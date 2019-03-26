@@ -21,7 +21,6 @@ public class SoulCapAir extends SoulCap {
         if (cap.knowsSoul()) {
             player.motionY *= 1.4;
         }
-        System.out.println("EPP");
         super.onJumpEvent(event, player, cap);
     }
 
