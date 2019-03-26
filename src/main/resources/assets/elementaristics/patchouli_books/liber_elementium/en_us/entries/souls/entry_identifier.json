@@ -1,0 +1,35 @@
+{
+  "name": "Soul Types",
+  "icon": "elementaristics:soul_identifier",
+  "category": "soulogy",
+  "advancement": "elementaristics:discovery_soul",
+  "pages": [
+    {
+      "type": "text",
+      "text": "My studies have shown that there are apparently different soul types. I can identify my own soul type with a $(item)Soul Identifier$(). "
+    },
+    {
+      "type": "crafting",
+      "recipe": "elementaristics:soul_identifier"
+    },
+    {
+      "type": "text",
+      "title": "Common Souls",
+      "text": "I have sorted the soul types in three different groups: the common, rare and legendary souls. As one can think, the groups are sorted by rarity. The group of $(marked)Common Souls$() completely consists of $(marked)Elemental Souls$(), which are healthy souls with a focus on a certain element. "
+    },
+    {
+      "type": "text",
+      "title": "Elemental Souls",
+      "text": "The sub-group of Elemental Souls includes six soul types: Aether, Air, Earth, Fire, Water and Magan Souls. They have all been created by multiversal influences with a dominating aspect. $(br2)$(l)Aether Soul$()$(br)-unimplemented $(br)$(l)Air Soul$()$(br)Fleetfeet. This word describes inheritors of Air Souls the best. Them knowing their souls makes them even more agile."
+    },
+    {
+      "type": "text",
+      "text": "$(l)Earth Soul$()$(br)-not really there either$(br)$(l)Fire Soul$()$(br)-nope $(br)$(l)Water Soul$()$(br)-noper $(br)$(l)Magan Soul$()$(br)-nopest"
+    },
+    {
+      "type": "text",
+      "title": "Rare Souls",
+      "text": "The $(marked)Rare Souls$() are often built incorrectly or were lowly manipulated by an external force (of the special kind, mind you). People with rare souls often get interesting advantages at a cost."
+    }
+  ]
+}

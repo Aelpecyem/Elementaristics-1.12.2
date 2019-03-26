@@ -1,0 +1,28 @@
+{
+  "display": {
+    "icon": {
+      "item": "elementaristics:essence",
+      "data": 12
+    },
+    "title": {
+      "translate": "advancement.elementaristics.light"
+    },
+    "description": {
+      "translate": ""
+    }
+  },
+  "parent": "elementaristics:discovery_fire",
+  "criteria": {
+    "book": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "elementaristics:essence",
+            "data": 12
+          }
+        ]
+      }
+    }
+  }
+}

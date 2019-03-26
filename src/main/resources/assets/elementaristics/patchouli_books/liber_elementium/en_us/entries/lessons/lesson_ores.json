@@ -1,0 +1,26 @@
+{
+  "name": "Additions to the world",
+  "icon": "elementaristics:ore_helium",
+  "category": "arcane_lessons",
+  "pages": [
+    {
+      "type": "text",
+      "text": "The Blind Idiot gifted us many things, some more, some less useful. These materials found on my planet should be of particular interest for my studies, in addition to the commonly used materials, of course."
+    },
+    {
+      "type": "spotlight",
+      "item": "elementaristics:ore_helium",
+      "text": "This ore can be found between the heights 30 - 10.$() $(br)This ore stores helium in it, which was fused into the stone through inconceivably high pressure. Helium is not reactive at all, which could make it useful to prevent nasty things to happen in (al-)chemical reactions. However, its main use can be found in rites invoking the Air aspect."
+    },
+    {
+      "type": "spotlight",
+      "item": "elementaristics:ore_hydrogen",
+      "text": "This ore can be found between the same heights as helium.$() $(br)The gas inside of this stone has been, just like with the helium in the helium ore, fused into the ore through immense pressure. Hydrogen is really flammable and can be used to create explosive substances. It is used in some rites as well."
+    },
+    {
+      "type": "spotlight",
+      "item": "elementaristics:ore_prismarine",
+      "text": "This ore can be found between the heights 15 - 40.$() $(br)The shards inside this ore may be fossils of guardians, which apparently don't have bones. $(item)Prismarine Shards$() are mostly used in rites invoking the aspect of Water."
+    }
+  ]
+}

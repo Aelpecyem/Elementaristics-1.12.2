@@ -1,0 +1,326 @@
+{
+  "entries": [
+    {
+      "key": "BASEELEMENTARISTICS",
+      "name": "research.BASEELEMENTARISTICS.title",
+      "icons": [
+        "elementaristics:textures/items/book_elementaristics.png"
+      ],
+      "category": "ELEMENTARISTICS",
+      "location": [
+        0,
+        0
+      ],
+      "parents": [
+        "UNLOCKALCHEMY"
+      ],
+      "meta": [
+        "ROUND",
+        "HIDDEN"
+      ],
+      "stages": [
+        {
+          "text": "research.BASEELEMENTARISTICS.stage.1",
+          "recipes": [
+            "elementaristics:recipe_drugs"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "ESSENCECREATION",
+      "name": "research.ESSENCECREATION.title",
+      "icons": [
+        "elementaristics:textures/items/essence_blank.png"
+      ],
+      "category": "ELEMENTARISTICS",
+      "location": [
+        0,
+        2
+      ],
+      "parents": [
+        "BASEELEMENTARISTICS"
+      ],
+      "meta": [
+        "ROUND",
+        "SPIKY",
+        "REVERSE"
+      ],
+      "stages": [
+        {
+          "text": "research.ESSENCECREATION.stage.1",
+          "required_knowledge": [
+            "THEORY;ALCHEMY;1",
+            "THEORY;INFUSION;1"
+          ]
+        },
+        {
+          "text": "research.ESSENCECREATION.stage.2",
+          "recipes": [
+            "elementaristics:essence_blank"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "CREATION_FIRE",
+      "name": "research.CREATION_FIRE.title",
+      "icons": [
+        "elementaristics:textures/items/essence_fire.png"
+      ],
+      "category": "ELEMENTARISTICS",
+      "location": [
+        -4,
+        4
+      ],
+      "parents": [
+        "ESSENCECREATION"
+      ],
+      "stages": [
+        {
+          "text": "research.CREATION.stage.1",
+          "required_item": [
+            "elementaristics:essence;1;3"
+          ]
+        },
+        {
+          "text": "research.CREATION.stage.2",
+          "recipes": [
+            "elementaristics:tc_essence_fire"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "CREATION_WATER",
+      "name": "research.CREATION_WATER.title",
+      "icons": [
+        "elementaristics:textures/items/essence_water.png"
+      ],
+      "category": "ELEMENTARISTICS",
+      "location": [
+        -8,
+        4
+      ],
+      "parents": [
+        "ESSENCECREATION"
+      ],
+      "stages": [
+        {
+          "text": "research.CREATION.stage.1",
+          "required_item": [
+            "elementaristics:essence;1;2"
+          ]
+        },
+        {
+          "text": "research.CREATION.stage.2",
+          "recipes": [
+            "elementaristics:tc_essence_water"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "CREATION_EARTH",
+      "name": "research.CREATION_EARTH.title",
+      "icons": [
+        "elementaristics:textures/items/essence_earth.png"
+      ],
+      "category": "ELEMENTARISTICS",
+      "location": [
+        0,
+        4
+      ],
+      "parents": [
+        "ESSENCECREATION"
+      ],
+      "stages": [
+        {
+          "text": "research.CREATION.stage.1",
+          "required_item": [
+            "elementaristics:essence;1;1"
+          ]
+        },
+        {
+          "text": "research.CREATION.stage.2",
+          "recipes": [
+            "elementaristics:tc_essence_earth"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "CREATION_AIR",
+      "name": "research.CREATION_AIR.title",
+      "icons": [
+        "elementaristics:textures/items/essence_air.png"
+      ],
+      "category": "ELEMENTARISTICS",
+      "location": [
+        8,
+        4
+      ],
+      "parents": [
+        "ESSENCECREATION"
+      ],
+      "stages": [
+        {
+          "text": "research.CREATION.stage.1",
+          "required_item": [
+            "elementaristics:essence;1;0"
+          ]
+        },
+        {
+          "text": "research.CREATION.stage.2",
+          "recipes": [
+            "elementaristics:tc_essence_air"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "CREATION_AETHER",
+      "name": "research.CREATION_AETHER.title",
+      "icons": [
+        "elementaristics:textures/items/essence_aether.png"
+      ],
+      "category": "ELEMENTARISTICS",
+      "location": [
+        4,
+        4
+      ],
+      "parents": [
+        "ESSENCECREATION"
+      ],
+      "stages": [
+        {
+          "text": "research.CREATION.stage.1",
+          "required_item": [
+            "elementaristics:essence;1;4"
+          ]
+        },
+        {
+          "text": "research.CREATION.stage.2",
+          "recipes": [
+            "elementaristics:tc_essence_aether"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "MATSTUDMAGANIZED_MATTER",
+      "name": "research.MATSTUDMAGANIZED_MATTER.title",
+      "icons": [
+        "elementaristics:matter_maganized"
+      ],
+      "category": "ELEMENTARISTICS",
+      "location": [
+        -2,
+        0
+      ],
+      "parents": [
+        "MINDCLOCKWORK",
+        "BASEELEMENTARISTICS"
+      ],
+      "meta": [
+        "ROUND"
+      ],
+      "stages": [
+        {
+          "text": "research.MATSTUDMAGANIZED_MATTER.stage.1",
+          "required_research": [
+            "f_MAGANIZED_MATTER"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "MATSTUDPROTOPLASM",
+      "name": "research.MATSTUDPROTOPLASM.title",
+      "icons": [
+        "elementaristics:protoplasm"
+      ],
+      "category": "ELEMENTARISTICS",
+      "location": [
+        -4,
+        0
+      ],
+      "parents": [
+        "MATSTUDMAGANIZED_MATTER"
+      ],
+      "meta": [
+        "ROUND"
+      ],
+      "stages": [
+        {
+          "text": "research.MATSTUDPROTOPLASM.stage.1",
+          "required_research": [
+            "f_MAGANIZED_MATTER"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "FOCUSSTABILIZE",
+      "name": "research.FOCUSSTABILIZE.title",
+      "icons": [
+        "focus:elementaristics.STABILIZE"
+      ],
+      "category": "ELEMENTARISTICS",
+      "location": [
+        2,
+        0
+      ],
+      "parents": [
+        "BASEELEMENTARISTICS",
+        "BASEELEMENTARISTICS",
+        "INFUSIONSTABLE"
+      ],
+      "stages": [
+        {
+          "text": "research.FOCUSSTABILIZE.stage.1",
+          "required_item": [
+            "thaumcraft:Stabilizer"
+          ],
+          "required_research": [
+            "!ordo"
+          ]
+        },
+        {
+          "text": "research.FOCUSSTABILIZE.stage.2"
+        }
+      ]
+    },
+    {
+      "key": "FOCUSRIFTCLOSER",
+      "name": "research.FOCUSRIFTCLOSER.title",
+      "icons": [
+        "focus:elementaristics.RIFTCLOSER"
+      ],
+      "category": "ELEMENTARISTICS",
+      "location": [
+        4,
+        0
+      ],
+      "parents": [
+        "FOCUSSTABILIZE",
+        "FOCUSRIFT",
+        "RIFTCLOSER"
+      ],
+      "stages": [
+        {
+          "text": "research.FOCUSRIFTCLOSER.stage.1",
+          "required_item": [
+            "thaumcraft:void_seed"
+          ],
+          "required_research": [
+            "!perditio"
+          ]
+        },
+        {
+          "text": "research.FOCUSRIFTCLOSER.stage.2"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    " # ",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "elementaristics:stone_enriched"
+    }
+  },
+  "result": {
+    "item": "elementaristics:pedestal",
+    "count": 8
+  }
+}

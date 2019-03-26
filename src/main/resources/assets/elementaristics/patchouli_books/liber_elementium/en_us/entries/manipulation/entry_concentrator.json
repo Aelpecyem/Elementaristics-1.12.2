@@ -1,0 +1,20 @@
+{
+  "name": "Concentrator",
+  "icon": "elementaristics:concentrator",
+  "category": "matter_manipulation",
+  "pages": [
+    {
+      "type": "text",
+      "text": "The $(item)Concentrator$() is a simple matter manipulating apparatus.$(br) It uses two reagents, from which one (in the center of the block) will be influenced by the other (rotating around the center).$(br)$(marked)If the influencing is successful, the reagents will not be consumed or distorted$(). Unsuccessful influencing rites leave $(item)Chaotic Matter$() and consume the influencing reagent."
+    },
+    {
+      "type": "text",
+      "text": "The process will, as said, influence one item with another. $(br)The item that is influenced will override one of its traits, like the physical state it presents, and will get the trait of the item that influences instead. $(br)One may want to watch the process, as in case of a successful process the essence influenced will still be influenced, which can ruin the results if it is in this state for too long."
+    },
+    {
+      "type": "crafting",
+      "recipe": "elementaristics:concentrator"
+    }
+  ],
+  "advancement": "elementaristics:discovery_earth"
+}

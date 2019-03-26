@@ -1,0 +1,15 @@
+{
+  "name": "On Ascension: Sanity",
+  "icon": "",
+  "category": "stories",
+  "pages": [
+    {
+      "type": "text",
+      "text": "$(o)The Watcher, one who shall not dream, argues with The Dreamer, chained to The Watcher himself.$(br2)$(l)W:$()You take your steps in dreams, yet you step further. $(br)$(l)D:$()What I seek lies beneath the skin, and so do dreams. Come and join me, though it'll drive us insane!"
+    },
+    {
+      "type": "text",
+      "text": "$(l)W:$()Don't you see that your sanity keeps you walking on these grounds?"
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "name": "Collected Essences",
+  "icon": "elementaristics:essence_aether",
+  "category": "arcane_lessons",
+  "pages": [
+    {
+      "type": "text",
+      "text": "I will summarize my observations on discovered essences here. $(br)This may help me with my research, maybe it won't. $(br2)Maybe luck will do."
+    },
+    {
+      "advancement": "elementaristics:discovery_aether",
+      "type": "spotlight",
+      "item": "elementaristics:essence:4",
+      "text": "Aether is the element of galaxies, the unknown and the space of possibilities, sometimes even time-space and existence in general. $(br)Its vague direct definition sometimes lets people consider it the 'other' element, besides obviously making research with this quite annoying. $(br)(Should I sometimes just use it as a placeholder?)"
+    },
+    {
+      "advancement": "elementaristics:discovery_air",
+      "type": "spotlight",
+      "item": "elementaristics:essence:0",
+      "text": "Air is the element of all gas, motion and sometimes even the element of senses. $(br)It is also well known to react with the fire essence, so I should give that a try."
+    },
+    {
+      "advancement": "elementaristics:discovery_earth",
+      "type": "spotlight",
+      "item": "elementaristics:essence:1",
+      "text": "Earth is the element of solid matter. $(br)It is often connected with life, though it is also generally known that more than one primal aspect is needed for something of such complexity. $(br)Generally, I should consider using it when trying to create essences that are connected to organisms."
+    },
+    {
+      "advancement": "elementaristics:discovery_fire",
+      "type": "spotlight",
+      "item": "elementaristics:essence:3",
+      "text": "Fire is the element of power, puissance and of course fire. $(br)It should be noted that it is not necessarily every kind of energy, however, thermal energy can definitely be counted to it. $(br)Fire is sometimes also used to represent consciousness.$(br)Generally, every essence that has some process connected with energy to it uses it."
+    },
+    {
+      "advancement": "elementaristics:discovery_water",
+      "type": "spotlight",
+      "item": "elementaristics:essence:2",
+      "text": "Water is the element of liquids, a crucial component to life as we know it and is sometimes even connected to feelings. $(br)Generally, it is often known to be one of the simplest primal elements."
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "Purifier",
+  "icon": "elementaristics:purifier",
+  "category": "matter_manipulation",
+  "pages": [
+    {
+      "type": "text",
+      "text": "The $(item)Purifier$() is basically a washing basin... but of the arcane kind. As the name implies, it purifies materials and may grant interesting results. $(br)I should be aware that during purification, material tends to dissolve, meaning that the Purifier often requires greater amounts of material to purificate. I should find a way of $(marked)concentrating essence$()..."
+    },
+    {
+      "type": "crafting",
+      "recipe": "elementaristics:purifier"
+    }
+  ],
+  "advancement": "elementaristics:discovery_water"
+}

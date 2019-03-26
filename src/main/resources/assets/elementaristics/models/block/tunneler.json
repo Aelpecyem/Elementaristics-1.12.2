@@ -1,0 +1,267 @@
+{
+  "credit": "Made with Blockbench",
+  "textures": {
+    "0": "elementaristics:blocks/tunneler_top",
+    "particle": "elementaristics:blocks/tunneler_top"
+  },
+  "elements": [
+    {
+      "name": "base",
+      "from": [
+        0,
+        8,
+        0
+      ],
+      "to": [
+        16,
+        16,
+        16
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            8,
+            4
+          ],
+          "texture": "#0"
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            8,
+            4
+          ],
+          "texture": "#0"
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            8,
+            4
+          ],
+          "texture": "#0"
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            8,
+            4
+          ],
+          "texture": "#0"
+        },
+        "up": {
+          "uv": [
+            8,
+            8.5,
+            16,
+            16
+          ],
+          "texture": "#0"
+        },
+        "down": {
+          "uv": [
+            8,
+            0,
+            16,
+            8
+          ],
+          "texture": "#0"
+        }
+      }
+    },
+    {
+      "from": [
+        3,
+        0,
+        3
+      ],
+      "to": [
+        13,
+        8,
+        13
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            1.5,
+            4,
+            6.5,
+            8
+          ],
+          "texture": "#0"
+        },
+        "east": {
+          "uv": [
+            1.5,
+            4,
+            6.5,
+            8
+          ],
+          "texture": "#0"
+        },
+        "south": {
+          "uv": [
+            1.5,
+            4,
+            6.5,
+            8
+          ],
+          "texture": "#0"
+        },
+        "west": {
+          "uv": [
+            1.5,
+            4,
+            6.5,
+            8
+          ],
+          "texture": "#0"
+        },
+        "up": {
+          "uv": [
+            9.5,
+            9.5,
+            14.5,
+            14.5
+          ],
+          "texture": "#0"
+        },
+        "down": {
+          "uv": [
+            1.5,
+            8.5,
+            6.5,
+            13.5
+          ],
+          "texture": "#0"
+        }
+      }
+    }
+  ],
+  "display": {
+    "thirdperson_righthand": {
+      "scale": [
+        0.35,
+        0.375,
+        0.375
+      ],
+      "rotation": [
+        75,
+        45,
+        0
+      ],
+      "translation": [
+        0,
+        0,
+        2
+      ]
+    },
+    "thirdperson_lefthand": {
+      "scale": [
+        0.5,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "translation": [
+        0,
+        0,
+        0
+      ]
+    },
+    "firstperson_righthand": {
+      "scale": [
+        0.5,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "translation": [
+        0,
+        0,
+        0
+      ]
+    },
+    "firstperson_lefthand": {
+      "scale": [
+        0.5,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "translation": [
+        0,
+        0,
+        0
+      ]
+    },
+    "ground": {
+      "scale": [
+        0.5,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "translation": [
+        0,
+        0,
+        0
+      ]
+    },
+    "fixed": {
+      "scale": [
+        0.5,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "translation": [
+        0,
+        0,
+        0
+      ]
+    },
+    "gui": {
+      "scale": [
+        0.625,
+        0.625,
+        0.625
+      ],
+      "rotation": [
+        30,
+        225,
+        0
+      ],
+      "translation": [
+        0,
+        0,
+        0
+      ]
+    }
+  }
+}

@@ -1,0 +1,18 @@
+[
+  {
+    "modid": "elementaristics",
+    "name": "Elementaristics",
+    "description": "A mod about the elemental things",
+    "version": "0.0.1",
+    "mcversion": "1.12.2",
+    "url": "",
+    "updateUrl": "",
+    "authorList": [
+      "Aelpecyem"
+    ],
+    "credits": "Zaesar and other memebers of the Powderkeg Power Team for inpiration. Thanks to Morinor for some nice artwork and suggestions on the mod's theme",
+    "logoFile": "",
+    "screenshots": [],
+    "dependencies": []
+  }
+]

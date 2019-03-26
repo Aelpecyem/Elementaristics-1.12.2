@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "elementaristics:concentrator"
+    },
+    "title": {
+      "translate": "advancement.elementaristics.concentrator"
+    },
+    "description": {
+      "translate": "advancement.elementaristics.concentrator.desc"
+    }
+  },
+  "parent": "elementaristics:progress_pedestal",
+  "criteria": {
+    "book": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "elementaristics:concentrator"
+          }
+        ]
+      }
+    }
+  }
+}

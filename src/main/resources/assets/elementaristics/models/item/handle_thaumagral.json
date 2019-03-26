@@ -1,0 +1,7 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "elementaristics:items/thaumagral_parts/handle_thaumagral",
+    "layer1": "elementaristics:items/thaumagral_parts/stick_thaumagral"
+  }
+}

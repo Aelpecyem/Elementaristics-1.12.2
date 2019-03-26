@@ -1,0 +1,28 @@
+{
+  "display": {
+    "icon": {
+      "item": "elementaristics:essence",
+      "data": 16
+    },
+    "title": {
+      "translate": "advancement.elementaristics.soul"
+    },
+    "description": {
+      "translate": ""
+    }
+  },
+  "parent": "elementaristics:discovery_life",
+  "criteria": {
+    "book": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "elementaristics:essence",
+            "data": 16
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "display": {
+    "icon": {
+      "item": "elementaristics:essence",
+      "data": 15
+    },
+    "title": {
+      "translate": "advancement.elementaristics.chaos"
+    },
+    "description": {
+      "translate": ""
+    }
+  },
+  "parent": "elementaristics:discovery_aether",
+  "criteria": {
+    "book": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "elementaristics:essence",
+            "data": 15
+          }
+        ]
+      }
+    }
+  }
+}

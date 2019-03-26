@@ -1,0 +1,16 @@
+{
+  "name": "Lightning Pedestal",
+  "icon": "elementaristics:pedestal_lightning",
+  "category": "matter_manipulation",
+  "turnin": "elementaristics:root_research",
+  "pages": [
+    {
+      "type": "text",
+      "text": "The $(item)Lightning Pedestal$() is a basic block used to reduce some materials (see: $(l:manipulation/entry_recipes)Known recipes$()) into primary essences.$(br) $(br)The $(item)Lightning Pedestal$() can also be used to electrify $(item)Nether Quartz$() into $(item)Vibrant Quartz$() and to destabilize $(item)Stone$()."
+    },
+    {
+      "type": "crafting",
+      "recipe": "elementaristics:pedestal_lightning"
+    }
+  ]
+}

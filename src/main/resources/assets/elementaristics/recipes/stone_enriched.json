@@ -1,0 +1,44 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:stone",
+      "data": 0
+    },
+    {
+      "item": "minecraft:stone",
+      "data": 0
+    },
+    {
+      "item": "minecraft:stone",
+      "data": 0
+    },
+    {
+      "item": "minecraft:stone",
+      "data": 0
+    },
+    {
+      "item": "minecraft:quartz"
+    },
+    {
+      "item": "minecraft:stone",
+      "data": 0
+    },
+    {
+      "item": "minecraft:stone",
+      "data": 0
+    },
+    {
+      "item": "minecraft:stone",
+      "data": 0
+    },
+    {
+      "item": "minecraft:stone",
+      "data": 0
+    }
+  ],
+  "result": {
+    "item": "elementaristics:stone_enriched",
+    "count": 8
+  }
+}

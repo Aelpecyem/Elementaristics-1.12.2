@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "# #",
+    "SSS",
+    "SQS"
+  ],
+  "key": {
+    "#": {
+      "item": "elementaristics:essence_water"
+    },
+    "S": {
+      "item": "elementaristics:stone_enriched"
+    },
+    "Q": {
+      "item": "elementaristics:block_essence_water"
+    }
+  },
+  "result": {
+    "item": "elementaristics:purifier",
+    "count": 1
+  }
+}

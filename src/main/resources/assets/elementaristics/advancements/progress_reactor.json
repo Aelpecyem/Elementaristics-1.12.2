@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "elementaristics:reactor"
+    },
+    "title": {
+      "translate": "advancement.elementaristics.reactor"
+    },
+    "description": {
+      "translate": "advancement.elementaristics.reactor.desc"
+    }
+  },
+  "parent": "elementaristics:progress_pedestal",
+  "criteria": {
+    "book": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "elementaristics:reactor"
+          }
+        ]
+      }
+    }
+  }
+}

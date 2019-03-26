@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "elementaristics:incantation_chaos"
+    },
+    "title": {
+      "translate": "advancement.elementaristics.chaos"
+    },
+    "description": {
+      "translate": "advancement.elementaristics.chaos.desc"
+    }
+  },
+  "parent": "elementaristics:progress_pedestal",
+  "criteria": {
+    "book": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "elementaristics:incantation_chaos"
+          }
+        ]
+      }
+    }
+  }
+}

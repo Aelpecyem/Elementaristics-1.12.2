@@ -1,0 +1,28 @@
+{
+  "name": "The Body and what else",
+  "icon": "",
+  "category": "stories",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Tell me, reader, is a stone a living being? $(br)No?$(br)Why though? Because it cannot think? $(br)That's correct. What distincts you from a stone, is that the stone does not have a mind and therefore cannot think. However, you both have a body.$(br)We see, the Body is the soil of your and the rock's material existence."
+    },
+    {
+      "type": "text",
+      "text": "Here's another question: is there anything with a mind but without a body? $(br)Spirits? Yes, that's correct.$(br)However, even a spirit needs some means of manifestation. That's why spirits have a soul, just as you do. "
+    },
+    {
+      "type": "text",
+      "text": "Knowing this, you might ask yourself why you have this soul. There is as little knowledge on this as there is knowledge on souls in general. However, there are some theories."
+    },
+    {
+      "type": "text",
+      "title": "The Soul as Stabilizer",
+      "text": "$(o)Certain$() experiments have shown, that the Body and the Mind are, in the view of an alchemist, primarily made out of $Air, $Earth, $Fire and $Water, with Fire as dominating aspect for the Mind and Earth as the dominating aspect for the Body. $(br)As one may know, some of these elements 'fight' each other, which would most likely cause a living being to die. "
+    },
+    {
+      "type": "text",
+      "text": "The Soul, in this theory, is then used as a sort of 'stabilizer', as it has some sort of binding aspect in it. $(br)I may invest more time into this topic..."
+    }
+  ]
+}

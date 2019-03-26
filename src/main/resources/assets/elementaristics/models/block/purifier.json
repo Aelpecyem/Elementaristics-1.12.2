@@ -1,0 +1,475 @@
+﻿{
+  "credit": "Made with Blockbench",
+  "textures": {
+    "0": "elementaristics:blocks/purifier",
+    "particle": "elementaristics:blocks/purifier"
+  },
+  "elements": [
+    {
+      "name": "base",
+      "from": [
+        0,
+        0,
+        0
+      ],
+      "to": [
+        16,
+        6,
+        16
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            8,
+            0,
+            16,
+            3
+          ],
+          "texture": "#0"
+        },
+        "east": {
+          "uv": [
+            8,
+            0,
+            16,
+            3
+          ],
+          "texture": "#0"
+        },
+        "south": {
+          "uv": [
+            8,
+            0,
+            16,
+            3
+          ],
+          "texture": "#0"
+        },
+        "west": {
+          "uv": [
+            8,
+            0,
+            16,
+            3
+          ],
+          "texture": "#0"
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            8,
+            8
+          ],
+          "texture": "#0"
+        },
+        "down": {
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ],
+          "texture": "#0"
+        }
+      }
+    },
+    {
+      "name": "electrode1",
+      "from": [
+        0,
+        6,
+        15
+      ],
+      "to": [
+        1,
+        11,
+        16
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            15.5,
+            3,
+            16,
+            5.5
+          ],
+          "texture": "#0"
+        },
+        "east": {
+          "uv": [
+            15,
+            3,
+            15.5,
+            5.5
+          ],
+          "texture": "#0"
+        },
+        "south": {
+          "uv": [
+            15.5,
+            3,
+            16,
+            5.5
+          ],
+          "texture": "#0"
+        },
+        "west": {
+          "uv": [
+            15,
+            3,
+            15.5,
+            5.5
+          ],
+          "texture": "#0"
+        },
+        "up": {
+          "uv": [
+            15.5,
+            3,
+            16,
+            3.5
+          ],
+          "texture": "#0"
+        },
+        "down": {
+          "uv": [
+            15.5,
+            3,
+            16,
+            3.5
+          ],
+          "texture": "#0"
+        }
+      }
+    },
+    {
+      "name": "electrode4",
+      "from": [
+        0,
+        6,
+        0
+      ],
+      "to": [
+        1,
+        11,
+        1
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            15.5,
+            3,
+            16,
+            5.5
+          ],
+          "texture": "#0"
+        },
+        "east": {
+          "uv": [
+            15,
+            3,
+            15.5,
+            5.5
+          ],
+          "texture": "#0"
+        },
+        "south": {
+          "uv": [
+            15.5,
+            3,
+            16,
+            5.5
+          ],
+          "texture": "#0"
+        },
+        "west": {
+          "uv": [
+            15,
+            3,
+            15.5,
+            5.5
+          ],
+          "texture": "#0"
+        },
+        "up": {
+          "uv": [
+            15.5,
+            3,
+            16,
+            3.5
+          ],
+          "texture": "#0"
+        },
+        "down": {
+          "uv": [
+            15.5,
+            3,
+            16,
+            3.5
+          ],
+          "texture": "#0"
+        }
+      }
+    },
+    {
+      "name": "electrode3",
+      "from": [
+        15,
+        6,
+        0
+      ],
+      "to": [
+        16,
+        11,
+        1
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            15.5,
+            3,
+            16,
+            5.5
+          ],
+          "texture": "#0"
+        },
+        "east": {
+          "uv": [
+            15,
+            3,
+            15.5,
+            5.5
+          ],
+          "texture": "#0"
+        },
+        "south": {
+          "uv": [
+            15.5,
+            3,
+            16,
+            5.5
+          ],
+          "texture": "#0"
+        },
+        "west": {
+          "uv": [
+            15,
+            3,
+            15.5,
+            5.5
+          ],
+          "texture": "#0"
+        },
+        "up": {
+          "uv": [
+            15.5,
+            3,
+            16,
+            3.5
+          ],
+          "texture": "#0"
+        },
+        "down": {
+          "uv": [
+            15.5,
+            3,
+            16,
+            3.5
+          ],
+          "texture": "#0"
+        }
+      }
+    },
+    {
+      "name": "electrode2",
+      "from": [
+        15,
+        6,
+        15
+      ],
+      "to": [
+        16,
+        11,
+        16
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            15.5,
+            3,
+            16,
+            5.5
+          ],
+          "texture": "#0"
+        },
+        "east": {
+          "uv": [
+            15,
+            3,
+            15.5,
+            5.5
+          ],
+          "texture": "#0"
+        },
+        "south": {
+          "uv": [
+            15.5,
+            3,
+            16,
+            5.5
+          ],
+          "texture": "#0"
+        },
+        "west": {
+          "uv": [
+            15,
+            3,
+            15.5,
+            5.5
+          ],
+          "texture": "#0"
+        },
+        "up": {
+          "uv": [
+            15.5,
+            3,
+            16,
+            3.5
+          ],
+          "texture": "#0"
+        },
+        "down": {
+          "uv": [
+            15.5,
+            3,
+            16,
+            3.5
+          ],
+          "texture": "#0"
+        }
+      }
+    }
+  ],
+  "display": {
+    "thirdperson_righthand": {
+      "scale": [
+        0.375,
+        0.375,
+        0.375
+      ],
+      "rotation": [
+        75,
+        45,
+        0
+      ],
+      "translation": [
+        0,
+        2.5,
+        0
+      ]
+    },
+    "thirdperson_lefthand": {
+      "scale": [
+        0.375,
+        0.375,
+        0.375
+      ],
+      "rotation": [
+        75,
+        45,
+        0
+      ],
+      "translation": [
+        0,
+        2.5,
+        0
+      ]
+    },
+    "firstperson_righthand": {
+      "scale": [
+        0.4,
+        0.4,
+        0.4
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "translation": [
+        0,
+        0,
+        0
+      ]
+    },
+    "firstperson_lefthand": {
+      "scale": [
+        0.4,
+        0.4,
+        0.4
+      ],
+      "rotation": [
+        0,
+        225,
+        0
+      ],
+      "translation": [
+        0,
+        0,
+        0
+      ]
+    },
+    "ground": {
+      "scale": [
+        0.25,
+        0.25,
+        0.25
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "translation": [
+        0,
+        3,
+        0
+      ]
+    },
+    "fixed": {
+      "scale": [
+        0.5,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "translation": [
+        0,
+        0,
+        0
+      ]
+    },
+    "gui": {
+      "scale": [
+        0.625,
+        0.625,
+        0.625
+      ],
+      "rotation": [
+        30,
+        225,
+        0
+      ],
+      "translation": [
+        0,
+        0,
+        0
+      ]
+    }
+  }
+}

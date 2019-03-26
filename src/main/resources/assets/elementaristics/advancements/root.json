@@ -1,0 +1,30 @@
+{
+  "display": {
+    "icon": {
+      "item": "patchouli:guide_book",
+      "nbt": "{\"patchouli:book\":\"elementaristics:liber_elementium\"}"
+    },
+    "title": {
+      "translate": "advancement.elementaristics.root"
+    },
+    "description": {
+      "translate": "advancement.elementaristics.root.desc"
+    },
+    "background": "minecraft:textures/gui/advancements/backgrounds/stone.png",
+    "show_toast": false,
+    "announce_to_chat": true
+  },
+  "criteria": {
+    "book": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "patchouli:guide_book",
+            "nbt": "{\"patchouli:book\":\"elementaristics:liber_elementium\"}"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "name": "Altar",
+  "icon": "elementaristics:altar",
+  "category": "matter_manipulation",
+  "pages": [
+    {
+      "type": "text",
+      "text": "The $(item)Altar$() uses the power of chaos to directly and mercilessly distort the field of magic, causing effects to happen based on incantation used on the altar."
+    },
+    {
+      "type": "crafting",
+      "recipe": "elementaristics:altar"
+    },
+    {
+      "type": "text",
+      "text": "In order to use the altar, one must use an $(item)Incantation$() of a certain type on it. $(br)This will drain the magan of $(l)all$() players nearby. Further information on how much energy is required for the rite is written on the incantation.$(br2)Additionally, Rites must reach a certain level of $(marked)Item Power$() and must also contain specific $(marked)Aspects."
+    },
+    {
+      "type": "text",
+      "text": "Both item power and aspects needed are written on the incantation. $(br)In order to get certain aspects for a rite or to push up the amount of item power, $(item)Rite Tools$() must be used, tools or materials with aspects and power. $(br)These must be held by the cultists close to the altar. Materials will get consumed, tools will not."
+    },
+    {
+      "type": "text",
+      "text": "Once all aspects are present and the item power of the rite tools is greater or equal to the power needed, the rite will be finished. $(br) It should be noted, that some rites perform their effect during the performing of the rite and that sometimes certain soul types are required. $(br)If a certain soul types $(o) is$() required, it is written on the incantation. $(br)(Rituals can always be stopped by acting on the block while sneaking)"
+    }
+  ],
+  "advancement": "elementaristics:discovery_aether"
+}

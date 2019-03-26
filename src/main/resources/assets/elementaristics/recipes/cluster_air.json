@@ -1,0 +1,23 @@
+{
+  "type": "forge:ore_shapeless",
+  "ingredients": [
+    {
+      "type": "forge:ore_dict",
+      "ore": "dye"
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "listAllPlant"
+    },
+    {
+      "item": "elementaristics:bubble_helium"
+    },
+    {
+      "item": "elementaristics:bubble_hydrogen"
+    }
+  ],
+  "result": {
+    "item": "elementaristics:cluster_air",
+    "count": 2
+  }
+}

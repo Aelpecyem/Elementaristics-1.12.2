@@ -1,0 +1,28 @@
+{
+  "display": {
+    "icon": {
+      "item": "elementaristics:essence",
+      "data": 4
+    },
+    "title": {
+      "translate": "advancement.elementaristics.aether"
+    },
+    "description": {
+      "translate": ""
+    }
+  },
+  "parent": "elementaristics:root_research",
+  "criteria": {
+    "book": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "elementaristics:essence",
+            "data": 4
+          }
+        ]
+      }
+    }
+  }
+}

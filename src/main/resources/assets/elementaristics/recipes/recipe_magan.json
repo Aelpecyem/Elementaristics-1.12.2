@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "elementaristics:essence_fire"
+    },
+    {
+      "item": "elementaristics:essence_air"
+    },
+    {
+      "item": "elementaristics:essence_water"
+    },
+    {
+      "item": "elementaristics:essence_earth"
+    }
+  ],
+  "result": {
+    "item": "elementaristics:essence_magan"
+  }
+}

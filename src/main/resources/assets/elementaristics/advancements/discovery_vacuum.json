@@ -1,0 +1,28 @@
+{
+  "display": {
+    "icon": {
+      "item": "elementaristics:essence",
+      "data": 7
+    },
+    "title": {
+      "translate": "advancement.elementaristics.vacuum"
+    },
+    "description": {
+      "translate": ""
+    }
+  },
+  "parent": "elementaristics:discovery_air",
+  "criteria": {
+    "book": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "elementaristics:essence",
+            "data": 7
+          }
+        ]
+      }
+    }
+  }
+}

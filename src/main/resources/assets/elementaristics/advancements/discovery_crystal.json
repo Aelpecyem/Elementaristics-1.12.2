@@ -1,0 +1,28 @@
+{
+  "display": {
+    "icon": {
+      "item": "elementaristics:essence",
+      "data": 8
+    },
+    "title": {
+      "translate": "advancement.elementaristics.crystal"
+    },
+    "description": {
+      "translate": ""
+    }
+  },
+  "parent": "elementaristics:discovery_earth",
+  "criteria": {
+    "book": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "elementaristics:essence",
+            "data": 8
+          }
+        ]
+      }
+    }
+  }
+}

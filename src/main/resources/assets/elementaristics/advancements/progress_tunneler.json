@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "elementaristics:tunneler"
+    },
+    "title": {
+      "translate": "advancement.elementaristics.tunneler"
+    },
+    "description": {
+      "translate": "advancement.elementaristics.tunneler.desc"
+    }
+  },
+  "parent": "elementaristics:progress_pedestal",
+  "criteria": {
+    "book": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "elementaristics:tunneler"
+          }
+        ]
+      }
+    }
+  }
+}

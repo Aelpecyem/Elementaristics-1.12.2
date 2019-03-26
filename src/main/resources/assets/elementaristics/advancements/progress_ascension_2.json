@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "elementaristics:altar"
+    },
+    "title": {
+      "translate": "advancement.elementaristics.ascension_2"
+    },
+    "description": {
+      "translate": "advancement.elementaristics.ascension_2.desc"
+    }
+  },
+  "parent": "elementaristics:progress_ascension",
+  "criteria": {
+    "book": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "elementaristics:altar"
+          }
+        ]
+      }
+    }
+  }
+}

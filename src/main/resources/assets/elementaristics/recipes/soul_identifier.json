@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "   ",
+    "R#R",
+    "SSS"
+  ],
+  "key": {
+    "#": {
+      "item": "elementaristics:essence_soul"
+    },
+    "S": {
+      "item": "elementaristics:stone_enriched"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    }
+  },
+  "result": {
+    "item": "elementaristics:soul_identifier",
+    "count": 1
+  }
+}
