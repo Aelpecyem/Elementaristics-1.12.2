@@ -12,6 +12,7 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 public class SoulCapAir extends SoulCap {
     public SoulCapAir() {
+
         super(SoulInit.soulAir);
     }
 
@@ -20,6 +21,7 @@ public class SoulCapAir extends SoulCap {
         if (cap.knowsSoul()) {
             player.motionY *= 1.4;
         }
+        System.out.println("EPP");
         super.onJumpEvent(event, player, cap);
     }
 
