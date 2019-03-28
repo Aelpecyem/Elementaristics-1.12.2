@@ -55,6 +55,7 @@ public class TileEntityAltar extends TileEntity implements ITickable {
                             new BlockPos(pos.getX() - 10F, pos.getY() - 4F, pos.getZ() - 10F),
                             new BlockPos(pos.getX() + 10F, pos.getY() + 8F, pos.getZ() + 10F)));
                     rite.onRitual(world, pos, targets, tickCount);
+
                 }else{
                     doFailingShow();
                     currentRite = "";

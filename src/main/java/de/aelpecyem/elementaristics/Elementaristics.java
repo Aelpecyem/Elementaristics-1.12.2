@@ -86,8 +86,10 @@ public final class Elementaristics {
 
         ModEntities.init();
         RenderHandler.registerEntityRenderers();
+        BiomeInit.registerBiomes();
         ModDimensions.init(); //TODO  rework entirely
         proxy.registerRenderers();
+
         GameRegistry.registerWorldGenerator(new WorldGen(), 3);
         initOreDict();
     }

@@ -47,6 +47,8 @@ public class ModBlocks {
     public static BlockBase essence_casing;
     public static BlockForge forge;
     public static BlockAltar altar;
+    public static BlockBase fabric_reason;
+    public static BlockBase fabric_passion;
 
     public static void init() {
         for (Block blockBase : BLOCKS) {
@@ -70,6 +72,8 @@ public class ModBlocks {
         essence_casing = new BlockBase(Material.ROCK, "casing_essence");
         forge = new BlockForge();
         altar = new BlockAltar();
+        fabric_reason = new BlockBase(Material.BARRIER, "fabric_reason");
+        fabric_passion = new BlockBase(Material.BARRIER, "fabric_passion");
         for (Aspect a : ElementInit.getElements()) {
             ESSENCES_CONCENTRATED.put(a.getId(), new BlockEssence("block_essence_" + a.getName(), a.getId()));
         }

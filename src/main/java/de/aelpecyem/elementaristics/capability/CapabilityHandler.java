@@ -49,6 +49,7 @@ public class CapabilityHandler {
         }
     }
 
+
     @SubscribeEvent
     public void applyBuffsOnSpawning(net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerRespawnEvent event) {
 

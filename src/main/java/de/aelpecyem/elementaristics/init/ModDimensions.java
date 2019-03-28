@@ -14,7 +14,6 @@ import net.minecraftforge.registries.IForgeRegistry;
 
 @GameRegistry.ObjectHolder(Elementaristics.MODID)
 public class ModDimensions {
-    public final static Biome mindBiome = new BiomeMind().setRegistryName(Elementaristics.MODID, "mind");
     public static DimensionType mindDimensionType; //usual id = 1103
     public static WorldType mindType;
 
@@ -25,7 +24,6 @@ public class ModDimensions {
     }
 
     public static void registerBiomes(IForgeRegistry<Biome> event) {
-        event.register(mindBiome);
         mindType = new WorldTypeMind();
     }
 
