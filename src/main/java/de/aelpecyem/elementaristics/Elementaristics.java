@@ -87,7 +87,7 @@ public final class Elementaristics {
         ModEntities.init();
         RenderHandler.registerEntityRenderers();
         BiomeInit.registerBiomes();
-        ModDimensions.init(); //TODO  rework entirely
+        ModDimensions.init();
         proxy.registerRenderers();
 
         GameRegistry.registerWorldGenerator(new WorldGen(), 3);
@@ -139,10 +139,6 @@ public final class Elementaristics {
 
     @Mod.EventBusSubscriber
     public static class RegistryHandler {
-        @SubscribeEvent
-        public static void registerBiomes(RegistryEvent.Register<Biome> event) {
-            ModDimensions.registerBiomes(event.getRegistry());
-        }
 
         @SubscribeEvent
         public static void registerBlocks(RegistryEvent.Register<Block> event) {

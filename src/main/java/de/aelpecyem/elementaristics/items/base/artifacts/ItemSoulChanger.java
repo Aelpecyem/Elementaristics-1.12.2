@@ -18,6 +18,7 @@ import net.minecraft.world.World;
 public class ItemSoulChanger extends ItemBase {
     public ItemSoulChanger() {
         super("soul_changer");
+        setMaxStackSize(1);
     }
 
 

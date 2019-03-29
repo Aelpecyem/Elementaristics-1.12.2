@@ -6,6 +6,7 @@ import de.aelpecyem.elementaristics.util.IHasModel;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 
@@ -14,8 +15,22 @@ public class BlockBase extends Block implements IHasModel{
 
     public BlockBase(Material material, String name) {
         super(material);
-        setHardness(10);
+        setHardness(6);
+
         setResistance(6);
+        this.name = name;
+
+        setUnlocalizedName(name);
+        setRegistryName(name);
+        this.setCreativeTab(Elementaristics.tab);
+        ModBlocks.BLOCKS.add(this);
+    }
+
+    public BlockBase(Material material, String name, float lightLevel) {
+        super(material);
+        setHardness(6);
+        setResistance(6);
+        setLightLevel(lightValue);
         this.name = name;
 
         setUnlocalizedName(name);

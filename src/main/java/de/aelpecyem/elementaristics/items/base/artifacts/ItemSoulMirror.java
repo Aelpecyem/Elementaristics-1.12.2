@@ -14,6 +14,7 @@ import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.text.TextComponentString;
@@ -26,6 +27,7 @@ public class
 ItemSoulMirror extends ItemAspects {
     public ItemSoulMirror() {
         super("soul_mirror", ElementInit.soul, 6, false);
+        setMaxStackSize(1);
     }
 
     @Override
@@ -37,11 +39,11 @@ ItemSoulMirror extends ItemAspects {
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {//give stats
         if (playerIn.dimension != Config.mindDimensionId) {
-            if (false) {
+            if (playerIn.getActivePotionEffects().contains(new PotionEffect(PotionInit.potionTrance))) {
                 playerIn.changeDimension(Config.mindDimensionId, new ITeleporter() {
                     @Override
                     public void placeEntity(World world, Entity entity, float yaw) {
-                        entity.setPosition(entity.posX, entity.posY, entity.posZ);
+                        entity.setPosition(entity.posX, 36, entity.posZ);
                     }
                 });
             } else {
@@ -80,6 +82,9 @@ ItemSoulMirror extends ItemAspects {
                 public void placeEntity(World world, Entity entity, float yaw) {
                     if (playerIn.bedLocation != null) {
                         entity.setPosition(playerIn.bedLocation.getX(), playerIn.bedLocation.getY(), playerIn.bedLocation.getZ());
+                    }else{
+                        for (int i = 0; i < 250; i++)
+                        playerIn.attemptTeleport(playerIn.posX, 250 - i, playerIn.posZ);
                     }
                 }
             });
