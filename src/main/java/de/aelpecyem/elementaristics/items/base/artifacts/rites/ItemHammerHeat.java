@@ -1,9 +1,7 @@
 package de.aelpecyem.elementaristics.items.base.artifacts.rites;
 
 import de.aelpecyem.elementaristics.blocks.tileentity.TileEntityForge;
-import de.aelpecyem.elementaristics.items.base.ItemBase;
-import de.aelpecyem.elementaristics.misc.elements.Aspect;
-import de.aelpecyem.elementaristics.misc.elements.ElementInit;
+import de.aelpecyem.elementaristics.misc.elements.Aspects;
 import de.aelpecyem.elementaristics.recipe.ForgeRecipes;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
@@ -15,12 +13,11 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ItemHammerHeat extends ItemAspects implements IHasRiteUse {
     public ItemHammerHeat() {
-        super("hammer_heat", ElementInit.fire, 6, false);
+        super("hammer_heat", Aspects.fire, 6, false);
         maxStackSize = 1;
     }
 

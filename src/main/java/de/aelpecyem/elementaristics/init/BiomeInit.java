@@ -16,7 +16,7 @@ import net.minecraftforge.registries.IForgeRegistry;
 public class BiomeInit {
     public static final Biome MIND = new BiomeMind();
     public static void registerBiomes(){
-        initBiome(MIND, "mind", true, BiomeManager.BiomeType.DESERT, BiomeDictionary.Type.DEAD, BiomeDictionary.Type.MAGICAL);
+        initBiome(MIND, "mind", false, BiomeManager.BiomeType.DESERT, BiomeDictionary.Type.DEAD, BiomeDictionary.Type.MAGICAL);
     }
 
     private static Biome initBiome(Biome biome, String name, boolean genInWorld, BiomeManager.BiomeType biomeType, BiomeDictionary.Type... type){

@@ -15,10 +15,10 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
-public class RiteChaos extends RiteBase {
+public class RiteForging extends RiteBase {
 
-    public RiteChaos() {
-        super(new ResourceLocation(Elementaristics.MODID, "rite_chaos"), 200, 0.49F, 8, Aspects.chaos);
+    public RiteForging() {
+        super(new ResourceLocation(Elementaristics.MODID, "rite_forging"), 200, 0.35F, 8, Aspects.fire);
     }
 
     @Override

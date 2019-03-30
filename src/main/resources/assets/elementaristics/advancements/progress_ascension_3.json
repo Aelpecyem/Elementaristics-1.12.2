@@ -1,0 +1,23 @@
+{
+  "display": {
+    "icon": {
+      "item": "elementaristics:ash"
+    },
+    "title": {
+      "translate": "advancement.elementaristics.ascension_3"
+    },
+    "description": {
+      "translate": "advancement.elementaristics.ascension_3.desc"
+    }
+  },
+  "parent": "elementaristics:progress_ascension",
+  "criteria": {
+    "book": {
+      "trigger": "minecraft:changed_dimension",
+      "conditions": {
+        "from": "overworld",
+        "to": "the_end"
+      }
+    }
+  }
+}

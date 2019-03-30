@@ -8,7 +8,7 @@ import de.aelpecyem.elementaristics.events.HUDRenderHandler;
 import de.aelpecyem.elementaristics.gui.GuiHandler;
 import de.aelpecyem.elementaristics.init.*;
 import de.aelpecyem.elementaristics.misc.ItemColorHandler;
-import de.aelpecyem.elementaristics.misc.elements.ElementInit;
+import de.aelpecyem.elementaristics.misc.elements.Aspects;
 import de.aelpecyem.elementaristics.misc.potions.PotionInit;
 import de.aelpecyem.elementaristics.networking.PacketHandler;
 import de.aelpecyem.elementaristics.proxy.CommonProxy;
@@ -22,7 +22,6 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
-import net.minecraft.world.biome.Biome;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
@@ -134,7 +133,7 @@ public final class Elementaristics {
     }
 
     private void initElements() {
-        ElementInit.init();
+        Aspects.init();
     }
 
     @Mod.EventBusSubscriber

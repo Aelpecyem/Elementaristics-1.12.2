@@ -1,18 +1,10 @@
 package de.aelpecyem.elementaristics.items.base.artifacts.rites;
 
-import de.aelpecyem.elementaristics.blocks.tileentity.TileEntityForge;
 import de.aelpecyem.elementaristics.items.base.ItemBase;
 import de.aelpecyem.elementaristics.misc.elements.Aspect;
-import de.aelpecyem.elementaristics.misc.elements.ElementInit;
-import de.aelpecyem.elementaristics.recipe.ForgeRecipes;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import java.util.ArrayList;

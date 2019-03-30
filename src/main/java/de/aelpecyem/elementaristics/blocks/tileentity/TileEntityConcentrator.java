@@ -3,7 +3,7 @@ package de.aelpecyem.elementaristics.blocks.tileentity;
 import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.init.ModItems;
 import de.aelpecyem.elementaristics.items.base.ItemEssence;
-import de.aelpecyem.elementaristics.misc.elements.ElementInit;
+import de.aelpecyem.elementaristics.misc.elements.Aspects;
 import de.aelpecyem.elementaristics.networking.PacketHandler;
 import de.aelpecyem.elementaristics.networking.concentrator.PacketUpdateConcentrator;
 import de.aelpecyem.elementaristics.particles.ParticleGeneric;
@@ -119,7 +119,7 @@ public class TileEntityConcentrator extends TileEntity implements ITickable {
     }
 
     private void doParticleShow() {
-        Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(world, pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, world.rand.nextGaussian() * 0.02F, Math.abs(world.rand.nextGaussian()) * 0.06F, world.rand.nextGaussian() * 0.02F, ElementInit.getElementById(inventory.getStackInSlot(1).getMetadata()).getColor(), 2, 10, 0, true, true, 1F));
+        Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(world, pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, world.rand.nextGaussian() * 0.02F, Math.abs(world.rand.nextGaussian()) * 0.06F, world.rand.nextGaussian() * 0.02F, Aspects.getElementById(inventory.getStackInSlot(1).getMetadata()).getColor(), 2, 10, 0, true, false, 0.5F));
     }
 
 

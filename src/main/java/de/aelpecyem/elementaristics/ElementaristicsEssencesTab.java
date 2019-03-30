@@ -1,10 +1,9 @@
 package de.aelpecyem.elementaristics;
 
 import de.aelpecyem.elementaristics.init.ModItems;
-import de.aelpecyem.elementaristics.misc.elements.ElementInit;
+import de.aelpecyem.elementaristics.misc.elements.Aspects;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
-import scala.xml.Elem;
 
 public class ElementaristicsEssencesTab extends CreativeTabs {
     public ElementaristicsEssencesTab() {
@@ -13,7 +12,7 @@ public class ElementaristicsEssencesTab extends CreativeTabs {
 
     @Override
     public ItemStack getTabIconItem() {
-        return new ItemStack(ModItems.essence, 1, ElementInit.magan.getId());
+        return new ItemStack(ModItems.essence, 1, Aspects.magan.getId());
     }
 
 }

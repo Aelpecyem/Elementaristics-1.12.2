@@ -1,0 +1,6 @@
+{
+  "name": "Alchemy",
+  "description": "The Reactor has opened some gates to new territory in matters of $(marked)Alchemy$(). Perhaps all these tinctures and powders could be put to good use",
+  "icon": "elementaristics:textures/gui/icons/alchemy.png",
+  "sortnum": 2
+}

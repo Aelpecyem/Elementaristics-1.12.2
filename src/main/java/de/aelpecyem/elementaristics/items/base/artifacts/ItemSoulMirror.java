@@ -5,9 +5,8 @@ import de.aelpecyem.elementaristics.capability.IPlayerCapabilities;
 import de.aelpecyem.elementaristics.capability.PlayerCapProvider;
 import de.aelpecyem.elementaristics.config.Config;
 import de.aelpecyem.elementaristics.init.SoulInit;
-import de.aelpecyem.elementaristics.items.base.ItemBase;
 import de.aelpecyem.elementaristics.items.base.artifacts.rites.ItemAspects;
-import de.aelpecyem.elementaristics.misc.elements.ElementInit;
+import de.aelpecyem.elementaristics.misc.elements.Aspects;
 import de.aelpecyem.elementaristics.misc.potions.PotionInit;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
@@ -26,7 +25,7 @@ import java.util.List;
 public class
 ItemSoulMirror extends ItemAspects {
     public ItemSoulMirror() {
-        super("soul_mirror", ElementInit.soul, 6, false);
+        super("soul_mirror", Aspects.soul, 6, false);
         setMaxStackSize(1);
     }
 

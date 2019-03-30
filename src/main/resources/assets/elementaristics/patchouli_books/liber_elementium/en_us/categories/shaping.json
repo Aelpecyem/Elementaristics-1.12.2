@@ -1,6 +1,6 @@
 {
-  "name": "Arcane Shaping",
-  "description": "Fire shapes and oh it shapes very well! I could use this power.",
+  "name": "Forging",
+  "description": "The Rite of Forging has shown quite useful in, well, forging. I suppose that I should use this.",
   "icon": "elementaristics:textures/gui/icons/forging.png",
   "sortnum": 5
 }

@@ -10,9 +10,9 @@ public class Aspect {
     //maybe other stuff
     public Aspect(String name, int color) {
         this.name = name;
-        this.id = ElementInit.getElements().size();
+        this.id = Aspects.getElements().size();
         this.color = color;
-        ElementInit.getElements().add(this);
+        Aspects.getElements().add(this);
     }
 
     public int getColor() {

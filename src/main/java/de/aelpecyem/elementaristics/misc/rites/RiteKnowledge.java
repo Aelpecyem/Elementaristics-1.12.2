@@ -6,27 +6,20 @@ import de.aelpecyem.elementaristics.capability.IPlayerCapabilities;
 import de.aelpecyem.elementaristics.capability.PlayerCapProvider;
 import de.aelpecyem.elementaristics.capability.souls.soulCaps.SoulCaps;
 import de.aelpecyem.elementaristics.init.SoulInit;
-import de.aelpecyem.elementaristics.misc.elements.Aspect;
-import de.aelpecyem.elementaristics.misc.elements.ElementInit;
-import de.aelpecyem.elementaristics.proxy.ClientProxy;
-import de.aelpecyem.elementaristics.util.MaganUtil;
+import de.aelpecyem.elementaristics.misc.elements.Aspects;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.EnumDyeColor;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 
-import java.util.Iterator;
 import java.util.List;
 
 public class RiteKnowledge extends RiteBase {
 
     public RiteKnowledge() {
-        super(new ResourceLocation(Elementaristics.MODID, "rite_knowledge"), 100, 0.5F, 8, ElementInit.soul, ElementInit.light);
+        super(new ResourceLocation(Elementaristics.MODID, "rite_knowledge"), 100, 0.5F, 8, Aspects.soul, Aspects.light);
     }
 
     @Override

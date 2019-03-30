@@ -7,7 +7,7 @@ import de.aelpecyem.elementaristics.blocks.base.OreDroppingBase;
 import de.aelpecyem.elementaristics.blocks.base.crops.CropOpium;
 import de.aelpecyem.elementaristics.blocks.tileentity.blocks.*;
 import de.aelpecyem.elementaristics.misc.elements.Aspect;
-import de.aelpecyem.elementaristics.misc.elements.ElementInit;
+import de.aelpecyem.elementaristics.misc.elements.Aspects;
 import de.aelpecyem.elementaristics.util.IHasModel;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -74,7 +74,7 @@ public class ModBlocks {
         altar = new BlockAltar();
         fabric_reason = new BlockBase(Material.BARRIER, "fabric_reason");
         fabric_passion = new BlockBase(Material.BARRIER, "fabric_passion");
-        for (Aspect a : ElementInit.getElements()) {
+        for (Aspect a : Aspects.getElements()) {
             ESSENCES_CONCENTRATED.put(a.getId(), new BlockEssence("block_essence_" + a.getName(), a.getId()));
         }
 
@@ -89,7 +89,7 @@ public class ModBlocks {
             }
 
         }
-        for (int i = 0; i < ElementInit.getElements().size(); i++) {
+        for (int i = 0; i < Aspects.getElements().size(); i++) {
 
             registry.register(ESSENCES_CONCENTRATED.get(i));
         }
@@ -118,7 +118,7 @@ public class ModBlocks {
                 registry.register(((BlockBase) blockBase).createItemBlock());
             }
         }
-        for (int i = 0; i < ElementInit.getElements().size(); i++) {
+        for (int i = 0; i < Aspects.getElements().size(); i++) {
 
             registry.register(ESSENCES_CONCENTRATED.get(i).createItemBlock());
         }
@@ -136,13 +136,13 @@ public class ModBlocks {
                 }
             }
         }
-        for (int i = 0; i < ElementInit.getElements().size(); i++) {
+        for (int i = 0; i < Aspects.getElements().size(); i++) {
 
             ESSENCES_CONCENTRATED.get(i).registerItemModel(Item.getItemFromBlock(ESSENCES_CONCENTRATED.get(i)));
         }
     }
 
     public static Block getElementEssenceFromName(String name) {
-        return ESSENCES_CONCENTRATED.get(ElementInit.getElementByName(name).getId());
+        return ESSENCES_CONCENTRATED.get(Aspects.getElementByName(name).getId());
     }
 }

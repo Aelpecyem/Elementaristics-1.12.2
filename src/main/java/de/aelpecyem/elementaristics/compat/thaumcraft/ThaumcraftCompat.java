@@ -4,7 +4,7 @@ import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.compat.thaumcraft.focus.FocusEffectRiftCloser;
 import de.aelpecyem.elementaristics.compat.thaumcraft.focus.FocusEffectStabilize;
 import de.aelpecyem.elementaristics.init.ModItems;
-import de.aelpecyem.elementaristics.misc.elements.ElementInit;
+import de.aelpecyem.elementaristics.misc.elements.Aspects;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import thaumcraft.api.ThaumcraftApi;
@@ -42,21 +42,21 @@ public class ThaumcraftCompat {
 
         ThaumcraftApi.addArcaneCraftingRecipe(new ResourceLocation("elementaristics:essence_blank"), new ShapedArcaneRecipe(elementaristicsGroup, "ESSENCECREATION@2", 5, (new AspectList()).add(Aspect.AIR, 1).add(Aspect.EARTH, 1).add(Aspect.WATER, 1).add(Aspect.FIRE, 1).add(Aspect.ORDER, 1).add(Aspect.ENTROPY, 1), new ItemStack(ModItems.essence_blank, 2), new Object[]{" I ", "I I", " I ", 'I', "gemQuartz"}));
 
-        ThaumcraftApi.addCrucibleRecipe(new ResourceLocation("elementaristics:tc_essence_fire"), new CrucibleRecipe("CREATION_FIRE@2", new ItemStack(ModItems.essence, 1, ElementInit.fire.getId()), new ItemStack(ModItems.essence_blank), (new AspectList()).add(Aspect.FIRE, 10)));
-        ThaumcraftApi.addCrucibleRecipe(new ResourceLocation("elementaristics:tc_essence_water"), new CrucibleRecipe("CREATION_WATER@2", new ItemStack(ModItems.essence, 1, ElementInit.water.getId()), new ItemStack(ModItems.essence_blank), (new AspectList()).add(Aspect.WATER, 10)));
-        ThaumcraftApi.addCrucibleRecipe(new ResourceLocation("elementaristics:tc_essence_earth"), new CrucibleRecipe("CREATION_EARTH@2", new ItemStack(ModItems.essence, 1, ElementInit.earth.getId()), new ItemStack(ModItems.essence_blank), (new AspectList()).add(Aspect.EARTH, 10)));
-        ThaumcraftApi.addCrucibleRecipe(new ResourceLocation("elementaristics:tc_essence_air"), new CrucibleRecipe("CREATION_AIR@2", new ItemStack(ModItems.essence, 1, ElementInit.air.getId()), new ItemStack(ModItems.essence_blank), (new AspectList()).add(Aspect.AIR, 10)));
-        ThaumcraftApi.addCrucibleRecipe(new ResourceLocation("elementaristics:tc_essence_aether"), new CrucibleRecipe("CREATION_AETHER@2", new ItemStack(ModItems.essence, 1, ElementInit.aether.getId()), new ItemStack(ModItems.essence_blank), (new AspectList()).add(Aspect.ORDER, 5).add(Aspect.ENTROPY, 5)));
+        ThaumcraftApi.addCrucibleRecipe(new ResourceLocation("elementaristics:tc_essence_fire"), new CrucibleRecipe("CREATION_FIRE@2", new ItemStack(ModItems.essence, 1, Aspects.fire.getId()), new ItemStack(ModItems.essence_blank), (new AspectList()).add(Aspect.FIRE, 10)));
+        ThaumcraftApi.addCrucibleRecipe(new ResourceLocation("elementaristics:tc_essence_water"), new CrucibleRecipe("CREATION_WATER@2", new ItemStack(ModItems.essence, 1, Aspects.water.getId()), new ItemStack(ModItems.essence_blank), (new AspectList()).add(Aspect.WATER, 10)));
+        ThaumcraftApi.addCrucibleRecipe(new ResourceLocation("elementaristics:tc_essence_earth"), new CrucibleRecipe("CREATION_EARTH@2", new ItemStack(ModItems.essence, 1, Aspects.earth.getId()), new ItemStack(ModItems.essence_blank), (new AspectList()).add(Aspect.EARTH, 10)));
+        ThaumcraftApi.addCrucibleRecipe(new ResourceLocation("elementaristics:tc_essence_air"), new CrucibleRecipe("CREATION_AIR@2", new ItemStack(ModItems.essence, 1, Aspects.air.getId()), new ItemStack(ModItems.essence_blank), (new AspectList()).add(Aspect.AIR, 10)));
+        ThaumcraftApi.addCrucibleRecipe(new ResourceLocation("elementaristics:tc_essence_aether"), new CrucibleRecipe("CREATION_AETHER@2", new ItemStack(ModItems.essence, 1, Aspects.aether.getId()), new ItemStack(ModItems.essence_blank), (new AspectList()).add(Aspect.ORDER, 5).add(Aspect.ENTROPY, 5)));
 
-        ThaumcraftApi.addCrucibleRecipe(new ResourceLocation("elementaristics:tc_essence_light"), new CrucibleRecipe("CREATION_LIGHT@2", new ItemStack(ModItems.essence, 1, ElementInit.light.getId()), new ItemStack(ModItems.essence_blank), (new AspectList()).add(Aspect.FIRE, 10)));
-        ThaumcraftApi.addCrucibleRecipe(new ResourceLocation("elementaristics:tc_essence_ice"), new CrucibleRecipe("CREATION_ICE@2", new ItemStack(ModItems.essence, 1, ElementInit.ice.getId()), new ItemStack(ModItems.essence_blank), (new AspectList()).add(Aspect.COLD, 10)));
+        ThaumcraftApi.addCrucibleRecipe(new ResourceLocation("elementaristics:tc_essence_light"), new CrucibleRecipe("CREATION_LIGHT@2", new ItemStack(ModItems.essence, 1, Aspects.light.getId()), new ItemStack(ModItems.essence_blank), (new AspectList()).add(Aspect.FIRE, 10)));
+        ThaumcraftApi.addCrucibleRecipe(new ResourceLocation("elementaristics:tc_essence_ice"), new CrucibleRecipe("CREATION_ICE@2", new ItemStack(ModItems.essence, 1, Aspects.ice.getId()), new ItemStack(ModItems.essence_blank), (new AspectList()).add(Aspect.COLD, 10)));
 
-        ThaumcraftApi.addCrucibleRecipe(new ResourceLocation("elementaristics:tc_essence_crystal"), new CrucibleRecipe("CREATION_CRYSTAL@2", new ItemStack(ModItems.essence, 1, ElementInit.crystal.getId()), new ItemStack(ModItems.essence_blank), (new AspectList()).add(Aspect.CRYSTAL, 10)));
+        ThaumcraftApi.addCrucibleRecipe(new ResourceLocation("elementaristics:tc_essence_crystal"), new CrucibleRecipe("CREATION_CRYSTAL@2", new ItemStack(ModItems.essence, 1, Aspects.crystal.getId()), new ItemStack(ModItems.essence_blank), (new AspectList()).add(Aspect.CRYSTAL, 10)));
 
-        ThaumcraftApi.addCrucibleRecipe(new ResourceLocation("elementaristics:tc_essence_life"), new CrucibleRecipe("CREATION_LIFE@2", new ItemStack(ModItems.essence, 1, ElementInit.life.getId()), new ItemStack(ModItems.essence_blank), (new AspectList()).add(Aspect.LIFE, 10)));
+        ThaumcraftApi.addCrucibleRecipe(new ResourceLocation("elementaristics:tc_essence_life"), new CrucibleRecipe("CREATION_LIFE@2", new ItemStack(ModItems.essence, 1, Aspects.life.getId()), new ItemStack(ModItems.essence_blank), (new AspectList()).add(Aspect.LIFE, 10)));
 
-        ThaumcraftApi.addCrucibleRecipe(new ResourceLocation("elementaristics:tc_essence_order"), new CrucibleRecipe("CREATION_ORDER@2", new ItemStack(ModItems.essence, 1, ElementInit.order.getId()), new ItemStack(ModItems.essence_blank), (new AspectList()).add(Aspect.ORDER, 10)));
-        ThaumcraftApi.addCrucibleRecipe(new ResourceLocation("elementaristics:tc_essence_chaos"), new CrucibleRecipe("CREATION_CHAOS@2", new ItemStack(ModItems.essence, 1, ElementInit.chaos.getId()), new ItemStack(ModItems.essence_blank), (new AspectList()).add(Aspect.ENTROPY, 10)));
+        ThaumcraftApi.addCrucibleRecipe(new ResourceLocation("elementaristics:tc_essence_order"), new CrucibleRecipe("CREATION_ORDER@2", new ItemStack(ModItems.essence, 1, Aspects.order.getId()), new ItemStack(ModItems.essence_blank), (new AspectList()).add(Aspect.ORDER, 10)));
+        ThaumcraftApi.addCrucibleRecipe(new ResourceLocation("elementaristics:tc_essence_chaos"), new CrucibleRecipe("CREATION_CHAOS@2", new ItemStack(ModItems.essence, 1, Aspects.chaos.getId()), new ItemStack(ModItems.essence_blank), (new AspectList()).add(Aspect.ENTROPY, 10)));
 
 
 

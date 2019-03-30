@@ -1,7 +1,6 @@
 package de.aelpecyem.elementaristics.init;
 
 import de.aelpecyem.elementaristics.items.base.*;
-import de.aelpecyem.elementaristics.items.base.armor.RobesCultist;
 import de.aelpecyem.elementaristics.items.base.artifacts.rites.IncantationBase;
 import de.aelpecyem.elementaristics.items.base.artifacts.rites.ItemAspects;
 import de.aelpecyem.elementaristics.items.base.artifacts.rites.ItemHammerHeat;
@@ -9,12 +8,10 @@ import de.aelpecyem.elementaristics.items.base.artifacts.ItemSoulChanger;
 import de.aelpecyem.elementaristics.items.base.artifacts.ItemSoulMirror;
 import de.aelpecyem.elementaristics.items.base.burnable.ItemHerbBundle;
 import de.aelpecyem.elementaristics.items.base.thaumagral.*;
-import de.aelpecyem.elementaristics.misc.elements.ElementInit;
+import de.aelpecyem.elementaristics.misc.elements.Aspects;
 import de.aelpecyem.elementaristics.util.IHasModel;
 import net.minecraft.init.Blocks;
-import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemArmor;
 import net.minecraftforge.registries.IForgeRegistry;
 
 import java.util.ArrayList;
@@ -52,21 +49,22 @@ public class ModItems {
     public static ItemHammerHeat hammer_heat; //might make that an item with nice functions
     public static ItemThaumagral thaumagral_iron;
 
-    public static IncantationBase incantation_chaos = new IncantationBase("incantation_chaos", RiteInit.riteChaos, ElementInit.chaos, 4);
-    public static IncantationBase incantation_light = new IncantationBase("incantation_light",RiteInit.riteKnowledge, ElementInit.light, 4);
-    public static IncantationBase incantation_feast = new IncantationBase("incantation_feast",RiteInit.riteFeast, ElementInit.life, 4);
-    public static IncantationBase incantation_conflagration = new IncantationBase("incantation_conflagration", RiteInit.riteConflagration, ElementInit.fire, 4);
-    public static IncantationBase incantation_wind = new IncantationBase("incantation_wind", RiteInit.riteShredding, ElementInit.air, 4);
-    public static IncantationBase incantation_gaia = new IncantationBase("incantation_gaia", RiteInit.riteGaiasGaze, ElementInit.earth, 4);
-    public static IncantationBase incantation_stars = new IncantationBase("incantation_stars", RiteInit.riteSpaceExilation, ElementInit.aether, 4);
-    public static IncantationBase incantation_depths = new IncantationBase("incantation_depths", RiteInit.riteDrowningAstral, ElementInit.water, 4);
+    public static IncantationBase incantation_chaos = new IncantationBase("incantation_chaos", RiteInit.riteChaos, Aspects.chaos, 4);
+    public static IncantationBase incantation_light = new IncantationBase("incantation_light",RiteInit.riteKnowledge, Aspects.light, 4);
+    public static IncantationBase incantation_feast = new IncantationBase("incantation_feast",RiteInit.riteFeast, Aspects.life, 4);
+    public static IncantationBase incantation_conflagration = new IncantationBase("incantation_conflagration", RiteInit.riteConflagration, Aspects.fire, 4);
+    public static IncantationBase incantation_wind = new IncantationBase("incantation_wind", RiteInit.riteShredding, Aspects.air, 4);
+    public static IncantationBase incantation_gaia = new IncantationBase("incantation_gaia", RiteInit.riteGaiasGaze, Aspects.earth, 4);
+    public static IncantationBase incantation_stars = new IncantationBase("incantation_stars", RiteInit.riteSpaceExilation, Aspects.aether, 4);
+    public static IncantationBase incantation_depths = new IncantationBase("incantation_depths", RiteInit.riteDrowningAstral, Aspects.water, 4);
     public static ItemAspects sands_soul;
     public static ItemAspects wine_redmost;
 
-    public static ItemArmor hood_cultist = new RobesCultist("hood_cultist",1, EntityEquipmentSlot.HEAD);
+   /* public static ItemArmor hood_cultist = new RobesCultist("hood_cultist",1, EntityEquipmentSlot.HEAD);
     public static ItemArmor garb_cultist = new RobesCultist("garb_cultist",1, EntityEquipmentSlot.CHEST);
     public static ItemArmor legwear_cultist = new RobesCultist("legwear_cultist",2, EntityEquipmentSlot.LEGS);
     public static ItemArmor boots_cultist = new RobesCultist("boots_cultist",1, EntityEquipmentSlot.FEET);
+*/
 
     public static ItemEssence essence = new ItemEssence();
 
@@ -91,7 +89,7 @@ public class ModItems {
 
         matter_accelerating_module = new ItemBase("module_matter_accelerating");
 
-        catalyst_entropizing = new ItemAspects("catalyst_entropizing", ElementInit.chaos, 8, true); //1 aether essence 3 chaotic matter pieces
+        catalyst_entropizing = new ItemAspects("catalyst_entropizing", Aspects.chaos, 8, true); //1 aether essence 3 chaotic matter pieces
         soul_changer = new ItemSoulChanger();
         soul_mirror = new ItemSoulMirror();
         ash = new ItemBase("ash");
@@ -100,8 +98,8 @@ public class ModItems {
         //book_liber_elementium = new LiberElementiumItem();
         hammer_heat = new ItemHammerHeat();
 
-        sands_soul = new ItemAspects("powder_soul", ElementInit.soul, 6, true);
-        wine_redmost = new ItemAspects("wine_redmost", ElementInit.body, 6, true);
+        sands_soul = new ItemAspects("powder_soul", Aspects.soul, 6, true);
+        wine_redmost = new ItemAspects("wine_redmost", Aspects.body, 6, true);
 
         thaumagral_iron = new ItemThaumagral("thaumagral_iron", Item.ToolMaterial.IRON, 0, 0);
     }

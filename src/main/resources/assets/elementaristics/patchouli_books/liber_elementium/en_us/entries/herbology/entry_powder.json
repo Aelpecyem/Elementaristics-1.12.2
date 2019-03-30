@@ -1,7 +1,7 @@
 {
   "name": "Bundle of Herbs",
   "icon": "elementaristics:bundle_herbs",
-  "category": "herbology",
+  "category": "vis_vitalis",
   "pages": [
     {
       "type": "text",

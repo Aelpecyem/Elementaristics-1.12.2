@@ -1,18 +1,15 @@
 package de.aelpecyem.elementaristics.misc.rites.killing;
 
-import com.mojang.realmsclient.gui.ChatFormatting;
 import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.capability.IPlayerCapabilities;
 import de.aelpecyem.elementaristics.capability.PlayerCapProvider;
 import de.aelpecyem.elementaristics.capability.souls.Soul;
 import de.aelpecyem.elementaristics.init.ModItems;
-import de.aelpecyem.elementaristics.init.SoulInit;
 import de.aelpecyem.elementaristics.misc.elements.Aspect;
-import de.aelpecyem.elementaristics.misc.elements.ElementInit;
 import de.aelpecyem.elementaristics.misc.rites.RiteBase;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -20,7 +17,6 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 
 import java.util.List;
@@ -28,10 +24,18 @@ import java.util.List;
 public class RiteSacrifice extends RiteBase{//Soul's Conflagration
     Aspect aspect;
     Soul soul;
-    public RiteSacrifice(String name, Aspect aspectInvoked, Soul soulToAscend) {
+    DamageSource dmgSource;
+    public RiteSacrifice(String name, Aspect aspectInvoked, Soul soulToAscend, DamageSource damageSource) {
         super(new ResourceLocation(Elementaristics.MODID, name), 100,1, 8, soulToAscend, aspectInvoked); //set itempower higher, once the artifacts exist (also set maganPerTick higher)
         aspect = aspectInvoked;
         soul = soulToAscend;
+        dmgSource = damageSource;
+    }
+
+    public RiteSacrifice(String name, Aspect aspectInvoked, DamageSource damageSource) {
+        super(new ResourceLocation(Elementaristics.MODID, name), 100,1, 8, aspectInvoked); //set itempower higher, once the artifacts exist (also set maganPerTick higher)
+        aspect = aspectInvoked;
+        dmgSource = damageSource;
     }
 
     @Override
@@ -39,17 +43,21 @@ public class RiteSacrifice extends RiteBase{//Soul's Conflagration
         if (!world.isRemote) {
             int killCount = 0;
             Elementaristics.proxy.generateGenericParticles(player, aspect.getColor(), 4, 100, 0, false, true);
-            if (player.hasCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null)) {
-                IPlayerCapabilities caps = player.getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null);
-                if (caps.getPlayerAscensionStage() > 6) {
-                    //do final ascension
-                    return;
+            if (isSoulSpecific()) {
+                if (player.hasCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null)) {
+                    IPlayerCapabilities caps = player.getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null);
+                    if (caps.getPlayerAscensionStage() > 6) {
+                        if (caps.getSoulId() == soul.getId()) {
+                            //do final ascension
+                            return;
+                        }
+                    }
                 }
             }
             ItemStack stack = new ItemStack(ModItems.essence, 1, aspect.getId());
             EntityPlayer sacrifice = world.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 5, false);
             if (sacrifice != null){
-                sacrifice.attackEntityFrom(DamageSource.ON_FIRE, 100);
+                sacrifice.attackEntityFrom(dmgSource, 100);
                 killCount++;
             }
             List<Entity> entities = world.getEntitiesInAABBexcluding(null, new AxisAlignedBB(pos.getX() - 2, pos.getY() - 1, pos.getZ() - 2, pos.getX() + 2, pos.getY() + 2, pos.getZ() + 2), null);
@@ -58,8 +66,8 @@ public class RiteSacrifice extends RiteBase{//Soul's Conflagration
                 if (i >= entities.size()){
                     break;
                 }Entity entity = entities.get(i);
-                if (entity instanceof EntityLiving && entity.isNonBoss()) {
-                    entity.attackEntityFrom(DamageSource.ON_FIRE, 22);
+                if (entity instanceof EntityLivingBase && entity.isNonBoss()) {
+                    entity.attackEntityFrom(dmgSource, 22);
                     if (world.rand.nextBoolean()) {
                         world.spawnEntity(new EntityItem(world, pos.getX() + 0.5, pos.getY() + 1.2, pos.getZ() + 0.5, stack));
                     }

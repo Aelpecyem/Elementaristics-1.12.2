@@ -22,7 +22,7 @@ public class TileEntityPurifier extends TileEntity implements ITickable {
     public ItemStackHandler inventory = new ItemStackHandler(1) {
         @Override
         public int getSlotLimit(int slot) {
-            return 1;
+            return 3;
         }
     };
     public int tickCount;

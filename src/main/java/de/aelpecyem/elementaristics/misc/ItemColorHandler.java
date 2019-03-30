@@ -3,7 +3,7 @@ package de.aelpecyem.elementaristics.misc;
 import de.aelpecyem.elementaristics.items.base.ItemEssence;
 import de.aelpecyem.elementaristics.items.base.thaumagral.ItemPartHandle;
 import de.aelpecyem.elementaristics.items.base.thaumagral.ItemThaumagral;
-import de.aelpecyem.elementaristics.misc.elements.ElementInit;
+import de.aelpecyem.elementaristics.misc.elements.Aspects;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.item.ItemStack;
 
@@ -11,7 +11,7 @@ public class ItemColorHandler implements IItemColor {
     @Override
     public int colorMultiplier(ItemStack stack, int tintIndex) {
         if (stack.getItem() instanceof ItemEssence) {
-            return ElementInit.getElementById(stack.getItemDamage()).getColor();
+            return Aspects.getElementById(stack.getItemDamage()).getColor();
         }
         if (stack.getItem() instanceof ItemThaumagral){
             if (stack.hasTagCompound()) {

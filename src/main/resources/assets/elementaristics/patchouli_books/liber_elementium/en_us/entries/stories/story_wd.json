@@ -1,15 +1,15 @@
 {
   "name": "On Ascension: Sanity",
   "icon": "",
-  "category": "stories",
+  "category": "soulogy",
   "pages": [
     {
       "type": "text",
-      "text": "$(o)The Watcher, one who shall not dream, argues with The Dreamer, chained to The Watcher himself.$(br2)$(l)W:$()You take your steps in dreams, yet you step further. $(br)$(l)D:$()What I seek lies beneath the skin, and so do dreams. Come and join me, though it'll drive us insane!"
+      "text": "In occultist circles, it is generally accepted that sanity can be seen as a wall. $(br)It keeps things we should not understand out and thus keeps our mind and soul intact. $(br)However, in order for one to ascend, which is the goal of oh so many, one must break boundaries."
     },
     {
       "type": "text",
-      "text": "$(l)W:$()Don't you see that your sanity keeps you walking on these grounds?"
+      "text": "This breaking and rearranging of boundaries is considered the $(l)Great Work$(). "
     }
   ]
 }

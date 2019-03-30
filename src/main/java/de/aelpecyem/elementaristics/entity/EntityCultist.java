@@ -1,44 +1,22 @@
 package de.aelpecyem.elementaristics.entity;
 
-import com.mojang.realmsclient.gui.ChatFormatting;
 import de.aelpecyem.elementaristics.Elementaristics;
-import de.aelpecyem.elementaristics.capability.IPlayerCapabilities;
-import de.aelpecyem.elementaristics.capability.PlayerCapProvider;
-import de.aelpecyem.elementaristics.init.SoulInit;
 import de.aelpecyem.elementaristics.misc.elements.Aspect;
-import de.aelpecyem.elementaristics.misc.elements.ElementInit;
-import de.aelpecyem.elementaristics.particles.ParticleGeneric;
-import net.minecraft.client.resources.I18n;
+import de.aelpecyem.elementaristics.misc.elements.Aspects;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;
-import net.minecraft.entity.monster.*;
 import net.minecraft.entity.passive.EntityTameable;
-import net.minecraft.entity.passive.EntityVillager;
-import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentString;
-import net.minecraft.world.BossInfo;
-import net.minecraft.world.BossInfoServer;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 
 public class EntityCultist extends EntityTameable {
-    Aspect aspect = ElementInit.magan;
+    Aspect aspect = Aspects.magan;
 
     public EntityCultist(World worldIn) {
         super(worldIn);
@@ -63,7 +41,7 @@ public class EntityCultist extends EntityTameable {
 
     @Override
     public void readFromNBT(NBTTagCompound compound) {
-        aspect = ElementInit.getElementById(compound.getInteger("aspectId"));
+        aspect = Aspects.getElementById(compound.getInteger("aspectId"));
         super.readFromNBT(compound);
     }
 

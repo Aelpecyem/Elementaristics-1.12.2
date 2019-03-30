@@ -1,5 +1,6 @@
 package de.aelpecyem.elementaristics.misc.rites;
 
+import de.aelpecyem.elementaristics.blocks.tileentity.TileEntityAltar;
 import de.aelpecyem.elementaristics.capability.IPlayerCapabilities;
 import de.aelpecyem.elementaristics.capability.PlayerCapProvider;
 import de.aelpecyem.elementaristics.capability.souls.Soul;
@@ -76,8 +77,10 @@ public abstract class RiteBase {
         return maganDrainedPerTick;
     }
 
-    public abstract void doMagic(World world, BlockPos pos,EntityPlayer player);
-    public abstract void onRitual(World world, BlockPos altarPos, List<EntityPlayer> players, int tickCount);
+    public void doMagic(World world, BlockPos pos,EntityPlayer player){}
+    public void doMagic(World world, BlockPos pos, EntityPlayer player, TileEntityAltar altar){}
+    public void onRitual(World world, BlockPos altarPos, List<EntityPlayer> players, int tickCount){}
+    public void onRitual(World world, BlockPos altarPos, List<EntityPlayer> players, int tickCount,TileEntityAltar altar){}
    /* public boolean process(EntityPlayer player, int itemPower, float maganUsed){
         if (player.hasCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null)){
             IPlayerCapabilities cap = player.getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null);

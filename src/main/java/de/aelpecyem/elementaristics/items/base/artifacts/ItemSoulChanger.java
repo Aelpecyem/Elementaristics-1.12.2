@@ -2,12 +2,9 @@ package de.aelpecyem.elementaristics.items.base.artifacts;
 
 import de.aelpecyem.elementaristics.capability.IPlayerCapabilities;
 import de.aelpecyem.elementaristics.capability.PlayerCapProvider;
-import de.aelpecyem.elementaristics.entity.EntityCultist;
 import de.aelpecyem.elementaristics.init.SoulInit;
 import de.aelpecyem.elementaristics.items.base.ItemBase;
-import de.aelpecyem.elementaristics.misc.elements.ElementInit;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
