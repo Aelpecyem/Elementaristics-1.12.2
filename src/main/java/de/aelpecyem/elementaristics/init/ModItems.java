@@ -8,6 +8,7 @@ import de.aelpecyem.elementaristics.items.base.artifacts.ItemSoulChanger;
 import de.aelpecyem.elementaristics.items.base.artifacts.ItemSoulMirror;
 import de.aelpecyem.elementaristics.items.base.burnable.ItemHerbBundle;
 import de.aelpecyem.elementaristics.items.base.thaumagral.*;
+import de.aelpecyem.elementaristics.misc.elements.Aspect;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;
 import de.aelpecyem.elementaristics.util.IHasModel;
 import net.minecraft.init.Blocks;
@@ -42,23 +43,45 @@ public class ModItems {
 
     public static ItemBase essence_blank;
 
-    public static ItemAspects catalyst_entropizing;
+
     public static ItemSoulChanger soul_changer;
     public static ItemSoulMirror soul_mirror;
 
     public static ItemHammerHeat hammer_heat; //might make that an item with nice functions
     public static ItemThaumagral thaumagral_iron;
 
-    public static IncantationBase incantation_chaos = new IncantationBase("incantation_chaos", RiteInit.riteChaos, Aspects.chaos, 4);
-    public static IncantationBase incantation_light = new IncantationBase("incantation_light",RiteInit.riteKnowledge, Aspects.light, 4);
-    public static IncantationBase incantation_feast = new IncantationBase("incantation_feast",RiteInit.riteFeast, Aspects.life, 4);
-    public static IncantationBase incantation_conflagration = new IncantationBase("incantation_conflagration", RiteInit.riteConflagration, Aspects.fire, 4);
-    public static IncantationBase incantation_wind = new IncantationBase("incantation_wind", RiteInit.riteShredding, Aspects.air, 4);
-    public static IncantationBase incantation_gaia = new IncantationBase("incantation_gaia", RiteInit.riteGaiasGaze, Aspects.earth, 4);
-    public static IncantationBase incantation_stars = new IncantationBase("incantation_stars", RiteInit.riteSpaceExilation, Aspects.aether, 4);
-    public static IncantationBase incantation_depths = new IncantationBase("incantation_depths", RiteInit.riteDrowningAstral, Aspects.water, 4);
-    public static ItemAspects sands_soul;
+    public static IncantationBase incantation_chaos;
+    public static IncantationBase incantation_light;
+    public static IncantationBase incantation_feast;
+    public static IncantationBase incantation_conflagration;
+    public static IncantationBase incantation_wind;
+    public static IncantationBase incantation_gaia;
+    public static IncantationBase incantation_stars;
+    public static IncantationBase incantation_depths;
+    public static IncantationBase incantation_compression;
+    public static IncantationBase incantation_forging;
+
+    public static ItemAspects water_purest;
+    public static ItemAspects sparks_living;
+    public static ItemAspects earth_purest;
+    public static ItemAspects motion_captured;
+    public static ItemAspects stardust;
+
+    public static ItemAspects sparks_brightest;
     public static ItemAspects wine_redmost;
+    public static ItemAspects thoughts_battling; //after entering the mind
+    public static ItemAspects vacuum_selfsustaining;
+    public static ItemAspects lightning_tangible;
+    public static ItemAspects moss_everchaning;
+    public static ItemAspects gem_triangular;
+    public static ItemAspects catalyst_ordering;
+    public static ItemAspects catalyst_entropizing;
+
+    public static ItemAspects soul_dead; //Mana
+    public static ItemAspects matter_astral_body; //weaker soul aspect
+    public static ItemAspects sands_soul;
+
+
 
    /* public static ItemArmor hood_cultist = new RobesCultist("hood_cultist",1, EntityEquipmentSlot.HEAD);
     public static ItemArmor garb_cultist = new RobesCultist("garb_cultist",1, EntityEquipmentSlot.CHEST);
@@ -89,19 +112,55 @@ public class ModItems {
 
         matter_accelerating_module = new ItemBase("module_matter_accelerating");
 
-        catalyst_entropizing = new ItemAspects("catalyst_entropizing", Aspects.chaos, 8, true); //1 aether essence 3 chaotic matter pieces
         soul_changer = new ItemSoulChanger();
-        soul_mirror = new ItemSoulMirror();
+
         ash = new ItemBase("ash");
         protoplasm = new ItemBase("protoplasm");
 
         //book_liber_elementium = new LiberElementiumItem();
-        hammer_heat = new ItemHammerHeat();
 
-        sands_soul = new ItemAspects("powder_soul", Aspects.soul, 6, true);
-        wine_redmost = new ItemAspects("wine_redmost", Aspects.body, 6, true);
-
+        initRiteTools();
+        initRiteMaterials();
         thaumagral_iron = new ItemThaumagral("thaumagral_iron", Item.ToolMaterial.IRON, 0, 0);
+    }
+
+    private static void initRiteMaterials() {
+        water_purest = new ItemAspects("water_purest", 6, true, Aspects.water);
+        sparks_living = new ItemAspects("sparks_living", 6, true, Aspects.fire);
+        earth_purest = new ItemAspects("earth_purest", 6, true, Aspects.earth);
+        motion_captured = new ItemAspects("motion_captured", 6, true, Aspects.air);
+        stardust = new ItemAspects("stardust", 6, true, Aspects.aether);
+        
+        sparks_brightest = new ItemAspects("sparks_brightest", 6, true, Aspects.light);
+        wine_redmost = new ItemAspects("wine_redmost", 6, true, Aspects.body);
+        thoughts_battling = new ItemAspects("thoughts_battling", 6, true, Aspects.mind);
+        vacuum_selfsustaining = new ItemAspects("vacuum_selfsustaining", 6, true, Aspects.vacuum);
+        lightning_tangible = new ItemAspects("lightning_tangible", 6, true, Aspects.electricity);
+        moss_everchaning = new ItemAspects("moss_everchanging", 6, true, Aspects.life);
+        gem_triangular = new ItemAspects("gem_triangular", 6, true, Aspects.crystal);
+        catalyst_ordering = new ItemAspects("catalyst_ordering", 6, true, Aspects.order);
+        catalyst_entropizing = new ItemAspects("catalyst_entropizing", 6, true, Aspects.chaos); //1 aether essence 3 chaotic matter pieces
+
+        soul_dead = new ItemAspects("soul_dead", 3, true, Aspects.mana);
+        matter_astral_body = new ItemAspects("matter_astral_body", 3, true, Aspects.aether);
+        sands_soul = new ItemAspects("powder_soul", 6, true, Aspects.soul); //out of the 5 primal materials + astral stuff + dead soul
+
+    }
+
+    private static void initRiteTools() {
+        incantation_chaos = new IncantationBase("incantation_chaos", RiteInit.riteChaos, Aspects.chaos, 4);
+        incantation_light = new IncantationBase("incantation_light", RiteInit.riteKnowledge, Aspects.light, 4);
+        incantation_feast = new IncantationBase("incantation_feast", RiteInit.riteFeast, Aspects.life, 4);
+        incantation_conflagration = new IncantationBase("incantation_conflagration", RiteInit.riteConflagration, Aspects.fire, 4);
+        incantation_wind = new IncantationBase("incantation_wind", RiteInit.riteShredding, Aspects.air, 4);
+        incantation_gaia = new IncantationBase("incantation_gaia", RiteInit.riteGaiasGaze, Aspects.earth, 4);
+        incantation_stars = new IncantationBase("incantation_stars", RiteInit.riteSpaceExilation, Aspects.aether, 4);
+        incantation_depths = new IncantationBase("incantation_depths", RiteInit.riteDrowningAstral, Aspects.water, 4);
+        incantation_compression = new IncantationBase("incantation_compression", RiteInit.riteCompression, Aspects.mana, 4);
+        incantation_forging = new IncantationBase("incantation_forging", RiteInit.riteForging, Aspects.fire, 4);
+
+        hammer_heat = new ItemHammerHeat();
+        soul_mirror = new ItemSoulMirror();
     }
 
     public static void register(IForgeRegistry<Item> registry) {
@@ -114,9 +173,9 @@ public class ModItems {
 
     public static void registerModels() {
         for (Item item : ITEMS) {
-                if (item instanceof IHasModel){
-                    ((IHasModel) item).registerItemModel();
-                }
+            if (item instanceof IHasModel) {
+                ((IHasModel) item).registerItemModel();
+            }
         }
 
     }

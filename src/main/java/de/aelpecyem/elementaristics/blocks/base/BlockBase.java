@@ -30,7 +30,7 @@ public class BlockBase extends Block implements IHasModel{
         super(material);
         setHardness(6);
         setResistance(6);
-        setLightLevel(lightValue);
+        setLightLevel(lightLevel);
         this.name = name;
 
         setUnlocalizedName(name);

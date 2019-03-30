@@ -70,8 +70,8 @@ public class ModBlocks {
         reactor = new BlockReactor();
         essence_casing = new BlockBase(Material.ROCK, "casing_essence");
         altar = new BlockAltar();
-        fabric_reason = new BlockBase(Material.BARRIER, "fabric_reason");
-        fabric_passion = new BlockBase(Material.BARRIER, "fabric_passion");
+        fabric_reason = new BlockBase(Material.ROCK, "fabric_reason");
+        fabric_passion = new BlockBase(Material.ROCK, "fabric_passion");
         for (Aspect a : Aspects.getElements()) {
             ESSENCES_CONCENTRATED.put(a.getId(), new BlockEssence("block_essence_" + a.getName(), a.getId()));
         }

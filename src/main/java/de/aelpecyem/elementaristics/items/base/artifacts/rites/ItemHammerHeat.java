@@ -1,6 +1,6 @@
 package de.aelpecyem.elementaristics.items.base.artifacts.rites;
 
-import de.aelpecyem.elementaristics.blocks.tileentity.TileEntityForge;
+
 import de.aelpecyem.elementaristics.misc.elements.Aspects;
 import de.aelpecyem.elementaristics.recipe.ForgeRecipes;
 import net.minecraft.client.resources.I18n;
@@ -17,7 +17,7 @@ import java.util.List;
 
 public class ItemHammerHeat extends ItemAspects implements IHasRiteUse {
     public ItemHammerHeat() {
-        super("hammer_heat", Aspects.fire, 6, false);
+        super("hammer_heat", 6, false, Aspects.fire);
         maxStackSize = 1;
     }
 
@@ -25,19 +25,6 @@ public class ItemHammerHeat extends ItemAspects implements IHasRiteUse {
     public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
         tooltip.add(I18n.format("tooltip.hammer_heat.name"));
         super.addInformation(stack, worldIn, tooltip, flagIn);
-    }
-
-    @Override
-    public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        if (worldIn.getTileEntity(pos) instanceof TileEntityForge) {
-            TileEntityForge forge = (TileEntityForge) worldIn.getTileEntity(pos);
-            if (ForgeRecipes.getRecipeForInput(forge.inventory.getStackInSlot(0)) != null) {
-                    forge.doParticleShow();
-                    forge.hitCount += 1;
-            }
-
-        }
-        return super.onItemUse(player, worldIn, pos, hand, facing, hitX, hitY, hitZ);
     }
 
 }

@@ -17,7 +17,7 @@
     },
     {
       "type": "text",
-      "text": "Both item power and aspects needed are written on the incantation. $(br)In order to get certain aspects for a rite or to push up the amount of item power, $(item)Rite Tools$() must be used, tools or materials with aspects and power. $(br)These must be held by the cultists close to the altar. Materials will get consumed, tools will not."
+      "text": "Both item power and aspects needed are written on the incantation. $(br)In order to get certain aspects for a rite or to push up the amount of item power, $(item)Rite Tools$() must be used, tools or materials with aspects and power. $(br)These must be held by the cultists close to the altar. Materials will get consumed, tools will not. Additionally, the tool power will only increase if the tool's aspects are relevant."
     },
     {
       "type": "text",

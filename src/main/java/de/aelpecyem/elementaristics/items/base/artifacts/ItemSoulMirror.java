@@ -25,7 +25,7 @@ import java.util.List;
 public class
 ItemSoulMirror extends ItemAspects {
     public ItemSoulMirror() {
-        super("soul_mirror", Aspects.soul, 6, false);
+        super("soul_mirror", 6, false, Aspects.soul);
         setMaxStackSize(1);
     }
 

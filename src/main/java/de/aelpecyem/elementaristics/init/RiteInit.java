@@ -1,10 +1,7 @@
 package de.aelpecyem.elementaristics.init;
 
 import de.aelpecyem.elementaristics.misc.elements.Aspects;
-import de.aelpecyem.elementaristics.misc.rites.RiteBase;
-import de.aelpecyem.elementaristics.misc.rites.RiteChaos;
-import de.aelpecyem.elementaristics.misc.rites.RiteFeast;
-import de.aelpecyem.elementaristics.misc.rites.RiteKnowledge;
+import de.aelpecyem.elementaristics.misc.rites.*;
 import de.aelpecyem.elementaristics.misc.rites.killing.RiteSacrifice;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
@@ -17,12 +14,13 @@ public class RiteInit {
     public static RiteKnowledge riteKnowledge = new RiteKnowledge();
     public static RiteFeast riteFeast = new RiteFeast();
     public static RiteChaos riteChaos = new RiteChaos();
+    public static RiteForging riteForging = new RiteForging();
     public static RiteSacrifice riteConflagration = new RiteSacrifice("conflagration_soul", Aspects.fire, SoulInit.soulFire, DamageSource.ON_FIRE);
     public static RiteSacrifice riteShredding = new RiteSacrifice("rage_wind", Aspects.air, SoulInit.soulAir, DamageSource.MAGIC);
     public static RiteSacrifice riteGaiasGaze = new RiteSacrifice("gaias_gaze", Aspects.earth, SoulInit.soulEarth, DamageSource.FLY_INTO_WALL);
     public static RiteSacrifice riteDrowningAstral = new RiteSacrifice("drowning_astral", Aspects.water, SoulInit.soulWater, DamageSource.DROWN);
     public static RiteSacrifice riteSpaceExilation = new RiteSacrifice("space_exilation", Aspects.aether, SoulInit.soulAether, DamageSource.OUT_OF_WORLD);
-    public static RiteSacrifice riteCompression = new RiteSacrifice("soul_compression", Aspects.magan, DamageSource.MAGIC);
+    public static RiteSacrifice riteCompression = new RiteSacrifice("soul_compression", Aspects.mana, DamageSource.MAGIC);
     public static void registerRite(ResourceLocation name, RiteBase rite){
         RITES.put(name, rite);
     }
@@ -37,6 +35,7 @@ public class RiteInit {
         registerRite(riteFeast.name, RiteInit.riteFeast);
         registerRite(riteKnowledge.name, RiteInit.riteKnowledge);
         registerRite(riteChaos.name, RiteInit.riteChaos);
+        registerRite(riteForging.name, RiteInit.riteForging);
     }
     public static RiteBase getRiteForResLoc(String rite) {
         if (RITES.get(new ResourceLocation(rite)) != null) {

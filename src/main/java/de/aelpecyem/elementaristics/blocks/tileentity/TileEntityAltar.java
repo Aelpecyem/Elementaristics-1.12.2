@@ -141,11 +141,22 @@ public class TileEntityAltar extends TileEntity implements ITickable {
             Iterator iterator = targets.iterator();
             while (iterator.hasNext()) {
                 EntityPlayer player = (EntityPlayer) iterator.next();
+                RiteBase rite = RiteInit.getRiteForResLoc(currentRite);
                 if (player.getHeldItemMainhand().getItem() instanceof IHasRiteUse) {
-                    power += ((IHasRiteUse) player.getHeldItemMainhand().getItem()).getPower();
+                    for (Aspect aspect : ((IHasRiteUse) player.getHeldItemMainhand().getItem()).getAspects()){
+                        if (rite.getAspectsRequired().contains(aspect)){
+                            power += ((IHasRiteUse) player.getHeldItemMainhand().getItem()).getPower();
+                            break;
+                        }
+                    }
                 }
                 if (player.getHeldItemOffhand().getItem() instanceof IHasRiteUse) {
-                    power += ((IHasRiteUse) player.getHeldItemOffhand().getItem()).getPower();
+                    for (Aspect aspect : ((IHasRiteUse) player.getHeldItemMainhand().getItem()).getAspects()){
+                        if (rite.getAspectsRequired().contains(aspect)){
+                            power += ((IHasRiteUse) player.getHeldItemMainhand().getItem()).getPower();
+                            break;
+                        }
+                    }
                 }
             }
         }

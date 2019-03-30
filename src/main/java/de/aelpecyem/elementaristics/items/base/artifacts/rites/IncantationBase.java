@@ -13,7 +13,7 @@ import java.util.*;
 public class IncantationBase extends ItemAspects implements IHasRiteUse {
     RiteBase rite;
     public IncantationBase(String name, RiteBase rite, Aspect aspect, int power) {
-        super(name, aspect, power, false);
+        super(name, power, false, aspect);
         this.rite = rite;
 
     }

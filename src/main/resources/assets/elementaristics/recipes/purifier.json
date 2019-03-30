@@ -3,17 +3,15 @@
   "pattern": [
     "# #",
     "SSS",
-    "SQS"
+    "S#S"
   ],
   "key": {
     "#": {
-      "item": "elementaristics:essence_water"
+      "item": "elementaristics:essence",
+      "data": 2
     },
     "S": {
       "item": "elementaristics:stone_enriched"
-    },
-    "Q": {
-      "item": "elementaristics:block_essence_water"
     }
   },
   "result": {

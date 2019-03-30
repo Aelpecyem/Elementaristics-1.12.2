@@ -4,6 +4,8 @@ import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.init.ModItems;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;
 import de.aelpecyem.elementaristics.recipe.EntropizerRecipes;
+import de.aelpecyem.elementaristics.recipe.ForgeRecipes;
+import de.aelpecyem.elementaristics.recipe.base.ForgeRecipe;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -13,6 +15,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RiteForging extends RiteBase {
@@ -24,19 +27,39 @@ public class RiteForging extends RiteBase {
     @Override
     public void doMagic(World world, BlockPos pos, EntityPlayer player) {
         List<Entity> entities = world.getEntitiesInAABBexcluding(null, new AxisAlignedBB(pos.getX() - 2, pos.getY() - 1, pos.getZ() - 2, pos.getX() + 2, pos.getY() + 2, pos.getZ() + 2), null);
-        
+        List<ItemStack> stacks = new ArrayList<>();
         for (Entity entity : entities) {
             if (entity instanceof EntityItem) {
+                stacks.add(((EntityItem) entity).getItem());
                 Elementaristics.proxy.generateGenericParticles(entity, Aspects.chaos.getColor(), 1, 10, 0, false, true);
-                Elementaristics.proxy.generateGenericParticles(entity, Aspects.aether.getColor(), 1, 10, 0, false, true);
-                if (!world.isRemote) {
-                    ItemStack result = ItemStack.EMPTY;
-
-
-                    world.spawnEntity(new EntityItem(world, entity.posX, entity.posY, entity.posZ, result));
-                }
+                Elementaristics.proxy.generateGenericParticles(entity, Aspects.fire.getColor(), 1, 10, 0, false, true);
             }
         }
+        if (!world.isRemote) {
+            if (ForgeRecipes.getRecipeForInputs(stacks) != null) {
+                ForgeRecipe recipe = ForgeRecipes.getRecipeForInputs(stacks);
+
+                for (Entity entity : entities) {
+                    if (entity instanceof EntityItem) {
+                        if (recipe.input1.apply(((EntityItem) entity).getItem())) {
+                            ((EntityItem) entity).getItem().shrink(recipe.input1.getMatchingStacks()[0].getCount());
+                        } else if (recipe.input2.apply(((EntityItem) entity).getItem())) {
+                            ((EntityItem) entity).getItem().shrink(recipe.input2.getMatchingStacks()[0].getCount());
+                        } else if (recipe.input3.apply(((EntityItem) entity).getItem())) {
+                            ((EntityItem) entity).getItem().shrink(recipe.input3.getMatchingStacks()[0].getCount());
+                        } else if (recipe.input4.apply(((EntityItem) entity).getItem())) {
+                            ((EntityItem) entity).getItem().shrink(recipe.input4.getMatchingStacks()[0].getCount());
+                        } else if (recipe.input5.apply(((EntityItem) entity).getItem())) {
+                            ((EntityItem) entity).getItem().shrink(recipe.input5.getMatchingStacks()[0].getCount());
+                        }
+                    }
+                }
+                EntityItem item = new EntityItem(world, pos.getX() + 0.5, pos.getY() + 1.2, pos.getZ() + 0.5, recipe.output);
+                world.spawnEntity(item);
+            }
+
+        }
+
     }
 
     @Override
@@ -46,8 +69,8 @@ public class RiteForging extends RiteBase {
             List<Entity> entities = world.getEntitiesInAABBexcluding(null, new AxisAlignedBB(altarPos.getX() - 2, altarPos.getY() - 1, altarPos.getZ() - 2, altarPos.getX() + 2, altarPos.getY() + 2, altarPos.getZ() + 2), null);
             for (Entity entity : entities) {
                 if (entity instanceof EntityItem) {
-                    Elementaristics.proxy.generateGenericParticles(entity, Aspects.chaos.getColor(), 1, 10, 0, false, true);
-                    Elementaristics.proxy.generateGenericParticles(entity, Aspects.aether.getColor(), 1, 10, 0, false, true);
+                    Elementaristics.proxy.generateGenericParticles(entity, Aspects.fire.getColor(), 1, 10, 0, false, true);
+                    Elementaristics.proxy.generateGenericParticles(entity, Aspects.light.getColor(), 1, 10, 0, false, true);
                 }
             }
         }
