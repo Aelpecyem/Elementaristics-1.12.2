@@ -45,7 +45,6 @@ public class ModBlocks {
     public static BlockFilterHolder filter_holder;
     public static BlockReactor reactor;
     public static BlockBase essence_casing;
-    public static BlockForge forge;
     public static BlockAltar altar;
     public static BlockBase fabric_reason;
     public static BlockBase fabric_passion;
@@ -70,7 +69,6 @@ public class ModBlocks {
         filter_holder = new BlockFilterHolder();
         reactor = new BlockReactor();
         essence_casing = new BlockBase(Material.ROCK, "casing_essence");
-        forge = new BlockForge();
         altar = new BlockAltar();
         fabric_reason = new BlockBase(Material.BARRIER, "fabric_reason");
         fabric_passion = new BlockBase(Material.BARRIER, "fabric_passion");
@@ -106,7 +104,6 @@ public class ModBlocks {
         GameRegistry.registerTileEntity(tunneler_top.getTileEntityClass(), tunneler_top.getRegistryName().toString());
         GameRegistry.registerTileEntity(filter_holder.getTileEntityClass(), filter_holder.getRegistryName().toString());
         GameRegistry.registerTileEntity(reactor.getTileEntityClass(), reactor.getRegistryName().toString());
-        GameRegistry.registerTileEntity(forge.getTileEntityClass(), forge.getRegistryName().toString());
         GameRegistry.registerTileEntity(altar.getTileEntityClass(), altar.getRegistryName().toString());
     }
 

@@ -75,11 +75,12 @@ advancement.elementaristics.pedestal=No mercy for atoms
 advancement.elementaristics.concentrator=Influencing, isn't it?
 advancement.elementaristics.purifier=SPLASHING
 advancement.elementaristics.chaos=Far below
-advancement.elementaristics.tunneler=Woosh.
+advancement.elementaristics.tunneler=Whoosh.
 advancement.elementaristics.reactor=Not of the giant kind
 
 advancement.elementaristics.ascension_1=Far above, but just space
 advancement.elementaristics.ascension_2=THE MORE-!
+advancement.elementaristics.ascension_3=The Mind
 
 advancement.elementaristics.root.desc=You opened your gate... after a not so appreciable intoxication.
 advancement.elementaristics.root_research.desc=The aspects of the multiverse, discovered by me
@@ -93,6 +94,7 @@ advancement.elementaristics.reactor.desc=Build a Reactor to let (al-)chemicals r
 
 advancement.elementaristics.ascension_1.desc=Study the essence of space
 advancement.elementaristics.ascension_2.desc=Build an Altar to perform rites
+advancement.elementaristics.ascension_3.desc=Enter The Mind
 
 
 

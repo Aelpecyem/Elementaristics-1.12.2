@@ -54,5 +54,4 @@ public class EventHandler {
         }
 
     }
-// only let the HUD appear when knowing soul, add essence variants, instead of separate items
 }

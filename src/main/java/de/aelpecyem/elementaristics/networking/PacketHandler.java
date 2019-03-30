@@ -6,8 +6,6 @@ import de.aelpecyem.elementaristics.networking.concentrator.PacketRequestUpdateC
 import de.aelpecyem.elementaristics.networking.concentrator.PacketUpdateConcentrator;
 import de.aelpecyem.elementaristics.networking.filterholder.PacketRequestUpdateFilterHolder;
 import de.aelpecyem.elementaristics.networking.filterholder.PacketUpdateFilterHolder;
-import de.aelpecyem.elementaristics.networking.forge.PacketRequestUpdateForge;
-import de.aelpecyem.elementaristics.networking.forge.PacketUpdateForge;
 import de.aelpecyem.elementaristics.networking.pedestal.PacketRequestUpdatePedestal;
 import de.aelpecyem.elementaristics.networking.pedestal.PacketUpdatePedestal;
 import de.aelpecyem.elementaristics.networking.pedestallightning.PacketRequestUpdateLightningPedestal;
@@ -30,7 +28,6 @@ import net.minecraftforge.fml.relauncher.Side;
 
 public class PacketHandler {
 
-    //https://github.com/Ellpeck/NaturesAura/blob/master/src/main/java/de/ellpeck/naturesaura/packet/PacketHandler.java
     private static SimpleNetworkWrapper network;
 
     public static void init() {
@@ -57,10 +54,7 @@ public class PacketHandler {
         network.registerMessage(new PacketUpdateReactor.Handler(), PacketUpdateReactor.class, 12, Side.CLIENT);
         network.registerMessage(new PacketRequestUpdateReactor.Handler(), PacketRequestUpdateReactor.class, 13, Side.SERVER);
 
-        network.registerMessage(new PacketUpdateForge.Handler(), PacketUpdateForge.class, 14, Side.CLIENT);
-        network.registerMessage(new PacketRequestUpdateForge.Handler(), PacketRequestUpdateForge.class, 15, Side.SERVER);
-
-        network.registerMessage(new CapabilitySync.Handler(), CapabilitySync.class, 16, Side.CLIENT);
+        network.registerMessage(new CapabilitySync.Handler(), CapabilitySync.class, 14, Side.CLIENT);
     }
 
     public static void sendToAllLoaded(World world, BlockPos pos, IMessage message) {

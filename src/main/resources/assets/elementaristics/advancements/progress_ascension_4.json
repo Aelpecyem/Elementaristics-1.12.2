@@ -1,0 +1,24 @@
+{
+  "display": {
+    "icon": {
+      "item": "elementaristics:ash"
+    },
+    "title": {
+      "translate": "advancement.elementaristics.ascension_4"
+    },
+    "description": {
+      "translate": "advancement.elementaristics.ascension_4.desc"
+    }
+  },
+  "parent": "elementaristics:progress_ascension_3",
+  "criteria": {
+    "book": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": {
+          "type": "elementaristics:silver_thread"
+        }
+      }
+    }
+  }
+}

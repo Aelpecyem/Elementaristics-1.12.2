@@ -24,32 +24,15 @@ public class RiteForging extends RiteBase {
     @Override
     public void doMagic(World world, BlockPos pos, EntityPlayer player) {
         List<Entity> entities = world.getEntitiesInAABBexcluding(null, new AxisAlignedBB(pos.getX() - 2, pos.getY() - 1, pos.getZ() - 2, pos.getX() + 2, pos.getY() + 2, pos.getZ() + 2), null);
+        
         for (Entity entity : entities) {
             if (entity instanceof EntityItem) {
                 Elementaristics.proxy.generateGenericParticles(entity, Aspects.chaos.getColor(), 1, 10, 0, false, true);
                 Elementaristics.proxy.generateGenericParticles(entity, Aspects.aether.getColor(), 1, 10, 0, false, true);
                 if (!world.isRemote) {
-                    ItemStack result;
-                    if (EntropizerRecipes.getRecipeForInput(((EntityItem) entity).getItem()) != null) {
-                        //((EntityItem) entity).getItem().shrink(4);
-                        result = EntropizerRecipes.getRecipeForInput(((EntityItem) entity).getItem()).output;
-                        if (((EntityItem) entity).getItem().getCount() >= 4){
-                            ((EntityItem) entity).getItem().shrink(4);
-                            result.setCount(4);
-                        }else{
-                            result.setCount(((EntityItem) entity).getItem().getCount());
-                            ((EntityItem) entity).getItem().shrink(((EntityItem) entity).getItem().getCount());
-                        }
-                    } else {
-                        result = ModItems.chaotic_matter.getDefaultInstance();
-                        if (((EntityItem) entity).getItem().getCount() >= 4){
-                            ((EntityItem) entity).getItem().shrink(4);
-                            result.setCount(4);
-                        }else{
-                            result.setCount(((EntityItem) entity).getItem().getCount());
-                            ((EntityItem) entity).getItem().shrink(((EntityItem) entity).getItem().getCount());
-                        }
-                    }
+                    ItemStack result = ItemStack.EMPTY;
+
+
                     world.spawnEntity(new EntityItem(world, entity.posX, entity.posY, entity.posZ, result));
                 }
             }

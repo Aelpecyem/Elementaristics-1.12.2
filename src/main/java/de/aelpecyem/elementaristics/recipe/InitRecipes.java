@@ -23,7 +23,7 @@ public class InitRecipes {
     }
 
     private static void initForge() {
-        ForgeRecipes.addRecipe(new ForgeRecipe(new ResourceLocation(Elementaristics.MODID, "thaumagral_iron"), Ingredient.fromStacks(new ItemStack(Blocks.IRON_BLOCK)), ModItems.thaumagral_iron.getDefaultInstance(),4));
+        ForgeRecipes.addRecipe(new ForgeRecipe(new ResourceLocation(Elementaristics.MODID, "thaumagral_iron"), Ingredient.fromStacks(new ItemStack(Blocks.IRON_BLOCK)), Ingredient.fromStacks(new ItemStack(Blocks.GOLD_BLOCK)), Ingredient.fromStacks(new ItemStack(Blocks.DIAMOND_BLOCK)), Ingredient.fromStacks(new ItemStack(Blocks.EMERALD_BLOCK)), Ingredient.fromStacks(new ItemStack(Blocks.LAPIS_BLOCK)),  ModItems.thaumagral_iron.getDefaultInstance()));
     }
 
     private static void initPedestal() {

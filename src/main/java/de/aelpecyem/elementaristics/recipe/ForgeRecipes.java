@@ -6,6 +6,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ForgeRecipes {
@@ -15,9 +16,23 @@ public class ForgeRecipes {
         FORGE_RECIPES.put(recipe.name, recipe);
     }
 
-    public static ForgeRecipe getRecipeForInput(ItemStack input) {
+    public static ForgeRecipe getRecipeForInputs(List<ItemStack> stacks) {
         for (ForgeRecipe recipe : FORGE_RECIPES.values()) {
-            if (recipe.input.apply(input)) {
+            int checksPassed = 0;
+            for (ItemStack stack : stacks) {
+                if (recipe.input1.apply(stack)){
+                    checksPassed++;
+                }else if(recipe.input2.apply(stack)){
+                    checksPassed++;
+                }else if(recipe.input3.apply(stack)){
+                    checksPassed++;
+                }else if (recipe.input4.apply(stack)){
+                    checksPassed++;
+                }else if (recipe.input5.apply(stack)){
+                    checksPassed++;
+                }
+            }
+            if (checksPassed >= 5){
                 return recipe;
             }
         }

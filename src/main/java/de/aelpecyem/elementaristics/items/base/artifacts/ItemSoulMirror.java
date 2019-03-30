@@ -38,7 +38,7 @@ ItemSoulMirror extends ItemAspects {
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {//give stats
         if (playerIn.dimension != Config.mindDimensionId) {
-            if (playerIn.getActivePotionEffects().contains(new PotionEffect(PotionInit.potionTrance))) {
+            if (playerIn.getActivePotionEffects().contains(playerIn.getActivePotionEffect(PotionInit.potionTrance))){
                 playerIn.changeDimension(Config.mindDimensionId, new ITeleporter() {
                     @Override
                     public void placeEntity(World world, Entity entity, float yaw) {
