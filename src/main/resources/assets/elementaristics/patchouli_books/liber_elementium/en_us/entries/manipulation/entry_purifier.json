@@ -9,7 +9,8 @@
     },
     {
       "type": "crafting",
-      "recipe": "elementaristics:purifier"
+      "recipe": "elementaristics:purifier",
+      "text": "$(o)The first dishwasher that does not start to smell bad$()"
     }
   ],
   "advancement": "elementaristics:discovery_water"

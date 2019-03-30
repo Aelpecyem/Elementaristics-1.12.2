@@ -12,7 +12,7 @@ import de.aelpecyem.elementaristics.misc.elements.Aspects;
 import de.aelpecyem.elementaristics.misc.potions.PotionInit;
 import de.aelpecyem.elementaristics.networking.PacketHandler;
 import de.aelpecyem.elementaristics.proxy.CommonProxy;
-import de.aelpecyem.elementaristics.recipe.InitRecipes;
+import de.aelpecyem.elementaristics.init.InitRecipes;
 import de.aelpecyem.elementaristics.util.ClientTickHandler;
 import de.aelpecyem.elementaristics.util.RenderHandler;
 import de.aelpecyem.elementaristics.world.WorldGen;

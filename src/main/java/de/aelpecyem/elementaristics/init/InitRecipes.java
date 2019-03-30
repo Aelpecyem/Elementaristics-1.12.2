@@ -1,8 +1,9 @@
-package de.aelpecyem.elementaristics.recipe;
+package de.aelpecyem.elementaristics.init;
 
 import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.init.ModItems;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;
+import de.aelpecyem.elementaristics.recipe.*;
 import de.aelpecyem.elementaristics.recipe.base.*;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;

@@ -2,7 +2,6 @@ package de.aelpecyem.elementaristics.init;
 
 import de.aelpecyem.elementaristics.blocks.base.BlockBase;
 import de.aelpecyem.elementaristics.blocks.base.crops.BlockCropBase;
-import de.aelpecyem.elementaristics.blocks.base.BlockEssence;
 import de.aelpecyem.elementaristics.blocks.base.OreDroppingBase;
 import de.aelpecyem.elementaristics.blocks.base.crops.CropOpium;
 import de.aelpecyem.elementaristics.blocks.tileentity.blocks.*;
@@ -24,7 +23,6 @@ import java.util.Map;
 public class ModBlocks {
 
     public static List<Block> BLOCKS = new ArrayList<>();
-    public static Map<Integer, BlockEssence> ESSENCES_CONCENTRATED = new HashMap<>();
 
     //CROPS
     public static BlockCropBase crop_opium;
@@ -50,11 +48,6 @@ public class ModBlocks {
     public static BlockBase fabric_passion;
 
     public static void init() {
-        for (Block blockBase : BLOCKS) {
-            if (blockBase instanceof BlockEssence) {
-                BLOCKS.remove(blockBase);
-            }
-        }
         crop_opium = new CropOpium();
         stone_enriched = new BlockBase(Material.ROCK, "stone_enriched");
         ore_helium = new OreDroppingBase("ore_helium", ModItems.helium_bubble, 1, 2);
@@ -72,9 +65,7 @@ public class ModBlocks {
         altar = new BlockAltar();
         fabric_reason = new BlockBase(Material.ROCK, "fabric_reason");
         fabric_passion = new BlockBase(Material.ROCK, "fabric_passion");
-        for (Aspect a : Aspects.getElements()) {
-            ESSENCES_CONCENTRATED.put(a.getId(), new BlockEssence("block_essence_" + a.getName(), a.getId()));
-        }
+
 
     }
 
@@ -82,16 +73,10 @@ public class ModBlocks {
     public static void register(IForgeRegistry<Block> registry) {
 
         for (Block blockBase : BLOCKS) {
-            if (!(blockBase instanceof BlockEssence)) {
-                registry.register(blockBase);
-            }
+            registry.register(blockBase);
+
 
         }
-        for (int i = 0; i < Aspects.getElements().size(); i++) {
-
-            registry.register(ESSENCES_CONCENTRATED.get(i));
-        }
-
 
         registry.registerAll(
 
@@ -110,14 +95,9 @@ public class ModBlocks {
     public static void registerItemBlocks(IForgeRegistry<Item> registry) {
 
         for (Block blockBase : BLOCKS) {
-            if (!(blockBase instanceof BlockEssence)) {
-                if (blockBase instanceof BlockBase)
+            if (blockBase instanceof BlockBase)
                 registry.register(((BlockBase) blockBase).createItemBlock());
-            }
-        }
-        for (int i = 0; i < Aspects.getElements().size(); i++) {
 
-            registry.register(ESSENCES_CONCENTRATED.get(i).createItemBlock());
         }
 
         registry.registerAll(
@@ -127,19 +107,10 @@ public class ModBlocks {
 
     public static void registerModels() {
         for (Block blockBase : BLOCKS) {
-            if (!(blockBase instanceof BlockEssence)) {
-                if (blockBase instanceof IHasModel) {
+            if (blockBase instanceof IHasModel) {
                     ((IHasModel) blockBase).registerItemModel(Item.getItemFromBlock(blockBase));
-                }
             }
         }
-        for (int i = 0; i < Aspects.getElements().size(); i++) {
-
-            ESSENCES_CONCENTRATED.get(i).registerItemModel(Item.getItemFromBlock(ESSENCES_CONCENTRATED.get(i)));
-        }
     }
 
-    public static Block getElementEssenceFromName(String name) {
-        return ESSENCES_CONCENTRATED.get(Aspects.getElementByName(name).getId());
-    }
 }

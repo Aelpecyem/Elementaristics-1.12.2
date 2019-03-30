@@ -10,7 +10,8 @@
     },
     {
       "type": "crafting",
-      "recipe": "elementaristics:incantation_light"
+      "recipe": "elementaristics:incantation_light",
+      "text": "$(o)Sighs in enlightenment$()"
     },
     {
       "type": "text",

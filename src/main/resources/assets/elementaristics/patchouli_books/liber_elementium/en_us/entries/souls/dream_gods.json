@@ -1,0 +1,17 @@
+{
+  "name": "A Dream of Gods",
+  "icon": "",
+  "category": "soulogy",
+  "advancement": "elementaristics:discovery_soul",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Now that I know of souls, I wonder if I know of gods... what differs the soul of a god from the soul of a mortal? Do they even have one? $(o)Could I become one?$()"
+    },
+    {
+      "type": "crafting",
+      "recipe": "elementaristics:dream_god_self",
+      "text": "I only know things so far: a god must be believed in. And maybe, just maybe, a god does not have $(o)one$() Soul. After all, doesn't a god controll all primal aspects of reality?"
+    }
+  ]
+}

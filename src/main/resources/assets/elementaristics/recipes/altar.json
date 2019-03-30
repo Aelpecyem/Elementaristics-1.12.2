@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "SGS",
+    "S#S"
+  ],
+  "key": {
+    "#": {
+      "item": "elementaristics:essence",
+      "data": 4
+    },
+    "S": {
+      "item": "elementaristics:stone_enriched"
+    },
+    "G": {
+      "item": "minecraft:glowstone_dust"
+    }
+  },
+  "result": {
+    "item": "elementaristics:altar",
+    "count": 1
+  }
+}

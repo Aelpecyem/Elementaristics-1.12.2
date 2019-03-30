@@ -2,16 +2,28 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "elementaristics:essence_fire"
+      "item": "elementaristics:essence",
+      "data": 0
     },
     {
-      "item": "elementaristics:essence_air"
+      "item": "elementaristics:essence",
+      "data": 1
     },
     {
-      "item": "elementaristics:essence_water"
+      "item": "elementaristics:essence",
+      "data": 2
     },
     {
-      "item": "elementaristics:essence_earth"
+      "item": "elementaristics:essence",
+      "data": 3
+    },
+    {
+      "item": "elementaristics:essence",
+      "data": 4
+    },
+    {
+      "item": "elementaristics:essence",
+      "data": 17
     }
   ],
   "result": {

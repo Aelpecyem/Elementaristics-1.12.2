@@ -121,7 +121,7 @@ item.elementaristics.book.name=Liber Elementium
 info.elementaristics.book.landing=The Elementaristics are a simple concept about the elemental powers of the multiverse. I invented this concept, I think. I will use this book to hold my knowledge.
 info.elementaristics.book.subtitle=The gate's opening
 
-book.purifierTime=Time needed:
+book.purifierTime=Ticks needed:
 
 #Tooltip
 tooltip.incantation.magan=Magan needed:

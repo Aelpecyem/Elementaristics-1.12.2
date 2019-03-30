@@ -25,7 +25,7 @@ public class ProcessorConcentrator implements IComponentProcessor {
             case "output":
                 return PatchouliAPI.instance.serializeItemStack(this.recipe.output);
             case "inputInfluencing":
-                return PatchouliAPI.instance.serializeItemStack(new ItemStack(this.recipe.inputInfluencing.getItem()));
+                return PatchouliAPI.instance.serializeItemStack(this.recipe.inputInfluencing);
             default:
                 return null;
         }

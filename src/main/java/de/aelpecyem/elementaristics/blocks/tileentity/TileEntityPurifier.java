@@ -72,14 +72,18 @@ public class TileEntityPurifier extends TileEntity implements ITickable {
             PacketHandler.sendToAllAround(world, pos, 64, new PacketUpdatePurifier(TileEntityPurifier.this));
         }
         if (!(PurifierRecipes.getRecipeForInput(inventory.getStackInSlot(0)) == null)) {
-            tickCount++;
-            doParticleShow();
+            if (inventory.getStackInSlot(0).getCount() >= 3) {
+                tickCount++;
+                doParticleShow();
             if (tickCount < 0) {
                 tickCount = 0;
             }
 
             if (tickCount >= PurifierRecipes.getRecipeForInput(inventory.getStackInSlot(0)).time) {
                 inventory.setStackInSlot(0, PurifierRecipes.getRecipeForInput(inventory.getStackInSlot(0)).output);
+                tickCount = 0;
+            }
+        } else{
                 tickCount = 0;
             }
         } else {

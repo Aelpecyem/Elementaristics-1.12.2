@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ISI",
+    "ISI",
+    "ISI"
+  ],
+  "key": {
+    "S": {
+      "item": "elementaristics:stone_enriched"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "result": {
+    "item": "elementaristics:filter_holder",
+    "count": 3
+  }
+}

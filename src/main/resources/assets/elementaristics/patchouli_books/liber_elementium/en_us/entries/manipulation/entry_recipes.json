@@ -33,47 +33,6 @@
       "recipe": "elementaristics:cluster_aether",
       "text": "These clusters are used for the Lightning Pedestal to create essences.",
       "title": "Unrefined Clusters"
-    },
-    {
-      "advancement": "elementaristics:progress_concentrator",
-      "type": "crafting",
-      "recipe": "elementaristics:casing_essence",
-      "text": "$(item)Essence Casings$() are used for $(item)Concentrated Essence Blocks$()."
-    },
-    {
-      "advancement": "elementaristics:progress_concentrator",
-      "type": "spotlight",
-      "item": "elementaristics:block_essence_aether",
-      "title": "Essence Blocks",
-      "text": "$(item)Concentrated Essence Blocks$() are created using $(item)Essence Casings$() and Essences in a $(item)Concentrator$(), where the essence is the influencing reagent."
-    },
-    {
-      "advancement": "elementaristics:discovery_crystal",
-      "type": "elementaristics:purifier_recipe",
-      "recipe": "elementaristics:essence_crystal",
-      "name": "Crystal Essence",
-      "text": "How to create crystal essence"
-    },
-    {
-      "advancement": "elementaristics:discovery_life",
-      "type": "elementaristics:reactor_recipe",
-      "recipe": "elementaristics:essence_life",
-      "name": "Life Essence",
-      "text": "How to create life essence"
-    },
-    {
-      "advancement": "elementaristics:discovery_soul",
-      "type": "elementaristics:tunneler_recipe",
-      "recipe": "elementaristics:essence_soul",
-      "name": "Soul Essence",
-      "text": "How to create soul essence"
-    },
-    {
-      "advancement": "elementaristics:discovery_light",
-      "type": "elementaristics:concentrator_recipe",
-      "recipe": "elementaristics:essence_light",
-      "name": "Light Essence",
-      "text": "How to create light essence"
     }
   ]
 }

@@ -13,7 +13,8 @@
     },
     {
       "type": "crafting",
-      "recipe": "elementaristics:concentrator"
+      "recipe": "elementaristics:concentrator",
+      "text": "$(o)My roast is ruined$()"
     }
   ],
   "advancement": "elementaristics:discovery_earth"

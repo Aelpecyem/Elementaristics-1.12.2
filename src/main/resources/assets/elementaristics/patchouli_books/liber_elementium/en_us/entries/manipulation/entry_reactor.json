@@ -9,7 +9,8 @@
     },
     {
       "type": "crafting",
-      "recipe": "elementaristics:reactor"
+      "recipe": "elementaristics:reactor",
+      "text": "$(o)This time without fuel$()"
     }
   ],
   "advancement": "elementaristics:discovery_fire"

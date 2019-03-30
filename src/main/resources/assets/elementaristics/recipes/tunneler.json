@@ -1,13 +1,14 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "   ",
     "R#R",
-    "SSS"
+    "S#S",
+    "S#S"
   ],
   "key": {
     "#": {
-      "item": "elementaristics:essence_soul"
+      "item": "elementaristics:essence",
+      "data": 0
     },
     "S": {
       "item": "elementaristics:stone_enriched"
@@ -17,7 +18,7 @@
     }
   },
   "result": {
-    "item": "elementaristics:soul_identifier",
+    "item": "elementaristics:tunneler",
     "count": 1
   }
 }

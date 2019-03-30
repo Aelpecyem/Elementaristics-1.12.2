@@ -1,0 +1,17 @@
+{
+  "name": "A Dream of a truer Self",
+  "icon": "",
+  "category": "soulogy",
+  "advancement": "elementaristics:discovery_mind",
+  "pages": [
+    {
+      "type": "text",
+      "text": "I had a dream. Or rather, I still have a dream. A dream of a truer self. What if there once was a truth in my soul? A truth that was lost? What if I can find it again?"
+    },
+    {
+      "type": "crafting",
+      "recipe": "elementaristics:dream_truer_self",
+      "text": "Can one kill a lie? And if so, can one build a truth? Can one let this truth be recognized, even by oneself? Even by gods?"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "name": "A Dream of a Body",
+  "icon": "",
+  "category": "soulogy",
+  "advancement": "elementaristics:discovery_body",
+  "pages": [
+    {
+      "type": "text",
+      "text": "I thought about godhood, I thought about truth, but I never thought about this material world. What if I could focus the efforts on my soul on my body instead?"
+    },
+    {
+      "type": "crafting",
+      "recipe": "elementaristics:dream_material_self",
+      "text": "This body seems like it has so much more potential. Maybe $(marked)Alchemy$() might help me..."
+    }
+  ]
+}

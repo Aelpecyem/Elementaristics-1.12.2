@@ -9,7 +9,8 @@
     },
     {
       "type": "crafting",
-      "recipe": "elementaristics:incantation_chaos"
+      "recipe": "elementaristics:incantation_chaos",
+      "text": "$(o)Chaotic-Good$()"
     },
     {
       "type": "text",

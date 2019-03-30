@@ -36,6 +36,78 @@
       "type": "spotlight",
       "item": "elementaristics:essence:2",
       "text": "Water is the element of liquids, a crucial component to life as we know it and is sometimes even connected to feelings. $(br)Generally, it is often known to be one of the simplest primal elements."
+    },
+    {
+      "advancement": "elementaristics:discovery_crystal",
+      "type": "elementaristics:purifier_recipe",
+      "recipe": "elementaristics:essence_crystal",
+      "name": "Crystal Essence",
+      "text": "The aspect of crystals symbolizes the structure in all crystalline matter and is thus loosely connected to the aspect of Order. $(br)One may describe it as the 'stronger earth aspect'."
+    },{
+      "advancement": "elementaristics:discovery_order",
+      "type": "elementaristics:purifier_recipe",
+      "recipe": "elementaristics:essence_order",
+      "name": "Crystal Essence",
+      "text": "Order: the very force, or rather, not-force that keeps the universe from collapsing in chaos."
+    },
+    {
+      "advancement": "elementaristics:discovery_life",
+      "type": "elementaristics:reactor_recipe",
+      "recipe": "elementaristics:essence_life",
+      "name": "Life Essence",
+      "text": "The aspect of life... is quite lively. It is able to adapt to cruel conditions and is the aspect that persists chaos, or rather, order the most... till death."
+    },{
+      "advancement": "elementaristics:discovery_electricity",
+      "type": "elementaristics:reactor_recipe",
+      "recipe": "elementaristics:essence_electricity",
+      "name": "Electricity Essence",
+      "text": "This truly shocking aspect describes the energy of electricity, with its motion and its influence."
+    },
+    {
+      "advancement": "elementaristics:discovery_light",
+      "type": "elementaristics:concentrator_recipe",
+      "recipe": "elementaristics:essence_light",
+      "name": "Light Essence",
+      "text": "Being sustained by the air and its motion, fire creates light. Light so glorious even gods might see it."
+    },
+    {
+      "advancement": "elementaristics:discovery_ice",
+      "type": "elementaristics:concentrator_recipe",
+      "recipe": "elementaristics:essence_ice",
+      "name": "Ice Essence",
+      "text": "The hard water, basically, but also coldness."
+    },
+    {
+      "advancement": "elementaristics:discovery_body",
+      "type": "elementaristics:tunneler_recipe",
+      "recipe": "elementaristics:essence_body",
+      "name": "Ice Essence",
+      "text": "The body, my body, our body, all bodies. Maybe a father."
+    },
+    {
+      "advancement": "elementaristics:discovery_mind",
+      "type": "elementaristics:tunneler_recipe",
+      "recipe": "elementaristics:essence_mind",
+      "name": "Soul Essence",
+      "text": "The mind knows and the mind perceives, yet it may be a son."
+    },
+    {
+      "advancement": "elementaristics:discovery_soul",
+      "type": "elementaristics:tunneler_recipe",
+      "recipe": "elementaristics:essence_soul",
+      "name": "Soul Essence",
+      "text": "The soul and the spirit, and what lies beneath it."
+    },
+    {
+      "advancement": "elementaristics:discovery_chaos",
+      "type": "spotlight",
+      "item": "elementaristics:essence:15",
+      "text": "Chaos essence is the chaotic aspect of aether, and is the destructive force keeping the universe from becoming the most ordered. It is like the fire that warms and consumes, although order is always the ash."
+    },{
+      "advancement": "elementaristics:discovery_vacuum",
+      "type": "spotlight",
+      "item": "elementaristics:essence:7",
+      "text": "Total. Emptiness. But. Yet. More"
     }
   ]
 }

@@ -137,7 +137,7 @@ public class ModItems {
         vacuum_selfsustaining = new ItemAspects("vacuum_selfsustaining", 6, true, Aspects.vacuum);
         lightning_tangible = new ItemAspects("lightning_tangible", 6, true, Aspects.electricity);
         moss_everchaning = new ItemAspects("moss_everchanging", 6, true, Aspects.life);
-        gem_triangular = new ItemAspects("gem_triangular", 6, true, Aspects.crystal);
+        gem_triangular = new ItemAspects("gem_arcane", 6, true, Aspects.crystal);
         catalyst_ordering = new ItemAspects("catalyst_ordering", 6, true, Aspects.order);
         catalyst_entropizing = new ItemAspects("catalyst_entropizing", 6, true, Aspects.chaos); //1 aether essence 3 chaotic matter pieces
 

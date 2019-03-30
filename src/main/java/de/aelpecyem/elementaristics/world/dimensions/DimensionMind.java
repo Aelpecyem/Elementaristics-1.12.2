@@ -48,8 +48,11 @@ public class DimensionMind extends WorldProvider{
         return false;
     }
 
-
-    /**
+    @Override
+    public boolean isDaytime() {
+        return true;
+    }
+/**
      * True if the player can respawn in this dimension (true = overworld, false = nether).
      */
 
@@ -83,7 +86,20 @@ public class DimensionMind extends WorldProvider{
         return ModDimensions.MIND;
     }
 
+    @Override
+    public float getStarBrightness(float par1) {
+        return 1;
+    }
 
+    @Override
+    public float getSunBrightness(float par1) {
+        return 1;
+    }
+
+    @Override
+    public float getSunBrightnessFactor(float par1) {
+        return 1;
+    }
 
     @Override
     public boolean canRespawnHere() {

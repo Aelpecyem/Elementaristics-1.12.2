@@ -10,7 +10,8 @@
     },
     {
       "type": "crafting",
-      "recipe": "elementaristics:pedestal_lightning"
+      "recipe": "elementaristics:pedestal_lightning",
+      "text": "$(o)Really just a Refinery with too much magic$()"
     }
   ]
 }

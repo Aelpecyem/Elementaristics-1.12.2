@@ -25,7 +25,7 @@ public class ProcessorPurifier implements IComponentProcessor {
             case "output":
                 return PatchouliAPI.instance.serializeItemStack(this.recipe.output);
             case "time":
-                return I18n.format("book.purifierTime") + " " + String.valueOf(this.recipe.time + "s");
+                return I18n.format("book.purifierTime") + " " + String.valueOf(this.recipe.time);
             default:
                 return null;
         }
