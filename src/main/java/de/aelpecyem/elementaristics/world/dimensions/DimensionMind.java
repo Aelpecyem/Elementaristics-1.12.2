@@ -80,6 +80,10 @@ public class DimensionMind extends WorldProvider{
         };
     }
 
+    @Override
+    public long getWorldTime() {
+        return 1000;
+    }
 
     @Override
     public DimensionType getDimensionType() {

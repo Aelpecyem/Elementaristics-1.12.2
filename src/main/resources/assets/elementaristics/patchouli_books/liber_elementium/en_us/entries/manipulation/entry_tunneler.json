@@ -10,7 +10,7 @@
     {
       "type": "crafting",
       "recipe": "elementaristics:tunneler",
-      "recipe2": "elementaristics:filter_holder"
+      "recipe2": "elementaristics:filter"
     },
     {
       "type": "text",

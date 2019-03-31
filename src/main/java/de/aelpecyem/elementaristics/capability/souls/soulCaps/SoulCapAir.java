@@ -25,6 +25,12 @@ public class SoulCapAir extends SoulCap {
     }
 
     @Override
+    public void normalize(EntityPlayer player, IPlayerCapabilities cap) {
+       player.capabilities.setPlayerWalkSpeed( 0.1F);
+       super.normalize(player, cap);
+    }
+
+    @Override
     public void buffsOnSpawning(EntityPlayer player, IPlayerCapabilities cap) {
        if (cap.knowsSoul()) {
            if (player.capabilities.getWalkSpeed() < 0.14F) {

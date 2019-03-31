@@ -75,9 +75,10 @@ public class TileEntityAltar extends TileEntity implements ITickable {
                                 }
                             }else{
                                 if (world.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 15, false) != null) {
+                                    consumeConsumables();
                                     rite.doMagic(world, pos, world.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 20, false));
                                     currentRite = "";
-                                    consumeConsumables();
+
                                 }
                             }
                         }
@@ -151,9 +152,9 @@ public class TileEntityAltar extends TileEntity implements ITickable {
                     }
                 }
                 if (player.getHeldItemOffhand().getItem() instanceof IHasRiteUse) {
-                    for (Aspect aspect : ((IHasRiteUse) player.getHeldItemMainhand().getItem()).getAspects()){
+                    for (Aspect aspect : ((IHasRiteUse) player.getHeldItemOffhand().getItem()).getAspects()){
                         if (rite.getAspectsRequired().contains(aspect)){
-                            power += ((IHasRiteUse) player.getHeldItemMainhand().getItem()).getPower();
+                            power += ((IHasRiteUse) player.getHeldItemOffhand().getItem()).getPower();
                             break;
                         }
                     }

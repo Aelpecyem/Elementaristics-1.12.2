@@ -2,6 +2,8 @@ package de.aelpecyem.elementaristics.items.base.artifacts;
 
 import de.aelpecyem.elementaristics.capability.IPlayerCapabilities;
 import de.aelpecyem.elementaristics.capability.PlayerCapProvider;
+import de.aelpecyem.elementaristics.capability.souls.soulCaps.SoulCap;
+import de.aelpecyem.elementaristics.capability.souls.soulCaps.SoulCaps;
 import de.aelpecyem.elementaristics.init.SoulInit;
 import de.aelpecyem.elementaristics.items.base.ItemBase;
 import net.minecraft.client.resources.I18n;
@@ -31,6 +33,7 @@ public class ItemSoulChanger extends ItemBase {
             }
 
             if (!playerIn.isSneaking()) {
+                SoulCaps.getCapForSoul(SoulInit.getSoulFromId(cap.getSoulId())).normalize(playerIn, cap);
                 if (cap.getSoulId() > 0) {
                     cap.setSoulId(cap.getSoulId() - 1);
                 } else if (cap.getSoulId() == 0) {

@@ -14,6 +14,9 @@ public class SoulCap {
         SoulCaps.addSoulCapToSoul(this, soul);
     }
 
+    public void normalize(EntityPlayer player, IPlayerCapabilities cap){
+
+    }
     public void buffsOnSpawning(EntityPlayer player, IPlayerCapabilities cap){
 
     }

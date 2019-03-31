@@ -15,9 +15,9 @@ public class BlockBase extends Block implements IHasModel{
 
     public BlockBase(Material material, String name) {
         super(material);
-        setHardness(6);
+        setHardness(4);
 
-        setResistance(6);
+        setResistance(5);
         this.name = name;
 
         setUnlocalizedName(name);
