@@ -7,32 +7,32 @@ import java.util.ArrayList;
 
 public class Aspects {
 
-    public static Aspect air;// = new Aspect("air");
-    public static Aspect earth;// = new Aspect("earth");
-    public static Aspect water;// = new Aspect("water");
-    public static Aspect fire;// = new Aspect("fire");
-    public static Aspect aether;// = new Aspect("aether");
+    public static Aspect air;
+    public static Aspect earth;
+    public static Aspect water;
+    public static Aspect fire;
+    public static Aspect aether;
 
-    public static Aspect mana; //sacrifice
-    public static Aspect magan; //all primals + mana
+    public static Aspect mana;
+    public static Aspect magan;
 
-    //Air descendants
-    public static Aspect electricity; //r //definitely rework those (equally balance use of manipulation methods, define Aspects to help with research (water influenced by earth is ice, because earth also represents the solid matter
-    public static Aspect vacuum; //r- entropizing
+
+    public static Aspect electricity;
+    public static Aspect vacuum;
     //Earth descendants
-    public static Aspect crystal; //r- purifying
-    public static Aspect body; //r- influencing
+    public static Aspect crystal;
+    public static Aspect body;
     //Water decendants
-    public static Aspect life; //r- reacting
-    public static Aspect ice; //r- tunneling
+    public static Aspect life;
+    public static Aspect ice;
     //Fire descendants
-    public static Aspect light; //r- influencing
-    public static Aspect mind; //r- tunneling
+    public static Aspect light;
+    public static Aspect mind;
     //Aether descendants
-    public static Aspect order; //r- purifying
-    public static Aspect chaos; //r- entropizing
+    public static Aspect order;
+    public static Aspect chaos;
     //advanced
-    public static Aspect soul; //r- tunneling
+    public static Aspect soul;
 
     private static ArrayList<Aspect> elements = new ArrayList<>();
 
