@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "elementaristics:incantation_forging"
+    },
+    "title": {
+      "translate": "advancement.elementaristics.forging"
+    },
+    "description": {
+      "translate": "advancement.elementaristics.forging.desc"
+    }
+  },
+  "parent": "elementaristics:progress_pedestal",
+  "criteria": {
+    "book": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "elementaristics:incantation_forging"
+          }
+        ]
+      }
+    }
+  }
+}

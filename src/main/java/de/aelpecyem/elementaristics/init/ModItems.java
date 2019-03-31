@@ -7,6 +7,7 @@ import de.aelpecyem.elementaristics.items.base.artifacts.rites.ItemHammerHeat;
 import de.aelpecyem.elementaristics.items.base.artifacts.ItemSoulChanger;
 import de.aelpecyem.elementaristics.items.base.artifacts.ItemSoulMirror;
 import de.aelpecyem.elementaristics.items.base.burnable.ItemHerbBundle;
+import de.aelpecyem.elementaristics.items.base.burnable.ItemOpiumTincture;
 import de.aelpecyem.elementaristics.items.base.thaumagral.*;
 import de.aelpecyem.elementaristics.misc.elements.Aspect;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;
@@ -24,7 +25,8 @@ public class ModItems {
 
     public static ItemBase helium_bubble = new ItemBase("bubble_helium");
     public static ItemBase hydrogen_bubble = new ItemBase("bubble_hydrogen");
-    public static ItemBase bundle_herbs = new ItemHerbBundle();
+    public static ItemBase bundle_herbs;
+    public static ItemBase opium_tincture;
 
     public static ItemBase petal_opium;
     public static ItemSeedBase seed_herb;
@@ -93,9 +95,10 @@ public class ModItems {
 
 
     public static void init() {
-
+        bundle_herbs = new ItemHerbBundle();
         petal_opium = new ItemBase("petal_opium");
         seed_herb = new ItemSeedBase("seeds_opium", ModBlocks.crop_opium, Blocks.FARMLAND);
+        opium_tincture = new ItemOpiumTincture();
 
         vibrant_quartz = new ItemBase("quartz_vibrant");
         chaotic_matter = new ItemBase("matter_chaotic");
@@ -141,7 +144,7 @@ public class ModItems {
         catalyst_ordering = new ItemAspects("catalyst_ordering", 6, true, Aspects.order);
         catalyst_entropizing = new ItemAspects("catalyst_entropizing", 6, true, Aspects.chaos); //1 aether essence 3 chaotic matter pieces
 
-        soul_dead = new ItemAspects("soul_dead", 3, true, Aspects.mana);
+        soul_dead = new ItemAspects("soul_dead", 4, true, Aspects.mana);
         matter_astral_body = new ItemAspects("matter_astral_body", 3, true, Aspects.aether);
         sands_soul = new ItemAspects("powder_soul", 6, true, Aspects.soul); //out of the 5 primal materials + astral stuff + dead soul
 

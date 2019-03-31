@@ -27,6 +27,8 @@
     }
   ],
   "result": {
-    "item": "elementaristics:essence_magan"
+    "item": "elementaristics:essence",
+    "count": 6,
+    "data": 5
   }
 }

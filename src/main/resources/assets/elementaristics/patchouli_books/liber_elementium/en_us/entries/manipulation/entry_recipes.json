@@ -31,7 +31,7 @@
       "advancement": "elementaristics:progress_pedestal",
       "type": "crafting",
       "recipe": "elementaristics:cluster_aether",
-      "text": "These clusters are used for the Lightning Pedestal to create essences.",
+      "text": "These clusters are used at the Lightning Pedestal to create essences.",
       "title": "Unrefined Clusters"
     }
   ]

@@ -11,7 +11,7 @@
       "translate": ""
     }
   },
-  "parent": "elementaristics:discovery_life",
+  "parent": "elementaristics:discovery_magan",
   "criteria": {
     "book": {
       "trigger": "minecraft:inventory_changed",

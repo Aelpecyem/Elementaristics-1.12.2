@@ -28,6 +28,7 @@ item.powder_herbs.name=Intoxicating Blend
 item.powder_soul.name=Powder of Souls
 item.wine_redmost.name=Redmost Wine
 item.essence.name=Air Essence
+item.tincture_opium.name=Magic Laudanum
 
 #Essences (Items and Blocks)
 item.essence_air.name=Air Essence
@@ -133,11 +134,12 @@ tooltip.aspect_tool.power=Power:
 
 
 
-tooltip.root=I could have a nice nighttime when burning this...
+tooltip.root=I could have a rather interesting time when burning this...
 tooltip.thaumagral.durability=Durability Bonus:
 tooltip.thaumagral.damage=Damage Bonus:
 tooltip.thaumagral.spellSlots=Spellslots:
 tooltip.mirror_soul.name=Knowing me, knowing you
+tooltip.opium.name=Relatively weak, compared to its non-arcane version.
 
 #Misc
 entity.silver_thread.name=Silver Thread
@@ -198,8 +200,7 @@ message.view_stats.name=Viewing stats for
 message.max_magan.name=Your maximum magan is
 message.current_magan.name=Your current magan is
 message.regen_per_tick.name=Your magan regeneration rate per tick is
-message.aspects_discovered.name=The following aspects were discovered:
-message.aspect_added.name=You discovered the following aspect:
+message.
 #Souls
 soul.soul_magan.name=§6Magan Soul
 soul.soul_water.name=§1Water Soul
