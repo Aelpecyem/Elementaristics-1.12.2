@@ -109,8 +109,16 @@ public class TileEntityAltar extends TileEntity implements ITickable {
 
         for (int i = 0; i < cultists.size(); i++){
             EntityCultist cultist = cultists.get(i);
-            cultist.setPosition(pos.getX() + 6  * ((i + 1) % 2 == 0 ? 1 : -1), pos.getY(), pos.getZ() + 6 * ((i + 1) < 3 ? 1 : -1));
-            cultist.setSitting(true);
+            if(!cultistsThere.contains(cultist)) {
+                for (EntityPlayer player: playersThere){
+                    if (cultist.isOwner(player)){
+                        break;
+                    }
+                    return;
+                }
+                cultist.setPosition(pos.getX() + 6 * ((i + 1) % 2 == 0 ? 1 : -1), pos.getY(), pos.getZ() + 6 * ((i + 1) < 3 ? 1 : -1));
+                cultist.setSitting(true);
+            }
         }
         }
     }
