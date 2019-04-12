@@ -5,9 +5,11 @@ import de.aelpecyem.elementaristics.compat.thaumcraft.ThaumcraftCompat;
 import de.aelpecyem.elementaristics.capability.CapabilityHandler;
 import de.aelpecyem.elementaristics.events.EventHandler;
 import de.aelpecyem.elementaristics.events.HUDRenderHandler;
+import de.aelpecyem.elementaristics.events.LootTableEventHandler;
 import de.aelpecyem.elementaristics.gui.GuiHandler;
 import de.aelpecyem.elementaristics.init.*;
 import de.aelpecyem.elementaristics.misc.ItemColorHandler;
+import de.aelpecyem.elementaristics.misc.commands.CommandElementaristics;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;
 import de.aelpecyem.elementaristics.misc.potions.PotionInit;
 import de.aelpecyem.elementaristics.networking.PacketHandler;
@@ -32,6 +34,7 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -102,6 +105,7 @@ public final class Elementaristics {
         MinecraftForge.EVENT_BUS.register(new HUDRenderHandler());
         MinecraftForge.EVENT_BUS.register(new CapabilityHandler());
         MinecraftForge.EVENT_BUS.register(new EventHandler());
+        MinecraftForge.EVENT_BUS.register(new LootTableEventHandler());
 
         MinecraftForge.EVENT_BUS.register(new ClientTickHandler());
         InitRecipes.init();
@@ -130,6 +134,11 @@ public final class Elementaristics {
         OreDictionary.registerOre("listAllPlant", Blocks.TALLGRASS);
         OreDictionary.registerOre("listAllPlant", Blocks.DOUBLE_PLANT);
 
+    }
+
+    @Mod.EventHandler
+    public void serverLoad(FMLServerStartingEvent event) {
+        event.registerServerCommand(new CommandElementaristics());
     }
 
     private void initElements() {

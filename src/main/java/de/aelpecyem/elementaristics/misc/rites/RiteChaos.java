@@ -18,7 +18,7 @@ import java.util.List;
 public class RiteChaos extends RiteBase {
 
     public RiteChaos() {
-        super(new ResourceLocation(Elementaristics.MODID, "rite_chaos"), 200, 0.49F, 8, Aspects.chaos);
+        super(new ResourceLocation(Elementaristics.MODID, "rite_chaos"), 200, 0.3F, 8, Aspects.chaos);
     }
 
     @Override

@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " I ",
+    "+P+",
+    " # "
+  ],
+  "key": {
+    "#": {
+      "item": "elementaristics:essence",
+      "data": 1
+    },
+    "+": {
+      "item": "elementaristics:essence",
+      "data": 4
+    },
+    "P": {
+      "item": "minecraft:paper"
+    },
+    "I": {
+      "item": "elementaristics:stardust"
+    }
+  },
+  "result": {
+    "item": "elementaristics:incantation_compression",
+    "count": 1
+  }
+}

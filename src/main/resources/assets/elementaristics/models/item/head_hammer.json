@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "elementaristics:items/soul_mirror"
+    "layer0": "elementaristics:items/head_hammer"
   }
 }

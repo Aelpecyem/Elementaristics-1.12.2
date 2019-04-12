@@ -11,7 +11,7 @@
     {
       "type": "elementaristics:forging_recipe",
       "recipe": "elementaristics:thaumagral_iron",
-      "text": "$(o)Ayyyy, my arms$()"
+      "text": "$(o)Not to be confused with a Thaumagrail$()"
     }
   ]
 }

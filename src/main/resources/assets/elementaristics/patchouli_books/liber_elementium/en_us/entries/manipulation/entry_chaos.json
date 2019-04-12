@@ -8,8 +8,13 @@
       "text": "Chaos is the most chaotic of all forces for sure. Predicting it seems pretty unreasonable, however, an Alchemist may see certain patterns emerging... $(br)Chaos may be used in a $(marked)Ritual$() to create 'chaotic' items."
     },
     {
-      "type": "crafting",
+      "type": "concentrator_recipe",
       "recipe": "elementaristics:incantation_chaos",
+      "text": "$(o)Chaotic-Neutral$()"
+    },
+    {
+      "type": "tunneler_recipe",
+      "recipe": "elementaristics:catalyst_entropizing",
       "text": "$(o)Chaotic-Good$()"
     },
     {

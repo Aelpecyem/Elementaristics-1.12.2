@@ -14,6 +14,8 @@ import de.aelpecyem.elementaristics.misc.elements.Aspects;
 import de.aelpecyem.elementaristics.util.IHasModel;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemPickaxe;
+import net.minecraft.item.ItemSword;
 import net.minecraftforge.registries.IForgeRegistry;
 
 import java.util.ArrayList;
@@ -36,6 +38,7 @@ public class ModItems {
     public static ItemBase protoplasm;
     public static ItemBase vibrant_quartz;
     public static ItemBase matter_accelerating_module;
+    public static ItemBase head_hammer;
 
     public static ItemBase cluster_aether;
     public static ItemBase cluster_air;
@@ -49,7 +52,7 @@ public class ModItems {
     public static ItemSoulChanger soul_changer;
     public static ItemSoulMirror soul_mirror;
 
-    public static ItemHammerHeat hammer_heat; //might make that an item with nice functions
+    public static ItemPickaxe hammer_heat; //might make that an item with nice functions
     public static ItemThaumagral thaumagral_iron;
 
     public static IncantationBase incantation_chaos;
@@ -78,6 +81,7 @@ public class ModItems {
     public static ItemAspects gem_triangular;
     public static ItemAspects catalyst_ordering;
     public static ItemAspects catalyst_entropizing;
+    public static ItemAspects blizzard_frozen;
 
     public static ItemAspects soul_dead; //Mana
     public static ItemAspects matter_astral_body; //weaker soul aspect
@@ -110,6 +114,7 @@ public class ModItems {
         cluster_water = new ItemBase("cluster_water");
         cluster_fire = new ItemBase("cluster_fire");
 
+        head_hammer = new ItemBase("head_hammer");
         essence_blank = new ItemBase("essence_blank");
 
 
@@ -143,6 +148,7 @@ public class ModItems {
         gem_triangular = new ItemAspects("gem_arcane", 6, true, Aspects.crystal);
         catalyst_ordering = new ItemAspects("catalyst_ordering", 6, true, Aspects.order);
         catalyst_entropizing = new ItemAspects("catalyst_entropizing", 6, true, Aspects.chaos); //1 aether essence 3 chaotic matter pieces
+        blizzard_frozen = new ItemAspects("blizzard_frozen", 6, true, Aspects.ice);
 
         soul_dead = new ItemAspects("soul_dead", 4, true, Aspects.mana);
         matter_astral_body = new ItemAspects("matter_astral_body", 3, true, Aspects.aether);
@@ -159,7 +165,7 @@ public class ModItems {
         incantation_gaia = new IncantationBase("incantation_gaia", RiteInit.riteGaiasGaze, Aspects.earth, 4);
         incantation_stars = new IncantationBase("incantation_stars", RiteInit.riteSpaceExilation, Aspects.aether, 4);
         incantation_depths = new IncantationBase("incantation_depths", RiteInit.riteDrowningAstral, Aspects.water, 4);
-        incantation_compression = new IncantationBase("incantation_compression", RiteInit.riteCompression, Aspects.mana, 4);
+        incantation_compression = new IncantationBase("incantation_compression", RiteInit.riteCompression, Aspects.aether, 4);
         incantation_forging = new IncantationBase("incantation_forging", RiteInit.riteForging, Aspects.fire, 4);
 
         hammer_heat = new ItemHammerHeat();

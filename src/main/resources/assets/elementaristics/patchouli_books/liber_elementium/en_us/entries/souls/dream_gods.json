@@ -1,6 +1,6 @@
 {
   "name": "A Dream of Gods",
-  "icon": "",
+  "icon": "elementaristics:textures/gui/icons/gods.png",
   "category": "soulogy",
   "advancement": "elementaristics:discovery_soul",
   "pages": [

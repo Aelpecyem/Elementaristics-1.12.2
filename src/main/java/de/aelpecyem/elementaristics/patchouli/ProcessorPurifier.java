@@ -3,6 +3,8 @@ package de.aelpecyem.elementaristics.patchouli;
 import de.aelpecyem.elementaristics.recipe.PurifierRecipes;
 import de.aelpecyem.elementaristics.recipe.base.PurifierRecipe;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
 import vazkii.patchouli.api.IComponentProcessor;
 import vazkii.patchouli.api.IVariableProvider;
@@ -20,6 +22,8 @@ public class ProcessorPurifier implements IComponentProcessor {
     @Override
     public String process(String s) {
         switch (s) {
+            case "count":
+                return recipe.itemCount + "x";
             case "input":
                 return PatchouliAPI.instance.serializeIngredient(this.recipe.input);
             case "output":

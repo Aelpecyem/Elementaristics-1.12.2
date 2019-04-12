@@ -84,6 +84,6 @@ public class Aspects {
                 return a;
             }
         }
-        return null;
+        return magan;
     }
 }

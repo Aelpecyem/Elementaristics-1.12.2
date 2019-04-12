@@ -3,6 +3,7 @@ package de.aelpecyem.elementaristics.blocks.tileentity.blocks;
 import de.aelpecyem.elementaristics.blocks.tileentity.BlockTileEntity;
 import de.aelpecyem.elementaristics.blocks.tileentity.TileEntityConcentrator;
 import de.aelpecyem.elementaristics.items.base.ItemEssence;
+import de.aelpecyem.elementaristics.items.base.artifacts.rites.ItemAspects;
 import de.aelpecyem.elementaristics.util.InventoryUtil;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.material.Material;
@@ -128,8 +129,9 @@ public class BlockConcentrator extends BlockTileEntity<TileEntityConcentrator> {
                     playerIn.setHeldItem(hand, itemHandler.insertItem(0, heldItem, false));
                     tile.markDirty();
                 } else if (tile.inventory.getStackInSlot(1).isEmpty()) {
-                    if (heldItem.getItem() instanceof ItemEssence)
+                    if (heldItem.getItem() instanceof ItemEssence || heldItem.getItem() instanceof ItemAspects) {
                         playerIn.setHeldItem(hand, itemHandler.insertItem(1, heldItem, false));
+                    }
                     tile.markDirty();
                 }
 

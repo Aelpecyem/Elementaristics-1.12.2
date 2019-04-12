@@ -14,9 +14,9 @@ public class ConcentratorRecipes {
         CONCENTRATOR_RECIPES.put(recipe.name, recipe);
     }
 
-    public static ConcentratorRecipe getRecipeForInput(ItemStack input) {
+    public static ConcentratorRecipe getRecipeForInput(ItemStack input,ItemStack inputInfluencing) {
         for (ConcentratorRecipe recipe : CONCENTRATOR_RECIPES.values()) {
-            if (recipe.input.apply(input)) { //weird phantom error here.i hate it :(
+            if (recipe.input.apply(input) && recipe.inputInfluencing.isItemEqual(inputInfluencing)) { //weird phantom error here.i hate it :(
                 return recipe;
             }
         }

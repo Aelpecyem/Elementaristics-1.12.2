@@ -10,7 +10,7 @@
       "translate": "advancement.elementaristics.chaos.desc"
     }
   },
-  "parent": "elementaristics:progress_pedestal",
+  "parent": "elementaristics:progress_ascension_2",
   "criteria": {
     "book": {
       "trigger": "minecraft:inventory_changed",

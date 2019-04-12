@@ -22,6 +22,9 @@ public class ItemAspects extends ItemBase implements IHasRiteUse {
         }
         this.itemPower = itemPower;
         this.consumed = consumed;
+        if (!consumed){
+            setMaxStackSize(1);
+        }
     }
     public ItemAspects(String name, int itemPower, boolean consumed, String extraLore, Aspect... aspects) {
         super(name);
@@ -31,6 +34,9 @@ public class ItemAspects extends ItemBase implements IHasRiteUse {
         this.itemPower = itemPower;
         this.consumed = consumed;
         this.extraLore = extraLore;
+        if (!consumed){
+            setMaxStackSize(1);
+        }
     }
 
     @Override

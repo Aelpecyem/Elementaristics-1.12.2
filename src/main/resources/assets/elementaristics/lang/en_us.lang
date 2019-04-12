@@ -7,6 +7,7 @@ config.gameplaybuffs.comment=Set this to false if you wish not to play with the 
 #Potion effect
 elementaristics.potion.intoxicated=Intoxicated
 elementaristics.potion.trance=Trance
+
 #Items
 item.bubble_helium.name=Helium Filled Stone
 item.bubble_hydrogen.name=Hydrogen Filled Stone
@@ -15,20 +16,59 @@ item.quartz_vibrant.name=Vibrant Quartz
 item.matter_chaotic.name=Chaotic Matter
 item.matter_maganized.name=Maganized Matter
 item.module_matter_accelerating.name=Matter Accelerating Module
-item.catalyst_entropizing.name=Entropizing Catalyst
-item.soul_changer.name=Soul Changer (Creative Only)
-item.soul_mirror.name=Mirror of the Soul
+
+item.changer_soul.name=Soul Changer (Creative Only)
+item.mirror_soul.name=Mirror of the Soul
 item.ring_mana_regen.name=Ring of Mana Regeneration
 item.cluster_aether.name=Unrefined Aether Cluster
 item.cluster_air.name=Unrefined Air Cluster
 item.cluster_earth.name=Unrefined Earth Cluster
 item.cluster_fire.name=Unrefined Fire Cluster
 item.cluster_water.name=Unrefined Water Cluster
-item.powder_herbs.name=Intoxicating Blend
-item.powder_soul.name=Powder of Souls
-item.wine_redmost.name=Redmost Wine
 item.essence.name=Air Essence
 item.tincture_opium.name=Magic Laudanum
+item.bundle_herbs.name=Bundle of Herbs
+item.petal_opium.name=Opium Petal
+item.seeds_opium.name=Opium Seeds
+item.essence_blank.name=Blank Essence
+item.ash.name=Ash
+item.protoplasm.name=Protoplasmic Sample
+item.hammer_heat.name=Hammer of Heat
+item.thaumagral_iron.name=Iron Thaumagral
+item.head_hammer.name=Archaic Hammer Head
+
+item.incantation_chaos.name=Chaotic Incantation
+item.incantation_light.name=Incantation of Light
+item.incantation_feast.name=Hungry Incantation
+item.incantation_forging.name=Incantation of Forging
+
+item.incantation_conflagration.name=Conflagrating Incantation
+item.incantation_wind.name=Incantation of Wind
+item.incantation_gaia.name=Incantation of Gaia
+item.incantation_stars.name=Incantation of Stars
+item.incantation_depths.name=Incantation of the Depths
+item.incantation_compression.name=Incantation of Compression
+
+item.water_purest.name=Purest Water
+item.sparks_living.name=Living Sparks
+item.earth_purest.name=Purest Earth
+item.motion_captured.name=Captured Motion
+item.stardust.name=Stardust
+item.sparks_brightest.name=Brightest Sparks
+
+item.wine_redmost.name=Redmost Wine
+item.thoughts_battling.name=Battling Thoughts
+item.vacuum_selfsustaining.name=Self-sustaining Vacuum
+item.lightning_tangible.name=Tangible Lightning
+item.moss_everchanging.name=Everchanging Moss
+item.gem_arcane.name=Arcane Gem
+item.catalyst_ordering.name=Ordering Catalyst
+item.catalyst_entropizing.name=Entropizing Catalyst
+item.blizzard_frozen.name=Frozen Blizzard
+item.soul_dead.name=Dead Soul
+item.powder_soul.name=Soul Powder
+item.matter_astral_body.name=Astral Body Matter
+
 
 #Essences (Items and Blocks)
 item.essence_air.name=Air Essence
@@ -41,6 +81,13 @@ item.essence_life.name=Life Essence
 item.essence_crystal.name=Crystal Essence
 item.essence_soul.name=Soul Essence
 item.essence_light.name=Light Essence
+item.essence_vacuum.name=Essence of Emptiness
+item.essence_magan.name=Magan Essence
+item.essence_mana.name=Mana Essence
+item.essence_electricity.name=Electricity Essence
+item.essence_order.name=Order Essence
+item.essence_chaos.name=Chaos Essence
+item.essence_bodyname
 
 tile.block_essence_air.name=Concentrated Air Essence
 tile.block_essence_earth.name=Concentrated Earth Essence
@@ -67,6 +114,11 @@ tile.soul_identifier.name=Soul Identifier
 tile.concentrator.name=Concentrator
 tile.tunneler.name=Tunneler
 tile.filter_holder.name=Filter Holder
+tile.reactor.name=Reactor
+tile.casing_essence.name=Essence Casing
+tile.altar.name=Altar
+tile.fabric_reason.name=Fabric of Reason
+tile.fabric_passion.name=Fabric of Passion
 
 #Advancements
 advancement.elementaristics.root=Elementaristics
@@ -76,6 +128,7 @@ advancement.elementaristics.pedestal=No mercy for atoms
 advancement.elementaristics.concentrator=Influencing, isn't it?
 advancement.elementaristics.purifier=SPLASHING
 advancement.elementaristics.chaos=Far below
+advancement.elementaristics.forging=Without the clonk
 advancement.elementaristics.tunneler=Whoosh.
 advancement.elementaristics.reactor=Not of the giant kind
 
@@ -90,6 +143,7 @@ advancement.elementaristics.pedestal.desc=Build a Lightning Pedestal to create e
 advancement.elementaristics.concentrator.desc=Build a Concentrator to influence items with other items to create new items
 advancement.elementaristics.purifier.desc=Build an arcane dishwasher
 advancement.elementaristics.chaos.desc=Invoke the powers of chaos!
+advancement.elementaristics.forging.desc=Invoke the purest heat, the arcane one
 advancement.elementaristics.tunneler.desc=Build a Tunneler to accelerate item particles
 advancement.elementaristics.reactor.desc=Build a Reactor to let (al-)chemicals react
 
@@ -116,6 +170,8 @@ advancement.elementaristics.electricity=Electricity!
 advancement.elementaristics.vacuum=Emptiness
 advancement.elementaristics.mind=Mind
 advancement.elementaristics.body=Body
+advancement.elementaristics.mana=Mana
+advancement.elementaristics.magan=Magan
 
 #Book
 item.elementaristics.book.name=Liber Elementium
@@ -125,6 +181,7 @@ info.elementaristics.book.subtitle=The gate's opening
 book.purifierTime=Ticks needed:
 
 #Tooltip
+tooltip.incantation.rite=Rite:
 tooltip.incantation.magan=Magan needed:
 tooltip.incantation.power=Item Power needed:
 tooltip.incantation.soul=Soul needed:
@@ -139,13 +196,26 @@ tooltip.thaumagral.durability=Durability Bonus:
 tooltip.thaumagral.damage=Damage Bonus:
 tooltip.thaumagral.spellSlots=Spellslots:
 tooltip.mirror_soul.name=Knowing me, knowing you
-tooltip.opium.name=Relatively weak, compared to its non-arcane version.
+tooltip.hammer_heat.name=Warm to the touch, hot to the target
+tooltip.opium.name=Relatively weak, compared to its non-arcane version
+
+#Rites
+rite.elementaristics:rite_knowledge.name=Enlightenment's Sighing
+rite.elementaristics:rite_feast.name=The Feast on the Soul
+rite.elementaristics:rite_chaos.name=Chaos Rite
+rite.elementaristics:rite_forging.name=Forging Rite
+
+rite.elementaristics:conflagration_soul.name=Soul's Conflagration
+rite.elementaristics:rage_wind.name=Wind's Wrath
+rite.elementaristics:gaias_gaze.name=Gaia's Gaze
+rite.elementaristics:space_exilation.name=Space Exilation
+rite.elementaristics:drowning_astral.name=Astral Drowning
+rite.elementaristics:soul_compression.name=Compression of the Soul
+
 
 #Misc
 entity.silver_thread.name=Silver Thread
-rite.elementaristics:rite_knowledge.name=Enlightenment's Sighing
-rite.elementaristics:rite_feast.name=The Feast on the Soul
-rite.elementaristics:conflagration_soul.name=Soul's Conflagration
+
 
 rite.item_power.name=Local Item Power:
 rite.progress.name=Progress:
@@ -200,7 +270,7 @@ message.view_stats.name=Viewing stats for
 message.max_magan.name=Your maximum magan is
 message.current_magan.name=Your current magan is
 message.regen_per_tick.name=Your magan regeneration rate per tick is
-message.
+message.ascension_stage.name=Your ascension stage:
 #Souls
 soul.soul_magan.name=§6Magan Soul
 soul.soul_water.name=§1Water Soul
@@ -229,6 +299,13 @@ aspect.ice.name=§fIce
 aspect.light.name=§eLight
 aspect.soul.name=§7Soul
 aspect.body.name=§cBody
+aspect.mana.name=§dMana
+aspect.vacuum.name=§8Emptiness
+aspect.mind.name=§3Mind
+aspect.electricity.name=§9Electricity
+aspect.chaos.name=§0Chaos
+aspect.order.name=§fOrder
+aspect.magan.name=§6Magan
 
 #Compat - Thaumcraft
 tc.research_category.ELEMENTARISTICS=Elementaristics

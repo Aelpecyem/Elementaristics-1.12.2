@@ -20,7 +20,7 @@ public class RiteInit {
     public static RiteSacrifice riteGaiasGaze = new RiteSacrifice("gaias_gaze", Aspects.earth, SoulInit.soulEarth, DamageSource.FLY_INTO_WALL);
     public static RiteSacrifice riteDrowningAstral = new RiteSacrifice("drowning_astral", Aspects.water, SoulInit.soulWater, DamageSource.DROWN);
     public static RiteSacrifice riteSpaceExilation = new RiteSacrifice("space_exilation", Aspects.aether, SoulInit.soulAether, DamageSource.OUT_OF_WORLD);
-    public static RiteSacrifice riteCompression = new RiteSacrifice("soul_compression", Aspects.mana, DamageSource.MAGIC);
+    public static RiteSacrifice riteCompression = new RiteSacrifice("soul_compression", Aspects.aether, DamageSource.MAGIC);
     public static void registerRite(ResourceLocation name, RiteBase rite){
         RITES.put(name, rite);
     }

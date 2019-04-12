@@ -1,6 +1,5 @@
 package de.aelpecyem.elementaristics.blocks.tileentity;
 
-import com.sun.istack.internal.Nullable;
 import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.blocks.tileentity.blocks.BlockReactor;
 import de.aelpecyem.elementaristics.init.ModItems;
@@ -64,13 +63,12 @@ public class TileEntityReactor extends TileEntity implements ITickable {
     }
 
     @Override
-    public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
+    public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
         return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY || super.hasCapability(capability, facing);
     }
 
-    @Nullable
     @Override
-    public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
+    public <T> T getCapability(Capability<T> capability,  EnumFacing facing) {
         return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY ? (T) inventory : super.getCapability(capability, facing);
     }
 

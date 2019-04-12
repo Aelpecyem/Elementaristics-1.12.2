@@ -27,7 +27,10 @@ public class BiomeMind extends Biome {
         topBlock = ModBlocks.fabric_reason.getDefaultState();
         fillerBlock = ModBlocks.fabric_passion.getDefaultState();
     }
-
+    @Override
+    public float getSpawningChance() {
+        return 0;
+    }
 
     @Override
     public boolean getEnableSnow() {

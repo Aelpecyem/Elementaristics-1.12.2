@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:dirt",
+      "data": 0
+    },
+    {
+      "item": "elementaristics:essence",
+      "data": 1
+    },
+    {
+      "item": "elementaristics:water_purest"
+    },
+    {
+      "item": "minecraft:iron_ingot"
+    }
+  ],
+  "result": {
+    "item": "elementaristics:earth_purest"
+  }
+}

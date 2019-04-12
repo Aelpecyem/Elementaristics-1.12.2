@@ -4,7 +4,9 @@ import de.aelpecyem.elementaristics.blocks.tileentity.BlockTileEntity;
 import de.aelpecyem.elementaristics.blocks.tileentity.TileEntityAltar;
 import de.aelpecyem.elementaristics.blocks.tileentity.TileEntityPurifier;
 import de.aelpecyem.elementaristics.blocks.tileentity.TileEntityReactor;
+import de.aelpecyem.elementaristics.entity.EntityCultist;
 import de.aelpecyem.elementaristics.items.base.artifacts.rites.IncantationBase;
+import de.aelpecyem.elementaristics.items.base.thaumagral.ItemThaumagral;
 import de.aelpecyem.elementaristics.util.InventoryUtil;
 import de.aelpecyem.elementaristics.util.MaganUtil;
 import net.minecraft.block.BlockHorizontal;
@@ -26,6 +28,8 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
+
+import java.util.List;
 
 
 public class BlockAltar extends BlockTileEntity<TileEntityAltar> {
@@ -99,15 +103,14 @@ public class BlockAltar extends BlockTileEntity<TileEntityAltar> {
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         TileEntityAltar tile = getTileEntity(worldIn, pos);
         if (playerIn.getHeldItem(hand).getItem() instanceof IncantationBase){
-            if (playerIn.isSneaking()){
-                System.out.println(tile.currentRite.equals(((IncantationBase) playerIn.getHeldItem(hand).getItem()).getRite().name.toString()));
-                if (tile.currentRite.equals(((IncantationBase) playerIn.getHeldItem(hand).getItem()).getRite().name.toString())) {
+
+            if (tile.currentRite.equals(((IncantationBase) playerIn.getHeldItem(hand).getItem()).getRite().name.toString())) {
                     tile.currentRite = "";
                     tile.tickCount = 0;
-                }
             }else {
                 IncantationBase incantation = (IncantationBase) playerIn.getHeldItem(hand).getItem();
                 tile.currentRite = incantation.getRite().getName().toString();
+                tile.tickCount = 0;
             }
         }
         return true;

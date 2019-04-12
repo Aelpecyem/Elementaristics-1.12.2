@@ -3,6 +3,7 @@ package de.aelpecyem.elementaristics.blocks.tileentity;
 import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.blocks.tileentity.blocks.BlockReactor;
 import de.aelpecyem.elementaristics.capability.souls.Soul;
+import de.aelpecyem.elementaristics.entity.EntityCultist;
 import de.aelpecyem.elementaristics.init.RiteInit;
 import de.aelpecyem.elementaristics.items.base.artifacts.rites.IHasRiteUse;
 import de.aelpecyem.elementaristics.misc.elements.Aspect;
@@ -10,6 +11,8 @@ import de.aelpecyem.elementaristics.misc.rites.RiteBase;
 import de.aelpecyem.elementaristics.particles.ParticleGeneric;
 import de.aelpecyem.elementaristics.util.MaganUtil;
 import de.aelpecyem.elementaristics.util.SoulUtil;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -17,6 +20,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 
 import java.util.*;
 
@@ -49,39 +53,40 @@ public class TileEntityAltar extends TileEntity implements ITickable {
         if (!currentRite.equals("")) {
             if (RiteInit.getRiteForResLoc(currentRite) != null) {
                 RiteBase rite = RiteInit.getRiteForResLoc(currentRite);
-                if (drainPlayers(rite)){
-                    tickCount++;
-                    List<EntityPlayer> targets = world.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(
-                            new BlockPos(pos.getX() - 10F, pos.getY() - 4F, pos.getZ() - 10F),
-                            new BlockPos(pos.getX() + 10F, pos.getY() + 8F, pos.getZ() + 10F)));
-                    rite.onRitual(world, pos, targets, tickCount);
+                recruitCultists();
+                    if (drainPlayers(rite)) {
+                        tickCount++;
+                        List<EntityPlayer> targets = world.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(
+                                new BlockPos(pos.getX() - 10F, pos.getY() - 4F, pos.getZ() - 10F),
+                                new BlockPos(pos.getX() + 10F, pos.getY() + 8F, pos.getZ() + 10F)));
+                        rite.onRitual(world, pos, targets, tickCount);
 
-                }else{
-                    doFailingShow();
-                    currentRite = "";
-                    tickCount = 0;
-                }
+                    } else {
+                        doFailingShow();
+                        currentRite = "";
+                        tickCount = 0;
+                    }
 
-                if (tickCount >= rite.getTicksRequired()) {
-                    if (getAspectsInArea().containsAll(rite.getAspectsRequired())) {
-                    if (getItemPowerInArea() >= rite.getItemPowerRequired()) {
-                            if (rite.isSoulSpecific()) {
-                                if (getSoulsInArea().contains(rite.getSoulRequired())) {
+                    if (tickCount >= rite.getTicksRequired()) {
+                        if (getAspectsInArea().containsAll(rite.getAspectsRequired())) {
+                            if (getItemPowerInArea() >= rite.getItemPowerRequired()) {
+                                if (rite.isSoulSpecific()) {
+                                    if (getSoulsInArea().contains(rite.getSoulRequired())) {
+                                        if (world.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 15, false) != null) {
+                                            rite.doMagic(world, pos, world.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 20, false));
+                                            currentRite = "";
+                                            consumeConsumables();
+                                        }
+                                    }
+                                } else {
                                     if (world.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 15, false) != null) {
+                                        consumeConsumables();
                                         rite.doMagic(world, pos, world.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 20, false));
                                         currentRite = "";
-                                        consumeConsumables();
+
                                     }
                                 }
-                            }else{
-                                if (world.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 15, false) != null) {
-                                    consumeConsumables();
-                                    rite.doMagic(world, pos, world.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 20, false));
-                                    currentRite = "";
-
-                                }
                             }
-                        }
                     }
                 }
 
@@ -93,6 +98,21 @@ public class TileEntityAltar extends TileEntity implements ITickable {
         }
 
 
+    }
+    public void recruitCultists(){
+        if(tickCount % 20 == 0){
+        List<EntityCultist> cultists = world.getEntitiesWithinAABB(EntityCultist.class, new AxisAlignedBB(pos.getX()-100, pos.getY()-40, pos.getZ()-100, pos.getX() + 100, pos.getY() + 40, pos.getZ() + 100));
+        List<EntityCultist> cultistsThere = world.getEntitiesWithinAABB(EntityCultist.class, new AxisAlignedBB(pos.getX()-10, pos.getY()-4, pos.getZ()-10, pos.getX() + 10, pos.getY() + 4, pos.getZ() + 10));
+        List<EntityPlayer> playersThere = world.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos.getX()-10, pos.getY()-4, pos.getZ()-10, pos.getX() + 10, pos.getY() + 4, pos.getZ() + 10));
+        if (cultists.size() > 4)
+            cultists = cultists.subList(0, 3);
+
+        for (int i = 0; i < cultists.size(); i++){
+            EntityCultist cultist = cultists.get(i);
+            cultist.setPosition(pos.getX() + 6  * ((i + 1) % 2 == 0 ? 1 : -1), pos.getY(), pos.getZ() + 6 * ((i + 1) < 3 ? 1 : -1));
+            cultist.setSitting(true);
+        }
+        }
     }
 
     private void doFailingShow() {

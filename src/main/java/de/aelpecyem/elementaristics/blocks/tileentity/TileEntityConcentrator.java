@@ -3,6 +3,7 @@ package de.aelpecyem.elementaristics.blocks.tileentity;
 import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.init.ModItems;
 import de.aelpecyem.elementaristics.items.base.ItemEssence;
+import de.aelpecyem.elementaristics.items.base.artifacts.rites.ItemAspects;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;
 import de.aelpecyem.elementaristics.networking.PacketHandler;
 import de.aelpecyem.elementaristics.networking.concentrator.PacketUpdateConcentrator;
@@ -29,7 +30,7 @@ public class TileEntityConcentrator extends TileEntity implements ITickable {
         @Override
         protected void onContentsChanged(int slot) {
             if (!inventory.getStackInSlot(1).isEmpty()) {
-                if (!(inventory.getStackInSlot(1).getItem() instanceof ItemEssence)) {
+                if (!(inventory.getStackInSlot(1).getItem() instanceof ItemEssence || inventory.getStackInSlot(1).getItem() instanceof ItemAspects)) {
                     EntityItem item = new EntityItem(world, pos.getX(), pos.getY() + 1.5, pos.getZ(), inventory.getStackInSlot(slot));
                     world.spawnEntity(item);
                     inventory.setStackInSlot(slot, ItemStack.EMPTY);
@@ -100,15 +101,10 @@ public class TileEntityConcentrator extends TileEntity implements ITickable {
             doParticleShow();
 
             if (tickCount >= 300) {
-                if (ConcentratorRecipes.getRecipeForInput(inventory.getStackInSlot(0)) != null) {
-                    if (ConcentratorRecipes.getRecipeForInput(inventory.getStackInSlot(0)).inputInfluencing.isItemEqual(inventory.getStackInSlot(1))) {
-                        inventory.setStackInSlot(0, ConcentratorRecipes.getRecipeForInput(inventory.getStackInSlot(0)).output);
-                    } else {
-                        inventory.setStackInSlot(0, new ItemStack(ModItems.maganized_matter));
-                        inventory.setStackInSlot(1, ItemStack.EMPTY);
-                    }
+                if (ConcentratorRecipes.getRecipeForInput(inventory.getStackInSlot(0), inventory.getStackInSlot(1)) != null) {
+                    inventory.setStackInSlot(0, ConcentratorRecipes.getRecipeForInput(inventory.getStackInSlot(0), inventory.getStackInSlot(1)).output);
                 } else {
-                    inventory.setStackInSlot(0, new ItemStack(ModItems.chaotic_matter));
+                    inventory.setStackInSlot(0, new ItemStack(ModItems.maganized_matter));
                     inventory.setStackInSlot(1, ItemStack.EMPTY);
                 }
                 tickCount = 0;
@@ -119,7 +115,11 @@ public class TileEntityConcentrator extends TileEntity implements ITickable {
     }
 
     private void doParticleShow() {
-        Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(world, pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, world.rand.nextGaussian() * 0.02F, Math.abs(world.rand.nextGaussian()) * 0.06F, world.rand.nextGaussian() * 0.02F, Aspects.getElementById(inventory.getStackInSlot(1).getMetadata()).getColor(), 2, 10, 0, true, false, 0.5F));
+        if (inventory.getStackInSlot(1).getItem() instanceof ItemEssence)
+            Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(world, pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, world.rand.nextGaussian() * 0.02F, Math.abs(world.rand.nextGaussian()) * 0.06F, world.rand.nextGaussian() * 0.02F, Aspects.getElementById(inventory.getStackInSlot(1).getMetadata()).getColor(), 2, 10, 0, true, false, 0.5F));
+        else if (inventory.getStackInSlot(1).getItem() instanceof ItemAspects)
+            Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(world, pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, world.rand.nextGaussian() * 0.02F, Math.abs(world.rand.nextGaussian()) * 0.06F, world.rand.nextGaussian() * 0.02F,((ItemAspects) inventory.getStackInSlot(1).getItem()).getAspects().get(0).getColor(), 2, 10, 0, true, false, 0.5F));
+
     }
 
 

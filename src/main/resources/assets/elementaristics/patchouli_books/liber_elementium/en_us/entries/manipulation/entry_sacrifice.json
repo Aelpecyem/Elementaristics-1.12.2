@@ -1,0 +1,36 @@
+{
+  "name": "Sacrificial Rites",
+  "icon": "elementaristics:incantation_compression",
+  "category": "matter_manipulation",
+  "pages": [
+    {
+      "type": "text",
+      "text": "The five primal aspects may be rather expensive to obtain for some, however, to certain souls, there is an alternative: $(marked)Sacrificial Rites$(). $(br)These rites require a mundane item power of the essence to obtain, and a matching soul type. It will kill around 5 of the closest living beings and drop essenes of the fitting kind accordingly."
+    },
+    {
+      "type": "crafting",
+      "recipe": "elementaristics:kill_mana",
+      "text": "One exception is the $(marked)Compression of the Soul$(), which can be executed by anyone. $(br)It will compress the sacrifice's soul into a clump of $(item)Mana Essence$(), resulting in their death."
+    },
+    {
+      "type": "crafting",
+      "recipe": "elementaristics:kill_air",
+      "recipe2": "elementaristics:kill_earth"
+    },
+    {
+      "type": "crafting",
+      "recipe": "elementaristics:kill_fire",
+      "recipe2": "elementaristics:kill_water"
+    },
+    {
+      "type": "crafting",
+      "recipe": "elementaristics:kill_aether",
+      "text": "All of these rites deal different kinds of damage, and players can be killed with them, too. However, they would have to stand in close range to the altar, like everything else."
+    },
+    {
+      "type": "text",
+      "text": "It should be noted that the matching soul might also use the rite to their advantage, as they'll get the closest to the element they represent ever. $(br)However, only prepared souls might take that step."
+    }
+  ],
+  "advancement": "elementaristics:discovery_magan"
+}

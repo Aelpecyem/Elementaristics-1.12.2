@@ -1,6 +1,6 @@
 {
   "name": "A Dream of a truer Self",
-  "icon": "",
+  "icon": "elementaristics:textures/gui/icons/self.png",
   "category": "soulogy",
   "advancement": "elementaristics:discovery_mind",
   "pages": [

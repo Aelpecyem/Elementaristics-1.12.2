@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " I ",
+    "#P#",
+    " # "
+  ],
+  "key": {
+    "#": {
+      "item": "elementaristics:essence",
+      "data": 2
+    },
+    "P": {
+      "item": "minecraft:paper"
+    },
+    "I": {
+      "item": "elementaristics:water_purest"
+    }
+  },
+  "result": {
+    "item": "elementaristics:incantation_depths",
+    "count": 1
+  }
+}

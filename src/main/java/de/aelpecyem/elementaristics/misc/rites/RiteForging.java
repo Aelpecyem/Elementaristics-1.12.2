@@ -64,15 +64,19 @@ public class RiteForging extends RiteBase {
 
     @Override
     public void onRitual(World world, BlockPos altarPos, List<EntityPlayer> players, int tickCount) {
-        if (tickCount % 2 == 0) {
-            Elementaristics.proxy.generateGenericParticles(world, altarPos.getX() + 0.5F, altarPos.getY() + 1F, altarPos.getZ() + 0.5F, Aspects.chaos.getColor(), 3, 60, 0, false, false);
-            List<Entity> entities = world.getEntitiesInAABBexcluding(null, new AxisAlignedBB(altarPos.getX() - 2, altarPos.getY() - 1, altarPos.getZ() - 2, altarPos.getX() + 2, altarPos.getY() + 2, altarPos.getZ() + 2), null);
+            Elementaristics.proxy.generateGenericParticles(world, altarPos.getX() + 0.5F, altarPos.getY() + 1.5F, altarPos.getZ() + 0.5F, 14762496, 5, 60, 0, false, false);
+            Elementaristics.proxy.generateGenericParticles(world, altarPos.getX() + 0.5F, altarPos.getY() + 1.5F, altarPos.getZ() + 0.5F, Aspects.magan.getColor(), 3, 60, 0, false, false);
+            List<Entity> entities = world.getEntitiesInAABBexcluding(null, new AxisAlignedBB(altarPos.getX() - 4, altarPos.getY() - 2, altarPos.getZ() - 4, altarPos.getX() + 4, altarPos.getY() + 3, altarPos.getZ() + 4), null);
             for (Entity entity : entities) {
                 if (entity instanceof EntityItem) {
-                    Elementaristics.proxy.generateGenericParticles(entity, Aspects.fire.getColor(), 1, 10, 0, false, true);
-                    Elementaristics.proxy.generateGenericParticles(entity, Aspects.light.getColor(), 1, 10, 0, false, true);
+                    entity.motionX = (altarPos.getX() + 0.5 - entity.posX) / 20;
+                    entity.motionY = (altarPos.getY() + 1.5 - entity.posY) / 20;
+                    entity.motionZ = (altarPos.getZ()+ 0.5 - entity.posZ) / 20;
+                    Elementaristics.proxy.generateGenericParticles(entity, 14762496, 1, 10, 0, false, false);
+                    Elementaristics.proxy.generateGenericParticles(entity, Aspects.light.getColor(), 1, 10, 0, false, false);
                 }
+
             }
-        }
+
     }
 }

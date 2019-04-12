@@ -16,6 +16,11 @@
       "item": "#input",
       "x": 48,
       "y": 28
+    }, {
+      "type": "text",
+      "text": "#count",
+      "x": 38,
+      "y": 30
     },
     {
       "type": "item",

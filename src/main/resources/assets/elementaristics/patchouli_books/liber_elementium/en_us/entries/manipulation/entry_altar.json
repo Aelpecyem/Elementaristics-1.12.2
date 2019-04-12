@@ -22,7 +22,7 @@
     },
     {
       "type": "text",
-      "text": "Once all aspects are present and the item power of the rite tools is greater or equal to the power needed, the rite will be finished. $(br) It should be noted, that some rites have an effect during the performing of the rite and that sometimes certain soul types are required. $(br)If a certain soul types $(o) is$() required, it is written on the incantation. $(br)(Rituals can always be stopped by acting on the block while sneaking)"
+      "text": "Once all aspects are present and the item power of the rite tools is greater or equal to the power needed, the rite will be finished. $(br) It should be noted, that some rites have an effect during the performing of the rite and that sometimes certain soul types are required. $(br)If a certain soul types $(o) is$() required, it is written on the incantation. $(br)(Rituals can always be stopped by acting on the block while holding the same incantation)"
     }
   ],
   "advancement": "elementaristics:discovery_aether"

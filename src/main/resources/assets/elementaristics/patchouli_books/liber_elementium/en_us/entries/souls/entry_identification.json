@@ -9,7 +9,7 @@
       "text": "My studies have shown that there are apparently different soul types. I can identify my own soul type with a the ritual called $(marked)Enlightenment's Sighing$(). "
     },
     {
-      "type": "crafting",
+      "type": "concentrator_recipe",
       "anchor": "recipe_light",
       "recipe": "elementaristics:incantation_light",
       "text": "$(o)Sighs in enlightenment$()"

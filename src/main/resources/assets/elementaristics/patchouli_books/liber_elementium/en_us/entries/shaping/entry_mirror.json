@@ -1,0 +1,17 @@
+{
+  "name": "The Mirror of the Soul",
+  "icon": "elementaristics:mirror_soul",
+  "category": "shaping",
+  "advancement": "elementaristics:discovery_soul",
+  "pages": [
+    {
+      "type": "text",
+      "text": "The $(item)Mirror of the Soul$() may be $(l)the$() tool for the occultist trying to conquer the soul (and $(marked)Mind$()), as it is a source for the $(marked)Soul Aspect$() in rites that does not get consumed. $(br)Additionally, it can view the player's stats."
+    },
+    {
+      "type": "elementaristics:forging_recipe",
+      "recipe": "elementaristics:mirror_soul",
+      "text": "$(o)It knows, we know$()"
+    }
+  ]
+}

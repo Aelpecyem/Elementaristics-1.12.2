@@ -46,11 +46,7 @@ public class ItemThaumagral extends ItemSword implements IHasModel {
     }
 
 
-    @Override
-    public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-        tooltip.add(TextFormatting.GRAY + I18n.format("tooltip.thaumagral_iron"));
-        super.addInformation(stack, worldIn, tooltip, flagIn);
-    }
+
 
     public void registerItemModel() {
         Elementaristics.proxy.registerItemRenderer(this, 0, name);

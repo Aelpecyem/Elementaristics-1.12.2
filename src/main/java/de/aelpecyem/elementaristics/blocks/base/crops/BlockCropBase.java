@@ -7,24 +7,17 @@ import net.minecraft.block.BlockCrops;
 import net.minecraft.item.Item;
 public class BlockCropBase extends BlockCrops {
     protected String name;
-    int maxAge;
     Item seed, crop;
 
-    public BlockCropBase(String name, Item seed, Item crop, int maxAge) {
+    public BlockCropBase(String name, Item seed, Item crop) {
         this.name = name;
         this.seed = seed;
         this.crop = crop;
-        this.maxAge = maxAge;
 
         setUnlocalizedName(name);
         setRegistryName(name);
         this.setCreativeTab(Elementaristics.tab);
         ModBlocks.BLOCKS.add(this);
-    }
-
-    @Override
-    public int getMaxAge() {
-        return maxAge;
     }
 
 
