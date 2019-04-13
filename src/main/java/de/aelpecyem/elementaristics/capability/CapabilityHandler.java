@@ -79,10 +79,7 @@ public class CapabilityHandler {
             final EntityPlayerMP player = (EntityPlayerMP) event.getEntity();
             final IPlayerCapabilities cap =  player.getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null);
 
-
-
-            PacketHandler.sendTo(player, new CapabilitySync(cap.getSoulId(), cap.getTimeStunted(), cap.knowsSoul(), cap.getMaxMagan(),
-                    cap.getMagan(), cap.getMaganRegenPerTick(), cap.getPlayerAscensionStage()));
+            PacketHandler.sendTo(player, new CapabilitySync(cap));
         }
 
 

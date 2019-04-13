@@ -26,6 +26,14 @@ public class SoulInit {
     public static Soul soulDragon;
     public static Soul soulAncient;
 
+    public static Soul soulApostleGod;
+    public static Soul soulTrue;
+    public static Soul soulFirst;
+
+    public static Soul soulMachnie;
+    public static Soul soulSentient;
+    public static Soul soulServant;
+
     public static void init() {
         soulMagan = new Soul("soul_magan", 15702784, EnumSoulRarity.COMMON, 110, 0.2F);
         soulAir = new Soul("soul_air", 40948,EnumSoulRarity.COMMON);
@@ -42,6 +50,13 @@ public class SoulInit {
         soulDragon = new Soul("soul_dragon", 16772352, EnumSoulRarity.EXTRAODINARY, 130, 0.42F);
         soulAncient = new Soul("soul_ancient", 399112, EnumSoulRarity.EXTRAODINARY, 140, 0.5F);
 
+        soulApostleGod = new Soul("soul_apostle", 16373760, EnumSoulRarity.ASCENDED, 130, 0.5F);
+        soulTrue = new Soul("soul_true", 16777215, EnumSoulRarity.ASCENDED, 130, 0.4F);
+        soulFirst = new Soul("soul_first", 9111320, EnumSoulRarity.ASCENDED, 180, 0.7F);
+
+        soulMachnie = new Soul("soul_machine", 3634072, EnumSoulRarity.ASCENDED, 110,0.1F);
+        soulSentient = new Soul("soul_sentient", 730980, EnumSoulRarity.ASCENDED, 120, 0.4F);
+        soulServant = new Soul("soul_servant", 4163316, EnumSoulRarity.ASCENDED, 160, 0.5F);
 
     }
 
@@ -90,17 +105,17 @@ public class SoulInit {
                 notApproved = false;
             }
             if (soul.getRarity() == EnumSoulRarity.RARE) {
-                if (random.nextInt(2) == 0) {
+                if (random.nextInt(3) == 0) {
                     notApproved = false;
                 }
             }
             if (soul.getRarity() == EnumSoulRarity.EXTRAODINARY) {
-                if (random.nextInt(4) == 0) {
+                if (random.nextInt(7) == 0) {
                     notApproved = false;
                 }
 
             }
-        }System.out.println(soul);
+        }
         return soul;
 
     }
@@ -108,6 +123,7 @@ public class SoulInit {
     public enum EnumSoulRarity {
         COMMON,
         RARE,
-        EXTRAODINARY
+        EXTRAODINARY,
+        ASCENDED
     }
 }

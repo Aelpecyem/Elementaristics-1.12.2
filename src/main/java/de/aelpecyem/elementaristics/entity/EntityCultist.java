@@ -8,6 +8,7 @@ import de.aelpecyem.elementaristics.misc.elements.Aspects;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;
+import net.minecraft.entity.passive.EntityLlama;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
@@ -79,7 +80,6 @@ public class EntityCultist extends EntityTameable {
 
     @Override
     public void onLivingUpdate() {
-
         //TODO later... make those actually usable
         Elementaristics.proxy.generateGenericParticles(this, aspect.getColor(), 0.5F, 50, -0.01F, true, true);
         super.onLivingUpdate();
@@ -91,11 +91,10 @@ public class EntityCultist extends EntityTameable {
         this.aiSit = new EntityAISit(this);
         this.tasks.addTask(1, new EntityAISwimming(this));
         this.tasks.addTask(2, this.aiSit);
-        this.tasks.addTask(0, new EntityAIFollowOwner(this, 0.5, 5, 2));
-        this.tasks.addTask(2, new EntityAIWanderAvoidWater(this, 1.0D));
-        this.tasks.addTask(3, new EntityAIWatchClosest(this, EntityPlayer.class, 20.0F));
-        this.tasks.addTask(4, new EntityAILookIdle(this));
-    }
+        this.tasks.addTask(3, new EntityAIFollowOwner(this, 0.5D, 4.0F, 2.0F));
+        this.tasks.addTask(4, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
+        this.tasks.addTask(5, new EntityAILookIdle(this));
+        }
 
     @Override
     public boolean processInteract(EntityPlayer player, EnumHand hand) {

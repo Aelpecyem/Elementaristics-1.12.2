@@ -4,6 +4,7 @@ import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.capability.IPlayerCapabilities;
 import de.aelpecyem.elementaristics.capability.PlayerCapProvider;
 import de.aelpecyem.elementaristics.capability.souls.Soul;
+import de.aelpecyem.elementaristics.entity.EntityCultist;
 import de.aelpecyem.elementaristics.init.ModItems;
 import de.aelpecyem.elementaristics.misc.elements.Aspect;
 import de.aelpecyem.elementaristics.misc.rites.RiteBase;
@@ -68,7 +69,7 @@ public class RiteSacrifice extends RiteBase{//Soul's Conflagration
                 if (i >= entities.size()){
                     break;
                 }Entity entity = entities.get(i);
-                if (entity instanceof EntityLivingBase && entity.isNonBoss() && !(entity instanceof EntityPlayer)) {
+                if (entity instanceof EntityLivingBase && entity.isNonBoss() && !(entity instanceof EntityPlayer) & !(entity instanceof EntityCultist)) {
                     entity.attackEntityFrom(dmgSource, 22);
                     if (world.rand.nextBoolean()) {
                         world.spawnEntity(new EntityItem(world, pos.getX() + 0.5, pos.getY() + 1.2, pos.getZ() + 0.5, stack));
@@ -87,7 +88,7 @@ public class RiteSacrifice extends RiteBase{//Soul's Conflagration
                 EntityPlayer player = world.getClosestPlayer(altarPos.getX(), altarPos.getY(), altarPos.getZ(), 2, false);
                 List<Entity> entities = world.getEntitiesInAABBexcluding(player, new AxisAlignedBB(altarPos.getX() - 4, altarPos.getY() - 2, altarPos.getZ() - 4, altarPos.getX() + 4, altarPos.getY() + 4, altarPos.getZ() + 4), null);
                 for (Entity entity : entities) {
-                    if (entity instanceof EntityLivingBase && entity.isNonBoss() & !(entity instanceof EntityPlayer)) {
+                    if (entity instanceof EntityLivingBase && entity.isNonBoss() & !(entity instanceof EntityPlayer) & !(entity instanceof EntityCultist)) {
                         Elementaristics.proxy.generateGenericParticles(entity, aspect.getColor(), 2, 100, 0, false, true);
                     }
                 }

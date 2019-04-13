@@ -271,6 +271,7 @@ message.max_magan.name=Your maximum magan is
 message.current_magan.name=Your current magan is
 message.regen_per_tick.name=Your magan regeneration rate per tick is
 message.ascension_stage.name=Your ascension stage:
+
 #Souls
 soul.soul_magan.name=§6Magan Soul
 soul.soul_water.name=§1Water Soul
@@ -286,6 +287,14 @@ soul.soul_balanced.name=§fBalanced Soul
 
 soul.soul_dragon.name=§eDragon Soul
 soul.soul_ancient.name=§0Ancient Soul
+
+soul.soul_servant.name=§3Servant's Soul
+soul.soul_sentient.name=§9Sentient Soul
+soul.soul_machine.name=§8Mechanical Soul
+
+soul.soul_first.name=§fFirst Soul
+soul.soul_true.name=§fTrue Soul
+soul.soul_apostle.name=§4Apostle's Soul
 
 #Aspects
 aspect.air.name=§bAir

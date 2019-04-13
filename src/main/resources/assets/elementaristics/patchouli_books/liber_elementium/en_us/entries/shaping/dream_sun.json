@@ -1,5 +1,5 @@
 {
-  "name": "Deus Ex Machina",
+  "name": "A Dream of a Sun",
   "category": "shaping",
   "icon": "elementaristics:textures/gui/icons/machine.png",
   "advancement": "elementaristics:progress_ascension_3",
@@ -11,7 +11,7 @@
     {
       "type": "crafting",
       "recipe": "elementaristics:incantation_reforging",
-      "text": "$(o)I am the vessel and this is my crucible$()"
+      "text": "$(o)I am the vessel and this is my crucible. $(br)I am the god born in the machine$()"
     }
   ]
 }

@@ -22,7 +22,9 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import javax.annotation.Nullable;
 import java.util.*;
+import java.util.function.Predicate;
 
 public class TileEntityAltar extends TileEntity implements ITickable {
 
@@ -53,74 +55,86 @@ public class TileEntityAltar extends TileEntity implements ITickable {
         if (!currentRite.equals("")) {
             if (RiteInit.getRiteForResLoc(currentRite) != null) {
                 RiteBase rite = RiteInit.getRiteForResLoc(currentRite);
-                recruitCultists();
-                    if (drainPlayers(rite)) {
-                        tickCount++;
-                        List<EntityPlayer> targets = world.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(
-                                new BlockPos(pos.getX() - 10F, pos.getY() - 4F, pos.getZ() - 10F),
-                                new BlockPos(pos.getX() + 10F, pos.getY() + 8F, pos.getZ() + 10F)));
-                        rite.onRitual(world, pos, targets, tickCount);
+                if (drainPlayers(rite)) {
 
-                    } else {
-                        doFailingShow();
-                        currentRite = "";
-                        tickCount = 0;
+                    if (tickCount % 20 == 0 && getCultistsInArea().size() < 4){
+                   //     recruitCultists(getCultistsInArea().size() + 1); tweak that out a bit and add actual support of those
                     }
+                    tickCount++;
+                    List<EntityPlayer> targets = world.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(
+                            new BlockPos(pos.getX() - 10F, pos.getY() - 4F, pos.getZ() - 10F),
+                            new BlockPos(pos.getX() + 10F, pos.getY() + 8F, pos.getZ() + 10F)));
+                    rite.onRitual(world, pos, targets, tickCount);
 
-                    if (tickCount >= rite.getTicksRequired()) {
-                        if (getAspectsInArea().containsAll(rite.getAspectsRequired())) {
-                            if (getItemPowerInArea() >= rite.getItemPowerRequired()) {
-                                if (rite.isSoulSpecific()) {
-                                    if (getSoulsInArea().contains(rite.getSoulRequired())) {
-                                        if (world.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 15, false) != null) {
-                                            rite.doMagic(world, pos, world.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 20, false));
-                                            currentRite = "";
-                                            consumeConsumables();
-                                        }
-                                    }
-                                } else {
+                } else {
+                    doFailingShow();
+                    currentRite = "";
+                    tickCount = 0;
+                }
+
+                if (tickCount >= rite.getTicksRequired()) {
+                    if (getAspectsInArea().containsAll(rite.getAspectsRequired())) {
+                        if (getItemPowerInArea() >= rite.getItemPowerRequired()) {
+                            if (rite.isSoulSpecific()) {
+                                if (getSoulsInArea().contains(rite.getSoulRequired())) {
                                     if (world.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 15, false) != null) {
-                                        consumeConsumables();
                                         rite.doMagic(world, pos, world.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 20, false));
                                         currentRite = "";
-
+                                        consumeConsumables();
                                     }
                                 }
+                            } else {
+                                if (world.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 15, false) != null) {
+                                    consumeConsumables();
+                                    rite.doMagic(world, pos, world.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 20, false));
+                                    currentRite = "";
+
+                                }
                             }
+                        }
                     }
                 }
 
             } else {
                 currentRite = "";
             }
-        }else{
+        } else {
             tickCount = 0;
         }
 
 
     }
-    public void recruitCultists(){
-        if(tickCount % 20 == 0){
-        List<EntityCultist> cultists = world.getEntitiesWithinAABB(EntityCultist.class, new AxisAlignedBB(pos.getX()-100, pos.getY()-40, pos.getZ()-100, pos.getX() + 100, pos.getY() + 40, pos.getZ() + 100));
-        List<EntityCultist> cultistsThere = world.getEntitiesWithinAABB(EntityCultist.class, new AxisAlignedBB(pos.getX()-10, pos.getY()-4, pos.getZ()-10, pos.getX() + 10, pos.getY() + 4, pos.getZ() + 10));
-        List<EntityPlayer> playersThere = world.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos.getX()-10, pos.getY()-4, pos.getZ()-10, pos.getX() + 10, pos.getY() + 4, pos.getZ() + 10));
-        if (cultists.size() > 4)
-            cultists = cultists.subList(0, 3);
 
-        for (int i = 0; i < cultists.size(); i++){
-            EntityCultist cultist = cultists.get(i);
-            if(!cultistsThere.contains(cultist)) {
-                for (EntityPlayer player: playersThere){
-                    if (cultist.isOwner(player)){
-                        break;
+    public void recruitCultists(int spot) {
+        List<EntityCultist> cultistsThere = getCultistsInArea();
+
+        List<EntityCultist> cultists = world.getEntities(EntityCultist.class, new com.google.common.base.Predicate<EntityCultist>() {
+            @Override
+            public boolean apply(@Nullable EntityCultist input) {
+                for (EntityPlayer player : getPlayersInArea()) {
+                    if (input.isOwner(player)) {
+                        for (EntityCultist cultistToTest : cultistsThere) {
+                            if (input.getUniqueID().toString().equals(cultistToTest.getUniqueID().toString())) {
+                                return false;
+                            }
+                        }
+                        System.out.println("Found cultist");
+                        return true;
                     }
-                    return;
                 }
-                cultist.setPosition(pos.getX() + 6 * ((i + 1) % 2 == 0 ? 1 : -1), pos.getY(), pos.getZ() + 6 * ((i + 1) < 3 ? 1 : -1));
-                cultist.setSitting(true);
+                return false;
             }
+        });
+        if (!cultists.isEmpty()) {
+            System.out.println("Processing Cultist");
+            EntityCultist cultist = cultists.get(0);
+
+            cultist.attemptTeleport(    pos.getX() + (3 * (spot < 3 ? -1 : 1)), pos.getY(), pos.getZ() + (3 * (spot % 2 == 0 ? -1 : 1)));
+            System.out.println((pos.getX() + (3 * (spot < 3 ? -1 : 1)))  + " + " + (pos.getY()) + " + " + (pos.getZ() + (3 * (spot % 2 == 0 ? 1 : -1))));
+            cultist.setSitting(true);
+            cultist.getLookHelper().setLookPositionWithEntity(cultist, 45 + 90 * (spot - 1), 90);
         }
-        }
+
     }
 
     private void doFailingShow() {
@@ -131,9 +145,7 @@ public class TileEntityAltar extends TileEntity implements ITickable {
 
     public Set<Soul> getSoulsInArea() {
         Set<Soul> souls = new HashSet<>();
-        List<EntityPlayer> targets = world.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(
-                new BlockPos(pos.getX() - 10F, pos.getY() - 4F, pos.getZ() - 10F),
-                new BlockPos(pos.getX() + 10F, pos.getY() + 8F, pos.getZ() + 10F)));
+        List<EntityPlayer> targets = getPlayersInArea();
         if (targets.size() > 0) {
             Iterator iterator = targets.iterator();
             while (iterator.hasNext()) {
@@ -145,15 +157,13 @@ public class TileEntityAltar extends TileEntity implements ITickable {
     }
 
     public boolean drainPlayers(RiteBase rite) {
-        List<EntityPlayer> targets = world.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(
-                new BlockPos(pos.getX() - 10F, pos.getY() - 4F, pos.getZ() - 10F),
-                new BlockPos(pos.getX() + 10F, pos.getY() + 8F, pos.getZ() + 10F)));
+        List<EntityPlayer> targets = getPlayersInArea();
         if (targets.size() > 0) {
             Iterator iterator = targets.iterator();
             while (iterator.hasNext()) {
                 EntityPlayer player = (EntityPlayer) iterator.next();
                 if (MaganUtil.drainMaganFromPlayer(player, rite.getMaganDrainedPerTick(), 20, true)) {
-                   return true;
+                    return true;
                 }
             }
         }
@@ -162,9 +172,7 @@ public class TileEntityAltar extends TileEntity implements ITickable {
 
     public int getItemPowerInArea() {
         int power = 0;
-        List<EntityPlayer> targets = world.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(
-                new BlockPos(pos.getX() - 10F, pos.getY() - 4F, pos.getZ() - 10F),
-                new BlockPos(pos.getX() + 10F, pos.getY() + 8F, pos.getZ() + 10F)));
+        List<EntityPlayer> targets = getPlayersInArea();
 
         if (targets.size() > 0) {
             Iterator iterator = targets.iterator();
@@ -172,16 +180,16 @@ public class TileEntityAltar extends TileEntity implements ITickable {
                 EntityPlayer player = (EntityPlayer) iterator.next();
                 RiteBase rite = RiteInit.getRiteForResLoc(currentRite);
                 if (player.getHeldItemMainhand().getItem() instanceof IHasRiteUse) {
-                    for (Aspect aspect : ((IHasRiteUse) player.getHeldItemMainhand().getItem()).getAspects()){
-                        if (rite.getAspectsRequired().contains(aspect)){
+                    for (Aspect aspect : ((IHasRiteUse) player.getHeldItemMainhand().getItem()).getAspects()) {
+                        if (rite.getAspectsRequired().contains(aspect)) {
                             power += ((IHasRiteUse) player.getHeldItemMainhand().getItem()).getPower();
                             break;
                         }
                     }
                 }
                 if (player.getHeldItemOffhand().getItem() instanceof IHasRiteUse) {
-                    for (Aspect aspect : ((IHasRiteUse) player.getHeldItemOffhand().getItem()).getAspects()){
-                        if (rite.getAspectsRequired().contains(aspect)){
+                    for (Aspect aspect : ((IHasRiteUse) player.getHeldItemOffhand().getItem()).getAspects()) {
+                        if (rite.getAspectsRequired().contains(aspect)) {
                             power += ((IHasRiteUse) player.getHeldItemOffhand().getItem()).getPower();
                             break;
                         }
@@ -194,11 +202,22 @@ public class TileEntityAltar extends TileEntity implements ITickable {
         return power;
     }
 
-    public Set<Aspect> getAspectsInArea() {
-        Set<Aspect> aspects = new HashSet<>();
-        List<EntityPlayer> targets = world.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(
+    public List<EntityPlayer> getPlayersInArea() {
+        return world.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(
                 new BlockPos(pos.getX() - 10F, pos.getY() - 4F, pos.getZ() - 10F),
                 new BlockPos(pos.getX() + 10F, pos.getY() + 8F, pos.getZ() + 10F)));
+    }
+
+    public List<EntityCultist> getCultistsInArea(){
+        return world.getEntitiesWithinAABB(EntityCultist.class,
+                new AxisAlignedBB(pos.getX() - 10, pos.getY() - 4,
+                        pos.getZ() - 10, pos.getX() + 10, pos.getY() + 4, pos.getZ() + 10));
+
+    }
+
+    public Set<Aspect> getAspectsInArea() {
+        Set<Aspect> aspects = new HashSet<>();
+        List<EntityPlayer> targets = getPlayersInArea();
 
         if (targets.size() > 0) {
             Iterator iterator = targets.iterator();
@@ -217,22 +236,20 @@ public class TileEntityAltar extends TileEntity implements ITickable {
         return aspects;
     }
 
-    public void consumeConsumables(){
-        List<EntityPlayer> targets = world.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(
-                new BlockPos(pos.getX() - 10F, pos.getY() - 4F, pos.getZ() - 10F),
-                new BlockPos(pos.getX() + 10F, pos.getY() + 8F, pos.getZ() + 10F)));
+    public void consumeConsumables() {
+        List<EntityPlayer> targets = getPlayersInArea();
 
         if (targets.size() > 0) {
             Iterator iterator = targets.iterator();
             while (iterator.hasNext()) {
                 EntityPlayer player = (EntityPlayer) iterator.next();
                 if (player.getHeldItemMainhand().getItem() instanceof IHasRiteUse) {
-                   if (((IHasRiteUse) player.getHeldItemMainhand().getItem()).isConsumed()){
-                       player.getHeldItemMainhand().shrink(1);
-                   }
+                    if (((IHasRiteUse) player.getHeldItemMainhand().getItem()).isConsumed()) {
+                        player.getHeldItemMainhand().shrink(1);
+                    }
                 }
                 if (player.getHeldItemOffhand().getItem() instanceof IHasRiteUse) {
-                    if (((IHasRiteUse) player.getHeldItemOffhand().getItem()).isConsumed()){
+                    if (((IHasRiteUse) player.getHeldItemOffhand().getItem()).isConsumed()) {
                         player.getHeldItemOffhand().shrink(1);
                     }
                 }

@@ -1,5 +1,6 @@
 package de.aelpecyem.elementaristics.capability;
 
+import de.aelpecyem.elementaristics.entity.EntityCultist;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
@@ -18,6 +19,8 @@ public class PlayerCapStorage implements Capability.IStorage<IPlayerCapabilities
         compound.setFloat("maganRegenPerSecond", instance.getMaganRegenPerTick());
         compound.setFloat("maxMagan", instance.getMaxMagan());
         compound.setInteger("ascensionStage", instance.getPlayerAscensionStage());
+        compound.setInteger("cultistCount", instance.getCultistCount());
+
         return compound;
     }
 
@@ -32,6 +35,7 @@ public class PlayerCapStorage implements Capability.IStorage<IPlayerCapabilities
         instance.setMagan(compound.getFloat("currentMagan"));
         instance.setMaganRegenPerTick(compound.getFloat("maganRegenPerSecond"));
         instance.setPlayerAscensionStage(compound.getInteger("ascensionStage"));
+        instance.setCultistCount(compound.getInteger("cultistCount"));
 
     }
 }

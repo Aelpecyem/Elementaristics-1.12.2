@@ -1,5 +1,9 @@
 package de.aelpecyem.elementaristics.capability;
 
+import de.aelpecyem.elementaristics.entity.EntityCultist;
+
+import java.util.List;
+
 public interface IPlayerCapabilities {
 
     int getSoulId();
@@ -35,4 +39,7 @@ public interface IPlayerCapabilities {
 
     int getPlayerAscensionStage();
 
+    int getCultistCount();
+
+    void setCultistCount(int count);
 }

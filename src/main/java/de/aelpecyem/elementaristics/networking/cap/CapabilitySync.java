@@ -18,6 +18,7 @@ public class CapabilitySync implements IMessage{
     private float currentMagan;
     private float maganRegenPerTick;
     private int ascensionStage;
+    private int cultistCount;
 
     public CapabilitySync(){
         this.soulId = 0;
@@ -27,16 +28,18 @@ public class CapabilitySync implements IMessage{
         this.currentMagan = 0;
         this.maganRegenPerTick = 0;
         this.ascensionStage = 0;
+        this.cultistCount = 0;
     }
 
-    public CapabilitySync(int soulId, int ticksLeftStunted, boolean knowsSoul, float maxMagan, float currentMagan, float maganRegenPerTick, int ascensionStage) {
-        this.soulId = soulId;
-        this.ticksLeftStunted = ticksLeftStunted;
-        this.knowsSoul = knowsSoul;
-        this.maxMagan = maxMagan;
-        this.currentMagan = currentMagan;
-        this.maganRegenPerTick = maganRegenPerTick;
-        this.ascensionStage = ascensionStage;
+    public CapabilitySync(IPlayerCapabilities cap) {
+        this.soulId = cap.getSoulId();
+        this.ticksLeftStunted = cap.getTimeStunted();
+        this.knowsSoul = cap.knowsSoul();
+        this.maxMagan = cap.getMaxMagan();
+        this.currentMagan = cap.getMagan();
+        this.maganRegenPerTick = cap.getMaganRegenPerTick();
+        this.ascensionStage = cap.getPlayerAscensionStage();
+        this.cultistCount = cap.getCultistCount();
     }
 
     @Override
@@ -48,6 +51,7 @@ public class CapabilitySync implements IMessage{
         buf.writeFloat(currentMagan);
         buf.writeFloat(maganRegenPerTick);
         buf.writeInt(ascensionStage);
+        buf.writeInt(cultistCount);
     }
 
     @Override
@@ -59,6 +63,7 @@ public class CapabilitySync implements IMessage{
         currentMagan = buf.readFloat();
         maganRegenPerTick = buf.readFloat();
         ascensionStage = buf.readInt();
+        cultistCount = buf.readInt();
     }
 
     public static class Handler implements IMessageHandler<CapabilitySync, IMessage> {
@@ -74,6 +79,7 @@ public class CapabilitySync implements IMessage{
                 c.setMagan(message.currentMagan);
                 c.setMaganRegenPerTick(message.maganRegenPerTick);
                 c.setPlayerAscensionStage(message.ascensionStage);
+                c.setCultistCount(message.cultistCount);
             });
             return null;
         }
