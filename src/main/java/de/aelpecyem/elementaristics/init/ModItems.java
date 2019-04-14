@@ -65,6 +65,7 @@ public class ModItems {
     public static IncantationBase incantation_depths;
     public static IncantationBase incantation_compression;
     public static IncantationBase incantation_forging;
+    public static IncantationBase incantation_recruiting;
 
     public static ItemAspects water_purest;
     public static ItemAspects sparks_living;
@@ -167,7 +168,7 @@ public class ModItems {
         incantation_depths = new IncantationBase("incantation_depths", RiteInit.riteDrowningAstral, Aspects.water, 4);
         incantation_compression = new IncantationBase("incantation_compression", RiteInit.riteCompression, Aspects.aether, 4);
         incantation_forging = new IncantationBase("incantation_forging", RiteInit.riteForging, Aspects.fire, 4);
-
+        incantation_recruiting = new IncantationBase("incantation_recruiting", RiteInit.riteRecruiting, Aspects.soul, 2);
         hammer_heat = new ItemHammerHeat();
         soul_mirror = new ItemSoulMirror();
     }

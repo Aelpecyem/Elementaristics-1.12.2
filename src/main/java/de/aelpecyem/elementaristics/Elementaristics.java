@@ -18,6 +18,7 @@ import de.aelpecyem.elementaristics.init.InitRecipes;
 import de.aelpecyem.elementaristics.util.ClientTickHandler;
 import de.aelpecyem.elementaristics.util.RenderHandler;
 import de.aelpecyem.elementaristics.world.WorldGen;
+import de.aelpecyem.elementaristics.world.structures.WorldGenAnomaly;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.creativetab.CreativeTabs;
@@ -101,6 +102,7 @@ public final class Elementaristics {
         if (Loader.isModLoaded("thaumcraft")) {
             ThaumcraftCompat.init();
         }
+        // GameRegistry.registerWorldGenerator(new WorldGenAnomaly(), 10); todo gonna continue with this later on
         MinecraftForge.EVENT_BUS.register(new PotionInit());
         MinecraftForge.EVENT_BUS.register(new HUDRenderHandler());
         MinecraftForge.EVENT_BUS.register(new CapabilityHandler());

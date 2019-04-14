@@ -6,7 +6,7 @@ import de.aelpecyem.elementaristics.items.base.ItemEssence;
 import de.aelpecyem.elementaristics.items.base.artifacts.rites.ItemAspects;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;
 import de.aelpecyem.elementaristics.networking.PacketHandler;
-import de.aelpecyem.elementaristics.networking.concentrator.PacketUpdateConcentrator;
+import de.aelpecyem.elementaristics.networking.tileentity.concentrator.PacketUpdateConcentrator;
 import de.aelpecyem.elementaristics.particles.ParticleGeneric;
 import de.aelpecyem.elementaristics.recipe.ConcentratorRecipes;
 import net.minecraft.entity.item.EntityItem;

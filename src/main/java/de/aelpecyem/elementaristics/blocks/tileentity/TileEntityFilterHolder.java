@@ -1,10 +1,7 @@
 package de.aelpecyem.elementaristics.blocks.tileentity;
 
-import de.aelpecyem.elementaristics.items.base.ItemEssence;
 import de.aelpecyem.elementaristics.networking.PacketHandler;
-import de.aelpecyem.elementaristics.networking.filterholder.PacketUpdateFilterHolder;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.item.ItemStack;
+import de.aelpecyem.elementaristics.networking.tileentity.filterholder.PacketUpdateFilterHolder;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;

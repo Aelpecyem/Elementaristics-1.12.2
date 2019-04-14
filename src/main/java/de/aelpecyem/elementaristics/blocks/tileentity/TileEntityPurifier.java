@@ -2,7 +2,7 @@ package de.aelpecyem.elementaristics.blocks.tileentity;
 
 import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.networking.PacketHandler;
-import de.aelpecyem.elementaristics.networking.purifier.PacketUpdatePurifier;
+import de.aelpecyem.elementaristics.networking.tileentity.purifier.PacketUpdatePurifier;
 import de.aelpecyem.elementaristics.recipe.PurifierRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;

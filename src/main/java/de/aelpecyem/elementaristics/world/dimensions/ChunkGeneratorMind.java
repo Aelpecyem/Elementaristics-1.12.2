@@ -403,6 +403,7 @@ public class ChunkGeneratorMind implements IChunkGenerator {
 
         public void recreateStructures (Chunk chunkIn,int x, int z)
         {
+
         }
 
 }

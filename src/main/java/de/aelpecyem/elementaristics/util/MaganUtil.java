@@ -3,6 +3,7 @@ package de.aelpecyem.elementaristics.util;
 import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.capability.IPlayerCapabilities;
 import de.aelpecyem.elementaristics.capability.PlayerCapProvider;
+import de.aelpecyem.elementaristics.entity.EntityCultist;
 import de.aelpecyem.elementaristics.init.SoulInit;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
@@ -34,14 +35,23 @@ public class MaganUtil {
                 if (caps.getMagan() >= amount) {
                     if (particles) {
                         Elementaristics.proxy.generateGenericParticles(player, SoulInit.getSoulFromId(caps.getSoulId()).getParticleColor(), 0.5F, 50, -0.01F, true, true);
-                        if (caps.getSoulId() == SoulInit.soulMana.getId()) {
-                            Elementaristics.proxy.generateGenericParticles(player, SoulInit.getSoulFromId(caps.getSoulId()).getParticleColor(), 0.3F, 50, -0.01F, true, true);
-
-                        }
                     }
                 }
                 return caps.drainMagan(amount);
             }
+        }
+        return false;
+    }
+
+    public static boolean drainMaganFromCultist(EntityCultist cultist, float amount, int stuntTime, boolean particles) {
+        if (cultist != null) {
+            cultist.setStuntTime(stuntTime);
+            if (cultist.getMagan() >= amount) {
+                if (particles) {
+                    Elementaristics.proxy.generateGenericParticles(cultist, cultist.getAspect().getColor(), 2F, 50, -0.01F, true, true);
+                }
+            }
+            return cultist.drainMagan(amount);
         }
         return false;
     }

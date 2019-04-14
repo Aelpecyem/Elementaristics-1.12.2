@@ -1,6 +1,7 @@
-package de.aelpecyem.elementaristics.networking.tunneler;
+package de.aelpecyem.elementaristics.networking.tileentity.altar;
 
-import de.aelpecyem.elementaristics.blocks.tileentity.TileEntityTunneler;
+import de.aelpecyem.elementaristics.blocks.tileentity.TileEntityAltar;
+import de.aelpecyem.elementaristics.blocks.tileentity.TileEntityPurifier;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -9,20 +10,20 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
-public class PacketRequestUpdateTunneler implements IMessage {
+public class PacketRequestUpdateAltar implements IMessage {
     private BlockPos pos;
     private int dimension;
 
-    public PacketRequestUpdateTunneler(BlockPos pos, int dimension) {
+    public PacketRequestUpdateAltar(BlockPos pos, int dimension) {
         this.pos = pos;
         this.dimension = dimension;
     }
 
-    public PacketRequestUpdateTunneler(TileEntityTunneler te) {
+    public PacketRequestUpdateAltar(TileEntityAltar te) {
         this(te.getPos(), te.getWorld().provider.getDimension());
     }
 
-    public PacketRequestUpdateTunneler() {
+    public PacketRequestUpdateAltar() {
     }
 
     @Override
@@ -37,14 +38,14 @@ public class PacketRequestUpdateTunneler implements IMessage {
         dimension = buf.readInt();
     }
 
-    public static class Handler implements IMessageHandler<PacketRequestUpdateTunneler, PacketUpdateTunneler> {
+    public static class Handler implements IMessageHandler<PacketRequestUpdateAltar, PacketUpdateAltar> {
 
         @Override
-        public PacketUpdateTunneler onMessage(PacketRequestUpdateTunneler message, MessageContext ctx) {
+        public PacketUpdateAltar onMessage(PacketRequestUpdateAltar message, MessageContext ctx) {
             World world = FMLCommonHandler.instance().getMinecraftServerInstance().getWorld(message.dimension); //worldServerForDimension(message.dimension);
-            TileEntityTunneler te = (TileEntityTunneler) world.getTileEntity(message.pos);
+            TileEntityAltar te = (TileEntityAltar) world.getTileEntity(message.pos);
             if (te != null) {
-                return new PacketUpdateTunneler(te);
+                return new PacketUpdateAltar(te);
             } else {
                 return null;
             }

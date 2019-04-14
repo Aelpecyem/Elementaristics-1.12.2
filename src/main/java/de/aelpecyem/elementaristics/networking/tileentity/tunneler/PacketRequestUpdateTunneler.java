@@ -1,6 +1,6 @@
-package de.aelpecyem.elementaristics.networking.concentrator;
+package de.aelpecyem.elementaristics.networking.tileentity.tunneler;
 
-import de.aelpecyem.elementaristics.blocks.tileentity.TileEntityConcentrator;
+import de.aelpecyem.elementaristics.blocks.tileentity.TileEntityTunneler;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -9,20 +9,20 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
-public class PacketRequestUpdateConcentrator implements IMessage {
+public class PacketRequestUpdateTunneler implements IMessage {
     private BlockPos pos;
     private int dimension;
 
-    public PacketRequestUpdateConcentrator(BlockPos pos, int dimension) {
+    public PacketRequestUpdateTunneler(BlockPos pos, int dimension) {
         this.pos = pos;
         this.dimension = dimension;
     }
 
-    public PacketRequestUpdateConcentrator(TileEntityConcentrator te) {
+    public PacketRequestUpdateTunneler(TileEntityTunneler te) {
         this(te.getPos(), te.getWorld().provider.getDimension());
     }
 
-    public PacketRequestUpdateConcentrator() {
+    public PacketRequestUpdateTunneler() {
     }
 
     @Override
@@ -37,14 +37,14 @@ public class PacketRequestUpdateConcentrator implements IMessage {
         dimension = buf.readInt();
     }
 
-    public static class Handler implements IMessageHandler<PacketRequestUpdateConcentrator, PacketUpdateConcentrator> {
+    public static class Handler implements IMessageHandler<PacketRequestUpdateTunneler, PacketUpdateTunneler> {
 
         @Override
-        public PacketUpdateConcentrator onMessage(PacketRequestUpdateConcentrator message, MessageContext ctx) {
+        public PacketUpdateTunneler onMessage(PacketRequestUpdateTunneler message, MessageContext ctx) {
             World world = FMLCommonHandler.instance().getMinecraftServerInstance().getWorld(message.dimension); //worldServerForDimension(message.dimension);
-            TileEntityConcentrator te = (TileEntityConcentrator) world.getTileEntity(message.pos);
+            TileEntityTunneler te = (TileEntityTunneler) world.getTileEntity(message.pos);
             if (te != null) {
-                return new PacketUpdateConcentrator(te);
+                return new PacketUpdateTunneler(te);
             } else {
                 return null;
             }

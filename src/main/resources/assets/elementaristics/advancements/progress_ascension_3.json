@@ -10,7 +10,7 @@
       "translate": "advancement.elementaristics.ascension_3.desc"
     }
   },
-  "parent": "elementaristics:progress_ascension_2",
+  "parent": "elementaristics:progress_ascension_identification",
   "criteria": {
     "book": {
       "trigger": "minecraft:changed_dimension",

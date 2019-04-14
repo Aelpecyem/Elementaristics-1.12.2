@@ -3,7 +3,7 @@ package de.aelpecyem.elementaristics.blocks.tileentity;
 import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.init.ModItems;
 import de.aelpecyem.elementaristics.networking.PacketHandler;
-import de.aelpecyem.elementaristics.networking.tunneler.PacketUpdateTunneler;
+import de.aelpecyem.elementaristics.networking.tileentity.tunneler.PacketUpdateTunneler;
 import de.aelpecyem.elementaristics.particles.ParticleGeneric;
 import de.aelpecyem.elementaristics.recipe.TunnelerRecipes;
 import net.minecraft.entity.item.EntityItem;

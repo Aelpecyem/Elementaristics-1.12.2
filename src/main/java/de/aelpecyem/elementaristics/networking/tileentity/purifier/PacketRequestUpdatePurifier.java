@@ -1,4 +1,4 @@
-package de.aelpecyem.elementaristics.networking.purifier;
+package de.aelpecyem.elementaristics.networking.tileentity.purifier;
 
 import de.aelpecyem.elementaristics.blocks.tileentity.TileEntityPurifier;
 import io.netty.buffer.ByteBuf;

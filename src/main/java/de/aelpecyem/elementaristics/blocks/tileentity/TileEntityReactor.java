@@ -4,7 +4,7 @@ import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.blocks.tileentity.blocks.BlockReactor;
 import de.aelpecyem.elementaristics.init.ModItems;
 import de.aelpecyem.elementaristics.networking.PacketHandler;
-import de.aelpecyem.elementaristics.networking.reactor.PacketUpdateReactor;
+import de.aelpecyem.elementaristics.networking.tileentity.reactor.PacketUpdateReactor;
 import de.aelpecyem.elementaristics.particles.ParticleGeneric;
 import de.aelpecyem.elementaristics.recipe.ReactorRecipes;
 import net.minecraft.entity.item.EntityItem;

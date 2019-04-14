@@ -3,10 +3,9 @@ package de.aelpecyem.elementaristics.blocks.tileentity;
 
 import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.networking.PacketHandler;
-import de.aelpecyem.elementaristics.networking.pedestallightning.PacketUpdateLightningPedestal;
+import de.aelpecyem.elementaristics.networking.tileentity.pedestallightning.PacketUpdateLightningPedestal;
 import de.aelpecyem.elementaristics.particles.ParticleGeneric;
 import de.aelpecyem.elementaristics.recipe.PedestalRecipes;
-import de.aelpecyem.elementaristics.recipe.PurifierRecipes;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;

@@ -134,7 +134,9 @@ advancement.elementaristics.reactor=Not of the giant kind
 
 advancement.elementaristics.ascension_1=Far above, but just space
 advancement.elementaristics.ascension_2=THE MORE-!
+advancement.elementaristics.ascension_identification=Know
 advancement.elementaristics.ascension_3=The Mind
+advancement.elementaristics.ascension_4=Broken Boundaries
 
 advancement.elementaristics.root.desc=You opened your gate... after a not so appreciable intoxication.
 advancement.elementaristics.root_research.desc=The aspects of the multiverse, discovered by me
@@ -149,7 +151,9 @@ advancement.elementaristics.reactor.desc=Build a Reactor to let (al-)chemicals r
 
 advancement.elementaristics.ascension_1.desc=Study the essence of space
 advancement.elementaristics.ascension_2.desc=Build an Altar to perform rites
+advancement.elementaristics.ascension_identification.desc=Create an Incantation of Light
 advancement.elementaristics.ascension_3.desc=Enter The Mind
+advancement.elementaristics.ascension_4.desc=Kill the Silver Thread
 
 
 
@@ -215,6 +219,7 @@ rite.elementaristics:soul_compression.name=Compression of the Soul
 
 #Misc
 entity.silver_thread.name=Silver Thread
+entity.cultist.name=Cultist
 
 
 rite.item_power.name=Local Item Power:
@@ -247,6 +252,10 @@ message.know_soul_ancient=The Great Dreamer sleeps... but I have awoken.
 message.know_soul_dragon=Dragons don't roar, they sing... and the world shall hear me.
 
 
+message.cultist.sit=The Cultist will stay here
+message.cultist.follow=The Cultist will closely follow you
+message.cultist.deny=This Cultist is not part of your cult
+
 message.soul.machine_activated.name=Machine Activated!
 message.soul.machine_deactivated.name=Machine Deactivated!
 message.soul.name=You have been identified with a
@@ -271,7 +280,14 @@ message.max_magan.name=Your maximum magan is
 message.current_magan.name=Your current magan is
 message.regen_per_tick.name=Your magan regeneration rate per tick is
 message.ascension_stage.name=Your ascension stage:
+message.cultist_count.name=Your cultist count:
 
+message.cultist_stats.name=Viewing stats for Cultist:
+message.cultists_aspect.name=Cultist's aspect:
+message.cultist_magan.name=Current Magan:
+
+message.rite_fail_cultists.name=There's too many artificial souls here
+message.call_cultist_error.name=There must be more space for the cultists to appear
 #Souls
 soul.soul_magan.name=§6Magan Soul
 soul.soul_water.name=§1Water Soul

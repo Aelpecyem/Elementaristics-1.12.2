@@ -1,9 +1,7 @@
 package de.aelpecyem.elementaristics.networking.cap;
 
-import de.aelpecyem.elementaristics.blocks.tileentity.TileEntityPedestal;
 import de.aelpecyem.elementaristics.capability.IPlayerCapabilities;
 import de.aelpecyem.elementaristics.capability.PlayerCapProvider;
-import de.aelpecyem.elementaristics.networking.pedestal.PacketUpdatePedestal;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;

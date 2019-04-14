@@ -1,6 +1,6 @@
-package de.aelpecyem.elementaristics.networking.purifier;
+package de.aelpecyem.elementaristics.networking.tileentity.pedestal;
 
-import de.aelpecyem.elementaristics.blocks.tileentity.TileEntityPurifier;
+import de.aelpecyem.elementaristics.blocks.tileentity.TileEntityPedestal;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
@@ -10,22 +10,22 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
-public class PacketUpdatePurifier implements IMessage {
+public class PacketUpdatePedestal implements IMessage {
     private BlockPos pos;
     private ItemStack stack;
     private long lastChangeTime;
 
-    public PacketUpdatePurifier(BlockPos pos, ItemStack stack, long lastChangeTime) {
+    public PacketUpdatePedestal(BlockPos pos, ItemStack stack, long lastChangeTime) {
         this.pos = pos;
         this.stack = stack;
         this.lastChangeTime = lastChangeTime;
     }
 
-    public PacketUpdatePurifier(TileEntityPurifier te) {
+    public PacketUpdatePedestal(TileEntityPedestal te) {
         this(te.getPos(), te.inventory.getStackInSlot(0), te.lastChangeTime);
     }
 
-    public PacketUpdatePurifier() {
+    public PacketUpdatePedestal() {
     }
 
     @Override
@@ -42,12 +42,12 @@ public class PacketUpdatePurifier implements IMessage {
         lastChangeTime = buf.readLong();
     }
 
-    public static class Handler implements IMessageHandler<PacketUpdatePurifier, IMessage> {
+    public static class Handler implements IMessageHandler<PacketUpdatePedestal, IMessage> {
 
         @Override
-        public IMessage onMessage(PacketUpdatePurifier message, MessageContext ctx) {
+        public IMessage onMessage(PacketUpdatePedestal message, MessageContext ctx) {
             Minecraft.getMinecraft().addScheduledTask(() -> {
-                TileEntityPurifier te = (TileEntityPurifier) Minecraft.getMinecraft().world.getTileEntity(message.pos);
+                TileEntityPedestal te = (TileEntityPedestal) Minecraft.getMinecraft().world.getTileEntity(message.pos);
                 if (te != null) {
                     te.inventory.setStackInSlot(0, message.stack);
 

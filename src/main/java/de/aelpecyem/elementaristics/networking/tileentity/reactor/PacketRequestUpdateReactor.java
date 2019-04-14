@@ -1,7 +1,6 @@
-package de.aelpecyem.elementaristics.networking.filterholder;
+package de.aelpecyem.elementaristics.networking.tileentity.reactor;
 
-import de.aelpecyem.elementaristics.blocks.tileentity.TileEntityFilterHolder;
-import de.aelpecyem.elementaristics.blocks.tileentity.TileEntityPedestal;
+import de.aelpecyem.elementaristics.blocks.tileentity.TileEntityReactor;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -10,20 +9,20 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
-public class PacketRequestUpdateFilterHolder implements IMessage {
+public class PacketRequestUpdateReactor implements IMessage {
     private BlockPos pos;
     private int dimension;
 
-    public PacketRequestUpdateFilterHolder(BlockPos pos, int dimension) {
+    public PacketRequestUpdateReactor(BlockPos pos, int dimension) {
         this.pos = pos;
         this.dimension = dimension;
     }
 
-    public PacketRequestUpdateFilterHolder(TileEntityPedestal te) {
+    public PacketRequestUpdateReactor(TileEntityReactor te) {
         this(te.getPos(), te.getWorld().provider.getDimension());
     }
 
-    public PacketRequestUpdateFilterHolder() {
+    public PacketRequestUpdateReactor() {
     }
 
     @Override
@@ -38,14 +37,15 @@ public class PacketRequestUpdateFilterHolder implements IMessage {
         dimension = buf.readInt();
     }
 
-    public static class Handler implements IMessageHandler<PacketRequestUpdateFilterHolder, PacketUpdateFilterHolder> {
+
+    public static class Handler implements IMessageHandler<PacketRequestUpdateReactor, PacketUpdateReactor> {
 
         @Override
-        public PacketUpdateFilterHolder onMessage(PacketRequestUpdateFilterHolder message, MessageContext ctx) {
+        public PacketUpdateReactor onMessage(PacketRequestUpdateReactor message, MessageContext ctx) {
             World world = FMLCommonHandler.instance().getMinecraftServerInstance().getWorld(message.dimension); //worldServerForDimension(message.dimension);
-            TileEntityFilterHolder te = (TileEntityFilterHolder) world.getTileEntity(message.pos);
+            TileEntityReactor te = (TileEntityReactor) world.getTileEntity(message.pos);
             if (te != null) {
-                return new PacketUpdateFilterHolder(te);
+                return new PacketUpdateReactor(te);
             } else {
                 return null;
             }

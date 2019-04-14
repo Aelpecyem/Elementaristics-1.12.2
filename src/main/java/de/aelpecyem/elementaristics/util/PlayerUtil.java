@@ -25,11 +25,4 @@ public class PlayerUtil {
         return null;
     }
 
-    public static Entity getEntityInSight(double distance) {
-        RayTraceResult r = Minecraft.getMinecraft().getRenderViewEntity().rayTrace(distance, 1.0F);
-        if (r != null) {
-            return r.entityHit;
-        }
-        return null;
-    }
 }

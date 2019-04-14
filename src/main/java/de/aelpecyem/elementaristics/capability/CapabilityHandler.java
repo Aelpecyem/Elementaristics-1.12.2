@@ -1,15 +1,10 @@
 package de.aelpecyem.elementaristics.capability;
 
 import de.aelpecyem.elementaristics.Elementaristics;
-import de.aelpecyem.elementaristics.blocks.tileentity.TileEntityPedestal;
-import de.aelpecyem.elementaristics.capability.IPlayerCapabilities;
-import de.aelpecyem.elementaristics.capability.PlayerCapProvider;
-import de.aelpecyem.elementaristics.capability.souls.soulCaps.SoulCap;
 import de.aelpecyem.elementaristics.capability.souls.soulCaps.SoulCaps;
 import de.aelpecyem.elementaristics.init.SoulInit;
 import de.aelpecyem.elementaristics.networking.PacketHandler;
 import de.aelpecyem.elementaristics.networking.cap.CapabilitySync;
-import de.aelpecyem.elementaristics.networking.pedestal.PacketUpdatePedestal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.ResourceLocation;

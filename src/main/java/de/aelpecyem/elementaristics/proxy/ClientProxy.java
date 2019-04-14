@@ -60,7 +60,7 @@ public class ClientProxy extends CommonProxy {
                 motionX,
                 motionY,
                 motionZ,
-                color, scale, maxAge, gravity, collision, fade);
+                color, scale, maxAge, gravity, collision, fade, false, 0, 0, 0);
         Minecraft.getMinecraft().effectRenderer.addEffect(particleGeneric);
     }
 
@@ -73,7 +73,7 @@ public class ClientProxy extends CommonProxy {
                 motionX,
                 motionY,
                 motionZ,
-                color, scale, maxAge, gravity, collision, fade);
+                color, scale, maxAge, gravity, collision, fade, false, 0, 0, 0);
         Minecraft.getMinecraft().effectRenderer.addEffect(particleGeneric);
     }
 
@@ -83,7 +83,7 @@ public class ClientProxy extends CommonProxy {
                 velX,
                 velY,
                 velZ,
-                color, scale, maxAge, gravity, collision, fade);
+                color, scale, maxAge, gravity, collision, fade, false, 0, 0, 0);
         Minecraft.getMinecraft().effectRenderer.addEffect(particleGeneric);
     }
 
@@ -96,7 +96,7 @@ public class ClientProxy extends CommonProxy {
                 motionX,
                 motionY,
                 motionZ,
-                color, scale, maxAge, gravity, collision, fade);
+                color, scale, maxAge, gravity, collision, fade, false, 0, 0, 0);
         Minecraft.getMinecraft().effectRenderer.addEffect(particleGeneric);
     }
 

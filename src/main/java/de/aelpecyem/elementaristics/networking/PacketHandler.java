@@ -2,21 +2,22 @@ package de.aelpecyem.elementaristics.networking;
 
 import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.networking.cap.CapabilitySync;
-import de.aelpecyem.elementaristics.networking.concentrator.PacketRequestUpdateConcentrator;
-import de.aelpecyem.elementaristics.networking.concentrator.PacketUpdateConcentrator;
-import de.aelpecyem.elementaristics.networking.filterholder.PacketRequestUpdateFilterHolder;
-import de.aelpecyem.elementaristics.networking.filterholder.PacketUpdateFilterHolder;
-import de.aelpecyem.elementaristics.networking.pedestal.PacketRequestUpdatePedestal;
-import de.aelpecyem.elementaristics.networking.pedestal.PacketUpdatePedestal;
-import de.aelpecyem.elementaristics.networking.pedestallightning.PacketRequestUpdateLightningPedestal;
-import de.aelpecyem.elementaristics.networking.pedestallightning.PacketUpdateLightningPedestal;
-import de.aelpecyem.elementaristics.networking.purifier.PacketRequestUpdatePurifier;
-import de.aelpecyem.elementaristics.networking.purifier.PacketUpdatePurifier;
-import de.aelpecyem.elementaristics.networking.reactor.PacketRequestUpdateReactor;
-import de.aelpecyem.elementaristics.networking.reactor.PacketUpdateReactor;
-import de.aelpecyem.elementaristics.networking.tunneler.PacketRequestUpdateTunneler;
-import de.aelpecyem.elementaristics.networking.*;
-import de.aelpecyem.elementaristics.networking.tunneler.PacketUpdateTunneler;
+import de.aelpecyem.elementaristics.networking.tileentity.altar.PacketRequestUpdateAltar;
+import de.aelpecyem.elementaristics.networking.tileentity.altar.PacketUpdateAltar;
+import de.aelpecyem.elementaristics.networking.tileentity.concentrator.PacketRequestUpdateConcentrator;
+import de.aelpecyem.elementaristics.networking.tileentity.concentrator.PacketUpdateConcentrator;
+import de.aelpecyem.elementaristics.networking.tileentity.filterholder.PacketRequestUpdateFilterHolder;
+import de.aelpecyem.elementaristics.networking.tileentity.filterholder.PacketUpdateFilterHolder;
+import de.aelpecyem.elementaristics.networking.tileentity.pedestal.PacketRequestUpdatePedestal;
+import de.aelpecyem.elementaristics.networking.tileentity.pedestal.PacketUpdatePedestal;
+import de.aelpecyem.elementaristics.networking.tileentity.pedestallightning.PacketRequestUpdateLightningPedestal;
+import de.aelpecyem.elementaristics.networking.tileentity.pedestallightning.PacketUpdateLightningPedestal;
+import de.aelpecyem.elementaristics.networking.tileentity.purifier.PacketRequestUpdatePurifier;
+import de.aelpecyem.elementaristics.networking.tileentity.purifier.PacketUpdatePurifier;
+import de.aelpecyem.elementaristics.networking.tileentity.reactor.PacketRequestUpdateReactor;
+import de.aelpecyem.elementaristics.networking.tileentity.reactor.PacketUpdateReactor;
+import de.aelpecyem.elementaristics.networking.tileentity.tunneler.PacketRequestUpdateTunneler;
+import de.aelpecyem.elementaristics.networking.tileentity.tunneler.PacketUpdateTunneler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.math.BlockPos;
@@ -54,7 +55,10 @@ public class PacketHandler {
         network.registerMessage(new PacketUpdateReactor.Handler(), PacketUpdateReactor.class, 12, Side.CLIENT);
         network.registerMessage(new PacketRequestUpdateReactor.Handler(), PacketRequestUpdateReactor.class, 13, Side.SERVER);
 
-        network.registerMessage(new CapabilitySync.Handler(), CapabilitySync.class, 14, Side.CLIENT);
+        network.registerMessage(new PacketUpdateAltar.Handler(), PacketUpdateAltar.class, 14, Side.CLIENT);
+        network.registerMessage(new PacketRequestUpdateAltar.Handler(), PacketRequestUpdateAltar.class, 15, Side.SERVER);
+
+        network.registerMessage(new CapabilitySync.Handler(), CapabilitySync.class, 16, Side.CLIENT);
     }
 
     public static void sendToAllLoaded(World world, BlockPos pos, IMessage message) {

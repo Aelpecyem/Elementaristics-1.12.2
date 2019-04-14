@@ -2,12 +2,18 @@ package de.aelpecyem.elementaristics.blocks.tileentity;
 
 import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.blocks.tileentity.blocks.BlockReactor;
+import de.aelpecyem.elementaristics.capability.IPlayerCapabilities;
+import de.aelpecyem.elementaristics.capability.PlayerCapProvider;
 import de.aelpecyem.elementaristics.capability.souls.Soul;
 import de.aelpecyem.elementaristics.entity.EntityCultist;
 import de.aelpecyem.elementaristics.init.RiteInit;
+import de.aelpecyem.elementaristics.init.SoulInit;
 import de.aelpecyem.elementaristics.items.base.artifacts.rites.IHasRiteUse;
 import de.aelpecyem.elementaristics.misc.elements.Aspect;
 import de.aelpecyem.elementaristics.misc.rites.RiteBase;
+import de.aelpecyem.elementaristics.networking.PacketHandler;
+import de.aelpecyem.elementaristics.networking.tileentity.altar.PacketUpdateAltar;
+import de.aelpecyem.elementaristics.networking.tileentity.purifier.PacketUpdatePurifier;
 import de.aelpecyem.elementaristics.particles.ParticleGeneric;
 import de.aelpecyem.elementaristics.util.MaganUtil;
 import de.aelpecyem.elementaristics.util.SoulUtil;
@@ -29,14 +35,12 @@ import java.util.function.Predicate;
 public class TileEntityAltar extends TileEntity implements ITickable {
 
     public int tickCount;
-    public boolean active;
     public String currentRite = "";
     Random random = new Random();
 
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
         compound.setInteger("tickCount", tickCount);
-        compound.setBoolean("active", active);
         compound.setString("rite", currentRite);
         return super.writeToNBT(compound);
     }
@@ -44,7 +48,6 @@ public class TileEntityAltar extends TileEntity implements ITickable {
     @Override
     public void readFromNBT(NBTTagCompound compound) {
         tickCount = compound.getInteger("tickCount");
-        active = compound.getBoolean("active");
         currentRite = compound.getString("rite");
         super.readFromNBT(compound);
     }
@@ -52,45 +55,51 @@ public class TileEntityAltar extends TileEntity implements ITickable {
 
     @Override
     public void update() {
+        if (!world.isRemote) {
+            PacketHandler.sendToAllAround(world, pos, 64, new PacketUpdateAltar(TileEntityAltar.this));
+        }
+
         if (!currentRite.equals("")) {
             if (RiteInit.getRiteForResLoc(currentRite) != null) {
-                RiteBase rite = RiteInit.getRiteForResLoc(currentRite);
-                if (drainPlayers(rite)) {
+                if (getCultistsInArea().size() < 5) {
+                    RiteBase rite = RiteInit.getRiteForResLoc(currentRite);
+                    if (drainPlayers(rite)) {
+                        tickCount++;
+                        List<EntityPlayer> targets = world.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(
+                                new BlockPos(pos.getX() - 10F, pos.getY() - 4F, pos.getZ() - 10F),
+                                new BlockPos(pos.getX() + 10F, pos.getY() + 8F, pos.getZ() + 10F)));
+                        rite.onRitual(world, pos, targets, tickCount);
 
-                    if (tickCount % 20 == 0 && getCultistsInArea().size() < 4){
-                   //     recruitCultists(getCultistsInArea().size() + 1); tweak that out a bit and add actual support of those
+                    } else {
+                        doFailingShow();
+                        currentRite = "";
+                        tickCount = 0;
                     }
-                    tickCount++;
-                    List<EntityPlayer> targets = world.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(
-                            new BlockPos(pos.getX() - 10F, pos.getY() - 4F, pos.getZ() - 10F),
-                            new BlockPos(pos.getX() + 10F, pos.getY() + 8F, pos.getZ() + 10F)));
-                    rite.onRitual(world, pos, targets, tickCount);
 
-                } else {
-                    doFailingShow();
-                    currentRite = "";
-                    tickCount = 0;
-                }
-
-                if (tickCount >= rite.getTicksRequired()) {
-                    if (getAspectsInArea().containsAll(rite.getAspectsRequired())) {
-                        if (getItemPowerInArea() >= rite.getItemPowerRequired()) {
-                            if (rite.isSoulSpecific()) {
-                                if (getSoulsInArea().contains(rite.getSoulRequired())) {
+                    if (tickCount >= rite.getTicksRequired()) {
+                        if (getAspectsInArea().containsAll(rite.getAspectsRequired())) {
+                            if (getItemPowerInArea() >= rite.getItemPowerRequired()) {
+                                if (rite.isSoulSpecific()) {
+                                    if (getSoulsInArea().contains(rite.getSoulRequired())) {
+                                        if (world.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 15, false) != null) {
+                                            rite.doMagic(world, pos, world.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 20, false));
+                                            currentRite = "";
+                                            consumeConsumables();
+                                        }
+                                    }
+                                } else {
                                     if (world.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 15, false) != null) {
+                                        consumeConsumables();
                                         rite.doMagic(world, pos, world.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 20, false));
                                         currentRite = "";
-                                        consumeConsumables();
+
                                     }
                                 }
-                            } else {
-                                if (world.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 15, false) != null) {
-                                    consumeConsumables();
-                                    rite.doMagic(world, pos, world.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 20, false));
-                                    currentRite = "";
-
-                                }
                             }
+                        } else {
+                            doFailingShow();
+                            currentRite = "";
+                            tickCount = 0;
                         }
                     }
                 }
@@ -101,14 +110,13 @@ public class TileEntityAltar extends TileEntity implements ITickable {
         } else {
             tickCount = 0;
         }
-
-
     }
 
     public void recruitCultists(int spot) {
         List<EntityCultist> cultistsThere = getCultistsInArea();
-
+        System.out.println("Recruiting cultist_" + spot);
         List<EntityCultist> cultists = world.getEntities(EntityCultist.class, new com.google.common.base.Predicate<EntityCultist>() {
+
             @Override
             public boolean apply(@Nullable EntityCultist input) {
                 for (EntityPlayer player : getPlayersInArea()) {
@@ -127,12 +135,20 @@ public class TileEntityAltar extends TileEntity implements ITickable {
         });
         if (!cultists.isEmpty()) {
             System.out.println("Processing Cultist");
-            EntityCultist cultist = cultists.get(0);
+            EntityCultist cultist = null;
+            for (EntityCultist entity : cultists) {
+                if (RiteInit.getRiteForResLoc(currentRite).getAspectsRequired().contains(entity.getAspect())) {
+                    cultist = entity;
+                    break;
+                }
+            }
+            if (cultist == null) {
+                cultists.get(0);
+            }
 
-            cultist.attemptTeleport(    pos.getX() + (3 * (spot < 3 ? -1 : 1)), pos.getY(), pos.getZ() + (3 * (spot % 2 == 0 ? -1 : 1)));
-            System.out.println((pos.getX() + (3 * (spot < 3 ? -1 : 1)))  + " + " + (pos.getY()) + " + " + (pos.getZ() + (3 * (spot % 2 == 0 ? 1 : -1))));
-            cultist.setSitting(true);
-            cultist.getLookHelper().setLookPositionWithEntity(cultist, 45 + 90 * (spot - 1), 90);
+            cultist.attemptTeleport(pos.getX() + 0.5 + (3 * (spot < 3 ? -1 : 1)), pos.getY(), pos.getZ() + 0.5 + (3 * (spot % 2 == 0 ? -1 : 1)));
+            cultist.lookAt(pos.getX(), pos.getY(), pos.getZ());
+            //cultist.getLookHelper().setLookPositionWithEntity(cultist, 45 + 90 * (spot - 1), 90);
         }
 
     }
@@ -157,23 +173,49 @@ public class TileEntityAltar extends TileEntity implements ITickable {
     }
 
     public boolean drainPlayers(RiteBase rite) {
+        List<EntityCultist> cultists = getCultistsInArea().size() < 4 ? getCultistsInArea() : getCultistsInArea().subList(0, 4);
+        if (cultists.size() > 0) {
+            Iterator iterator = cultists.iterator();
+            while (iterator.hasNext()) {
+                EntityCultist cultist = (EntityCultist) iterator.next();
+                if (MaganUtil.drainMaganFromCultist(cultist, rite.getMaganDrainedPerTick(), 20, true)) {
+                    Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(world, cultist.posX + cultist.world.rand.nextFloat() * cultist.width
+                            * 2.0F - cultist.width,
+                            cultist.posY + 0.5D + cultist.world.rand.nextFloat()
+                                    * cultist.height,
+                            cultist.posZ + cultist.world.rand.nextFloat() * cultist.width
+                                    * 2.0F - cultist.width, 0, 0, 0, cultist.getAspect().getColor(), 3, 100, 0, true, true, true, pos.getX() + 0.5F, pos.getY() + 1, pos.getZ() + 0.5F));
+                    return true;
+                }
+            }
+        }
         List<EntityPlayer> targets = getPlayersInArea();
         if (targets.size() > 0) {
             Iterator iterator = targets.iterator();
             while (iterator.hasNext()) {
                 EntityPlayer player = (EntityPlayer) iterator.next();
                 if (MaganUtil.drainMaganFromPlayer(player, rite.getMaganDrainedPerTick(), 20, true)) {
+                    if (player.hasCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null)) {
+                        IPlayerCapabilities caps = player.getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null);
+
+                        Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(world, player.posX + player.world.rand.nextFloat() * player.width
+                                * 2.0F - player.width,
+                                player.posY + 0.5D + player.world.rand.nextFloat()
+                                        * player.height,
+                                player.posZ + player.world.rand.nextFloat() * player.width
+                                        * 2.0F - player.width, 0, 0, 0, SoulInit.getSoulFromId(caps.getSoulId()).getParticleColor(), 3, 100, 0, true, true, true, pos.getX() + 0.5F, pos.getY() + 1, pos.getZ() + 0.5F));
+                    }
                     return true;
                 }
             }
         }
+
         return false;
     }
 
     public int getItemPowerInArea() {
         int power = 0;
         List<EntityPlayer> targets = getPlayersInArea();
-
         if (targets.size() > 0) {
             Iterator iterator = targets.iterator();
             while (iterator.hasNext()) {
@@ -198,6 +240,18 @@ public class TileEntityAltar extends TileEntity implements ITickable {
             }
         }
 
+        List<EntityCultist> cultists = getCultistsInArea();
+        if (cultists.size() > 0) {
+            Iterator iterator = cultists.iterator();
+            while (iterator.hasNext()) {
+                EntityCultist cultist = (EntityCultist) iterator.next();
+                RiteBase rite = RiteInit.getRiteForResLoc(currentRite);
+                if (rite.getAspectsRequired().contains(cultist.getAspect())) {
+                    power += 4;
+                }
+            }
+        }
+
 
         return power;
     }
@@ -211,7 +265,7 @@ public class TileEntityAltar extends TileEntity implements ITickable {
     public List<EntityCultist> getCultistsInArea(){
         return world.getEntitiesWithinAABB(EntityCultist.class,
                 new AxisAlignedBB(pos.getX() - 10, pos.getY() - 4,
-                        pos.getZ() - 10, pos.getX() + 10, pos.getY() + 4, pos.getZ() + 10));
+                        pos.getZ() - 10, pos.getX() + 10, pos.getY() + 8, pos.getZ() + 10));
 
     }
 
@@ -229,6 +283,15 @@ public class TileEntityAltar extends TileEntity implements ITickable {
                 if (player.getHeldItemOffhand().getItem() instanceof IHasRiteUse) {
                     aspects.addAll(((IHasRiteUse) player.getHeldItemOffhand().getItem()).getAspects());
                 }
+            }
+        }
+
+        List<EntityCultist> cultists = getCultistsInArea();
+        if (cultists.size() > 0) {
+            Iterator iterator = cultists.iterator();
+            while (iterator.hasNext()) {
+                EntityCultist cultist = (EntityCultist) iterator.next();
+                aspects.add(cultist.getAspect());
             }
         }
 

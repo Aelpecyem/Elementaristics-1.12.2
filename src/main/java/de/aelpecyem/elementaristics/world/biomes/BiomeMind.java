@@ -36,4 +36,6 @@ public class BiomeMind extends Biome {
     public boolean getEnableSnow() {
         return false;
     }
+
+
 }

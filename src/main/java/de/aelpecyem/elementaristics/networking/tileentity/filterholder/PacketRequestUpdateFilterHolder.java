@@ -1,7 +1,7 @@
-package de.aelpecyem.elementaristics.networking.pedestallightning;
+package de.aelpecyem.elementaristics.networking.tileentity.filterholder;
 
-import de.aelpecyem.elementaristics.blocks.tileentity.TileEntityLightningPedestal;
-import de.aelpecyem.elementaristics.blocks.tileentity.TileEntityPurifier;
+import de.aelpecyem.elementaristics.blocks.tileentity.TileEntityFilterHolder;
+import de.aelpecyem.elementaristics.blocks.tileentity.TileEntityPedestal;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -10,20 +10,20 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
-public class PacketRequestUpdateLightningPedestal implements IMessage {
+public class PacketRequestUpdateFilterHolder implements IMessage {
     private BlockPos pos;
     private int dimension;
 
-    public PacketRequestUpdateLightningPedestal(BlockPos pos, int dimension) {
+    public PacketRequestUpdateFilterHolder(BlockPos pos, int dimension) {
         this.pos = pos;
         this.dimension = dimension;
     }
 
-    public PacketRequestUpdateLightningPedestal(TileEntityPurifier te) {
+    public PacketRequestUpdateFilterHolder(TileEntityPedestal te) {
         this(te.getPos(), te.getWorld().provider.getDimension());
     }
 
-    public PacketRequestUpdateLightningPedestal() {
+    public PacketRequestUpdateFilterHolder() {
     }
 
     @Override
@@ -38,14 +38,14 @@ public class PacketRequestUpdateLightningPedestal implements IMessage {
         dimension = buf.readInt();
     }
 
-    public static class Handler implements IMessageHandler<PacketRequestUpdateLightningPedestal, PacketUpdateLightningPedestal> {
+    public static class Handler implements IMessageHandler<PacketRequestUpdateFilterHolder, PacketUpdateFilterHolder> {
 
         @Override
-        public PacketUpdateLightningPedestal onMessage(PacketRequestUpdateLightningPedestal message, MessageContext ctx) {
+        public PacketUpdateFilterHolder onMessage(PacketRequestUpdateFilterHolder message, MessageContext ctx) {
             World world = FMLCommonHandler.instance().getMinecraftServerInstance().getWorld(message.dimension); //worldServerForDimension(message.dimension);
-            TileEntityLightningPedestal te = (TileEntityLightningPedestal) world.getTileEntity(message.pos);
+            TileEntityFilterHolder te = (TileEntityFilterHolder) world.getTileEntity(message.pos);
             if (te != null) {
-                return new PacketUpdateLightningPedestal(te);
+                return new PacketUpdateFilterHolder(te);
             } else {
                 return null;
             }

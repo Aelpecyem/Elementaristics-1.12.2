@@ -21,6 +21,7 @@ public class RiteInit {
     public static RiteSacrifice riteDrowningAstral = new RiteSacrifice("drowning_astral", Aspects.water, SoulInit.soulWater, DamageSource.DROWN);
     public static RiteSacrifice riteSpaceExilation = new RiteSacrifice("space_exilation", Aspects.aether, SoulInit.soulAether, DamageSource.OUT_OF_WORLD);
     public static RiteSacrifice riteCompression = new RiteSacrifice("soul_compression", Aspects.aether, DamageSource.MAGIC);
+    public static RiteRecruiting riteRecruiting = new RiteRecruiting();
     public static void registerRite(ResourceLocation name, RiteBase rite){
         RITES.put(name, rite);
     }
@@ -36,6 +37,7 @@ public class RiteInit {
         registerRite(riteKnowledge.name, RiteInit.riteKnowledge);
         registerRite(riteChaos.name, RiteInit.riteChaos);
         registerRite(riteForging.name, RiteInit.riteForging);
+        registerRite(riteRecruiting.name, RiteInit.riteRecruiting);
     }
     public static RiteBase getRiteForResLoc(String rite) {
         if (RITES.get(new ResourceLocation(rite)) != null) {

@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "elementaristics:incantation_light"
+    },
+    "title": {
+      "translate": "advancement.elementaristics.ascension_identification"
+    },
+    "description": {
+      "translate": "advancement.elementaristics.ascension_identification.desc"
+    }
+  },
+  "parent": "elementaristics:progress_ascension_2",
+  "criteria": {
+    "book": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "elementaristics:incantation_light"
+          }
+        ]
+      }
+    }
+  }
+}

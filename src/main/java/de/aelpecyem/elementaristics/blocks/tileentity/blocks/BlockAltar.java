@@ -1,5 +1,6 @@
 package de.aelpecyem.elementaristics.blocks.tileentity.blocks;
 
+import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.blocks.tileentity.BlockTileEntity;
 import de.aelpecyem.elementaristics.blocks.tileentity.TileEntityAltar;
 import de.aelpecyem.elementaristics.blocks.tileentity.TileEntityPurifier;
@@ -9,14 +10,17 @@ import de.aelpecyem.elementaristics.items.base.artifacts.rites.IncantationBase;
 import de.aelpecyem.elementaristics.items.base.thaumagral.ItemThaumagral;
 import de.aelpecyem.elementaristics.util.InventoryUtil;
 import de.aelpecyem.elementaristics.util.MaganUtil;
+import net.minecraft.block.BlockAir;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemFlintAndSteel;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
@@ -24,6 +28,8 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -39,10 +45,12 @@ public class BlockAltar extends BlockTileEntity<TileEntityAltar> {
         super(Material.ROCK, "altar");
 
     }
+
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
         return new AxisAlignedBB(0, 0, 0, 1, 0.75, 1);
     }
+
     @Override
     public BlockStateContainer createBlockState() {
         return new BlockStateContainer(this, FACING);
@@ -98,19 +106,48 @@ public class BlockAltar extends BlockTileEntity<TileEntityAltar> {
     }
 
 
-
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         TileEntityAltar tile = getTileEntity(worldIn, pos);
-        if (playerIn.getHeldItem(hand).getItem() instanceof IncantationBase){
-
+        boolean approved = true;
+        if (playerIn.isSneaking()) {
+            for (int x = pos.getX() - 4; x < pos.getX() + 4; x++) {
+                for (int y = pos.getY(); y < pos.getY() + 3; y++) {
+                    for (int z = pos.getZ() - 4; z < pos.getZ() + 4; z++) {
+                        if (!(worldIn.getBlockState(new BlockPos(x, y, z)).getBlock() instanceof BlockAir || (x == pos.getX() && z == pos.getZ() && y == pos.getY()))) {
+                            Elementaristics.proxy.generateGenericParticles(worldIn, new BlockPos(x + 0.5, y + 0.5, z + 0.5), 8073887, 6, 80, 0, false, false);
+                            approved = false;
+                        }
+                    }
+                }
+            }
+            if (approved) {
+                if (tile.getCultistsInArea().size() < 4) {
+                    for (int i = tile.getCultistsInArea().size() + 1; i < 5; i++) {
+                        tile.recruitCultists(i);
+                    }
+                }
+            } else {
+                if (worldIn.isRemote)
+                    playerIn.sendStatusMessage(new TextComponentString(TextFormatting.RED + I18n.format("message.call_cultist_error.name")), true);
+                return false;
+            }
+            return true;
+        }
+        if (playerIn.getHeldItem(hand).getItem() instanceof IncantationBase) {
             if (tile.currentRite.equals(((IncantationBase) playerIn.getHeldItem(hand).getItem()).getRite().name.toString())) {
                     tile.currentRite = "";
                     tile.tickCount = 0;
-            }else {
-                IncantationBase incantation = (IncantationBase) playerIn.getHeldItem(hand).getItem();
-                tile.currentRite = incantation.getRite().getName().toString();
-                tile.tickCount = 0;
+            } else {
+                if (tile.getCultistsInArea().size() < 5) {
+                    IncantationBase incantation = (IncantationBase) playerIn.getHeldItem(hand).getItem();
+                    tile.currentRite = incantation.getRite().getName().toString();
+                    tile.tickCount = 0;
+                } else {
+                    if (worldIn.isRemote) {
+                        playerIn.sendStatusMessage(new TextComponentString(TextFormatting.RED + I18n.format("message.rite_fail_cultists.name")), true);
+                    }
+                }
             }
         }
         return true;

@@ -1,4 +1,4 @@
-package de.aelpecyem.elementaristics.networking.pedestal;
+package de.aelpecyem.elementaristics.networking.tileentity.pedestal;
 
 import de.aelpecyem.elementaristics.blocks.tileentity.TileEntityPedestal;
 import io.netty.buffer.ByteBuf;

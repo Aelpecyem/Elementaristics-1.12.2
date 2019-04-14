@@ -1,7 +1,7 @@
 package de.aelpecyem.elementaristics.blocks.tileentity;
 
 import de.aelpecyem.elementaristics.networking.PacketHandler;
-import de.aelpecyem.elementaristics.networking.pedestal.PacketUpdatePedestal;
+import de.aelpecyem.elementaristics.networking.tileentity.pedestal.PacketUpdatePedestal;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;

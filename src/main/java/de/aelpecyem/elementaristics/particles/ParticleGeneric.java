@@ -5,6 +5,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -16,6 +17,8 @@ public class ParticleGeneric extends Particle {
 
     private final float desiredScale;
     private final boolean fade;
+    private final boolean followPosition;
+    private final float xTo, yTo, zTo;
 
     public ParticleGeneric(World world, double posX, double posY, double posZ, double motionX, double motionY, double motionZ, int color, float scale, int maxAge, float gravity, boolean collision, boolean fade, float alpha) {
         super(world, posX, posY, posZ);
@@ -29,6 +32,11 @@ public class ParticleGeneric extends Particle {
         this.motionY = motionY;
         this.motionZ = motionZ;
 
+        followPosition = false;
+        xTo = 0;
+        yTo = 0;
+        zTo = 0;
+
         float r = (((color >> 16) & 255) / 255F) * (1F - this.rand.nextFloat() * 0.25F);
         float g = (((color >> 8) & 255) / 255F) * (1F - this.rand.nextFloat() * 0.25F);
         float b = ((color & 255) / 255F) * (1F - this.rand.nextFloat() * 0.25F);
@@ -41,7 +49,7 @@ public class ParticleGeneric extends Particle {
         this.particleScale = this.desiredScale;
     }
 
-    public ParticleGeneric(World world, double posX, double posY, double posZ, double motionX, double motionY, double motionZ, int color, float scale, int maxAge, float gravity, boolean collision, boolean fade) {
+    public ParticleGeneric(World world, double posX, double posY, double posZ, double motionX, double motionY, double motionZ, int color, float scale, int maxAge, float gravity, boolean collision, boolean fade, boolean followPosition, float xTo, float yTo, float zTo) {
         super(world, posX, posY, posZ);
         this.desiredScale = scale;
         this.particleMaxAge = maxAge;
@@ -52,6 +60,10 @@ public class ParticleGeneric extends Particle {
         this.motionX = motionX;
         this.motionY = motionY;
         this.motionZ = motionZ;
+        this.followPosition = followPosition;
+        this.xTo = xTo;
+        this.yTo = yTo;
+        this.zTo = zTo;
 
         float r = (((color >> 16) & 255) / 255F) * (1F - this.rand.nextFloat() * 0.25F);
         float g = (((color >> 8) & 255) / 255F) * (1F - this.rand.nextFloat() * 0.25F);
@@ -67,6 +79,12 @@ public class ParticleGeneric extends Particle {
 
     @Override
     public void onUpdate() {
+        if (followPosition) {
+            motionX = (xTo - posX) / 20;
+            motionY = (yTo - posY) / 20;
+            motionZ = (zTo - posZ) / 20;
+        }
+
         this.prevPosX = this.posX;
         this.prevPosY = this.posY;
         this.prevPosZ = this.posZ;

@@ -1,6 +1,7 @@
 package de.aelpecyem.elementaristics.init;
 
 import de.aelpecyem.elementaristics.blocks.base.BlockBase;
+import de.aelpecyem.elementaristics.blocks.base.BlockSilverThread;
 import de.aelpecyem.elementaristics.blocks.base.crops.BlockCropBase;
 import de.aelpecyem.elementaristics.blocks.base.OreDroppingBase;
 import de.aelpecyem.elementaristics.blocks.base.crops.CropOpium;
@@ -46,6 +47,7 @@ public class ModBlocks {
     public static BlockAltar altar;
     public static BlockBase fabric_reason;
     public static BlockBase fabric_passion;
+    public static BlockSilverThread block_silver_thread;
 
     public static void init() {
         crop_opium = new CropOpium();
@@ -65,6 +67,7 @@ public class ModBlocks {
         altar = new BlockAltar();
         fabric_reason = new BlockBase(Material.ROCK, "fabric_reason");
         fabric_passion = new BlockBase(Material.ROCK, "fabric_passion");
+        block_silver_thread = new BlockSilverThread();
 
 
     }
