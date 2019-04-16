@@ -1,15 +1,17 @@
 package de.aelpecyem.elementaristics.init;
 
 import de.aelpecyem.elementaristics.items.base.*;
+import de.aelpecyem.elementaristics.items.base.artifacts.ItemSwordIcy;
 import de.aelpecyem.elementaristics.items.base.artifacts.rites.IncantationBase;
 import de.aelpecyem.elementaristics.items.base.artifacts.rites.ItemAspects;
-import de.aelpecyem.elementaristics.items.base.artifacts.rites.ItemHammerHeat;
+import de.aelpecyem.elementaristics.items.base.artifacts.ItemHammerHeat;
 import de.aelpecyem.elementaristics.items.base.artifacts.ItemSoulChanger;
 import de.aelpecyem.elementaristics.items.base.artifacts.ItemSoulMirror;
 import de.aelpecyem.elementaristics.items.base.burnable.ItemHerbBundle;
 import de.aelpecyem.elementaristics.items.base.burnable.ItemOpiumTincture;
+import de.aelpecyem.elementaristics.items.base.consumable.ItemDrinkBase;
+import de.aelpecyem.elementaristics.items.base.consumable.ItemTinctureArcane;
 import de.aelpecyem.elementaristics.items.base.thaumagral.*;
-import de.aelpecyem.elementaristics.misc.elements.Aspect;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;
 import de.aelpecyem.elementaristics.util.IHasModel;
 import net.minecraft.init.Blocks;
@@ -29,6 +31,7 @@ public class ModItems {
     public static ItemBase hydrogen_bubble = new ItemBase("bubble_hydrogen");
     public static ItemBase bundle_herbs;
     public static ItemBase opium_tincture;
+    public static ItemDrinkBase tincture_arcane;
 
     public static ItemBase petal_opium;
     public static ItemSeedBase seed_herb;
@@ -52,7 +55,8 @@ public class ModItems {
     public static ItemSoulChanger soul_changer;
     public static ItemSoulMirror soul_mirror;
 
-    public static ItemPickaxe hammer_heat; //might make that an item with nice functions
+    public static ItemPickaxe hammer_heat;
+    public static ItemSword sword_icy;
     public static ItemThaumagral thaumagral_iron;
 
     public static IncantationBase incantation_chaos;
@@ -104,6 +108,7 @@ public class ModItems {
         petal_opium = new ItemBase("petal_opium");
         seed_herb = new ItemSeedBase("seeds_opium", ModBlocks.crop_opium, Blocks.FARMLAND);
         opium_tincture = new ItemOpiumTincture();
+        tincture_arcane = new ItemTinctureArcane();
 
         vibrant_quartz = new ItemBase("quartz_vibrant");
         chaotic_matter = new ItemBase("matter_chaotic");
@@ -170,6 +175,7 @@ public class ModItems {
         incantation_forging = new IncantationBase("incantation_forging", RiteInit.riteForging, Aspects.fire, 4);
         incantation_recruiting = new IncantationBase("incantation_recruiting", RiteInit.riteRecruiting, Aspects.soul, 2);
         hammer_heat = new ItemHammerHeat();
+        sword_icy = new ItemSwordIcy();
         soul_mirror = new ItemSoulMirror();
     }
 

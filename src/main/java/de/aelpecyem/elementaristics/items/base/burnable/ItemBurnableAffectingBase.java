@@ -29,7 +29,8 @@ public class ItemBurnableAffectingBase extends ItemBase {
                 Iterator var3 = players.iterator();
                 while (var3.hasNext()) {
                     EntityPlayer e = (EntityPlayer) var3.next();
-                    affect(entityItem, e);
+                    if (!entityItem.world.isRemote)
+                        affect(entityItem, e);
                 }
             }
             entityItem.setDead();

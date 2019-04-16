@@ -41,6 +41,11 @@ public class EntitySilverThread extends EntityMob {
     }
 
     @Override
+    public float getBrightness() {
+        return 1F;
+    }
+
+    @Override
     public boolean isNonBoss() {
         return false;
     }

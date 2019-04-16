@@ -1,0 +1,40 @@
+{
+  "name": "The Mind",
+  "icon": "elementaristics:block_silver_thread",
+  "category": "soulogy",
+  "advancement": "elementaristics:progress_ascension_identification",
+  "pages": [
+    {
+      "type": "text",
+      "text": "$(marked)The Mind$() is one of the more unusual places for a cultist to visit, yet it is indeed very important. $(br)It is the place where one must fight the $(marked)Silver Thread$(), an entity of the soul which sets boundaries (and sanity etc. we all know that)."
+    },
+    {
+      "type": "text",
+      "text": "In order to enter the Mind, one must first consume $(l:alchemy/entry_laudanum)Magic Laudanum$() and then sleep in a bed.$(br)Then, if the player is secured with at least one $(l:lessons/lesson_recruiting)Cultist$(), they will find theirselves in the Mind."
+    },
+    {
+      "type": "image",
+      "images": [
+        "elementaristics:textures/images/ground.png",
+        "elementaristics:textures/images/fly.png"
+      ],
+      "border": true,
+      "text": "$(l)The Mind$()"
+    },
+    {
+      "type": "text",
+      "text": "The Player will find theirselves between two layers, from which one is made out of $(item)Fabric of Passion$() (above) while the other one is made out of $(item)Fabric of Reason$() (below), though more Fabric of Passion might be found underneath it. $(br)Additionally, another layer of Passion can be found over the current one."
+    },
+    {
+      "type": "image",
+      "images": [
+      ],
+      "text": "Looking around in this place, one might sooner or later find an anomaly."
+    },
+    {
+      "type": "entity",
+      "entity": "elementaristics:silver_thread",
+      "offset": 0.1
+    }
+  ]
+}

@@ -11,5 +11,6 @@ import javax.annotation.Resource;
 
 public class ModMaterials {
     public static final ItemArmor.ArmorMaterial MATERIAL_ROBES =  EnumHelper.addArmorMaterial("robes_cultist", new ResourceLocation(Elementaristics.MODID, "material_robes").toString(), 16, new int[]{2, 4, 3, 1}, 20, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0);
-    public static final Item.ToolMaterial MATERIAL_HAMMER = EnumHelper.addToolMaterial("hammer_heat", 2, 600, 3, 5, 20);
+    public static final Item.ToolMaterial MATERIAL_HAMMER = EnumHelper.addToolMaterial("hammer_heat", 2, 800, 3, 5, 20);
+    public static final Item.ToolMaterial MATERIAL_SWORD_ICE = EnumHelper.addToolMaterial("sword_ice", 2, 900, 3, 2, 20);
 }

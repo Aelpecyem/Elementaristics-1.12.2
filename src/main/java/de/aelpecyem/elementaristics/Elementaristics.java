@@ -102,7 +102,7 @@ public final class Elementaristics {
         if (Loader.isModLoaded("thaumcraft")) {
             ThaumcraftCompat.init();
         }
-        // GameRegistry.registerWorldGenerator(new WorldGenAnomaly(), 10); todo gonna continue with this later on
+        GameRegistry.registerWorldGenerator(new WorldGenAnomaly(), 10);// todo gonna continue with this later on
         MinecraftForge.EVENT_BUS.register(new PotionInit());
         MinecraftForge.EVENT_BUS.register(new HUDRenderHandler());
         MinecraftForge.EVENT_BUS.register(new CapabilityHandler());
@@ -112,7 +112,7 @@ public final class Elementaristics {
         MinecraftForge.EVENT_BUS.register(new ClientTickHandler());
         InitRecipes.init();
         RiteInit.init();
-
+        proxy.registerKeyBinds();
         NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
 
 

@@ -8,6 +8,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.renderer.Vector3d;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
 import net.minecraft.util.math.BlockPos;
@@ -17,12 +18,13 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.client.model.ModelLoaderRegistry;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
+import org.lwjgl.input.Keyboard;
 
 import java.util.Vector;
 import java.util.function.IntFunction;
 
 public class ClientProxy extends CommonProxy {
-
+    public static KeyBinding[] keyBindings;
 
     @Override
     public void registerRenderers() {

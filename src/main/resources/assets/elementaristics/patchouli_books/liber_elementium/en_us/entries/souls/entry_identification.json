@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "My studies have shown that there are apparently different soul types. I can identify my own soul type with a the ritual called $(marked)Enlightenment's Sighing$(). "
+      "text": "My studies have shown that there are apparently different soul types. $(br)I can identify my own soul type with the ritual called $(marked)Enlightenment's Sighing$(). "
     },
     {
       "type": "concentrator_recipe",

@@ -1,29 +1,23 @@
-package de.aelpecyem.elementaristics.items.base.artifacts.rites;
+package de.aelpecyem.elementaristics.items.base.artifacts;
 
 
-import com.google.common.collect.Multimap;
 import de.aelpecyem.elementaristics.Elementaristics;
-import de.aelpecyem.elementaristics.ElementaristicsTab;
 import de.aelpecyem.elementaristics.init.ModItems;
 import de.aelpecyem.elementaristics.init.ModMaterials;
+import de.aelpecyem.elementaristics.items.base.artifacts.rites.IHasRiteUse;
 import de.aelpecyem.elementaristics.misc.elements.Aspect;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;
-import de.aelpecyem.elementaristics.recipe.ForgeRecipes;
 import de.aelpecyem.elementaristics.util.IHasModel;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemSword;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -62,8 +56,17 @@ public class ItemHammerHeat extends ItemPickaxe implements IHasRiteUse, IHasMode
     }
 
     @Override
+    public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+        worldIn.setBlockState(pos.add(0, 1, 0), Blocks.FIRE.getDefaultState(), 1);
+        worldIn.playSound(null, pos.add(0.5, 1, 0.5), SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.AMBIENT, 1, 1);
+        Elementaristics.proxy.generateGenericParticles(worldIn, pos.add(0.5, 1, 0.5), 15159040, 2, 160, 0, true, true);
+        player.getHeldItem(hand).damageItem(1, player);
+        return EnumActionResult.SUCCESS;
+    }
+
+    @Override
     public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
-        target.setFire(2);
+        target.setFire(5);
         return super.hitEntity(stack, target, attacker);
     }
 

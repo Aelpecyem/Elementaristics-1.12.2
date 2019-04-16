@@ -29,6 +29,10 @@ public class CommonProxy {
     public void generateGenericParticles(ParticleGeneric particleGeneric) {
     }
 
+    public void registerKeyBinds() {
+
+    }
+
     public void generateGenericParticles(World world, BlockPos pos, int color, float scale, int maxAge, float gravity, boolean collision, boolean fade) {
     }
 

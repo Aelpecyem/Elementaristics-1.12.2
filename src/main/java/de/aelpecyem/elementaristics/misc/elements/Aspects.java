@@ -44,7 +44,7 @@ public class Aspects {
         air = new Aspect("air", 1026524); //0
         earth = new Aspect("earth",23296); //1
         water = new Aspect("water",13275);//2
-        fire = new Aspect("fire",15728640);//3
+        fire = new Aspect("fire", 15159040);//3
         aether = new Aspect("aether", 9961727);//4
 
         magan = new Aspect("magan", 14117632);//5

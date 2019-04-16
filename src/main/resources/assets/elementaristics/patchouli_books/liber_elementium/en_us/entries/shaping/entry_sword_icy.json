@@ -1,0 +1,17 @@
+{
+  "name": "The Chilling Blade",
+  "icon": "elementaristics:sword_icy",
+  "category": "shaping",
+  "advancement": "elementaristics:progress_forging",
+  "pages": [
+    {
+      "type": "text",
+      "text": "The $(item)Chilling Bladet$() is stronger artifact of Ice. Besides supplying rites with the Ice aspect, it is able to attack enemies with the power of Ice, slowing them temporarily down. In addition to that, an initiate might use the blade to perform an attack that'll create a cloud of coldness, slowing down and damaging enemies in it. This will consume Magan."
+    },
+    {
+      "type": "elementaristics:forging_recipe",
+      "recipe": "elementaristics:sword_icy",
+      "text": "$(o)The blade tastes like pain :($()"
+    }
+  ]
+}

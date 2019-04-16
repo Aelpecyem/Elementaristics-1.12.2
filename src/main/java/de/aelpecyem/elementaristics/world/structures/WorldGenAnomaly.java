@@ -22,8 +22,10 @@ public class WorldGenAnomaly implements IWorldGenerator {
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
         if (random.nextInt(1000) == 1) {
             if (world.getBiome(new BlockPos(chunkX * 16, 35, chunkZ * 16)) == BiomeInit.MIND) {
-                final BlockPos basePos = new BlockPos(chunkX * 16, 34, chunkZ * 16);
-                final PlacementSettings settings = new PlacementSettings().setRotation(Rotation.NONE);
+                final BlockPos basePos = new BlockPos(chunkX * 16 + 8, 35, chunkZ * 16 + 8);
+
+                final PlacementSettings settings = new PlacementSettings().setRotation(world.rand.nextBoolean() ? world.rand.nextBoolean() ? Rotation.NONE : Rotation.CLOCKWISE_90 :
+                        world.rand.nextBoolean() ? Rotation.COUNTERCLOCKWISE_90 : Rotation.CLOCKWISE_180);
                 final Template template = world.getSaveHandler().getStructureTemplateManager().getTemplate(world.getMinecraftServer(), ANOMALY);
 
                 template.addBlocksToWorld(world, basePos, settings);

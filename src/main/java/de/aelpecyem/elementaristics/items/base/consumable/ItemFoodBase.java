@@ -1,4 +1,4 @@
-package de.aelpecyem.elementaristics.items.base;
+package de.aelpecyem.elementaristics.items.base.consumable;
 
 import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.init.ModItems;

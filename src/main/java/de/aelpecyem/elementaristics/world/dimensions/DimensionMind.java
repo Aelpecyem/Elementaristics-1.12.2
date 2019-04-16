@@ -21,7 +21,6 @@ public class DimensionMind extends WorldProvider{
     }
     @Override
     public void init(){
-
         this.biomeProvider = new BiomeProviderSingle(BiomeInit.MIND);
     }
 
@@ -52,13 +51,8 @@ public class DimensionMind extends WorldProvider{
     public boolean isDaytime() {
         return true;
     }
-/**
-     * True if the player can respawn in this dimension (true = overworld, false = nether).
-     */
 
-    /**
-     * Returns true if the given X,Z coordinate should show environmental fog.
-     */
+
     @SideOnly(Side.CLIENT)
     public boolean doesXZShowFog(int x, int z)
     {
@@ -80,6 +74,7 @@ public class DimensionMind extends WorldProvider{
         };
     }
 
+
     @Override
     public long getWorldTime() {
         return 1000;
@@ -91,18 +86,12 @@ public class DimensionMind extends WorldProvider{
     }
 
     @Override
-    public float getStarBrightness(float par1) {
-        return 1;
+    public boolean shouldClientCheckLighting() {
+        return false;
     }
 
-    @Override
-    public float getSunBrightness(float par1) {
-        return 1;
-    }
-
-    @Override
-    public float getSunBrightnessFactor(float par1) {
-        return 1;
+    public float calculateCelestialAngle(long worldTime, float partialTicks) {
+        return 0.5F;
     }
 
     @Override
@@ -110,5 +99,12 @@ public class DimensionMind extends WorldProvider{
         return false;
     }
 
+    protected void generateLightBrightnessTable() {
+        float f = 0.1F;
 
+        for (int i = 0; i <= 15; ++i) {
+            float f1 = 1.0F - (float) i / 15.0F;
+            this.lightBrightnessTable[i] = (1.0F - f1) / (f1 * 3.0F + 1.0F) * 0.9F + 0.4F;
+        }
+    }
 }

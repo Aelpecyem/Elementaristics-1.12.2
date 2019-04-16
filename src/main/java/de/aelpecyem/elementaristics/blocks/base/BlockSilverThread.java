@@ -11,6 +11,7 @@ import de.aelpecyem.elementaristics.util.IHasModel;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -41,11 +42,14 @@ public class BlockSilverThread extends BlockBase {
                 playerIn.changeDimension(playerIn.getSpawnDimension(), new ITeleporter() {
                     @Override
                     public void placeEntity(World world, Entity entity, float yaw) {
-                        if (playerIn.bedLocation != null) {
-                            entity.setPosition(playerIn.bedLocation.getX(), playerIn.bedLocation.getY(), playerIn.bedLocation.getZ());
+                        if (playerIn.getBedLocation() != null) {
+                            System.out.println("TPing to bed");
+                            entity.setPosition(playerIn.getBedLocation().getX(), playerIn.getBedLocation().getY(), playerIn.getBedLocation().getZ());
                         } else {
-                            for (int i = 0; i < 250; i++)
+                            for (int i = 0; i < 250; i++) {
+                                System.out.println("TPing to a location");
                                 playerIn.attemptTeleport(playerIn.posX, 250 - i, playerIn.posZ);
+                            }
                         }
                     }
                 });
@@ -55,11 +59,15 @@ public class BlockSilverThread extends BlockBase {
                     return input.dimension == Config.mindDimensionId;
                 }
             }).size() < 1) {
-                EntitySilverThread boss = new EntitySilverThread(worldIn);
-                boss.setPosition(pos.getX() + 3 * (worldIn.rand.nextBoolean() ? -1 : 1), pos.getY(), pos.getZ() + 3 * (worldIn.rand.nextBoolean() ? -1 : 1));
-                worldIn.spawnEntity(boss);
+                if (!worldIn.isRemote) {
+                    EntitySilverThread boss = new EntitySilverThread(worldIn);
+                    boss.setNoGravity(false);
+                    boss.setPosition(pos.getX() + 20 * (worldIn.rand.nextBoolean() ? -1 : 1), pos.getY(), pos.getZ() + 20 * (worldIn.rand.nextBoolean() ? -1 : 1));
+                    worldIn.spawnEntity(boss);
+                }
             } else {
-                playerIn.sendStatusMessage(new TextComponentString("H"), true);
+                if (worldIn.isRemote)
+                    playerIn.sendStatusMessage(new TextComponentString(I18n.format("message.interact_silver_thread.error_fight")), true);
             }
         }
         return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);

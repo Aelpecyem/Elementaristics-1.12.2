@@ -10,8 +10,8 @@ import net.minecraftforge.common.MinecraftForge;
 
 public class PotionIntoxicated extends PotionBase {
     public PotionIntoxicated() {
-        super("intoxicated", true, 8636302, 1);
-        MinecraftForge.EVENT_BUS.register(this);
+        super("intoxicated", false, 8636302, 1);
+        //  MinecraftForge.EVENT_BUS.register(this);
     }
 
     @Override
@@ -28,14 +28,18 @@ public class PotionIntoxicated extends PotionBase {
         Elementaristics.proxy.generateGenericParticles(entityLivingBaseIn, 16776960, 0.5F, 5, 0, false, true);
         Elementaristics.proxy.generateGenericParticles(entityLivingBaseIn, 11272428, 0.5F, 5, 0, false, true);
         Elementaristics.proxy.generateGenericParticles(entityLivingBaseIn, 16777215, 1F, 10, 0, false, true);
-        entityLivingBaseIn.addPotionEffect(new PotionEffect(Potion.getPotionById(15), 120, amplifier * 2, false, false));
-        entityLivingBaseIn.addPotionEffect(new PotionEffect(Potion.getPotionById(9), 120, amplifier * 2, false, false));
-        entityLivingBaseIn.addPotionEffect(new PotionEffect(Potion.getPotionById(2), 120, amplifier * 2, false, false));
-        entityLivingBaseIn.addPotionEffect(new PotionEffect(Potion.getPotionById(4), 120, amplifier, false, false));
-        entityLivingBaseIn.addPotionEffect(new PotionEffect(Potion.getPotionById(18), 120, amplifier, false, false));
+        if (!entityLivingBaseIn.world.isRemote) {
+            entityLivingBaseIn.addPotionEffect(new PotionEffect(Potion.getPotionById(15), 120, amplifier, false, false));
+            entityLivingBaseIn.addPotionEffect(new PotionEffect(Potion.getPotionById(9), 120, amplifier, false, false));
+            entityLivingBaseIn.addPotionEffect(new PotionEffect(Potion.getPotionById(2), 120, amplifier, false, false));
+            entityLivingBaseIn.addPotionEffect(new PotionEffect(Potion.getPotionById(4), 120, amplifier, false, false));
+            entityLivingBaseIn.addPotionEffect(new PotionEffect(Potion.getPotionById(18), 120, amplifier, false, false));
+        }
         if (entityLivingBaseIn.hasCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null)){
             IPlayerCapabilities cap = entityLivingBaseIn.getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null);
-            cap.fillMagan(0.2F);
+            if (cap.getTimeStunted() < 1) {
+                cap.fillMagan(0.2F);
+            }
         }
 
         super.performEffect(entityLivingBaseIn, amplifier);

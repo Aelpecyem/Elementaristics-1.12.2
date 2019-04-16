@@ -23,6 +23,7 @@ public class PotionBase extends Potion {
         super(isBadEffectIn, color);
         setRegistryName(new ResourceLocation(Elementaristics.MODID, name));
         setPotionName("elementaristics.potion." + name);
+        MinecraftForge.EVENT_BUS.register(this);
         this.iconIndex = iconIndex;
     }
 
@@ -32,6 +33,11 @@ public class PotionBase extends Potion {
 
     public boolean hasEffect(EntityLivingBase entity, Potion potion) {
         return entity.getActivePotionEffect(potion) != null;
+    }
+
+    @Override
+    public boolean isReady(int duration, int amplifier) {
+        return true;
     }
 
     @Override

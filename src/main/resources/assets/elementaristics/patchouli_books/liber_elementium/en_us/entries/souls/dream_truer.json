@@ -6,12 +6,12 @@
   "pages": [
     {
       "type": "text",
-      "text": "I had a dream. Or rather, I still have a dream. A dream of a truer self. What if there once was a truth in my soul? A truth that was lost? What if I can find it again?"
+      "text": "Today, I dreamt of dancing. I dreamt of two dancers, dancing with each other. $(br)One was Me, the other one was What I am. $(br)What I am guided. What I am guided horribly. I adapted to most mistakes, but I could see the potential beauty of the dance. I could see who should guide this dance."
     },
     {
       "type": "crafting",
       "recipe": "elementaristics:dream_truer_self",
-      "text": "Can one kill a lie? And if so, can one build a truth? Can one let this truth be recognized, even by oneself? Even by gods?"
+      "text": "$(o)Like the finest poetry on concrete$()"
     }
   ]
 }
