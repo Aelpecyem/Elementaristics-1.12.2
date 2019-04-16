@@ -1,6 +1,9 @@
 package de.aelpecyem.elementaristics.entity;
 
+import com.google.common.base.Predicate;
 import de.aelpecyem.elementaristics.Elementaristics;
+import de.aelpecyem.elementaristics.capability.IPlayerCapabilities;
+import de.aelpecyem.elementaristics.capability.PlayerCapProvider;
 import de.aelpecyem.elementaristics.items.base.artifacts.ItemSoulMirror;
 import de.aelpecyem.elementaristics.misc.elements.Aspect;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;
@@ -137,6 +140,15 @@ public class EntityCultist extends EntityTameable {
         super.onLivingUpdate();
     }
 
+    @Override
+    public void onDeath(DamageSource cause) {
+        if (getOwner() != null && getOwner().hasCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null)) {
+            IPlayerCapabilities cap = getOwner().getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null);
+            cap.setCultistCount(cap.getCultistCount() - 1);
+        }
+        super.onDeath(cause);
+    }
+
     public void lookAt(double px, double py, double pz) {
         double directionX = posX - px;
         double directionY = posY - py;
@@ -174,29 +186,39 @@ public class EntityCultist extends EntityTameable {
     @Override
     public boolean processInteract(EntityPlayer player, EnumHand hand) {
         if (hand == EnumHand.MAIN_HAND && isOwner(player)) {
-            if (player.getHeldItemMainhand().getItem() instanceof ItemSoulMirror) {
-                if (world.isRemote) {
-                    player.sendMessage(new TextComponentString(I18n.format("message.cultist_stats.name")));
-                    player.sendMessage(new TextComponentString(TextFormatting.GOLD + I18n.format("message.cultist_aspect.name") + " " + getAspect().getLocalizedName()));
-                    player.sendMessage(new TextComponentString(TextFormatting.GOLD + I18n.format("message.cultist_magan.name") + " " + getMagan()));
+            if (isOwner(player)) {
+                if (player.getHeldItemMainhand().getItem() instanceof ItemSoulMirror) {
+                    if (world.isRemote) {
+                        player.sendMessage(new TextComponentString(I18n.format("message.cultist_stats.name")));
+                        player.sendMessage(new TextComponentString(TextFormatting.GOLD + I18n.format("message.cultist_aspect.name") + " " + getAspect().getLocalizedName()));
+                        player.sendMessage(new TextComponentString(TextFormatting.GOLD + I18n.format("message.cultist_magan.name") + " " + getMagan()));
+                    }
+                    return true;
                 }
-                return true;
-            }
-            if (!isSitting()) {
-                if (!world.isRemote)
-                    setSitting(true);
-                if (world.isRemote)
-                    player.sendStatusMessage(new TextComponentString(I18n.format("message.cultist.sit")), true);
+                if (!isSitting()) {
+                    if (!world.isRemote)
+                        setSitting(true);
+                    if (world.isRemote)
+                        player.sendStatusMessage(new TextComponentString(I18n.format("message.cultist.sit")), true);
+                } else {
+                    if (!world.isRemote)
+                        setSitting(false);
+                    if (world.isRemote)
+                        player.sendStatusMessage(new TextComponentString(I18n.format("message.cultist.follow")), true);
+                }
             } else {
-                if (!world.isRemote)
-                    setSitting(false);
                 if (world.isRemote)
-                    player.sendStatusMessage(new TextComponentString(I18n.format("message.cultist.follow")), true);
-
+                    player.sendStatusMessage(new TextComponentString(I18n.format("message.cultist.deny")), true);
             }
-        } else if (!isOwner(player)) {
-            if (world.isRemote)
-                player.sendStatusMessage(new TextComponentString(I18n.format("message.cultist.deny")), true);
+            if (player.hasCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null)) {
+                IPlayerCapabilities cap = player.getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null);
+                cap.setCultistCount(world.getEntities(EntityCultist.class, new Predicate<EntityCultist>() {
+                    @Override
+                    public boolean apply(@Nullable EntityCultist input) {
+                        return input.isOwner(player);
+                    }
+                }).size());
+            }
         }
         return super.processInteract(player, hand);
     }

@@ -42,7 +42,7 @@ public class ItemHerbBundle extends ItemBurnableAffectingBase {
             }
         }
         player.addPotionEffect(new PotionEffect(PotionInit.potionIntoxicated, 3500, 1, true, true));
-        if (!player.world.isRemote)
+        if (player.world.isRemote)
             player.sendStatusMessage(new TextComponentString(I18n.format("message.drugs")), false);
 
         super.affect(itemIn, player);

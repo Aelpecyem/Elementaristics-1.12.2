@@ -1,16 +1,23 @@
 package de.aelpecyem.elementaristics.events;
 
+import com.google.common.base.Predicate;
 import de.aelpecyem.elementaristics.capability.IPlayerCapabilities;
 import de.aelpecyem.elementaristics.capability.PlayerCapProvider;
+import de.aelpecyem.elementaristics.config.Config;
+import de.aelpecyem.elementaristics.entity.EntityCultist;
 import de.aelpecyem.elementaristics.init.SoulInit;
 import de.aelpecyem.elementaristics.misc.potions.PotionInit;
 import net.minecraft.block.BlockBed;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraft.world.World;
 import net.minecraftforge.client.event.RenderPlayerEvent;
+import net.minecraftforge.common.util.ITeleporter;
 import net.minecraftforge.event.entity.player.PlayerSleepInBedEvent;
 import net.minecraftforge.event.entity.player.PlayerWakeUpEvent;
 import net.minecraftforge.event.entity.player.SleepingLocationCheckEvent;
@@ -26,6 +33,7 @@ import thaumcraft.api.aura.AuraHelper;
 import thaumcraft.common.entities.EntityFluxRift;
 import vazkii.patchouli.api.PatchouliAPI;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -72,7 +80,6 @@ public class EventHandler {
             IPlayerCapabilities cap = event.getEntityPlayer().getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null);
             if (cap.getPlayerAscensionStage() > 0) {
                 if (!event.getEntityPlayer().isPlayerFullyAsleep()) {
-                    System.out.println(event.getEntityPlayer().getSleepTimer());
                     if (event.getEntityPlayer().getSleepTimer() > 19 && event.getEntityPlayer().getSleepTimer() % 20 == 0) {
                         if (event.getEntityPlayer().getFoodStats().getFoodLevel() != 0)
                             event.getEntityPlayer().getFoodStats().setFoodLevel(event.getEntityPlayer().getFoodStats().getFoodLevel() - 1);
@@ -99,6 +106,23 @@ public class EventHandler {
                 }
             }
         }
+        if (event.getEntityPlayer().getActivePotionEffects().contains(event.getEntityPlayer().getActivePotionEffect(PotionInit.potionTrance)) && event.getEntityPlayer().isPlayerFullyAsleep()) {
+            if (event.getEntityPlayer().hasCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null)) {
+                IPlayerCapabilities cap = event.getEntityPlayer().getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null);
+                if (cap.getCultistCount() > 0) {
+                    if (event.getEntityPlayer().dimension != Config.mindDimensionId) {
+                        if (!event.getEntityPlayer().world.isRemote) {
+                            event.getEntityPlayer().changeDimension(Config.mindDimensionId, new ITeleporter() {
+                                @Override
+                                public void placeEntity(World world, Entity entity, float yaw) {
+                                    entity.setPosition(entity.posX, 36, entity.posZ);
+                                }
+                            });
+                        }
+                    }
+                }
+            }
+        }
     }
 
     public void performMoodAnalysis(EntityPlayer player) {
@@ -107,6 +131,7 @@ public class EventHandler {
             player.addPotionEffect(new PotionEffect(potion, 16000, player.getActivePotionEffect(PotionInit.potionIntoxicated).getAmplifier(), true, false));
             player.removePotionEffect(PotionInit.potionIntoxicated);
         }
+
     }
 
    /* @SubscribeEvent

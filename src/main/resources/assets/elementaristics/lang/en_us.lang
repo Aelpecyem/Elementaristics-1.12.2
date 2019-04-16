@@ -293,11 +293,13 @@ message.ascension_stage.name=Your ascension stage:
 message.cultist_count.name=Your cultist count:
 
 message.cultist_stats.name=Viewing stats for Cultist:
-message.cultists_aspect.name=Cultist's aspect:
+message.cultist_aspect.name=Cultist's aspect:
 message.cultist_magan.name=Current Magan:
 
 message.rite_fail_cultists.name=There's too many artificial souls here
 message.call_cultist_error.name=There must be more space for the cultists to appear
+message.no_cultists_secured.name=Visiting the Mind without having any loyal Cultists sounds like a foolish idea
+
 #Souls
 soul.soul_magan.name=§6Magan Soul
 soul.soul_water.name=§1Water Soul

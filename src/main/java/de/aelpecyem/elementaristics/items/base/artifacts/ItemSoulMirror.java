@@ -37,60 +37,39 @@ ItemSoulMirror extends ItemAspects {
         tooltip.add(I18n.format("tooltip.mirror_soul.name"));
         super.addInformation(stack, worldIn, tooltip, flagIn);
     }
+
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {//give stats
-        if (playerIn.dimension != Config.mindDimensionId) {
-            if (playerIn.getActivePotionEffects().contains(playerIn.getActivePotionEffect(PotionInit.potionTrance))){
-                playerIn.changeDimension(Config.mindDimensionId, new ITeleporter() {
-                    @Override
-                    public void placeEntity(World world, Entity entity, float yaw) {
-                        entity.setPosition(entity.posX, 36, entity.posZ);
+    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {//give statselse {
+        if (playerIn.hasCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null)) {
+            IPlayerCapabilities cap = playerIn.getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null);
+            SoulInit.updateSoulInformation(playerIn, cap);
+            if (worldIn.isRemote) {
+                if (playerIn.isSneaking()) {
+
+                    playerIn.sendMessage(new TextComponentString(I18n.format("message.view_stats.name") + " " + playerIn.getName()));
+
+
+                    if (cap.knowsSoul()) {
+                        playerIn.sendMessage(new TextComponentString(ChatFormatting.GOLD + I18n.format("message.soul_creative.name") + " "
+                                + SoulInit.getSoulFromId(cap.getSoulId()).getLocalizedName()));
+                    } else {
+                        playerIn.sendMessage(new TextComponentString(ChatFormatting.GOLD + I18n.format("message.soul_unknown.name")));
                     }
-                });
-            } else {
-                if (playerIn.hasCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null)) {
-                    IPlayerCapabilities cap = playerIn.getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null);
-                    SoulInit.updateSoulInformation(playerIn, cap);
-                    if (worldIn.isRemote){
-                        if (playerIn.isSneaking()) {
+                    playerIn.sendMessage(new TextComponentString(ChatFormatting.GOLD + I18n.format("message.max_magan.name") + " "
+                            + Math.ceil(cap.getMaxMagan())));
 
-                        playerIn.sendMessage(new TextComponentString(I18n.format("message.view_stats.name") + " " + playerIn.getName()));
+                    playerIn.sendMessage(new TextComponentString(ChatFormatting.GOLD + I18n.format("message.regen_per_tick.name") + " "
+                            + cap.getMaganRegenPerTick()));
 
+                    playerIn.sendMessage(new TextComponentString(ChatFormatting.GOLD + I18n.format("message.ascension_stage.name") + " " + cap.getPlayerAscensionStage()));
 
-                        if (cap.knowsSoul()) {
-                            playerIn.sendMessage(new TextComponentString(ChatFormatting.GOLD +I18n.format("message.soul_creative.name") + " "
-                                    + SoulInit.getSoulFromId(cap.getSoulId()).getLocalizedName()));
-                        } else {
-                            playerIn.sendMessage(new TextComponentString(ChatFormatting.GOLD +I18n.format("message.soul_unknown.name")));
-                        }
-                        playerIn.sendMessage(new TextComponentString(ChatFormatting.GOLD +I18n.format("message.max_magan.name") + " "
-                                + Math.ceil(cap.getMaxMagan())));
-
-                        playerIn.sendMessage(new TextComponentString(ChatFormatting.GOLD +I18n.format("message.regen_per_tick.name") + " "
-                                + cap.getMaganRegenPerTick()));
-
-                        playerIn.sendMessage(new TextComponentString(ChatFormatting.GOLD +I18n.format("message.ascension_stage.name") + " " + cap.getPlayerAscensionStage()));
-
-                            playerIn.sendMessage(new TextComponentString(ChatFormatting.GOLD + I18n.format("message.cultist_count.name") + " " + cap.getCultistCount()));
-                    }
-                    playerIn.sendMessage(new TextComponentString(ChatFormatting.BLUE +I18n.format("message.current_magan.name") + " "
-                            + Math.ceil(cap.getMagan())));
-
-
-                }}
-            }
-        } else {
-            playerIn.changeDimension(playerIn.getSpawnDimension(), new ITeleporter() {
-                @Override
-                public void placeEntity(World world, Entity entity, float yaw) {
-                    if (playerIn.bedLocation != null) {
-                        entity.setPosition(playerIn.bedLocation.getX(), playerIn.bedLocation.getY(), playerIn.bedLocation.getZ());
-                    }else{
-                        for (int i = 0; i < 250; i++)
-                        playerIn.attemptTeleport(playerIn.posX, 250 - i, playerIn.posZ);
-                    }
+                    playerIn.sendMessage(new TextComponentString(ChatFormatting.GOLD + I18n.format("message.cultist_count.name") + " " + cap.getCultistCount()));
                 }
-            });
+                playerIn.sendMessage(new TextComponentString(ChatFormatting.BLUE + I18n.format("message.current_magan.name") + " "
+                        + Math.ceil(cap.getMagan())));
+
+
+            }
         }
         return super.onItemRightClick(worldIn, playerIn, handIn);
 

@@ -23,8 +23,8 @@ public class BiomeInit {
         biome.setRegistryName(Elementaristics.MODID, name);
         ForgeRegistries.BIOMES.register(biome);
         BiomeDictionary.addTypes(biome, type);
-        BiomeManager.addBiome(biomeType, new BiomeManager.BiomeEntry(biome, 10));
         if (genInWorld) {
+            BiomeManager.addBiome(biomeType, new BiomeManager.BiomeEntry(biome, 10));
             BiomeManager.addSpawnBiome(biome);
         }
         return biome;
