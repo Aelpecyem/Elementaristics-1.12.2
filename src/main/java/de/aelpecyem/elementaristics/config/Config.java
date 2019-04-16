@@ -9,12 +9,16 @@ public class Config {
     private static final String CATEGORY_HUD = "hud";
     private static final String CATEGORY_SOULS = "souls";
     private static final String CATEGORY_DIM = "dimensions";
+    private static final String CATEGORY_MISC = "misc";
     //values- hud
     public static boolean useNumbersInsteadOfBar = false;
     //values- souls
     public static boolean normalGameplayBuffs = true;
     //values- dimensions
     public static int mindDimensionId = 1103;
+    //values- misc
+    public static int silverThreadId = 1103;
+    public static int cultistId = 77766;
 
     public static void readConfig() {
         Configuration cfg = Elementaristics.config;
@@ -48,6 +52,13 @@ public class Config {
         cfg.addCustomCategoryComment(CATEGORY_DIM, "Configuration on Elementaristics' dimensions");
         // cfg.getBoolean() will get the value in the config if it is already specified there. If not it will create the value.
         mindDimensionId = cfg.getInt("mindDimensionId", CATEGORY_DIM, mindDimensionId, -10000, 10000, "Determines the dimension id of 'The Mind'");
+    }
+
+    private static void initMiscConfig(Configuration cfg) {
+        cfg.addCustomCategoryComment(CATEGORY_MISC, "Misc Configuration");
+        cultistId = cfg.getInt("cultistId", CATEGORY_MISC, cultistId, -10000, 10000, "Determines the ID for the Cultist Entity");
+        silverThreadId = cfg.getInt("silverThreadId", CATEGORY_MISC, silverThreadId, -10000, 10000, "Determines the ID for the Silver Thread Entity");
+
 
     }
 }

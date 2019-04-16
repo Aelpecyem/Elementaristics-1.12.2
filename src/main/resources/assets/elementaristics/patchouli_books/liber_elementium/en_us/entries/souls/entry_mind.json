@@ -28,13 +28,26 @@
     {
       "type": "image",
       "images": [
+        "elementaristics:textures/images/anomaly.png",
+        "elementaristics:textures/images/thread.png"
       ],
+      "border": true,
       "text": "Looking around in this place, one might sooner or later find an anomaly."
+    },
+    {
+      "type": "spotlight",
+      "item": "elementaristics:block_silver_thread",
+      "text": "In the center of those, a tangible fraction of the Silver Thread can be found. When activated, it will summon the actual Silver Thread, which has to be slain. Once it is slain by a player, the player can use this block to teleport back to their bed."
     },
     {
       "type": "entity",
       "entity": "elementaristics:silver_thread",
-      "offset": 0.1
+      "offset": 0.1,
+      "text": "$(l)The Silver Thread$()"
+    },
+    {
+      "type": "text",
+      "text": "The Silver Thread on its own is not that strong, compared to other more powerful entities. However, it has the ability to only be damaged by two units, and that only by players. This makes the fight against it a fight of time, in which the player must try not to get hit. Shields and items that slow down enemies are recommended.$(br)As the Silver Thread will change location upon being hit, the fighting player must be cautious."
     }
   ]
 }

@@ -59,10 +59,10 @@ public class BlockSilverThread extends BlockBase {
                     return input.dimension == Config.mindDimensionId;
                 }
             }).size() < 1) {
+
+                EntitySilverThread boss = new EntitySilverThread(worldIn);
+                boss.setPosition(pos.getX() + 20 * (worldIn.rand.nextBoolean() ? -1 : 1), pos.getY(), pos.getZ() + 20 * (worldIn.rand.nextBoolean() ? -1 : 1));
                 if (!worldIn.isRemote) {
-                    EntitySilverThread boss = new EntitySilverThread(worldIn);
-                    boss.setNoGravity(false);
-                    boss.setPosition(pos.getX() + 20 * (worldIn.rand.nextBoolean() ? -1 : 1), pos.getY(), pos.getZ() + 20 * (worldIn.rand.nextBoolean() ? -1 : 1));
                     worldIn.spawnEntity(boss);
                 }
             } else {

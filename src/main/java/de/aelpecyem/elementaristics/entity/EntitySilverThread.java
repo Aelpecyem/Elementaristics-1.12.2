@@ -118,7 +118,6 @@ public class EntitySilverThread extends EntityMob {
     }
     @Override
     public boolean attackEntityAsMob(Entity entityIn) {
-        entityIn.attackEntityFrom(DamageSource.MAGIC, 1);
         return super.attackEntityAsMob(entityIn);
     }
 
@@ -152,7 +151,8 @@ public class EntitySilverThread extends EntityMob {
                     setPosition(living.posX, living.posY, living.posZ);
                     living.setPosition(curPos.getX(), curPos.getY(), curPos.getZ());
                     setRotation(living.getRotationYawHead(), living.rotationPitch);
-                    living.addPotionEffect(new PotionEffect(Potion.getPotionById(15), 20, 3, false, false));
+
+                    living.addPotionEffect(new PotionEffect(Potion.getPotionById(15), 60, 3, false, false));
 
             }
             if (!attemptTeleport(rand.nextInt(10), 0, rand.nextInt(10))) {
@@ -190,7 +190,7 @@ public class EntitySilverThread extends EntityMob {
 
     @Override
     public void onLivingUpdate() {
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 2; i++) {
             Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(
                     world,
                     posX + world.rand.nextFloat() * width
