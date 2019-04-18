@@ -7,9 +7,14 @@ import de.aelpecyem.elementaristics.items.base.artifacts.rites.ItemAspects;
 import de.aelpecyem.elementaristics.items.base.artifacts.ItemHammerHeat;
 import de.aelpecyem.elementaristics.items.base.artifacts.ItemSoulChanger;
 import de.aelpecyem.elementaristics.items.base.artifacts.ItemSoulMirror;
+import de.aelpecyem.elementaristics.items.base.artifacts.rites.materials.ItemSparksLiving;
+import de.aelpecyem.elementaristics.items.base.artifacts.rites.materials.ItemThoughtsBattling;
+import de.aelpecyem.elementaristics.items.base.artifacts.rites.materials.ItemWaterPurest;
 import de.aelpecyem.elementaristics.items.base.burnable.ItemHerbBundle;
 import de.aelpecyem.elementaristics.items.base.burnable.ItemOpiumTincture;
+import de.aelpecyem.elementaristics.items.base.consumable.ItemBaseSeed;
 import de.aelpecyem.elementaristics.items.base.consumable.ItemDrinkBase;
+import de.aelpecyem.elementaristics.items.base.consumable.ItemFoodBase;
 import de.aelpecyem.elementaristics.items.base.consumable.ItemTinctureArcane;
 import de.aelpecyem.elementaristics.items.base.thaumagral.*;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;
@@ -39,6 +44,7 @@ public class ModItems {
     public static ItemBase chaotic_matter;
     public static ItemBase maganized_matter;
     public static ItemBase protoplasm;
+    public static ItemFoodBase itemBaseSeed;
     public static ItemBase vibrant_quartz;
     public static ItemBase matter_accelerating_module;
     public static ItemBase head_hammer;
@@ -71,7 +77,7 @@ public class ModItems {
     public static IncantationBase incantation_forging;
     public static IncantationBase incantation_recruiting;
 
-    public static ItemAspects water_purest;
+    public static ItemDrinkBase water_purest;
     public static ItemAspects sparks_living;
     public static ItemAspects earth_purest;
     public static ItemAspects motion_captured;
@@ -130,7 +136,7 @@ public class ModItems {
 
         ash = new ItemBase("ash");
         protoplasm = new ItemBase("protoplasm");
-
+        itemBaseSeed = new ItemBaseSeed(); //make it possible to craft many different plants/seeds with this
         //book_liber_elementium = new LiberElementiumItem();
 
         initRiteTools();
@@ -139,15 +145,15 @@ public class ModItems {
     }
 
     private static void initRiteMaterials() {
-        water_purest = new ItemAspects("water_purest", 6, true, Aspects.water);
-        sparks_living = new ItemAspects("sparks_living", 6, true, Aspects.fire);
+        water_purest = new ItemWaterPurest();
+        sparks_living = new ItemSparksLiving();
         earth_purest = new ItemAspects("earth_purest", 6, true, Aspects.earth);
         motion_captured = new ItemAspects("motion_captured", 6, true, Aspects.air);
         stardust = new ItemAspects("stardust", 6, true, Aspects.aether);
         
         sparks_brightest = new ItemAspects("sparks_brightest", 6, true, Aspects.light);
         wine_redmost = new ItemAspects("wine_redmost", 6, true, Aspects.body);
-        thoughts_battling = new ItemAspects("thoughts_battling", 6, true, Aspects.mind);
+        thoughts_battling = new ItemThoughtsBattling();
         vacuum_selfsustaining = new ItemAspects("vacuum_selfsustaining", 6, true, Aspects.vacuum);
         lightning_tangible = new ItemAspects("lightning_tangible", 6, true, Aspects.electricity);
         moss_everchaning = new ItemAspects("moss_everchanging", 6, true, Aspects.life);

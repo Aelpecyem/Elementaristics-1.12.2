@@ -8,12 +8,14 @@ config.gameplaybuffs.comment=Set this to false if you wish not to play with the 
 #Potion effect
 elementaristics.potion.intoxicated=Intoxicated
 elementaristics.potion.trance=Trance
+elementaristics.potion.focused=Focused
 elementaristics.potion.dread=Dread
 elementaristics.potion.contentment=Contentment
 elementaristics.potion.ecstasy=Ecstasy
 elementaristics.potion.fear=Fear
 elementaristics.potion.laughter=Laughter
 elementaristics.potion.silence=Silence
+
 
 #Items
 item.bubble_helium.name=Helium Filled Stone
@@ -128,6 +130,14 @@ tile.casing_essence.name=Essence Casing
 tile.altar.name=Altar
 tile.fabric_reason.name=Fabric of Reason
 tile.fabric_passion.name=Fabric of Passion
+tile.block_silver_thread.name=Silver Thread
+
+tile.flower_ecstasy.name=Aphrodium
+tile.flower_fear.name=Phobaryllis
+tile.flower_contentment.name=Laetatium
+tile.flower_dread.name=Horryllis
+tile.flower_laughter.name=Risium
+tile.flower_silence.name=Tacituryllis
 
 #Advancements
 advancement.elementaristics.root=Elementaristics
@@ -188,6 +198,7 @@ advancement.elementaristics.magan=Magan
 
 #Book
 item.elementaristics.book.name=Liber Elementium
+info.elementaristics.book.landing_1=A collection of manuscripts collected over many centuries, created by many different witches, meant to assist you with delving into the mysteries of witchcraft.
 info.elementaristics.book.landing=The Elementaristics are a simple concept about the elemental powers of the multiverse. I invented this concept, I think. I will use this book to hold my knowledge.
 info.elementaristics.book.subtitle=The gate's opening
 
@@ -212,6 +223,8 @@ tooltip.mirror_soul.name=Knowing me, knowing you
 tooltip.sword_icy.name=The air is chilled around this blade
 tooltip.hammer_heat.name=Warm to the touch, hot to the target
 tooltip.opium.name=Relatively weak, compared to its non-arcane version
+tooltip.sparks_living.name=Can be used as fuel
+tooltip.thoughts_battling.name=Is it you or is it me, would you know or would you see?
 
 #Rites
 rite.elementaristics:rite_knowledge.name=Enlightenment's Sighing
@@ -299,7 +312,15 @@ message.cultist_magan.name=Current Magan:
 message.rite_fail_cultists.name=There's too many artificial souls here
 message.call_cultist_error.name=There must be more space for the cultists to appear
 message.no_cultists_secured.name=Visiting the Mind without having any loyal Cultists sounds like a foolish idea
+message.interact_silver_thread.error_fight=There's already a Silver Thread in the area
 
+message.meditation_to_contentment.name=Ecstasy spreads, but will sooner wayne. But it always wants to leave something... contentment maybe.
+message.meditation_to_dread.name=The earth revolves around the sun, and it never stops existing... but on times, we won't see it, and these times are times of dread.
+message.meditation_to_fear.name=As the sun is not seen, darkness arises. The darkness consumes, the darkness spreads fear.
+message.meditation_to_silence.name=And as the mind gets used to the fear, suddenly it stops. And as it stops, all sound stops.
+message.meditation_to_laughter.name=And suddenly we laugh.
+
+message.meditation_ascension.name=The mind has been reforged, and next is the body.
 #Souls
 soul.soul_magan.name=§6Magan Soul
 soul.soul_water.name=§1Water Soul

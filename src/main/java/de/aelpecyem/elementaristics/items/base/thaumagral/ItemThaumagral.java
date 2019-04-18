@@ -52,9 +52,4 @@ public class ItemThaumagral extends ItemSword implements IHasModel {
         Elementaristics.proxy.registerItemRenderer(this, 0, name);
     }
 
-    @Override
-    public void registerItemModel(Item itemBlock) {
-
-    }
-
 }

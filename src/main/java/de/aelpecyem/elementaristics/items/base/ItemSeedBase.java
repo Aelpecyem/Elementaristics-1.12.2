@@ -27,11 +27,6 @@ public class ItemSeedBase extends ItemSeeds implements IHasModel{
         Elementaristics.proxy.registerItemRenderer(this, 0, name);
     }
 
-    @Override
-    public void registerItemModel(Item itemBlock) {
-
-    }
-
 
     @Override
     public Item setCreativeTab(CreativeTabs tab) {

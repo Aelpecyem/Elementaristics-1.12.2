@@ -1,6 +1,7 @@
 package de.aelpecyem.elementaristics.misc.potions;
 
 import de.aelpecyem.elementaristics.Elementaristics;
+import de.aelpecyem.elementaristics.misc.potions.effects.PotionFocused;
 import de.aelpecyem.elementaristics.misc.potions.effects.PotionIntoxicated;
 import de.aelpecyem.elementaristics.misc.potions.effects.PotionTrance;
 import de.aelpecyem.elementaristics.misc.potions.effects.emotion.*;
@@ -17,6 +18,7 @@ public class PotionInit {
     public static List<PotionEmotion> emotions = new ArrayList<>();
     public static final PotionIntoxicated potionIntoxicated = new PotionIntoxicated();
     public static final PotionTrance potionTrance = new PotionTrance();
+    public static final PotionFocused potionFocused = new PotionFocused();
 
     public static PotionEmotionContentment contentment = new PotionEmotionContentment(); //lower regen
     public static PotionEmotionDread dread = new PotionEmotionDread(); //higher regen
@@ -29,6 +31,7 @@ public class PotionInit {
     public static void registerPotions(RegistryEvent.Register<Potion> event) {
         event.getRegistry().register(potionIntoxicated);
         event.getRegistry().register(potionTrance);
+        event.getRegistry().register(potionFocused);
 
         event.getRegistry().register(contentment);
         event.getRegistry().register(dread);

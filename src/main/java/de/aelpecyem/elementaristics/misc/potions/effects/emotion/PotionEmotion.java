@@ -3,6 +3,7 @@ package de.aelpecyem.elementaristics.misc.potions.effects.emotion;
 import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.capability.IPlayerCapabilities;
 import de.aelpecyem.elementaristics.capability.PlayerCapProvider;
+import de.aelpecyem.elementaristics.init.SoulInit;
 import de.aelpecyem.elementaristics.misc.potions.PotionInit;
 import de.aelpecyem.elementaristics.misc.potions.effects.PotionBase;
 import net.minecraft.entity.EntityLivingBase;
@@ -34,7 +35,8 @@ public class PotionEmotion extends PotionBase {
     public void performEffect(EntityLivingBase entityLivingBaseIn, int amplifier) {
         if (entityLivingBaseIn.hasCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null)) {
             IPlayerCapabilities cap = entityLivingBaseIn.getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null);
-            effect(entityLivingBaseIn, cap, amplifier);
+            if (cap.getSoulId() != SoulInit.soulMana.getId())
+                effect(entityLivingBaseIn, cap, amplifier);
         }
 
 

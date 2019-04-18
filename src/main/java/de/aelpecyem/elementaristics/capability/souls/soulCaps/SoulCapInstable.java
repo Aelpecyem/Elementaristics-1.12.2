@@ -32,7 +32,7 @@ public class SoulCapInstable extends SoulCap {
     public void onTickEvent(TickEvent.PlayerTickEvent event, EntityPlayer player, IPlayerCapabilities cap) {
         if (cap.knowsSoul()){
             if (Loader.isModLoaded("thaumcraft")){
-                System.out.println(ThaumcraftCapabilities.getWarp(player).get(IPlayerWarp.EnumWarpType.PERMANENT));
+
             }
             if (player.world.rand.nextInt(1000) == 9){
                 player.addExperience(2);

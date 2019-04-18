@@ -25,12 +25,6 @@ public class ItemBase extends Item implements IHasModel {
     }
 
     @Override
-    public void registerItemModel(Item itemBlock) {
-
-    }
-
-
-    @Override
     public ItemBase setCreativeTab(CreativeTabs tab) {
         super.setCreativeTab(tab);
         return this;

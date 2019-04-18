@@ -1,6 +1,7 @@
 package de.aelpecyem.elementaristics.init;
 
 import de.aelpecyem.elementaristics.blocks.base.BlockBase;
+import de.aelpecyem.elementaristics.blocks.base.BlockFlowerBase;
 import de.aelpecyem.elementaristics.blocks.base.BlockSilverThread;
 import de.aelpecyem.elementaristics.blocks.base.crops.BlockCropBase;
 import de.aelpecyem.elementaristics.blocks.base.OreDroppingBase;
@@ -8,8 +9,12 @@ import de.aelpecyem.elementaristics.blocks.base.crops.CropOpium;
 import de.aelpecyem.elementaristics.blocks.tileentity.blocks.*;
 import de.aelpecyem.elementaristics.misc.elements.Aspect;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;
+import de.aelpecyem.elementaristics.misc.potions.PotionInit;
+import de.aelpecyem.elementaristics.util.IBlockHasModel;
 import de.aelpecyem.elementaristics.util.IHasModel;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockBush;
+import net.minecraft.block.BlockFlower;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -49,6 +54,14 @@ public class ModBlocks {
     public static BlockBase fabric_passion;
     public static BlockSilverThread block_silver_thread;
 
+    //Flowers
+    public static BlockBush flower_ecstasy;
+    public static BlockBush flower_contentment;
+    public static BlockBush flower_dread;
+    public static BlockBush flower_fear;
+    public static BlockBush flower_laughter;
+    public static BlockBush flower_silence;
+
     public static void init() {
         crop_opium = new CropOpium();
         stone_enriched = new BlockBase(Material.ROCK, "stone_enriched");
@@ -69,6 +82,12 @@ public class ModBlocks {
         fabric_passion = new BlockBase(Material.ROCK, "fabric_passion");
         block_silver_thread = new BlockSilverThread();
 
+        flower_ecstasy = new BlockFlowerBase("flower_ecstasy", PotionInit.ecstasy);
+        flower_contentment = new BlockFlowerBase("flower_contentment", PotionInit.contentment);
+        flower_dread = new BlockFlowerBase("flower_dread", PotionInit.dread);
+        flower_fear = new BlockFlowerBase("flower_fear", PotionInit.fear);
+        flower_laughter = new BlockFlowerBase("flower_laughter", PotionInit.laughter);
+        flower_silence = new BlockFlowerBase("flower_silence", PotionInit.silence);
 
     }
 
@@ -98,8 +117,8 @@ public class ModBlocks {
     public static void registerItemBlocks(IForgeRegistry<Item> registry) {
 
         for (Block blockBase : BLOCKS) {
-            if (blockBase instanceof BlockBase)
-                registry.register(((BlockBase) blockBase).createItemBlock());
+            if (blockBase instanceof IBlockHasModel)
+                registry.register(((IBlockHasModel) blockBase).createItemBlock());
 
         }
 
@@ -110,8 +129,8 @@ public class ModBlocks {
 
     public static void registerModels() {
         for (Block blockBase : BLOCKS) {
-            if (blockBase instanceof IHasModel) {
-                    ((IHasModel) blockBase).registerItemModel(Item.getItemFromBlock(blockBase));
+            if (blockBase instanceof IBlockHasModel) {
+                ((IBlockHasModel) blockBase).registerItemModel(Item.getItemFromBlock(blockBase));
             }
         }
     }

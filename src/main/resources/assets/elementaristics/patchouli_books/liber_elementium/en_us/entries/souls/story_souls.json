@@ -2,6 +2,7 @@
   "name": "The Soul",
   "icon": "elementaristics:textures/gui/icons/souls.png",
   "category": "soulogy",
+  "advancement": "elementaristics:discovery_soul",
   "pages": [
     {
       "type": "text",

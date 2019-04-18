@@ -50,6 +50,8 @@ public class InitRecipes {
 
         ReactorRecipes.addRecipe(new ReactorRecipe(new ResourceLocation(Elementaristics.MODID, "seeds_opium"), Ingredient.fromStacks(new ItemStack(Blocks.RED_FLOWER)), Ingredient.fromStacks(new ItemStack(ModItems.essence, 1, Aspects.mind.getId())), new ItemStack(ModItems.seed_herb)));
         ReactorRecipes.addRecipe(new ReactorRecipe(new ResourceLocation(Elementaristics.MODID, "sparks_living"), Ingredient.fromItem(Items.BLAZE_POWDER), Ingredient.fromStacks(new ItemStack(ModItems.essence, 1, Aspects.fire.getId())), ModItems.sparks_living.getDefaultInstance()));
+        ReactorRecipes.addRecipe(new ReactorRecipe(new ResourceLocation(Elementaristics.MODID, "thoughts_battling"), Ingredient.fromStacks(new ItemStack(ModBlocks.fabric_passion)), Ingredient.fromStacks(new ItemStack(ModBlocks.fabric_reason)), ModItems.thoughts_battling.getDefaultInstance()));
+
     }
 
     private static void initPurifier() {

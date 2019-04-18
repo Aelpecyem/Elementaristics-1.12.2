@@ -67,11 +67,8 @@ public class ItemSwordIcy extends ItemSword implements IHasRiteUse, IHasModel {
         Elementaristics.proxy.registerItemRenderer(this, 0, name);
     }
 
-    @Override
-    public void registerItemModel(Item itemBlock) {
 
-    }
-
+    //TODO make the freezing spell a bit better then
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
         Entity entity = playerIn.rayTrace(10, 1).entityHit instanceof EntityLivingBase ? playerIn.rayTrace(10, 1).entityHit : null;
@@ -113,7 +110,7 @@ public class ItemSwordIcy extends ItemSword implements IHasRiteUse, IHasModel {
                                 break;
                         }
                     }
-                    targets = worldIn.getEntitiesWithinAABBExcludingEntity(playerIn, new AxisAlignedBB(x - 1.5, y - 1.5, y - 1.5, x + 1.5, y + 1.5, z + 1.5));
+                    targets = worldIn.getEntitiesWithinAABBExcludingEntity(playerIn, new AxisAlignedBB(x - 2, y - 1.5, z - 2, x + 2, y + 1.5, z + 2));
                     for (int i = 0; i < 10; i++)
                         Elementaristics.proxy.generateGenericParticles(worldIn, x + worldIn.rand.nextGaussian(), y + worldIn.rand.nextGaussian(), z + worldIn.rand.nextGaussian(), Aspects.ice.getColor(), 4, 1000, 0, true, true);
                 }

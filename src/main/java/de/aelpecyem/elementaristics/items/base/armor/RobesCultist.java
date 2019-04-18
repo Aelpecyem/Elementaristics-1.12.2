@@ -36,11 +36,6 @@ public class RobesCultist extends ItemArmor implements IHasModel {
             Elementaristics.proxy.registerItemRenderer(this, 0, name);
         }
 
-        @Override
-        public void registerItemModel(Item itemBlock) {
-
-        }
-
 
 
     @Override

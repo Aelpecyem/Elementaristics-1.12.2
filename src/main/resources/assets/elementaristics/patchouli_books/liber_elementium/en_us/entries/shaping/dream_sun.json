@@ -2,7 +2,7 @@
   "name": "A Dream of a Sun",
   "category": "shaping",
   "icon": "elementaristics:textures/gui/icons/machine.png",
-  "advancement": "elementaristics:progress_ascension_3",
+  "advancement": "elementaristics:progress_ascension_4",
   "pages": [
     {
       "type": "text",

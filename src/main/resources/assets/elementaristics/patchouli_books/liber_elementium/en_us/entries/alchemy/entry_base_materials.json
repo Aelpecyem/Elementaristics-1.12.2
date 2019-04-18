@@ -10,12 +10,12 @@
     {
       "type": "purifier_recipe",
       "recipe": "elementaristics:water_purest",
-      "text": "$(item)Purest Water$() is, well, pretty pure water. However, it is not drinkable, as it does not contain any nutrients etc."
+      "text": "$(item)Purest Water$() is, well, pretty pure water. Drinking it will remove all bad potion effects"
     },
     {
       "type": "reactor_recipe",
       "recipe": "elementaristics:sparks_living",
-      "text": "$(item)Living Sparks$() roar the passion of the fire.$(br)They may not glow forever, but their heat may never cease."
+      "text": "$(item)Living Sparks$() roar the passion of the fire.$(br)They may not glow forever, but their heat will never cease."
     },
     {
       "type": "crafting",

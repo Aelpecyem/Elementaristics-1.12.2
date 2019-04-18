@@ -70,8 +70,16 @@ public class EntitySilverThread extends EntityMob {
         EntityPlayer player = world.getClosestPlayer(posX, posY, posZ, 100, false);
         if (cause.getTrueSource() instanceof EntityPlayer) {
              player = (EntityPlayer) cause.getTrueSource();
-             if(world.isRemote)
             player.sendStatusMessage(new TextComponentString(ChatFormatting.GOLD + I18n.format("message.ascension_1.standard")), false);
+            IPlayerCapabilities cap = player.getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null);
+            if (cap.knowsSoul()) {
+                if (cap.getPlayerAscensionStage() < 1) {
+                    cap.setPlayerAscensionStage(1);
+                    if (world.isRemote)
+                        player.sendStatusMessage(new TextComponentString(ChatFormatting.GOLD + I18n.format("message.ascension_1.standard")), false);
+                }
+
+            }
         }else if (player != null) {
             if(player.hasCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null)){
                 IPlayerCapabilities cap = player.getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null);
@@ -95,7 +103,7 @@ public class EntitySilverThread extends EntityMob {
 
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(100.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.34F);
+        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.37F);
         this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(6.0D);
         this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(6.0D);
     }
@@ -127,21 +135,21 @@ public class EntitySilverThread extends EntityMob {
             EntityLivingBase living = (EntityLivingBase) entity;
             switch (world.rand.nextInt(5)) {
                 case 1:
-                    if (!attemptTeleport(posX + 3 + rand.nextInt(7), entity.posY, posZ + 3 + rand.nextInt(7))) {
+                    if (!attemptTeleport(posX + 3 + rand.nextInt(3), entity.posY, posZ + 3 + rand.nextInt(3))) {
 
                     } else {
                         for (int i = 0; i < world.rand.nextInt(8); i++) {
-                            if (attemptTeleport(posX + 3 + rand.nextInt(7), posY + rand.nextInt(5), posX + rand.nextInt(10)))
+                            if (attemptTeleport(posX + 3 + rand.nextInt(3), posY + rand.nextInt(3), posX + rand.nextInt(3)))
                                 break;
                         }
                     }
                     break;
                 case 2:
-                    if (!attemptTeleport(posX -rand.nextInt(10), entity.posY, posZ-rand.nextInt(10))) {
+                    if (!attemptTeleport(posX - rand.nextInt(5), entity.posY, posZ - rand.nextInt(5))) {
 
                     } else {
                         for (int i = 0; i < world.rand.nextInt(8); i++) {
-                            if (attemptTeleport(posX -3 -rand.nextInt(7), posY + rand.nextInt(5), posZ - 3 - rand.nextInt(10)))
+                            if (attemptTeleport(posX - 3 - rand.nextInt(3), posY + rand.nextInt(5), posZ - 3 - rand.nextInt(3)))
                                 break;
                         }
                     }
@@ -152,16 +160,16 @@ public class EntitySilverThread extends EntityMob {
                     living.setPosition(curPos.getX(), curPos.getY(), curPos.getZ());
                     setRotation(living.getRotationYawHead(), living.rotationPitch);
 
-                    living.addPotionEffect(new PotionEffect(Potion.getPotionById(15), 60, 3, false, false));
+                    living.addPotionEffect(new PotionEffect(Potion.getPotionById(15), 80, 3, false, false));
 
             }
-            if (!attemptTeleport(rand.nextInt(10), 0, rand.nextInt(10))) {
+           /* if (!attemptTeleport(rand.nextInt(10), 0, rand.nextInt(10))) {
                 this.attemptTeleport((Math.abs(this.posX) - Math.abs(living.posX)) * -1 + posX, living.posY, (Math.abs(this.posZ) - Math.abs(living.posZ)) * -1 + posZ);
             } else {
                 for (int i = 0; i < 5; i++) {
                     attemptTeleport(rand.nextInt(10), rand.nextInt(5), rand.nextInt(10));
                 }
-            }
+            }*/
         }
 
 
@@ -175,7 +183,7 @@ public class EntitySilverThread extends EntityMob {
         this.tasks.addTask(2, new EntityAIAttackMelee(this, 1.0D, false));
         this.tasks.addTask(5, new EntityAIMoveTowardsRestriction(this, 1.0D));
         this.tasks.addTask(7, new EntityAIWanderAvoidWater(this, 1.0D));
-        this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
+        this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 100.0F));
         this.tasks.addTask(8, new EntityAILookIdle(this));
         this.applyEntityAI();
     }

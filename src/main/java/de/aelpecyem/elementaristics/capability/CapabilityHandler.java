@@ -85,7 +85,7 @@ public class CapabilityHandler {
         if (event.player != null && event.player.hasCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null)) {
             IPlayerCapabilities cap = event.player.getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null);
 
-
+            //System.out.println(cap.getTimeStunted()); sometimes does that, weirdly enough
             //Stuff with mana stunting etc.etc.
             if (!(cap.getTimeStunted() > 0)) {
                 cap.fillMagan(cap.getMaganRegenPerTick());

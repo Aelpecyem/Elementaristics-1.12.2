@@ -32,6 +32,7 @@ public class BlockSilverThread extends BlockBase {
 
     public BlockSilverThread() {
         super(Material.IRON, "block_silver_thread", 100);
+        setBlockUnbreakable();
     }
 
     @Override

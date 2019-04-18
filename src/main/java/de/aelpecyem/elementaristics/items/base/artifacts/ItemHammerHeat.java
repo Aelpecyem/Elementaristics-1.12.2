@@ -57,11 +57,14 @@ public class ItemHammerHeat extends ItemPickaxe implements IHasRiteUse, IHasMode
 
     @Override
     public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        worldIn.setBlockState(pos.add(0, 1, 0), Blocks.FIRE.getDefaultState(), 1);
-        worldIn.playSound(null, pos.add(0.5, 1, 0.5), SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.AMBIENT, 1, 1);
-        Elementaristics.proxy.generateGenericParticles(worldIn, pos.add(0.5, 1, 0.5), 15159040, 2, 160, 0, true, true);
-        player.getHeldItem(hand).damageItem(1, player);
-        return EnumActionResult.SUCCESS;
+        if (worldIn.getBlockState(pos.up()).getBlock() == Blocks.AIR) {
+            worldIn.setBlockState(pos.up(), Blocks.FIRE.getDefaultState(), 1);
+            worldIn.playSound(null, pos.add(0.5, 1, 0.5), SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.AMBIENT, 1, 1);
+            Elementaristics.proxy.generateGenericParticles(worldIn, pos.add(0.5, 1, 0.5), 15159040, 2, 160, 0, true, true);
+            player.getHeldItem(hand).damageItem(1, player);
+            return EnumActionResult.SUCCESS;
+        }
+        return EnumActionResult.PASS;
     }
 
     @Override
@@ -74,10 +77,6 @@ public class ItemHammerHeat extends ItemPickaxe implements IHasRiteUse, IHasMode
         Elementaristics.proxy.registerItemRenderer(this, 0, name);
     }
 
-    @Override
-    public void registerItemModel(Item itemBlock) {
-
-    }
 
     @Override
     public List<Aspect> getAspects() {

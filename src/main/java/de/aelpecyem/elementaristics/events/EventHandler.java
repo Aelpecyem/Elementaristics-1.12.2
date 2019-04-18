@@ -1,6 +1,8 @@
 package de.aelpecyem.elementaristics.events;
 
 import com.google.common.base.Predicate;
+import com.mojang.realmsclient.gui.ChatFormatting;
+import de.aelpecyem.elementaristics.blocks.base.BlockFlowerBase;
 import de.aelpecyem.elementaristics.capability.IPlayerCapabilities;
 import de.aelpecyem.elementaristics.capability.PlayerCapProvider;
 import de.aelpecyem.elementaristics.config.Config;
@@ -8,15 +10,20 @@ import de.aelpecyem.elementaristics.entity.EntityCultist;
 import de.aelpecyem.elementaristics.init.SoulInit;
 import de.aelpecyem.elementaristics.misc.potions.PotionInit;
 import net.minecraft.block.BlockBed;
+import net.minecraft.client.audio.SoundEventAccessor;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.RenderPlayerEvent;
+import net.minecraftforge.client.event.sound.SoundLoadEvent;
+import net.minecraftforge.client.event.sound.SoundSetupEvent;
 import net.minecraftforge.common.util.ITeleporter;
 import net.minecraftforge.event.entity.player.PlayerSleepInBedEvent;
 import net.minecraftforge.event.entity.player.PlayerWakeUpEvent;
@@ -81,21 +88,25 @@ public class EventHandler {
             if (cap.getPlayerAscensionStage() > 0) {
                 if (!event.getEntityPlayer().isPlayerFullyAsleep()) {
                     if (event.getEntityPlayer().getSleepTimer() > 19 && event.getEntityPlayer().getSleepTimer() % 20 == 0) {
-                        if (event.getEntityPlayer().getFoodStats().getFoodLevel() != 0)
-                            event.getEntityPlayer().getFoodStats().setFoodLevel(event.getEntityPlayer().getFoodStats().getFoodLevel() - 1);
-
-                        event.getEntityPlayer().heal(6);
-                        cap.fillMagan(50);
+                        if (event.getEntityPlayer().getFoodStats().getFoodLevel() != 3) {
+                            if (event.getEntityPlayer().getHealth() < event.getEntityPlayer().getMaxHealth()) {
+                                event.getEntityPlayer().heal(6);
+                                event.getEntityPlayer().getFoodStats().setFoodLevel(event.getEntityPlayer().getFoodStats().getFoodLevel() - 1);
+                            }
+                            if (cap.getMagan() < cap.getMaxMagan()) {
+                                cap.fillMagan(50);
+                                event.getEntityPlayer().getFoodStats().setFoodLevel(event.getEntityPlayer().getFoodStats().getFoodLevel() - 1);
+                            }
+                        }
                     }
-                    if (event.getEntityPlayer().getSleepTimer() > 90) {
+                 /*   if (event.getEntityPlayer().getSleepTimer() > 90) {
 
-                    }
+                    }*/
                     event.setResult(Event.Result.ALLOW);
                 } else {
                     performMoodAnalysis(event.getEntityPlayer());
 
                     PotionEffect[] effects = new PotionEffect[]{
-
                     };
                     effects = event.getEntityPlayer().getActivePotionEffects().toArray(effects);
                     for (PotionEffect effect : effects) {
@@ -106,6 +117,7 @@ public class EventHandler {
                 }
             }
         }
+
         if (event.getEntityPlayer().getActivePotionEffects().contains(event.getEntityPlayer().getActivePotionEffect(PotionInit.potionTrance)) && event.getEntityPlayer().isPlayerFullyAsleep()) {
             if (event.getEntityPlayer().hasCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null)) {
                 IPlayerCapabilities cap = event.getEntityPlayer().getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null);
@@ -120,6 +132,9 @@ public class EventHandler {
                             });
                         }
                     }
+                } else {
+                    event.getEntityPlayer().sendStatusMessage(new TextComponentString(ChatFormatting.RED + I18n.format("message.no_cultists_secured.name")), false);
+
                 }
             }
         }
@@ -127,12 +142,32 @@ public class EventHandler {
 
     public void performMoodAnalysis(EntityPlayer player) {
         if (player.getActivePotionEffects().contains(player.getActivePotionEffect(PotionInit.potionIntoxicated))) {
-            Potion potion = PotionInit.emotions.get(player.world.rand.nextInt(PotionInit.emotions.size()));
+            World world = player.getEntityWorld();
+            Potion potion = null;
+            Iterable<BlockPos> blockPos = BlockPos.getAllInBox(Math.round((float) player.posX) - 10, Math.round((float) player.posY) - 5, Math.round((float) player.posZ) - 10, Math.round((float) player.posX) + 10, Math.round((float) player.posY) + 8, Math.round((float) player.posZ) + 10);
+            Iterator iterator = blockPos.iterator();
+            while (iterator.hasNext()) {
+                BlockPos pos = (BlockPos) iterator.next();
+                if (world.getBlockState(pos).getBlock() instanceof BlockFlowerBase) {
+                    potion = world.rand.nextBoolean() ? ((BlockFlowerBase) world.getBlockState(pos).getBlock()).getEmotion() : null;
+                }
+            }
+            if (potion == null)
+                potion = PotionInit.emotions.get(player.world.rand.nextInt(PotionInit.emotions.size()));
             player.addPotionEffect(new PotionEffect(potion, 16000, player.getActivePotionEffect(PotionInit.potionIntoxicated).getAmplifier(), true, false));
             player.removePotionEffect(PotionInit.potionIntoxicated);
         }
+        //to start meditation step
+        if (player.getActivePotionEffects().contains(player.getActivePotionEffect(PotionInit.potionTrance)) && player.getActivePotionEffects().contains(player.getActivePotionEffect(PotionInit.ecstasy))) {
+            Potion potion = PotionInit.potionFocused;
+            player.addPotionEffect(new PotionEffect(potion, 24000, 0, true, true));
+            player.removePotionEffect(PotionInit.potionTrance);
+            player.removePotionEffect(PotionInit.ecstasy);
+            player.sendStatusMessage(new TextComponentString(TextFormatting.GOLD + I18n.format("message.meditation_to_contentment.name")), false);
 
+        }
     }
+
 
    /* @SubscribeEvent
     public void canWakeUp(TickEvent.PlayerTickEvent event){

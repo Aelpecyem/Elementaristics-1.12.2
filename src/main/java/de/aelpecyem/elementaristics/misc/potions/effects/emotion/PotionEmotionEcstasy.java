@@ -16,9 +16,9 @@ public class PotionEmotionEcstasy extends PotionEmotion {
             cap.fillMagan(0.2F * amplifier);
         }
 
-        living.addPotionEffect(new PotionEffect(Potion.getPotionById(23), 80, 0, false, false));
-        if (living.getEntityWorld().getTotalWorldTime() % 200 == 0) {
-            living.heal(2);
+        living.addPotionEffect(new PotionEffect(Potion.getPotionById(17), 80, 0, false, false));
+        if (living.getEntityWorld().getTotalWorldTime() % 300 == 0) {
+            living.heal(amplifier + 2);
         }
         super.effect(living, cap, amplifier);
     }

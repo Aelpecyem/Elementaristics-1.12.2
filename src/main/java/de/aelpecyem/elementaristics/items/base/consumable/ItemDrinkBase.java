@@ -16,9 +16,11 @@ public class ItemDrinkBase extends ItemFood implements IHasModel {
         this.name = name;
         setRegistryName(name);
         setUnlocalizedName(name);
+        setAlwaysEdible();
         this.setCreativeTab(Elementaristics.tab);
         ModItems.ITEMS.add(this);
     }
+
 
     @Override
     public EnumAction getItemUseAction(ItemStack stack) {
@@ -29,9 +31,5 @@ public class ItemDrinkBase extends ItemFood implements IHasModel {
         Elementaristics.proxy.registerItemRenderer(this, 0, name);
     }
 
-    @Override
-    public void registerItemModel(Item itemBlock) {
-
-    }
 
 }

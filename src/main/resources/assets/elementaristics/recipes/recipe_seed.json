@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:wheat_seeds"
+    },
+    {
+      "item": "elementaristics:essence",
+      "data": 1
+    },
+    {
+      "item": "elementaristics:moss_everchanging"
+    },
+    {
+      "item": "minecraft:redstone"
+    }
+  ],
+  "result": {
+    "item": "elementaristics:seed_dormant"
+  }
+}

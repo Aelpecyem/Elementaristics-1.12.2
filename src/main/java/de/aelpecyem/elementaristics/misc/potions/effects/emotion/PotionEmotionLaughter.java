@@ -15,8 +15,10 @@ public class PotionEmotionLaughter extends PotionEmotion {
         if (cap.getTimeStunted() < 1) {
             cap.fillMagan(0.3F * amplifier + 0.5F);
         }
-        living.addPotionEffect(new PotionEffect(Potion.getPotionById(16), 40, 0, false, false));
-
+        if (living.world.getTotalWorldTime() % 600 == 0) {
+            if (living.getAbsorptionAmount() < 2)
+                living.setAbsorptionAmount(2);
+        }
         super.effect(living, cap, amplifier);
     }
 }
