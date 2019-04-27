@@ -3,22 +3,31 @@ package de.aelpecyem.elementaristics.compat.thaumcraft;
 import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.compat.thaumcraft.focus.FocusEffectRiftCloser;
 import de.aelpecyem.elementaristics.compat.thaumcraft.focus.FocusEffectStabilize;
+import de.aelpecyem.elementaristics.init.ModBlocks;
 import de.aelpecyem.elementaristics.init.ModItems;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;
+import jdk.nashorn.internal.runtime.regexp.joni.ScanEnvironment;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import thaumcraft.Registrar;
 import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
+import thaumcraft.api.blocks.BlocksTC;
+import thaumcraft.api.capabilities.ThaumcraftCapabilities;
 import thaumcraft.api.casters.FocusEngine;
 import thaumcraft.api.crafting.CrucibleRecipe;
+import thaumcraft.api.crafting.InfusionRecipe;
 import thaumcraft.api.crafting.ShapedArcaneRecipe;
 import thaumcraft.api.golems.EnumGolemTrait;
 import thaumcraft.api.golems.parts.GolemMaterial;
 import thaumcraft.api.items.ItemsTC;
 import thaumcraft.api.research.ResearchCategories;
+import thaumcraft.api.research.ScanBlock;
 import thaumcraft.api.research.ScanItem;
 import thaumcraft.api.research.ScanningManager;
+import thaumcraft.common.blocks.BlockTC;
 
 public class ThaumcraftCompat {
     static ResourceLocation elementaristicsGroup = new ResourceLocation("elementaristics");
@@ -48,7 +57,7 @@ public class ThaumcraftCompat {
         ThaumcraftApi.addCrucibleRecipe(new ResourceLocation("elementaristics:tc_essence_air"), new CrucibleRecipe("CREATION_AIR@2", new ItemStack(ModItems.essence, 1, Aspects.air.getId()), new ItemStack(ModItems.essence_blank), (new AspectList()).add(Aspect.AIR, 10)));
         ThaumcraftApi.addCrucibleRecipe(new ResourceLocation("elementaristics:tc_essence_aether"), new CrucibleRecipe("CREATION_AETHER@2", new ItemStack(ModItems.essence, 1, Aspects.aether.getId()), new ItemStack(ModItems.essence_blank), (new AspectList()).add(Aspect.ORDER, 5).add(Aspect.ENTROPY, 5)));
 
-        ThaumcraftApi.addCrucibleRecipe(new ResourceLocation("elementaristics:tc_essence_light"), new CrucibleRecipe("CREATION_LIGHT@2", new ItemStack(ModItems.essence, 1, Aspects.light.getId()), new ItemStack(ModItems.essence_blank), (new AspectList()).add(Aspect.FIRE, 10)));
+        /*ThaumcraftApi.addCrucibleRecipe(new ResourceLocation("elementaristics:tc_essence_light"), new CrucibleRecipe("CREATION_LIGHT@2", new ItemStack(ModItems.essence, 1, Aspects.light.getId()), new ItemStack(ModItems.essence_blank), (new AspectList()).add(Aspect.FIRE, 10)));
         ThaumcraftApi.addCrucibleRecipe(new ResourceLocation("elementaristics:tc_essence_ice"), new CrucibleRecipe("CREATION_ICE@2", new ItemStack(ModItems.essence, 1, Aspects.ice.getId()), new ItemStack(ModItems.essence_blank), (new AspectList()).add(Aspect.COLD, 10)));
 
         ThaumcraftApi.addCrucibleRecipe(new ResourceLocation("elementaristics:tc_essence_crystal"), new CrucibleRecipe("CREATION_CRYSTAL@2", new ItemStack(ModItems.essence, 1, Aspects.crystal.getId()), new ItemStack(ModItems.essence_blank), (new AspectList()).add(Aspect.CRYSTAL, 10)));
@@ -57,7 +66,8 @@ public class ThaumcraftCompat {
 
         ThaumcraftApi.addCrucibleRecipe(new ResourceLocation("elementaristics:tc_essence_order"), new CrucibleRecipe("CREATION_ORDER@2", new ItemStack(ModItems.essence, 1, Aspects.order.getId()), new ItemStack(ModItems.essence_blank), (new AspectList()).add(Aspect.ORDER, 10)));
         ThaumcraftApi.addCrucibleRecipe(new ResourceLocation("elementaristics:tc_essence_chaos"), new CrucibleRecipe("CREATION_CHAOS@2", new ItemStack(ModItems.essence, 1, Aspects.chaos.getId()), new ItemStack(ModItems.essence_blank), (new AspectList()).add(Aspect.ENTROPY, 10)));
-
+        */
+        ThaumcraftApi.addInfusionCraftingRecipe(new ResourceLocation("elementaristics:tc_mushroom_intoxicating"), new InfusionRecipe("MUSHROOM_INTOXICATING@3", new ItemStack(ModBlocks.mushroom_intoxicating), 1, (new AspectList()).add(Aspect.MAGIC, 15).add(Aspect.MIND, 20).add(Aspect.ALCHEMY, 20).add(Aspect.PLANT, 40).add(Aspect.AURA, 10), new ItemStack(BlocksTC.vishroom), ModItems.bundle_herbs.getDefaultInstance(), ModItems.petal_opium.getDefaultInstance(), new ItemStack(ModItems.essence, 1, Aspects.mind.getId()), new ItemStack(ModBlocks.flower_ecstasy)));
 
 
         FocusEngine.registerElement(FocusEffectStabilize.class, new ResourceLocation(Elementaristics.MODID, "tc/textures/stabilize.png"), 3106205);
@@ -83,6 +93,11 @@ public class ThaumcraftCompat {
                 new ScanItem("f_MAGANIZED_MATTER", new ItemStack(ModItems.maganized_matter, 1)));
         ScanningManager.addScannableThing(
                 new ScanItem("f_PROTOPLASM", new ItemStack(ModItems.protoplasm, 1)));
+
+
+        ScanningManager.addScannableThing(new ScanBlock("f_PASSION", ModBlocks.fabric_passion));
+        ScanningManager.addScannableThing(new ScanBlock("f_REASON", ModBlocks.fabric_reason));
+        ScanningManager.addScannableThing(new ScanBlock("f_SHROOM", BlocksTC.vishroom));
     }
 
 

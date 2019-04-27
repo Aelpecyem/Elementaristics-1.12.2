@@ -403,8 +403,17 @@ golem.material.protoplasm=Protoplasm
 golem.material.text.protoplasm=These golems are organic...
 
 research.FOCUSSTABILIZE.title=Focus Effect: Stabilize
-research.FOCUSSTABILIZE.stage.1=My recent discoveries have shown that stabilizing abnormalities in infusion matrices is indeed possible. <BR> I should invest research in creating an according focus effect.
-research.FOCUSSTABILIZE.stage.2=This beautiful focus effect increases the stability of infusion matrices for a bit.
+research.FOCUSSTABILIZE.stage.1=My recent discoveries have shown that stabilizing abnormalities in infusion matrices is indeed possible. <BR>I should invest research in creating an according focus effect.
+research.FOCUSSTABILIZE.stage.2=This stabilization effect will (when cast on an Infusion Matrix) increase the target's stability for a bit.<BR>This could be useful in some infusions.
+
+research.MUSHROOM_INTOXICATING.title=Shimmershroom
+research.MUSHROOM_INTOXICATING.stage.1=Recently, I started experiments with intoxicating herbs... relatively expensive intoxicating herbs.<BR>I could invest research into finding a cheap way of short intoxication.<BR>Maybe I should start by looking at a familiar fungus, one that already has minor intoxicating effects.
+research.MUSHROOM_INTOXICATING.stage.2=Inspecting these mushrooms has proven useful; however, I will need to investigate further, and find ways of enhancing this fungus' properties.<BR>Examining rather occult manifestations of the mind will prove useful.
+research.MUSHROOM_INTOXICATING.stage.3=I have completed my research.<BR>This modified fungus will intoxicate anyone that touches it, for a short period of time.<BR>It's quite smelly.
+
+research.f_SHROOM.text=Examine Vishrooms
+research.f_PASSION.text=Examine Fabric of Passion
+research.f_REASON.text=Examine Fabric of Reason
 
 elementaristics.STABILIZE.name=Stabilize
 elementaristics.STABILIZE.text=Stabilizes infusion matrices.
@@ -415,7 +424,7 @@ research.FOCUSRIFTCLOSER.stage.1=Now that I have found a way of removing flux ri
 research.FOCUSRIFTCLOSER.stage.2=This focus is able of closing rifts matching its power at the cost of flux (which can be decreased). <BR>Removing flux rifts with the pure power of a focus seems to have its downsides. The destroyed rift won't drop any useful objects and will just disappear.
 
 elementaristics.RIFTCLOSER.name=Close Rifts
-elementaristics.RIFTCLOSER.text=Completely removes flux rifts at the cost of flux in the aura. No items will drop.
+elementaristics.RIFTCLOSER.text=Completely removes flux rifts at the cost of flux generation. No items will drop.
 focus.rift_closer.power=Power
 focus.rift_closer.cleanliness=Cleanliness
 

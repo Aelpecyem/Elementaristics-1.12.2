@@ -16,6 +16,7 @@ import de.aelpecyem.elementaristics.networking.PacketHandler;
 import de.aelpecyem.elementaristics.proxy.CommonProxy;
 import de.aelpecyem.elementaristics.init.InitRecipes;
 import de.aelpecyem.elementaristics.util.ClientTickHandler;
+import de.aelpecyem.elementaristics.util.Keybinds;
 import de.aelpecyem.elementaristics.util.RenderHandler;
 import de.aelpecyem.elementaristics.world.WorldGen;
 import de.aelpecyem.elementaristics.world.structures.WorldGenAnomaly;
@@ -25,6 +26,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.util.DamageSource;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
@@ -71,6 +73,10 @@ public final class Elementaristics {
 
     public static Configuration config;
 
+    public static final DamageSource DAMAGE_PSYCHIC = new DamageSource("damage_psychic").setDamageBypassesArmor();
+    public static final DamageSource DAMAGE_AIR = new DamageSource("damage_air").setExplosion();
+    public static final DamageSource DAMAGE_AETHER = new DamageSource("damage_aether");
+
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         LOGGER.info(NAME + " is loading");
@@ -78,6 +84,7 @@ public final class Elementaristics {
         config = new Configuration(new File(directory.getPath(), "elementaristics.cfg"));
         de.aelpecyem.elementaristics.config.Config.readConfig();
         MinecraftForge.EVENT_BUS.register(new PotionInit());
+
         SoulInit.init();
 
         PacketHandler.init();
@@ -95,6 +102,7 @@ public final class Elementaristics {
 
         GameRegistry.registerWorldGenerator(new WorldGen(), 3);
         initOreDict();
+        Keybinds.register();
     }
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
@@ -103,11 +111,13 @@ public final class Elementaristics {
             ThaumcraftCompat.init();
         }
         GameRegistry.registerWorldGenerator(new WorldGenAnomaly(), 10);// todo gonna continue with this later on
+        MinecraftForge.EVENT_BUS.register(new SpellInit());
         MinecraftForge.EVENT_BUS.register(new PotionInit());
         MinecraftForge.EVENT_BUS.register(new HUDRenderHandler());
         MinecraftForge.EVENT_BUS.register(new CapabilityHandler());
         MinecraftForge.EVENT_BUS.register(new EventHandler());
         MinecraftForge.EVENT_BUS.register(new LootTableEventHandler());
+
 
         MinecraftForge.EVENT_BUS.register(new ClientTickHandler());
         InitRecipes.init();
@@ -121,6 +131,8 @@ public final class Elementaristics {
 
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event) {
+        SpellInit.initSpells();
+        SoulInit.initSpellsForSouls();
         SoulCaps.init();
     }
 

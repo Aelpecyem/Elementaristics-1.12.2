@@ -1,9 +1,7 @@
 package de.aelpecyem.elementaristics.misc.potions;
 
 import de.aelpecyem.elementaristics.Elementaristics;
-import de.aelpecyem.elementaristics.misc.potions.effects.PotionFocused;
-import de.aelpecyem.elementaristics.misc.potions.effects.PotionIntoxicated;
-import de.aelpecyem.elementaristics.misc.potions.effects.PotionTrance;
+import de.aelpecyem.elementaristics.misc.potions.effects.*;
 import de.aelpecyem.elementaristics.misc.potions.effects.emotion.*;
 import net.minecraft.potion.Potion;
 import net.minecraftforge.event.RegistryEvent;
@@ -20,6 +18,10 @@ public class PotionInit {
     public static final PotionTrance potionTrance = new PotionTrance();
     public static final PotionFocused potionFocused = new PotionFocused();
 
+    public static final PotionFormGaseous potionFormGaseous = new PotionFormGaseous();
+    public static final PotionCrystalProtection potionCrystalProtection = new PotionCrystalProtection();
+    public static final PotionFireballCharge potionFireballCharge = new PotionFireballCharge();
+
     public static PotionEmotionContentment contentment = new PotionEmotionContentment(); //lower regen
     public static PotionEmotionDread dread = new PotionEmotionDread(); //higher regen
     public static PotionEmotionEcstasy ecstasy = new PotionEmotionEcstasy(); //little regen / no regen
@@ -32,6 +34,10 @@ public class PotionInit {
         event.getRegistry().register(potionIntoxicated);
         event.getRegistry().register(potionTrance);
         event.getRegistry().register(potionFocused);
+
+        event.getRegistry().register(potionFormGaseous);
+        event.getRegistry().register(potionCrystalProtection);
+        event.getRegistry().register(potionFireballCharge);
 
         event.getRegistry().register(contentment);
         event.getRegistry().register(dread);

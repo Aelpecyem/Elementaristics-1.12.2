@@ -3,17 +3,22 @@ package de.aelpecyem.elementaristics.particles;
 import de.aelpecyem.elementaristics.Elementaristics;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.Particle;
+import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.texture.TextureMap;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
+import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.lwjgl.opengl.GL11;
 
 //see https://github.com/Ellpeck/NaturesAura/blob/master/src/main/java/de/ellpeck/naturesaura/particles/ParticleMagic.java
+
 @SideOnly(Side.CLIENT)
 public class ParticleGeneric extends Particle {
-    public static final ResourceLocation TEXTURE = new ResourceLocation(Elementaristics.MODID, "items/essence_blank"); //may be dirty and hacky, but saves effort and one additional texture
+    public static final ResourceLocation TEXTURE = new ResourceLocation(Elementaristics.MODID, "textures/misc/particle_base_1.png"); //switch to particle_base_1.png if it's considered fancier
 
     private final float desiredScale;
     private final boolean fade;
@@ -78,6 +83,35 @@ public class ParticleGeneric extends Particle {
     }
 
     @Override
+    public void renderParticle(BufferBuilder buffer, Entity entityIn, float partialTicks, float rotationX, float rotationZ, float rotationYZ, float rotationXY, float rotationXZ) {
+        Minecraft.getMinecraft().renderEngine.bindTexture(TEXTURE);
+//        buffer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX_COLOR);
+
+        double x = this.prevPosX + (this.posX - this.prevPosX) * partialTicks - interpPosX;
+        double y = this.prevPosY + (this.posY - this.prevPosY) * partialTicks - interpPosY;
+        double z = this.prevPosZ + (this.posZ - this.prevPosZ) * partialTicks - interpPosZ;
+        float sc = 0.1F * this.particleScale;
+
+        int brightness = this.getBrightnessForRender(partialTicks);
+        int sky = brightness >> 16 & 0xFFFF;
+        int block = brightness & 0xFFFF;
+
+        buffer.pos(x + (-rotationX * sc - rotationXY * sc), y + -rotationZ * sc, z + (-rotationYZ * sc - rotationXZ * sc))
+                .tex(0, 1).color(this.particleRed, this.particleGreen, this.particleBlue, this.particleAlpha)
+                .lightmap(sky, block).endVertex();
+        buffer.pos(x + (-rotationX * sc + rotationXY * sc), y + (rotationZ * sc), z + (-rotationYZ * sc + rotationXZ * sc))
+                .tex(1, 1).color(this.particleRed, this.particleGreen, this.particleBlue, this.particleAlpha)
+                .lightmap(sky, block).endVertex();
+        buffer.pos(x + (rotationX * sc + rotationXY * sc), y + (rotationZ * sc), z + (rotationYZ * sc + rotationXZ * sc))
+                .tex(1, 0).color(this.particleRed, this.particleGreen, this.particleBlue, this.particleAlpha)
+                .lightmap(sky, block).endVertex();
+        buffer.pos(x + (rotationX * sc - rotationXY * sc), y + (-rotationZ * sc), z + (rotationYZ * sc - rotationXZ * sc))
+                .tex(0, 0).color(this.particleRed, this.particleGreen, this.particleBlue, this.particleAlpha)
+                .lightmap(sky, block).endVertex();
+        super.renderParticle(buffer, entityIn, partialTicks, rotationX, rotationZ, rotationYZ, rotationXY, rotationXZ);
+    }
+
+    @Override
     public void onUpdate() {
         if (followPosition) {
             motionX = (xTo - posX) / 20;
@@ -103,6 +137,7 @@ public class ParticleGeneric extends Particle {
             }
         }
     }
+
 
     @Override
     public int getFXLayer() {

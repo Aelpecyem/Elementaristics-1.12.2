@@ -1,10 +1,7 @@
 package de.aelpecyem.elementaristics.init;
 
-import de.aelpecyem.elementaristics.blocks.base.BlockBase;
-import de.aelpecyem.elementaristics.blocks.base.BlockFlowerBase;
-import de.aelpecyem.elementaristics.blocks.base.BlockSilverThread;
+import de.aelpecyem.elementaristics.blocks.base.*;
 import de.aelpecyem.elementaristics.blocks.base.crops.BlockCropBase;
-import de.aelpecyem.elementaristics.blocks.base.OreDroppingBase;
 import de.aelpecyem.elementaristics.blocks.base.crops.CropOpium;
 import de.aelpecyem.elementaristics.blocks.tileentity.blocks.*;
 import de.aelpecyem.elementaristics.misc.elements.Aspect;
@@ -43,13 +40,13 @@ public class ModBlocks {
     public static BlockPedestal pedestal;
     public static BlockPurifier purifier;
     public static BlockLightningPedestal pedestalLightning;
-    public static BlockSoulIdentifier soul_identifier;
     public static BlockConcentrator concentrator;
     public static BlockTunneler tunneler_top;
     public static BlockFilterHolder filter_holder;
     public static BlockReactor reactor;
     public static BlockBase essence_casing;
     public static BlockAltar altar;
+    public static BlockBasin basin;
     public static BlockBase fabric_reason;
     public static BlockBase fabric_passion;
     public static BlockSilverThread block_silver_thread;
@@ -62,6 +59,8 @@ public class ModBlocks {
     public static BlockBush flower_laughter;
     public static BlockBush flower_silence;
 
+    public static BlockBush mushroom_intoxicating;
+
     public static void init() {
         crop_opium = new CropOpium();
         stone_enriched = new BlockBase(Material.ROCK, "stone_enriched");
@@ -71,13 +70,13 @@ public class ModBlocks {
         pedestal = new BlockPedestal();
         purifier = new BlockPurifier();
         pedestalLightning = new BlockLightningPedestal();
-        soul_identifier = new BlockSoulIdentifier();
         concentrator = new BlockConcentrator();
         tunneler_top = new BlockTunneler();
         filter_holder = new BlockFilterHolder();
         reactor = new BlockReactor();
         essence_casing = new BlockBase(Material.ROCK, "casing_essence");
         altar = new BlockAltar();
+        basin = new BlockBasin();
         fabric_reason = new BlockBase(Material.ROCK, "fabric_reason");
         fabric_passion = new BlockBase(Material.ROCK, "fabric_passion");
         block_silver_thread = new BlockSilverThread();
@@ -89,6 +88,8 @@ public class ModBlocks {
         flower_laughter = new BlockFlowerBase("flower_laughter", PotionInit.laughter);
         flower_silence = new BlockFlowerBase("flower_silence", PotionInit.silence);
 
+        //TC
+        mushroom_intoxicating = new BlockMushroomIntoxicating();
     }
 
 
@@ -106,12 +107,13 @@ public class ModBlocks {
         GameRegistry.registerTileEntity(pedestal.getTileEntityClass(), pedestal.getRegistryName().toString());
         GameRegistry.registerTileEntity(purifier.getTileEntityClass(), purifier.getRegistryName().toString());
         GameRegistry.registerTileEntity(pedestalLightning.getTileEntityClass(), pedestalLightning.getRegistryName().toString());
-        GameRegistry.registerTileEntity(soul_identifier.getTileEntityClass(), soul_identifier.getRegistryName().toString());
         GameRegistry.registerTileEntity(concentrator.getTileEntityClass(), concentrator.getRegistryName().toString());
         GameRegistry.registerTileEntity(tunneler_top.getTileEntityClass(), tunneler_top.getRegistryName().toString());
         GameRegistry.registerTileEntity(filter_holder.getTileEntityClass(), filter_holder.getRegistryName().toString());
         GameRegistry.registerTileEntity(reactor.getTileEntityClass(), reactor.getRegistryName().toString());
         GameRegistry.registerTileEntity(altar.getTileEntityClass(), altar.getRegistryName().toString());
+        GameRegistry.registerTileEntity(basin.getTileEntityClass(), basin.getRegistryName().toString());
+
     }
 
     public static void registerItemBlocks(IForgeRegistry<Item> registry) {

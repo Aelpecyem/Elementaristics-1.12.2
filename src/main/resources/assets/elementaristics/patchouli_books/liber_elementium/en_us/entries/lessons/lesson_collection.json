@@ -1,5 +1,5 @@
 {
-  "name": "Collected Essences",
+  "name": "Collected Essences --- PROBABLY WILL BE OVERHAULED :3",
   "icon": "elementaristics:essence:4",
   "category": "arcane_lessons",
   "pages": [
@@ -11,7 +11,7 @@
       "advancement": "elementaristics:discovery_aether",
       "type": "spotlight",
       "item": "elementaristics:essence:4",
-      "text": "Aether is the element of galaxies, the unknown and the space of possibilities, sometimes even time-space and existence in general. $(br)Its vague direct definition sometimes lets people consider it the 'other' element, besides obviously making research with this quite annoying. $(br)(Should I sometimes just use it as a placeholder?)"
+      "text": "Aether is the element of galaxies, the unknown and the space of possibilities, sometimes even time-space and existence in general. $(br)Its vague direct definition sometimes lets people consider it the 'other' element."
     },
     {
       "advancement": "elementaristics:discovery_air",
@@ -38,40 +38,40 @@
       "text": "Water is the element of liquids, a crucial component to life as we know it and is sometimes even connected to feelings. $(br)Generally, it is often known to be one of the simplest primal elements."
     },
     {
-      "advancement": "elementaristics:discovery_crystal",
+      "advancement": "elementaristics:progress_purifier",
       "type": "elementaristics:purifier_recipe",
       "recipe": "elementaristics:essence_crystal",
       "name": "Crystal Essence",
       "text": "The aspect of crystals symbolizes the structure in all crystalline matter and is thus loosely connected to the aspect of Order. $(br)One may describe it as the 'stronger earth aspect'."
     },{
-      "advancement": "elementaristics:discovery_order",
+      "advancement": "elementaristics:progress_purifier",
       "type": "elementaristics:purifier_recipe",
       "recipe": "elementaristics:essence_order",
       "name": "Crystal Essence",
       "text": "Order: the very force, or rather, not-force that keeps the universe from collapsing in chaos."
     },
     {
-      "advancement": "elementaristics:discovery_life",
+      "advancement": "elementaristics:progress_reactor",
       "type": "elementaristics:reactor_recipe",
       "recipe": "elementaristics:essence_life",
       "name": "Life Essence",
       "text": "The aspect of life... is quite lively. It is able to adapt to cruel conditions and is the aspect that persists chaos, or rather, order the most... till death."
     },{
-      "advancement": "elementaristics:discovery_electricity",
+      "advancement": "elementaristics:progress_reactor",
       "type": "elementaristics:reactor_recipe",
       "recipe": "elementaristics:essence_electricity",
       "name": "Electricity Essence",
       "text": "This truly shocking aspect describes the energy of electricity, with its motion and its influence."
     },
     {
-      "advancement": "elementaristics:discovery_light",
+      "advancement": "elementaristics:progress_concentrator",
       "type": "elementaristics:concentrator_recipe",
       "recipe": "elementaristics:essence_light",
       "name": "Light Essence",
       "text": "Being sustained by the air and its motion, fire creates light. Light so glorious even gods might see it."
     },
     {
-      "advancement": "elementaristics:discovery_ice",
+      "advancement": "elementaristics:progress_concentrator",
       "type": "elementaristics:concentrator_recipe",
       "recipe": "elementaristics:essence_ice",
       "name": "Ice Essence",

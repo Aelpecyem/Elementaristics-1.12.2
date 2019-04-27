@@ -70,7 +70,7 @@
       ],
       "category": "ELEMENTARISTICS",
       "location": [
-        -4,
+        -2,
         4
       ],
       "parents": [
@@ -99,7 +99,7 @@
       ],
       "category": "ELEMENTARISTICS",
       "location": [
-        -8,
+        -4,
         4
       ],
       "parents": [
@@ -157,7 +157,7 @@
       ],
       "category": "ELEMENTARISTICS",
       "location": [
-        8,
+        4,
         4
       ],
       "parents": [
@@ -186,7 +186,7 @@
       ],
       "category": "ELEMENTARISTICS",
       "location": [
-        4,
+        2,
         4
       ],
       "parents": [
@@ -261,6 +261,54 @@
       ]
     },
     {
+      "key": "MUSHROOM_INTOXICATING",
+      "name": "research.MUSHROOM_INTOXICATING.title",
+      "icons": [
+        "elementaristics:mushroom_intoxicating"
+      ],
+      "category": "ELEMENTARISTICS",
+      "location": [
+        0,
+        -2
+      ],
+      "parents": [
+        "BASEELEMENTARISTICS",
+        "HEDGEALCHEMY"
+      ],
+      "stages": [
+        {
+          "text": "research.MUSHROOM_INTOXICATING.stage.1",
+          "required_item": [
+            "thaumcraft:vishroom"
+          ],
+          "required_research": [
+            "f_SHROOM"
+          ]
+        },
+        {
+          "text": "research.MUSHROOM_INTOXICATING.stage.2",
+          "required_item": [
+            "elementaristics:bundle_herbs"
+          ],
+          "required_research": [
+            "f_PASSION",
+            "f_REASON"
+          ],
+          "required_knowledge": [
+            "THEORY;ALCHEMY;1",
+            "THEORY;INFUSION;1",
+            "THEORY;BASICS;1"
+          ]
+        },
+        {
+          "text": "research.MUSHROOM_INTOXICATING.stage.3",
+          "recipes": [
+            "elementaristics:tc_mushroom_intoxicating"
+          ]
+        }
+      ]
+    },
+    {
       "key": "FOCUSSTABILIZE",
       "name": "research.FOCUSSTABILIZE.title",
       "icons": [
@@ -272,7 +320,6 @@
         0
       ],
       "parents": [
-        "BASEELEMENTARISTICS",
         "BASEELEMENTARISTICS",
         "INFUSIONSTABLE"
       ],

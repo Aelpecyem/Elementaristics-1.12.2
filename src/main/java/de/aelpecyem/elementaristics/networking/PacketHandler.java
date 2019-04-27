@@ -4,6 +4,8 @@ import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.networking.cap.CapabilitySync;
 import de.aelpecyem.elementaristics.networking.tileentity.altar.PacketRequestUpdateAltar;
 import de.aelpecyem.elementaristics.networking.tileentity.altar.PacketUpdateAltar;
+import de.aelpecyem.elementaristics.networking.tileentity.basin.PacketRequestUpdateBasin;
+import de.aelpecyem.elementaristics.networking.tileentity.basin.PacketUpdateBasin;
 import de.aelpecyem.elementaristics.networking.tileentity.concentrator.PacketRequestUpdateConcentrator;
 import de.aelpecyem.elementaristics.networking.tileentity.concentrator.PacketUpdateConcentrator;
 import de.aelpecyem.elementaristics.networking.tileentity.filterholder.PacketRequestUpdateFilterHolder;
@@ -58,7 +60,10 @@ public class PacketHandler {
         network.registerMessage(new PacketUpdateAltar.Handler(), PacketUpdateAltar.class, 14, Side.CLIENT);
         network.registerMessage(new PacketRequestUpdateAltar.Handler(), PacketRequestUpdateAltar.class, 15, Side.SERVER);
 
-        network.registerMessage(new CapabilitySync.Handler(), CapabilitySync.class, 16, Side.CLIENT);
+        network.registerMessage(new PacketUpdateBasin.Handler(), PacketUpdateBasin.class, 16, Side.CLIENT);
+        network.registerMessage(new PacketRequestUpdateBasin.Handler(), PacketRequestUpdateBasin.class, 17, Side.SERVER);
+
+        network.registerMessage(new CapabilitySync.Handler(), CapabilitySync.class, 18, Side.CLIENT);
     }
 
     public static void sendToAllLoaded(World world, BlockPos pos, IMessage message) {

@@ -16,6 +16,7 @@ public class SoulCapAir extends SoulCap {
         super(SoulInit.soulAir);
     }
 
+
     @Override
     public void onJumpEvent(LivingEvent.LivingJumpEvent event, EntityPlayer player, IPlayerCapabilities cap) {
         if (cap.knowsSoul()) {
@@ -44,6 +45,7 @@ public class SoulCapAir extends SoulCap {
     public void onTickEvent(TickEvent.PlayerTickEvent event, EntityPlayer player, IPlayerCapabilities cap) {
         if (cap.knowsSoul()){
             event.player.jumpMovementFactor = 0.06F;
+            event.player.fallDistance *= 0.9F;
         }
         super.onTickEvent(event, player, cap);
     }

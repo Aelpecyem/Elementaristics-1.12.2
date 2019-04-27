@@ -37,6 +37,7 @@ public class ClientProxy extends CommonProxy {
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTunneler.class, new TESRTunneler());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityFilterHolder.class, new TESRFilterHolder());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityReactor.class, new TESRReactor());
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityInfusionBasin.class, new TESRBasin());
     }
 
 
@@ -106,6 +107,11 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void generateGenericParticles(ParticleGeneric particleGeneric) {
         Minecraft.getMinecraft().effectRenderer.addEffect(particleGeneric);
+    }
+
+    @Override
+    public void registerKeyBinds() {
+        super.registerKeyBinds();
     }
 }
 

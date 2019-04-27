@@ -106,12 +106,6 @@ public class EntityCultist extends EntityTameable {
         compound.setInteger("stuntTime", getStuntTime());
     }
 
-    @Nullable
-    @Override
-    public EntityLivingBase getOwner() {
-
-        return world.getClosestPlayer(posX, posY, posZ, 1000, false);
-    }
 
     @Override
     protected void applyEntityAttributes() {

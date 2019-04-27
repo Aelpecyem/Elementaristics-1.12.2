@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SWS",
+    "SGS",
+    "SSS"
+  ],
+  "key": {
+    "W": {
+      "item": "elementaristics:essence",
+      "data": 2
+    },
+    "S": {
+      "item": "elementaristics:stone_enriched"
+    },
+    "G": {
+      "item": "elementaristics:essence",
+      "data": 1
+    }
+  },
+  "result": {
+    "item": "elementaristics:basin_infusion",
+    "count": 1
+  }
+}

@@ -23,8 +23,12 @@ public class InitRecipes {
         initTunneler();
         initConcentrator();
         initReactor();
+        initBasin();
     }
 
+    private static void initBasin() {
+        InfusionRecipes.addRecipe(new InfusionRecipe(new ResourceLocation(Elementaristics.MODID, "seed_wheat"), Ingredient.fromItem(ModItems.itemBaseSeed), Items.WHEAT_SEEDS.getDefaultInstance(), Aspects.earth, Aspects.water));
+    }
     private static void initForge() {
         ForgeRecipes.addRecipe(new ForgeRecipe(new ResourceLocation(Elementaristics.MODID, "thaumagral_iron"), Ingredient.fromStacks(new ItemStack(Items.IRON_SWORD)), Ingredient.fromStacks(new ItemStack(ModItems.essence, 1, Aspects.fire.getId())), Ingredient.fromStacks(new ItemStack(ModItems.essence, 1, Aspects.mana.getId())), Ingredient.fromStacks(new ItemStack(Items.IRON_INGOT)), Ingredient.fromStacks(new ItemStack(ModItems.gem_triangular)),  ModItems.thaumagral_iron.getDefaultInstance()));
         ForgeRecipes.addRecipe(new ForgeRecipe(new ResourceLocation(Elementaristics.MODID, "hammer_heat"), Ingredient.fromItem(ModItems.head_hammer), Ingredient.fromStacks(new ItemStack(ModItems.essence, 1, Aspects.fire.getId())), Ingredient.fromItem(ModItems.sparks_living),Ingredient.fromStacks(new ItemStack(Blocks.OBSIDIAN)), Ingredient.fromItem(Items.STICK), ModItems.hammer_heat.getDefaultInstance()));

@@ -21,10 +21,10 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
+import javax.annotation.Nonnull;
+
 public class TileEntityConcentrator extends TileEntity implements ITickable {
 
-
-    public EnumParticleTypes particle = EnumParticleTypes.CRIT_MAGIC;
     public ItemStackHandler inventory = new ItemStackHandler(2) {
 
         @Override
@@ -48,14 +48,12 @@ public class TileEntityConcentrator extends TileEntity implements ITickable {
     public int tickCount;
     public long lastChangeTime;
     public ItemStack stackCrafting = ItemStack.EMPTY;
-    private boolean crafting;
 
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
         compound.setTag("inventory", inventory.serializeNBT());
         compound.setInteger("tickCount", tickCount);
         compound.setLong("lastChangeTime", lastChangeTime);
-        compound.setBoolean("crafting", crafting);
         compound.setTag("stackCrafting", stackCrafting.serializeNBT());
         return super.writeToNBT(compound);
     }
@@ -65,7 +63,6 @@ public class TileEntityConcentrator extends TileEntity implements ITickable {
         inventory.deserializeNBT(compound.getCompoundTag("inventory"));
         tickCount = compound.getInteger("tickCount");
         lastChangeTime = compound.getInteger("lastChangeTime");
-        crafting = compound.getBoolean("crafting");
         stackCrafting.deserializeNBT(compound.getCompoundTag("stackCrafting"));
         super.readFromNBT(compound);
     }
@@ -75,9 +72,6 @@ public class TileEntityConcentrator extends TileEntity implements ITickable {
         return new AxisAlignedBB(getPos(), getPos().add(1, 2, 1));
     }
 
-    public boolean isCrafting() {
-        return crafting;
-    }
 
     @Override
     public boolean hasCapability(Capability<?> capability, EnumFacing facing) {

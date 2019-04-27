@@ -32,11 +32,10 @@ public class BlockFlowerBase extends BlockBush implements IBlockHasModel {
 
     public BlockFlowerBase(String name, float lightLevel, PotionEmotion emotion) {
         super(Material.PLANTS);
-        setHardness(6);
-        setResistance(6);
         setLightLevel(lightLevel);
         this.name = name;
         this.emotion = emotion;
+        setSoundType(SoundType.PLANT);
         setUnlocalizedName(name);
         setRegistryName(name);
         this.setCreativeTab(Elementaristics.tab);

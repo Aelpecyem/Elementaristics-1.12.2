@@ -179,12 +179,14 @@ public class TileEntityAltar extends TileEntity implements ITickable {
             while (iterator.hasNext()) {
                 EntityCultist cultist = (EntityCultist) iterator.next();
                 if (MaganUtil.drainMaganFromCultist(cultist, rite.getMaganDrainedPerTick(), 20, true)) {
-                    Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(world, cultist.posX + cultist.world.rand.nextFloat() * cultist.width
-                            * 2.0F - cultist.width,
-                            cultist.posY + 0.5D + cultist.world.rand.nextFloat()
-                                    * cultist.height,
-                            cultist.posZ + cultist.world.rand.nextFloat() * cultist.width
-                                    * 2.0F - cultist.width, 0, 0, 0, cultist.getAspect().getColor(), 3, 100, 0, true, true, true, pos.getX() + 0.5F, pos.getY() + 1, pos.getZ() + 0.5F));
+                    if (tickCount % 5 == 0) {
+                        Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(world, cultist.posX + cultist.world.rand.nextFloat() * cultist.width
+                                * 2.0F - cultist.width,
+                                cultist.posY + 0.5D + cultist.world.rand.nextFloat()
+                                        * cultist.height,
+                                cultist.posZ + cultist.world.rand.nextFloat() * cultist.width
+                                        * 2.0F - cultist.width, 0, 0, 0, cultist.getAspect().getColor(), 1, 100, 0, true, true, true, pos.getX() + 0.5F, pos.getY() + 1, pos.getZ() + 0.5F));
+                    }
                     return true;
                 }
             }
@@ -197,13 +199,14 @@ public class TileEntityAltar extends TileEntity implements ITickable {
                 if (MaganUtil.drainMaganFromPlayer(player, rite.getMaganDrainedPerTick(), 20, true)) {
                     if (player.hasCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null)) {
                         IPlayerCapabilities caps = player.getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null);
-
-                        Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(world, player.posX + player.world.rand.nextFloat() * player.width
-                                * 2.0F - player.width,
-                                player.posY + 0.5D + player.world.rand.nextFloat()
-                                        * player.height,
-                                player.posZ + player.world.rand.nextFloat() * player.width
-                                        * 2.0F - player.width, 0, 0, 0, SoulInit.getSoulFromId(caps.getSoulId()).getParticleColor(), 3, 100, 0, true, true, true, pos.getX() + 0.5F, pos.getY() + 1, pos.getZ() + 0.5F));
+                        if (tickCount % 5 == 0) {
+                            Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(world, player.posX + player.world.rand.nextFloat() * player.width
+                                    * 2.0F - player.width,
+                                    player.posY + 0.5D + player.world.rand.nextFloat()
+                                            * player.height,
+                                    player.posZ + player.world.rand.nextFloat() * player.width
+                                            * 2.0F - player.width, 0, 0, 0, SoulInit.getSoulFromId(caps.getSoulId()).getParticleColor(), 1, 100, 0, true, true, true, pos.getX() + 0.5F, pos.getY() + 1, pos.getZ() + 0.5F));
+                        }
                     }
                     return true;
                 }
