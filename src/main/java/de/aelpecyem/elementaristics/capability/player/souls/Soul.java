@@ -1,10 +1,9 @@
-package de.aelpecyem.elementaristics.capability.souls;
+package de.aelpecyem.elementaristics.capability.player.souls;
 
-import de.aelpecyem.elementaristics.capability.IPlayerCapabilities;
+import de.aelpecyem.elementaristics.capability.player.IPlayerCapabilities;
 import de.aelpecyem.elementaristics.init.SoulInit;
 import de.aelpecyem.elementaristics.misc.spell.SpellBase;
 import net.minecraft.client.resources.I18n;
-import scala.Int;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -99,6 +98,7 @@ public class Soul {
 
     /**
      * Really, only call this Client-Side
+     *
      * @return
      */
     public String getLocalizedName() {

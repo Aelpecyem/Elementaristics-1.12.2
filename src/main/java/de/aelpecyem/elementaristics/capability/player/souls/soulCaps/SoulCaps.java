@@ -1,6 +1,6 @@
-package de.aelpecyem.elementaristics.capability.souls.soulCaps;
+package de.aelpecyem.elementaristics.capability.player.souls.soulCaps;
 
-import de.aelpecyem.elementaristics.capability.souls.Soul;
+import de.aelpecyem.elementaristics.capability.player.souls.Soul;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -11,7 +11,7 @@ public class SoulCaps {
     public static SoulCap soulCapAir;
     public static SoulCap soulCapInstable;
 
-    public static void init(){
+    public static void init() {
         soulCapAir = new SoulCapAir();
         soulCapInstable = new SoulCapInstable();
     }
@@ -20,7 +20,7 @@ public class SoulCaps {
         return caps.getOrDefault(soul, standardCap);
     }
 
-    public static void addSoulCapToSoul(SoulCap cap, Soul soul){
+    public static void addSoulCapToSoul(SoulCap cap, Soul soul) {
         caps.put(soul, cap);
     }
 }

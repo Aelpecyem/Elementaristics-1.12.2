@@ -1,22 +1,15 @@
 package de.aelpecyem.elementaristics.blocks.base;
 
 import com.google.common.base.Predicate;
-import de.aelpecyem.elementaristics.Elementaristics;
-import de.aelpecyem.elementaristics.capability.IPlayerCapabilities;
-import de.aelpecyem.elementaristics.capability.PlayerCapProvider;
+import de.aelpecyem.elementaristics.capability.player.IPlayerCapabilities;
+import de.aelpecyem.elementaristics.capability.player.PlayerCapProvider;
 import de.aelpecyem.elementaristics.config.Config;
 import de.aelpecyem.elementaristics.entity.EntitySilverThread;
-import de.aelpecyem.elementaristics.init.ModBlocks;
-import de.aelpecyem.elementaristics.util.IHasModel;
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;

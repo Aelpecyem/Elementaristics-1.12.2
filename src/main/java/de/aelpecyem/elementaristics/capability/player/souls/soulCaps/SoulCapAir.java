@@ -1,13 +1,9 @@
-package de.aelpecyem.elementaristics.capability.souls.soulCaps;
+package de.aelpecyem.elementaristics.capability.player.souls.soulCaps;
 
-import de.aelpecyem.elementaristics.capability.IPlayerCapabilities;
-import de.aelpecyem.elementaristics.capability.souls.Soul;
+import de.aelpecyem.elementaristics.capability.player.IPlayerCapabilities;
 import de.aelpecyem.elementaristics.init.SoulInit;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.event.entity.living.LivingEvent;
-import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 public class SoulCapAir extends SoulCap {
@@ -27,23 +23,23 @@ public class SoulCapAir extends SoulCap {
 
     @Override
     public void normalize(EntityPlayer player, IPlayerCapabilities cap) {
-       player.capabilities.setPlayerWalkSpeed( 0.1F);
-       super.normalize(player, cap);
+        player.capabilities.setPlayerWalkSpeed(0.1F);
+        super.normalize(player, cap);
     }
 
     @Override
     public void buffsOnSpawning(EntityPlayer player, IPlayerCapabilities cap) {
-       if (cap.knowsSoul()) {
-           if (player.capabilities.getWalkSpeed() < 0.14F) {
-               player.capabilities.setPlayerWalkSpeed(0.14F);
-           }
-       }
+        if (cap.knowsSoul()) {
+            if (player.capabilities.getWalkSpeed() < 0.14F) {
+                player.capabilities.setPlayerWalkSpeed(0.14F);
+            }
+        }
         super.buffsOnSpawning(player, cap);
     }
 
     @Override
     public void onTickEvent(TickEvent.PlayerTickEvent event, EntityPlayer player, IPlayerCapabilities cap) {
-        if (cap.knowsSoul()){
+        if (cap.knowsSoul()) {
             event.player.jumpMovementFactor = 0.06F;
             event.player.fallDistance *= 0.9F;
         }

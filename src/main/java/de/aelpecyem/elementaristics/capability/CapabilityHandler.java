@@ -1,7 +1,9 @@
 package de.aelpecyem.elementaristics.capability;
 
 import de.aelpecyem.elementaristics.Elementaristics;
-import de.aelpecyem.elementaristics.capability.souls.soulCaps.SoulCaps;
+import de.aelpecyem.elementaristics.capability.player.IPlayerCapabilities;
+import de.aelpecyem.elementaristics.capability.player.PlayerCapProvider;
+import de.aelpecyem.elementaristics.capability.player.souls.soulCaps.SoulCaps;
 import de.aelpecyem.elementaristics.init.SoulInit;
 import de.aelpecyem.elementaristics.networking.PacketHandler;
 import de.aelpecyem.elementaristics.networking.cap.CapabilitySync;
@@ -20,12 +22,11 @@ public class CapabilityHandler {
 
     @SubscribeEvent
     public void attachCapability(AttachCapabilitiesEvent event) {
-        if (!(event.getObject() instanceof EntityPlayer)) {
-            return;
-
-        }
-        EntityPlayer player = (EntityPlayer) event.getObject();
+        if (event.getObject() instanceof EntityPlayer) {
+            EntityPlayer player = (EntityPlayer) event.getObject();
             event.addCapability(PLAYER_CAP, new PlayerCapProvider());
+        }
+
     }
 
     @SubscribeEvent
@@ -82,11 +83,8 @@ public class CapabilityHandler {
 
     @SubscribeEvent
     public void onPlayerTick(TickEvent.PlayerTickEvent event) {
-        if (event.player != null && event.player.hasCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null)) {
+        if (event.player != null && event.player.hasCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null) && !event.player.world.isRemote) {
             IPlayerCapabilities cap = event.player.getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null);
-
-            //System.out.println(cap.getTimeStunted()); sometimes does that, weirdly enough
-            //Stuff with mana stunting etc.etc.
             if (!(cap.getTimeStunted() > 0)) {
                 cap.fillMagan(cap.getMaganRegenPerTick());
             } else {

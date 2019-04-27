@@ -1,6 +1,8 @@
 package de.aelpecyem.elementaristics.init;
 
-import de.aelpecyem.elementaristics.capability.*;
+import de.aelpecyem.elementaristics.capability.player.IPlayerCapabilities;
+import de.aelpecyem.elementaristics.capability.player.PlayerCapStorage;
+import de.aelpecyem.elementaristics.capability.player.PlayerCapabilities;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 
 

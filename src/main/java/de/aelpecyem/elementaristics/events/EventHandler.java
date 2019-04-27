@@ -1,52 +1,28 @@
 package de.aelpecyem.elementaristics.events;
 
-import com.google.common.base.Predicate;
 import com.mojang.realmsclient.gui.ChatFormatting;
 import de.aelpecyem.elementaristics.blocks.base.BlockFlowerBase;
-import de.aelpecyem.elementaristics.capability.IPlayerCapabilities;
-import de.aelpecyem.elementaristics.capability.PlayerCapProvider;
+import de.aelpecyem.elementaristics.capability.player.IPlayerCapabilities;
+import de.aelpecyem.elementaristics.capability.player.PlayerCapProvider;
 import de.aelpecyem.elementaristics.config.Config;
-import de.aelpecyem.elementaristics.entity.EntityCultist;
-import de.aelpecyem.elementaristics.init.SoulInit;
 import de.aelpecyem.elementaristics.misc.potions.PotionInit;
-import net.minecraft.block.BlockBed;
-import net.minecraft.client.audio.SoundEventAccessor;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import net.minecraftforge.client.event.RenderPlayerEvent;
-import net.minecraftforge.client.event.TextureStitchEvent;
-import net.minecraftforge.client.event.sound.SoundLoadEvent;
-import net.minecraftforge.client.event.sound.SoundSetupEvent;
 import net.minecraftforge.common.util.ITeleporter;
-import net.minecraftforge.event.entity.player.PlayerSleepInBedEvent;
-import net.minecraftforge.event.entity.player.PlayerWakeUpEvent;
-import net.minecraftforge.event.entity.player.SleepingLocationCheckEvent;
 import net.minecraftforge.event.entity.player.SleepingTimeCheckEvent;
-import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.eventhandler.Event;
-import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
-import scala.collection.parallel.ParIterableLike;
-import thaumcraft.api.aura.AuraHelper;
-import thaumcraft.common.entities.EntityFluxRift;
 import vazkii.patchouli.api.PatchouliAPI;
 
-import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Iterator;
-import java.util.List;
 
 public class EventHandler {
     @SubscribeEvent

@@ -1,37 +1,19 @@
 package de.aelpecyem.elementaristics.entity;
 
-import com.google.common.base.Predicate;
 import de.aelpecyem.elementaristics.Elementaristics;
-import de.aelpecyem.elementaristics.capability.IPlayerCapabilities;
-import de.aelpecyem.elementaristics.capability.PlayerCapProvider;
 import de.aelpecyem.elementaristics.init.SpellInit;
-import de.aelpecyem.elementaristics.items.base.artifacts.ItemSoulMirror;
-import de.aelpecyem.elementaristics.misc.elements.Aspect;
-import de.aelpecyem.elementaristics.misc.elements.Aspects;
 import de.aelpecyem.elementaristics.misc.spell.SpellBase;
 import de.aelpecyem.elementaristics.particles.ParticleGeneric;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.passive.EntityTameable;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityThrowable;
-import net.minecraft.init.SoundEvents;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.text.TextComponentString;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;

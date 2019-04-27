@@ -1,9 +1,7 @@
 package de.aelpecyem.elementaristics.misc.rites;
 
 import de.aelpecyem.elementaristics.blocks.tileentity.TileEntityAltar;
-import de.aelpecyem.elementaristics.capability.IPlayerCapabilities;
-import de.aelpecyem.elementaristics.capability.PlayerCapProvider;
-import de.aelpecyem.elementaristics.capability.souls.Soul;
+import de.aelpecyem.elementaristics.capability.player.souls.Soul;
 import de.aelpecyem.elementaristics.misc.elements.Aspect;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;

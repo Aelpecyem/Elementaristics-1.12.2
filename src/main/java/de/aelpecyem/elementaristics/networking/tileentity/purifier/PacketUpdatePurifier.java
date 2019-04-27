@@ -14,15 +14,17 @@ public class PacketUpdatePurifier implements IMessage {
     private BlockPos pos;
     private ItemStack stack;
     private long lastChangeTime;
+    private int tickCount;
 
-    public PacketUpdatePurifier(BlockPos pos, ItemStack stack, long lastChangeTime) {
+    public PacketUpdatePurifier(BlockPos pos, ItemStack stack, long lastChangeTime, int tickCount) {
         this.pos = pos;
         this.stack = stack;
         this.lastChangeTime = lastChangeTime;
+        this.tickCount = tickCount;
     }
 
     public PacketUpdatePurifier(TileEntityPurifier te) {
-        this(te.getPos(), te.inventory.getStackInSlot(0), te.lastChangeTime);
+        this(te.getPos(), te.inventory.getStackInSlot(0), te.lastChangeTime, te.tickCount);
     }
 
     public PacketUpdatePurifier() {
@@ -33,6 +35,7 @@ public class PacketUpdatePurifier implements IMessage {
         buf.writeLong(pos.toLong());
         ByteBufUtils.writeItemStack(buf, stack);
         buf.writeLong(lastChangeTime);
+        buf.writeInt(tickCount);
     }
 
     @Override
@@ -40,6 +43,7 @@ public class PacketUpdatePurifier implements IMessage {
         pos = BlockPos.fromLong(buf.readLong());
         stack = ByteBufUtils.readItemStack(buf);
         lastChangeTime = buf.readLong();
+        tickCount = buf.readInt();
     }
 
     public static class Handler implements IMessageHandler<PacketUpdatePurifier, IMessage> {
@@ -50,8 +54,8 @@ public class PacketUpdatePurifier implements IMessage {
                 TileEntityPurifier te = (TileEntityPurifier) Minecraft.getMinecraft().world.getTileEntity(message.pos);
                 if (te != null) {
                     te.inventory.setStackInSlot(0, message.stack);
-
                     te.lastChangeTime = message.lastChangeTime;
+                    te.tickCount = message.tickCount;
                 }
             });
             return null;

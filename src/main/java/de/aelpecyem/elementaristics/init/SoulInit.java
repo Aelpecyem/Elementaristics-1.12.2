@@ -1,8 +1,8 @@
 package de.aelpecyem.elementaristics.init;
 
-import de.aelpecyem.elementaristics.capability.IPlayerCapabilities;
-import de.aelpecyem.elementaristics.capability.souls.Soul;
-import de.aelpecyem.elementaristics.capability.souls.soulCaps.SoulCaps;
+import de.aelpecyem.elementaristics.capability.player.IPlayerCapabilities;
+import de.aelpecyem.elementaristics.capability.player.souls.Soul;
+import de.aelpecyem.elementaristics.capability.player.souls.soulCaps.SoulCaps;
 import net.minecraft.entity.player.EntityPlayer;
 
 import java.util.ArrayList;

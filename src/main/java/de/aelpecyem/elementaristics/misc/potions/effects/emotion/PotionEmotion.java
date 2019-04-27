@@ -1,18 +1,12 @@
 package de.aelpecyem.elementaristics.misc.potions.effects.emotion;
 
-import de.aelpecyem.elementaristics.Elementaristics;
-import de.aelpecyem.elementaristics.capability.IPlayerCapabilities;
-import de.aelpecyem.elementaristics.capability.PlayerCapProvider;
+import de.aelpecyem.elementaristics.capability.player.IPlayerCapabilities;
+import de.aelpecyem.elementaristics.capability.player.PlayerCapProvider;
 import de.aelpecyem.elementaristics.init.SoulInit;
 import de.aelpecyem.elementaristics.misc.potions.PotionInit;
 import de.aelpecyem.elementaristics.misc.potions.effects.PotionBase;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import scala.collection.parallel.ParIterableLike;
-
-import java.util.Collection;
-import java.util.Set;
 
 public class PotionEmotion extends PotionBase {
     public PotionEmotion(String name, int color, int index) {

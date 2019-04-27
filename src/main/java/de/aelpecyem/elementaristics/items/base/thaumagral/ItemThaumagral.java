@@ -1,12 +1,11 @@
 package de.aelpecyem.elementaristics.items.base.thaumagral;
 
 import de.aelpecyem.elementaristics.Elementaristics;
-import de.aelpecyem.elementaristics.capability.IPlayerCapabilities;
-import de.aelpecyem.elementaristics.capability.PlayerCapProvider;
+import de.aelpecyem.elementaristics.capability.player.IPlayerCapabilities;
+import de.aelpecyem.elementaristics.capability.player.PlayerCapProvider;
 import de.aelpecyem.elementaristics.entity.EntitySpellProjectile;
 import de.aelpecyem.elementaristics.init.ModItems;
 import de.aelpecyem.elementaristics.init.SoulInit;
-import de.aelpecyem.elementaristics.init.SpellInit;
 import de.aelpecyem.elementaristics.misc.spell.SpellBase;
 import de.aelpecyem.elementaristics.util.IHasModel;
 import de.aelpecyem.elementaristics.util.Keybinds;
@@ -14,15 +13,12 @@ import de.aelpecyem.elementaristics.util.MaganUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.*;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
@@ -30,7 +26,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 import javax.annotation.Nullable;
-import javax.swing.text.JTextComponent;
 import java.util.List;
 
 public class ItemThaumagral extends ItemSword implements IHasModel {

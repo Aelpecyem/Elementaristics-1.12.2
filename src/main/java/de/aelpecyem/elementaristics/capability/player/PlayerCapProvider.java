@@ -1,4 +1,4 @@
-package de.aelpecyem.elementaristics.capability;
+package de.aelpecyem.elementaristics.capability.player;
 
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.util.EnumFacing;
@@ -8,7 +8,6 @@ import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 
 
 public class PlayerCapProvider implements ICapabilitySerializable<NBTBase> {
-
 
     @CapabilityInject(IPlayerCapabilities.class)
     public static final Capability<IPlayerCapabilities> ELEMENTARISTICS_CAP = null;

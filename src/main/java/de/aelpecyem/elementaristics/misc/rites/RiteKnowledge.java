@@ -2,9 +2,9 @@ package de.aelpecyem.elementaristics.misc.rites;
 
 import com.mojang.realmsclient.gui.ChatFormatting;
 import de.aelpecyem.elementaristics.Elementaristics;
-import de.aelpecyem.elementaristics.capability.IPlayerCapabilities;
-import de.aelpecyem.elementaristics.capability.PlayerCapProvider;
-import de.aelpecyem.elementaristics.capability.souls.soulCaps.SoulCaps;
+import de.aelpecyem.elementaristics.capability.player.IPlayerCapabilities;
+import de.aelpecyem.elementaristics.capability.player.PlayerCapProvider;
+import de.aelpecyem.elementaristics.capability.player.souls.soulCaps.SoulCaps;
 import de.aelpecyem.elementaristics.init.SoulInit;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;
 import net.minecraft.client.resources.I18n;

@@ -2,8 +2,8 @@ package de.aelpecyem.elementaristics.items.base.artifacts;
 
 
 import de.aelpecyem.elementaristics.Elementaristics;
-import de.aelpecyem.elementaristics.capability.IPlayerCapabilities;
-import de.aelpecyem.elementaristics.capability.PlayerCapProvider;
+import de.aelpecyem.elementaristics.capability.player.IPlayerCapabilities;
+import de.aelpecyem.elementaristics.capability.player.PlayerCapProvider;
 import de.aelpecyem.elementaristics.init.ModItems;
 import de.aelpecyem.elementaristics.init.ModMaterials;
 import de.aelpecyem.elementaristics.items.base.artifacts.rites.IHasRiteUse;

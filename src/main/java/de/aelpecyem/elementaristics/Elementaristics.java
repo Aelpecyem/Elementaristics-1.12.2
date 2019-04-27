@@ -1,6 +1,6 @@
 package de.aelpecyem.elementaristics;
 
-import de.aelpecyem.elementaristics.capability.souls.soulCaps.SoulCaps;
+import de.aelpecyem.elementaristics.capability.player.souls.soulCaps.SoulCaps;
 import de.aelpecyem.elementaristics.compat.thaumcraft.ThaumcraftCompat;
 import de.aelpecyem.elementaristics.capability.CapabilityHandler;
 import de.aelpecyem.elementaristics.events.EventHandler;

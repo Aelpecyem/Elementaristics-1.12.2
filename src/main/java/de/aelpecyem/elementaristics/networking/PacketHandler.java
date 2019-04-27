@@ -8,6 +8,8 @@ import de.aelpecyem.elementaristics.networking.tileentity.basin.PacketRequestUpd
 import de.aelpecyem.elementaristics.networking.tileentity.basin.PacketUpdateBasin;
 import de.aelpecyem.elementaristics.networking.tileentity.concentrator.PacketRequestUpdateConcentrator;
 import de.aelpecyem.elementaristics.networking.tileentity.concentrator.PacketUpdateConcentrator;
+import de.aelpecyem.elementaristics.networking.tileentity.energy.generatorCombustion.PacketRequestUpdateCombustionGenerator;
+import de.aelpecyem.elementaristics.networking.tileentity.energy.generatorCombustion.PacketUpdateCombustionGenerator;
 import de.aelpecyem.elementaristics.networking.tileentity.filterholder.PacketRequestUpdateFilterHolder;
 import de.aelpecyem.elementaristics.networking.tileentity.filterholder.PacketUpdateFilterHolder;
 import de.aelpecyem.elementaristics.networking.tileentity.pedestal.PacketRequestUpdatePedestal;
@@ -63,7 +65,10 @@ public class PacketHandler {
         network.registerMessage(new PacketUpdateBasin.Handler(), PacketUpdateBasin.class, 16, Side.CLIENT);
         network.registerMessage(new PacketRequestUpdateBasin.Handler(), PacketRequestUpdateBasin.class, 17, Side.SERVER);
 
-        network.registerMessage(new CapabilitySync.Handler(), CapabilitySync.class, 18, Side.CLIENT);
+        network.registerMessage(new PacketUpdateCombustionGenerator.Handler(), PacketUpdateCombustionGenerator.class, 18, Side.CLIENT);
+        network.registerMessage(new PacketRequestUpdateCombustionGenerator.Handler(), PacketRequestUpdateCombustionGenerator.class, 19, Side.SERVER);
+
+        network.registerMessage(new CapabilitySync.Handler(), CapabilitySync.class, 20, Side.CLIENT);
     }
 
     public static void sendToAllLoaded(World world, BlockPos pos, IMessage message) {

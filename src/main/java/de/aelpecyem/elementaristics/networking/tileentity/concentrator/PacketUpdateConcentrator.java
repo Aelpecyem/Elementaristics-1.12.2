@@ -15,16 +15,18 @@ public class PacketUpdateConcentrator implements IMessage {
     private ItemStack stack;
     private ItemStack stackInfusing;
     private long lastChangeTime;
+    private int tickCount;
 
-    public PacketUpdateConcentrator(BlockPos pos, ItemStack stack, ItemStack stackInfusing, long lastChangeTime) {
+    public PacketUpdateConcentrator(BlockPos pos, ItemStack stack, ItemStack stackInfusing, long lastChangeTime, int tickCount) {
         this.pos = pos;
         this.stack = stack;
         this.stackInfusing = stackInfusing;
         this.lastChangeTime = lastChangeTime;
+        this.tickCount = tickCount;
     }
 
     public PacketUpdateConcentrator(TileEntityConcentrator te) {
-        this(te.getPos(), te.inventory.getStackInSlot(0), te.inventory.getStackInSlot(1), te.lastChangeTime);
+        this(te.getPos(), te.inventory.getStackInSlot(0), te.inventory.getStackInSlot(1), te.lastChangeTime, te.tickCount);
     }
 
     public PacketUpdateConcentrator() {
@@ -36,6 +38,7 @@ public class PacketUpdateConcentrator implements IMessage {
         ByteBufUtils.writeItemStack(buf, stack);
         ByteBufUtils.writeItemStack(buf, stackInfusing);
         buf.writeLong(lastChangeTime);
+        buf.writeInt(tickCount);
     }
 
     @Override
@@ -44,6 +47,7 @@ public class PacketUpdateConcentrator implements IMessage {
         stack = ByteBufUtils.readItemStack(buf);
         stackInfusing = ByteBufUtils.readItemStack(buf);
         lastChangeTime = buf.readLong();
+        tickCount = buf.readInt();
     }
 
     public static class Handler implements IMessageHandler<PacketUpdateConcentrator, IMessage> {
@@ -54,10 +58,9 @@ public class PacketUpdateConcentrator implements IMessage {
                 TileEntityConcentrator te = (TileEntityConcentrator) Minecraft.getMinecraft().world.getTileEntity(message.pos);
                 if (te != null) {
                     te.inventory.setStackInSlot(0, message.stack);
-
                     te.inventory.setStackInSlot(1, message.stackInfusing);
-
                     te.lastChangeTime = message.lastChangeTime;
+                    te.tickCount = message.tickCount;
                 }
 
             });

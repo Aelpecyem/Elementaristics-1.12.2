@@ -1,10 +1,6 @@
-package de.aelpecyem.elementaristics.capability;
+package de.aelpecyem.elementaristics.capability.player;
 
-import de.aelpecyem.elementaristics.entity.EntityCultist;
 import de.aelpecyem.elementaristics.init.SoulInit;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class PlayerCapabilities implements IPlayerCapabilities {
 
@@ -12,11 +8,11 @@ public class PlayerCapabilities implements IPlayerCapabilities {
     private int ticksLeftStunted = 0;
     private boolean knowsSoul = false;
     private float maxMagan = 100;
-    private float currentMagan =maxMagan;
+    private float currentMagan = maxMagan;
     private float maganRegenPerTick;
     private int ascensionStage;
     private int cultistCount;
-    //TODO sync Client with Server etc. 
+
     public PlayerCapabilities() {
         soulId = SoulInit.generateSoulType().getId();
     }

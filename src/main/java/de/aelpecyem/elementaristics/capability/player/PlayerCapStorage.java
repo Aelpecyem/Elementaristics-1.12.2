@@ -1,6 +1,5 @@
-package de.aelpecyem.elementaristics.capability;
+package de.aelpecyem.elementaristics.capability.player;
 
-import de.aelpecyem.elementaristics.entity.EntityCultist;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;

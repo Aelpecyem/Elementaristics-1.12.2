@@ -25,19 +25,21 @@ public class PacketUpdateBasin implements IMessage {
     private int aspectsSize;
     private int fillCount;
     private long lastChangeTime;
+    private int tickCount;
 
-    public PacketUpdateBasin(BlockPos pos, ItemStack stack, List<Integer> aspects, int fillCount, long lastChangeTime) {
+    public PacketUpdateBasin(BlockPos pos, ItemStack stack, List<Integer> aspects, int fillCount, long lastChangeTime, int tickCount) {
         this.pos = pos;
         this.stack = stack;
         this.lastChangeTime = lastChangeTime;
         this.aspectsSize = aspects.size();
         this.aspects = aspects;
         this.fillCount = fillCount;
+        this.tickCount = tickCount;
 
     }
 
     public PacketUpdateBasin(TileEntityInfusionBasin te) {
-        this(te.getPos(), te.inventory.getStackInSlot(0), te.aspectIDs, te.fillCount, te.lastChangeTime);
+        this(te.getPos(), te.inventory.getStackInSlot(0), te.aspectIDs, te.fillCount, te.lastChangeTime, te.tickCount);
     }
 
     public PacketUpdateBasin() {
@@ -53,6 +55,7 @@ public class PacketUpdateBasin implements IMessage {
             buf.writeInt(i);
         }
         buf.writeInt(fillCount);
+        buf.writeInt(tickCount);
     }
 
     @Override
@@ -67,6 +70,7 @@ public class PacketUpdateBasin implements IMessage {
             aspects.add(buf.readInt());
         }
         fillCount = buf.readInt();
+        tickCount = buf.readInt();
 
     }
 
@@ -81,6 +85,7 @@ public class PacketUpdateBasin implements IMessage {
                     te.aspectIDs = message.aspects;
                     te.lastChangeTime = message.lastChangeTime;
                     te.fillCount = message.fillCount;
+                    te.tickCount = message.tickCount;
                 }
             });
             return null;

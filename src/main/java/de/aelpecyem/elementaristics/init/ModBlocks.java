@@ -4,6 +4,7 @@ import de.aelpecyem.elementaristics.blocks.base.*;
 import de.aelpecyem.elementaristics.blocks.base.crops.BlockCropBase;
 import de.aelpecyem.elementaristics.blocks.base.crops.CropOpium;
 import de.aelpecyem.elementaristics.blocks.tileentity.blocks.*;
+import de.aelpecyem.elementaristics.blocks.tileentity.blocks.energy.BlockGeneratorCombustion;
 import de.aelpecyem.elementaristics.misc.elements.Aspect;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;
 import de.aelpecyem.elementaristics.misc.potions.PotionInit;
@@ -31,26 +32,30 @@ public class ModBlocks {
     public static BlockCropBase crop_opium;
     //"DECOR"
     public static BlockBase stone_enriched;
+    public static BlockPedestal pedestal;
     //ORES
     public static OreDroppingBase ore_helium;
     public static OreDroppingBase ore_hydrogen;
     public static OreDroppingBase ore_prismarine;
 
-    //Others
-    public static BlockPedestal pedestal;
+    //MATTER MANIPULATION
     public static BlockPurifier purifier;
     public static BlockLightningPedestal pedestalLightning;
     public static BlockConcentrator concentrator;
     public static BlockTunneler tunneler_top;
     public static BlockFilterHolder filter_holder;
     public static BlockReactor reactor;
-    public static BlockBase essence_casing;
     public static BlockAltar altar;
     public static BlockBasin basin;
+
+    //OTHERS
+    public static BlockBase essence_casing;
     public static BlockBase fabric_reason;
     public static BlockBase fabric_passion;
     public static BlockSilverThread block_silver_thread;
 
+    //ENERGY
+    public static BlockGeneratorCombustion generator_combustion;
     //Flowers
     public static BlockBush flower_ecstasy;
     public static BlockBush flower_contentment;
@@ -88,6 +93,7 @@ public class ModBlocks {
         flower_laughter = new BlockFlowerBase("flower_laughter", PotionInit.laughter);
         flower_silence = new BlockFlowerBase("flower_silence", PotionInit.silence);
 
+        generator_combustion = new BlockGeneratorCombustion();
         //TC
         mushroom_intoxicating = new BlockMushroomIntoxicating();
     }
@@ -113,6 +119,8 @@ public class ModBlocks {
         GameRegistry.registerTileEntity(reactor.getTileEntityClass(), reactor.getRegistryName().toString());
         GameRegistry.registerTileEntity(altar.getTileEntityClass(), altar.getRegistryName().toString());
         GameRegistry.registerTileEntity(basin.getTileEntityClass(), basin.getRegistryName().toString());
+
+        GameRegistry.registerTileEntity(generator_combustion.getTileEntityClass(), generator_combustion.getRegistryName().toString());
 
     }
 

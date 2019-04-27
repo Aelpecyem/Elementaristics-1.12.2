@@ -1,9 +1,7 @@
 package de.aelpecyem.elementaristics.misc.potions.effects.emotion;
 
-import de.aelpecyem.elementaristics.capability.IPlayerCapabilities;
+import de.aelpecyem.elementaristics.capability.player.IPlayerCapabilities;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
 
 public class PotionEmotionLaughter extends PotionEmotion {
     public PotionEmotionLaughter() {

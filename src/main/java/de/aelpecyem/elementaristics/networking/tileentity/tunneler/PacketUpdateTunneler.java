@@ -15,16 +15,18 @@ public class PacketUpdateTunneler implements IMessage {
     private ItemStack stack;
     private ItemStack stackModule;
     private long lastChangeTime;
+    private int tickCount;
 
-    public PacketUpdateTunneler(BlockPos pos, ItemStack stack, ItemStack stackModule, long lastChangeTime) {
+    public PacketUpdateTunneler(BlockPos pos, ItemStack stack, ItemStack stackModule, long lastChangeTime, int tickCount) {
         this.pos = pos;
         this.stack = stack;
         this.stackModule = stackModule;
         this.lastChangeTime = lastChangeTime;
+        this.tickCount = tickCount;
     }
 
     public PacketUpdateTunneler(TileEntityTunneler te) {
-        this(te.getPos(), te.inventory.getStackInSlot(0), te.inventory.getStackInSlot(1), te.lastChangeTime);
+        this(te.getPos(), te.inventory.getStackInSlot(0), te.inventory.getStackInSlot(1), te.lastChangeTime, te.tickCount);
     }
 
     public PacketUpdateTunneler() {
@@ -36,6 +38,7 @@ public class PacketUpdateTunneler implements IMessage {
         ByteBufUtils.writeItemStack(buf, stack);
         ByteBufUtils.writeItemStack(buf, stackModule);
         buf.writeLong(lastChangeTime);
+        buf.writeInt(tickCount);
     }
 
     @Override
@@ -44,6 +47,7 @@ public class PacketUpdateTunneler implements IMessage {
         stack = ByteBufUtils.readItemStack(buf);
         stackModule = ByteBufUtils.readItemStack(buf);
         lastChangeTime = buf.readLong();
+        tickCount = buf.readInt();
     }
 
     public static class Handler implements IMessageHandler<PacketUpdateTunneler, IMessage> {
@@ -54,10 +58,9 @@ public class PacketUpdateTunneler implements IMessage {
                 TileEntityTunneler te = (TileEntityTunneler) Minecraft.getMinecraft().world.getTileEntity(message.pos);
                 if (te != null) {
                     te.inventory.setStackInSlot(0, message.stack);
-
                     te.inventory.setStackInSlot(1, message.stackModule);
-
                     te.lastChangeTime = message.lastChangeTime;
+                    te.tickCount = message.tickCount;
                 }
             });
             return null;

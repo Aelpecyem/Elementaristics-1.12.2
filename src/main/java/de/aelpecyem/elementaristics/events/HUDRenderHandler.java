@@ -2,8 +2,8 @@ package de.aelpecyem.elementaristics.events;
 
 import de.aelpecyem.elementaristics.blocks.tileentity.TileEntityAltar;
 import de.aelpecyem.elementaristics.blocks.tileentity.blocks.BlockAltar;
-import de.aelpecyem.elementaristics.capability.IPlayerCapabilities;
-import de.aelpecyem.elementaristics.capability.PlayerCapProvider;
+import de.aelpecyem.elementaristics.capability.player.IPlayerCapabilities;
+import de.aelpecyem.elementaristics.capability.player.PlayerCapProvider;
 import de.aelpecyem.elementaristics.init.RiteInit;
 import de.aelpecyem.elementaristics.init.SoulInit;
 import de.aelpecyem.elementaristics.misc.elements.Aspect;
@@ -15,13 +15,15 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import org.lwjgl.opengl.GL11;
-import scala.collection.parallel.ParIterableLike;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class HUDRenderHandler {
+    public static final ResourceLocation TEXTURE = new ResourceLocation("elementaristics:textures/gui/hud_elements.png");
+
+    ///FIXME still interferes with vanilla rendering
     @SubscribeEvent
     public void onRenderHud(RenderGameOverlayEvent.Post event) {
         if (event.getType() == RenderGameOverlayEvent.ElementType.EXPERIENCE && !event.isCancelable()) {
@@ -30,15 +32,16 @@ public class HUDRenderHandler {
                 if (mc.player.hasCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null)) {
                     IPlayerCapabilities caps = mc.player.getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null);
                     if (caps.knowsSoul()) {
+                        int posX = event.getResolution().getScaledWidth() / 2 - 93; // + 10;
+                        int poxY = event.getResolution().getScaledHeight() - 31;
+                        float mult = caps.getMagan() / caps.getMaxMagan();
                         GL11.glPushMatrix();
                         boolean needAlpha = GL11.glIsEnabled(GL11.GL_ALPHA_TEST);
                         boolean needBlend = GL11.glIsEnabled(GL11.GL_BLEND);
-                        int posX = event.getResolution().getScaledWidth() / 2 - 93; // + 10;
-                        int poxY = event.getResolution().getScaledHeight() - 31;
-
+                        boolean needDepthTest = GL11.glIsEnabled(GL11.GL_DEPTH_TEST);
                         mc.renderEngine.bindTexture(new ResourceLocation("elementaristics:textures/gui/hud_elements.png"));
-                        //  GL11.glEnable(GL11.GL_BLEND);
-                        //   GL11.glDisable(GL11.GL_DEPTH_TEST);
+                        if (needDepthTest)
+                            GL11.glDisable(GL11.GL_DEPTH_TEST);
                         //GL11.glDepthMask(false);
                         if (!needBlend)
                             GL11.glEnable(GL11.GL_BLEND);
@@ -54,11 +57,11 @@ public class HUDRenderHandler {
                         if (needAlpha)
                             GL11.glDisable(GL11.GL_ALPHA_TEST);
 
-                        float mult = caps.getMagan() / caps.getMaxMagan();
+
                         mc.ingameGUI.drawTexturedModalRect(posX, poxY, 0, 0, Math.round(186 * mult), 9);
 
-                        //   GL11.glDisable(GL11.GL_BLEND);
-                        //        GL11.glEnable(GL11.GL_DEPTH_TEST);
+                        if (needDepthTest)
+                            GL11.glEnable(GL11.GL_DEPTH_TEST);
                         if (needAlpha)
                             GL11.glEnable(GL11.GL_ALPHA_TEST);
                         if (!needBlend)

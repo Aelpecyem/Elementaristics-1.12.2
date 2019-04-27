@@ -1,4 +1,4 @@
-package de.aelpecyem.elementaristics.capability;
+package de.aelpecyem.elementaristics.capability.player;
 
 import de.aelpecyem.elementaristics.entity.EntityCultist;
 
