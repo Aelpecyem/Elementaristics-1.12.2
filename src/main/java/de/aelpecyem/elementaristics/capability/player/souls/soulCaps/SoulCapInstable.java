@@ -11,7 +11,7 @@ import thaumcraft.api.capabilities.ThaumcraftCapabilities;
 public class SoulCapInstable extends SoulCap {
     public SoulCapInstable() {
 
-        super(SoulInit.soulInstable);
+        super(SoulInit.soulUnstable);
     }
 
 

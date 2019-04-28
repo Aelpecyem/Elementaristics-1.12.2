@@ -35,13 +35,13 @@ public class PotionFormGaseous extends PotionBase {
                 entityLivingBaseIn.removePotionEffect(this);
             }
         }
-        entityLivingBaseIn.addPotionEffect(new PotionEffect(MobEffects.INVISIBILITY, 20, 0, false, false));
+        entityLivingBaseIn.addPotionEffect(new PotionEffect(MobEffects.INVISIBILITY, 20, 1, false, false));
         entityLivingBaseIn.motionY = 0;
         entityLivingBaseIn.fallDistance = 0;
         Elementaristics.proxy.generateGenericParticles(entityLivingBaseIn, Aspects.air.getColor(), 3, 30, 0, true, false);
         float yaw = entityLivingBaseIn.rotationYaw;
         float pitch = entityLivingBaseIn.rotationPitch;
-        float f = 0.4F + amplifier * 0.2F + (entityLivingBaseIn instanceof EntityPlayer ? ((EntityPlayer) entityLivingBaseIn).capabilities.getWalkSpeed() : 0);
+        float f = 0.4F + amplifier * 0.2F + (entityLivingBaseIn instanceof EntityPlayer ? ((EntityPlayer) entityLivingBaseIn).capabilities.getFlySpeed() : 0);
         double motionX = (double) (-MathHelper.sin(yaw / 180.0F * (float) Math.PI) * MathHelper.cos(pitch / 180.0F * (float) Math.PI) * f);
         double motionZ = (double) (MathHelper.cos(yaw / 180.0F * (float) Math.PI) * MathHelper.cos(pitch / 180.0F * (float) Math.PI) * f);
         double motionY = (double) (-MathHelper.sin((pitch) / 180.0F * (float) Math.PI) * f);

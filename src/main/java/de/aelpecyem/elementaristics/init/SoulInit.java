@@ -20,7 +20,7 @@ public class SoulInit {
     public static Soul soulFire;
     public static Soul soulAether;
     public static Soul soulMana;
-    public static Soul soulInstable;
+    public static Soul soulUnstable;
     public static Soul soulImmutable;
     public static Soul soulBalanced;
     public static Soul soulDragon;
@@ -43,7 +43,7 @@ public class SoulInit {
         soulAether = new Soul("soul_aether", 10354943, EnumSoulRarity.COMMON);
 
         soulMana = new Soul("soul_mana", 15597809, EnumSoulRarity.RARE, 160, 0.4F, 1.5F);
-        soulInstable = new Soul("soul_instable", 7208960, EnumSoulRarity.RARE);
+        soulUnstable = new Soul("soul_unstable", 7208960, EnumSoulRarity.RARE);
         soulImmutable = new Soul("soul_immutable", 5922140, EnumSoulRarity.RARE, 90, 0.12F, 0.8F);
         soulBalanced = new Soul("soul_balanced", 14015459, EnumSoulRarity.RARE, 115, 0.2F, 1.1F);
 
@@ -68,6 +68,8 @@ public class SoulInit {
         soulFire.addSpellToList(SpellInit.spell_attack_fire, 2);
         soulWater.addSpellToList(SpellInit.spell_attack_water, 2);
         soulAether.addSpellToList(SpellInit.spell_attack_aether, 2); //and so on for the other soul types
+        soulBalanced.addSpellToList(SpellInit.spell_attack_generic, 2);
+        soulImmutable.addSpellToList(SpellInit.spell_attack_nullifying, 2);
         soulDragon.addSpellToList(SpellInit.spell_attack_dragon, 2);
         soulAncient.addSpellToList(SpellInit.spell_attack_ancient, 2);
 
@@ -77,13 +79,18 @@ public class SoulInit {
         soulWater.addSpellToList(SpellInit.spell_cleanse, 2);
         soulFire.addSpellToList(SpellInit.spell_fireball_charge, 2);
 
+
         soulImmutable.addSpellToList(SpellInit.spell_protection_crystal, 1);
+        soulImmutable.addSpellToList(SpellInit.spell_counterspell, 2);
 
         soulDragon.addSpellToList(SpellInit.spell_form_gaseous, 2);
         soulDragon.addSpellToList(SpellInit.spell_protection_crystal, 2);
         soulDragon.addSpellToList(SpellInit.spell_blink, 2);
         soulDragon.addSpellToList(SpellInit.spell_cleanse, 2);
         soulDragon.addSpellToList(SpellInit.spell_fireball_charge, 2);
+
+        soulUnstable.addSpellToList(SpellInit.spell_activate, 2);
+        soulAncient.addSpellToList(SpellInit.spell_activate, 2);
 
     }
 

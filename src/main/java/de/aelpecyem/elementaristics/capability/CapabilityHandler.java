@@ -90,6 +90,9 @@ public class CapabilityHandler {
             } else {
                 cap.stuntMagan(cap.getTimeStunted() - 1);
             }
+            if (event.player.capabilities.isCreativeMode) {
+                cap.setMagan(cap.getMaxMagan());
+            }
             //...
             SoulCaps.getCapForSoul(SoulInit.getSoulFromId(cap.getSoulId())).onTickEvent(event, event.player, cap);
 

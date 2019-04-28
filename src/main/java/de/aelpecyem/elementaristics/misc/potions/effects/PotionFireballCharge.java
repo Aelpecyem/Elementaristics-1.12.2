@@ -19,7 +19,7 @@ import java.util.ConcurrentModificationException;
 
 public class PotionFireballCharge extends PotionBase {
     public PotionFireballCharge() {
-        super("fireball_charge", false, 39381, 10);
+        super("fireball_charge", false, 39381, 12);
     }
 
     @Override
@@ -30,7 +30,7 @@ public class PotionFireballCharge extends PotionBase {
     @SubscribeEvent
     public void hitEntity(TickEvent.PlayerTickEvent event) {
         if (event.player != null && event.player.getActivePotionEffects().contains(event.player.getActivePotionEffect(this))) {
-            if (event.player.world.getEntitiesWithinAABB(EntityLivingBase.class, event.player.getEntityBoundingBox()).size() > 1) {
+            if (event.player.world.getEntitiesWithinAABB(EntityLivingBase.class, event.player.getEntityBoundingBox().grow(0.5)).size() > 1) {
                 event.player.setEntityInvulnerable(true);
                 Explosion xplosn = new Explosion(event.player.world, event.player, event.player.posX, event.player.posY,
                         event.player.posZ, 2.5F, false, false);

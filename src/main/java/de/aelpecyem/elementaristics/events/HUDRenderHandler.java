@@ -10,6 +10,9 @@ import de.aelpecyem.elementaristics.misc.elements.Aspect;
 import de.aelpecyem.elementaristics.util.MiscUtil;
 import de.aelpecyem.elementaristics.util.PlayerUtil;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.BufferBuilder;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
@@ -35,38 +38,12 @@ public class HUDRenderHandler {
                         int posX = event.getResolution().getScaledWidth() / 2 - 93; // + 10;
                         int poxY = event.getResolution().getScaledHeight() - 31;
                         float mult = caps.getMagan() / caps.getMaxMagan();
-                        GL11.glPushMatrix();
-                        boolean needAlpha = GL11.glIsEnabled(GL11.GL_ALPHA_TEST);
-                        boolean needBlend = GL11.glIsEnabled(GL11.GL_BLEND);
-                        boolean needDepthTest = GL11.glIsEnabled(GL11.GL_DEPTH_TEST);
-                        mc.renderEngine.bindTexture(new ResourceLocation("elementaristics:textures/gui/hud_elements.png"));
-                        if (needDepthTest)
-                            GL11.glDisable(GL11.GL_DEPTH_TEST);
-                        //GL11.glDepthMask(false);
-                        if (!needBlend)
-                            GL11.glEnable(GL11.GL_BLEND);
-                        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
                         Color color = MiscUtil.convertIntToColor(SoulInit.getSoulFromId(caps.getSoulId()).getParticleColor());
                         if (caps.getTimeStunted() > 0) {
-                            Color colorStunted = MiscUtil.blend(color, Color.gray, 1 - Math.min(0.1 * (float) caps.getTimeStunted() / 10F, 0.8), Math.min(0.1 * (float) caps.getTimeStunted() / 10F, 0.8));
-                            GL11.glColor4f((float) colorStunted.getRed() / 255F, (float) colorStunted.getGreen() / 255F, (float) colorStunted.getBlue() / 255F, 0.5F);
-                        } else {
-                            GL11.glColor4f((float) color.getRed() / 255F, (float) color.getGreen() / 255F, (float) color.getBlue() / 255F, 0.5F);
+                            color = MiscUtil.blend(color, Color.gray, 1 - Math.min(0.1 * (float) caps.getTimeStunted() / 10F, 0.8), Math.min(0.1 * (float) caps.getTimeStunted() / 10F, 0.8));
                         }
-
-                        if (needAlpha)
-                            GL11.glDisable(GL11.GL_ALPHA_TEST);
-
-
-                        mc.ingameGUI.drawTexturedModalRect(posX, poxY, 0, 0, Math.round(186 * mult), 9);
-
-                        if (needDepthTest)
-                            GL11.glEnable(GL11.GL_DEPTH_TEST);
-                        if (needAlpha)
-                            GL11.glEnable(GL11.GL_ALPHA_TEST);
-                        if (!needBlend)
-                            GL11.glDisable(GL11.GL_BLEND);
-                        GL11.glPopMatrix();
+                        mc.renderEngine.bindTexture(new ResourceLocation("elementaristics:textures/gui/hud_elements.png"));
+                        drawColoredTexturedModalRect(posX, poxY, 0, 0, Math.round(186 * mult), 9, color);
                     }
                 }
             }
@@ -104,5 +81,20 @@ public class HUDRenderHandler {
         }
     }
 
+
+    public void drawColoredTexturedModalRect(int x, int y, int textureX, int textureY, int width, int height, Color color) {
+        float zLevel = -90.0F;
+        float f = 0.00390625F;
+        float f1 = 0.00390625F;
+        Tessellator tessellator = Tessellator.getInstance();
+        BufferBuilder bufferbuilder = tessellator.getBuffer();
+        bufferbuilder.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX_COLOR);
+        //   bufferbuilder.begin(7, DefaultVertexFormats.POSITION_TEX);
+        bufferbuilder.pos((double) (x + 0), (double) (y + height), (double) zLevel).tex((double) ((float) (textureX + 0) * 0.00390625F), (double) ((float) (textureY + height) * 0.00390625F)).color(color.getRed() / 255F, color.getGreen() / 255F, color.getBlue() / 255F, 0.6F).endVertex();
+        bufferbuilder.pos((double) (x + width), (double) (y + height), (double) zLevel).tex((double) ((float) (textureX + width) * 0.00390625F), (double) ((float) (textureY + height) * 0.00390625F)).color(color.getRed() / 255F, color.getGreen() / 255F, color.getBlue() / 255F, 0.6F).endVertex();
+        bufferbuilder.pos((double) (x + width), (double) (y + 0), (double) zLevel).tex((double) ((float) (textureX + width) * 0.00390625F), (double) ((float) (textureY + 0) * 0.00390625F)).color(color.getRed() / 255F, color.getGreen() / 255F, color.getBlue() / 255F, 0.6F).endVertex();
+        bufferbuilder.pos((double) (x + 0), (double) (y + 0), (double) zLevel).tex((double) ((float) (textureX + 0) * 0.00390625F), (double) ((float) (textureY + 0) * 0.00390625F)).color(color.getRed() / 255F, color.getGreen() / 255F, color.getBlue() / 255F, 0.6F).endVertex();
+        tessellator.draw();
+    }
 
 }

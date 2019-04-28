@@ -23,7 +23,7 @@ import net.minecraftforge.items.ItemStackHandler;
 
 public class TileEntityGeneratorArcaneCombustion extends TileEntity implements ITickable {
 
-    public EnergyCapability storage = new EnergyCapability(1000, 10);
+    public EnergyCapability storage = new EnergyCapability(100, 1);
 
     public ItemStackHandler inventory = new ItemStackHandler(1) {
         @Override
@@ -80,7 +80,6 @@ public class TileEntityGeneratorArcaneCombustion extends TileEntity implements I
 
     @Override
     public void update() {
-        System.out.println(tickCount);
         if (!world.isRemote) {
             PacketHandler.sendToAllAround(world, pos, 64, new PacketUpdateCombustionGenerator(TileEntityGeneratorArcaneCombustion.this));
         }
@@ -90,7 +89,7 @@ public class TileEntityGeneratorArcaneCombustion extends TileEntity implements I
                 tickCount += 400;
             }
         } else {
-            this.storage.receiveEnergy(10, false);
+            this.storage.receiveEnergy(1, false);
             tickCount--;
         }
         System.out.println("Energy: " + storage.getEnergyStored());

@@ -1,11 +1,11 @@
 {
-  "name": "Collected Essences --- PROBABLY WILL BE OVERHAULED :3",
+  "name": "PROBABLY WILL BE OVERHAULED :3",
   "icon": "elementaristics:essence:4",
   "category": "arcane_lessons",
   "pages": [
     {
       "type": "text",
-      "text": "I will summarize my observations on discovered essences here. $(br)This may help me with my research, maybe it won't. $(br2)Maybe luck will do."
+      "text": "(Collected Essences)I will summarize my observations on discovered essences here. $(br)This may help me with my research, maybe it won't. $(br2)Maybe luck will do."
     },
     {
       "advancement": "elementaristics:discovery_aether",

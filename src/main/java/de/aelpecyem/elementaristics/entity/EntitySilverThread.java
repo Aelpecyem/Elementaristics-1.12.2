@@ -49,7 +49,7 @@ public class EntitySilverThread extends EntityMob {
     protected void damageEntity(DamageSource damageSrc, float damageAmount) {
         if(damageSrc.getTrueSource() != null  && damageSrc.getTrueSource().hasCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null)) {
             IPlayerCapabilities cap = damageSrc.getTrueSource().getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null);
-            if (cap.getSoulId() == SoulInit.soulInstable.getId()) {
+            if (cap.getSoulId() == SoulInit.soulUnstable.getId()) {
                 damageAmount = 10;
 
             } else {

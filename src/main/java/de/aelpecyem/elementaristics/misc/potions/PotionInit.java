@@ -21,6 +21,7 @@ public class PotionInit {
     public static final PotionFormGaseous potionFormGaseous = new PotionFormGaseous();
     public static final PotionCrystalProtection potionCrystalProtection = new PotionCrystalProtection();
     public static final PotionFireballCharge potionFireballCharge = new PotionFireballCharge();
+    public static final PotionCounterspell potionCounterspell = new PotionCounterspell();
 
     public static PotionEmotionContentment contentment = new PotionEmotionContentment(); //lower regen
     public static PotionEmotionDread dread = new PotionEmotionDread(); //higher regen
@@ -38,6 +39,7 @@ public class PotionInit {
         event.getRegistry().register(potionFormGaseous);
         event.getRegistry().register(potionCrystalProtection);
         event.getRegistry().register(potionFireballCharge);
+        event.getRegistry().register(potionCounterspell);
 
         event.getRegistry().register(contentment);
         event.getRegistry().register(dread);

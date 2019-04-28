@@ -16,6 +16,14 @@ elementaristics.potion.fear=Fear
 elementaristics.potion.laughter=Laughter
 elementaristics.potion.silence=Silence
 
+elementaristics.potion.gaseous=Gaseous Form
+elementaristics.potion.crystal_protection=Crystalline Shield
+elementaristics.potion.fireball_charge=Fireball Charge
+elementaristics.potion.counterspell=Counterspell Field
+
+#Spells
+
+
 
 #Items
 item.bubble_helium.name=Helium Filled Stone
@@ -330,7 +338,7 @@ soul.soul_earth.name=§2Earth Soul
 soul.soul_aether.name=§5Aether Soul
 
 soul.soul_mana.name=§dMana Soul
-soul.soul_instable.name=§4Instable Soul
+soul.soul_unstable.name=§4Unstable Soul
 soul.soul_immutable.name=§7Immutable Soul
 soul.soul_balanced.name=§fBalanced Soul
 
