@@ -9,11 +9,34 @@ public class SoulCaps {
     private static Map<Soul, SoulCap> caps = new HashMap<>();
     private static SoulCap standardCap = new SoulCap(null);
     public static SoulCap soulCapAir;
-    public static SoulCap soulCapInstable;
+    public static SoulCap soulCapFire;
+    public static SoulCap soulCapWater;
+    public static SoulCap soulCapEarth;
+    public static SoulCap soulCapMagan;
+
+    public static SoulCap soulCapMana;
+    public static SoulCap soulCapImmutable;
+    public static SoulCap soulCapUnstable;
+    public static SoulCap soulCapBalanced;
+
+    public static SoulCap soulCapAncient;
+    public static SoulCap soulCapDragon;
+
 
     public static void init() {
         soulCapAir = new SoulCapAir();
-        soulCapInstable = new SoulCapInstable();
+        soulCapFire = new SoulCapFire();
+        soulCapWater = new SoulCapWater();
+        soulCapEarth = new SoulCapEarth();
+        soulCapMagan = new SoulCapMagan();
+
+        soulCapMana = new SoulCapMana();
+        soulCapImmutable = new SoulCapImmutable();
+        soulCapUnstable = new SoulCapUnstable();
+        soulCapBalanced = new SoulCapBalanced();
+
+        soulCapAncient = new SoulCapAncient();
+        soulCapDragon = new SoulCapDragon();
     }
 
     public static SoulCap getCapForSoul(Soul soul) {

@@ -1,12 +1,12 @@
 {
   "name": "Opium Plant",
   "icon": "elementaristics:petal_opium",
-  "advancement": "elementaristics:discovery_mind",
+  "advancement": "elementaristics:progress_ascension_4",
   "category": "vis_vitalis",
   "pages": [
     {
       "type": "text",
-      "text": "This close relative to the poppy is created with some arcane shinanigans.$(br)It does not look much different, yet its seeds have some good use in the creation of $(item)$(l:alchemy/entry_laudanum)Arcane Laudanum$()."
+      "text": "This close relative to the poppy is created with some arcane shenanigans.$(br)It does not look much different, yet its seeds have some good use in the creation of $(item)$(l:alchemy/entry_laudanum)Arcane Laudanum$()."
     },
     {
       "type": "reactor_recipe",

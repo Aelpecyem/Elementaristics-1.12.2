@@ -92,7 +92,6 @@ public class TileEntityGeneratorArcaneCombustion extends TileEntity implements I
             this.storage.receiveEnergy(1, false);
             tickCount--;
         }
-        System.out.println("Energy: " + storage.getEnergyStored());
     }
 
 

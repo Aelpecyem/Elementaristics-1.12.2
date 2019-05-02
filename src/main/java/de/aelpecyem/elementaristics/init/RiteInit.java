@@ -1,5 +1,6 @@
 package de.aelpecyem.elementaristics.init;
 
+import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;
 import de.aelpecyem.elementaristics.misc.rites.*;
 import de.aelpecyem.elementaristics.misc.rites.killing.RiteSacrifice;
@@ -16,10 +17,9 @@ public class RiteInit {
     public static RiteChaos riteChaos = new RiteChaos();
     public static RiteForging riteForging = new RiteForging();
     public static RiteSacrifice riteConflagration = new RiteSacrifice("conflagration_soul", Aspects.fire, SoulInit.soulFire, DamageSource.ON_FIRE);
-    public static RiteSacrifice riteShredding = new RiteSacrifice("rage_wind", Aspects.air, SoulInit.soulAir, DamageSource.MAGIC);
+    public static RiteSacrifice riteShredding = new RiteSacrifice("rage_wind", Aspects.air, SoulInit.soulAir, Elementaristics.DAMAGE_AIR);
     public static RiteSacrifice riteGaiasGaze = new RiteSacrifice("gaias_gaze", Aspects.earth, SoulInit.soulEarth, DamageSource.FLY_INTO_WALL);
     public static RiteSacrifice riteDrowningAstral = new RiteSacrifice("drowning_astral", Aspects.water, SoulInit.soulWater, DamageSource.DROWN);
-    public static RiteSacrifice riteSpaceExilation = new RiteSacrifice("space_exilation", Aspects.aether, SoulInit.soulAether, DamageSource.OUT_OF_WORLD);
     public static RiteSacrifice riteCompression = new RiteSacrifice("soul_compression", Aspects.aether, DamageSource.MAGIC);
     public static RiteRecruiting riteRecruiting = new RiteRecruiting();
     public static void registerRite(ResourceLocation name, RiteBase rite){
@@ -30,7 +30,6 @@ public class RiteInit {
         registerRite(riteShredding.name, riteShredding);
         registerRite(riteGaiasGaze.name, riteGaiasGaze);
         registerRite(riteDrowningAstral.name, riteDrowningAstral);
-        registerRite(riteSpaceExilation.name, riteSpaceExilation);
         registerRite(riteCompression.name, riteCompression);
 
         registerRite(riteFeast.name, RiteInit.riteFeast);

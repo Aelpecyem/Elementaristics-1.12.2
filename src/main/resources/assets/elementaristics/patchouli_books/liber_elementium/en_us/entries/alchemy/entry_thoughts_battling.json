@@ -5,7 +5,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "$(item)Battling Thoughts$() are useful in order to get the $(marked)Mind$() Aspect in rites, and can be pretty easily obtained once a person has visited $(marked)The Mind$().$(br)On its own, it does not do a lot, however, it can be used to either gain or lose xp, depending on how lucky you feel."
+      "text": "$(item)Battling Thoughts$() are useful in order to get the $(marked)Mind$() Aspect in rites, and can be pretty easily obtained once a person has visited $(l:souls/entry_mind)The Mind$()."
     },
     {
       "type": "elementaristics:reactor_recipe",

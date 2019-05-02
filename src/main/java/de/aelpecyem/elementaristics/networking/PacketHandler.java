@@ -14,8 +14,6 @@ import de.aelpecyem.elementaristics.networking.tileentity.filterholder.PacketReq
 import de.aelpecyem.elementaristics.networking.tileentity.filterholder.PacketUpdateFilterHolder;
 import de.aelpecyem.elementaristics.networking.tileentity.pedestal.PacketRequestUpdatePedestal;
 import de.aelpecyem.elementaristics.networking.tileentity.pedestal.PacketUpdatePedestal;
-import de.aelpecyem.elementaristics.networking.tileentity.pedestallightning.PacketRequestUpdateLightningPedestal;
-import de.aelpecyem.elementaristics.networking.tileentity.pedestallightning.PacketUpdateLightningPedestal;
 import de.aelpecyem.elementaristics.networking.tileentity.purifier.PacketRequestUpdatePurifier;
 import de.aelpecyem.elementaristics.networking.tileentity.purifier.PacketUpdatePurifier;
 import de.aelpecyem.elementaristics.networking.tileentity.reactor.PacketRequestUpdateReactor;
@@ -40,9 +38,6 @@ public class PacketHandler {
 
         network.registerMessage(new PacketUpdatePurifier.Handler(), PacketUpdatePurifier.class, 0, Side.CLIENT);
         network.registerMessage(new PacketRequestUpdatePurifier.Handler(), PacketRequestUpdatePurifier.class, 1, Side.SERVER);
-
-        network.registerMessage(new PacketUpdateLightningPedestal.Handler(), PacketUpdateLightningPedestal.class, 2, Side.CLIENT);
-        network.registerMessage(new PacketRequestUpdateLightningPedestal.Handler(), PacketRequestUpdateLightningPedestal.class, 3, Side.SERVER);
 
         network.registerMessage(new PacketUpdatePedestal.Handler(), PacketUpdatePedestal.class, 4, Side.CLIENT);
         network.registerMessage(new PacketRequestUpdatePedestal.Handler(), PacketRequestUpdatePedestal.class, 5, Side.SERVER);

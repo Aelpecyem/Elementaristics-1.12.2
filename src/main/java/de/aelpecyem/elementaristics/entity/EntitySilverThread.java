@@ -65,7 +65,7 @@ public class EntitySilverThread extends EntityMob {
         EntityPlayer player = world.getClosestPlayer(posX, posY, posZ, 100, false);
         if (cause.getTrueSource() instanceof EntityPlayer) {
              player = (EntityPlayer) cause.getTrueSource();
-            player.sendStatusMessage(new TextComponentString(ChatFormatting.GOLD + I18n.format("message.ascension_1.standard")), false);
+            // player.sendStatusMessage(new TextComponentString(ChatFormatting.GOLD + I18n.format("message.ascension_1.standard")), false);
             IPlayerCapabilities cap = player.getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null);
             if (cap.knowsSoul()) {
                 if (cap.getPlayerAscensionStage() < 1) {
@@ -73,7 +73,6 @@ public class EntitySilverThread extends EntityMob {
                     if (world.isRemote)
                         player.sendStatusMessage(new TextComponentString(ChatFormatting.GOLD + I18n.format("message.ascension_1.standard")), false);
                 }
-
             }
         }else if (player != null) {
             if(player.hasCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null)){

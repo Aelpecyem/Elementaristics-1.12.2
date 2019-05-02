@@ -1,0 +1,17 @@
+{
+  "name": "The Heart of Stone",
+  "icon": "elementaristics:heart_stone",
+  "category": "shaping",
+  "advancement": "elementaristics:progress_forging",
+  "pages": [
+    {
+      "type": "text",
+      "text": "The $(item)Heart of Stone$() is cold to the touch, and feels like an urn where frames of bone reside.$(br)It is a $(marked)Rite Tool$() of $Earth."
+    },
+    {
+      "type": "elementaristics:forging_recipe",
+      "recipe": "elementaristics:heart_stone",
+      "text": "$(o)In the grave you dug for me$()"
+    }
+  ]
+}

@@ -25,11 +25,11 @@
     },
     {
       "type": "text",
-      "text": "The Cultist's owner will be the closest player to the altar. Each Cultist will have an Aspect assigned, depending on the Rite Tool that was offered. A Cultist has a Magan pool of 80 Units, which will be drained during rites. $(br)Acting on the Altar while sneaking will summon as many cultists to help as possible in rites (4). It should be noted that some space will be needed for that, and that a cultist won't appear if his spot is blocked."
+      "text": "The Cultist's owner will be the closest player to the altar. Each Cultist will have an Aspect assigned, depending on the Rite Tool that was offered. A Cultist has a Magan pool of 80 Units, which will be drained during rites. $(br)Acting on the Altar while sneaking will summon as many cultists to help as possible in rites (4)."
     },
     {
       "type": "text",
-      "text": "It should be noted that some space will be needed for that, and that a cultist won't appear if his spot is blocked.$(br)A Cultist's stats can be shown with a $(item)Mirror of the Soul$()."
+      "text": "It should be noted that some space will be needed for that, and that a cultist won't appear if the spot is blocked.$(br)A Cultist's stats can be viewed with a $(item)Mirror of the Soul$()."
     }
   ],
   "advancement": "elementaristics:progress_forging"

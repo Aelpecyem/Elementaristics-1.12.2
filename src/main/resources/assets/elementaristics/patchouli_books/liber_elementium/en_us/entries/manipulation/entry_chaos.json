@@ -5,7 +5,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Chaos is the most chaotic of all forces for sure. Predicting it seems pretty unreasonable, however, an Alchemist may see certain patterns emerging... $(br)Chaos may be used in a $(marked)Ritual$() to create 'chaotic' items."
+      "text": "Chaos is the most chaotic of all forces for sure. Predicting it seems pretty unreasonable; however, an Alchemist may see certain patterns emerging... $(br)Chaos may be used in a $(marked)Ritual$() to create 'chaotic' items."
     },
     {
       "type": "concentrator_recipe",
@@ -13,13 +13,8 @@
       "text": "$(o)Chaotic-Neutral$()"
     },
     {
-      "type": "tunneler_recipe",
-      "recipe": "elementaristics:catalyst_entropizing",
-      "text": "$(o)Chaotic-Good$()"
-    },
-    {
       "type": "text",
-      "text": "The ritual is performed on the $(l:manipulation/entry_altar)$(item)Altar$() and requires a greater power of Chaos, manifested in $(l:manipulation/entry_recipes)$(item)Entropizing Catalysts$(). $(br)In order to achieve results, the items to be affected must be tossed near the altar before the rite ends."
+      "text": "The ritual is performed on the $(l:manipulation/entry_altar)$(item)Altar$() and requires a greater power of Chaos, manifested in $(l:alchemy/entry_entropizing_catalyst)$(item)Entropizing Catalysts$(). $(br)In order to achieve results, the items to be affected must be tossed near the altar before the rite ends."
     }
   ],
   "advancement": "elementaristics:progress_ascension_2"

@@ -13,5 +13,5 @@
       "text": "That's why crafting it is so ridiculously easy, as one will only have to mash those 6 essences together. $(br)$(item)Magan Essence$() is usually used in $(marked)Applied Soulogy$(), though it can also find use in other disciplines."
     }
   ],
-  "advancement": "elementaristics:discovery_mana"
+  "advancement": "elementaristics:progress_basin_infusion"
 }

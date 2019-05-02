@@ -1,8 +1,6 @@
 package de.aelpecyem.elementaristics.init;
 
 import de.aelpecyem.elementaristics.Elementaristics;
-import de.aelpecyem.elementaristics.init.ModItems;
-import de.aelpecyem.elementaristics.misc.elements.Aspect;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;
 import de.aelpecyem.elementaristics.recipe.*;
 import de.aelpecyem.elementaristics.recipe.base.*;
@@ -11,7 +9,6 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
-import scala.xml.Elem;
 
 public class InitRecipes {
 
@@ -27,13 +24,14 @@ public class InitRecipes {
     }
 
     private static void initBasin() {
-        InfusionRecipes.addRecipe(new InfusionRecipe(new ResourceLocation(Elementaristics.MODID, "seed_wheat"), Ingredient.fromItem(ModItems.itemBaseSeed), Items.WHEAT_SEEDS.getDefaultInstance(), Aspects.earth, Aspects.water));
+        InfusionRecipes.addRecipe(new InfusionRecipe(new ResourceLocation(Elementaristics.MODID, "wine_redmost"), Ingredient.fromItem(ModItems.tincture_arcane), ModItems.wine_redmost.getDefaultInstance(), Aspects.earth, Aspects.water, Aspects.mind, Aspects.body));
     }
     private static void initForge() {
         ForgeRecipes.addRecipe(new ForgeRecipe(new ResourceLocation(Elementaristics.MODID, "thaumagral_iron"), Ingredient.fromStacks(new ItemStack(Items.IRON_SWORD)), Ingredient.fromStacks(new ItemStack(ModItems.essence, 1, Aspects.fire.getId())), Ingredient.fromStacks(new ItemStack(ModItems.essence, 1, Aspects.mana.getId())), Ingredient.fromStacks(new ItemStack(Items.IRON_INGOT)), Ingredient.fromStacks(new ItemStack(ModItems.gem_triangular)),  ModItems.thaumagral_iron.getDefaultInstance()));
         ForgeRecipes.addRecipe(new ForgeRecipe(new ResourceLocation(Elementaristics.MODID, "hammer_heat"), Ingredient.fromItem(ModItems.head_hammer), Ingredient.fromStacks(new ItemStack(ModItems.essence, 1, Aspects.fire.getId())), Ingredient.fromItem(ModItems.sparks_living),Ingredient.fromStacks(new ItemStack(Blocks.OBSIDIAN)), Ingredient.fromItem(Items.STICK), ModItems.hammer_heat.getDefaultInstance()));
         ForgeRecipes.addRecipe(new ForgeRecipe(new ResourceLocation(Elementaristics.MODID, "mirror_soul"), Ingredient.fromStacks(new ItemStack(Blocks.GLASS)),  Ingredient.fromItem(Items.DIAMOND), Ingredient.fromStacks(new ItemStack(ModItems.sands_soul)), Ingredient.fromStacks(new ItemStack(ModItems.thoughts_battling)), Ingredient.fromItem(Items.STICK),ModItems.soul_mirror.getDefaultInstance()));
-        ForgeRecipes.addRecipe(new ForgeRecipe(new ResourceLocation(Elementaristics.MODID, "sword_icy"), Ingredient.fromStacks(new ItemStack(ModItems.essence, 1, Aspects.ice.getId())), Ingredient.fromItem(ModItems.gem_triangular), Ingredient.fromStacks(new ItemStack(ModItems.blizzard_frozen)), Ingredient.fromStacks(new ItemStack(Items.DIAMOND_SWORD)), Ingredient.fromItem(ModItems.earth_purest), ModItems.sword_icy.getDefaultInstance()));
+        ForgeRecipes.addRecipe(new ForgeRecipe(new ResourceLocation(Elementaristics.MODID, "dagger"), Ingredient.fromStacks(new ItemStack(ModItems.essence, 1, Aspects.ice.getId())), Ingredient.fromItem(ModItems.gem_triangular), Ingredient.fromStacks(new ItemStack(ModItems.motion_captured)), Ingredient.fromStacks(new ItemStack(Items.DIAMOND_SWORD)), Ingredient.fromItem(ModItems.earth_purest), ModItems.dagger_sacrificial.getDefaultInstance()));
+        ForgeRecipes.addRecipe(new ForgeRecipe(new ResourceLocation(Elementaristics.MODID, "heart_stone"), Ingredient.fromStacks(new ItemStack(ModItems.essence, 1, Aspects.earth.getId())), Ingredient.fromItem(ModItems.earth_purest), Ingredient.fromStacks(new ItemStack(ModItems.soul_dead)), Ingredient.fromStacks(new ItemStack(ModItems.essence, 1, Aspects.body.getId())), Ingredient.fromStacks(new ItemStack(Blocks.STONE, 1, 0)), ModItems.heart_stone.getDefaultInstance()));
 
     }
 

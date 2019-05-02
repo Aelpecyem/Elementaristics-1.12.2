@@ -2,7 +2,7 @@
   "name": "A Dream of a truer Self",
   "icon": "elementaristics:textures/gui/icons/self.png",
   "category": "soulogy",
-  "advancement": "elementaristics:discovery_mind",
+  "advancement": "elementaristics:progress_ascension_identification",
   "pages": [
     {
       "type": "text",

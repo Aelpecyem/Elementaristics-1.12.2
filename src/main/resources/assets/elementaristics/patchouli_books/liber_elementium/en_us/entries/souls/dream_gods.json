@@ -2,7 +2,7 @@
   "name": "A Dream of Gods",
   "icon": "elementaristics:textures/gui/icons/gods.png",
   "category": "soulogy",
-  "advancement": "elementaristics:discovery_soul",
+  "advancement": "elementaristics:progress_ascension_identification",
   "pages": [
     {
       "type": "text",

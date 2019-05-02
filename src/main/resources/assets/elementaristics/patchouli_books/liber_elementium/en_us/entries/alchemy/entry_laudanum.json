@@ -2,7 +2,7 @@
   "name": "Magic Laudanum",
   "icon": "elementaristics:tincture_opium",
   "category": "alchemy",
-  "advancement": "elementaristics:discovery_mind",
+  "advancement": "elementaristics:progress_ascension_4",
   "pages": [
     {
       "type": "text",

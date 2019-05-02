@@ -1,6 +1,6 @@
 {
   "name": "Arcane Lessons",
-  "description": "There are always lessons to be learnt!",
+  "description": "The Arcane Lessons are lessons on this discipline at its core, or rather how it gets a foundation.$(br)One might not need to know this; however, they might want to, in some cases.",
   "icon": "elementaristics:textures/gui/icons/lessons.png",
   "sortnum": 0
 }

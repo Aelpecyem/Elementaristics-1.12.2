@@ -23,14 +23,12 @@
       "recipe2": "elementaristics:kill_water"
     },
     {
-      "type": "crafting",
-      "recipe": "elementaristics:kill_aether",
+      "type": "text",
       "text": "All of these rites deal different kinds of damage, and players can be killed with them, too. However, they would have to stand in close range to the altar, like everything else."
     },
     {
       "type": "text",
       "text": "It should be noted that the matching soul might also use the rite to their advantage, as they'll get the closest to the element they represent ever. $(br)However, only prepared souls might take that step."
     }
-  ],
-  "advancement": "elementaristics:discovery_magan"
+  ]
 }

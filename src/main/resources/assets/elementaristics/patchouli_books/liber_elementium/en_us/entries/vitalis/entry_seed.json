@@ -1,7 +1,7 @@
 {
   "name": "Dormant Seeds",
   "icon": "elementaristics:seed_dormant",
-  "advancement": "elementaristics:discovery_earth",
+  "advancement": "elementaristics:progress_concentrator",
   "category": "vis_vitalis",
   "pages": [
     {

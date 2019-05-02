@@ -21,6 +21,19 @@ elementaristics.potion.crystal_protection=Crystalline Shield
 elementaristics.potion.fireball_charge=Fireball Charge
 elementaristics.potion.counterspell=Counterspell Field
 
+#Damage
+death.attack.damage_air=%1$s felt the wind's rage
+death.attack.damage_air.player=%1$s felt the wind's rage invoked by %2$s
+death.attack.damage_air.item="%1$s felt the wind's rage invoked by %2$s using %3$s
+
+death.attack.damage_psychic=%1$s's mind collapsed
+death.attack.damage_psychic.player=%1$s's mind collapsed because of %2$s
+death.attack.damage_psychic.item="%1$s's mind collapsed because of %2$s using %3$s
+
+death.attack.damage_aether=%1$s saw him
+death.attack.damage_aether.player=%1$s saw him because of %2$s
+death.attack.damage_aether.item="%1$s saw him because of %2$s using %3$s
+
 #Spells
 
 
@@ -32,7 +45,7 @@ item.elder_root.name=Elder Root
 item.quartz_vibrant.name=Vibrant Quartz
 item.matter_chaotic.name=Chaotic Matter
 item.matter_maganized.name=Maganized Matter
-item.module_matter_accelerating.name=Matter Accelerating Module
+item.module_matter_accelerating.name=Acceleration Module
 
 item.changer_soul.name=Soul Changer (Creative Only)
 item.mirror_soul.name=Mirror of the Soul
@@ -53,7 +66,8 @@ item.protoplasm.name=Protoplasmic Sample
 item.hammer_heat.name=Hammer of Heat
 item.thaumagral_iron.name=Iron Thaumagral
 item.head_hammer.name=Archaic Hammer Head
-item.sword_icy.name=Chilling Blade
+item.dagger_sacrificial.name=Sacrificial Dagger
+item.heart_stone.name=Heart of Stone
 
 item.incantation_chaos.name=Chaotic Incantation
 item.incantation_light.name=Incantation of Light
@@ -82,7 +96,7 @@ item.moss_everchanging.name=Everchanging Moss
 item.gem_arcane.name=Arcane Gem
 item.catalyst_ordering.name=Ordering Catalyst
 item.catalyst_entropizing.name=Entropizing Catalyst
-item.blizzard_frozen.name=Frozen Blizzard
+item.flesh_lamb.name=Flesh of the Lamb
 item.soul_dead.name=Dead Soul
 item.powder_soul.name=Soul Powder
 item.matter_astral_body.name=Astral Body Matter
@@ -206,8 +220,7 @@ advancement.elementaristics.magan=Magan
 
 #Book
 item.elementaristics.book.name=Liber Elementium
-info.elementaristics.book.landing_1=A collection of manuscripts collected over many centuries, created by many different witches, meant to assist you with delving into the mysteries of witchcraft.
-info.elementaristics.book.landing=The Elementaristics are a simple concept about the elemental powers of the multiverse. I invented this concept, I think. I will use this book to hold my knowledge.
+info.elementaristics.book.landing=The Elementaristics are the discipline from Nothingness, and they focus on how to dance beyond it.$(br)However, as no normal human has unlimited knowledge or an unceasing memory, this book covers the latter for them.
 info.elementaristics.book.subtitle=The gate's opening
 
 book.purifierTime=Ticks needed:
@@ -221,18 +234,18 @@ tooltip.incantation.aspects=Aspects needed:
 tooltip.aspect_tool.aspects=Aspects:
 tooltip.aspect_tool.power=Power:
 
-
-
 tooltip.root=I could have a rather interesting time when burning this...
 tooltip.thaumagral.durability=Durability Bonus:
 tooltip.thaumagral.damage=Damage Bonus:
 tooltip.thaumagral.spellSlots=Spellslots:
 tooltip.mirror_soul.name=Knowing me, knowing you
-tooltip.sword_icy.name=The air is chilled around this blade
+tooltip.dagger_sacrificial.name=It's not lunacy, it's just bloodshed
 tooltip.hammer_heat.name=Warm to the touch, hot to the target
 tooltip.opium.name=Relatively weak, compared to its non-arcane version
 tooltip.sparks_living.name=Can be used as fuel
 tooltip.thoughts_battling.name=Is it you or is it me, would you know or would you see?
+tooltip.wine_redmost.name=Will you ever know what you have done after drinking this?
+tooltip.flesh_lamb.name=Wolves shall devour the Lamb
 
 #Rites
 rite.elementaristics:rite_knowledge.name=Enlightenment's Sighing
@@ -329,6 +342,8 @@ message.meditation_to_silence.name=And as the mind gets used to the fear, sudden
 message.meditation_to_laughter.name=And suddenly we laugh.
 
 message.meditation_ascension.name=The mind has been reforged, and next is the body.
+
+display.spell_locked=Locked Spell
 #Souls
 soul.soul_magan.name=§6Magan Soul
 soul.soul_water.name=§1Water Soul

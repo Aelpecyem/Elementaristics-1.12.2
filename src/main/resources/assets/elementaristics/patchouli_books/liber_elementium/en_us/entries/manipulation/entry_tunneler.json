@@ -10,7 +10,7 @@
     {
       "type": "crafting",
       "recipe": "elementaristics:tunneler",
-      "recipe2": "elementaristics:filter"
+      "recipe2": "elementaristics:matter_acceleration_module"
     },
     {
       "type": "text",
@@ -47,7 +47,10 @@
     {
       "type": "text",
       "text": "If the crafting process was not successful because the reactant was wrong, the essences won't get consumed. If the catalyst had possibilites, but the essences were not the correct ones, the correct essences will get consumed. $(br)(Note that the machine needs to get a redstone signal)."
+    },
+    {
+      "type": "crafting",
+      "recipe": "elementaristics:filter"
     }
-  ],
-  "advancement": "elementaristics:discovery_air"
+  ]
 }

@@ -102,6 +102,7 @@ public class CommandElementaristics extends CommandBase {
             IPlayerCapabilities cap = player.getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null);
             cap.setKnowsSoul(boolValue);
             sender.sendMessage(new TextComponentString(TextFormatting.GREEN + "Successfully changed  state of knowing of "  + player.getDisplayNameString() + " to " + boolValue));
+            SoulInit.updateSoulInformation(player, cap);
             return true;
         }
         return false;
@@ -112,6 +113,7 @@ public class CommandElementaristics extends CommandBase {
             IPlayerCapabilities cap = player.getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null);
             cap.setMagan(intValue);
             sender.sendMessage(new TextComponentString(TextFormatting.GREEN + "Successfully changed the magan of "  + player.getDisplayNameString() + " to " + intValue));
+            SoulInit.updateSoulInformation(player, cap);
             return true;
         }
         return false;
@@ -122,6 +124,7 @@ public class CommandElementaristics extends CommandBase {
             IPlayerCapabilities cap = player.getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null);
             cap.setPlayerAscensionStage(intValue);
             sender.sendMessage(new TextComponentString(TextFormatting.GREEN + "Successfully changed the ascension stage of "  + player.getDisplayNameString() + " to " + intValue));
+            SoulInit.updateSoulInformation(player, cap);
             return true;
         }
         return false;
@@ -131,6 +134,7 @@ public class CommandElementaristics extends CommandBase {
             IPlayerCapabilities cap = player.getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null);
             cap.setSoulId(intValue);
             sender.sendMessage(new TextComponentString(TextFormatting.GREEN + "Successfully changed the soul of "  + player.getDisplayNameString() + " to " + SoulInit.getSoulFromId(intValue).getName()));
+            SoulInit.updateSoulInformation(player, cap);
             return true;
         }
         return false;

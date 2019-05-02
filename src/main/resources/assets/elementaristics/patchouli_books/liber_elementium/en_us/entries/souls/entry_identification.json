@@ -2,7 +2,7 @@
   "name": "Soul Types",
   "icon": "elementaristics:incantation_light",
   "category": "soulogy",
-  "advancement": "elementaristics:discovery_soul",
+  "advancement": "elementaristics:progress_ascension_2",
   "pages": [
     {
       "type": "text",
@@ -22,13 +22,7 @@
     {
       "type": "text",
       "title": "Elemental Souls",
-      "text": "The sub-group of Elemental Souls includes six soul types: Aether, Air, Earth, Fire, Water and Magan Souls. They have all been created by multiversal influences with a dominating aspect. "
-    },
-    {
-      "type": "spotlight",
-      "title": "Aether Soul",
-      "item": "elementaristics:essence:4",
-      "text": "These souls have been born near the aspect of Aether, the very aspect of space.$(br)While not having any categorized abilities, these souls are generally bound to space and the outer realms. They also have some attributes in common with the air aspect."
+      "text": "The sub-group of Elemental Souls includes five soul types: Air, Earth, Fire, Water and Magan Souls. They have all been created by multiversal influences with a dominating aspect. $(br)One should be aware that there is no such thing as an \"Aether Soul\", as the Aether is really just the space, and does not offer the possibility of radiation."
     },
     {
       "type": "spotlight",

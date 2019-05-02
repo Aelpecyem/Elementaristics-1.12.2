@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " R ",
+    " I ",
+    " E "
+  ],
+  "key": {
+    "E": {
+      "item": "elementaristics:essence",
+      "data": 0
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "result": {
+    "item": "elementaristics:module_matter_accelerating",
+    "count": 1
+  }
+}

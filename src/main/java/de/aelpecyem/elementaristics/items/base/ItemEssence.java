@@ -12,7 +12,7 @@ public class ItemEssence extends ItemBase{
 
     public ItemEssence() {
         super("essence");
-        this.setCreativeTab(Elementaristics.tab_essences);
+        this.setCreativeTab(Elementaristics.tab);
         setHasSubtypes(true);
 
     }

@@ -2,7 +2,7 @@
   "name": "A Dream of a Mother",
   "icon": "elementaristics:textures/gui/icons/mother.png",
   "category": "soulogy",
-  "advancement": "elementaristics:discovery_body",
+  "advancement": "elementaristics:progress_ascension_identification",
   "pages": [
     {
       "type": "text",

@@ -1,0 +1,16 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "textures": {
+      "all": "elementaristics:blocks/moss"
+    }
+  },
+  "variants": {
+    "normal": {
+      "model": "elementaristics:moss"
+    },
+    "inventory": {
+      "model": "elementaristics:moss"
+    }
+  }
+}

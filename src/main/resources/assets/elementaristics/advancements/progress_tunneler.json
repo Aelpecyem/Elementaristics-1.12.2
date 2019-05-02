@@ -10,7 +10,7 @@
       "translate": "advancement.elementaristics.tunneler.desc"
     }
   },
-  "parent": "elementaristics:progress_pedestal",
+  "parent": "elementaristics:root",
   "criteria": {
     "book": {
       "trigger": "minecraft:inventory_changed",

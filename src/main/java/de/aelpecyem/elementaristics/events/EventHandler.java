@@ -135,7 +135,7 @@ public class EventHandler {
             player.removePotionEffect(PotionInit.potionIntoxicated);
         }
         //to start meditation step
-        if (player.getActivePotionEffects().contains(player.getActivePotionEffect(PotionInit.potionTrance)) && player.getActivePotionEffects().contains(player.getActivePotionEffect(PotionInit.ecstasy))) {
+        if (player.getActivePotionEffects().contains(player.getActivePotionEffect(PotionInit.potionTrance)) && player.getActivePotionEffects().contains(player.getActivePotionEffect(PotionInit.ecstasy)) && player.getActivePotionEffect(PotionInit.ecstasy).getAmplifier() >= 2) {
             Potion potion = PotionInit.potionFocused;
             player.addPotionEffect(new PotionEffect(potion, 24000, 0, true, true));
             player.removePotionEffect(PotionInit.potionTrance);

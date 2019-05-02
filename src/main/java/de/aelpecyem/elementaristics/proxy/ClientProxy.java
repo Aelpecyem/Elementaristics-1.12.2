@@ -28,10 +28,7 @@ public class ClientProxy extends CommonProxy {
 
     @Override
     public void registerRenderers() {
-
-
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPurifier.class, new TESRPurifier());
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityLightningPedestal.class, new TESRLightningPedestal());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPedestal.class, new TESRPedestal());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityConcentrator.class, new TESRConcentrator());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTunneler.class, new TESRTunneler());

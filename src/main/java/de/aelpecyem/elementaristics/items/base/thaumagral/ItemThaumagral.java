@@ -30,13 +30,14 @@ import java.util.List;
 
 public class ItemThaumagral extends ItemSword implements IHasModel {
     protected String name;
-    float magicDmg, voidDmg;
+    float castingEfficiency;
+    float cooldown;
 
-    public ItemThaumagral(String name, ToolMaterial material, float magicDmg, float voidDmg) { //ThaumagralMaterial
+    public ItemThaumagral(String name, ToolMaterial material, float castingEfficiency, float cooldownReduction) { //ThaumagralMaterial
         super(material);
         this.name = name;
-        this.magicDmg = magicDmg;
-        this.voidDmg = voidDmg;
+        this.castingEfficiency = castingEfficiency;
+        this.cooldown = cooldownReduction;
         setUnlocalizedName(name);
         setRegistryName(name);
         this.setCreativeTab(Elementaristics.tab);
@@ -148,7 +149,7 @@ public class ItemThaumagral extends ItemSword implements IHasModel {
             } catch (IndexOutOfBoundsException e) {
             }
             if (spellBase != null && SoulInit.getSoulFromId(cap.getSoulId()).isSpellUsable(spellBase, cap)) {
-                if (cap.getMagan() >= spellBase.getMaganCost() / SoulInit.getSoulFromId(cap.getSoulId()).getCastingEfficiency()) {
+                if (cap.getMagan() >= (spellBase.getMaganCost() / SoulInit.getSoulFromId(cap.getSoulId()).getCastingEfficiency()) / castingEfficiency) {
                     MaganUtil.drainMaganFromPlayer(playerIn, spellBase.getMaganCost() / SoulInit.getSoulFromId(cap.getSoulId()).getCastingEfficiency(), spellBase.getStuntTime(), true);
                     if (spellBase.getType() == SpellBase.SpellType.EDEMA) {
                         for (int i = 0; i < 10; i++) {
@@ -187,7 +188,7 @@ public class ItemThaumagral extends ItemSword implements IHasModel {
                     }
 
                     if (spellBase.getType() != SpellBase.SpellType.EDEMA)
-                        playerIn.getCooldownTracker().setCooldown(this, spellBase.getCooldownTicks());
+                        playerIn.getCooldownTracker().setCooldown(this, Math.round(spellBase.getCooldownTicks() / cooldown));
                     return ActionResult.newResult(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
                 }
             }

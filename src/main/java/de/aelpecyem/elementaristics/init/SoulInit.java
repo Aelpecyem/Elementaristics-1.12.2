@@ -1,6 +1,7 @@
 package de.aelpecyem.elementaristics.init;
 
 import de.aelpecyem.elementaristics.capability.player.IPlayerCapabilities;
+import de.aelpecyem.elementaristics.capability.player.PlayerCapProvider;
 import de.aelpecyem.elementaristics.capability.player.souls.Soul;
 import de.aelpecyem.elementaristics.capability.player.souls.soulCaps.SoulCaps;
 import net.minecraft.entity.player.EntityPlayer;
@@ -18,7 +19,7 @@ public class SoulInit {
     public static Soul soulEarth;
     public static Soul soulWater;
     public static Soul soulFire;
-    public static Soul soulAether;
+    // public static Soul soulAether; hmhmh
     public static Soul soulMana;
     public static Soul soulUnstable;
     public static Soul soulImmutable;
@@ -40,10 +41,10 @@ public class SoulInit {
         soulEarth = new Soul("soul_earth",26368, EnumSoulRarity.COMMON);
         soulWater = new Soul("soul_water", 1279, EnumSoulRarity.COMMON);
         soulFire = new Soul("soul_fire", 15157504, EnumSoulRarity.COMMON);
-        soulAether = new Soul("soul_aether", 10354943, EnumSoulRarity.COMMON);
+        // soulAether = new Soul("soul_aether", 10354943, EnumSoulRarity.COMMON);
 
         soulMana = new Soul("soul_mana", 15597809, EnumSoulRarity.RARE, 160, 0.4F, 1.5F);
-        soulUnstable = new Soul("soul_unstable", 7208960, EnumSoulRarity.RARE);
+        soulUnstable = new Soul("soul_unstable", 7208960, EnumSoulRarity.RARE, 130, 0.2F, 1.8F);
         soulImmutable = new Soul("soul_immutable", 5922140, EnumSoulRarity.RARE, 90, 0.12F, 0.8F);
         soulBalanced = new Soul("soul_balanced", 14015459, EnumSoulRarity.RARE, 115, 0.2F, 1.1F);
 
@@ -67,7 +68,6 @@ public class SoulInit {
         soulEarth.addSpellToList(SpellInit.spell_attack_earth, 2);
         soulFire.addSpellToList(SpellInit.spell_attack_fire, 2);
         soulWater.addSpellToList(SpellInit.spell_attack_water, 2);
-        soulAether.addSpellToList(SpellInit.spell_attack_aether, 2); //and so on for the other soul types
         soulBalanced.addSpellToList(SpellInit.spell_attack_generic, 2);
         soulImmutable.addSpellToList(SpellInit.spell_attack_nullifying, 2);
         soulDragon.addSpellToList(SpellInit.spell_attack_dragon, 2);
@@ -75,7 +75,6 @@ public class SoulInit {
 
         soulAir.addSpellToList(SpellInit.spell_form_gaseous, 2);
         soulEarth.addSpellToList(SpellInit.spell_protection_crystal, 2);
-        soulAether.addSpellToList(SpellInit.spell_blink, 2);
         soulWater.addSpellToList(SpellInit.spell_cleanse, 2);
         soulFire.addSpellToList(SpellInit.spell_fireball_charge, 2);
 
@@ -120,10 +119,17 @@ public class SoulInit {
         return soulMagan;
     }
 
+    public static void normalizeSoulCaps(EntityPlayer player) {
+        if (player.hasCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null)) {
+            SoulCaps.getCapForSoul(SoulInit.getSoulFromId(player.getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null).getSoulId())).normalize(player,
+                    player.getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null));
+        }
+    }
+
     public static void updateSoulInformation(EntityPlayer player, IPlayerCapabilities caps) {
-        SoulCaps.getCapForSoul(SoulInit.getSoulFromId(caps.getSoulId())).buffsOnSpawning(player, caps);
         caps.setMaganRegenPerTick(SoulInit.getSoulFromId(caps.getSoulId()).getMaganRegenPerTick());
         caps.setMaxMagan(SoulInit.getSoulFromId(caps.getSoulId()).getMaxMagan());
+        SoulCaps.getCapForSoul(SoulInit.getSoulFromId(caps.getSoulId())).buffsOnSpawning(player, caps);
     }
 
     public static Soul generateSoulType() {

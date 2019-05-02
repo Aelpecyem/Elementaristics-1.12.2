@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:dirt",
+      "data": 0
+    },
+    {
+      "item": "elementaristics:essence",
+      "data": 1
+    },
+    {
+      "item": "elementaristics:essence",
+      "data": 2
+    },
+    {
+      "item": "elementaristics:moss_everchanging"
+    }
+  ],
+  "result": {
+    "item": "elementaristics:moss"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "elementaristics:basin_infusion"
+    },
+    "title": {
+      "translate": "advancement.elementaristics.basin"
+    },
+    "description": {
+      "translate": "advancement.elementaristics.basin.desc"
+    }
+  },
+  "parent": "elementaristics:root",
+  "criteria": {
+    "book": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "elementaristics:basin_infusion"
+          }
+        ]
+      }
+    }
+  }
+}

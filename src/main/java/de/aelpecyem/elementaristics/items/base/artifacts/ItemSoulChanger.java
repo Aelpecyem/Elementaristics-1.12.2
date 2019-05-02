@@ -24,6 +24,7 @@ public class ItemSoulChanger extends ItemBase {
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
         if (playerIn.hasCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null)) {
             IPlayerCapabilities cap = playerIn.getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null);
+            SoulCaps.getCapForSoul(SoulInit.getSoulFromId(cap.getSoulId())).normalize(playerIn, cap);
             if (playerIn.isSneaking()) {
                 if (worldIn.isRemote) {
                     playerIn.sendMessage(new TextComponentString(I18n.format("message.soul_creative.name") + " "
@@ -32,7 +33,6 @@ public class ItemSoulChanger extends ItemBase {
             }
 
             if (!playerIn.isSneaking()) {
-                SoulCaps.getCapForSoul(SoulInit.getSoulFromId(cap.getSoulId())).normalize(playerIn, cap);
                 if (cap.getSoulId() > 0) {
                     cap.setSoulId(cap.getSoulId() - 1);
                 } else if (cap.getSoulId() == 0) {
@@ -43,6 +43,8 @@ public class ItemSoulChanger extends ItemBase {
                             + SoulInit.getSoulFromId(cap.getSoulId()).getLocalizedName()));
                 }
             }
+
+            SoulCaps.getCapForSoul(SoulInit.getSoulFromId(cap.getSoulId())).normalize(playerIn, cap);
             SoulInit.updateSoulInformation(playerIn, cap);
         }
 

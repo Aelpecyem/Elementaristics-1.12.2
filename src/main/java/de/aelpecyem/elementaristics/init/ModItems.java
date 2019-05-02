@@ -1,15 +1,14 @@
 package de.aelpecyem.elementaristics.init;
 
 import de.aelpecyem.elementaristics.items.base.*;
-import de.aelpecyem.elementaristics.items.base.artifacts.ItemSwordIcy;
+
+import de.aelpecyem.elementaristics.items.base.artifacts.ItemDaggerSacrificial;
 import de.aelpecyem.elementaristics.items.base.artifacts.rites.IncantationBase;
 import de.aelpecyem.elementaristics.items.base.artifacts.rites.ItemAspects;
 import de.aelpecyem.elementaristics.items.base.artifacts.ItemHammerHeat;
 import de.aelpecyem.elementaristics.items.base.artifacts.ItemSoulChanger;
 import de.aelpecyem.elementaristics.items.base.artifacts.ItemSoulMirror;
-import de.aelpecyem.elementaristics.items.base.artifacts.rites.materials.ItemSparksLiving;
-import de.aelpecyem.elementaristics.items.base.artifacts.rites.materials.ItemThoughtsBattling;
-import de.aelpecyem.elementaristics.items.base.artifacts.rites.materials.ItemWaterPurest;
+import de.aelpecyem.elementaristics.items.base.artifacts.rites.materials.*;
 import de.aelpecyem.elementaristics.items.base.burnable.ItemHerbBundle;
 import de.aelpecyem.elementaristics.items.base.burnable.ItemOpiumTincture;
 import de.aelpecyem.elementaristics.items.base.consumable.ItemBaseSeed;
@@ -22,6 +21,7 @@ import de.aelpecyem.elementaristics.util.IHasModel;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemPickaxe;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraftforge.registries.IForgeRegistry;
 
@@ -62,8 +62,14 @@ public class ModItems {
     public static ItemSoulMirror soul_mirror;
 
     public static ItemPickaxe hammer_heat;
-    public static ItemSword sword_icy;
+    public static ItemSword dagger_sacrificial;
     public static ItemThaumagral thaumagral_iron;
+    public static ItemThaumagral thaumagral_gold;
+    public static ItemThaumagral thaumagral_diamond;
+    public static ItemThaumagral thaumagral_stone;
+    public static ItemThaumagral thaumagral_wood;
+
+    public static ItemAspects heart_stone;
 
     public static IncantationBase incantation_chaos;
     public static IncantationBase incantation_light;
@@ -71,7 +77,6 @@ public class ModItems {
     public static IncantationBase incantation_conflagration;
     public static IncantationBase incantation_wind;
     public static IncantationBase incantation_gaia;
-    public static IncantationBase incantation_stars;
     public static IncantationBase incantation_depths;
     public static IncantationBase incantation_compression;
     public static IncantationBase incantation_forging;
@@ -84,7 +89,7 @@ public class ModItems {
     public static ItemAspects stardust;
 
     public static ItemAspects sparks_brightest;
-    public static ItemAspects wine_redmost;
+    public static ItemDrinkBase wine_redmost;
     public static ItemAspects thoughts_battling; //after entering the mind
     public static ItemAspects vacuum_selfsustaining;
     public static ItemAspects lightning_tangible;
@@ -92,7 +97,7 @@ public class ModItems {
     public static ItemAspects gem_triangular;
     public static ItemAspects catalyst_ordering;
     public static ItemAspects catalyst_entropizing;
-    public static ItemAspects blizzard_frozen;
+    public static ItemFoodBase flesh_lamb;
 
     public static ItemAspects soul_dead; //Mana
     public static ItemAspects matter_astral_body; //weaker soul aspect
@@ -120,11 +125,11 @@ public class ModItems {
         chaotic_matter = new ItemBase("matter_chaotic");
         maganized_matter = new ItemBase("matter_maganized"); //1 of each primal essence 1 chaotic matter = 8 Maganized
 
-        cluster_aether = new ItemBase("cluster_aether");
-        cluster_earth = new ItemBase("cluster_earth");
-        cluster_air = new ItemBase("cluster_air");
-        cluster_water = new ItemBase("cluster_water");
-        cluster_fire = new ItemBase("cluster_fire");
+        cluster_aether = new ItemClusterUnrefined("cluster_aether", new ItemStack(essence, 1, Aspects.aether.getId()));
+        cluster_earth = new ItemClusterUnrefined("cluster_earth", new ItemStack(essence, 1, Aspects.earth.getId()));
+        cluster_air = new ItemClusterUnrefined("cluster_air", new ItemStack(essence, 1, Aspects.air.getId()));
+        cluster_water = new ItemClusterUnrefined("cluster_water", new ItemStack(essence, 1, Aspects.water.getId()));
+        cluster_fire = new ItemClusterUnrefined("cluster_fire", new ItemStack(essence, 1, Aspects.fire.getId()));
 
         head_hammer = new ItemBase("head_hammer");
         essence_blank = new ItemBase("essence_blank");
@@ -141,7 +146,12 @@ public class ModItems {
 
         initRiteTools();
         initRiteMaterials();
-        thaumagral_iron = new ItemThaumagral("thaumagral_iron", Item.ToolMaterial.IRON, 0, 0);
+        thaumagral_iron = new ItemThaumagral("thaumagral_iron", Item.ToolMaterial.IRON, 1, 1);
+        thaumagral_gold = new ItemThaumagral("thaumagral_gold", Item.ToolMaterial.GOLD, 0.9F, 2);
+        thaumagral_diamond = new ItemThaumagral("thaumagral_diamond", Item.ToolMaterial.DIAMOND, 1.25F, 1.25F);
+        thaumagral_stone = new ItemThaumagral("thaumagral_stone", Item.ToolMaterial.STONE, 1.2F, 0.8F);
+        thaumagral_wood = new ItemThaumagral("thaumagral_wood", Item.ToolMaterial.WOOD, 1.5F, 0.5F);
+
     }
 
     private static void initRiteMaterials() {
@@ -152,15 +162,15 @@ public class ModItems {
         stardust = new ItemAspects("stardust", 6, true, Aspects.aether);
         
         sparks_brightest = new ItemAspects("sparks_brightest", 6, true, Aspects.light);
-        wine_redmost = new ItemAspects("wine_redmost", 6, true, Aspects.body);
-        thoughts_battling = new ItemThoughtsBattling();
+        wine_redmost = new ItemWineRedmost();
+        thoughts_battling = new ItemAspects("thoughts_battling", 6, true, "tooltip.thoughts_battling.name", Aspects.mind);
         vacuum_selfsustaining = new ItemAspects("vacuum_selfsustaining", 6, true, Aspects.vacuum);
         lightning_tangible = new ItemAspects("lightning_tangible", 6, true, Aspects.electricity);
         moss_everchaning = new ItemAspects("moss_everchanging", 6, true, Aspects.life);
         gem_triangular = new ItemAspects("gem_arcane", 6, true, Aspects.crystal);
         catalyst_ordering = new ItemAspects("catalyst_ordering", 6, true, Aspects.order);
         catalyst_entropizing = new ItemAspects("catalyst_entropizing", 6, true, Aspects.chaos); //1 aether essence 3 chaotic matter pieces
-        blizzard_frozen = new ItemAspects("blizzard_frozen", 6, true, Aspects.ice);
+        flesh_lamb = new ItemFleshLamb();
 
         soul_dead = new ItemAspects("soul_dead", 4, true, Aspects.mana);
         matter_astral_body = new ItemAspects("matter_astral_body", 3, true, Aspects.aether);
@@ -175,14 +185,15 @@ public class ModItems {
         incantation_conflagration = new IncantationBase("incantation_conflagration", RiteInit.riteConflagration, Aspects.fire, 4);
         incantation_wind = new IncantationBase("incantation_wind", RiteInit.riteShredding, Aspects.air, 4);
         incantation_gaia = new IncantationBase("incantation_gaia", RiteInit.riteGaiasGaze, Aspects.earth, 4);
-        incantation_stars = new IncantationBase("incantation_stars", RiteInit.riteSpaceExilation, Aspects.aether, 4);
         incantation_depths = new IncantationBase("incantation_depths", RiteInit.riteDrowningAstral, Aspects.water, 4);
         incantation_compression = new IncantationBase("incantation_compression", RiteInit.riteCompression, Aspects.aether, 4);
         incantation_forging = new IncantationBase("incantation_forging", RiteInit.riteForging, Aspects.fire, 4);
         incantation_recruiting = new IncantationBase("incantation_recruiting", RiteInit.riteRecruiting, Aspects.soul, 2);
+
         hammer_heat = new ItemHammerHeat();
-        sword_icy = new ItemSwordIcy();
+        dagger_sacrificial = new ItemDaggerSacrificial();
         soul_mirror = new ItemSoulMirror();
+        heart_stone = new ItemAspects("heart_stone", 6, false, Aspects.earth); //todo add functionality
     }
 
     public static void register(IForgeRegistry<Item> registry) {
