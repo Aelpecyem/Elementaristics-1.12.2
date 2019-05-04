@@ -44,7 +44,7 @@ public class ModItems {
     public static ItemBase chaotic_matter;
     public static ItemBase maganized_matter;
     public static ItemBase protoplasm;
-    public static ItemFoodBase itemBaseSeed;
+    public static ItemFoodBase base_seed;
     public static ItemBase vibrant_quartz;
     public static ItemBase matter_accelerating_module;
     public static ItemBase head_hammer;
@@ -82,6 +82,9 @@ public class ModItems {
     public static IncantationBase incantation_forging;
     public static IncantationBase incantation_recruiting;
 
+    public static IncantationBase incantation_day;
+    public static IncantationBase incantation_night;
+
     public static ItemDrinkBase water_purest;
     public static ItemAspects sparks_living;
     public static ItemAspects earth_purest;
@@ -92,7 +95,7 @@ public class ModItems {
     public static ItemDrinkBase wine_redmost;
     public static ItemAspects thoughts_battling; //after entering the mind
     public static ItemAspects vacuum_selfsustaining;
-    public static ItemAspects lightning_tangible;
+    public static ItemBase lightning_tangible;
     public static ItemAspects moss_everchaning;
     public static ItemAspects gem_triangular;
     public static ItemAspects catalyst_ordering;
@@ -141,13 +144,13 @@ public class ModItems {
 
         ash = new ItemBase("ash");
         protoplasm = new ItemBase("protoplasm");
-        itemBaseSeed = new ItemBaseSeed(); //make it possible to craft many different plants/seeds with this
+        base_seed = new ItemBaseSeed(); //make it possible to craft many different plants/seeds with this
         //book_liber_elementium = new LiberElementiumItem();
 
         initRiteTools();
         initRiteMaterials();
         thaumagral_iron = new ItemThaumagral("thaumagral_iron", Item.ToolMaterial.IRON, 1, 1);
-        thaumagral_gold = new ItemThaumagral("thaumagral_gold", Item.ToolMaterial.GOLD, 0.9F, 2);
+        thaumagral_gold = new ItemThaumagral("thaumagral_gold", Item.ToolMaterial.GOLD, 0.8F, 1.5F);
         thaumagral_diamond = new ItemThaumagral("thaumagral_diamond", Item.ToolMaterial.DIAMOND, 1.25F, 1.25F);
         thaumagral_stone = new ItemThaumagral("thaumagral_stone", Item.ToolMaterial.STONE, 1.2F, 0.8F);
         thaumagral_wood = new ItemThaumagral("thaumagral_wood", Item.ToolMaterial.WOOD, 1.5F, 0.5F);
@@ -165,7 +168,7 @@ public class ModItems {
         wine_redmost = new ItemWineRedmost();
         thoughts_battling = new ItemAspects("thoughts_battling", 6, true, "tooltip.thoughts_battling.name", Aspects.mind);
         vacuum_selfsustaining = new ItemAspects("vacuum_selfsustaining", 6, true, Aspects.vacuum);
-        lightning_tangible = new ItemAspects("lightning_tangible", 6, true, Aspects.electricity);
+        lightning_tangible = new ItemLightningTangible();
         moss_everchaning = new ItemAspects("moss_everchanging", 6, true, Aspects.life);
         gem_triangular = new ItemAspects("gem_arcane", 6, true, Aspects.crystal);
         catalyst_ordering = new ItemAspects("catalyst_ordering", 6, true, Aspects.order);
@@ -190,6 +193,8 @@ public class ModItems {
         incantation_forging = new IncantationBase("incantation_forging", RiteInit.riteForging, Aspects.fire, 4);
         incantation_recruiting = new IncantationBase("incantation_recruiting", RiteInit.riteRecruiting, Aspects.soul, 2);
 
+        incantation_day = new IncantationBase("incantation_day", RiteInit.riteDay, Aspects.light, 1);
+        incantation_night = new IncantationBase("incantation_night", RiteInit.riteNight, Aspects.ice, 1);
         hammer_heat = new ItemHammerHeat();
         dagger_sacrificial = new ItemDaggerSacrificial();
         soul_mirror = new ItemSoulMirror();

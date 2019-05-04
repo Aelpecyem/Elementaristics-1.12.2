@@ -1,7 +1,7 @@
 {
   "name": "Opium Plant",
   "icon": "elementaristics:petal_opium",
-  "advancement": "elementaristics:progress_ascension_4",
+  "advancement": "elementaristics:progress_ascension_identification",
   "category": "vis_vitalis",
   "pages": [
     {

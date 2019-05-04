@@ -67,6 +67,7 @@ public class TESRBasin extends TileEntitySpecialRenderer<TileEntityInfusionBasin
 
 
             buffer.setTranslation(0, 0, 0);
+            Minecraft.getMinecraft().getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
         }
     }
 

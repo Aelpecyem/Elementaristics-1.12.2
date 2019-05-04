@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " F ",
+    "GPB",
+    " E "
+  ],
+  "key": {
+    "E": {
+      "item": "elementaristics:essence",
+      "data": 3
+    },
+    "B": {
+      "item": "minecraft:dye",
+      "data": 15
+    },
+    "F": {
+      "item": "minecraft:double_plant",
+      "data": 0
+    },
+    "P": {
+      "item": "minecraft:paper"
+    },
+    "G": {
+      "item": "minecraft:gold_ingot"
+    }
+  },
+  "result": {
+    "item": "elementaristics:incantation_day",
+    "count": 1
+  }
+}

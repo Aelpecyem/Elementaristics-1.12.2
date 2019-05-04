@@ -1,7 +1,6 @@
 package de.aelpecyem.elementaristics.blocks.tileentity.blocks.energy;
 
 import de.aelpecyem.elementaristics.blocks.tileentity.BlockTileEntity;
-import de.aelpecyem.elementaristics.blocks.tileentity.TileEntityLightningPedestal;
 import de.aelpecyem.elementaristics.blocks.tileentity.energy.TileEntityGeneratorArcaneCombustion;
 import de.aelpecyem.elementaristics.util.InventoryUtil;
 import net.minecraft.block.BlockHorizontal;

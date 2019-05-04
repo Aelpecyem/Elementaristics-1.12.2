@@ -11,6 +11,34 @@
     {
       "type": "crafting",
       "recipe": "elementaristics:recipe_seed"
+    },
+    {
+      "type": "concentrator_recipe",
+      "recipe": "elementaristics:seed_dormant_7"
+    },
+    {
+      "type": "concentrator_recipe",
+      "recipe": "elementaristics:seed_dormant_6"
+    },
+    {
+      "type": "concentrator_recipe",
+      "recipe": "elementaristics:seed_dormant_1"
+    },
+    {
+      "type": "concentrator_recipe",
+      "recipe": "elementaristics:seed_dormant_2"
+    },
+    {
+      "type": "concentrator_recipe",
+      "recipe": "elementaristics:seed_dormant_3"
+    },
+    {
+      "type": "concentrator_recipe",
+      "recipe": "elementaristics:seed_dormant_4"
+    },
+    {
+      "type": "concentrator_recipe",
+      "recipe": "elementaristics:seed_dormant_5"
     }
   ]
 }

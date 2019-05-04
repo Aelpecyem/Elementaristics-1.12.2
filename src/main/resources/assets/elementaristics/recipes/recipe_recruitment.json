@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " S ",
+    "LPE",
+    "   "
+  ],
+  "key": {
+    "S": {
+      "item": "elementaristics:essence",
+      "data": 16
+    },
+    "L": {
+      "item": "minecraft:leather"
+    },
+    "E": {
+      "item": "minecraft:emerald"
+    },
+    "P": {
+      "item": "minecraft:paper"
+    }
+  },
+  "result": {
+    "item": "elementaristics:incantation_recruiting",
+    "count": 1
+  }
+}

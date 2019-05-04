@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " F ",
+    "GPB",
+    " E "
+  ],
+  "key": {
+    "E": {
+      "item": "elementaristics:essence",
+      "data": 2
+    },
+    "B": {
+      "item": "minecraft:dye",
+      "data": 0
+    },
+    "F": {
+      "item": "minecraft:red_flower",
+      "data": 2
+    },
+    "P": {
+      "item": "minecraft:paper"
+    },
+    "G": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "result": {
+    "item": "elementaristics:incantation_night",
+    "count": 1
+  }
+}

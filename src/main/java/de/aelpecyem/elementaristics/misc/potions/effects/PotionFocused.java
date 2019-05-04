@@ -58,6 +58,7 @@ public class PotionFocused extends PotionBase {
                         IPlayerCapabilities cap = entityLivingBaseIn.getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null);
                         if (cap.getPlayerAscensionStage() < 2) {
                             cap.setPlayerAscensionStage(2);
+                            entityLivingBaseIn.addPotionEffect(new PotionEffect(this, 500, 5));
                         }
                         ((EntityPlayer) entityLivingBaseIn).sendStatusMessage(new TextComponentString(TextFormatting.GOLD + I18n.format("message.meditation_ascension.name")), false);
                     }

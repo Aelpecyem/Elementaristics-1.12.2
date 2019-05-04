@@ -63,7 +63,6 @@ public final class Elementaristics {
 
     public static final Logger LOGGER = LogManager.getLogger(NAME);
     public static CreativeTabs tab = new ElementaristicsTab();
-    public static CreativeTabs tab_essences = new ElementaristicsEssencesTab();
     @SidedProxy(serverSide = "de.aelpecyem.elementaristics.proxy.CommonProxy", clientSide = "de.aelpecyem.elementaristics.proxy.ClientProxy")
     public static CommonProxy proxy;
 
@@ -117,7 +116,6 @@ public final class Elementaristics {
         MinecraftForge.EVENT_BUS.register(new CapabilityHandler());
         MinecraftForge.EVENT_BUS.register(new EventHandler());
         MinecraftForge.EVENT_BUS.register(new LootTableEventHandler());
-
 
         MinecraftForge.EVENT_BUS.register(new ClientTickHandler());
         InitRecipes.init();

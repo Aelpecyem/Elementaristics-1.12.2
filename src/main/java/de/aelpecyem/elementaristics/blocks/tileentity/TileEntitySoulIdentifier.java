@@ -48,7 +48,7 @@ public class TileEntitySoulIdentifier extends TileEntity implements ITickable {
                 } else {
                     playerOn = null;
                     playerStandingOn = false;
-                }//TODO might actually do Soul Identification with drugs
+                }
             }
             if (tickCount >= 4) {
                 if (playerOn != null) {

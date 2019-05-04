@@ -100,7 +100,7 @@ public class ModBlocks {
         mossBase = new BlockMossBase("moss", true);
         mossEverchanging = new BlockMossEverchanging();
 
-        generator_combustion = new BlockGeneratorCombustion();
+        //  generator_combustion = new BlockGeneratorCombustion();
         //TC
         mushroom_intoxicating = new BlockMushroomIntoxicating();
     }
@@ -126,7 +126,7 @@ public class ModBlocks {
         GameRegistry.registerTileEntity(altar.getTileEntityClass(), altar.getRegistryName().toString());
         GameRegistry.registerTileEntity(basin.getTileEntityClass(), basin.getRegistryName().toString());
 
-        GameRegistry.registerTileEntity(generator_combustion.getTileEntityClass(), generator_combustion.getRegistryName().toString());
+        //  GameRegistry.registerTileEntity(generator_combustion.getTileEntityClass(), generator_combustion.getRegistryName().toString());
 
     }
 

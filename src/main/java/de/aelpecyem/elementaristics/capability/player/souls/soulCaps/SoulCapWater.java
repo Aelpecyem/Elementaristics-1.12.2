@@ -29,7 +29,6 @@ public class SoulCapWater extends SoulCap {
         player.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).removeModifier(HEALTH_MOD_STAGE1);
         player.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).removeModifier(HEALTH_MOD_STAGE3);
         player.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).removeModifier(HEALTH_MOD_STAGE5);
-        System.out.println(player.getMaxHealth());
         super.normalize(player, cap);
     }
 

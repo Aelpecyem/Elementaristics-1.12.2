@@ -132,13 +132,13 @@ public class TileEntityAltar extends TileEntity implements ITickable {
             System.out.println("Processing Cultist");
             EntityCultist cultist = null;
             for (EntityCultist entity : cultists) {
-                if (RiteInit.getRiteForResLoc(currentRite).getAspectsRequired().contains(entity.getAspect())) {
+                if (RiteInit.getRiteForResLoc(currentRite) != null && RiteInit.getRiteForResLoc(currentRite).getAspectsRequired().contains(entity.getAspect())) {
                     cultist = entity;
                     break;
                 }
             }
             if (cultist == null) {
-                cultists.get(0);
+                cultist = cultists.get(0);
             }
 
             cultist.attemptTeleport(pos.getX() + 0.5 + (3 * (spot < 3 ? -1 : 1)), pos.getY(), pos.getZ() + 0.5 + (3 * (spot % 2 == 0 ? -1 : 1)));

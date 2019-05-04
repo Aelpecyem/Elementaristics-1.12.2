@@ -16,6 +16,8 @@ public class RiteInit {
     public static RiteFeast riteFeast = new RiteFeast();
     public static RiteChaos riteChaos = new RiteChaos();
     public static RiteForging riteForging = new RiteForging();
+    public static RiteDay riteDay = new RiteDay();
+    public static RiteNight riteNight = new RiteNight();
     public static RiteSacrifice riteConflagration = new RiteSacrifice("conflagration_soul", Aspects.fire, SoulInit.soulFire, DamageSource.ON_FIRE);
     public static RiteSacrifice riteShredding = new RiteSacrifice("rage_wind", Aspects.air, SoulInit.soulAir, Elementaristics.DAMAGE_AIR);
     public static RiteSacrifice riteGaiasGaze = new RiteSacrifice("gaias_gaze", Aspects.earth, SoulInit.soulEarth, DamageSource.FLY_INTO_WALL);
@@ -37,6 +39,9 @@ public class RiteInit {
         registerRite(riteChaos.name, RiteInit.riteChaos);
         registerRite(riteForging.name, RiteInit.riteForging);
         registerRite(riteRecruiting.name, RiteInit.riteRecruiting);
+
+        registerRite(riteDay.name, RiteInit.riteDay);
+        registerRite(riteNight.name, RiteInit.riteNight);
     }
     public static RiteBase getRiteForResLoc(String rite) {
         if (RITES.get(new ResourceLocation(rite)) != null) {

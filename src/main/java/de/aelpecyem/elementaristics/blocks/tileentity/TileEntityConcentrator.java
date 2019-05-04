@@ -98,7 +98,7 @@ public class TileEntityConcentrator extends TileEntity implements ITickable {
                 if (ConcentratorRecipes.getRecipeForInput(inventory.getStackInSlot(0), inventory.getStackInSlot(1)) != null) {
                     inventory.setStackInSlot(0, ConcentratorRecipes.getRecipeForInput(inventory.getStackInSlot(0), inventory.getStackInSlot(1)).output);
                 } else {
-                    inventory.setStackInSlot(0, new ItemStack(ModItems.maganized_matter));
+                    inventory.setStackInSlot(0, new ItemStack(ModItems.chaotic_matter));
                     inventory.setStackInSlot(1, ItemStack.EMPTY);
                 }
                 tickCount = 0;

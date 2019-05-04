@@ -48,7 +48,7 @@ public class ParticleGeneric extends Particle {
         this.setRBGColorF(r, g, b);
 
         TextureMap map = Minecraft.getMinecraft().getTextureMapBlocks();
-        this.setParticleTexture(map.getAtlasSprite(TEXTURE.toString()));
+        //this.setParticleTexture(map.getAtlasSprite(TEXTURE.toString()));
 
         this.particleAlpha = alpha;
         this.particleScale = this.desiredScale;
@@ -76,7 +76,8 @@ public class ParticleGeneric extends Particle {
         this.setRBGColorF(r, g, b);
 
         TextureMap map = Minecraft.getMinecraft().getTextureMapBlocks();
-        this.setParticleTexture(map.getAtlasSprite(TEXTURE.toString()));
+
+        //  this.setParticleTexture(map.getAtlasSprite(TEXTURE.toString()));
 
         this.particleAlpha = 0.5F;
         this.particleScale = this.desiredScale;
@@ -84,8 +85,8 @@ public class ParticleGeneric extends Particle {
 
     @Override
     public void renderParticle(BufferBuilder buffer, Entity entityIn, float partialTicks, float rotationX, float rotationZ, float rotationYZ, float rotationXY, float rotationXZ) {
-        Minecraft.getMinecraft().renderEngine.bindTexture(TEXTURE);
-//        buffer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX_COLOR);
+
+        // buffer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX_COLOR);
 
         double x = this.prevPosX + (this.posX - this.prevPosX) * partialTicks - interpPosX;
         double y = this.prevPosY + (this.posY - this.prevPosY) * partialTicks - interpPosY;
@@ -108,7 +109,8 @@ public class ParticleGeneric extends Particle {
         buffer.pos(x + (rotationX * sc - rotationXY * sc), y + (-rotationZ * sc), z + (rotationYZ * sc - rotationXZ * sc))
                 .tex(0, 0).color(this.particleRed, this.particleGreen, this.particleBlue, this.particleAlpha)
                 .lightmap(sky, block).endVertex();
-        super.renderParticle(buffer, entityIn, partialTicks, rotationX, rotationZ, rotationYZ, rotationXY, rotationXZ);
+        //super.renderParticle(buffer, entityIn, partialTicks, rotationX, rotationZ, rotationYZ, rotationXY, rotationXZ);
+        Minecraft.getMinecraft().renderEngine.bindTexture(TEXTURE);
     }
 
     @Override
@@ -138,11 +140,6 @@ public class ParticleGeneric extends Particle {
         }
     }
 
-
-    @Override
-    public int getFXLayer() {
-        return 1;
-    }
 
     @Override
     public int getBrightnessForRender(float f) {

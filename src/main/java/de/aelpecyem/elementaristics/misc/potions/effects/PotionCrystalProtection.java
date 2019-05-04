@@ -33,7 +33,7 @@ public class PotionCrystalProtection extends PotionBase {
                 else {
                     IPlayerCapabilities cap = event.getEntityLiving().getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null);
                     if (cap.drainMagan(40 / (1 + amplifier))) {
-                        cap.stuntMagan(40 / (1 + amplifier));
+                        cap.stuntMagan(100 / (1 + amplifier));
                         event.getEntityLiving().addPotionEffect(new PotionEffect(this, duration - 1000, amplifier, false, false));
                     }
                 }

@@ -2,11 +2,11 @@
   "name": "Magic Laudanum",
   "icon": "elementaristics:tincture_opium",
   "category": "alchemy",
-  "advancement": "elementaristics:progress_ascension_4",
+  "advancement": "elementaristics:progress_ascension_identification",
   "pages": [
     {
       "type": "text",
-      "text": "Magic Laudanum is an opioid of the arcane kind, just as the name says. Its effect is an essential component for rites requiring a lot of concentration, or rather, a trance. In order for it to affect the cultist, it must, like the Bundle of Herbs, unlike other opioids, be thrown into a flame."
+      "text": "$(item)Magic Laudanum$() is an opioid of the arcane kind, just as the name says. Its effect is an essential component for rites requiring a lot of concentration, or rather, a trance. In order for it to affect the cultist, it must, like the Bundle of Herbs, unlike other opioids, be thrown into a flame."
     },
     {
       "type": "elementaristics:tunneler_recipe",

@@ -12,6 +12,7 @@ import de.aelpecyem.elementaristics.util.PlayerUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
@@ -90,11 +91,12 @@ public class HUDRenderHandler {
         BufferBuilder bufferbuilder = tessellator.getBuffer();
         bufferbuilder.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX_COLOR);
         //   bufferbuilder.begin(7, DefaultVertexFormats.POSITION_TEX);
-        bufferbuilder.pos((double) (x + 0), (double) (y + height), (double) zLevel).tex((double) ((float) (textureX + 0) * 0.00390625F), (double) ((float) (textureY + height) * 0.00390625F)).color(color.getRed() / 255F, color.getGreen() / 255F, color.getBlue() / 255F, 0.6F).endVertex();
-        bufferbuilder.pos((double) (x + width), (double) (y + height), (double) zLevel).tex((double) ((float) (textureX + width) * 0.00390625F), (double) ((float) (textureY + height) * 0.00390625F)).color(color.getRed() / 255F, color.getGreen() / 255F, color.getBlue() / 255F, 0.6F).endVertex();
-        bufferbuilder.pos((double) (x + width), (double) (y + 0), (double) zLevel).tex((double) ((float) (textureX + width) * 0.00390625F), (double) ((float) (textureY + 0) * 0.00390625F)).color(color.getRed() / 255F, color.getGreen() / 255F, color.getBlue() / 255F, 0.6F).endVertex();
-        bufferbuilder.pos((double) (x + 0), (double) (y + 0), (double) zLevel).tex((double) ((float) (textureX + 0) * 0.00390625F), (double) ((float) (textureY + 0) * 0.00390625F)).color(color.getRed() / 255F, color.getGreen() / 255F, color.getBlue() / 255F, 0.6F).endVertex();
+        bufferbuilder.pos((double) (x + 0), (double) (y + height), (double) zLevel).tex((double) ((float) (textureX + 0) * 0.00390625F), (double) ((float) (textureY + height) * 0.00390625F)).color(color.getRed() / 255F, color.getGreen() / 255F, color.getBlue() / 255F, 1).endVertex();
+        bufferbuilder.pos((double) (x + width), (double) (y + height), (double) zLevel).tex((double) ((float) (textureX + width) * 0.00390625F), (double) ((float) (textureY + height) * 0.00390625F)).color(color.getRed() / 255F, color.getGreen() / 255F, color.getBlue() / 255F, 1).endVertex();
+        bufferbuilder.pos((double) (x + width), (double) (y + 0), (double) zLevel).tex((double) ((float) (textureX + width) * 0.00390625F), (double) ((float) (textureY + 0) * 0.00390625F)).color(color.getRed() / 255F, color.getGreen() / 255F, color.getBlue() / 255F, 1).endVertex();
+        bufferbuilder.pos((double) (x + 0), (double) (y + 0), (double) zLevel).tex((double) ((float) (textureX + 0) * 0.00390625F), (double) ((float) (textureY + 0) * 0.00390625F)).color(color.getRed() / 255F, color.getGreen() / 255F, color.getBlue() / 255F, 1).endVertex();
         tessellator.draw();
+        Minecraft.getMinecraft().getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
     }
 
 }

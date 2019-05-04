@@ -68,6 +68,7 @@ public class SoulInit {
         soulEarth.addSpellToList(SpellInit.spell_attack_earth, 2);
         soulFire.addSpellToList(SpellInit.spell_attack_fire, 2);
         soulWater.addSpellToList(SpellInit.spell_attack_water, 2);
+        soulUnstable.addSpellToList(SpellInit.spell_attack_insane, 2);
         soulBalanced.addSpellToList(SpellInit.spell_attack_generic, 2);
         soulImmutable.addSpellToList(SpellInit.spell_attack_nullifying, 2);
         soulDragon.addSpellToList(SpellInit.spell_attack_dragon, 2);
@@ -84,12 +85,14 @@ public class SoulInit {
 
         soulDragon.addSpellToList(SpellInit.spell_form_gaseous, 2);
         soulDragon.addSpellToList(SpellInit.spell_protection_crystal, 2);
-        soulDragon.addSpellToList(SpellInit.spell_blink, 2);
+
         soulDragon.addSpellToList(SpellInit.spell_cleanse, 2);
         soulDragon.addSpellToList(SpellInit.spell_fireball_charge, 2);
 
         soulUnstable.addSpellToList(SpellInit.spell_activate, 2);
+        soulUnstable.addSpellToList(SpellInit.spell_blink, 2);
         soulAncient.addSpellToList(SpellInit.spell_activate, 2);
+        soulAncient.addSpellToList(SpellInit.spell_blink, 2);
 
     }
 
