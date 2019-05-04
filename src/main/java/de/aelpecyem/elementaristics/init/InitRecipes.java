@@ -26,6 +26,8 @@ public class InitRecipes {
     private static void initBasin() {
         InfusionRecipes.addRecipe(new InfusionRecipe(new ResourceLocation(Elementaristics.MODID, "essence_magan"), Ingredient.fromItem(ModItems.ash), new ItemStack(ModItems.essence, 5, Aspects.magan.getId()), Aspects.earth, Aspects.water, Aspects.air, Aspects.aether, Aspects.fire, Aspects.mana));
         InfusionRecipes.addRecipe(new InfusionRecipe(new ResourceLocation(Elementaristics.MODID, "wine_redmost"), Ingredient.fromItem(ModItems.tincture_arcane), ModItems.wine_redmost.getDefaultInstance(), Aspects.earth, Aspects.water, Aspects.mind, Aspects.body));
+        InfusionRecipes.addRecipe(new InfusionRecipe(new ResourceLocation(Elementaristics.MODID, "flesh_lamb"), Ingredient.fromItem(ModItems.thoughts_battling), ModItems.flesh_lamb.getDefaultInstance(), Aspects.ice, Aspects.ice, Aspects.ice));
+
     }
     private static void initForge() {
         ForgeRecipes.addRecipe(new ForgeRecipe(new ResourceLocation(Elementaristics.MODID, "thaumagral_iron"), Ingredient.fromStacks(new ItemStack(Items.IRON_SWORD)), Ingredient.fromStacks(new ItemStack(ModItems.essence, 1, Aspects.fire.getId())), Ingredient.fromStacks(new ItemStack(ModItems.essence, 1, Aspects.mana.getId())), Ingredient.fromStacks(new ItemStack(Items.IRON_INGOT)), Ingredient.fromStacks(new ItemStack(ModItems.gem_triangular)),  ModItems.thaumagral_iron.getDefaultInstance()));
@@ -97,8 +99,9 @@ public class InitRecipes {
 
         TunnelerRecipes.addRecipe(new TunnelerRecipe(new ResourceLocation(Elementaristics.MODID, "incantation_feast"), Ingredient.fromStacks(new ItemStack(Items.PAPER)), new ItemStack(ModItems.wine_redmost), new ItemStack(ModItems.essence, 1, Aspects.body.getId()), new ItemStack(ModItems.moss_everchaning), new ItemStack(ModItems.incantation_feast)));
 
-
         TunnelerRecipes.addRecipe(new TunnelerRecipe(new ResourceLocation(Elementaristics.MODID, "motion_captured"), Ingredient.fromStacks(new ItemStack(Items.FEATHER)), new ItemStack(ModItems.essence, 1, Aspects.air.getId()), new ItemStack(ModItems.essence, 1, Aspects.air.getId()), new ItemStack(ModItems.essence, 1, Aspects.earth.getId()), new ItemStack(ModItems.motion_captured)));
+
+        TunnelerRecipes.addRecipe(new TunnelerRecipe(new ResourceLocation(Elementaristics.MODID, "incantation_weather"), Ingredient.fromStacks(new ItemStack(Items.PAPER)), new ItemStack(ModItems.sparks_brightest), new ItemStack(ModItems.lightning_tangible), new ItemStack(ModItems.essence, 1, Aspects.earth.getId()), new ItemStack(ModItems.motion_captured)));
 
     }
 

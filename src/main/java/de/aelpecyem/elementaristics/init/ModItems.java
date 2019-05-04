@@ -81,7 +81,7 @@ public class ModItems {
     public static IncantationBase incantation_compression;
     public static IncantationBase incantation_forging;
     public static IncantationBase incantation_recruiting;
-
+    public static IncantationBase incantation_weather;
     public static IncantationBase incantation_day;
     public static IncantationBase incantation_night;
 
@@ -192,7 +192,7 @@ public class ModItems {
         incantation_compression = new IncantationBase("incantation_compression", RiteInit.riteCompression, Aspects.aether, 4);
         incantation_forging = new IncantationBase("incantation_forging", RiteInit.riteForging, Aspects.fire, 4);
         incantation_recruiting = new IncantationBase("incantation_recruiting", RiteInit.riteRecruiting, Aspects.soul, 2);
-
+        incantation_weather = new IncantationBase("incantation_weather", RiteInit.riteWeather, Aspects.water, 2);
         incantation_day = new IncantationBase("incantation_day", RiteInit.riteDay, Aspects.light, 1);
         incantation_night = new IncantationBase("incantation_night", RiteInit.riteNight, Aspects.ice, 1);
         hammer_heat = new ItemHammerHeat();

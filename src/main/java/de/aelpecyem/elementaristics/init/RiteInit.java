@@ -24,6 +24,7 @@ public class RiteInit {
     public static RiteSacrifice riteDrowningAstral = new RiteSacrifice("drowning_astral", Aspects.water, SoulInit.soulWater, DamageSource.DROWN);
     public static RiteSacrifice riteCompression = new RiteSacrifice("soul_compression", Aspects.aether, DamageSource.MAGIC);
     public static RiteRecruiting riteRecruiting = new RiteRecruiting();
+    public static RiteWeather riteWeather = new RiteWeather();
     public static void registerRite(ResourceLocation name, RiteBase rite){
         RITES.put(name, rite);
     }
@@ -39,6 +40,8 @@ public class RiteInit {
         registerRite(riteChaos.name, RiteInit.riteChaos);
         registerRite(riteForging.name, RiteInit.riteForging);
         registerRite(riteRecruiting.name, RiteInit.riteRecruiting);
+
+        registerRite(riteWeather.name, RiteInit.riteWeather);
 
         registerRite(riteDay.name, RiteInit.riteDay);
         registerRite(riteNight.name, RiteInit.riteNight);

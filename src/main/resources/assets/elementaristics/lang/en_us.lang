@@ -98,6 +98,7 @@ item.incantation_depths.name=Incantation of the Depths
 item.incantation_compression.name=Incantation of Compression
 item.incantation_day.name=Incantation of the Sun
 item.incantation_night.name=Incantation of the Moon
+item.incantation_weather.name=Incantation of the Sky
 item.water_purest.name=Purest Water
 item.sparks_living.name=Living Sparks
 item.earth_purest.name=Purest Earth
@@ -297,6 +298,7 @@ rite.elementaristics:drowning_astral.name=Astral Drowning
 rite.elementaristics:soul_compression.name=Compression of the Soul
 rite.elementaristics:rite_day.name=Rite of the Sun
 rite.elementaristics:rite_night.name=Rite of the Moon
+rite.elementaristics:rite_weather.name=Rite of the Shifting Clouds
 
 
 #Misc

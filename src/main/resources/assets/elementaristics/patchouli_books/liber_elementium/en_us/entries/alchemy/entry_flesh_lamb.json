@@ -1,0 +1,18 @@
+{
+  "name": "Flesh of the Lamb",
+  "icon": "elementaristics:flesh_lamb",
+  "category": "alchemy",
+  "advancement": "elementaristics:progress_basin",
+  "pages": [
+    {
+      "type": "text",
+      "text": "$(o)It's cold... it is so cold$(br2)The Lamb has been devoured, from Nothingness, from Wolves, from Dragons, from the Winter, from Endings, from Despair, from Renewal, from itself.$(br2)Its corpse gave birth to coldness, only coldness, nothing more.$(br2)$(o)The Lamb is forgotten and this is the memory$()"
+    },
+    {
+      "type": "spotlight",
+      "item": "elementaristics:flesh_lamb",
+      "text": "This $(item)$(l:alchemy/entry_thoughts_battling)memory$(), $(l:manipulation/entry_basin)infused$() with the purest coldness of $(l:lessons/lesson_collection)three winters$().",
+      "link_recipe": true
+    }
+  ]
+}

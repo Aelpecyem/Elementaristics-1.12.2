@@ -114,8 +114,8 @@ public class BlockAltar extends BlockTileEntity<TileEntityAltar> {
             for (int x = pos.getX() - 4; x < pos.getX() + 4; x++) {
                 for (int y = pos.getY(); y < pos.getY() + 3; y++) {
                     for (int z = pos.getZ() - 4; z < pos.getZ() + 4; z++) {
-                        if (!(worldIn.getBlockState(new BlockPos(x, y, z)).getBlock() instanceof BlockAir || (x == pos.getX() && z == pos.getZ() && y == pos.getY()))) {
-                            Elementaristics.proxy.generateGenericParticles(worldIn, new BlockPos(x + 0.5, y + 0.5, z + 0.5), 8073887, 6, 80, 0, false, false);
+                        if (!(worldIn.getBlockState(new BlockPos(x, y, z)).getBlock() instanceof BlockAir || (x == pos.getX() && z == pos.getZ() && y == pos.getY() || !worldIn.getBlockState(new BlockPos(x, y, z)).getMaterial().blocksMovement()))) {
+                            Elementaristics.proxy.generateGenericParticles(worldIn, x + 0.5, y + 0.5, z + 0.5, 8073887, 6, 80, 0, false, false);
                             approved = false;
                         }
                     }

@@ -20,7 +20,7 @@ public class WorldGenAnomaly implements IWorldGenerator {
 
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
-        if (random.nextInt(1000) == 1) {
+        if (random.nextInt(500) == 1) {
             if (world.getBiome(new BlockPos(chunkX * 16, 35, chunkZ * 16)) == BiomeInit.MIND) {
                 final BlockPos basePos = new BlockPos(chunkX * 16 + 1, 35, chunkZ * 16 + 1);
 
