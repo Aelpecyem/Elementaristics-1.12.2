@@ -42,16 +42,20 @@ public class ModelCultist extends ModelBase {
         this.headChild = new ModelRenderer(this, 32, 0);
         this.headChild.setRotationPoint(0.0F, 0.0F, 0.0F);
         this.headChild.addBox(-4.0F, -10.0F, -4.0F, 8, 12, 8, 0.1F);
+
         this.rightArm = new ModelRenderer(this, 40, 46);
         this.rightArm.setRotationPoint(-5.0F, 2.0F, 0.0F);
         this.rightArm.addBox(-3.0F, -2.0F, -2.0F, 4, 12, 4, 0.0F);
+
         this.head = new ModelRenderer(this, 0, 0);
         this.head.setRotationPoint(0.0F, 0.0F, 0.0F);
         this.head.addBox(-4.0F, -10.0F, -4.0F, 8, 10, 8, 0.0F);
+
         this.leftArm = new ModelRenderer(this, 40, 46);
         this.leftArm.mirror = true;
         this.leftArm.setRotationPoint(5.0F, 2.0F, 0.0F);
         this.leftArm.addBox(-1.0F, -2.0F, -2.0F, 4, 12, 4, 0.0F);
+
         this.leg1 = new ModelRenderer(this, 0, 22);
         this.leg1.mirror = true;
         this.leg1.setRotationPoint(2.0F, 12.0F, 0.0F);

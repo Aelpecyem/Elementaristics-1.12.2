@@ -32,7 +32,7 @@ public class BlockSilverThread extends BlockBase {
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (playerIn.hasCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null)) {
             IPlayerCapabilities cap = playerIn.getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null);
-            if (cap.getPlayerAscensionStage() > 0 || playerIn.capabilities.isCreativeMode) {
+            if ((cap.getPlayerAscensionStage() > 0 || playerIn.capabilities.isCreativeMode) && playerIn.dimension != 0) {
                 playerIn.changeDimension(playerIn.getSpawnDimension(), new ITeleporter() {
                     @Override
                     public void placeEntity(World world, Entity entity, float yaw) {
