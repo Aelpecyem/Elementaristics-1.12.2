@@ -6,7 +6,9 @@ import de.aelpecyem.elementaristics.blocks.base.crops.BlockMossBase;
 import de.aelpecyem.elementaristics.blocks.base.crops.BlockMossEverchanging;
 import de.aelpecyem.elementaristics.blocks.base.crops.CropOpium;
 import de.aelpecyem.elementaristics.blocks.tileentity.blocks.*;
+import de.aelpecyem.elementaristics.blocks.tileentity.blocks.energy.BlockDistributer;
 import de.aelpecyem.elementaristics.blocks.tileentity.blocks.energy.BlockGeneratorCombustion;
+import de.aelpecyem.elementaristics.blocks.tileentity.blocks.energy.BlockStorage;
 import de.aelpecyem.elementaristics.misc.elements.Aspect;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;
 import de.aelpecyem.elementaristics.misc.potions.PotionInit;
@@ -57,6 +59,8 @@ public class ModBlocks {
 
     //ENERGY
     public static BlockGeneratorCombustion generator_combustion;
+    public static BlockDistributer distributer;
+    public static BlockStorage energy_storage;
 
     //PLANTS
     public static BlockBush flower_ecstasy;
@@ -100,7 +104,9 @@ public class ModBlocks {
         mossBase = new BlockMossBase("moss", true);
         mossEverchanging = new BlockMossEverchanging();
 
-        //  generator_combustion = new BlockGeneratorCombustion();
+        generator_combustion = new BlockGeneratorCombustion();
+        energy_storage = new BlockStorage();
+        distributer = new BlockDistributer();
         //TC
         mushroom_intoxicating = new BlockMushroomIntoxicating();
     }
@@ -117,16 +123,18 @@ public class ModBlocks {
         registry.registerAll(
 
         );
-        GameRegistry.registerTileEntity(pedestal.getTileEntityClass(), pedestal.getRegistryName().toString());
-        GameRegistry.registerTileEntity(purifier.getTileEntityClass(), purifier.getRegistryName().toString());
-        GameRegistry.registerTileEntity(concentrator.getTileEntityClass(), concentrator.getRegistryName().toString());
-        GameRegistry.registerTileEntity(tunneler_top.getTileEntityClass(), tunneler_top.getRegistryName().toString());
-        GameRegistry.registerTileEntity(filter_holder.getTileEntityClass(), filter_holder.getRegistryName().toString());
-        GameRegistry.registerTileEntity(reactor.getTileEntityClass(), reactor.getRegistryName().toString());
-        GameRegistry.registerTileEntity(altar.getTileEntityClass(), altar.getRegistryName().toString());
-        GameRegistry.registerTileEntity(basin.getTileEntityClass(), basin.getRegistryName().toString());
+        GameRegistry.registerTileEntity(pedestal.getTileEntityClass(), pedestal.getRegistryName());
+        GameRegistry.registerTileEntity(purifier.getTileEntityClass(), purifier.getRegistryName());
+        GameRegistry.registerTileEntity(concentrator.getTileEntityClass(), concentrator.getRegistryName());
+        GameRegistry.registerTileEntity(tunneler_top.getTileEntityClass(), tunneler_top.getRegistryName());
+        GameRegistry.registerTileEntity(filter_holder.getTileEntityClass(), filter_holder.getRegistryName());
+        GameRegistry.registerTileEntity(reactor.getTileEntityClass(), reactor.getRegistryName());
+        GameRegistry.registerTileEntity(altar.getTileEntityClass(), altar.getRegistryName());
+        GameRegistry.registerTileEntity(basin.getTileEntityClass(), basin.getRegistryName());
 
-        //  GameRegistry.registerTileEntity(generator_combustion.getTileEntityClass(), generator_combustion.getRegistryName().toString());
+        GameRegistry.registerTileEntity(generator_combustion.getTileEntityClass(), generator_combustion.getRegistryName());
+        GameRegistry.registerTileEntity(energy_storage.getTileEntityClass(), energy_storage.getRegistryName());
+        GameRegistry.registerTileEntity(distributer.getTileEntityClass(), distributer.getRegistryName());
 
     }
 

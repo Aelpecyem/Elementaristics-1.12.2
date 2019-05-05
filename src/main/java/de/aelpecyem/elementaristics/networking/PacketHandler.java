@@ -6,20 +6,12 @@ import de.aelpecyem.elementaristics.networking.tileentity.altar.PacketRequestUpd
 import de.aelpecyem.elementaristics.networking.tileentity.altar.PacketUpdateAltar;
 import de.aelpecyem.elementaristics.networking.tileentity.basin.PacketRequestUpdateBasin;
 import de.aelpecyem.elementaristics.networking.tileentity.basin.PacketUpdateBasin;
-import de.aelpecyem.elementaristics.networking.tileentity.concentrator.PacketRequestUpdateConcentrator;
-import de.aelpecyem.elementaristics.networking.tileentity.concentrator.PacketUpdateConcentrator;
 import de.aelpecyem.elementaristics.networking.tileentity.energy.generatorCombustion.PacketRequestUpdateCombustionGenerator;
 import de.aelpecyem.elementaristics.networking.tileentity.energy.generatorCombustion.PacketUpdateCombustionGenerator;
-import de.aelpecyem.elementaristics.networking.tileentity.filterholder.PacketRequestUpdateFilterHolder;
-import de.aelpecyem.elementaristics.networking.tileentity.filterholder.PacketUpdateFilterHolder;
-import de.aelpecyem.elementaristics.networking.tileentity.pedestal.PacketRequestUpdatePedestal;
-import de.aelpecyem.elementaristics.networking.tileentity.pedestal.PacketUpdatePedestal;
-import de.aelpecyem.elementaristics.networking.tileentity.purifier.PacketRequestUpdatePurifier;
-import de.aelpecyem.elementaristics.networking.tileentity.purifier.PacketUpdatePurifier;
-import de.aelpecyem.elementaristics.networking.tileentity.reactor.PacketRequestUpdateReactor;
-import de.aelpecyem.elementaristics.networking.tileentity.reactor.PacketUpdateReactor;
-import de.aelpecyem.elementaristics.networking.tileentity.tunneler.PacketRequestUpdateTunneler;
-import de.aelpecyem.elementaristics.networking.tileentity.tunneler.PacketUpdateTunneler;
+import de.aelpecyem.elementaristics.networking.tileentity.inventory.PacketRequestUpdateInventory;
+import de.aelpecyem.elementaristics.networking.tileentity.inventory.PacketUpdateInventory;
+import de.aelpecyem.elementaristics.networking.tileentity.tick.PacketRequestUpdateTickTime;
+import de.aelpecyem.elementaristics.networking.tileentity.tick.PacketUpdateTickTime;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.math.BlockPos;
@@ -36,34 +28,22 @@ public class PacketHandler {
     public static void init() {
         network = NetworkRegistry.INSTANCE.newSimpleChannel(Elementaristics.MODID);
 
-        network.registerMessage(new PacketUpdatePurifier.Handler(), PacketUpdatePurifier.class, 0, Side.CLIENT);
-        network.registerMessage(new PacketRequestUpdatePurifier.Handler(), PacketRequestUpdatePurifier.class, 1, Side.SERVER);
+        network.registerMessage(new PacketUpdateAltar.Handler(), PacketUpdateAltar.class, 1, Side.CLIENT);
+        network.registerMessage(new PacketRequestUpdateAltar.Handler(), PacketRequestUpdateAltar.class, 2, Side.SERVER);
 
-        network.registerMessage(new PacketUpdatePedestal.Handler(), PacketUpdatePedestal.class, 4, Side.CLIENT);
-        network.registerMessage(new PacketRequestUpdatePedestal.Handler(), PacketRequestUpdatePedestal.class, 5, Side.SERVER);
+        network.registerMessage(new PacketUpdateBasin.Handler(), PacketUpdateBasin.class, 3, Side.CLIENT);
+        network.registerMessage(new PacketRequestUpdateBasin.Handler(), PacketRequestUpdateBasin.class, 4, Side.SERVER);
 
-        network.registerMessage(new PacketUpdateConcentrator.Handler(), PacketUpdateConcentrator.class, 6, Side.CLIENT);
-        network.registerMessage(new PacketRequestUpdateConcentrator.Handler(), PacketRequestUpdateConcentrator.class, 7, Side.SERVER);
+        network.registerMessage(new PacketUpdateCombustionGenerator.Handler(), PacketUpdateCombustionGenerator.class, 5, Side.CLIENT);
+        network.registerMessage(new PacketRequestUpdateCombustionGenerator.Handler(), PacketRequestUpdateCombustionGenerator.class, 6, Side.SERVER);
 
-        network.registerMessage(new PacketUpdateTunneler.Handler(), PacketUpdateTunneler.class, 8, Side.CLIENT);
-        network.registerMessage(new PacketRequestUpdateTunneler.Handler(), PacketRequestUpdateTunneler.class, 9, Side.SERVER);
+        network.registerMessage(new PacketUpdateInventory.Handler(), PacketUpdateInventory.class, 7, Side.CLIENT);
+        network.registerMessage(new PacketRequestUpdateInventory.Handler(), PacketRequestUpdateInventory.class, 8, Side.SERVER);
 
-        network.registerMessage(new PacketUpdateFilterHolder.Handler(), PacketUpdateFilterHolder.class, 10, Side.CLIENT);
-        network.registerMessage(new PacketRequestUpdateFilterHolder.Handler(), PacketRequestUpdateFilterHolder.class, 11, Side.SERVER);
+        network.registerMessage(new PacketUpdateTickTime.Handler(), PacketUpdateTickTime.class, 9, Side.CLIENT);
+        network.registerMessage(new PacketRequestUpdateTickTime.Handler(), PacketRequestUpdateTickTime.class, 10, Side.SERVER);
 
-        network.registerMessage(new PacketUpdateReactor.Handler(), PacketUpdateReactor.class, 12, Side.CLIENT);
-        network.registerMessage(new PacketRequestUpdateReactor.Handler(), PacketRequestUpdateReactor.class, 13, Side.SERVER);
-
-        network.registerMessage(new PacketUpdateAltar.Handler(), PacketUpdateAltar.class, 14, Side.CLIENT);
-        network.registerMessage(new PacketRequestUpdateAltar.Handler(), PacketRequestUpdateAltar.class, 15, Side.SERVER);
-
-        network.registerMessage(new PacketUpdateBasin.Handler(), PacketUpdateBasin.class, 16, Side.CLIENT);
-        network.registerMessage(new PacketRequestUpdateBasin.Handler(), PacketRequestUpdateBasin.class, 17, Side.SERVER);
-
-        network.registerMessage(new PacketUpdateCombustionGenerator.Handler(), PacketUpdateCombustionGenerator.class, 18, Side.CLIENT);
-        network.registerMessage(new PacketRequestUpdateCombustionGenerator.Handler(), PacketRequestUpdateCombustionGenerator.class, 19, Side.SERVER);
-
-        network.registerMessage(new CapabilitySync.Handler(), CapabilitySync.class, 20, Side.CLIENT);
+        network.registerMessage(new CapabilitySync.Handler(), CapabilitySync.class, 11, Side.CLIENT);
     }
 
     public static void sendToAllLoaded(World world, BlockPos pos, IMessage message) {

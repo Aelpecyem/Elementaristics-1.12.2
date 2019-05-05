@@ -13,6 +13,8 @@ import de.aelpecyem.elementaristics.misc.elements.Aspect;
 import de.aelpecyem.elementaristics.misc.rites.RiteBase;
 import de.aelpecyem.elementaristics.networking.PacketHandler;
 import de.aelpecyem.elementaristics.networking.tileentity.altar.PacketUpdateAltar;
+import de.aelpecyem.elementaristics.networking.tileentity.inventory.PacketUpdateInventory;
+import de.aelpecyem.elementaristics.networking.tileentity.tick.PacketUpdateTickTime;
 import de.aelpecyem.elementaristics.particles.ParticleGeneric;
 import de.aelpecyem.elementaristics.util.MaganUtil;
 import de.aelpecyem.elementaristics.util.SoulUtil;
@@ -23,11 +25,12 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nullable;
 import java.util.*;
 
-public class TileEntityAltar extends TileEntity implements ITickable {
+public class TileEntityAltar extends TileEntity implements ITickable, IHasTickCount {
 
     public int tickCount;
     public String currentRite = "";
@@ -51,6 +54,8 @@ public class TileEntityAltar extends TileEntity implements ITickable {
     @Override
     public void update() {
         if (!world.isRemote) {
+            PacketHandler.sendToAllAround(world, pos, 64, new PacketUpdateTickTime(this, tickCount));
+
             PacketHandler.sendToAllAround(world, pos, 64, new PacketUpdateAltar(TileEntityAltar.this));
         }
 
@@ -318,8 +323,14 @@ public class TileEntityAltar extends TileEntity implements ITickable {
         }
     }
 
-    public EnumFacing getBlockFacing() {
-        return this.world.getBlockState(this.pos).getValue(BlockReactor.FACING);
+    @Override
+    public int getTickCount() {
+        return tickCount;
+    }
+
+    @Override
+    public void setTickCount(int tickCount) {
+        this.tickCount = tickCount;
     }
 
 }

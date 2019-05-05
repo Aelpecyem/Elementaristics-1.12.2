@@ -1,59 +1,34 @@
-package de.aelpecyem.elementaristics.blocks.tileentity.blocks;
+package de.aelpecyem.elementaristics.blocks.tileentity.blocks.energy;
 
 import de.aelpecyem.elementaristics.blocks.tileentity.BlockTileEntity;
-import de.aelpecyem.elementaristics.blocks.tileentity.TileEntitySoulIdentifier;
+import de.aelpecyem.elementaristics.blocks.tileentity.energy.TileEntityDistributer;
+import de.aelpecyem.elementaristics.blocks.tileentity.energy.TileEntityGeneratorArcaneCombustion;
+import de.aelpecyem.elementaristics.util.InventoryUtil;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TextComponentString;
-import net.minecraft.util.text.TextFormatting;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
 
-public class BlockSoulIdentifier extends BlockTileEntity<TileEntitySoulIdentifier> {
+
+public class BlockDistributer extends BlockTileEntity<TileEntityDistributer> {
 
     public static final PropertyDirection FACING = BlockHorizontal.FACING;
 
-    public BlockSoulIdentifier() {
-        super(Material.ROCK, "soul_identifier");
+    public BlockDistributer() {
+        super(Material.ROCK, "block_distributer");
 
-    }
-
-    @Override
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        if (!getTileEntity(worldIn, pos).isReadyForUse) {
-            if (!playerIn.isSneaking()) {
-                getTileEntity(worldIn, pos).isReadyForUse = true;
-                if (!worldIn.isRemote) {
-                    playerIn.sendMessage(new TextComponentString(TextFormatting.DARK_BLUE + I18n.format("message.soul.machine_activated.name")));
-                }
-            }
-
-        } else {
-            if (playerIn.isSneaking()) {
-                getTileEntity(worldIn, pos).isReadyForUse = false;
-                if (!worldIn.isRemote) {
-                    playerIn.sendMessage(new TextComponentString(TextFormatting.DARK_RED + I18n.format("message.soul.machine_deactivated.name")));
-                }
-            }
-        }
-        return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
-    }
-
-    @Override
-    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-        return new AxisAlignedBB(0, 0, 0, 1, 0.15, 1);
     }
 
     @Override
@@ -87,12 +62,15 @@ public class BlockSoulIdentifier extends BlockTileEntity<TileEntitySoulIdentifie
                 entityFacing = EnumFacing.NORTH;
             } else if (entityFacing == EnumFacing.WEST) {
                 entityFacing = EnumFacing.EAST;
+            } else if (entityFacing == EnumFacing.DOWN) {
+                entityFacing = EnumFacing.UP;
+            } else if (entityFacing == EnumFacing.UP) {
+                entityFacing = EnumFacing.DOWN;
             }
 
             world.setBlockState(pos, state.withProperty(FACING, entityFacing), 2);
         }
     }
-
 
     @Override
     public BlockRenderLayer getBlockLayer() {
@@ -110,13 +88,14 @@ public class BlockSoulIdentifier extends BlockTileEntity<TileEntitySoulIdentifie
         return false;
     }
 
+
     @Override
-    public Class<TileEntitySoulIdentifier> getTileEntityClass() {
-        return TileEntitySoulIdentifier.class;
+    public Class<TileEntityDistributer> getTileEntityClass() {
+        return TileEntityDistributer.class;
     }
 
     @Override
-    public TileEntitySoulIdentifier createTileEntity(World world, IBlockState state) {
-        return new TileEntitySoulIdentifier();
+    public TileEntityDistributer createTileEntity(World world, IBlockState state) {
+        return new TileEntityDistributer();
     }
 }

@@ -20,26 +20,20 @@ import java.util.List;
 
 public class PacketUpdateBasin implements IMessage {
     private BlockPos pos;
-    private ItemStack stack;
     private List<Integer> aspects = new ArrayList<>();
     private int aspectsSize;
     private int fillCount;
-    private long lastChangeTime;
-    private int tickCount;
 
-    public PacketUpdateBasin(BlockPos pos, ItemStack stack, List<Integer> aspects, int fillCount, long lastChangeTime, int tickCount) {
+    public PacketUpdateBasin(BlockPos pos, List<Integer> aspects, int fillCount) {
         this.pos = pos;
-        this.stack = stack;
-        this.lastChangeTime = lastChangeTime;
         this.aspectsSize = aspects.size();
         this.aspects = aspects;
         this.fillCount = fillCount;
-        this.tickCount = tickCount;
 
     }
 
     public PacketUpdateBasin(TileEntityInfusionBasin te) {
-        this(te.getPos(), te.inventory.getStackInSlot(0), te.aspectIDs, te.fillCount, te.lastChangeTime, te.tickCount);
+        this(te.getPos(), te.aspectIDs, te.fillCount);
     }
 
     public PacketUpdateBasin() {
@@ -48,21 +42,16 @@ public class PacketUpdateBasin implements IMessage {
     @Override
     public void toBytes(ByteBuf buf) {
         buf.writeLong(pos.toLong());
-        ByteBufUtils.writeItemStack(buf, stack);
-        buf.writeLong(lastChangeTime);
         buf.writeInt(aspectsSize);
         for (int i : aspects) {
             buf.writeInt(i);
         }
         buf.writeInt(fillCount);
-        buf.writeInt(tickCount);
     }
 
     @Override
     public void fromBytes(ByteBuf buf) {
         pos = BlockPos.fromLong(buf.readLong());
-        stack = ByteBufUtils.readItemStack(buf);
-        lastChangeTime = buf.readLong();
         aspectsSize = buf.readInt();
         aspects.clear();
         for (int i = 0; i < aspectsSize; i++) {
@@ -70,7 +59,6 @@ public class PacketUpdateBasin implements IMessage {
             aspects.add(buf.readInt());
         }
         fillCount = buf.readInt();
-        tickCount = buf.readInt();
 
     }
 
@@ -81,11 +69,8 @@ public class PacketUpdateBasin implements IMessage {
             Minecraft.getMinecraft().addScheduledTask(() -> {
                 TileEntityInfusionBasin te = (TileEntityInfusionBasin) Minecraft.getMinecraft().world.getTileEntity(message.pos);
                 if (te != null) {
-                    te.inventory.setStackInSlot(0, message.stack);
                     te.aspectIDs = message.aspects;
-                    te.lastChangeTime = message.lastChangeTime;
                     te.fillCount = message.fillCount;
-                    te.tickCount = message.tickCount;
                 }
             });
             return null;

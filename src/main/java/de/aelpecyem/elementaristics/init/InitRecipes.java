@@ -26,7 +26,7 @@ public class InitRecipes {
     private static void initBasin() {
         InfusionRecipes.addRecipe(new InfusionRecipe(new ResourceLocation(Elementaristics.MODID, "essence_magan"), Ingredient.fromItem(ModItems.ash), new ItemStack(ModItems.essence, 5, Aspects.magan.getId()), Aspects.earth, Aspects.water, Aspects.air, Aspects.aether, Aspects.fire, Aspects.mana));
         InfusionRecipes.addRecipe(new InfusionRecipe(new ResourceLocation(Elementaristics.MODID, "wine_redmost"), Ingredient.fromItem(ModItems.tincture_arcane), ModItems.wine_redmost.getDefaultInstance(), Aspects.earth, Aspects.water, Aspects.mind, Aspects.body));
-        InfusionRecipes.addRecipe(new InfusionRecipe(new ResourceLocation(Elementaristics.MODID, "flesh_lamb"), Ingredient.fromItem(ModItems.thoughts_battling), ModItems.flesh_lamb.getDefaultInstance(), Aspects.ice, Aspects.ice, Aspects.ice));
+        InfusionRecipes.addRecipe(new InfusionRecipe(new ResourceLocation(Elementaristics.MODID, "flesh_lamb"), Ingredient.fromItem(ModItems.thoughts_battling), ModItems.flesh_lamb.getDefaultInstance(), Aspects.ice, Aspects.body));
 
     }
     private static void initForge() {

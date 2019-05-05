@@ -6,7 +6,8 @@ import de.aelpecyem.elementaristics.items.base.ItemEssence;
 import de.aelpecyem.elementaristics.items.base.artifacts.rites.ItemAspects;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;
 import de.aelpecyem.elementaristics.networking.PacketHandler;
-import de.aelpecyem.elementaristics.networking.tileentity.concentrator.PacketUpdateConcentrator;
+import de.aelpecyem.elementaristics.networking.tileentity.inventory.PacketUpdateInventory;
+import de.aelpecyem.elementaristics.networking.tileentity.tick.PacketUpdateTickTime;
 import de.aelpecyem.elementaristics.particles.ParticleGeneric;
 import de.aelpecyem.elementaristics.recipe.ConcentratorRecipes;
 import net.minecraft.entity.item.EntityItem;
@@ -14,16 +15,14 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
-import javax.annotation.Nonnull;
 
-public class TileEntityConcentrator extends TileEntity implements ITickable {
+public class TileEntityConcentrator extends TileEntity implements ITickable, IHasInventory, IHasTickCount {
 
     public ItemStackHandler inventory = new ItemStackHandler(2) {
 
@@ -46,15 +45,11 @@ public class TileEntityConcentrator extends TileEntity implements ITickable {
 
     };
     public int tickCount;
-    public long lastChangeTime;
-    public ItemStack stackCrafting = ItemStack.EMPTY;
 
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
         compound.setTag("inventory", inventory.serializeNBT());
         compound.setInteger("tickCount", tickCount);
-        compound.setLong("lastChangeTime", lastChangeTime);
-        compound.setTag("stackCrafting", stackCrafting.serializeNBT());
         return super.writeToNBT(compound);
     }
 
@@ -62,8 +57,6 @@ public class TileEntityConcentrator extends TileEntity implements ITickable {
     public void readFromNBT(NBTTagCompound compound) {
         inventory.deserializeNBT(compound.getCompoundTag("inventory"));
         tickCount = compound.getInteger("tickCount");
-        lastChangeTime = compound.getInteger("lastChangeTime");
-        stackCrafting.deserializeNBT(compound.getCompoundTag("stackCrafting"));
         super.readFromNBT(compound);
     }
 
@@ -87,8 +80,8 @@ public class TileEntityConcentrator extends TileEntity implements ITickable {
     @Override
     public void update() {
         if (!world.isRemote) {
-            lastChangeTime = world.getTotalWorldTime();
-            PacketHandler.sendToAllAround(world, pos, 64, new PacketUpdateConcentrator(TileEntityConcentrator.this));
+            PacketHandler.sendToAllAround(world, pos, 64, new PacketUpdateInventory(this, inventory));
+            PacketHandler.sendToAllAround(world, pos, 64, new PacketUpdateTickTime(this, tickCount));
         }
         if (!inventory.getStackInSlot(0).isEmpty() && !inventory.getStackInSlot(1).isEmpty()) {
             tickCount++;
@@ -117,4 +110,18 @@ public class TileEntityConcentrator extends TileEntity implements ITickable {
     }
 
 
+    @Override
+    public int getTickCount() {
+        return tickCount;
+    }
+
+    @Override
+    public void setTickCount(int tickCount) {
+        this.tickCount = tickCount;
+    }
+
+    @Override
+    public ItemStackHandler getInventory() {
+        return inventory;
+    }
 }

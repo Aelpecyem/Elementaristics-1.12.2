@@ -1,5 +1,7 @@
 package de.aelpecyem.elementaristics.blocks.tileentity.energy;
 
+import de.aelpecyem.elementaristics.blocks.tileentity.IHasInventory;
+import de.aelpecyem.elementaristics.blocks.tileentity.IHasTickCount;
 import de.aelpecyem.elementaristics.blocks.tileentity.TileEntityInfusionBasin;
 import de.aelpecyem.elementaristics.capability.energy.EnergyCapability;
 import de.aelpecyem.elementaristics.init.ModItems;
@@ -9,6 +11,8 @@ import de.aelpecyem.elementaristics.misc.elements.Aspects;
 import de.aelpecyem.elementaristics.networking.PacketHandler;
 import de.aelpecyem.elementaristics.networking.tileentity.basin.PacketUpdateBasin;
 import de.aelpecyem.elementaristics.networking.tileentity.energy.generatorCombustion.PacketUpdateCombustionGenerator;
+import de.aelpecyem.elementaristics.networking.tileentity.inventory.PacketUpdateInventory;
+import de.aelpecyem.elementaristics.networking.tileentity.tick.PacketUpdateTickTime;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -21,9 +25,9 @@ import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
-public class TileEntityGeneratorArcaneCombustion extends TileEntity implements ITickable {
+public class TileEntityGeneratorArcaneCombustion extends TileEntity implements ITickable, IHasTickCount, IHasInventory {
 
-    public EnergyCapability storage = new EnergyCapability(100, 1);
+    public EnergyCapability storage = new EnergyCapability(100, 1, 1);
 
     public ItemStackHandler inventory = new ItemStackHandler(1) {
         @Override
@@ -80,11 +84,13 @@ public class TileEntityGeneratorArcaneCombustion extends TileEntity implements I
 
     @Override
     public void update() {
+        System.out.println("Energy in generator: " + storage.getEnergyStored());
         if (!world.isRemote) {
-            PacketHandler.sendToAllAround(world, pos, 64, new PacketUpdateCombustionGenerator(TileEntityGeneratorArcaneCombustion.this));
+            PacketHandler.sendToAllAround(world, pos, 64, new PacketUpdateTickTime(this, tickCount));
+            PacketHandler.sendToAllAround(world, pos, 64, new PacketUpdateInventory(this, getInventory()));
         }
         if (tickCount <= 0) {
-            if (this.storage.canReceive() && inventory.getStackInSlot(0).isItemEqual(new ItemStack(ModItems.essence, 1, Aspects.fire.getId()))) {
+            if (this.storage.getEnergyStored() + 1 < storage.getMaxEnergyStored() && inventory.getStackInSlot(0).isItemEqual(new ItemStack(ModItems.essence, 1, Aspects.fire.getId()))) {
                 inventory.getStackInSlot(0).shrink(1);
                 tickCount += 400;
             }
@@ -94,5 +100,18 @@ public class TileEntityGeneratorArcaneCombustion extends TileEntity implements I
         }
     }
 
+    @Override
+    public ItemStackHandler getInventory() {
+        return inventory;
+    }
 
+    @Override
+    public int getTickCount() {
+        return tickCount;
+    }
+
+    @Override
+    public void setTickCount(int tickCount) {
+        this.tickCount = tickCount;
+    }
 }

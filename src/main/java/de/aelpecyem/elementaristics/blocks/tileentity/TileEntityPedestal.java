@@ -1,7 +1,7 @@
 package de.aelpecyem.elementaristics.blocks.tileentity;
 
 import de.aelpecyem.elementaristics.networking.PacketHandler;
-import de.aelpecyem.elementaristics.networking.tileentity.pedestal.PacketUpdatePedestal;
+import de.aelpecyem.elementaristics.networking.tileentity.inventory.PacketUpdateInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -13,7 +13,7 @@ import net.minecraftforge.items.ItemStackHandler;
 
 import java.util.Random;
 
-public class TileEntityPedestal extends TileEntity implements ITickable {
+public class TileEntityPedestal extends TileEntity implements ITickable, IHasInventory {
 
     public ItemStackHandler inventory = new ItemStackHandler(1) {
 
@@ -23,20 +23,17 @@ public class TileEntityPedestal extends TileEntity implements ITickable {
             return 1;
         }
     };
-    public long lastChangeTime;
     Random random = new Random();
 
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
         compound.setTag("inventory", inventory.serializeNBT());
-        compound.setLong("lastChangeTime", lastChangeTime);
         return super.writeToNBT(compound);
     }
 
     @Override
     public void readFromNBT(NBTTagCompound compound) {
         inventory.deserializeNBT(compound.getCompoundTag("inventory"));
-        lastChangeTime = compound.getInteger("lastChangeTime");
         super.readFromNBT(compound);
     }
 
@@ -60,8 +57,13 @@ public class TileEntityPedestal extends TileEntity implements ITickable {
     @Override
     public void update() {
         if (!world.isRemote) {
-            lastChangeTime = world.getTotalWorldTime();
-            PacketHandler.sendToAllAround(world, pos, 64, new PacketUpdatePedestal(TileEntityPedestal.this));
+            PacketHandler.sendToAllAround(world, pos, 64, new PacketUpdateInventory(this, inventory));
         }
+    }
+
+
+    @Override
+    public ItemStackHandler getInventory() {
+        return inventory;
     }
 }

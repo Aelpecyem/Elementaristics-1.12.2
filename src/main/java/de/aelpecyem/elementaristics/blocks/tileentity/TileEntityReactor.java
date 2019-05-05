@@ -4,7 +4,8 @@ import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.blocks.tileentity.blocks.BlockReactor;
 import de.aelpecyem.elementaristics.init.ModItems;
 import de.aelpecyem.elementaristics.networking.PacketHandler;
-import de.aelpecyem.elementaristics.networking.tileentity.reactor.PacketUpdateReactor;
+import de.aelpecyem.elementaristics.networking.tileentity.inventory.PacketUpdateInventory;
+import de.aelpecyem.elementaristics.networking.tileentity.tick.PacketUpdateTickTime;
 import de.aelpecyem.elementaristics.particles.ParticleGeneric;
 import de.aelpecyem.elementaristics.recipe.ReactorRecipes;
 import net.minecraft.entity.item.EntityItem;
@@ -20,7 +21,7 @@ import net.minecraftforge.items.ItemStackHandler;
 
 import java.util.Random;
 
-public class TileEntityReactor extends TileEntity implements ITickable {
+public class TileEntityReactor extends TileEntity implements ITickable, IHasTickCount, IHasInventory {
 
     public ItemStackHandler inventory = new ItemStackHandler(2) {
 
@@ -31,7 +32,6 @@ public class TileEntityReactor extends TileEntity implements ITickable {
         }
     };
     public int tickCount;
-    public long lastChangeTime;
     public boolean crafting;
     Random random = new Random();
 
@@ -39,7 +39,6 @@ public class TileEntityReactor extends TileEntity implements ITickable {
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
         compound.setTag("inventory", inventory.serializeNBT());
         compound.setInteger("tickCount", tickCount);
-        compound.setLong("lastChangeTime", lastChangeTime);
         compound.setBoolean("crafting", crafting);
         return super.writeToNBT(compound);
     }
@@ -48,7 +47,6 @@ public class TileEntityReactor extends TileEntity implements ITickable {
     public void readFromNBT(NBTTagCompound compound) {
         inventory.deserializeNBT(compound.getCompoundTag("inventory"));
         tickCount = compound.getInteger("tickCount");
-        lastChangeTime = compound.getInteger("lastChangeTime");
         crafting = compound.getBoolean("crafting");
         super.readFromNBT(compound);
     }
@@ -75,8 +73,8 @@ public class TileEntityReactor extends TileEntity implements ITickable {
     @Override
     public void update() {
         if (!world.isRemote) {
-            lastChangeTime = world.getTotalWorldTime();
-            PacketHandler.sendToAllAround(world, pos, 64, new PacketUpdateReactor(TileEntityReactor.this));
+            PacketHandler.sendToAllAround(world, pos, 64, new PacketUpdateInventory(TileEntityReactor.this, inventory));
+            PacketHandler.sendToAllAround(world, pos, 64, new PacketUpdateTickTime(TileEntityReactor.this, tickCount));
         }
         if (crafting) {
             tickCount++;
@@ -123,6 +121,20 @@ public class TileEntityReactor extends TileEntity implements ITickable {
     }
 
 
+    @Override
+    public ItemStackHandler getInventory() {
+        return inventory;
+    }
+
+    @Override
+    public int getTickCount() {
+        return tickCount;
+    }
+
+    @Override
+    public void setTickCount(int tickCount) {
+        this.tickCount = tickCount;
+    }
 }
 
 

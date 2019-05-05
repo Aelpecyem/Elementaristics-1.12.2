@@ -8,7 +8,8 @@ import de.aelpecyem.elementaristics.misc.elements.Aspect;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;
 import de.aelpecyem.elementaristics.networking.PacketHandler;
 import de.aelpecyem.elementaristics.networking.tileentity.basin.PacketUpdateBasin;
-import de.aelpecyem.elementaristics.networking.tileentity.concentrator.PacketUpdateConcentrator;
+import de.aelpecyem.elementaristics.networking.tileentity.inventory.PacketUpdateInventory;
+import de.aelpecyem.elementaristics.networking.tileentity.tick.PacketUpdateTickTime;
 import de.aelpecyem.elementaristics.particles.ParticleGeneric;
 import de.aelpecyem.elementaristics.recipe.ConcentratorRecipes;
 import de.aelpecyem.elementaristics.recipe.InfusionRecipes;
@@ -33,7 +34,7 @@ import java.awt.*;
 import java.util.*;
 import java.util.List;
 
-public class TileEntityInfusionBasin extends TileEntity implements ITickable {
+public class TileEntityInfusionBasin extends TileEntity implements ITickable, IHasTickCount, IHasInventory {
 
     public ItemStackHandler inventory = new ItemStackHandler(1) {
         @Override
@@ -56,7 +57,6 @@ public class TileEntityInfusionBasin extends TileEntity implements ITickable {
     public List<Integer> aspectIDs = new ArrayList<>();
     public int aspectCount;
     public int fillCount;
-    public long lastChangeTime;
 
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
@@ -68,7 +68,6 @@ public class TileEntityInfusionBasin extends TileEntity implements ITickable {
         aspectCount = aspectIDs.size();
         compound.setInteger("aspectCount", aspectCount);
         compound.setInteger("fillCount", fillCount);
-        compound.setLong("lastChangeTime", lastChangeTime);
         return super.writeToNBT(compound);
     }
 
@@ -81,7 +80,6 @@ public class TileEntityInfusionBasin extends TileEntity implements ITickable {
             aspectIDs.add(compound.getInteger("aspect" + i));
         }
         fillCount = compound.getInteger("fillCount");
-        lastChangeTime = compound.getLong("lastChangeTime");
         super.readFromNBT(compound);
     }
 
@@ -106,7 +104,9 @@ public class TileEntityInfusionBasin extends TileEntity implements ITickable {
     public void update() {
         doPassiveParticleShow();
         if (!world.isRemote) {
-            lastChangeTime = world.getTotalWorldTime();
+            PacketHandler.sendToAllAround(world, pos, 64, new PacketUpdateInventory(this, inventory));
+            PacketHandler.sendToAllAround(world, pos, 64, new PacketUpdateTickTime(this, tickCount));
+
             PacketHandler.sendToAllAround(world, pos, 64, new PacketUpdateBasin(TileEntityInfusionBasin.this));
         }
         if (!inventory.getStackInSlot(0).isEmpty() && fillCount > 0 && aspectIDs.size() > 0) {
@@ -164,6 +164,21 @@ public class TileEntityInfusionBasin extends TileEntity implements ITickable {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public int getTickCount() {
+        return tickCount;
+    }
+
+    @Override
+    public void setTickCount(int tickCount) {
+        this.tickCount = tickCount;
+    }
+
+    @Override
+    public ItemStackHandler getInventory() {
+        return inventory;
     }
 
 

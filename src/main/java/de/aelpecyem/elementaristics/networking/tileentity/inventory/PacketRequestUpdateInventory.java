@@ -1,7 +1,9 @@
-package de.aelpecyem.elementaristics.networking.tileentity.concentrator;
+package de.aelpecyem.elementaristics.networking.tileentity.inventory;
 
+import de.aelpecyem.elementaristics.blocks.tileentity.IHasInventory;
 import de.aelpecyem.elementaristics.blocks.tileentity.TileEntityConcentrator;
 import io.netty.buffer.ByteBuf;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLCommonHandler;
@@ -9,20 +11,20 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
-public class PacketRequestUpdateConcentrator implements IMessage {
+public class PacketRequestUpdateInventory implements IMessage {
     private BlockPos pos;
     private int dimension;
 
-    public PacketRequestUpdateConcentrator(BlockPos pos, int dimension) {
+    public PacketRequestUpdateInventory(BlockPos pos, int dimension) {
         this.pos = pos;
         this.dimension = dimension;
     }
 
-    public PacketRequestUpdateConcentrator(TileEntityConcentrator te) {
+    public PacketRequestUpdateInventory(TileEntity te) {
         this(te.getPos(), te.getWorld().provider.getDimension());
     }
 
-    public PacketRequestUpdateConcentrator() {
+    public PacketRequestUpdateInventory() {
     }
 
     @Override
@@ -37,14 +39,14 @@ public class PacketRequestUpdateConcentrator implements IMessage {
         dimension = buf.readInt();
     }
 
-    public static class Handler implements IMessageHandler<PacketRequestUpdateConcentrator, PacketUpdateConcentrator> {
+    public static class Handler implements IMessageHandler<PacketRequestUpdateInventory, PacketUpdateInventory> {
 
         @Override
-        public PacketUpdateConcentrator onMessage(PacketRequestUpdateConcentrator message, MessageContext ctx) {
-            World world = FMLCommonHandler.instance().getMinecraftServerInstance().getWorld(message.dimension); //worldServerForDimension(message.dimension);
-            TileEntityConcentrator te = (TileEntityConcentrator) world.getTileEntity(message.pos);
-            if (te != null) {
-                return new PacketUpdateConcentrator(te);
+        public PacketUpdateInventory onMessage(PacketRequestUpdateInventory message, MessageContext ctx) {
+            World world = FMLCommonHandler.instance().getMinecraftServerInstance().getWorld(message.dimension);
+            TileEntity te = world.getTileEntity(message.pos);
+            if (te != null && te instanceof IHasInventory) {
+                return new PacketUpdateInventory(te, ((IHasInventory) te).getInventory());
             } else {
                 return null;
             }

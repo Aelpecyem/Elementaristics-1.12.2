@@ -2,7 +2,8 @@ package de.aelpecyem.elementaristics.blocks.tileentity;
 
 import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.networking.PacketHandler;
-import de.aelpecyem.elementaristics.networking.tileentity.purifier.PacketUpdatePurifier;
+import de.aelpecyem.elementaristics.networking.tileentity.inventory.PacketUpdateInventory;
+import de.aelpecyem.elementaristics.networking.tileentity.tick.PacketUpdateTickTime;
 import de.aelpecyem.elementaristics.recipe.PurifierRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -15,7 +16,7 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
 
-public class TileEntityPurifier extends TileEntity implements ITickable {
+public class TileEntityPurifier extends TileEntity implements ITickable, IHasTickCount, IHasInventory {
 
 
     public EnumParticleTypes particle = EnumParticleTypes.CRIT_MAGIC;
@@ -27,14 +28,12 @@ public class TileEntityPurifier extends TileEntity implements ITickable {
     };
     public int tickCount;
     public long lastChangeTime;
-    public float manaCount;
 
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
         compound.setTag("inventory", inventory.serializeNBT());
         compound.setInteger("tickCount", tickCount);
         compound.setLong("lastChangeTime", lastChangeTime);
-        compound.setFloat("maganCount", manaCount);
         return super.writeToNBT(compound);
     }
 
@@ -42,8 +41,6 @@ public class TileEntityPurifier extends TileEntity implements ITickable {
     public void readFromNBT(NBTTagCompound compound) {
         inventory.deserializeNBT(compound.getCompoundTag("inventory"));
         tickCount = compound.getInteger("tickCount");
-        lastChangeTime = compound.getInteger("lastChangeTime");
-        manaCount = compound.getFloat("maganCount");
         super.readFromNBT(compound);
     }
 
@@ -68,8 +65,8 @@ public class TileEntityPurifier extends TileEntity implements ITickable {
     @Override
     public void update() {
         if (!world.isRemote) {
-            lastChangeTime = world.getTotalWorldTime();
-            PacketHandler.sendToAllAround(world, pos, 64, new PacketUpdatePurifier(TileEntityPurifier.this));
+            PacketHandler.sendToAllAround(world, pos, 64, new PacketUpdateInventory(this, inventory));
+            PacketHandler.sendToAllAround(world, pos, 64, new PacketUpdateTickTime(this, tickCount));
         }
         if (!(PurifierRecipes.getRecipeForInput(inventory.getStackInSlot(0)) == null)) {
             if (inventory.getStackInSlot(0).getCount() == PurifierRecipes.getRecipeForInput(inventory.getStackInSlot(0)).itemCount) {
@@ -100,4 +97,18 @@ public class TileEntityPurifier extends TileEntity implements ITickable {
 
     }
 
+    @Override
+    public int getTickCount() {
+        return tickCount;
+    }
+
+    @Override
+    public void setTickCount(int tickCount) {
+        this.tickCount = tickCount;
+    }
+
+    @Override
+    public ItemStackHandler getInventory() {
+        return inventory;
+    }
 }

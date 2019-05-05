@@ -54,7 +54,7 @@ public class TESRBasin extends TileEntitySpecialRenderer<TileEntityInfusionBasin
             //bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
             // TextureAtlasSprite still = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(FluidRegistry.WATER.getStill().toString());
             // TextureAtlasSprite still = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(TEXTURE.toString());
-            Minecraft.getMinecraft().renderEngine.bindTexture(TEXTURE);
+
             buffer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX_COLOR);
             //1-1;2-1;2-2;1;2
 
@@ -63,10 +63,12 @@ public class TESRBasin extends TileEntitySpecialRenderer<TileEntityInfusionBasin
             buffer.pos(15F / 16F, te.fillCount / 4F * 0.7 + 0.1, 1F / 16F).tex(2, 2).color(getWaterColor(te).getRed(), getWaterColor(te).getGreen(), getWaterColor(te).getBlue(), getWaterColor(te).getAlpha()).endVertex();
             buffer.pos(1F / 16F, te.fillCount / 4F * 0.7 + 0.1, 1F / 16F).tex(1, 2).color(getWaterColor(te).getRed(), getWaterColor(te).getGreen(), getWaterColor(te).getBlue(), getWaterColor(te).getAlpha()).endVertex();
 
+            Minecraft.getMinecraft().renderEngine.bindTexture(TEXTURE);
             tess.draw();
 
 
             buffer.setTranslation(0, 0, 0);
+
             //  Minecraft.getMinecraft().getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
         }
     }

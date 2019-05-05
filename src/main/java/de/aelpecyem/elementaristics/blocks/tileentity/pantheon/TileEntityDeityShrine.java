@@ -92,7 +92,6 @@ public class TileEntityDeityShrine extends TileEntity implements ITickable {
                 deityActive.statueEffect(this);
             } else {
                 deityActive.symbolEffect(this);
-                TileEntityAltar altar;
             }
         }
       /*  if (tickCount <= 0) {
