@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "S S",
+    "SES",
+    "FCF"
+  ],
+  "key": {
+    "E": {
+      "item": "elementaristics:essence",
+      "data": 6
+    },
+    "S": {
+      "item": "elementaristics:stone_enriched"
+    },
+    "F": {
+      "item": "elementaristics:essence",
+      "data": 3
+    },
+    "C": {
+      "item": "elementaristics:gem_arcane"
+    }
+  },
+  "result": {
+    "item": "elementaristics:generator_combustion",
+    "count": 1
+  }
+}

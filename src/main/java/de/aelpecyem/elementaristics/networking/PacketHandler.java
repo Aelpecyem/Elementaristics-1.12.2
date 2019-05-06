@@ -6,8 +6,8 @@ import de.aelpecyem.elementaristics.networking.tileentity.altar.PacketRequestUpd
 import de.aelpecyem.elementaristics.networking.tileentity.altar.PacketUpdateAltar;
 import de.aelpecyem.elementaristics.networking.tileentity.basin.PacketRequestUpdateBasin;
 import de.aelpecyem.elementaristics.networking.tileentity.basin.PacketUpdateBasin;
-import de.aelpecyem.elementaristics.networking.tileentity.energy.generatorCombustion.PacketRequestUpdateCombustionGenerator;
-import de.aelpecyem.elementaristics.networking.tileentity.energy.generatorCombustion.PacketUpdateCombustionGenerator;
+import de.aelpecyem.elementaristics.networking.tileentity.energy.EnergySync;
+import de.aelpecyem.elementaristics.networking.tileentity.energy.RequestEnergySync;
 import de.aelpecyem.elementaristics.networking.tileentity.inventory.PacketRequestUpdateInventory;
 import de.aelpecyem.elementaristics.networking.tileentity.inventory.PacketUpdateInventory;
 import de.aelpecyem.elementaristics.networking.tileentity.tick.PacketRequestUpdateTickTime;
@@ -34,14 +34,14 @@ public class PacketHandler {
         network.registerMessage(new PacketUpdateBasin.Handler(), PacketUpdateBasin.class, 3, Side.CLIENT);
         network.registerMessage(new PacketRequestUpdateBasin.Handler(), PacketRequestUpdateBasin.class, 4, Side.SERVER);
 
-        network.registerMessage(new PacketUpdateCombustionGenerator.Handler(), PacketUpdateCombustionGenerator.class, 5, Side.CLIENT);
-        network.registerMessage(new PacketRequestUpdateCombustionGenerator.Handler(), PacketRequestUpdateCombustionGenerator.class, 6, Side.SERVER);
+        network.registerMessage(new PacketUpdateInventory.Handler(), PacketUpdateInventory.class, 5, Side.CLIENT);
+        network.registerMessage(new PacketRequestUpdateInventory.Handler(), PacketRequestUpdateInventory.class, 6, Side.SERVER);
 
-        network.registerMessage(new PacketUpdateInventory.Handler(), PacketUpdateInventory.class, 7, Side.CLIENT);
-        network.registerMessage(new PacketRequestUpdateInventory.Handler(), PacketRequestUpdateInventory.class, 8, Side.SERVER);
+        network.registerMessage(new PacketUpdateTickTime.Handler(), PacketUpdateTickTime.class, 7, Side.CLIENT);
+        network.registerMessage(new PacketRequestUpdateTickTime.Handler(), PacketRequestUpdateTickTime.class, 8, Side.SERVER);
 
-        network.registerMessage(new PacketUpdateTickTime.Handler(), PacketUpdateTickTime.class, 9, Side.CLIENT);
-        network.registerMessage(new PacketRequestUpdateTickTime.Handler(), PacketRequestUpdateTickTime.class, 10, Side.SERVER);
+        network.registerMessage(new EnergySync.Handler(), EnergySync.class, 9, Side.CLIENT);
+        network.registerMessage(new RequestEnergySync.Handler(), RequestEnergySync.class, 10, Side.SERVER);
 
         network.registerMessage(new CapabilitySync.Handler(), CapabilitySync.class, 11, Side.CLIENT);
     }

@@ -43,6 +43,14 @@ public class MaganUtil {
         return false;
     }
 
+    public static float convertOccultEnergyToMagan(float occultEnergy) {
+        return occultEnergy / 100F;
+    }
+
+    public static int convertMaganIntoOccultEnergy(float magan) {
+        return Math.round(magan * 100);
+    }
+
     public static boolean drainMaganFromCultist(EntityCultist cultist, float amount, int stuntTime, boolean particles) {
         if (cultist != null) {
             cultist.setStuntTime(stuntTime);

@@ -67,6 +67,10 @@ public class BlockPurifier extends BlockTileEntity<TileEntityPurifier> {
         }
     }
 
+    @Override
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+        return new AxisAlignedBB(0, 0, 0, 1, 6F / 16F, 1);
+    }
 
     @Override
     public BlockRenderLayer getBlockLayer() {

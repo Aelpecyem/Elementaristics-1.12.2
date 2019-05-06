@@ -44,6 +44,8 @@ public class InitRecipes {
         ForgeRecipes.addRecipe(new ForgeRecipe(new ResourceLocation(Elementaristics.MODID, "gem_arcane"), Ingredient.fromStacks(new ItemStack(ModItems.essence, 1, Aspects.crystal.getId())), Ingredient.fromItem(ModItems.maganized_matter), Ingredient.fromStacks(new ItemStack(Items.DIAMOND)), Ingredient.fromStacks(new ItemStack(Items.GLOWSTONE_DUST)), Ingredient.fromStacks(new ItemStack(Items.REDSTONE, 1, 0)), ModItems.gem_triangular.getDefaultInstance()));
         ForgeRecipes.addRecipe(new ForgeRecipe(new ResourceLocation(Elementaristics.MODID, "lightning_tangible"), Ingredient.fromStacks(new ItemStack(ModItems.essence, 1, Aspects.electricity.getId())), Ingredient.fromItem(Items.IRON_INGOT), Ingredient.fromStacks(new ItemStack(Items.IRON_NUGGET)), Ingredient.fromStacks(new ItemStack(Items.IRON_NUGGET)), Ingredient.fromStacks(new ItemStack(ModItems.essence, 1, Aspects.electricity.getId())), ModItems.lightning_tangible.getDefaultInstance()));
 
+        ForgeRecipes.addRecipe(new ForgeRecipe(new ResourceLocation(Elementaristics.MODID, "tool_channeling"), Ingredient.fromStacks(new ItemStack(ModItems.essence, 1, Aspects.electricity.getId())), Ingredient.fromItem(Items.IRON_INGOT), Ingredient.fromStacks(new ItemStack(ModItems.gem_triangular)), Ingredient.fromStacks(new ItemStack(Items.IRON_INGOT)), Ingredient.fromStacks(new ItemStack(ModItems.lightning_tangible)), ModItems.tool_channeling.getDefaultInstance()));
+
     }
 
   /*  private static void initPedestal() {
@@ -60,6 +62,8 @@ public class InitRecipes {
     private static void initReactor() {
         ReactorRecipes.addRecipe(new ReactorRecipe(new ResourceLocation(Elementaristics.MODID, "essence_life"), Ingredient.fromStacks(new ItemStack(ModItems.essence, 1 , Aspects.water.getId())), Ingredient.fromStacks(new ItemStack(ModItems.essence,1,  Aspects.earth.getId())), new ItemStack(ModItems.essence, 1, Aspects.life.getId())));
         ReactorRecipes.addRecipe(new ReactorRecipe(new ResourceLocation(Elementaristics.MODID, "essence_electricity"), Ingredient.fromStacks(new ItemStack(ModItems.essence, 1, Aspects.air.getId())), Ingredient.fromStacks(new ItemStack(ModItems.essence, 1, Aspects.fire.getId())), new ItemStack(ModItems.essence, 1, Aspects.electricity.getId())));
+
+        ReactorRecipes.addRecipe(new ReactorRecipe(new ResourceLocation(Elementaristics.MODID, "incantation_forging"), Ingredient.fromStacks(new ItemStack(Items.PAPER)), Ingredient.fromStacks(new ItemStack(ModItems.essence, 1, Aspects.fire.getId())), new ItemStack(ModItems.incantation_forging)));
 
         ReactorRecipes.addRecipe(new ReactorRecipe(new ResourceLocation(Elementaristics.MODID, "seeds_opium"), Ingredient.fromStacks(new ItemStack(Blocks.RED_FLOWER)), Ingredient.fromStacks(new ItemStack(ModItems.essence, 1, Aspects.mind.getId())), new ItemStack(ModItems.seed_herb)));
         ReactorRecipes.addRecipe(new ReactorRecipe(new ResourceLocation(Elementaristics.MODID, "sparks_living"), Ingredient.fromItem(Items.BLAZE_POWDER), Ingredient.fromStacks(new ItemStack(ModItems.essence, 1, Aspects.fire.getId())), ModItems.sparks_living.getDefaultInstance()));

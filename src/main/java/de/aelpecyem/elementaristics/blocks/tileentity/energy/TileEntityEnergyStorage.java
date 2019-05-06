@@ -9,37 +9,26 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.energy.CapabilityEnergy;
 
-public class TileEntityEnergyStorage extends TileEntity implements ITickable {
+public class TileEntityEnergyStorage extends TileEntityEnergy implements ITickable {
 
-    public EnergyCapability storage = new EnergyCapability(1000, 1);
+    @Override
+    public int getMaxEnergy() {
+        return 10000;
+    }
 
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
-        storage.writeToNBT(compound);
         return super.writeToNBT(compound);
     }
 
     @Override
     public void readFromNBT(NBTTagCompound compound) {
-        storage.readFromNBT(compound);
         super.readFromNBT(compound);
     }
 
-
-    @Override
-    public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
-        return capability == CapabilityEnergy.ENERGY || super.hasCapability(capability, facing);
-    }
-
-    @Override
-    public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
-        return capability == CapabilityEnergy.ENERGY ? (T) storage : super.getCapability(capability, facing);
-    }
-
-
     @Override
     public void update() {
-        System.out.println("Energy in storage: " + storage.getEnergyStored());
+        super.update();
     }
 
 

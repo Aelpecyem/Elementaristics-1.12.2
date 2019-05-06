@@ -9,7 +9,7 @@
       "text": "The $(marked)Rite of Forging$() is an essential component for the creation of tools etc. $(br)In order to make use of it, up to five items must be tossed near the altar it is used on. $(br)If there is a valid recipe for those items, something will be forged at the end of the rite."
     },
     {
-      "type": "crafting",
+      "type": "reactor_recipe",
       "recipe": "elementaristics:incantation_forging",
       "text": "$(o)Ayyyy, my arms$()"
     }

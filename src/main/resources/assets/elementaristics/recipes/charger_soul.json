@@ -1,0 +1,31 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ESE",
+    "ILI",
+    "MSM"
+  ],
+  "key": {
+    "E": {
+      "item": "elementaristics:essence",
+      "data": 6
+    },
+    "S": {
+      "item": "elementaristics:stone_enriched"
+    },
+    "M": {
+      "item": "elementaristics:essence",
+      "data": 5
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "L": {
+      "item": "elementaristics:lightning_tangible"
+    }
+  },
+  "result": {
+    "item": "elementaristics:charger_soul",
+    "count": 1
+  }
+}

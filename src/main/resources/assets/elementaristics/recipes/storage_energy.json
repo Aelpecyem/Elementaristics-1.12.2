@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SAS",
+    "ACA",
+    "SAS"
+  ],
+  "key": {
+    "A": {
+      "item": "elementaristics:essence",
+      "data": 4
+    },
+    "S": {
+      "item": "elementaristics:stone_enriched"
+    },
+    "C": {
+      "item": "elementaristics:gem_arcane"
+    }
+  },
+  "result": {
+    "item": "elementaristics:storage_energy",
+    "count": 1
+  }
+}

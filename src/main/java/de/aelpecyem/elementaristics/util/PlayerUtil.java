@@ -22,7 +22,7 @@ public class PlayerUtil {
         if (r != null) {
             return r.getBlockPos();
         }
-        return null;
+        return BlockPos.ORIGIN;
     }
 
 }

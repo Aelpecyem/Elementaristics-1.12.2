@@ -2,11 +2,13 @@ package de.aelpecyem.elementaristics.events;
 
 import de.aelpecyem.elementaristics.blocks.tileentity.TileEntityAltar;
 import de.aelpecyem.elementaristics.blocks.tileentity.blocks.BlockAltar;
+import de.aelpecyem.elementaristics.blocks.tileentity.energy.TileEntityEnergy;
 import de.aelpecyem.elementaristics.capability.player.IPlayerCapabilities;
 import de.aelpecyem.elementaristics.capability.player.PlayerCapProvider;
 import de.aelpecyem.elementaristics.init.RiteInit;
 import de.aelpecyem.elementaristics.init.SoulInit;
 import de.aelpecyem.elementaristics.misc.elements.Aspect;
+import de.aelpecyem.elementaristics.misc.elements.Aspects;
 import de.aelpecyem.elementaristics.util.MiscUtil;
 import de.aelpecyem.elementaristics.util.PlayerUtil;
 import net.minecraft.client.Minecraft;
@@ -52,6 +54,7 @@ public class HUDRenderHandler {
         }
         if (event.getType() == RenderGameOverlayEvent.ElementType.TEXT && !event.isCancelable()) {
             Minecraft mc = Minecraft.getMinecraft();
+
             if (PlayerUtil.getBlockLookingAt(mc.player, 5) instanceof BlockAltar) {
                 BlockAltar altar = (BlockAltar) PlayerUtil.getBlockLookingAt(mc.player, 5);
                 TileEntityAltar tile = altar.getTileEntity(mc.player.world, PlayerUtil.getBlockPosLookingAt(5));
@@ -78,6 +81,15 @@ public class HUDRenderHandler {
                         mc.ingameGUI.drawString(mc.fontRenderer, "-" + aspectList.get(i).getLocalizedName(), event.getResolution().getScaledWidth() - 100, 15 + i * 10, 16777215);
                     }
                 }
+            }
+            if (mc.player.world.getTileEntity(PlayerUtil.getBlockPosLookingAt(5)) != null &&
+                    mc.player.world.getTileEntity(PlayerUtil.getBlockPosLookingAt(5)) instanceof TileEntityEnergy) {
+                TileEntityEnergy tile = (TileEntityEnergy) mc.player.world.getTileEntity(PlayerUtil.getBlockPosLookingAt(5));
+                //render whether it drains or gets drained etc.
+                mc.ingameGUI.drawString(mc.fontRenderer, I18n.format("hud.energy_current") + " " + tile.storage.getEnergyStored() + " / " + tile.storage.getMaxEnergyStored(), 5, 5, Aspects.electricity.getColor());
+                if (tile.posBound != null)
+                    if (!(tile.posBound.getZ() == tile.getPos().getZ() && tile.posBound.getY() == tile.getPos().getY() && tile.posBound.getX() == tile.getPos().getX()))
+                        mc.ingameGUI.drawString(mc.fontRenderer, (tile.receives ? I18n.format("hud.energy_from") : I18n.format("hud.energy_to")) + " X: " + tile.getPositionBoundTo().getX() + " Y: " + tile.getPositionBoundTo().getY() + " Z: " + tile.getPositionBoundTo().getZ() + " " + (tile.posBound.getDistance(tile.getPos().getX(), tile.getPos().getY(), tile.getPos().getZ()) < 16 ? " " : I18n.format("hud.too_far")), 5, 15, tile.posBound.getDistance(tile.getPos().getX(), tile.getPos().getY(), tile.getPos().getZ()) < 16 ? Aspects.electricity.getColor() : 13107200);
             }
         }
     }

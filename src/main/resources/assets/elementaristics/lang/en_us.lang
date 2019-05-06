@@ -126,6 +126,10 @@ item.thaumagral_wood.name=Wooden Thaumagral
 item.thaumagral_stone.name=Stone Thaumagral
 item.thaumagral_diamond.name=Diamond Thaumagral
 
+item.charger_soul.name=Maganatic Accumulator
+item.tool_channeling.name=Channeling Tool
+
+
 
 #Essences (Items and Blocks)
 item.essence_air.name=Air Essence
@@ -188,7 +192,8 @@ tile.mushroom_intoxicating.name=Shimmershroom
 tile.moss.name=Moss
 tile.block_moss_everchanging.name=Everchanging Moss
 tile.basin_infusion.name=Infusion Basin
-
+tile.generator_combustion.name=Arcane Combustion Generator
+tile.storage_energy.name=Occult Energy Core
 
 #Advancements
 advancement.elementaristics.root=Elementaristics
@@ -284,6 +289,12 @@ tooltip.thoughts_battling.name=Is it you or is it me, would you know or would yo
 tooltip.wine_redmost.name=Will you ever know what you have done after drinking this?
 tooltip.flesh_lamb.name=Wolves shall devour the Lamb
 
+tooltip.charge=Current Power:
+
+tooltip.posX=Bound X-Coordinates:
+tooltip.posY=Bound Y-Coordinates:
+tooltip.posZ=Bound Z-Coordinates:
+
 #Rites
 rite.elementaristics:rite_knowledge.name=Enlightenment's Sighing
 rite.elementaristics:rite_feast.name=The Feast on the Soul
@@ -315,8 +326,17 @@ rite.progress_ready.name=Progress: §2ready
 rite.aspects.name=Local Aspects:
 rite.aspects_needed.name=Aspects Needed:
 
+hud.energy_current=Current Energy:
+hud.energy_from=Draining Energy from:
+hud.energy_to=Transferring Energy to:
+hud.too_far=(too far!)
+
+message.position_set=Bound Position:
+message.position_set_for=Set Bound Position to
+
 message.ascension_1.standard=Walls have been broken. Walls that were limiting.
 hud.magan.amount=Current Magan:
+
 message.drugs=This is more potent than I thought... I might experience visions
 message.vision.1=Light blurs at the edge of perception
 message.vision.2=The tongue savors enlightenment

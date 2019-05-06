@@ -6,7 +6,6 @@ import de.aelpecyem.elementaristics.blocks.base.crops.BlockMossBase;
 import de.aelpecyem.elementaristics.blocks.base.crops.BlockMossEverchanging;
 import de.aelpecyem.elementaristics.blocks.base.crops.CropOpium;
 import de.aelpecyem.elementaristics.blocks.tileentity.blocks.*;
-import de.aelpecyem.elementaristics.blocks.tileentity.blocks.energy.BlockDistributer;
 import de.aelpecyem.elementaristics.blocks.tileentity.blocks.energy.BlockGeneratorCombustion;
 import de.aelpecyem.elementaristics.blocks.tileentity.blocks.energy.BlockStorage;
 import de.aelpecyem.elementaristics.misc.elements.Aspect;
@@ -59,7 +58,6 @@ public class ModBlocks {
 
     //ENERGY
     public static BlockGeneratorCombustion generator_combustion;
-    public static BlockDistributer distributer;
     public static BlockStorage energy_storage;
 
     //PLANTS
@@ -106,7 +104,6 @@ public class ModBlocks {
 
         generator_combustion = new BlockGeneratorCombustion();
         energy_storage = new BlockStorage();
-        distributer = new BlockDistributer();
         //TC
         mushroom_intoxicating = new BlockMushroomIntoxicating();
     }
@@ -134,7 +131,6 @@ public class ModBlocks {
 
         GameRegistry.registerTileEntity(generator_combustion.getTileEntityClass(), generator_combustion.getRegistryName());
         GameRegistry.registerTileEntity(energy_storage.getTileEntityClass(), energy_storage.getRegistryName());
-        GameRegistry.registerTileEntity(distributer.getTileEntityClass(), distributer.getRegistryName());
 
     }
 

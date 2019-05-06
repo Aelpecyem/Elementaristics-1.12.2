@@ -36,5 +36,30 @@ public class EnergyCapability extends EnergyStorage {
         compound.setInteger("maxReceive", this.maxReceive);
     }
 
+    public int getMaxReceive() {
+        return maxReceive;
+    }
+
+    public int getMaxExtract() {
+        return maxExtract;
+    }
+
+    public void setMaxReceive(int receive) {
+        this.maxReceive = receive;
+    }
+
+    public void setMaxExtract(int extract) {
+        this.maxExtract = extract;
+    }
+
+    public void setMaxStorage(int newMax) {
+        this.capacity = newMax;
+    }
+
+    public void setEnergy(int energy) {
+        this.energy = energy;
+    }
+
+
 
 }

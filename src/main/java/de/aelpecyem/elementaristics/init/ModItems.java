@@ -2,13 +2,11 @@ package de.aelpecyem.elementaristics.init;
 
 import de.aelpecyem.elementaristics.items.base.*;
 
-import de.aelpecyem.elementaristics.items.base.artifacts.ItemDaggerSacrificial;
+import de.aelpecyem.elementaristics.items.base.artifacts.*;
 import de.aelpecyem.elementaristics.items.base.artifacts.rites.IncantationBase;
 import de.aelpecyem.elementaristics.items.base.artifacts.rites.ItemAspects;
-import de.aelpecyem.elementaristics.items.base.artifacts.ItemHammerHeat;
-import de.aelpecyem.elementaristics.items.base.artifacts.ItemSoulChanger;
-import de.aelpecyem.elementaristics.items.base.artifacts.ItemSoulMirror;
 import de.aelpecyem.elementaristics.items.base.artifacts.rites.materials.*;
+import de.aelpecyem.elementaristics.items.base.bauble.ItemBaubleCharger;
 import de.aelpecyem.elementaristics.items.base.burnable.ItemHerbBundle;
 import de.aelpecyem.elementaristics.items.base.burnable.ItemOpiumTincture;
 import de.aelpecyem.elementaristics.items.base.consumable.ItemBaseSeed;
@@ -70,6 +68,7 @@ public class ModItems {
     public static ItemThaumagral thaumagral_wood;
 
     public static ItemAspects heart_stone;
+    public static ItemAspects tool_channeling;
 
     public static IncantationBase incantation_chaos;
     public static IncantationBase incantation_light;
@@ -106,7 +105,8 @@ public class ModItems {
     public static ItemAspects matter_astral_body; //weaker soul aspect
     public static ItemAspects sands_soul;
 
-
+    //Baubles
+    public static ItemBase charger_soul;
 
    /* public static ItemArmor hood_cultist = new RobesCultist("hood_cultist",1, EntityEquipmentSlot.HEAD);
     public static ItemArmor garb_cultist = new RobesCultist("garb_cultist",1, EntityEquipmentSlot.CHEST);
@@ -155,6 +155,7 @@ public class ModItems {
         thaumagral_stone = new ItemThaumagral("thaumagral_stone", Item.ToolMaterial.STONE, 1.2F, 0.8F);
         thaumagral_wood = new ItemThaumagral("thaumagral_wood", Item.ToolMaterial.WOOD, 1.5F, 0.5F);
 
+        charger_soul = new ItemBaubleCharger();
     }
 
     private static void initRiteMaterials() {
@@ -199,6 +200,7 @@ public class ModItems {
         dagger_sacrificial = new ItemDaggerSacrificial();
         soul_mirror = new ItemSoulMirror();
         heart_stone = new ItemAspects("heart_stone", 6, false, Aspects.earth); //todo add functionality
+        tool_channeling = new ItemChannelingTool();
     }
 
     public static void register(IForgeRegistry<Item> registry) {

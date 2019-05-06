@@ -56,6 +56,7 @@ public final class Elementaristics {
     //TODO spellcasting
     //TODO more rites
     //TODO ...more!
+    //TODO idea: have a "Potential" potion effect... used for rites like a teleportation rite (which will teleport the caster to an entity with potential)
 
     public static final String MODID = "elementaristics";
     public static final String NAME = "Elementaristics";

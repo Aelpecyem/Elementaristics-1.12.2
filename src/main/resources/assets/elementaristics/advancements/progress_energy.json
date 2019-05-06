@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "elementaristics:tool_channeling"
+    },
+    "title": {
+      "translate": "advancement.elementaristics.energy"
+    },
+    "description": {
+      "translate": "advancement.elementaristics.energy.desc"
+    }
+  },
+  "parent": "elementaristics:progress_forging",
+  "criteria": {
+    "book": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "elementaristics:tool_channeling"
+          }
+        ]
+      }
+    }
+  }
+}
