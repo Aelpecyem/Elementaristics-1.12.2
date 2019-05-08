@@ -16,6 +16,7 @@ import net.minecraft.world.World;
 public class ItemTinctureArcane extends ItemDrinkBase {
     public ItemTinctureArcane() {
         super("tincture_arcane");
+        maxStackSize = 1;
     }
 
     @Override
