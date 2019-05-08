@@ -1,33 +1,14 @@
 package de.aelpecyem.elementaristics.blocks.tileentity.pantheon;
 
-import de.aelpecyem.elementaristics.Elementaristics;
-import de.aelpecyem.elementaristics.blocks.tileentity.TileEntityAltar;
-import de.aelpecyem.elementaristics.blocks.tileentity.blocks.BlockReactor;
-import de.aelpecyem.elementaristics.blocks.tileentity.energy.TileEntityGeneratorArcaneCombustion;
+import de.aelpecyem.elementaristics.blocks.tileentity.IHasTickCount;
+import de.aelpecyem.elementaristics.blocks.tileentity.energy.TileEntityEnergy;
 import de.aelpecyem.elementaristics.capability.energy.EnergyCapability;
-import de.aelpecyem.elementaristics.capability.player.IPlayerCapabilities;
-import de.aelpecyem.elementaristics.capability.player.PlayerCapProvider;
-import de.aelpecyem.elementaristics.capability.player.souls.Soul;
-import de.aelpecyem.elementaristics.entity.EntityCultist;
-import de.aelpecyem.elementaristics.init.ModItems;
-import de.aelpecyem.elementaristics.init.RiteInit;
-import de.aelpecyem.elementaristics.init.SoulInit;
-import de.aelpecyem.elementaristics.items.base.ItemEssence;
-import de.aelpecyem.elementaristics.items.base.artifacts.rites.IHasRiteUse;
-import de.aelpecyem.elementaristics.misc.elements.Aspect;
-import de.aelpecyem.elementaristics.misc.elements.Aspects;
 import de.aelpecyem.elementaristics.misc.pantheon.Deities;
 import de.aelpecyem.elementaristics.misc.pantheon.Deity;
-import de.aelpecyem.elementaristics.misc.rites.RiteBase;
 import de.aelpecyem.elementaristics.networking.PacketHandler;
-import de.aelpecyem.elementaristics.networking.tileentity.altar.PacketUpdateAltar;
-import de.aelpecyem.elementaristics.networking.tileentity.energy.generatorCombustion.PacketUpdateCombustionGenerator;
-import de.aelpecyem.elementaristics.particles.ParticleGeneric;
-import de.aelpecyem.elementaristics.util.MaganUtil;
-import de.aelpecyem.elementaristics.util.SoulUtil;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
+import de.aelpecyem.elementaristics.networking.tileentity.deities.PacketUpdateDeity;
+import de.aelpecyem.elementaristics.networking.tileentity.energy.EnergySync;
+import de.aelpecyem.elementaristics.networking.tileentity.tick.PacketUpdateTickTime;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
@@ -43,17 +24,27 @@ import net.minecraftforge.items.ItemStackHandler;
 import javax.annotation.Nullable;
 import java.util.*;
 
-public class TileEntityDeityShrine extends TileEntity implements ITickable {
-
-    public EnergyCapability storage = new EnergyCapability(1000, 1);
+public class TileEntityDeityShrine extends TileEntityEnergy implements ITickable, IHasTickCount {
     public int tickCount;
     public String deityBound;
     public boolean isStatue;
+    public boolean unusedBool;
+    public float unusedFloat;
+    public int unusedInt;
+    public String unusedString;
 
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
         storage.writeToNBT(compound);
         compound.setInteger("tickCount", tickCount);
+
+        compound.setString("deityBound", deityBound);
+        compound.setBoolean("isStatue", isStatue);
+
+        compound.setBoolean("unusedBool", unusedBool);
+        compound.setFloat("unusedFloat", unusedFloat);
+        compound.setInteger("unusedInt", unusedInt);
+        compound.setString("unusedString", unusedString);
         return super.writeToNBT(compound);
     }
 
@@ -61,6 +52,14 @@ public class TileEntityDeityShrine extends TileEntity implements ITickable {
     public void readFromNBT(NBTTagCompound compound) {
         storage.readFromNBT(compound);
         tickCount = compound.getInteger("tickCount");
+
+        deityBound = compound.getString("deityBound");
+        isStatue = compound.getBoolean("isStatue");
+
+        unusedBool = compound.getBoolean("unusedBool");
+        unusedFloat = compound.getFloat("unusedFloat");
+        unusedInt = compound.getInteger("unusedInt");
+        unusedString = compound.getString("unusedString");
         super.readFromNBT(compound);
     }
 
@@ -83,8 +82,10 @@ public class TileEntityDeityShrine extends TileEntity implements ITickable {
 
     @Override
     public void update() {
+        super.update();
         if (!world.isRemote) {
-            //     PacketHandler.sendToAllAround(world, pos, 64, new PacketUpdateCombustionGenerator(TileEntityGeneratorArcaneCombustion.this));
+            PacketHandler.sendToAllAround(world, pos, 64, new PacketUpdateTickTime(this, tickCount));
+            PacketHandler.sendToAllAround(world, pos, 64, new PacketUpdateDeity(this));
         }
         Deity deityActive = Deities.deities.get(new ResourceLocation(deityBound));
         if (world.getWorldTime() >= deityActive.getTickTimeBegin() && world.getWorldTime() <= deityActive.getTickTimeEnd()) {
@@ -104,6 +105,16 @@ public class TileEntityDeityShrine extends TileEntity implements ITickable {
             tickCount--;
         }*/
         //   System.out.println("Energy: " + storage.getEnergyStored());
+    }
+
+    @Override
+    public int getTickCount() {
+        return tickCount;
+    }
+
+    @Override
+    public void setTickCount(int tickCount) {
+        this.tickCount = tickCount;
     }
 }
 

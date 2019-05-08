@@ -83,6 +83,8 @@ public class ModItems {
     public static IncantationBase incantation_weather;
     public static IncantationBase incantation_day;
     public static IncantationBase incantation_night;
+    public static IncantationBase incantation_binding;
+    public static IncantationBase incantation_unbinding;
 
     public static ItemDrinkBase water_purest;
     public static ItemAspects sparks_living;
@@ -196,17 +198,18 @@ public class ModItems {
         incantation_weather = new IncantationBase("incantation_weather", RiteInit.riteWeather, Aspects.water, 2);
         incantation_day = new IncantationBase("incantation_day", RiteInit.riteDay, Aspects.light, 1);
         incantation_night = new IncantationBase("incantation_night", RiteInit.riteNight, Aspects.ice, 1);
+        incantation_binding = new IncantationBase("incantation_binding", RiteInit.riteBinding, Aspects.earth, 1);
+        incantation_unbinding = new IncantationBase("incantation_unbinding", RiteInit.riteUnbinding, Aspects.earth, 1);
         hammer_heat = new ItemHammerHeat();
         dagger_sacrificial = new ItemDaggerSacrificial();
         soul_mirror = new ItemSoulMirror();
-        heart_stone = new ItemAspects("heart_stone", 6, false, Aspects.earth); //todo add functionality
+        heart_stone = new ItemHeartStone();
         tool_channeling = new ItemChannelingTool();
     }
 
     public static void register(IForgeRegistry<Item> registry) {
         for (Item item : ITEMS) {
-            Item toRegister = (Item) item;
-            registry.register(toRegister);
+            registry.register(item);
         }
 
     }

@@ -4,8 +4,10 @@ package de.aelpecyem.elementaristics.items.base.artifacts;
 import de.aelpecyem.elementaristics.blocks.tileentity.IHasBoundPosition;
 import de.aelpecyem.elementaristics.items.base.artifacts.rites.ItemAspects;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;
+import de.aelpecyem.elementaristics.util.MiscUtil;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -34,6 +36,12 @@ public class ItemChannelingTool extends ItemAspects {
             tooltip.add(" ");
         }
         super.addInformation(stack, worldIn, tooltip, flagIn);
+    }
+
+    @Override
+    public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
+        // MiscUtil.addEntityToBoundEntities(attacker, target);
+        return super.hitEntity(stack, target, attacker);
     }
 
     @Override

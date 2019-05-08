@@ -17,6 +17,7 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
 import java.util.List;
@@ -35,7 +36,7 @@ public class ItemBaubleCharger extends ItemBase implements IBauble {
     @Override
     public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
         if (stack.hasTagCompound() && stack.getTagCompound().hasKey(CHARGE_KEY)) {
-            tooltip.add(I18n.format("tooltip.charge") + " " + stack.getTagCompound().getInteger(CHARGE_KEY));
+            tooltip.add(TextFormatting.AQUA + I18n.format("tooltip.charge") + " " + stack.getTagCompound().getInteger(CHARGE_KEY));
             tooltip.add(" ");
         }
         if (stack.hasTagCompound() && stack.getTagCompound().hasKey(X_KEY)) {

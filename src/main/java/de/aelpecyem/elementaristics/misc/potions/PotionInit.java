@@ -23,6 +23,8 @@ public class PotionInit {
     public static final PotionFireballCharge potionFireballCharge = new PotionFireballCharge();
     public static final PotionCounterspell potionCounterspell = new PotionCounterspell();
 
+    public static final PotionHealthShare potionHealthShare = new PotionHealthShare();
+
     public static PotionEmotionContentment contentment = new PotionEmotionContentment(); //lower regen
     public static PotionEmotionDread dread = new PotionEmotionDread(); //higher regen
     public static PotionEmotionEcstasy ecstasy = new PotionEmotionEcstasy(); //little regen / no regen
@@ -40,6 +42,8 @@ public class PotionInit {
         event.getRegistry().register(potionCrystalProtection);
         event.getRegistry().register(potionFireballCharge);
         event.getRegistry().register(potionCounterspell);
+
+        event.getRegistry().register(potionHealthShare);
 
         event.getRegistry().register(contentment);
         event.getRegistry().register(dread);

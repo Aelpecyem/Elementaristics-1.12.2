@@ -207,6 +207,7 @@ advancement.elementaristics.forging=Without the clonk
 advancement.elementaristics.tunneler=Whoosh.
 advancement.elementaristics.reactor=Not of the giant kind
 advancement.elementaristics.basin=Flux free
+advancement.elementaristics.energy=Behold: technology!
 
 advancement.elementaristics.ascension_1=Far above, but just space
 advancement.elementaristics.ascension_2=THE MORE-!
@@ -229,6 +230,7 @@ advancement.elementaristics.forging.desc=Invoke the purest heat, the arcane one
 advancement.elementaristics.tunneler.desc=Build a Tunneler to accelerate item particles
 advancement.elementaristics.reactor.desc=Build a Reactor to let (al-)chemicals react
 advancement.elementaristics.basin.desc=Build an Infusion Basin to infuse items with essences
+advancement.elementaristics.energy.desc=Build a Channeling Tool
 
 advancement.elementaristics.ascension_1.desc=Study the essence of space
 advancement.elementaristics.ascension_2.desc=Build an Altar to perform rites

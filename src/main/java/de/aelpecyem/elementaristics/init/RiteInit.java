@@ -25,6 +25,9 @@ public class RiteInit {
     public static RiteSacrifice riteCompression = new RiteSacrifice("soul_compression", Aspects.aether, DamageSource.MAGIC);
     public static RiteRecruiting riteRecruiting = new RiteRecruiting();
     public static RiteWeather riteWeather = new RiteWeather();
+    public static RiteBinding riteBinding = new RiteBinding();
+    public static RiteUnbinding riteUnbinding = new RiteUnbinding();
+
     public static void registerRite(ResourceLocation name, RiteBase rite){
         RITES.put(name, rite);
     }
@@ -45,7 +48,11 @@ public class RiteInit {
 
         registerRite(riteDay.name, RiteInit.riteDay);
         registerRite(riteNight.name, RiteInit.riteNight);
+
+        registerRite(riteBinding.name, RiteInit.riteBinding);
+        registerRite(riteUnbinding.name, RiteInit.riteUnbinding);
     }
+
     public static RiteBase getRiteForResLoc(String rite) {
         if (RITES.get(new ResourceLocation(rite)) != null) {
             return RITES.get(new ResourceLocation(rite));

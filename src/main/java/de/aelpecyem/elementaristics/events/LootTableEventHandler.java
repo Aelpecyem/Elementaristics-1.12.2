@@ -59,11 +59,11 @@ public class LootTableEventHandler {
     }
 
     private LootPool getInjectPool(String entryName) {
-        return new LootPool(new LootEntry[] { getInjectEntry(entryName, 1) }, new LootCondition[0], new RandomValueRange(1), new RandomValueRange(0, 1), "botania_inject_pool");
+        return new LootPool(new LootEntry[]{getInjectEntry(entryName, 1)}, new LootCondition[0], new RandomValueRange(1), new RandomValueRange(0, 1), "elementaristics_inject_pool");
     }
 
     private LootEntryTable getInjectEntry(String name, int weight) {
-        return new LootEntryTable(new ResourceLocation(Elementaristics.MODID, "inject/" + name), weight, 0, new LootCondition[0], "botania_inject_entry");
+        return new LootEntryTable(new ResourceLocation(Elementaristics.MODID, "inject/" + name), weight, 0, new LootCondition[0], "elementaristics_inject_entry");
     }
 
 }
