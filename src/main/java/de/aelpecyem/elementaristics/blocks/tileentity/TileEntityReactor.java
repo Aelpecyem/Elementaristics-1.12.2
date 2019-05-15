@@ -78,7 +78,8 @@ public class TileEntityReactor extends TileEntity implements ITickable, IHasTick
         }
         if (crafting) {
             tickCount++;
-            doParticleShow();
+            if (world.isRemote)
+                doParticleShow();
 
             if (tickCount < 0) {
                 tickCount = 0;

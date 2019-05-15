@@ -13,8 +13,9 @@ public class SpellBase {
     protected int stuntTime;
     protected int color, color2;
     protected SpellType type;
+    protected int indexX, indexY;
 
-    public SpellBase(ResourceLocation name, float maganCost, int cooldownTicks, int stuntTime, int color, int color2) {
+    public SpellBase(ResourceLocation name, float maganCost, int cooldownTicks, int stuntTime, int color, int color2, int indexX, int indexY) {
         this.name = name;
         this.maganCost = maganCost;
         this.cooldownTicks = cooldownTicks;
@@ -22,10 +23,12 @@ public class SpellBase {
         this.color = color;
         this.color2 = color2;
         this.type = SpellType.PROJECTILE;
+        this.indexX = indexX;
+        this.indexY = indexY;
         SpellInit.spells.put(name, this);
     }
 
-    public SpellBase(ResourceLocation name, float maganCost, int cooldownTicks, int stuntTime, int color, int color2, SpellType type) {
+    public SpellBase(ResourceLocation name, float maganCost, int cooldownTicks, int stuntTime, int color, int color2, SpellType type, int indexX, int indexY) {
         this.name = name;
         this.maganCost = maganCost;
         this.cooldownTicks = cooldownTicks;
@@ -33,6 +36,8 @@ public class SpellBase {
         this.color = color;
         this.color2 = color2;
         this.type = type;
+        this.indexX = indexX;
+        this.indexY = indexY;
         SpellInit.spells.put(name, this);
     }
 
@@ -66,6 +71,14 @@ public class SpellBase {
 
     public int getColor() {
         return color;
+    }
+
+    public int getIndexX() {
+        return indexX;
+    }
+
+    public int getIndexY() {
+        return indexY;
     }
 
     public void affect(RayTraceResult result, EntityLivingBase caster, World world) {

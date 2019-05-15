@@ -5,13 +5,17 @@ import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.blocks.tileentity.IHasBoundPosition;
 import de.aelpecyem.elementaristics.items.base.artifacts.rites.ItemAspects;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;
+import de.aelpecyem.elementaristics.misc.potions.PotionInit;
 import de.aelpecyem.elementaristics.util.MiscUtil;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -35,18 +39,19 @@ public class ItemHeartStone extends ItemAspects {
 
     @Override
     public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
-        target.getEntityData().setUniqueId("sharing_uuid", attacker.getUniqueID());
+        target.addPotionEffect(new PotionEffect(PotionInit.potionPotential, 500, 0, false, true)); //only one bound entity; more for the god ascension
+        // target.getEntityData().setUniqueId("sharing_uuid", attacker.getUniqueID());
         return super.hitEntity(stack, target, attacker);
     }
 
     @Override
-    public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        for (int i = 0; i < MiscUtil.getBoundEntities(player).size(); i++) {
-            EntityLivingBase entityLivingBase = MiscUtil.getBoundEntities(player).get(i);
+    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
+        for (int i = 0; i < MiscUtil.getBoundEntities(playerIn).size(); i++) {
+            EntityLivingBase entityLivingBase = MiscUtil.getBoundEntities(playerIn).get(i);
             Elementaristics.proxy.generateGenericParticles(entityLivingBase, Aspects.earth.getColor(), 3, 100, 0, false, false);
             Elementaristics.proxy.generateGenericParticles(entityLivingBase, Aspects.soul.getColor(), 3, 100, 0, false, false);
 
         }
-        return super.onItemUse(player, worldIn, pos, hand, facing, hitX, hitY, hitZ);
+        return super.onItemRightClick(worldIn, playerIn, handIn);
     }
 }

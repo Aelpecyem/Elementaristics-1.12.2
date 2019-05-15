@@ -25,6 +25,8 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nullable;
@@ -71,7 +73,8 @@ public class TileEntityAltar extends TileEntity implements ITickable, IHasTickCo
                         rite.onRitual(world, pos, targets, tickCount);
 
                     } else {
-                        doFailingShow();
+                        if (world.isRemote)
+                            doFailingShow();
                         currentRite = "";
                         tickCount = 0;
                     }
@@ -96,10 +99,6 @@ public class TileEntityAltar extends TileEntity implements ITickable, IHasTickCo
                                     }
                                 }
                             }
-                        } else {
-                            doFailingShow();
-                            currentRite = "";
-                            tickCount = 0;
                         }
                     }
                 }
@@ -200,12 +199,13 @@ public class TileEntityAltar extends TileEntity implements ITickable, IHasTickCo
                     if (player.hasCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null)) {
                         IPlayerCapabilities caps = player.getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null);
                         if (tickCount % 5 == 0) {
-                            Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(world, player.posX + player.world.rand.nextFloat() * player.width
-                                    * 2.0F - player.width,
-                                    player.posY + 0.5D + player.world.rand.nextFloat()
-                                            * player.height,
-                                    player.posZ + player.world.rand.nextFloat() * player.width
-                                            * 2.0F - player.width, 0, 0, 0, SoulInit.getSoulFromId(caps.getSoulId()).getParticleColor(), 1, 100, 0, true, true, true, pos.getX() + 0.5F, pos.getY() + 1, pos.getZ() + 0.5F));
+                            if (world.isRemote)
+                                Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(world, player.posX + player.world.rand.nextFloat() * player.width
+                                        * 2.0F - player.width,
+                                        player.posY + 0.5D + player.world.rand.nextFloat()
+                                                * player.height,
+                                        player.posZ + player.world.rand.nextFloat() * player.width
+                                                * 2.0F - player.width, 0, 0, 0, SoulInit.getSoulFromId(caps.getSoulId()).getParticleColor(), 1, 100, 0, true, true, true, pos.getX() + 0.5F, pos.getY() + 1, pos.getZ() + 0.5F));
                         }
                     }
                     return true;

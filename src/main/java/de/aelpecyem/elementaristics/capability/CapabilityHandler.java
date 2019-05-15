@@ -7,16 +7,22 @@ import de.aelpecyem.elementaristics.capability.player.souls.soulCaps.SoulCaps;
 import de.aelpecyem.elementaristics.init.SoulInit;
 import de.aelpecyem.elementaristics.networking.PacketHandler;
 import de.aelpecyem.elementaristics.networking.cap.CapabilitySync;
+import de.aelpecyem.elementaristics.networking.player.PacketPressSpellKey;
+import de.aelpecyem.elementaristics.util.Keybinds;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.InputEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import scala.collection.parallel.ParIterableLike;
 
 public class CapabilityHandler {
 
@@ -30,6 +36,7 @@ public class CapabilityHandler {
         }
 
     }
+
 
     @SubscribeEvent
     public void onPlayerClone(PlayerEvent.Clone event) {
@@ -45,7 +52,8 @@ public class CapabilityHandler {
             caps.setMagan(oldCaps.getMaxMagan());
             caps.setPlayerAscensionStage(oldCaps.getPlayerAscensionStage());
             caps.setCultistCount(oldCaps.getCultistCount());
-
+            caps.setAscensionRoute(oldCaps.getAscensionRoute());
+            caps.setSpellSlot(oldCaps.getSpellSlot());
         }
     }
 
@@ -65,7 +73,6 @@ public class CapabilityHandler {
             EntityPlayer player = (EntityPlayer) event.getEntity();
             if (player.hasCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null)) {
                 IPlayerCapabilities cap = player.getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null);
-
                 SoulCaps.getCapForSoul(SoulInit.getSoulFromId(cap.getSoulId())).onJumpEvent(event, player, cap);
 
             }
@@ -76,12 +83,24 @@ public class CapabilityHandler {
     public void onPlayerUpdateEvent(LivingEvent.LivingUpdateEvent event) {
         if (event.getEntity() instanceof EntityPlayerMP) {
             final EntityPlayerMP player = (EntityPlayerMP) event.getEntity();
-            final IPlayerCapabilities cap =  player.getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null);
+            final IPlayerCapabilities cap = player.getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null);
 
             PacketHandler.sendTo(player, new CapabilitySync(cap));
         }
 
+    }
 
+    @SubscribeEvent
+    public void onKeyInput(TickEvent.PlayerTickEvent event) {
+        if (event.player.world.isRemote) {
+            if (event.player.hasCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null)) {
+                if (Keybinds.spellUp.isPressed()) {
+                    PacketHandler.sendToServer(new PacketPressSpellKey(event.player, true));
+                } else if (Keybinds.spellDown.isPressed()) {
+                    PacketHandler.sendToServer(new PacketPressSpellKey(event.player, false));
+                }
+            }
+        }
     }
 
     @SubscribeEvent
@@ -98,8 +117,6 @@ public class CapabilityHandler {
             }
             //...
             SoulCaps.getCapForSoul(SoulInit.getSoulFromId(cap.getSoulId())).onTickEvent(event, event.player, cap);
-
-
         }
 
     }

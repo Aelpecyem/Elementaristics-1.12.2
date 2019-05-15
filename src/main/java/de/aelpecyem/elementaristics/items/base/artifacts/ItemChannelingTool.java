@@ -38,11 +38,7 @@ public class ItemChannelingTool extends ItemAspects {
         super.addInformation(stack, worldIn, tooltip, flagIn);
     }
 
-    @Override
-    public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
-        // MiscUtil.addEntityToBoundEntities(attacker, target);
-        return super.hitEntity(stack, target, attacker);
-    }
+
 
     @Override
     public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
@@ -62,8 +58,9 @@ public class ItemChannelingTool extends ItemAspects {
                 if (stack.getTagCompound().hasKey(X_KEY)) {
                     ((IHasBoundPosition) worldIn.getTileEntity(pos)).setPositionBoundTo(new BlockPos(stack.getTagCompound().getInteger(X_KEY),
                             stack.getTagCompound().getInteger(Y_KEY), stack.getTagCompound().getInteger(Z_KEY)));
-                    player.sendStatusMessage(new TextComponentString(I18n.format("message.position_set_for") + " " + stack.getTagCompound().getInteger(X_KEY) + " " +
-                            stack.getTagCompound().getInteger(Y_KEY) + " " + stack.getTagCompound().getInteger(Z_KEY)), true);
+                    if (worldIn.isRemote)
+                        player.sendStatusMessage(new TextComponentString(I18n.format("message.position_set_for") + " " + stack.getTagCompound().getInteger(X_KEY) + " " +
+                                stack.getTagCompound().getInteger(Y_KEY) + " " + stack.getTagCompound().getInteger(Z_KEY)), true);
                 }
             }
         }

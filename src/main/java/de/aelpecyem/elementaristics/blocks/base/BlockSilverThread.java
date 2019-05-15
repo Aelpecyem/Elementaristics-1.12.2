@@ -37,11 +37,9 @@ public class BlockSilverThread extends BlockBase {
                     @Override
                     public void placeEntity(World world, Entity entity, float yaw) {
                         if (playerIn.getBedLocation() != null) {
-                            System.out.println("TPing to bed");
                             entity.setPosition(playerIn.getBedLocation().getX(), playerIn.getBedLocation().getY(), playerIn.getBedLocation().getZ());
                         } else {
                             for (int i = 0; i < 250; i++) {
-                                System.out.println("TPing to a location");
                                 playerIn.attemptTeleport(playerIn.posX, 250 - i, playerIn.posZ);
                             }
                         }

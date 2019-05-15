@@ -11,6 +11,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
+import thaumcraft.common.lib.CommandThaumcraft;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -28,10 +29,12 @@ public class CommandElementaristics extends CommandBase {
         return "elementaristics <player> <knowsSoul:setMagan:setAscensionStage:setSoulId> <value:count>";
     }
 
+
     @Override
-    public boolean checkPermission(MinecraftServer server, ICommandSender sender) {
-        return true;
+    public int getRequiredPermissionLevel() {
+        return 2;
     }
+
 
     @Override
     public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException {
@@ -39,6 +42,7 @@ public class CommandElementaristics extends CommandBase {
             sender.sendMessage(new TextComponentString(TextFormatting.RED + "Usage: /" + getUsage(sender)));
             return;
         }
+
         String target = args[0];
         EntityPlayer player;
         boolean boolValue;
@@ -151,7 +155,6 @@ public class CommandElementaristics extends CommandBase {
             completitions.add("setAscensionStage");
             completitions.add("setSoulId");
         }else if (args.length == 3) {
-            System.out.println(args[1]);
             if (args[1].equalsIgnoreCase("knowsSoul")){
                 completitions.add("true");
                 completitions.add("false");

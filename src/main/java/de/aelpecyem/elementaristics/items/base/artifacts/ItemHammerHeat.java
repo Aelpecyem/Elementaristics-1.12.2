@@ -28,7 +28,7 @@ public class ItemHammerHeat extends ItemPickaxe implements IHasRiteUse, IHasMode
     protected String name;
 
     public ItemHammerHeat() {
-        super(ModMaterials.MATERIAL_HAMMER.setRepairItem(ModItems.head_hammer.getDefaultInstance()));
+        super(ModMaterials.MATERIAL_HAMMER);
         attackDamage = ModMaterials.MATERIAL_HAMMER.getAttackDamage();
         maxStackSize = 1;
         name = "hammer_heat";

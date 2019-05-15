@@ -17,6 +17,8 @@ public class CapabilitySync implements IMessage{
     private float maganRegenPerTick;
     private int ascensionStage;
     private int cultistCount;
+    private int ascensionRoute;
+    private int selectedSpell;
 
     public CapabilitySync(){
         this.soulId = 0;
@@ -27,6 +29,8 @@ public class CapabilitySync implements IMessage{
         this.maganRegenPerTick = 0;
         this.ascensionStage = 0;
         this.cultistCount = 0;
+        this.ascensionRoute = 0;
+        this.selectedSpell = 0;
     }
 
     public CapabilitySync(IPlayerCapabilities cap) {
@@ -38,6 +42,8 @@ public class CapabilitySync implements IMessage{
         this.maganRegenPerTick = cap.getMaganRegenPerTick();
         this.ascensionStage = cap.getPlayerAscensionStage();
         this.cultistCount = cap.getCultistCount();
+        this.ascensionRoute = cap.getAscensionRoute();
+        this.selectedSpell = cap.getSpellSlot();
     }
 
     @Override
@@ -50,6 +56,8 @@ public class CapabilitySync implements IMessage{
         buf.writeFloat(maganRegenPerTick);
         buf.writeInt(ascensionStage);
         buf.writeInt(cultistCount);
+        buf.writeInt(ascensionRoute);
+        buf.writeInt(selectedSpell);
     }
 
     @Override
@@ -62,6 +70,8 @@ public class CapabilitySync implements IMessage{
         maganRegenPerTick = buf.readFloat();
         ascensionStage = buf.readInt();
         cultistCount = buf.readInt();
+        ascensionRoute = buf.readInt();
+        selectedSpell = buf.readInt();
     }
 
     public static class Handler implements IMessageHandler<CapabilitySync, IMessage> {
@@ -78,6 +88,8 @@ public class CapabilitySync implements IMessage{
                 c.setMaganRegenPerTick(message.maganRegenPerTick);
                 c.setPlayerAscensionStage(message.ascensionStage);
                 c.setCultistCount(message.cultistCount);
+                c.setAscensionRoute(message.ascensionRoute);
+                c.setSpellSlot(message.selectedSpell);
             });
             return null;
         }

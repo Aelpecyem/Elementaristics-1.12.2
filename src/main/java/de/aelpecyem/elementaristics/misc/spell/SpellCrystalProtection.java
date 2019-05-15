@@ -11,7 +11,7 @@ import net.minecraft.world.World;
 
 public class SpellCrystalProtection extends SpellBase {
     public SpellCrystalProtection() {
-        super(new ResourceLocation(Elementaristics.MODID, "spell_crystal_protection"), 70, 100, 200, Aspects.crystal.getColor(), Aspects.earth.getColor(), SpellType.SELF);
+        super(new ResourceLocation(Elementaristics.MODID, "spell_crystal_protection"), 70, 100, 200, Aspects.crystal.getColor(), Aspects.earth.getColor(), SpellType.SELF, 1, 0);
     }
 
     @Override

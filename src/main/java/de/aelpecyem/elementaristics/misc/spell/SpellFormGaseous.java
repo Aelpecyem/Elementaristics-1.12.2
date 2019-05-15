@@ -12,7 +12,7 @@ import net.minecraft.world.World;
 
 public class SpellFormGaseous extends SpellBase {
     public SpellFormGaseous() {
-        super(new ResourceLocation(Elementaristics.MODID, "spell_form_gaseous"), 80, 200, 400, Aspects.air.getColor(), Aspects.air.getColor(), SpellType.SELF);
+        super(new ResourceLocation(Elementaristics.MODID, "spell_form_gaseous"), 80, 200, 400, Aspects.air.getColor(), Aspects.air.getColor(), SpellType.SELF, 2, 0);
     }
 
     @Override

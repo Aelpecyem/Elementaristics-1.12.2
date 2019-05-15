@@ -19,7 +19,7 @@ import java.util.List;
 
 public class SpellCounterspell extends SpellBase {
     public SpellCounterspell() {
-        super(new ResourceLocation(Elementaristics.MODID, "spell_counterspell"), 30, 10, 60, SoulInit.soulImmutable.getParticleColor(), Aspects.crystal.getColor(), SpellType.SELF);
+        super(new ResourceLocation(Elementaristics.MODID, "spell_counterspell"), 30, 10, 60, SoulInit.soulImmutable.getParticleColor(), Aspects.crystal.getColor(), SpellType.SELF, 3, 0);
     }
 
     @Override

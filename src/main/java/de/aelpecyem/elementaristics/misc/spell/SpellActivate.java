@@ -11,7 +11,7 @@ import net.minecraft.world.World;
 
 public class SpellActivate extends SpellBase {
     public SpellActivate() {
-        super(new ResourceLocation(Elementaristics.MODID, "spell_activate"), 20, 20, 40, Aspects.mana.getColor(), Aspects.earth.getColor(), SpellType.PROJECTILE);
+        super(new ResourceLocation(Elementaristics.MODID, "spell_activate"), 20, 20, 40, Aspects.mana.getColor(), Aspects.earth.getColor(), SpellType.PROJECTILE, 3, 0);
     }
 
     @Override

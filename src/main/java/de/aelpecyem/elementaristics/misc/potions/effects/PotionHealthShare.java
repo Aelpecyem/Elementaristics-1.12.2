@@ -4,6 +4,7 @@ import com.google.common.base.Predicate;
 import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.capability.player.IPlayerCapabilities;
 import de.aelpecyem.elementaristics.capability.player.PlayerCapProvider;
+import de.aelpecyem.elementaristics.misc.potions.PotionInit;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
@@ -62,7 +63,7 @@ public class PotionHealthShare extends PotionBase {
                     List<EntityLivingBase> livingsShared = world.getEntities(EntityLivingBase.class, new Predicate<EntityLivingBase>() {
                         @Override
                         public boolean apply(@Nullable EntityLivingBase input) {
-                            return input.getEntityData().hasUniqueId("sharing_uuid") && input.getEntityData().getUniqueId("sharing_uuid").equals(attacked.getUniqueID());
+                            return input.getEntityData().hasUniqueId("sharing_uuid") && input.getEntityData().getUniqueId("sharing_uuid").equals(attacked.getUniqueID()) && input.getPosition().getDistance(Math.round((float) attacked.posX), Math.round((float) attacked.posY), Math.round((float) attacked.posZ)) < 30 * (attacked.getActivePotionEffect(PotionInit.potionHealthShare).getAmplifier() + 1);
                         }
                     });
                     if (!livingsShared.isEmpty()) {

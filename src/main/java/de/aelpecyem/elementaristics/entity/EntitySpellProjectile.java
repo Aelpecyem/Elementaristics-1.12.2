@@ -1,5 +1,6 @@
 package de.aelpecyem.elementaristics.entity;
 
+import com.google.common.base.Predicate;
 import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.init.SpellInit;
 import de.aelpecyem.elementaristics.misc.spell.SpellBase;
@@ -18,6 +19,7 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 //yup, grabbed that code from https://github.com/zabi94/Covens-reborn/blob/master/src/main/java/com/covens/common/entity/EntitySpellCarrier.java
@@ -91,12 +93,18 @@ public class EntitySpellProjectile extends EntityThrowable {
         return SpellInit.spells.get(new ResourceLocation(this.getSpellName()));
     }
 
+
     private String getCasterUUID() {
         return this.getDataManager().get(CASTER);
     }
 
+    public void setThrower(EntityLivingBase thrower) {
+        this.thrower = thrower;
+    }
+
     @Override
     public void onUpdate() {
+
         if (getSpell() != null && getSpell().getType() == SpellBase.SpellType.WAVE)
             this.setNoGravity(true);
         if (getSpell() != null) {
@@ -149,11 +157,11 @@ public class EntitySpellProjectile extends EntityThrowable {
     protected void onImpact(RayTraceResult result) {
         if (!this.world.isRemote) {
             SpellBase spell = this.getSpell();
-            EntityLivingBase caster = this.getCaster();
+            //   EntityLivingBase caster = this.getCaster();
             if (spell != null) {
-                if ((result.typeOfHit != RayTraceResult.Type.ENTITY) || (result.entityHit != caster)) {
+                if ((result.typeOfHit != RayTraceResult.Type.ENTITY) || (result.entityHit != getThrower())) {
                     //  performEffect(result, caster, this.world);
-                    spell.affect(result, caster, this.world);
+                    spell.affect(result, getThrower(), this.world);
                 }
                 if ((result.typeOfHit == RayTraceResult.Type.BLOCK && world.getBlockState(result.getBlockPos()).getMaterial().blocksMovement())) {// && ((spell.getType() == EnumSpellType.PROJECTILE_BLOCK) || (spell.getType() == EnumSpellType.PROJECTILE_ALL))) {
                     this.setDead();
@@ -191,14 +199,11 @@ public class EntitySpellProjectile extends EntityThrowable {
     }
    /* public void performEffect(RayTraceResult result, EntityLivingBase caster, World world){
         EntityLivingBase target;
-
         if (result.entityHit instanceof EntityLivingBase){
             target = (EntityLivingBase) result.entityHit;
             target.attackEntityFrom(DamageSource.MAGIC, 100);
         }else {
             return;
         }
-
     }*/
-
 }

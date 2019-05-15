@@ -9,6 +9,7 @@ import de.aelpecyem.elementaristics.items.base.artifacts.ItemHeartStone;
 import de.aelpecyem.elementaristics.items.base.artifacts.rites.IHasRiteUse;
 import de.aelpecyem.elementaristics.items.base.artifacts.rites.IncantationBase;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;
+import de.aelpecyem.elementaristics.misc.potions.PotionInit;
 import de.aelpecyem.elementaristics.util.MiscUtil;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
@@ -42,14 +43,13 @@ public class RiteBinding extends RiteBase {
             }
             if (flag) {
                 if (!targets.isEmpty()) {
-                    if (targets.size() > 4) {
-                        for (int i = 0; i < 4; i++) {
-                            MiscUtil.addEntityToBoundEntities(player, targets.get(i));
-                        }
-                    } else if (!targets.isEmpty()) {
-                        for (EntityLivingBase base : targets) {
+                    for (EntityLivingBase base : targets) {
+                        if (base.getActivePotionEffects().contains(base.getActivePotionEffect(PotionInit.potionPotential))) {
                             MiscUtil.addEntityToBoundEntities(player, base);
+                            base.removePotionEffect(PotionInit.potionPotential);
+                            return;
                         }
+
                     }
                 }
             }
@@ -77,7 +77,7 @@ public class RiteBinding extends RiteBase {
         }
 
         for (EntityLivingBase living : targets) {
-            if (living != player) {
+            if (living != player && living.getActivePotionEffects().contains(living.getActivePotionEffect(PotionInit.potionPotential))) {
                 Elementaristics.proxy.generateGenericParticles(player, Aspects.earth.getColor(), 3, 100, 0, false, true);
             }
         }

@@ -7,6 +7,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.Vec3d;
 
 public class PlayerUtil {
     public static Block getBlockLookingAt(EntityPlayer player, double distance) {
@@ -23,6 +24,14 @@ public class PlayerUtil {
             return r.getBlockPos();
         }
         return BlockPos.ORIGIN;
+    }
+
+
+    public static RayTraceResult rayTrace(EntityPlayer player, double blockReachDistance, float partialTicks) {
+        Vec3d vec3d = player.getPositionEyes(partialTicks);
+        Vec3d vec3d1 = player.getLook(partialTicks);
+        Vec3d vec3d2 = vec3d.addVector(vec3d1.x * blockReachDistance, vec3d1.y * blockReachDistance, vec3d1.z * blockReachDistance);
+        return player.world.rayTraceBlocks(vec3d, vec3d2, false, false, true);
     }
 
 }

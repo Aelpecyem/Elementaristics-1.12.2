@@ -42,10 +42,9 @@ public class PotionFormGaseous extends PotionBase {
         float yaw = entityLivingBaseIn.rotationYaw;
         float pitch = entityLivingBaseIn.rotationPitch;
         float f = 0.4F + amplifier * 0.2F + (entityLivingBaseIn instanceof EntityPlayer ? ((EntityPlayer) entityLivingBaseIn).capabilities.getFlySpeed() : 0);
-        double motionX = (double) (-MathHelper.sin(yaw / 180.0F * (float) Math.PI) * MathHelper.cos(pitch / 180.0F * (float) Math.PI) * f);
-        double motionZ = (double) (MathHelper.cos(yaw / 180.0F * (float) Math.PI) * MathHelper.cos(pitch / 180.0F * (float) Math.PI) * f);
-        double motionY = (double) (-MathHelper.sin((pitch) / 180.0F * (float) Math.PI) * f);
-        entityLivingBaseIn.setVelocity(motionX, motionY, motionZ);
+        entityLivingBaseIn.motionX = (double) (-MathHelper.sin(yaw / 180.0F * (float) Math.PI) * MathHelper.cos(pitch / 180.0F * (float) Math.PI) * f);
+        entityLivingBaseIn.motionZ = (double) (MathHelper.cos(yaw / 180.0F * (float) Math.PI) * MathHelper.cos(pitch / 180.0F * (float) Math.PI) * f);
+        entityLivingBaseIn.motionY = (double) (-MathHelper.sin((pitch) / 180.0F * (float) Math.PI) * f);
 
         super.performEffect(entityLivingBaseIn, amplifier);
     }

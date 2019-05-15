@@ -11,7 +11,7 @@ import net.minecraft.world.World;
 
 public class SpellCleanse extends SpellBase {
     public SpellCleanse() {
-        super(new ResourceLocation(Elementaristics.MODID, "spell_cleanse"), 40, 20, 100, Aspects.water.getColor(), Aspects.body.getColor(), SpellType.SELF);
+        super(new ResourceLocation(Elementaristics.MODID, "spell_cleanse"), 40, 20, 100, Aspects.water.getColor(), Aspects.body.getColor(), SpellType.SELF, 1, 0);
     }
 
     @Override

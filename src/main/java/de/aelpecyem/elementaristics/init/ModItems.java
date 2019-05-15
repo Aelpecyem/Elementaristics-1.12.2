@@ -7,6 +7,7 @@ import de.aelpecyem.elementaristics.items.base.artifacts.rites.IncantationBase;
 import de.aelpecyem.elementaristics.items.base.artifacts.rites.ItemAspects;
 import de.aelpecyem.elementaristics.items.base.artifacts.rites.materials.*;
 import de.aelpecyem.elementaristics.items.base.bauble.ItemBaubleCharger;
+import de.aelpecyem.elementaristics.items.base.bauble.ItemWaterBody;
 import de.aelpecyem.elementaristics.items.base.burnable.ItemHerbBundle;
 import de.aelpecyem.elementaristics.items.base.burnable.ItemOpiumTincture;
 import de.aelpecyem.elementaristics.items.base.consumable.ItemBaseSeed;
@@ -109,6 +110,7 @@ public class ModItems {
 
     //Baubles
     public static ItemBase charger_soul;
+    public static ItemBase body_water;
 
    /* public static ItemArmor hood_cultist = new RobesCultist("hood_cultist",1, EntityEquipmentSlot.HEAD);
     public static ItemArmor garb_cultist = new RobesCultist("garb_cultist",1, EntityEquipmentSlot.CHEST);
@@ -152,12 +154,13 @@ public class ModItems {
         initRiteTools();
         initRiteMaterials();
         thaumagral_iron = new ItemThaumagral("thaumagral_iron", Item.ToolMaterial.IRON, 1, 1);
-        thaumagral_gold = new ItemThaumagral("thaumagral_gold", Item.ToolMaterial.GOLD, 0.8F, 1.5F);
+        thaumagral_gold = new ItemThaumagral("thaumagral_gold", Item.ToolMaterial.GOLD, 0.8F, 1.3F);
         thaumagral_diamond = new ItemThaumagral("thaumagral_diamond", Item.ToolMaterial.DIAMOND, 1.25F, 1.25F);
         thaumagral_stone = new ItemThaumagral("thaumagral_stone", Item.ToolMaterial.STONE, 1.2F, 0.8F);
         thaumagral_wood = new ItemThaumagral("thaumagral_wood", Item.ToolMaterial.WOOD, 1.5F, 0.5F);
 
         charger_soul = new ItemBaubleCharger();
+        body_water = new ItemWaterBody();
     }
 
     private static void initRiteMaterials() {

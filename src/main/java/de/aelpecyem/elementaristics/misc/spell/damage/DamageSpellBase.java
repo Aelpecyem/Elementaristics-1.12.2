@@ -12,13 +12,13 @@ public class DamageSpellBase extends SpellBase {
     float damage;
 
     public DamageSpellBase(ResourceLocation name, float maganCost, int cooldownTicks, int stuntTime, DamageSource type, float damage, int color) {
-        super(name, maganCost, cooldownTicks, stuntTime, color, color);
+        super(name, maganCost, cooldownTicks, stuntTime, color, color, 0, 0);
         this.damage = damage;
         this.damageType = type;
     }
 
     public DamageSpellBase(ResourceLocation name, float maganCost, int cooldownTicks, int stuntTime, DamageSource type, float damage, int color, int color2) {
-        super(name, maganCost, cooldownTicks, stuntTime, color, color2);
+        super(name, maganCost, cooldownTicks, stuntTime, color, color2, 0, 0);
         this.damage = damage;
         this.damageType = type;
     }

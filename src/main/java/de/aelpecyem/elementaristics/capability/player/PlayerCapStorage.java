@@ -19,7 +19,8 @@ public class PlayerCapStorage implements Capability.IStorage<IPlayerCapabilities
         compound.setFloat("maxMagan", instance.getMaxMagan());
         compound.setInteger("ascensionStage", instance.getPlayerAscensionStage());
         compound.setInteger("cultistCount", instance.getCultistCount());
-
+        compound.setInteger("spellSelected", instance.getAscensionRoute());
+        compound.setInteger("spellSlot", instance.getSpellSlot());
         return compound;
     }
 
@@ -35,6 +36,8 @@ public class PlayerCapStorage implements Capability.IStorage<IPlayerCapabilities
         instance.setMaganRegenPerTick(compound.getFloat("maganRegenPerSecond"));
         instance.setPlayerAscensionStage(compound.getInteger("ascensionStage"));
         instance.setCultistCount(compound.getInteger("cultistCount"));
+        instance.setAscensionRoute(compound.getInteger("spellSelected"));
+        instance.setSpellSlot(compound.getInteger("spellSlot"));
 
     }
 }

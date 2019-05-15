@@ -1,6 +1,8 @@
 package de.aelpecyem.elementaristics.capability.player;
 
+import de.aelpecyem.elementaristics.capability.player.souls.Soul;
 import de.aelpecyem.elementaristics.entity.EntityCultist;
+import de.aelpecyem.elementaristics.misc.spell.SpellBase;
 
 import java.util.List;
 
@@ -42,4 +44,18 @@ public interface IPlayerCapabilities {
     int getCultistCount();
 
     void setCultistCount(int count);
+
+    int getAscensionRoute();
+
+    void setAscensionRoute(int route);
+
+    Soul getSoul();
+
+    void setSpellSlot(int slot);
+
+    int getSpellSlot();
+
+    void cycleSlot(boolean down);
+
+    SpellBase getCurrentSpell();
 }

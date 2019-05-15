@@ -51,7 +51,7 @@ public class SpellInit {
         spell_attack_nullifying = new DamageSpellImmutable();
         spell_attack_dragon = new DamageSpellDragon();
         spell_attack_ancient = new DamageSpellAncient();
-        spell_attack_insane = new DamageSpellBase(new ResourceLocation(Elementaristics.MODID, "damage_insane"), 13, 30, 30, Elementaristics.DAMAGE_PSYCHIC, 5, SoulInit.soulUnstable.getParticleColor());
+        spell_attack_insane = new DamageSpellBase(new ResourceLocation(Elementaristics.MODID, "damage_insane"), 13, 30, 30, Elementaristics.DAMAGE_PSYCHIC, 5, SoulInit.soulUnstable.getParticleColor(), 6144);
 
         spell_form_gaseous = new SpellFormGaseous();
         spell_protection_crystal = new SpellCrystalProtection();

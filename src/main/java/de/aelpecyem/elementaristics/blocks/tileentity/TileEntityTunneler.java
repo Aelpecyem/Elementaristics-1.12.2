@@ -99,7 +99,8 @@ public class TileEntityTunneler extends TileEntity implements ITickable, IHasTic
             if (!inventory.getStackInSlot(0).isEmpty() && inventory.getStackInSlot(1).isItemEqual(new ItemStack(ModItems.matter_accelerating_module))) {
                 if (checkSurroundings()) {
                     tickCount++;
-                    doParticleShow();
+                    if (world.isRemote)
+                        doParticleShow();
                     if (tickCount >= 200) {
                         if (TunnelerRecipes.getRecipeForInput(inventory.getStackInSlot(0)) != null) {
                             List<ItemStack> missingItems = new ArrayList<>();

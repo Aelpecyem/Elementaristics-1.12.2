@@ -101,7 +101,8 @@ public class TileEntityGeneratorArcaneCombustion extends TileEntityEnergy implem
         } else {
             if (storage.getEnergyStored() < storage.getMaxEnergyStored()) {
                 this.storage.receiveEnergy(10, false);
-                doParticles();
+                if (world.isRemote)
+                    doParticles();
                 tickCount--;
             }
         }

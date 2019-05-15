@@ -56,24 +56,8 @@ public class SoulCapWater extends SoulCap {
     @Override
     public void onTickEvent(TickEvent.PlayerTickEvent event, EntityPlayer player, IPlayerCapabilities cap) {
         if (cap.getPlayerAscensionStage() > 0) {
-            if (player.world.rand.nextInt(1000) == 1) {
+            if (player.world.rand.nextInt(player.isInWater() ? 1000 : 3000) == 1) {
                 player.heal(cap.getPlayerAscensionStage() < 5 ? cap.getPlayerAscensionStage() * 2 : 10);
-            }
-            if (player.isInWater()) {
-                player.addPotionEffect(new PotionEffect(MobEffects.WATER_BREATHING, 30, 0, false, false));
-                if (!player.isSneaking()) {
-                    float yaw = player.rotationYaw;
-                    float pitch = player.rotationPitch;
-                    float f = 0.8F;
-                    double motionX = (double) (-MathHelper.sin(yaw / 180.0F * (float) Math.PI) * MathHelper.cos(pitch / 180.0F * (float) Math.PI) * f);
-                    double motionZ = (double) (MathHelper.cos(yaw / 180.0F * (float) Math.PI) * MathHelper.cos(pitch / 180.0F * (float) Math.PI) * f);
-                    double motionY = (double) (-MathHelper.sin((pitch) / 180.0F * (float) Math.PI) * f);
-                    player.setVelocity(motionX, motionY, motionZ);
-
-                    /*player.motionX = motionX;
-                    player.motionY = motionY;
-                    player.motionZ = motionZ;*/
-                }
             }
         }
 

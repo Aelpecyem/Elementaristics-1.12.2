@@ -85,7 +85,8 @@ public class TileEntityConcentrator extends TileEntity implements ITickable, IHa
         }
         if (!inventory.getStackInSlot(0).isEmpty() && !inventory.getStackInSlot(1).isEmpty()) {
             tickCount++;
-            doParticleShow();
+            if (world.isRemote)
+                doParticleShow();
 
             if (tickCount >= 300) {
                 if (ConcentratorRecipes.getRecipeForInput(inventory.getStackInSlot(0), inventory.getStackInSlot(1)) != null) {

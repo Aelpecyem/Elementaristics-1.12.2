@@ -119,6 +119,7 @@ item.powder_soul.name=Soul Powder
 item.matter_astral_body.name=Astral Body Matter
 item.seed_dormant.name=Dormant Seed
 item.tincture_arcane.name=Arcane Tincture
+item.body_water.name=Aquatic Body
 
 item.thaumagral_iron.name=Iron Thaumagral
 item.thaumagral_gold.name=Golden Thaumagral
@@ -297,6 +298,8 @@ tooltip.posX=Bound X-Coordinates:
 tooltip.posY=Bound Y-Coordinates:
 tooltip.posZ=Bound Z-Coordinates:
 
+tooltip.spell_current=Current Spell:
+tooltip.no_current=No current Spell
 #Rites
 rite.elementaristics:rite_knowledge.name=Enlightenment's Sighing
 rite.elementaristics:rite_feast.name=The Feast on the Soul

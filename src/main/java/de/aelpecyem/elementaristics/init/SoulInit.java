@@ -72,6 +72,8 @@ public class SoulInit {
         soulBalanced.addSpellToList(SpellInit.spell_attack_generic, 2);
         soulImmutable.addSpellToList(SpellInit.spell_attack_nullifying, 2);
         soulDragon.addSpellToList(SpellInit.spell_attack_dragon, 2);
+
+        soulAncient.addSpellToList(SpellInit.spell_attack_insane, 2);
         soulAncient.addSpellToList(SpellInit.spell_attack_ancient, 2);
 
         soulAir.addSpellToList(SpellInit.spell_form_gaseous, 2);

@@ -34,11 +34,11 @@ public class PotionCounterspell extends PotionBase {
             List<EntitySpellProjectile> projectiles = event.player.world.getEntitiesWithinAABB(EntitySpellProjectile.class, counterBox);
             if (!projectiles.isEmpty()) {
                 for (EntitySpellProjectile projectile : projectiles) {
-                    if (!(projectile.getCaster() == event.player)) {
+                    if (!(projectile.getThrower() == event.player)) {
                         projectile.motionX = -projectile.motionX;
                         projectile.motionY = -projectile.motionY;
                         projectile.motionZ = -projectile.motionZ;
-                        projectile.setCaster(event.player);
+                        projectile.setThrower(event.player);
                         Elementaristics.proxy.generateGenericParticles(event.player, SoulInit.soulMana.getParticleColor(), 3, 100, 0, false, true);
                         Elementaristics.proxy.generateGenericParticles(projectile, SoulInit.soulMana.getParticleColor(), 3, 200, 0, false, true);
                         event.player.removePotionEffect(this);

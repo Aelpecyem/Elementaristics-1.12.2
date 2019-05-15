@@ -193,18 +193,19 @@ public class EntitySilverThread extends EntityMob {
     @Override
     public void onLivingUpdate() {
         for (int i = 0; i < 2; i++) {
-            Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(
-                    world,
-                    posX + world.rand.nextFloat() * width
-                            * 2.0F - width,
-                    posY + 0.5D + world.rand.nextFloat()
-                            * height,
-                    posZ + world.rand.nextFloat() * width
-                            * 2.0F - width,
-                    0,
-                    0,
-                    0,
-                    12249855, 4, 120, 0, true, true, 0.4F));
+            if (world.isRemote)
+                Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(
+                        world,
+                        posX + world.rand.nextFloat() * width
+                                * 2.0F - width,
+                        posY + 0.5D + world.rand.nextFloat()
+                                * height,
+                        posZ + world.rand.nextFloat() * width
+                                * 2.0F - width,
+                        0,
+                        0,
+                        0,
+                        12249855, 4, 120, 0, true, true, 0.4F));
         }
         super.onLivingUpdate();
     }

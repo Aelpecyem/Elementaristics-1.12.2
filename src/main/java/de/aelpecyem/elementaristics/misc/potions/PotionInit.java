@@ -32,6 +32,8 @@ public class PotionInit {
     public static PotionEmotionLaughter laughter = new PotionEmotionLaughter(); //strongest regen
     public static PotionEmotionSilence silence = new PotionEmotionSilence(); //no regen at all
 
+    public static PotionBase potionPotential = new PotionBase("potential", false, 8747125, 15);
+
     @SubscribeEvent
     public static void registerPotions(RegistryEvent.Register<Potion> event) {
         event.getRegistry().register(potionIntoxicated);
@@ -51,5 +53,7 @@ public class PotionInit {
         event.getRegistry().register(fear);
         event.getRegistry().register(laughter);
         event.getRegistry().register(silence);
+
+        event.getRegistry().register(potionPotential);
     }
 }

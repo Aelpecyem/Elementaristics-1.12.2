@@ -11,7 +11,7 @@ import net.minecraft.world.World;
 
 public class SpellFireballCharge extends SpellBase {
     public SpellFireballCharge() {
-        super(new ResourceLocation(Elementaristics.MODID, "spell_fireball_charge"), 90, 200, 300, Aspects.fire.getColor(), Aspects.magan.getColor(), SpellType.SELF);
+        super(new ResourceLocation(Elementaristics.MODID, "spell_fireball_charge"), 90, 200, 300, Aspects.fire.getColor(), Aspects.magan.getColor(), SpellType.SELF, 2, 0);
     }
 
     @Override

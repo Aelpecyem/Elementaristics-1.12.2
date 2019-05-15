@@ -6,6 +6,7 @@ import de.aelpecyem.elementaristics.capability.player.IPlayerCapabilities;
 import de.aelpecyem.elementaristics.capability.player.PlayerCapProvider;
 import de.aelpecyem.elementaristics.config.Config;
 import de.aelpecyem.elementaristics.misc.potions.PotionInit;
+import de.aelpecyem.elementaristics.misc.potions.effects.emotion.PotionEmotion;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.command.AdvancementCommand;
@@ -22,9 +23,12 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ITeleporter;
 import net.minecraftforge.event.entity.player.SleepingTimeCheckEvent;
+import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import vazkii.patchouli.api.PatchouliAPI;
 
 import java.util.Iterator;
@@ -37,22 +41,22 @@ public class EventHandler {
                 if (event.player.getActivePotionEffect(PotionInit.potionIntoxicated).getAmplifier() == 1) {
                     if (!event.player.inventory.hasItemStack(PatchouliAPI.instance.getBookStack("elementaristics:liber_elementium"))) {
                         if (event.player.getActivePotionEffect(PotionInit.potionIntoxicated).getDuration() == 3000) {
-                            if (!event.player.world.isRemote) {
+                            if (event.player.world.isRemote) {
                                 event.player.sendStatusMessage(new TextComponentString(I18n.format("message.vision.1")), true);
                             }
                         }
                         if (event.player.getActivePotionEffect(PotionInit.potionIntoxicated).getDuration() == 2800) {
-                            if (!event.player.world.isRemote) {
+                            if (event.player.world.isRemote) {
                                 event.player.sendStatusMessage(new TextComponentString(I18n.format("message.vision.2")), true);
                             }
                         }
                         if (event.player.getActivePotionEffect(PotionInit.potionIntoxicated).getDuration() == 2600) {
-                            if (!event.player.world.isRemote) {
+                            if (event.player.world.isRemote) {
                                 event.player.sendStatusMessage(new TextComponentString(I18n.format("message.vision.3")), true);
                             }
                         }
                         if (event.player.getActivePotionEffect(PotionInit.potionIntoxicated).getDuration() == 2400) {
-                            if (!event.player.world.isRemote) {
+                            if (event.player.world.isRemote) {
                                 event.player.sendStatusMessage(new TextComponentString(I18n.format("message.vision.4")), true);
                             }
                             event.player.inventory.addItemStackToInventory(PatchouliAPI.instance.getBookStack("elementaristics:liber_elementium"));
@@ -62,14 +66,14 @@ public class EventHandler {
             }
         }
     }
-
     @SubscribeEvent
     public void stillSleeping(SleepingTimeCheckEvent event) {
         if (event.getEntityPlayer().hasCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null)) {
             IPlayerCapabilities cap = event.getEntityPlayer().getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null);
             if (cap.getPlayerAscensionStage() > 0) {
                 if (!event.getEntityPlayer().isPlayerFullyAsleep()) {
-                    if (event.getEntityPlayer().getSleepTimer() > 19 && event.getEntityPlayer().getSleepTimer() % 20 == 0) {
+                    int sleepTimer = ObfuscationReflectionHelper.getPrivateValue(EntityPlayer.class, event.getEntityPlayer(), "field_71076_b", "sleepTimer");
+                    if (sleepTimer > 19 && sleepTimer % 20 == 0) {
                         if (event.getEntityPlayer().getFoodStats().getFoodLevel() != 3) {
                             if (event.getEntityPlayer().getHealth() < event.getEntityPlayer().getMaxHealth()) {
                                 event.getEntityPlayer().heal(6);
@@ -92,7 +96,7 @@ public class EventHandler {
                     };
                     effects = event.getEntityPlayer().getActivePotionEffects().toArray(effects);
                     for (PotionEffect effect : effects) {
-                        if (effect.getPotion().isBadEffect()) {
+                        if (effect.getPotion().isBadEffect() && !(effect.getPotion() instanceof PotionEmotion)) {
                             event.getEntityPlayer().removePotionEffect(effect.getPotion());
                         }
                     }
@@ -122,6 +126,7 @@ public class EventHandler {
         }
     }
 
+    //todo, fix bed stuff for server, fix thaumagrals for server ooooof
     public void performMoodAnalysis(EntityPlayer player) {
         if (player.getActivePotionEffects().contains(player.getActivePotionEffect(PotionInit.potionIntoxicated))) {
             World world = player.getEntityWorld();

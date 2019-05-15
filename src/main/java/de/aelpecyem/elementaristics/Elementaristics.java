@@ -79,6 +79,7 @@ public final class Elementaristics {
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
+        proxy.preInit(event);
         LOGGER.info(NAME + " is loading");
         File directory = event.getModConfigurationDirectory();
         config = new Configuration(new File(directory.getPath(), "elementaristics.cfg"));
@@ -95,33 +96,27 @@ public final class Elementaristics {
         ModItems.init();
 
         ModEntities.init();
-        RenderHandler.registerEntityRenderers();
         BiomeInit.registerBiomes();
         ModDimensions.init();
-        proxy.registerRenderers();
 
         GameRegistry.registerWorldGenerator(new WorldGen(), 3);
         initOreDict();
-        Keybinds.register();
+        //Keybinds.register();
     }
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
-        Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new ItemColorHandler(), ModItems.essence);
+        proxy.init(event);
         if (Loader.isModLoaded("thaumcraft")) {
             ThaumcraftCompat.init();
         }
         GameRegistry.registerWorldGenerator(new WorldGenAnomaly(), 10);// todo gonna continue with this later on
         MinecraftForge.EVENT_BUS.register(new SpellInit());
-        MinecraftForge.EVENT_BUS.register(new PotionInit());
-        MinecraftForge.EVENT_BUS.register(new HUDRenderHandler());
         MinecraftForge.EVENT_BUS.register(new CapabilityHandler());
         MinecraftForge.EVENT_BUS.register(new EventHandler());
         MinecraftForge.EVENT_BUS.register(new LootTableEventHandler());
 
-        MinecraftForge.EVENT_BUS.register(new ClientTickHandler());
         InitRecipes.init();
         RiteInit.init();
-        proxy.registerKeyBinds();
         NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
 
 

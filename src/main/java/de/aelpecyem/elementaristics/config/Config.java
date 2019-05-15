@@ -7,20 +7,20 @@ import org.apache.logging.log4j.Level;
 public class Config {
 
     private static final String CATEGORY_HUD = "hud";
-    private static final String CATEGORY_SOULS = "souls";
+    private static final String CATEGORY_COMPAT = "souls";
     private static final String CATEGORY_DIM = "dimensions";
     private static final String CATEGORY_MISC = "misc";
     //values- hud
     public static boolean useNumbersInsteadOfBar = false;
-    //values- souls
-    public static boolean normalGameplayBuffs = true;
+    //values- compat
+    public static boolean useTcCompat = true;
     //values- dimensions
     public static int mindDimensionId = 1103;
     //values- misc
     public static int silverThreadId = 1103;
     public static int cultistId = 77766;
     public static int protoplasmId = 2602;
-    public static int spellId = 14145;
+    public static int spellId = 7251;
 
     public static void readConfig() {
         Configuration cfg = Elementaristics.config;
@@ -28,7 +28,8 @@ public class Config {
             cfg.load();
             initDimConfig(cfg);
             initHudConfig(cfg);
-            initSoulConfig(cfg);
+            initCompatConfig(cfg);
+            initMiscConfig(cfg);
         } catch (Exception e1) {
             Elementaristics.LOGGER.log(Level.ERROR, "Problem loading config file!", e1);
         } finally {
@@ -44,15 +45,13 @@ public class Config {
         useNumbersInsteadOfBar = cfg.getBoolean("useNumbersInsteadOfBar", CATEGORY_HUD, false, "Determines whether a bar or numbers should be shown for the Magan Hud");
     }
 
-    private static void initSoulConfig(Configuration cfg) {
-        cfg.addCustomCategoryComment(CATEGORY_SOULS, "Configuration on Elementaristics' Soul Mechanic");
-        // cfg.getBoolean() will get the value in the config if it is already specified there. If not it will create the value.
-        normalGameplayBuffs = cfg.getBoolean("useGamplayBuffs", CATEGORY_SOULS, normalGameplayBuffs, "Determines whether players get gameplay buffs for a certain soul type");
+    private static void initCompatConfig(Configuration cfg) {
+        cfg.addCustomCategoryComment(CATEGORY_COMPAT, "Configuration on Elementaristics' cross-compat");
+        useTcCompat = cfg.getBoolean("useTcCompat", CATEGORY_COMPAT, useTcCompat, "Determines whether Elementaristics should add its own section in Thaumcraft or not");
     }
 
     private static void initDimConfig(Configuration cfg) {
         cfg.addCustomCategoryComment(CATEGORY_DIM, "Configuration on Elementaristics' dimensions");
-        // cfg.getBoolean() will get the value in the config if it is already specified there. If not it will create the value.
         mindDimensionId = cfg.getInt("mindDimensionId", CATEGORY_DIM, mindDimensionId, -10000, 10000, "Determines the dimension id of 'The Mind'");
     }
 
