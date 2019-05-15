@@ -74,11 +74,11 @@ public class HUDRenderHandler {
                 for (int i = 0; i < spells.size(); i++) {
                     SpellBase spellIn = spells.get(i);
                     ResourceLocation TEX = new ResourceLocation(Elementaristics.MODID, "textures/spells/" + "spells" + ".png");
-
                     int posX = event.getResolution().getScaledWidth() / 2 - 88; // + 10;
                     int poxY = event.getResolution().getScaledHeight() - 19;
-                    drawColoredTexturedModalRect(posX + (i * 20), poxY, 16 * spellIn.getIndexX(), 16 * spellIn.getIndexY(), 16, 16, i == cap.getSpellSlot() ? MiscUtil.convertIntToColor(spellIn.getColor()) : MiscUtil.blend(MiscUtil.convertIntToColor(spellIn.getColor()), Color.DARK_GRAY, 0.4, 0.6), i == cap.getSpellSlot() ? 0.8F : 0.4F, TEX);
-                    //TODO add the nice fancy texture thingy yay
+                    if (cap.getSoul().isSpellUsable(spellIn, cap))
+                        drawColoredTexturedModalRect(posX + (i * 20), poxY, 16 * spellIn.getIndexX(), 16 * spellIn.getIndexY(), 16, 16, i == cap.getSpellSlot() ? MiscUtil.convertIntToColor(spellIn.getColor()) : MiscUtil.blend(MiscUtil.convertIntToColor(spellIn.getColor()), Color.DARK_GRAY, 0.4, 0.6), i == cap.getSpellSlot() ? 0.8F : 0.4F, TEX);
+
                 }
                 if (cap.getCurrentSpell() != null) {
                     int posX = 5;// ((int) Math.round(I18n.format(cap.getCurrentSpell().getName().toString()).length() * 1.5)) - 50;

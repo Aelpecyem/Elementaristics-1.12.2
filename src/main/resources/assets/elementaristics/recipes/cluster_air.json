@@ -10,10 +10,10 @@
       "ore": "listAllPlant"
     },
     {
-      "item": "elementaristics:bubble_helium"
+      "item": "minecraft:reeds"
     },
     {
-      "item": "elementaristics:bubble_hydrogen"
+      "item": "minecraft:feather"
     }
   ],
   "result": {

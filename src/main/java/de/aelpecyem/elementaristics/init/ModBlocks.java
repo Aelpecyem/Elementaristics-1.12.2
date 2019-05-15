@@ -36,10 +36,6 @@ public class ModBlocks {
     //"DECOR"
     public static BlockBase stone_enriched;
     public static BlockPedestal pedestal;
-    //ORES
-    public static OreDroppingBase ore_helium;
-    public static OreDroppingBase ore_hydrogen;
-    public static OreDroppingBase ore_prismarine;
 
     //MATTER MANIPULATION
     public static BlockPurifier purifier;
@@ -76,9 +72,6 @@ public class ModBlocks {
     public static void init() {
         crop_opium = new CropOpium();
         stone_enriched = new BlockBase(Material.ROCK, "stone_enriched");
-        ore_helium = new OreDroppingBase("ore_helium", ModItems.helium_bubble, 1, 2);
-        ore_hydrogen = new OreDroppingBase("ore_hydrogen", ModItems.hydrogen_bubble, 1, 2);
-        ore_prismarine = new OreDroppingBase("ore_prismarine", Items.PRISMARINE_SHARD, 1, 2);
         pedestal = new BlockPedestal();
         purifier = new BlockPurifier();
         concentrator = new BlockConcentrator();

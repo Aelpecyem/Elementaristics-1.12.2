@@ -31,8 +31,6 @@ public class ModItems {
 
     public static List<Item> ITEMS = new ArrayList<>();
 
-    public static ItemBase helium_bubble = new ItemBase("bubble_helium");
-    public static ItemBase hydrogen_bubble = new ItemBase("bubble_hydrogen");
     public static ItemBase bundle_herbs;
     public static ItemBase opium_tincture;
     public static ItemDrinkBase tincture_arcane;

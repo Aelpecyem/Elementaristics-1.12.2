@@ -2,8 +2,10 @@ package de.aelpecyem.elementaristics.world;
 
 import de.aelpecyem.elementaristics.init.ModBlocks;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Biomes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraft.world.gen.feature.WorldGenMinable;
@@ -21,9 +23,7 @@ public class WorldGen implements IWorldGenerator {
 
     //TODO adjust values
     private void generateOverworld(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
-        generateOre(ModBlocks.ore_prismarine.getDefaultState(), world, random, chunkX * 16, chunkZ * 16, 15, 40, random.nextInt(3) + 2, 4);
-        generateOre(ModBlocks.ore_hydrogen.getDefaultState(), world, random, chunkX * 16, chunkZ * 16, 10, 30, 3, random.nextInt(2) + 4);
-        generateOre(ModBlocks.ore_helium.getDefaultState(), world, random, chunkX * 16, chunkZ * 16, 10, 30, 3, random.nextInt(2) + 4);
+
     }
 
     //chances = veins per chunk

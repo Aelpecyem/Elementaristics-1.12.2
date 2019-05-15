@@ -10,7 +10,8 @@
       "ore": "listAllMeat"
     },
     {
-      "item": "minecraft:prismarine_shard"
+      "item": "minecraft:dye",
+      "data": 4
     },
     {
       "item": "minecraft:clay"
