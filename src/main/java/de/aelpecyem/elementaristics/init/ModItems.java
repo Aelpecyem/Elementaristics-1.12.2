@@ -7,6 +7,7 @@ import de.aelpecyem.elementaristics.items.base.artifacts.rites.IncantationBase;
 import de.aelpecyem.elementaristics.items.base.artifacts.rites.ItemAspects;
 import de.aelpecyem.elementaristics.items.base.artifacts.rites.materials.*;
 import de.aelpecyem.elementaristics.items.base.bauble.ItemBaubleCharger;
+import de.aelpecyem.elementaristics.items.base.bauble.ItemKeyWinged;
 import de.aelpecyem.elementaristics.items.base.bauble.ItemWaterBody;
 import de.aelpecyem.elementaristics.items.base.burnable.ItemHerbBundle;
 import de.aelpecyem.elementaristics.items.base.burnable.ItemOpiumTincture;
@@ -109,6 +110,7 @@ public class ModItems {
     //Baubles
     public static ItemBase charger_soul;
     public static ItemBase body_water;
+    public static ItemBase key_winged;
 
    /* public static ItemArmor hood_cultist = new RobesCultist("hood_cultist",1, EntityEquipmentSlot.HEAD);
     public static ItemArmor garb_cultist = new RobesCultist("garb_cultist",1, EntityEquipmentSlot.CHEST);
@@ -159,6 +161,7 @@ public class ModItems {
 
         charger_soul = new ItemBaubleCharger();
         body_water = new ItemWaterBody();
+        key_winged = new ItemKeyWinged();
     }
 
     private static void initRiteMaterials() {

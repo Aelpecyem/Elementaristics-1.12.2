@@ -47,6 +47,7 @@ public class InitRecipes {
         ForgeRecipes.addRecipe(new ForgeRecipe(new ResourceLocation(Elementaristics.MODID, "lightning_tangible"), Ingredient.fromStacks(new ItemStack(ModItems.essence, 1, Aspects.electricity.getId())), Ingredient.fromItem(Items.IRON_INGOT), Ingredient.fromStacks(new ItemStack(Items.IRON_NUGGET)), Ingredient.fromStacks(new ItemStack(Items.IRON_NUGGET)), Ingredient.fromStacks(new ItemStack(ModItems.essence, 1, Aspects.electricity.getId())), new ItemStack(ModItems.lightning_tangible)));
 
         ForgeRecipes.addRecipe(new ForgeRecipe(new ResourceLocation(Elementaristics.MODID, "tool_channeling"), Ingredient.fromStacks(new ItemStack(ModItems.essence, 1, Aspects.electricity.getId())), Ingredient.fromItem(Items.IRON_INGOT), Ingredient.fromStacks(new ItemStack(ModItems.gem_triangular)), Ingredient.fromStacks(new ItemStack(Items.IRON_INGOT)), Ingredient.fromStacks(new ItemStack(ModItems.lightning_tangible)), new ItemStack(ModItems.tool_channeling)));
+        ForgeRecipes.addRecipe(new ForgeRecipe(new ResourceLocation(Elementaristics.MODID, "key_winged"), Ingredient.fromStacks(new ItemStack(ModItems.essence, 1, Aspects.air.getId())), Ingredient.fromItem(Items.IRON_INGOT), Ingredient.fromStacks(new ItemStack(ModItems.gem_triangular)), Ingredient.fromStacks(new ItemStack(Items.IRON_INGOT)), Ingredient.fromStacks(new ItemStack(ModItems.motion_captured)), new ItemStack(ModItems.key_winged)));
 
     }
 

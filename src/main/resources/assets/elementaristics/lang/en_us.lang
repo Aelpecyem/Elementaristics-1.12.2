@@ -119,7 +119,6 @@ item.powder_soul.name=Soul Powder
 item.matter_astral_body.name=Astral Body Matter
 item.seed_dormant.name=Dormant Seed
 item.tincture_arcane.name=Arcane Tincture
-item.body_water.name=Aquatic Body
 
 item.thaumagral_iron.name=Iron Thaumagral
 item.thaumagral_gold.name=Golden Thaumagral
@@ -129,8 +128,8 @@ item.thaumagral_diamond.name=Diamond Thaumagral
 
 item.charger_soul.name=Maganatic Accumulator
 item.tool_channeling.name=Channeling Tool
-
-
+item.body_water.name=Aquatic Body
+item.key_winged.name=Winged Key
 
 #Essences (Items and Blocks)
 item.essence_air.name=Air Essence
@@ -293,6 +292,7 @@ tooltip.wine_redmost.name=Will you ever know what you have done after drinking t
 tooltip.flesh_lamb.name=Wolves shall devour the Lamb
 
 tooltip.charge=Current Power:
+tooltip.magan=Current Magan:
 
 tooltip.posX=Bound X-Coordinates:
 tooltip.posY=Bound Y-Coordinates:

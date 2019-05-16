@@ -43,7 +43,7 @@ public class ItemThaumagral extends ItemSword implements IHasModel {
 
             if (spellBase != null && cap.getSoul().isSpellUsable(spellBase, cap)) {
                 if (cap.getMagan() >= (spellBase.getMaganCost() / SoulInit.getSoulFromId(cap.getSoulId()).getCastingEfficiency()) / castingEfficiency) {
-                    MaganUtil.drainMaganFromPlayer(playerIn, spellBase.getMaganCost() / SoulInit.getSoulFromId(cap.getSoulId()).getCastingEfficiency(), spellBase.getStuntTime(), true);
+                    MaganUtil.drainMaganFromPlayer(playerIn, spellBase.getMaganCost() / SoulInit.getSoulFromId(cap.getSoulId()).getCastingEfficiency() / castingEfficiency, spellBase.getStuntTime(), true);
 
                     if (spellBase.getType() == SpellBase.SpellType.EDEMA) {
                         for (int i = 0; i < 10; i++) {

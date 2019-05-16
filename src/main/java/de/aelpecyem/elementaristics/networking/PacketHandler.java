@@ -2,6 +2,7 @@ package de.aelpecyem.elementaristics.networking;
 
 import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.networking.cap.CapabilitySync;
+import de.aelpecyem.elementaristics.networking.player.PacketPressSpace;
 import de.aelpecyem.elementaristics.networking.player.PacketPressSpellKey;
 import de.aelpecyem.elementaristics.networking.tileentity.altar.PacketRequestUpdateAltar;
 import de.aelpecyem.elementaristics.networking.tileentity.altar.PacketUpdateAltar;
@@ -58,6 +59,9 @@ public class PacketHandler {
 
         network.registerMessage(new PacketPressSpellKey.Handler(), PacketPressSpellKey.class, next(), Side.SERVER);
         network.registerMessage(new PacketPressSpellKey.Handler(), PacketPressSpellKey.class, next(), Side.CLIENT);
+
+        network.registerMessage(new PacketPressSpace.Handler(), PacketPressSpace.class, next(), Side.SERVER);
+        network.registerMessage(new PacketPressSpace.Handler(), PacketPressSpace.class, next(), Side.CLIENT);
 
     }
 
