@@ -6,7 +6,9 @@ import de.aelpecyem.elementaristics.capability.player.PlayerCapProvider;
 import de.aelpecyem.elementaristics.init.ModItems;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;
 import io.netty.buffer.ByteBuf;
+import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
@@ -25,8 +27,12 @@ public class PacketPressSpace implements IMessage {
 
     }
 
-    public PacketPressSpace(EntityPlayer player) {
-        this.playerUUID = player.getUniqueID().toString();
+    public PacketPressSpace(EntityPlayer uuid) {
+        this.playerUUID = uuid.getUniqueID().toString();
+    }
+
+    public PacketPressSpace(UUID uuid) {
+        this.playerUUID = uuid.toString();
     }
 
     @Override
@@ -43,14 +49,16 @@ public class PacketPressSpace implements IMessage {
     public static class Handler implements IMessageHandler<PacketPressSpace, IMessage> {
         @Override
         public IMessage onMessage(PacketPressSpace message, MessageContext ctx) {
+            System.out.println("Packet sent");
             Elementaristics.proxy.getThreadListener(ctx).addScheduledTask(() -> {
                 if (Elementaristics.proxy.getPlayer(ctx) != null) {
-                    EntityPlayer player = (EntityPlayer) Elementaristics.proxy.getPlayer(ctx).world.getPlayerEntityByUUID(UUID.fromString(message.playerUUID));
-                    if (player.hasCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null) && player.isAirBorne) {
+                    System.out.println("Packet handled?");
+                    EntityPlayer player = Elementaristics.proxy.getPlayer(ctx).world.getPlayerEntityByUUID(UUID.fromString(message.playerUUID));
+                    // player.setDead();
+                    // if (player.isAirBorne) {
                         ItemStack stack = BaublesApi.getBaublesHandler(player).getStackInSlot(BaublesApi.isBaubleEquipped(player, ModItems.key_winged));
                         stack.getTagCompound().setFloat("charge", stack.getTagCompound().getFloat("charge") - 1F);
-
-                        player.motionY = 0;
+                       /* player.motionY = 0;
                         player.fallDistance -= 10;
                         player.jumpMovementFactor += 0.1;
                         float yaw = player.rotationYaw;
@@ -61,7 +69,7 @@ public class PacketPressSpace implements IMessage {
                             player.motionZ = (double) (MathHelper.cos(yaw / 180.0F * (float) Math.PI) * MathHelper.cos(pitch / 180.0F * (float) Math.PI) * f);
                         }
                         player.motionY = player.motionY + (double) (-MathHelper.sin((pitch) / 180.0F * (float) Math.PI) * f);
-                    }
+                 //   }*/
                 }
             });
 

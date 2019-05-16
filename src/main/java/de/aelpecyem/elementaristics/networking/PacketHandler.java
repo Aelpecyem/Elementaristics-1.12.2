@@ -58,7 +58,7 @@ public class PacketHandler {
         network.registerMessage(new CapabilitySync.Handler(), CapabilitySync.class, next(), Side.CLIENT);
 
         network.registerMessage(new PacketPressSpellKey.Handler(), PacketPressSpellKey.class, next(), Side.SERVER);
-        network.registerMessage(new PacketPressSpellKey.Handler(), PacketPressSpellKey.class, next(), Side.CLIENT);
+        // network.registerMessage(new PacketPressSpellKey.Handler(), PacketPressSpellKey.class, next(), Side.CLIENT);
 
         network.registerMessage(new PacketPressSpace.Handler(), PacketPressSpace.class, next(), Side.SERVER);
         network.registerMessage(new PacketPressSpace.Handler(), PacketPressSpace.class, next(), Side.CLIENT);

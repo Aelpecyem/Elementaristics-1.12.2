@@ -13,6 +13,7 @@ import de.aelpecyem.elementaristics.items.base.ItemBase;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;
 import de.aelpecyem.elementaristics.networking.PacketHandler;
 import de.aelpecyem.elementaristics.networking.player.PacketPressSpace;
+import de.aelpecyem.elementaristics.networking.player.PacketPressSpellKey;
 import de.aelpecyem.elementaristics.util.MaganUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
@@ -76,15 +77,31 @@ public class ItemKeyWinged extends ItemBase implements IBauble {
     @Override
     public void onWornTick(ItemStack itemstack, EntityLivingBase player) {
         player.fallDistance *= 0.8F;
-        if (itemstack.hasTagCompound() && itemstack.getTagCompound().hasKey(CHARGE_KEY) && player.hasCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null)) {
+        if (itemstack.hasTagCompound() && itemstack.getTagCompound().hasKey(CHARGE_KEY)) {
             if (itemstack.getTagCompound().getFloat(CHARGE_KEY) < 10 && player.onGround) {
                 itemstack.getTagCompound().setFloat(CHARGE_KEY, 10);
             }
+            System.out.println(itemstack.getTagCompound().getFloat(CHARGE_KEY));
             if (itemstack.getTagCompound().getFloat(CHARGE_KEY) > 0.1F) {
                 if (player.world.isRemote) {
                     if (GameSettings.isKeyDown(Minecraft.getMinecraft().gameSettings.keyBindJump) && Minecraft.getMinecraft().currentScreen == null) {
-                        if (player instanceof EntityPlayer)
-                            PacketHandler.sendToAll(new PacketPressSpace((EntityPlayer) player));
+                        player.motionY = 0;
+                        player.fallDistance -= 10;
+                        player.jumpMovementFactor += 0.1;
+                        float yaw = player.rotationYaw;
+                        float pitch = -36.000065F;
+                        float f = 0.8F;// + (entityLivingBaseIn instanceof EntityPlayer ? ((EntityPlayer) entityLivingBaseIn).capabilities.getFlySpeed() : 0);
+                        double motionY, motionX, motionZ;
+                        if (player.isSneaking()) {
+                            motionX = (double) (-MathHelper.sin(yaw / 180.0F * (float) Math.PI) * MathHelper.cos(pitch / 180.0F * (float) Math.PI) * f);
+                            motionZ = (double) (MathHelper.cos(yaw / 180.0F * (float) Math.PI) * MathHelper.cos(pitch / 180.0F * (float) Math.PI) * f);
+                        } else {
+                            motionX = player.motionX;
+                            motionZ = player.motionZ;
+                        }
+                        motionY = player.motionY + (double) (-MathHelper.sin((pitch) / 180.0F * (float) Math.PI) * f);
+                        player.setVelocity(motionX, motionY, motionZ);
+                        itemstack.getTagCompound().setFloat(CHARGE_KEY, itemstack.getTagCompound().getFloat(CHARGE_KEY) - 1F);
                         Elementaristics.proxy.generateGenericParticles(player, Aspects.air.getColor(), 1, 40, 0, true, true);
                     }
                 }
@@ -95,5 +112,6 @@ public class ItemKeyWinged extends ItemBase implements IBauble {
             itemstack.getTagCompound().setInteger(CHARGE_KEY, 0);
         }
     }
+
 
 }

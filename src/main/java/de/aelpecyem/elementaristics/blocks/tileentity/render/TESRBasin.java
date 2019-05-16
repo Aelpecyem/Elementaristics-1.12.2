@@ -13,6 +13,7 @@ import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.EnumSkyBlock;
 import net.minecraftforge.client.ForgeHooksClient;
 import org.lwjgl.opengl.GL11;
 
@@ -51,12 +52,7 @@ public class TESRBasin extends TileEntitySpecialRenderer<TileEntityInfusionBasin
 
             buffer.setTranslation(x, y, z);
 
-            //bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
-            // TextureAtlasSprite still = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(FluidRegistry.WATER.getStill().toString());
-            // TextureAtlasSprite still = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(TEXTURE.toString());
-
             buffer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX_COLOR);
-            //1-1;2-1;2-2;1;2
 
             buffer.pos(1F / 16F, te.fillCount / 4F * 0.7 + 0.1, 15F / 16F).tex(1, 1).color(getWaterColor(te).getRed(), getWaterColor(te).getGreen(), getWaterColor(te).getBlue(), getWaterColor(te).getAlpha()).endVertex();
             buffer.pos(15F / 16F, te.fillCount / 4F * 0.7 + 0.1, 15F / 16F).tex(2, 1).color(getWaterColor(te).getRed(), getWaterColor(te).getGreen(), getWaterColor(te).getBlue(), getWaterColor(te).getAlpha()).endVertex();

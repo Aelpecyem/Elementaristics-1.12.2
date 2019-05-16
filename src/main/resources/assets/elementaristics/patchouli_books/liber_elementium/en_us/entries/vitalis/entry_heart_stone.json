@@ -1,7 +1,7 @@
 {
   "name": "The Heart of Stone",
   "icon": "elementaristics:heart_stone",
-  "category": "vitalis",
+  "category": "vis_vitalis",
   "advancement": "elementaristics:progress_forging",
   "pages": [
     {

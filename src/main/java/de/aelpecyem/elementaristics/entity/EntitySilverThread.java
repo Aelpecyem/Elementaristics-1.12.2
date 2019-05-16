@@ -74,19 +74,6 @@ public class EntitySilverThread extends EntityMob {
                         player.sendStatusMessage(new TextComponentString(ChatFormatting.GOLD + I18n.format("message.ascension_1.standard")), false);
                 }
             }
-        }else if (player != null) {
-            if(player.hasCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null)){
-                IPlayerCapabilities cap = player.getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null);
-                if (cap.knowsSoul()) {
-                    if (cap.getPlayerAscensionStage() < 1){
-                        cap.setPlayerAscensionStage(1);
-                        if (world.isRemote)
-                            player.sendStatusMessage(new TextComponentString(ChatFormatting.GOLD + I18n.format("message.ascension_1.standard")), false);
-                    }
-
-                }
-            }
-
         }
         super.onDeath(cause);
     }

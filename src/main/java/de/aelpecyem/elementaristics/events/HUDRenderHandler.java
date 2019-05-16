@@ -176,7 +176,6 @@ public class HUDRenderHandler {
                     }
                     //   mc.renderEngine.bindTexture(TEXTURE);
                     drawColoredTexturedModalRect(posX, poxY, 0, 0, Math.round(186 * mult), 9, color, 1, TEXTURE);
-
                 }
             }
         }
@@ -198,5 +197,6 @@ public class HUDRenderHandler {
         tessellator.draw();
         Minecraft.getMinecraft().getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
     }
+
 
 }

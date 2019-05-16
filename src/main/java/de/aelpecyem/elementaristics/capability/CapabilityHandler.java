@@ -5,11 +5,14 @@ import de.aelpecyem.elementaristics.capability.player.IPlayerCapabilities;
 import de.aelpecyem.elementaristics.capability.player.PlayerCapProvider;
 import de.aelpecyem.elementaristics.capability.player.souls.soulCaps.SoulCaps;
 import de.aelpecyem.elementaristics.init.SoulInit;
+import de.aelpecyem.elementaristics.misc.elements.Aspects;
 import de.aelpecyem.elementaristics.networking.PacketHandler;
 import de.aelpecyem.elementaristics.networking.cap.CapabilitySync;
+import de.aelpecyem.elementaristics.networking.player.PacketPressSpace;
 import de.aelpecyem.elementaristics.networking.player.PacketPressSpellKey;
 import de.aelpecyem.elementaristics.util.Keybinds;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.settings.GameSettings;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.ResourceLocation;
@@ -100,6 +103,7 @@ public class CapabilityHandler {
                     PacketHandler.sendToServer(new PacketPressSpellKey(event.player, false));
                 }
             }
+
         }
     }
 

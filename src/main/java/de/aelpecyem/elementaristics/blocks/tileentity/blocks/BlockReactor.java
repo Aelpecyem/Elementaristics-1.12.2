@@ -116,10 +116,10 @@ public class BlockReactor extends BlockTileEntity<TileEntityReactor> {
                 InventoryUtil.drawItemFromInventoryBackasswards(tile, tile.inventory, playerIn);
             } else {
                 if (heldItem.getItem() instanceof ItemFlintAndSteel) {
-                    if (!tile.inventory.getStackInSlot(0).isEmpty() && !tile.inventory.getStackInSlot(1).isEmpty() && !tile.crafting) {
-                        if (!tile.crafting) {
+                    if (!tile.inventory.getStackInSlot(0).isEmpty() && !tile.inventory.getStackInSlot(1).isEmpty()) {
+                        if (tile.tickCount < 1) {
                             if (MaganUtil.drainMaganFromClosestPlayer(pos, worldIn, 4, 20, 20, true)) {
-                                tile.crafting = true;
+                                tile.tickCount = 1;
                             }
                         }
                     }
