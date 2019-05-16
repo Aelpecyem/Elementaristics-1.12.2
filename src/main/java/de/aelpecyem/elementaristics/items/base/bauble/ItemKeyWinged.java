@@ -50,7 +50,6 @@ public class ItemKeyWinged extends ItemBase implements IBauble {
     public ItemKeyWinged() {
         super("key_winged");
         maxStackSize = 1;
-        MinecraftForge.EVENT_BUS.register(this);
     }
 
     @SideOnly(Side.CLIENT)
@@ -59,29 +58,20 @@ public class ItemKeyWinged extends ItemBase implements IBauble {
         super.addInformation(stack, worldIn, tooltip, flagIn);
     }
 
-    //TODO drain magan on use
     @Override
     public BaubleType getBaubleType(ItemStack itemStack) {
-        return BaubleType.TRINKET;
+        return BaubleType.CHARM;
     }
 
-    @SubscribeEvent
-    public void onPlayerFall(LivingFallEvent event) {
-        if (event.getEntityLiving() instanceof EntityPlayer) {
-            if (BaublesApi.isBaubleEquipped((EntityPlayer) event.getEntityLiving(), ModItems.key_winged) > -1) {
-                event.setDamageMultiplier(0.5F);
-            }
-        }
-    }
+
 
     @Override
     public void onWornTick(ItemStack itemstack, EntityLivingBase player) {
-        player.fallDistance *= 0.8F;
+        player.fallDistance *= 0.9F;
         if (itemstack.hasTagCompound() && itemstack.getTagCompound().hasKey(CHARGE_KEY)) {
             if (itemstack.getTagCompound().getFloat(CHARGE_KEY) < 10 && player.onGround) {
                 itemstack.getTagCompound().setFloat(CHARGE_KEY, 10);
             }
-            System.out.println(itemstack.getTagCompound().getFloat(CHARGE_KEY));
             if (itemstack.getTagCompound().getFloat(CHARGE_KEY) > 0.1F) {
                 if (player.world.isRemote) {
                     if (GameSettings.isKeyDown(Minecraft.getMinecraft().gameSettings.keyBindJump) && Minecraft.getMinecraft().currentScreen == null) {
