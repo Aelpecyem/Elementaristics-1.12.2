@@ -1,6 +1,7 @@
 package de.aelpecyem.elementaristics.misc.spell;
 
 import de.aelpecyem.elementaristics.Elementaristics;
+import de.aelpecyem.elementaristics.entity.EntitySpellProjectile;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -15,11 +16,11 @@ public class SpellActivate extends SpellBase {
     }
 
     @Override
-    public void affect(RayTraceResult result, EntityLivingBase caster, World world) {
+    public void affect(RayTraceResult result, EntityLivingBase caster, World world, EntitySpellProjectile projectile) {
         if (caster instanceof EntityPlayer && result.getBlockPos() != null && result.sideHit != null) {
             world.getBlockState(result.getBlockPos()).getBlock().onBlockActivated(world, result.getBlockPos(),
                     world.getBlockState(result.getBlockPos()), (EntityPlayer) caster, EnumHand.OFF_HAND, result.sideHit, 0.5F, 0.5F, 0.5F);
         }
-        super.affect(result, caster, world);
+        super.affect(result, caster, world, projectile);
     }
 }

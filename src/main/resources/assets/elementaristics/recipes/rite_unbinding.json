@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " C ",
+    "FPF",
+    " C "
+  ],
+  "key": {
+    "C": {
+      "item": "elementaristics:essence",
+      "data": 15
+    },
+    "P": {
+      "item": "minecraft:paper"
+    },
+    "F": {
+      "item": "elementaristics:essence",
+      "data": 3
+    }
+  },
+  "result": {
+    "item": "elementaristics:incantation_unbinding",
+    "count": 1
+  }
+}

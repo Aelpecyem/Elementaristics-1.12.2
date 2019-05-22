@@ -20,7 +20,7 @@ public class InitRecipes {
         initTunneler();
         initConcentrator();
         initReactor();
-        initBasin();
+        initBasin(); //todo add doc to all added stuff (Energized Gunpowder, Ascension stage reshaping) and ofc recipes
     }
 
     private static void initBasin() {
@@ -29,6 +29,8 @@ public class InitRecipes {
         InfusionRecipes.addRecipe(new InfusionRecipe(new ResourceLocation(Elementaristics.MODID, "flesh_lamb"), Ingredient.fromItem(ModItems.thoughts_battling), new ItemStack(ModItems.flesh_lamb), Aspects.ice, Aspects.body));
 
         InfusionRecipes.addRecipe(new InfusionRecipe(new ResourceLocation(Elementaristics.MODID, "body_water"), Ingredient.fromItem(ModItems.maganized_matter), new ItemStack(ModItems.body_water), Aspects.water, Aspects.body, Aspects.air));
+
+        InfusionRecipes.addRecipe(new InfusionRecipe(new ResourceLocation(Elementaristics.MODID, "gunpowder_energized"), Ingredient.fromItem(Items.GUNPOWDER), new ItemStack(ModItems.gunpowder_energized, 3), Aspects.electricity));
 
     }
     private static void initForge() {
@@ -43,24 +45,17 @@ public class InitRecipes {
         ForgeRecipes.addRecipe(new ForgeRecipe(new ResourceLocation(Elementaristics.MODID, "mirror_soul"), Ingredient.fromStacks(new ItemStack(Blocks.GLASS)), Ingredient.fromItem(Items.DIAMOND), Ingredient.fromStacks(new ItemStack(ModItems.sands_soul)), Ingredient.fromStacks(new ItemStack(ModItems.thoughts_battling)), Ingredient.fromItem(Items.STICK), new ItemStack(ModItems.soul_mirror)));
         ForgeRecipes.addRecipe(new ForgeRecipe(new ResourceLocation(Elementaristics.MODID, "dagger"), Ingredient.fromStacks(new ItemStack(ModItems.essence, 1, Aspects.ice.getId())), Ingredient.fromItem(ModItems.gem_triangular), Ingredient.fromStacks(new ItemStack(ModItems.motion_captured)), Ingredient.fromStacks(new ItemStack(Items.DIAMOND_SWORD)), Ingredient.fromItem(ModItems.earth_purest), new ItemStack(ModItems.dagger_sacrificial)));
         ForgeRecipes.addRecipe(new ForgeRecipe(new ResourceLocation(Elementaristics.MODID, "heart_stone"), Ingredient.fromStacks(new ItemStack(ModItems.essence, 1, Aspects.earth.getId())), Ingredient.fromItem(ModItems.earth_purest), Ingredient.fromStacks(new ItemStack(ModItems.soul_dead)), Ingredient.fromStacks(new ItemStack(ModItems.essence, 1, Aspects.body.getId())), Ingredient.fromStacks(new ItemStack(Blocks.STONE, 1, 0)), new ItemStack(ModItems.heart_stone)));
-        ForgeRecipes.addRecipe(new ForgeRecipe(new ResourceLocation(Elementaristics.MODID, "gem_arcane"), Ingredient.fromStacks(new ItemStack(ModItems.essence, 1, Aspects.crystal.getId())), Ingredient.fromItem(ModItems.maganized_matter), Ingredient.fromStacks(new ItemStack(Items.DIAMOND)), Ingredient.fromStacks(new ItemStack(Items.GLOWSTONE_DUST)), Ingredient.fromStacks(new ItemStack(Items.REDSTONE, 1, 0)), new ItemStack(ModItems.gem_triangular))); //todo.. add doc?
+        ForgeRecipes.addRecipe(new ForgeRecipe(new ResourceLocation(Elementaristics.MODID, "gem_arcane"), Ingredient.fromStacks(new ItemStack(ModItems.essence, 1, Aspects.crystal.getId())), Ingredient.fromItem(ModItems.maganized_matter), Ingredient.fromStacks(new ItemStack(Items.DIAMOND)), Ingredient.fromStacks(new ItemStack(Items.GLOWSTONE_DUST)), Ingredient.fromStacks(new ItemStack(Items.REDSTONE, 1, 0)), new ItemStack(ModItems.gem_triangular)));
         ForgeRecipes.addRecipe(new ForgeRecipe(new ResourceLocation(Elementaristics.MODID, "lightning_tangible"), Ingredient.fromStacks(new ItemStack(ModItems.essence, 1, Aspects.electricity.getId())), Ingredient.fromItem(Items.IRON_INGOT), Ingredient.fromStacks(new ItemStack(Items.IRON_NUGGET)), Ingredient.fromStacks(new ItemStack(Items.IRON_NUGGET)), Ingredient.fromStacks(new ItemStack(ModItems.essence, 1, Aspects.electricity.getId())), new ItemStack(ModItems.lightning_tangible)));
 
-        ForgeRecipes.addRecipe(new ForgeRecipe(new ResourceLocation(Elementaristics.MODID, "tool_channeling"), Ingredient.fromStacks(new ItemStack(ModItems.essence, 1, Aspects.electricity.getId())), Ingredient.fromItem(Items.IRON_INGOT), Ingredient.fromStacks(new ItemStack(ModItems.gem_triangular)), Ingredient.fromStacks(new ItemStack(Items.IRON_INGOT)), Ingredient.fromStacks(new ItemStack(ModItems.lightning_tangible)), new ItemStack(ModItems.tool_channeling)));
-        ForgeRecipes.addRecipe(new ForgeRecipe(new ResourceLocation(Elementaristics.MODID, "key_winged"), Ingredient.fromStacks(new ItemStack(ModItems.essence, 1, Aspects.air.getId())), Ingredient.fromItem(Items.IRON_INGOT), Ingredient.fromStacks(new ItemStack(ModItems.gem_triangular)), Ingredient.fromStacks(new ItemStack(Items.IRON_INGOT)), Ingredient.fromStacks(new ItemStack(ModItems.motion_captured)), new ItemStack(ModItems.key_winged)));
+        ForgeRecipes.addRecipe(new ForgeRecipe(new ResourceLocation(Elementaristics.MODID, "tool_channeling"), Ingredient.fromStacks(new ItemStack(ModItems.essence, 1, Aspects.electricity.getId())), Ingredient.fromItem(Items.IRON_INGOT), Ingredient.fromStacks(new ItemStack(ModItems.gem_triangular)), Ingredient.fromStacks(new ItemStack(Items.IRON_NUGGET)), Ingredient.fromStacks(new ItemStack(ModItems.lightning_tangible)), new ItemStack(ModItems.tool_channeling)));
+        ForgeRecipes.addRecipe(new ForgeRecipe(new ResourceLocation(Elementaristics.MODID, "key_winged"), Ingredient.fromStacks(new ItemStack(ModItems.essence, 1, Aspects.air.getId())), Ingredient.fromItem(Items.IRON_INGOT), Ingredient.fromStacks(new ItemStack(ModItems.gem_triangular)), Ingredient.fromStacks(new ItemStack(Items.IRON_NUGGET)), Ingredient.fromStacks(new ItemStack(ModItems.motion_captured)), new ItemStack(ModItems.key_winged)));
+        ForgeRecipes.addRecipe(new ForgeRecipe(new ResourceLocation(Elementaristics.MODID, "hammer_head"), Ingredient.fromStacks(new ItemStack(ModItems.essence, 1, Aspects.earth.getId())), Ingredient.fromStacks(new ItemStack(Blocks.OBSIDIAN)), Ingredient.fromStacks(new ItemStack(ModItems.gem_triangular)), Ingredient.fromStacks(new ItemStack(Blocks.OBSIDIAN)), Ingredient.fromStacks(new ItemStack(ModItems.earth_purest)), new ItemStack(ModItems.head_hammer)));
+        ForgeRecipes.addRecipe(new ForgeRecipe(new ResourceLocation(Elementaristics.MODID, "splendor_eye"), Ingredient.fromItems(Items.DIAMOND, Items.EMERALD), Ingredient.fromStacks(new ItemStack(ModItems.essence, 1, Aspects.soul.getId())), Ingredient.fromStacks(new ItemStack(Blocks.OBSIDIAN)), Ingredient.fromStacks(new ItemStack(ModBlocks.stone_enriched)), Ingredient.fromStacks(new ItemStack(ModItems.essence, 1, Aspects.light.getId())), new ItemStack(ModItems.splendor_eye)));
+
+        ForgeRecipes.addRecipe(new ForgeRecipe(new ResourceLocation(Elementaristics.MODID, "incantation_reshaping"), Ingredient.fromItems(Items.PAPER), Ingredient.fromStacks(new ItemStack(ModItems.essence, 1, Aspects.fire.getId())), Ingredient.fromStacks(new ItemStack(ModItems.essence, 1, Aspects.light.getId())), Ingredient.fromStacks(new ItemStack(ModItems.essence, 1, Aspects.body.getId())), Ingredient.fromStacks(new ItemStack(ModItems.essence, 1, Aspects.earth.getId())), new ItemStack(ModItems.incantation_reforging)));
 
     }
-
-  /*  private static void initPedestal() {
-        PedestalRecipes.addRecipe(new PedestalRecipe(new ResourceLocation(Elementaristics.MODID, "essence_aether"), Ingredient.fromStacks(new ItemStack(ModItems.cluster_aether)), new ItemStack(ModItems.essence, 1, Aspects.aether.getId())));
-        PedestalRecipes.addRecipe(new PedestalRecipe(new ResourceLocation(Elementaristics.MODID, "essence_fire"), Ingredient.fromStacks(new ItemStack(ModItems.cluster_fire)), new ItemStack(ModItems.essence, 1, Aspects.fire.getId())));
-        PedestalRecipes.addRecipe(new PedestalRecipe(new ResourceLocation(Elementaristics.MODID, "essence_air"), Ingredient.fromStacks(new ItemStack(ModItems.cluster_air)), new ItemStack(ModItems.essence, 1, Aspects.air.getId())));
-        PedestalRecipes.addRecipe(new PedestalRecipe(new ResourceLocation(Elementaristics.MODID, "essence_water"), Ingredient.fromStacks(new ItemStack(ModItems.cluster_water)), new ItemStack(ModItems.essence, 1, Aspects.water.getId())));
-        PedestalRecipes.addRecipe(new PedestalRecipe(new ResourceLocation(Elementaristics.MODID, "essence_earth"), Ingredient.fromStacks(new ItemStack(ModItems.cluster_earth)), new ItemStack(ModItems.essence, 1, Aspects.earth.getId())));
-
-        PedestalRecipes.addRecipe(new PedestalRecipe(new ResourceLocation(Elementaristics.MODID, "vibrant_quartz"), Ingredient.fromStacks(new ItemStack(Items.QUARTZ)), new ItemStack(ModItems.vibrant_quartz)));
-        PedestalRecipes.addRecipe(new PedestalRecipe(new ResourceLocation(Elementaristics.MODID, "chaotic_matter_pedestal"), Ingredient.fromStacks(new ItemStack(Blocks.STONE)), new ItemStack(ModItems.chaotic_matter)));
-    }*/
 
     private static void initReactor() {
         ReactorRecipes.addRecipe(new ReactorRecipe(new ResourceLocation(Elementaristics.MODID, "essence_life"), Ingredient.fromStacks(new ItemStack(ModItems.essence, 1 , Aspects.water.getId())), Ingredient.fromStacks(new ItemStack(ModItems.essence,1,  Aspects.earth.getId())), new ItemStack(ModItems.essence, 1, Aspects.life.getId())));
@@ -81,6 +76,8 @@ public class InitRecipes {
         PurifierRecipes.addRecipe(new PurifierRecipe(new ResourceLocation(Elementaristics.MODID, "essence_order"), Ingredient.fromStacks(new ItemStack(ModItems.essence, 1, Aspects.aether.getId())), 3,new ItemStack(ModItems.essence, 1, Aspects.order.getId()), 200));
 
         PurifierRecipes.addRecipe(new PurifierRecipe(new ResourceLocation(Elementaristics.MODID, "water_purest"), Ingredient.fromStacks(new ItemStack(ModItems.essence, 1, Aspects.water.getId())), 2, new ItemStack(ModItems.water_purest), 600));
+
+        PurifierRecipes.addRecipe(new PurifierRecipe(new ResourceLocation(Elementaristics.MODID, "flint"), Ingredient.fromStacks(new ItemStack(Blocks.GRAVEL)), 1, new ItemStack(Items.FLINT), 60));
     }
 
     private static void initEntropizer() {
@@ -127,6 +124,8 @@ public class InitRecipes {
         ConcentratorRecipes.addRecipe(new ConcentratorRecipe(new ResourceLocation(Elementaristics.MODID, "dead_soul"), Ingredient.fromStacks(new ItemStack(ModItems.essence, 1, Aspects.soul.getId())), new ItemStack(ModItems.essence, 1, Aspects.mana.getId()), new ItemStack(ModItems.soul_dead)));
         ConcentratorRecipes.addRecipe(new ConcentratorRecipe(new ResourceLocation(Elementaristics.MODID, "incantation_chaos"), Ingredient.fromStacks(new ItemStack(Items.PAPER)), new ItemStack(ModItems.catalyst_entropizing), new ItemStack(ModItems.incantation_chaos)));
         ConcentratorRecipes.addRecipe(new ConcentratorRecipe(new ResourceLocation(Elementaristics.MODID, "incantation_light"), Ingredient.fromStacks(new ItemStack(Items.PAPER)), new ItemStack(ModItems.sparks_brightest), new ItemStack(ModItems.incantation_light)));
+
+        ConcentratorRecipes.addRecipe(new ConcentratorRecipe(new ResourceLocation(Elementaristics.MODID, "incantation_health_share"), Ingredient.fromStacks(new ItemStack(Items.PAPER)), new ItemStack(ModItems.moss_everchaning), new ItemStack(ModItems.incantation_health_share)));
 
 
 

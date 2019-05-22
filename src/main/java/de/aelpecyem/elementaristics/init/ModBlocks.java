@@ -5,27 +5,24 @@ import de.aelpecyem.elementaristics.blocks.base.crops.BlockCropBase;
 import de.aelpecyem.elementaristics.blocks.base.crops.BlockMossBase;
 import de.aelpecyem.elementaristics.blocks.base.crops.BlockMossEverchanging;
 import de.aelpecyem.elementaristics.blocks.base.crops.CropOpium;
+import de.aelpecyem.elementaristics.blocks.tileentity.BlockTileEntity;
 import de.aelpecyem.elementaristics.blocks.tileentity.blocks.*;
 import de.aelpecyem.elementaristics.blocks.tileentity.blocks.energy.BlockGeneratorCombustion;
 import de.aelpecyem.elementaristics.blocks.tileentity.blocks.energy.BlockStorage;
-import de.aelpecyem.elementaristics.misc.elements.Aspect;
-import de.aelpecyem.elementaristics.misc.elements.Aspects;
+import de.aelpecyem.elementaristics.blocks.tileentity.blocks.pantheon.BlockDeityShrineBase;
+import de.aelpecyem.elementaristics.blocks.tileentity.pantheon.TileEntityDeityShrine;
 import de.aelpecyem.elementaristics.misc.potions.PotionInit;
 import de.aelpecyem.elementaristics.util.IBlockHasModel;
-import de.aelpecyem.elementaristics.util.IHasModel;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
-import net.minecraft.block.BlockFlower;
 import net.minecraft.block.material.Material;
-import net.minecraft.init.Items;
+import net.minecraft.client.settings.GameSettings;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class ModBlocks {
 
@@ -56,6 +53,33 @@ public class ModBlocks {
     public static BlockGeneratorCombustion generator_combustion;
     public static BlockStorage energy_storage;
 
+    //PANTHEON
+    public static BlockDeityShrineBase symbol_nothingness;
+    public static BlockDeityShrineBase symbol_azathoth;
+    public static BlockDeityShrineBase symbol_dragon_aether;
+    public static BlockDeityShrineBase symbol_dragon_fire;
+    public static BlockDeityShrineBase symbol_dragon_earth;
+    public static BlockDeityShrineBase symbol_dragon_water;
+    public static BlockDeityShrineBase symbol_dragon_air;
+    public static BlockDeityShrineBase symbol_gate;
+    public static BlockDeityShrineBase symbol_dreamer;
+    public static BlockDeityShrineBase symbol_angel;
+    public static BlockDeityShrineBase symbol_storm;
+    public static BlockDeityShrineBase symbol_fighter;
+    public static BlockDeityShrineBase symbol_sun;
+    public static BlockDeityShrineBase symbol_harbinger;
+    public static BlockDeityShrineBase symbol_queen;
+    public static BlockDeityShrineBase symbol_goat;
+    public static BlockDeityShrineBase symbol_moth;
+    public static BlockDeityShrineBase symbol_thread;
+    public static BlockDeityShrineBase symbol_mirror; //
+    public static BlockDeityShrineBase symbol_dancer;
+    public static BlockDeityShrineBase symbol_king;
+    public static BlockDeityShrineBase symbol_mother;
+    public static BlockDeityShrineBase symbol_moon;
+    public static BlockDeityShrineBase symbol_witch;
+
+    public static BlockBase manipulator_supplying;
     //PLANTS
     public static BlockBush flower_ecstasy;
     public static BlockBush flower_contentment;
@@ -99,6 +123,35 @@ public class ModBlocks {
         energy_storage = new BlockStorage();
         //TC
         mushroom_intoxicating = new BlockMushroomIntoxicating();
+
+        symbol_nothingness = new BlockDeityShrineBase("symbol_nothingness", Deities.deityNothingness, false);
+        symbol_azathoth = new BlockDeityShrineBase("symbol_azathoth", Deities.deityAzathoth, false);
+        symbol_dragon_fire = new BlockDeityShrineBase("symbol_dragon_fire", Deities.deityDragonFire, false);
+        symbol_dragon_aether = new BlockDeityShrineBase("symbol_dragon_aether", Deities.deityDragonAether, false);
+        symbol_dragon_air = new BlockDeityShrineBase("symbol_dragon_air", Deities.deityDragonAir, false);
+        symbol_dragon_earth = new BlockDeityShrineBase("symbol_dragon_earth", Deities.deityDragonEarth, false);
+        symbol_dragon_water = new BlockDeityShrineBase("symbol_dragon_water", Deities.deityDragonWater, false);
+        symbol_gate = new BlockDeityShrineBase("symbol_gate", Deities.deityGateAndKey, false);
+        symbol_dreamer = new BlockDeityShrineBase("symbol_dreamer", Deities.deityDreamer, false);
+        symbol_angel = new BlockDeityShrineBase("symbol_angel", Deities.deityAngel, false);
+        symbol_storm = new BlockDeityShrineBase("symbol_storm", Deities.deityStorm, false);
+        symbol_fighter = new BlockDeityShrineBase("symbol_fighter", Deities.deityFighter, false);
+        symbol_sun = new BlockDeityShrineBase("symbol_sun", Deities.deitySun, false);
+        symbol_harbinger = new BlockDeityShrineBase("symbol_harbinger", Deities.deityHarbinger, false);
+        symbol_queen = new BlockDeityShrineBase("symbol_queen", Deities.deityQueen, false);
+        symbol_goat = new BlockDeityShrineBase("symbol_goat", Deities.deityGoat, false);
+        symbol_moth = new BlockDeityShrineBase("symbol_moth", Deities.deityMoth, false);
+        symbol_thread = new BlockDeityShrineBase("symbol_thread", Deities.deityThread, false);
+        symbol_mirror = new BlockDeityShrineBase("symbol_mirror", Deities.deityMirror, false);
+        symbol_dancer = new BlockDeityShrineBase("symbol_dancer", Deities.deityDancer, false);
+        symbol_king = new BlockDeityShrineBase("symbol_king", Deities.deityKing, false);
+        symbol_mother = new BlockDeityShrineBase("symbol_mother", Deities.deityMother, false);
+        symbol_moon = new BlockDeityShrineBase("symbol_moon", Deities.deityMoon, false);
+        symbol_witch = new BlockDeityShrineBase("symbol_witch", Deities.deityWitch, false);
+
+        manipulator_supplying = new BlockBase(Material.ROCK, "manipulator_supplying");
+
+        //idea: wireless redstone transmitter, uses a teensy bit of OE, now and then, and converts the powered state to the linked block
     }
 
 
@@ -113,17 +166,12 @@ public class ModBlocks {
         registry.registerAll(
 
         );
-        GameRegistry.registerTileEntity(pedestal.getTileEntityClass(), pedestal.getRegistryName());
-        GameRegistry.registerTileEntity(purifier.getTileEntityClass(), purifier.getRegistryName());
-        GameRegistry.registerTileEntity(concentrator.getTileEntityClass(), concentrator.getRegistryName());
-        GameRegistry.registerTileEntity(tunneler_top.getTileEntityClass(), tunneler_top.getRegistryName());
-        GameRegistry.registerTileEntity(filter_holder.getTileEntityClass(), filter_holder.getRegistryName());
-        GameRegistry.registerTileEntity(reactor.getTileEntityClass(), reactor.getRegistryName());
-        GameRegistry.registerTileEntity(altar.getTileEntityClass(), altar.getRegistryName());
-        GameRegistry.registerTileEntity(basin.getTileEntityClass(), basin.getRegistryName());
-
-        GameRegistry.registerTileEntity(generator_combustion.getTileEntityClass(), generator_combustion.getRegistryName());
-        GameRegistry.registerTileEntity(energy_storage.getTileEntityClass(), energy_storage.getRegistryName());
+        GameRegistry.registerTileEntity(TileEntityDeityShrine.class, "elementaristics:deity_shrine");
+        for (Block block : BLOCKS) {
+            if (block instanceof BlockTileEntity && ((BlockTileEntity) block).getTileEntityClass() != TileEntityDeityShrine.class) {
+                GameRegistry.registerTileEntity(((BlockTileEntity) block).getTileEntityClass(), block.getRegistryName());
+            }
+        }
 
     }
 

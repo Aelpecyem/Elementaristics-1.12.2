@@ -20,7 +20,8 @@
       "type": "text",
       "text": "#count",
       "x": 38,
-      "y": 30
+      "y": 30,
+      "link_recipe": true
     },
     {
       "type": "item",

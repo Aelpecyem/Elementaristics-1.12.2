@@ -50,6 +50,7 @@ public class ItemThaumagral extends ItemSword implements IHasModel {
                             EntitySpellProjectile spellProjectile = new EntitySpellProjectile(worldIn, playerIn);
                             spellProjectile.shoot(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, 0.5F * 3.0F, 17.0F, spellBase);
                             spellProjectile.setSpell(spellBase);
+                            spellProjectile.setCaster(playerIn);
                             if (!worldIn.isRemote)
                                 worldIn.spawnEntity(spellProjectile);
                         }
@@ -62,7 +63,7 @@ public class ItemThaumagral extends ItemSword implements IHasModel {
                             worldIn.spawnEntity(spellProjectile);
                     }
                     if (spellBase.getType() == SpellBase.SpellType.SELF) {
-                        spellBase.affect(PlayerUtil.rayTrace(playerIn, 30, 1), playerIn, worldIn);
+                        spellBase.affect(PlayerUtil.rayTrace(playerIn, 30, 1), playerIn, worldIn, null);
 
                     }
                     if (spellBase.getType() == SpellBase.SpellType.WAVE) {

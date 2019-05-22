@@ -49,14 +49,10 @@ import java.io.File;
 
 @Mod(modid = Elementaristics.MODID, name = Elementaristics.NAME, version = Elementaristics.VERSION, dependencies = "required-after:baubles")
 public final class Elementaristics {
-
-    //TODO add doc to most aspects of this mod, let it be directly in categories or indirectly in Furtive Stories
-    //TODO might remove ores
+    //TODO spawn particles with packets
     //TODO ...ASCENSION!
-    //TODO spellcasting
     //TODO more rites
     //TODO ...more!
-    //TODO idea: have a "Potential" potion effect... used for rites like a teleportation rite (which will teleport the caster to an entity with potential)
 
     public static final String MODID = "elementaristics";
     public static final String NAME = "Elementaristics";
@@ -92,6 +88,7 @@ public final class Elementaristics {
 
         ModCaps.registerCapabilites();
         initElements();
+        Deities.initDeities();
         ModBlocks.init();
         ModItems.init();
 

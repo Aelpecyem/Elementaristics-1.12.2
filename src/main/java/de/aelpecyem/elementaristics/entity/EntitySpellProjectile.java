@@ -155,13 +155,14 @@ public class EntitySpellProjectile extends EntityThrowable {
 
     @Override
     protected void onImpact(RayTraceResult result) {
+
         if (!this.world.isRemote) {
             SpellBase spell = this.getSpell();
             //   EntityLivingBase caster = this.getCaster();
             if (spell != null) {
                 if ((result.typeOfHit != RayTraceResult.Type.ENTITY) || (result.entityHit != getThrower())) {
                     //  performEffect(result, caster, this.world);
-                    spell.affect(result, getThrower(), this.world);
+                    spell.affect(result, getThrower(), this.world, this);
                 }
                 if ((result.typeOfHit == RayTraceResult.Type.BLOCK && world.getBlockState(result.getBlockPos()).getMaterial().blocksMovement())) {// && ((spell.getType() == EnumSpellType.PROJECTILE_BLOCK) || (spell.getType() == EnumSpellType.PROJECTILE_ALL))) {
                     this.setDead();

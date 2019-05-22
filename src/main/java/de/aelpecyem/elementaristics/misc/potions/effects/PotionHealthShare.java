@@ -30,7 +30,6 @@ public class PotionHealthShare extends PotionBase {
     public void hitEntity(LivingHealEvent event) {
         if (event.getEntityLiving().getActivePotionEffects().contains(event.getEntityLiving().getActivePotionEffect(this))) {
             if (event.getAmount() > 1) {
-                System.out.println(event.getAmount());
                 World world = event.getEntityLiving().world;
                 EntityLivingBase attacked = event.getEntityLiving();
                 List<EntityLivingBase> livingsShared = world.getEntities(EntityLivingBase.class, new Predicate<EntityLivingBase>() {
@@ -42,7 +41,6 @@ public class PotionHealthShare extends PotionBase {
                 if (!livingsShared.isEmpty()) {
                     livingsShared = livingsShared.subList(0, livingsShared.size() < 10 ? livingsShared.size() : 10);
                     float amountEach = event.getAmount() / (livingsShared.size() + 1);
-                    System.out.println(livingsShared.size());
                     for (int i = 0; i < livingsShared.size(); i++) {
                         livingsShared.get(i).heal(amountEach);
                     }

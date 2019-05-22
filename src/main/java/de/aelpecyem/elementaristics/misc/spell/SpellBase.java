@@ -1,10 +1,13 @@
 package de.aelpecyem.elementaristics.misc.spell;
 
+import de.aelpecyem.elementaristics.entity.EntitySpellProjectile;
 import de.aelpecyem.elementaristics.init.SpellInit;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
+
+import javax.annotation.Nullable;
 
 public class SpellBase {
     protected ResourceLocation name;
@@ -81,7 +84,7 @@ public class SpellBase {
         return indexY;
     }
 
-    public void affect(RayTraceResult result, EntityLivingBase caster, World world) {
+    public void affect(RayTraceResult result, EntityLivingBase caster, World world, @Nullable EntitySpellProjectile projectile) {
 
     }
 

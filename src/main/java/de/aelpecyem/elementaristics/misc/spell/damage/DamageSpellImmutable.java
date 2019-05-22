@@ -18,13 +18,13 @@ public class DamageSpellImmutable extends DamageSpellBase {
 
 
     @Override
-    public void affect(RayTraceResult result, EntityLivingBase caster, World world) {
+    public void affect(RayTraceResult result, EntityLivingBase caster, World world, EntitySpellProjectile projectile) {
         EntitySpellProjectile target;
         if (result.entityHit instanceof EntitySpellProjectile) {
             target = (EntitySpellProjectile) result.entityHit;
             Elementaristics.proxy.generateGenericParticles(target, SoulInit.soulImmutable.getParticleColor(), 3, 200, 0, false, true);
             target.setDead();
         }
-        super.affect(result, caster, world);
+        super.affect(result, caster, world, projectile);
     }
 }

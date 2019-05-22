@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "elementaristics:incantation_reforging"
+    },
+    "title": {
+      "translate": "advancement.elementaristics.ascension_6"
+    },
+    "description": {
+      "translate": "advancement.elementaristics.ascension_6.desc"
+    }
+  },
+  "parent": "elementaristics:progress_ascension_5",
+  "criteria": {
+    "book": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "elementaristics:incantation_reforging"
+          }
+        ]
+      }
+    }
+  }
+}

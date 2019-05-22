@@ -42,7 +42,8 @@
       "type": "item",
       "item": "#output",
       "x": 50,
-      "y": 42
+      "y": 42,
+      "link_recipe": true
     },
     {
       "type": "header",

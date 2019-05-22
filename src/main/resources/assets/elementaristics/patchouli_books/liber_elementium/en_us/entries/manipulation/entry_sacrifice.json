@@ -2,6 +2,7 @@
   "name": "Sacrificial Rites",
   "icon": "elementaristics:incantation_compression",
   "category": "matter_manipulation",
+  "advancement": "elementaristics:progress_ascension_4",
   "pages": [
     {
       "type": "text",

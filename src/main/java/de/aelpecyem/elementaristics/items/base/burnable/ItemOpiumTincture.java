@@ -33,7 +33,7 @@ public class ItemOpiumTincture extends ItemBurnableAffectingBase {
                 for (int z = -3; z < 3; z++) {
                     BlockPos pos = new BlockPos(x + itemIn.getPosition().getX(), y + itemIn.getPosition().getY(), z + itemIn.getPosition().getZ());
                     Elementaristics.proxy.generateGenericParticles(itemIn.getEntityWorld(), pos, 623319, 3F, 200, 0, true, true);
-                    }
+                }
             }
         }
         player.addPotionEffect(new PotionEffect(PotionInit.potionTrance, 3500, 0, true, true));

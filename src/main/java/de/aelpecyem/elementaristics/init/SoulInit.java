@@ -51,7 +51,7 @@ public class SoulInit {
         soulDragon = new Soul("soul_dragon", 16772352, EnumSoulRarity.EXTRAODINARY, 140, 0.42F, 1.2F);
         soulAncient = new Soul("soul_ancient", 399112, EnumSoulRarity.EXTRAODINARY, 160, 0.5F, 1.3F);
 
-       /* soulApostleGod = new Soul("soul_apostle", 16373760, EnumSoulRarity.ASCENDED, 130, 0.5F); todo ... I am going to add a field in the PlayerCapability instead, determining the ascension path. Additionally, I'll add an AscendedSoul class, which is going to be pretty similar but add properties no matter what
+       /* soulApostleGod = new Soul("soul_apostle", 16373760, EnumSoulRarity.ASCENDED, 130, 0.5F); todo ... I'll add an AscendedSoul class, which is going to be pretty similar but add properties no matter what
         soulTrue = new Soul("soul_true", 16777215, EnumSoulRarity.ASCENDED, 130, 0.4F);
         soulFirst = new Soul("soul_first", 9111320, EnumSoulRarity.ASCENDED, 180, 0.7F);
 

@@ -1,6 +1,7 @@
 package de.aelpecyem.elementaristics.misc.rites.killing;
 
 import de.aelpecyem.elementaristics.Elementaristics;
+import de.aelpecyem.elementaristics.blocks.tileentity.TileEntityAltar;
 import de.aelpecyem.elementaristics.capability.player.IPlayerCapabilities;
 import de.aelpecyem.elementaristics.capability.player.PlayerCapProvider;
 import de.aelpecyem.elementaristics.capability.player.souls.Soul;
@@ -39,7 +40,7 @@ public class RiteSacrifice extends RiteBase{//Soul's Conflagration
     }
 
     @Override
-    public void doMagic(World world, BlockPos pos, EntityPlayer player) {
+    public void doMagic(World world, BlockPos pos, EntityPlayer player, TileEntityAltar tile) {
         if (!world.isRemote) {
             int killCount = 0;
 
@@ -82,7 +83,7 @@ public class RiteSacrifice extends RiteBase{//Soul's Conflagration
     }
 
     @Override
-    public void onRitual(World world, BlockPos altarPos, List<EntityPlayer> players, int tickCount) {
+    public void onRitual(World world, BlockPos altarPos, List<EntityPlayer> players, int tickCount, TileEntityAltar tile) {
             if (world.getClosestPlayer(altarPos.getX(), altarPos.getY(), altarPos.getZ(), 2, false) != null) {
                 EntityPlayer player = world.getClosestPlayer(altarPos.getX(), altarPos.getY(), altarPos.getZ(), 2, false);
                 List<Entity> entities = world.getEntitiesInAABBexcluding(player, new AxisAlignedBB(altarPos.getX() - 4, altarPos.getY() - 2, altarPos.getZ() - 4, altarPos.getX() + 4, altarPos.getY() + 4, altarPos.getZ() + 4), null);

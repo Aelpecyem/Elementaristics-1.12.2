@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "elementaristics:heart_stone"
+    },
+    "title": {
+      "translate": "advancement.elementaristics.binding"
+    },
+    "description": {
+      "translate": "advancement.elementaristics.binding.desc"
+    }
+  },
+  "parent": "elementaristics:progress_forging",
+  "criteria": {
+    "book": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "elementaristics:heart_stone"
+          }
+        ]
+      }
+    }
+  }
+}

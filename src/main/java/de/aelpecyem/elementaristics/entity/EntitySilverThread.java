@@ -5,6 +5,8 @@ import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.capability.player.IPlayerCapabilities;
 import de.aelpecyem.elementaristics.capability.player.PlayerCapProvider;
 import de.aelpecyem.elementaristics.init.SoulInit;
+import de.aelpecyem.elementaristics.networking.PacketHandler;
+import de.aelpecyem.elementaristics.networking.player.PacketMessage;
 import de.aelpecyem.elementaristics.particles.ParticleGeneric;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.*;
@@ -65,13 +67,11 @@ public class EntitySilverThread extends EntityMob {
         EntityPlayer player = world.getClosestPlayer(posX, posY, posZ, 100, false);
         if (cause.getTrueSource() instanceof EntityPlayer) {
              player = (EntityPlayer) cause.getTrueSource();
-            // player.sendStatusMessage(new TextComponentString(ChatFormatting.GOLD + I18n.format("message.ascension_1.standard")), false);
             IPlayerCapabilities cap = player.getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null);
             if (cap.knowsSoul()) {
                 if (cap.getPlayerAscensionStage() < 1) {
                     cap.setPlayerAscensionStage(1);
-                    if (world.isRemote)
-                        player.sendStatusMessage(new TextComponentString(ChatFormatting.GOLD + I18n.format("message.ascension_1.standard")), false);
+                    PacketHandler.sendTo(player, new PacketMessage("message.ascension_1.standard"));
                 }
             }
         }

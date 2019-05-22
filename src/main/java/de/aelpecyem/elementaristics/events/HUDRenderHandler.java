@@ -1,9 +1,12 @@
 package de.aelpecyem.elementaristics.events;
 
+import com.mojang.realmsclient.gui.ChatFormatting;
 import de.aelpecyem.elementaristics.Elementaristics;
+import de.aelpecyem.elementaristics.blocks.tileentity.IHasBoundPosition;
 import de.aelpecyem.elementaristics.blocks.tileentity.TileEntityAltar;
 import de.aelpecyem.elementaristics.blocks.tileentity.blocks.BlockAltar;
 import de.aelpecyem.elementaristics.blocks.tileentity.energy.TileEntityEnergy;
+import de.aelpecyem.elementaristics.blocks.tileentity.pantheon.TileEntityDeityShrine;
 import de.aelpecyem.elementaristics.capability.player.IPlayerCapabilities;
 import de.aelpecyem.elementaristics.capability.player.PlayerCapProvider;
 import de.aelpecyem.elementaristics.init.RiteInit;
@@ -26,6 +29,7 @@ import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
@@ -40,6 +44,7 @@ import java.util.List;
 
 public class HUDRenderHandler {
     public static final ResourceLocation TEXTURE = new ResourceLocation("elementaristics:textures/gui/hud_elements.png");
+    private int progressPercentage;
 
 
     @SubscribeEvent
@@ -55,7 +60,7 @@ public class HUDRenderHandler {
         if (event.getType() == RenderGameOverlayEvent.ElementType.TEXT && !event.isCancelable()) {
             renderRiteHud(event);
             renderEnergyHud(event);
-
+            renderDeityHud(event);
         }
     }
 
@@ -88,33 +93,6 @@ public class HUDRenderHandler {
 
             }
         }
-        if (PlayerUtil.getBlockLookingAt(mc.player, 5) instanceof BlockAltar) {
-            BlockAltar altar = (BlockAltar) PlayerUtil.getBlockLookingAt(mc.player, 5);
-            TileEntityAltar tile = altar.getTileEntity(mc.player.world, PlayerUtil.getBlockPosLookingAt(5));
-            if (RiteInit.getRiteForResLoc(tile.currentRite) != null) {
-                mc.ingameGUI.drawString(mc.fontRenderer, I18n.format("rite." + tile.currentRite + ".name"), 5, 5, 16777215);
-                mc.ingameGUI.drawString(mc.fontRenderer, I18n.format("rite.item_power.name") + " " + tile.getItemPowerInArea() + " /  " + RiteInit.getRiteForResLoc(tile.currentRite).getItemPowerRequired(), 5, 15, 16777215);
-                if (!(tile.tickCount * 100 / RiteInit.getRiteForResLoc(tile.currentRite).getTicksRequired() > 100)) {
-                    mc.ingameGUI.drawString(mc.fontRenderer, I18n.format("rite.progress.name") + " " + tile.tickCount * 100 / RiteInit.getRiteForResLoc(tile.currentRite).getTicksRequired() + " %", 5, 25, 16777215);
-                } else {
-                    mc.ingameGUI.drawString(mc.fontRenderer, I18n.format("rite.progress_ready.name"), 5, 25, 16777215);
-                }
-                if (!tile.getAspectsInArea().isEmpty()) {
-                    mc.ingameGUI.drawString(mc.fontRenderer, I18n.format("rite.aspects.name"), 5, 35, 16777215);
-                    List<Aspect> aspectList = new ArrayList<>();
-                    aspectList.addAll(tile.getAspectsInArea());
-                    for (int i = 0; i < aspectList.size(); i++) {
-                        mc.ingameGUI.drawString(mc.fontRenderer, "-" + aspectList.get(i).getLocalizedName(), 5, 45 + i * 10, 16777215);
-                    }
-                }
-                mc.ingameGUI.drawString(mc.fontRenderer, I18n.format("rite.aspects_needed.name"), event.getResolution().getScaledWidth() - 100, 5, 16777215);
-                List<Aspect> aspectList = new ArrayList<>();
-                aspectList.addAll(RiteInit.getRiteForResLoc(tile.currentRite).getAspectsRequired());
-                for (int i = 0; i < aspectList.size(); i++) {
-                    mc.ingameGUI.drawString(mc.fontRenderer, "-" + aspectList.get(i).getLocalizedName(), event.getResolution().getScaledWidth() - 100, 15 + i * 10, 16777215);
-                }
-            }
-        }
     }
 
     public void renderRiteHud(RenderGameOverlayEvent.Post event) {
@@ -125,8 +103,10 @@ public class HUDRenderHandler {
             if (RiteInit.getRiteForResLoc(tile.currentRite) != null) {
                 mc.ingameGUI.drawString(mc.fontRenderer, I18n.format("rite." + tile.currentRite + ".name"), 5, 5, 16777215);
                 mc.ingameGUI.drawString(mc.fontRenderer, I18n.format("rite.item_power.name") + " " + tile.getItemPowerInArea() + " /  " + RiteInit.getRiteForResLoc(tile.currentRite).getItemPowerRequired(), 5, 15, 16777215);
-                if (!(tile.tickCount * 100 / RiteInit.getRiteForResLoc(tile.currentRite).getTicksRequired() > 100)) {
-                    mc.ingameGUI.drawString(mc.fontRenderer, I18n.format("rite.progress.name") + " " + tile.tickCount * 100 / RiteInit.getRiteForResLoc(tile.currentRite).getTicksRequired() + " %", 5, 25, 16777215);
+                if (!((float) tile.tickCount / RiteInit.getRiteForResLoc(tile.currentRite).getTicksRequired() > 1)) {
+                    progressPercentage = Math.round((float) tile.tickCount / RiteInit.getRiteForResLoc(tile.currentRite).getTicksRequired() * 100);
+                    String progress = String.valueOf(progressPercentage);
+                    mc.ingameGUI.drawString(mc.fontRenderer, I18n.format("rite.progress.name") + " " + progress + " %", 5, 25, 16777215);
                 } else {
                     mc.ingameGUI.drawString(mc.fontRenderer, I18n.format("rite.progress_ready.name"), 5, 25, 16777215);
                 }
@@ -157,10 +137,27 @@ public class HUDRenderHandler {
             mc.ingameGUI.drawString(mc.fontRenderer, I18n.format("hud.energy_current") + " " + tile.storage.getEnergyStored() + " / " + tile.storage.getMaxEnergyStored(), 5, 5, Aspects.electricity.getColor());
             if (tile.posBound != null)
                 if (!(tile.posBound.getZ() == tile.getPos().getZ() && tile.posBound.getY() == tile.getPos().getY() && tile.posBound.getX() == tile.getPos().getX()))
-                    mc.ingameGUI.drawString(mc.fontRenderer, (tile.receives ? I18n.format("hud.energy_from") : I18n.format("hud.energy_to")) + " X: " + tile.getPositionBoundTo().getX() + " Y: " + tile.getPositionBoundTo().getY() + " Z: " + tile.getPositionBoundTo().getZ() + " " + (tile.posBound.getDistance(tile.getPos().getX(), tile.getPos().getY(), tile.getPos().getZ()) < 16 ? " " : I18n.format("hud.too_far")), 5, 15, tile.posBound.getDistance(tile.getPos().getX(), tile.getPos().getY(), tile.getPos().getZ()) < 16 ? Aspects.electricity.getColor() : 13107200);
+                    mc.ingameGUI.drawString(mc.fontRenderer, (tile.receives ? I18n.format("hud.energy_from") : I18n.format("hud.energy_to")) + " X: " + tile.getPositionBoundTo().getX() + " Y: " + tile.getPositionBoundTo().getY() + " Z: " + tile.getPositionBoundTo().getZ() + " " + (tile.posBound.getDistance(tile.getPos().getX(), tile.getPos().getY(), tile.getPos().getZ()) < 16 ? " " : I18n.format("hud.too_far")), 5, 40, tile.posBound.getDistance(tile.getPos().getX(), tile.getPos().getY(), tile.getPos().getZ()) < 16 ? Aspects.electricity.getColor() : 13107200);
+        } else if (mc.player.world.getTileEntity(PlayerUtil.getBlockPosLookingAt(5)) != null &&
+                mc.player.world.getTileEntity(PlayerUtil.getBlockPosLookingAt(5)) instanceof IHasBoundPosition) {
+            TileEntity tile = mc.player.world.getTileEntity(PlayerUtil.getBlockPosLookingAt(5));
+            if (((IHasBoundPosition) tile).getPositionBoundTo() != null)
+                mc.ingameGUI.drawString(mc.fontRenderer, I18n.format("hud.energy_to") + " X: " + ((IHasBoundPosition) tile).getPositionBoundTo().getX() + " Y: " + ((IHasBoundPosition) tile).getPositionBoundTo().getY() + " Z: " + ((IHasBoundPosition) tile).getPositionBoundTo().getZ(), 5, 40, Aspects.magan.getColor());
         }
     }
 
+    public void renderDeityHud(RenderGameOverlayEvent.Post event) {
+        Minecraft mc = Minecraft.getMinecraft();
+        if (mc.player.world.getTileEntity(PlayerUtil.getBlockPosLookingAt(5)) != null &&
+                mc.player.world.getTileEntity(PlayerUtil.getBlockPosLookingAt(5)) instanceof TileEntityDeityShrine) {
+            TileEntityDeityShrine tile = (TileEntityDeityShrine) mc.player.world.getTileEntity(PlayerUtil.getBlockPosLookingAt(5));
+            if (tile.deityBound != null || !tile.deityBound.equals(""))
+                mc.ingameGUI.drawString(mc.fontRenderer, I18n.format("hud.god") + " " + I18n.format(tile.deityBound), 5, 50, Aspects.light.getColor());
+            if (tile.altarPos != null)
+                if (!(tile.altarPos.getZ() == tile.getPos().getZ() && tile.altarPos.getY() == tile.getPos().getY() && tile.altarPos.getX() == tile.getPos().getX()))
+                    mc.ingameGUI.drawString(mc.fontRenderer, I18n.format("hud.altar_to") + " X: " + tile.altarPos.getX() + " Y: " + tile.altarPos.getY() + " Z: " + tile.altarPos.getZ(), 5, 60, Aspects.light.getColor());
+        }
+    }
     public void renderMaganBar(RenderGameOverlayEvent.Post event) {
         Minecraft mc = Minecraft.getMinecraft();
         if (!mc.player.capabilities.isCreativeMode && !mc.player.isSpectator()) {

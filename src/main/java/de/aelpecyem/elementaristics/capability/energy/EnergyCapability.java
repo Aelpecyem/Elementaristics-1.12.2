@@ -60,6 +60,13 @@ public class EnergyCapability extends EnergyStorage {
         this.energy = energy;
     }
 
-
+    public boolean extractIfPossible(int amount) {
+        if (getMaxEnergyStored() >= amount) {
+            extractEnergy(amount, false);
+            return true;
+        } else {
+            return false;
+        }
+    }
 
 }

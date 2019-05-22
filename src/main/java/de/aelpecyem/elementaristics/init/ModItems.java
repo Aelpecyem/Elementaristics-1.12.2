@@ -11,10 +11,7 @@ import de.aelpecyem.elementaristics.items.base.bauble.ItemKeyWinged;
 import de.aelpecyem.elementaristics.items.base.bauble.ItemWaterBody;
 import de.aelpecyem.elementaristics.items.base.burnable.ItemHerbBundle;
 import de.aelpecyem.elementaristics.items.base.burnable.ItemOpiumTincture;
-import de.aelpecyem.elementaristics.items.base.consumable.ItemBaseSeed;
-import de.aelpecyem.elementaristics.items.base.consumable.ItemDrinkBase;
-import de.aelpecyem.elementaristics.items.base.consumable.ItemFoodBase;
-import de.aelpecyem.elementaristics.items.base.consumable.ItemTinctureArcane;
+import de.aelpecyem.elementaristics.items.base.consumable.*;
 import de.aelpecyem.elementaristics.items.base.thaumagral.*;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;
 import de.aelpecyem.elementaristics.util.IHasModel;
@@ -69,22 +66,29 @@ public class ModItems {
 
     public static ItemAspects heart_stone;
     public static ItemAspects tool_channeling;
+    public static ItemAspects splendor_eye;
+    public static ItemAspects heart_human;
+
+    public static IncantationBase incantation_light;
+    public static IncantationBase incantation_reforging;
 
     public static IncantationBase incantation_chaos;
-    public static IncantationBase incantation_light;
-    public static IncantationBase incantation_feast;
-    public static IncantationBase incantation_conflagration;
-    public static IncantationBase incantation_wind;
-    public static IncantationBase incantation_gaia;
-    public static IncantationBase incantation_depths;
-    public static IncantationBase incantation_compression;
     public static IncantationBase incantation_forging;
+
+    public static IncantationBase incantation_feast;
     public static IncantationBase incantation_recruiting;
     public static IncantationBase incantation_weather;
     public static IncantationBase incantation_day;
     public static IncantationBase incantation_night;
     public static IncantationBase incantation_binding;
     public static IncantationBase incantation_unbinding;
+    public static IncantationBase incantation_health_share;
+
+    public static IncantationBase incantation_conflagration;
+    public static IncantationBase incantation_wind;
+    public static IncantationBase incantation_gaia;
+    public static IncantationBase incantation_depths;
+    public static IncantationBase incantation_compression;
 
     public static ItemDrinkBase water_purest;
     public static ItemAspects sparks_living;
@@ -111,6 +115,10 @@ public class ModItems {
     public static ItemBase charger_soul;
     public static ItemBase body_water;
     public static ItemBase key_winged;
+
+    public static ItemBase gunpowder_energized;
+    public static ItemDrinkBase water_clear;
+    public static ItemDrinkBase phial_nectar;
 
    /* public static ItemArmor hood_cultist = new RobesCultist("hood_cultist",1, EntityEquipmentSlot.HEAD);
     public static ItemArmor garb_cultist = new RobesCultist("garb_cultist",1, EntityEquipmentSlot.CHEST);
@@ -162,6 +170,10 @@ public class ModItems {
         charger_soul = new ItemBaubleCharger();
         body_water = new ItemWaterBody();
         key_winged = new ItemKeyWinged();
+
+        gunpowder_energized = new ItemGunpowderEnergized();
+        water_clear = new ItemWaterClear();
+        phial_nectar = new ItemNectar();
     }
 
     private static void initRiteMaterials() {
@@ -189,26 +201,34 @@ public class ModItems {
     }
 
     private static void initRiteTools() {
-        incantation_chaos = new IncantationBase("incantation_chaos", RiteInit.riteChaos, Aspects.chaos, 4);
         incantation_light = new IncantationBase("incantation_light", RiteInit.riteKnowledge, Aspects.light, 4);
-        incantation_feast = new IncantationBase("incantation_feast", RiteInit.riteFeast, Aspects.life, 4);
-        incantation_conflagration = new IncantationBase("incantation_conflagration", RiteInit.riteConflagration, Aspects.fire, 4);
-        incantation_wind = new IncantationBase("incantation_wind", RiteInit.riteShredding, Aspects.air, 4);
-        incantation_gaia = new IncantationBase("incantation_gaia", RiteInit.riteGaiasGaze, Aspects.earth, 4);
-        incantation_depths = new IncantationBase("incantation_depths", RiteInit.riteDrowningAstral, Aspects.water, 4);
-        incantation_compression = new IncantationBase("incantation_compression", RiteInit.riteCompression, Aspects.aether, 4);
+        incantation_reforging = new IncantationBase("incantation_reforging", RiteInit.riteReforging, Aspects.fire, 1);
+
+        incantation_chaos = new IncantationBase("incantation_chaos", RiteInit.riteChaos, Aspects.chaos, 4);
         incantation_forging = new IncantationBase("incantation_forging", RiteInit.riteForging, Aspects.fire, 4);
+
+        incantation_feast = new IncantationBase("incantation_feast", RiteInit.riteFeast, Aspects.life, 4);
         incantation_recruiting = new IncantationBase("incantation_recruiting", RiteInit.riteRecruiting, Aspects.soul, 2);
         incantation_weather = new IncantationBase("incantation_weather", RiteInit.riteWeather, Aspects.water, 2);
         incantation_day = new IncantationBase("incantation_day", RiteInit.riteDay, Aspects.light, 1);
         incantation_night = new IncantationBase("incantation_night", RiteInit.riteNight, Aspects.ice, 1);
         incantation_binding = new IncantationBase("incantation_binding", RiteInit.riteBinding, Aspects.earth, 1);
         incantation_unbinding = new IncantationBase("incantation_unbinding", RiteInit.riteUnbinding, Aspects.earth, 1);
+        incantation_health_share = new IncantationBase("incantation_health_share", RiteInit.riteHealthShare, Aspects.earth, 1);
+
+        incantation_conflagration = new IncantationBase("incantation_conflagration", RiteInit.riteConflagration, Aspects.fire, 4);
+        incantation_wind = new IncantationBase("incantation_wind", RiteInit.riteShredding, Aspects.air, 4);
+        incantation_gaia = new IncantationBase("incantation_gaia", RiteInit.riteGaiasGaze, Aspects.earth, 4);
+        incantation_depths = new IncantationBase("incantation_depths", RiteInit.riteDrowningAstral, Aspects.water, 4);
+        incantation_compression = new IncantationBase("incantation_compression", RiteInit.riteCompression, Aspects.aether, 4);
+
         hammer_heat = new ItemHammerHeat();
         dagger_sacrificial = new ItemDaggerSacrificial();
         soul_mirror = new ItemSoulMirror();
         heart_stone = new ItemHeartStone();
         tool_channeling = new ItemChannelingTool();
+        splendor_eye = new ItemEyeSplendor();//ItemAspects("splendor_eye", 4, false, Aspects.light); //shows current "Hour" and used for interaction with deities
+        heart_human = new ItemAspects("heart_human", 4, false, Aspects.body); //idk about that one--- crafted by killing a villager with a heart of in the one hand, and redmost wine in the other
     }
 
     public static void register(IForgeRegistry<Item> registry) {

@@ -2,12 +2,16 @@ package de.aelpecyem.elementaristics.recipe;
 
 import de.aelpecyem.elementaristics.recipe.base.ForgeRecipe;
 import de.aelpecyem.elementaristics.recipe.base.PurifierRecipe;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class ForgeRecipes {
     public static Map<ResourceLocation, ForgeRecipe> FORGE_RECIPES = new HashMap<>();
@@ -19,17 +23,23 @@ public class ForgeRecipes {
     public static ForgeRecipe getRecipeForInputs(List<ItemStack> stacks) {
         for (ForgeRecipe recipe : FORGE_RECIPES.values()) {
             int checksPassed = 0;
+            boolean passedSlot1 = false, passedSlot2 = false, passedSlot3 = false, passedSlot4 = false, passedSlot5 = false;
             for (ItemStack stack : stacks) {
-                if (recipe.input1.apply(stack)){
+                if (!passedSlot1 && recipe.input1.apply(stack)) {
                     checksPassed++;
-                }else if(recipe.input2.apply(stack)){
+                    passedSlot1 = true;
+                } else if (!passedSlot2 && recipe.input2.apply(stack)) {
                     checksPassed++;
-                }else if(recipe.input3.apply(stack)){
+                    passedSlot2 = true;
+                } else if (!passedSlot3 && recipe.input3.apply(stack)) {
                     checksPassed++;
-                }else if (recipe.input4.apply(stack)){
+                    passedSlot3 = true;
+                } else if (!passedSlot4 && recipe.input4.apply(stack)) {
                     checksPassed++;
-                }else if (recipe.input5.apply(stack)){
+                    passedSlot4 = true;
+                } else if (!passedSlot5 && recipe.input5.apply(stack)) {
                     checksPassed++;
+                    passedSlot5 = true;
                 }
             }
             if (checksPassed >= 5){
@@ -38,4 +48,5 @@ public class ForgeRecipes {
         }
         return null;
     }
+
 }

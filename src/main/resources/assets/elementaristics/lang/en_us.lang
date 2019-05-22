@@ -85,6 +85,7 @@ item.hammer_heat.name=Hammer of Heat
 item.head_hammer.name=Archaic Hammer Head
 item.dagger_sacrificial.name=Sacrificial Dagger
 item.heart_stone.name=Heart of Stone
+
 item.incantation_chaos.name=Chaotic Incantation
 item.incantation_light.name=Incantation of Light
 item.incantation_feast.name=Hungry Incantation
@@ -99,6 +100,11 @@ item.incantation_compression.name=Incantation of Compression
 item.incantation_day.name=Incantation of the Sun
 item.incantation_night.name=Incantation of the Moon
 item.incantation_weather.name=Incantation of the Sky
+item.incantation_binding.name=Binding Incantation
+item.incantation_unbinding.name=Unbinding Incantation
+item.incantation_health_share.name=Sharing Incantation
+item.incantation_reforging.name=Incantation of Reforging
+
 item.water_purest.name=Purest Water
 item.sparks_living.name=Living Sparks
 item.earth_purest.name=Purest Earth
@@ -130,6 +136,12 @@ item.charger_soul.name=Maganatic Accumulator
 item.tool_channeling.name=Channeling Tool
 item.body_water.name=Aquatic Body
 item.key_winged.name=Winged Key
+item.gunpowder_energized.name=Energized Gunpowder
+
+item.phial_nectar.name=Phial of Nectar
+item.water_clear.name=Clear Water
+item.heart_human.name=Human Heart
+item.splendor_eye.name=Splendorous Eye
 
 #Essences (Items and Blocks)
 item.essence_air.name=Air Essence
@@ -195,6 +207,8 @@ tile.basin_infusion.name=Infusion Basin
 tile.generator_combustion.name=Arcane Combustion Generator
 tile.storage_energy.name=Occult Energy Core
 
+tile.symbol_dragon_fire.name=Symbol of the Fire Dragon
+
 #Advancements
 advancement.elementaristics.root=Elementaristics
 advancement.elementaristics.root_research=Discovered Aspects
@@ -208,6 +222,8 @@ advancement.elementaristics.tunneler=Whoosh.
 advancement.elementaristics.reactor=Not of the giant kind
 advancement.elementaristics.basin=Flux free
 advancement.elementaristics.energy=Behold: technology!
+advancement.elementaristics.binding=More than just a frame of bones
+advancement.elementaristics.glory=There shall be glory!
 
 advancement.elementaristics.ascension_1=Far above, but just space
 advancement.elementaristics.ascension_2=THE MORE-!
@@ -231,6 +247,8 @@ advancement.elementaristics.tunneler.desc=Build a Tunneler to accelerate item pa
 advancement.elementaristics.reactor.desc=Build a Reactor to let (al-)chemicals react
 advancement.elementaristics.basin.desc=Build an Infusion Basin to infuse items with essences
 advancement.elementaristics.energy.desc=Build a Channeling Tool
+advancement.elementaristics.binding.desc=Build a Heart of Stone
+advancement.elementaristics.glory.desc=Build a Splendorous Eye
 
 advancement.elementaristics.ascension_1.desc=Study the essence of space
 advancement.elementaristics.ascension_2.desc=Build an Altar to perform rites
@@ -300,6 +318,7 @@ tooltip.posZ=Bound Z-Coordinates:
 
 tooltip.spell_current=Current Spell:
 tooltip.no_current=No current Spell
+
 #Rites
 rite.elementaristics:rite_knowledge.name=Enlightenment's Sighing
 rite.elementaristics:rite_feast.name=The Feast on the Soul
@@ -315,6 +334,10 @@ rite.elementaristics:soul_compression.name=Compression of the Soul
 rite.elementaristics:rite_day.name=Rite of the Sun
 rite.elementaristics:rite_night.name=Rite of the Moon
 rite.elementaristics:rite_weather.name=Rite of the Shifting Clouds
+rite.elementaristics:rite_binding.name=Rite of the Shared Frame
+rite.elementaristics:rite_unbinding.name=Rite of the Falling Towers
+rite.elementaristics:rite_reforging.name=Reshaping Rite
+rite.elementaristics:rite_health_share.name=Rite of the Patchwork
 
 
 #Misc
@@ -343,10 +366,11 @@ message.ascension_1.standard=Walls have been broken. Walls that were limiting.
 hud.magan.amount=Current Magan:
 
 message.drugs=This is more potent than I thought... I might experience visions
-message.vision.1=Light blurs at the edge of perception
-message.vision.2=The tongue savors enlightenment
-message.vision.3=And as the knowledge runs down the mind
-message.vision.4=It shows that it knows what you might find
+
+message.vision.1="What are you? Faust?"
+message.vision.2="Thankfully not"
+message.vision.3="Well what are you then? Mephistopheles?"
+message.vision.4="I could be"
 
 message.know_soul_fire=The fire roars and so does my soul... and I shall burn forever.
 message.know_soul_water=The water flows, the water feels... and the water feels me.
@@ -410,6 +434,14 @@ message.meditation_to_silence.name=And as the mind gets used to the fear, sudden
 message.meditation_to_laughter.name=And suddenly we laugh.
 
 message.meditation_ascension.name=The mind has been reforged, and next is the body.
+message.ascension_body.name=The body has been reforged. The skin felt like clay, but it hardened.
+message.deity_tick.name=Tick time:
+message.deity_hour.name=Hour:
+message.deity_active_current.name=It's the hour of
+message.deity_active_none.name=No deity is governing
+
+message.deity_belong.name=This shrine belongs to
+message.deity_active.name=This deity is active for 1000 ticks after tick time
 
 display.spell_locked=Locked Spell
 #Souls
@@ -455,6 +487,33 @@ aspect.electricity.name=§9Electricity
 aspect.chaos.name=§0Chaos
 aspect.order.name=§fOrder
 aspect.magan.name=§6Magan
+
+#Deities
+elementaristics:deity_nothingness=The God from-and-to-Nothingness
+elementaristics:deity_azathoth=The Blind Idiot God
+elementaristics:dragon_aether=The Dragon of Aether
+elementaristics:dragon_fire=The Dragon of Fire
+elementaristics:dragon_earth=The Dragon of Earth
+elementaristics:dragon_water=The Dragon of Water
+elementaristics:dragon_air=The Dragon of Air
+elementaristics:gate_and_key=The Gate-and-Key
+elementaristics:deity_dreamer=The Dreamer
+elementaristics:deity_angel=The Angel
+elementaristics:deity_storm=The Storm
+elementaristics:deity_fighter=The Knight-in-Blue
+elementaristics:deity_sun=The Sun-in-Splendor
+elementaristics:deity_harbinger=The Harbinger
+elementaristics:deity_queen=The Fasting Queen
+elementaristics:deity_goat=The Goat in the Wood
+elementaristics:deity_moth=The Moth
+elementaristics:deity_thread=The Thread
+elementaristics:deity_mirror=The Mirror
+elementaristics:deity_dancer=The Dancer
+elementaristics:deity_king=The Feasting King
+elementaristics:deity_mother=The Mother of Life
+elementaristics:deity_moon=The Golden Moon
+elementaristics:deity_witch=The Witch
+
 
 #Compat - Thaumcraft
 tc.research_category.ELEMENTARISTICS=Elementaristics

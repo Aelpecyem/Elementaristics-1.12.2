@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "elementaristics:splendor_eye"
+    },
+    "title": {
+      "translate": "advancement.elementaristics.glory"
+    },
+    "description": {
+      "translate": "advancement.elementaristics.glory.desc"
+    }
+  },
+  "parent": "elementaristics:progress_forging",
+  "criteria": {
+    "book": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "elementaristics:splendor_eye"
+          }
+        ]
+      }
+    }
+  }
+}

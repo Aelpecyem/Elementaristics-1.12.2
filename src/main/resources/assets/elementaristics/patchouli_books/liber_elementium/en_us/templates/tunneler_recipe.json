@@ -21,7 +21,8 @@
       "type": "item",
       "item": "#output",
       "x": 48,
-      "y": 74
+      "y": 74,
+      "link_recipe": true
     },
     {
       "type": "item",

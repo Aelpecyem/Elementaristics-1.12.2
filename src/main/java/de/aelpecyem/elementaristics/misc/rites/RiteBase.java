@@ -75,10 +75,11 @@ public abstract class RiteBase {
         return maganDrainedPerTick;
     }
 
-    public void doMagic(World world, BlockPos pos,EntityPlayer player){}
-    public void doMagic(World world, BlockPos pos, EntityPlayer player, TileEntityAltar altar){}
-    public void onRitual(World world, BlockPos altarPos, List<EntityPlayer> players, int tickCount){}
-    public void onRitual(World world, BlockPos altarPos, List<EntityPlayer> players, int tickCount,TileEntityAltar altar){}
+    public void doMagic(World world, BlockPos pos, EntityPlayer player, TileEntityAltar tile) {
+    }
+
+    public void onRitual(World world, BlockPos altarPos, List<EntityPlayer> players, int tickCoun, TileEntityAltar tile) {
+    }
    /* public boolean process(EntityPlayer player, int itemPower, float maganUsed){
         if (player.hasCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null)){
             IPlayerCapabilities cap = player.getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null);

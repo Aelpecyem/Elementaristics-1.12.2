@@ -23,11 +23,11 @@ public class SpellCounterspell extends SpellBase {
     }
 
     @Override
-    public void affect(RayTraceResult result, EntityLivingBase caster, World world) {
+    public void affect(RayTraceResult result, EntityLivingBase caster, World world, EntitySpellProjectile projectile) {
         for (int i = 0; i < 10; i++)
             Elementaristics.proxy.generateGenericParticles(caster, color, 4, 200, 0.1F, true, true);
         caster.addPotionEffect(new PotionEffect(PotionInit.potionCounterspell, 400, 0, false, false));
 
-        super.affect(result, caster, world);
+        super.affect(result, caster, world, projectile);
     }
 }

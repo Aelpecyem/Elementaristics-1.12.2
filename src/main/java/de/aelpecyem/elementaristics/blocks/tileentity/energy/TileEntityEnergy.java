@@ -16,7 +16,6 @@ import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
 
 public class TileEntityEnergy extends TileEntity implements ITickable, IHasBoundPosition {
-    //todo, make a basis for all energy TEs to be bound to a generator
     public EnergyCapability storage = new EnergyCapability(getMaxEnergy(), getTransfer(0), getTransfer(1));
 
     public int getMaxEnergy() {

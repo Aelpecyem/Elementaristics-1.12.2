@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "elementaristics:water_purest"
+    },
+    {
+      "item": "elementaristics:earth_purest"
+    }
+  ],
+  "result": {
+    "item": "elementaristics:water_clear"
+  }
+}

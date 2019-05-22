@@ -1,13 +1,10 @@
 package de.aelpecyem.elementaristics.util;
 
-import de.aelpecyem.elementaristics.entity.EntityCultist;
-import de.aelpecyem.elementaristics.entity.EntityProtoplasm;
-import de.aelpecyem.elementaristics.entity.EntitySilverThread;
-import de.aelpecyem.elementaristics.entity.EntitySpellProjectile;
+import de.aelpecyem.elementaristics.entity.*;
 import de.aelpecyem.elementaristics.entity.render.RenderCultist;
 import de.aelpecyem.elementaristics.entity.render.RenderProtoplasm;
 import de.aelpecyem.elementaristics.entity.render.RenderSilverThread;
-import de.aelpecyem.elementaristics.entity.render.RenderSpellProjectile;
+import de.aelpecyem.elementaristics.entity.render.RenderNone;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
@@ -39,8 +36,17 @@ public class RenderHandler {
         RenderingRegistry.registerEntityRenderingHandler(EntitySpellProjectile.class, new IRenderFactory<EntitySpellProjectile>() {
             @Override
             public Render<? super EntitySpellProjectile> createRenderFor(RenderManager manager) {
-                return new RenderSpellProjectile(manager);
+                return new RenderNone(manager);
             }
         });
+
+        RenderingRegistry.registerEntityRenderingHandler(EntityExplosionProjectile.class, new IRenderFactory<EntityExplosionProjectile>() {
+            @Override
+            public Render<? super EntityExplosionProjectile> createRenderFor(RenderManager manager) {
+                return new RenderNone(manager);
+            }
+        });
+
+
     }
 }

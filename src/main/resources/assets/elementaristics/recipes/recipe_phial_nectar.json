@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:glass_bottle"
+    },
+    {
+      "item": "elementaristics:essence",
+      "data": 12
+    },
+    {
+      "item": "elementaristics:sparks_brightest"
+    },
+    {
+      "item": "elementaristics:matter_maganized"
+    },
+    {
+      "item": "elementaristics:flower_laughter"
+    },
+    {
+      "item": "elementaristics:flower_laughter"
+    }
+  ],
+  "result": {
+    "item": "elementaristics:phial_nectar"
+  }
+}

@@ -109,48 +109,50 @@ public class BlockAltar extends BlockTileEntity<TileEntityAltar> {
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         TileEntityAltar tile = getTileEntity(worldIn, pos);
-        boolean approved = true;
-        if (playerIn.isSneaking()) {
-            for (int x = pos.getX() - 4; x < pos.getX() + 4; x++) {
-                for (int y = pos.getY(); y < pos.getY() + 3; y++) {
-                    for (int z = pos.getZ() - 4; z < pos.getZ() + 4; z++) {
-                        if (!(worldIn.getBlockState(new BlockPos(x, y, z)).getBlock() instanceof BlockAir || (x == pos.getX() && z == pos.getZ() && y == pos.getY() || !worldIn.getBlockState(new BlockPos(x, y, z)).getMaterial().blocksMovement()))) {
-                            Elementaristics.proxy.generateGenericParticles(worldIn, x + 0.5, y + 0.5, z + 0.5, 8073887, 6, 80, 0, false, false);
-                            approved = false;
+        if (playerIn.getHeldItem(hand).isEmpty() || playerIn.getHeldItem(hand).getItem() instanceof IncantationBase) {
+            boolean approved = true;
+            if (playerIn.isSneaking()) {
+                for (int x = pos.getX() - 4; x < pos.getX() + 4; x++) {
+                    for (int y = pos.getY(); y < pos.getY() + 3; y++) {
+                        for (int z = pos.getZ() - 4; z < pos.getZ() + 4; z++) {
+                            if (!(worldIn.getBlockState(new BlockPos(x, y, z)).getBlock() instanceof BlockAir || (x == pos.getX() && z == pos.getZ() && y == pos.getY() || !worldIn.getBlockState(new BlockPos(x, y, z)).getMaterial().blocksMovement()))) {
+                                Elementaristics.proxy.generateGenericParticles(worldIn, x + 0.5, y + 0.5, z + 0.5, 8073887, 6, 80, 0, false, false);
+                                approved = false;
+                            }
+                        }
+                    }
+                }
+                if (approved) {
+                    if (tile.getCultistsInArea().size() < 4) {
+                        for (int i = tile.getCultistsInArea().size() + 1; i < 5; i++) {
+                            tile.recruitCultists(i);
+                        }
+                    }
+                } else {
+                    if (worldIn.isRemote)
+                        playerIn.sendStatusMessage(new TextComponentString(TextFormatting.RED + I18n.format("message.call_cultist_error.name")), true);
+                    return false;
+                }
+                return true;
+            }
+            if (playerIn.getHeldItem(hand).getItem() instanceof IncantationBase) {
+                if (tile.currentRite.equals(((IncantationBase) playerIn.getHeldItem(hand).getItem()).getRite().name.toString())) {
+                    tile.currentRite = "";
+                    tile.tickCount = 0;
+                } else {
+                    if (tile.getCultistsInArea().size() < 5) {
+                        IncantationBase incantation = (IncantationBase) playerIn.getHeldItem(hand).getItem();
+                        tile.currentRite = incantation.getRite().getName().toString();
+                        tile.tickCount = 0;
+                    } else {
+                        if (worldIn.isRemote) {
+                            playerIn.sendStatusMessage(new TextComponentString(TextFormatting.RED + I18n.format("message.rite_fail_cultists.name")), true);
                         }
                     }
                 }
             }
-            if (approved) {
-                if (tile.getCultistsInArea().size() < 4) {
-                    for (int i = tile.getCultistsInArea().size() + 1; i < 5; i++) {
-                        tile.recruitCultists(i);
-                    }
-                }
-            } else {
-                if (worldIn.isRemote)
-                    playerIn.sendStatusMessage(new TextComponentString(TextFormatting.RED + I18n.format("message.call_cultist_error.name")), true);
-                return false;
-            }
-            return true;
         }
-        if (playerIn.getHeldItem(hand).getItem() instanceof IncantationBase) {
-            if (tile.currentRite.equals(((IncantationBase) playerIn.getHeldItem(hand).getItem()).getRite().name.toString())) {
-                    tile.currentRite = "";
-                    tile.tickCount = 0;
-            } else {
-                if (tile.getCultistsInArea().size() < 5) {
-                    IncantationBase incantation = (IncantationBase) playerIn.getHeldItem(hand).getItem();
-                    tile.currentRite = incantation.getRite().getName().toString();
-                    tile.tickCount = 0;
-                } else {
-                    if (worldIn.isRemote) {
-                        playerIn.sendStatusMessage(new TextComponentString(TextFormatting.RED + I18n.format("message.rite_fail_cultists.name")), true);
-                    }
-                }
-            }
-        }
-        return true;
+        return false;
     }
 
 

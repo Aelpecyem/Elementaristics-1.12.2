@@ -21,7 +21,6 @@ public class WorldGen implements IWorldGenerator {
         }
     }
 
-    //TODO adjust values
     private void generateOverworld(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
 
     }

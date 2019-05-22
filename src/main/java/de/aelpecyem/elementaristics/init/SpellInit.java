@@ -39,6 +39,8 @@ public class SpellInit {
     public static SpellBase spell_activate;
     public static SpellBase spell_counterspell;
 
+    public static SpellBase spell_explosion;
+
     public static void initSpells() {
         spell_attack_mana = new DamageSpellBase(new ResourceLocation(Elementaristics.MODID, "damage_mana"), 10, 10, 40, DamageSource.MAGIC, 6, Aspects.mana.getColor());
         spell_attack_magan = new DamageSpellBase(new ResourceLocation(Elementaristics.MODID, "damage_magan"), 15, 14, 40, DamageSource.MAGIC, 5, Aspects.magan.getColor());
@@ -61,5 +63,7 @@ public class SpellInit {
 
         spell_activate = new SpellActivate();
         spell_counterspell = new SpellCounterspell();
+
+        spell_explosion = new SpellExplosion();
     }
 }

@@ -16,6 +16,5 @@
       "recipe": "elementaristics:basin",
       "text": "$(o)I swear its no crucible$()"
     }
-  ],
-  "advancement": "elementaristics:progress_ascension_2"
+  ]
 }

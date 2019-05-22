@@ -112,8 +112,9 @@ public class BlockPurifier extends BlockTileEntity<TileEntityPurifier> {
                 InventoryUtil.drawItemFromInventory(tile, tile.inventory, playerIn);
 
             } else {
-                if (tile.inventory.getStackInSlot(0).isEmpty()) {
-                    playerIn.setHeldItem(hand, itemHandler.insertItem(0, heldItem, false));
+                if (tile.inventory.getStackInSlot(0).isEmpty() || tile.inventory.getStackInSlot(0).getItem() == heldItem.getItem()) {
+                    InventoryUtil.insertOneItemToInventory(tile, tile.inventory, 0, playerIn, hand);
+                    //playerIn.setHeldItem(hand, itemHandler.insertItem(0, heldItem, false));
                     tile.markDirty();
                 }
 

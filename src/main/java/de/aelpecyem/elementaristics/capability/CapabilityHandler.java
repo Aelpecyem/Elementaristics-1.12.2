@@ -5,14 +5,11 @@ import de.aelpecyem.elementaristics.capability.player.IPlayerCapabilities;
 import de.aelpecyem.elementaristics.capability.player.PlayerCapProvider;
 import de.aelpecyem.elementaristics.capability.player.souls.soulCaps.SoulCaps;
 import de.aelpecyem.elementaristics.init.SoulInit;
-import de.aelpecyem.elementaristics.misc.elements.Aspects;
 import de.aelpecyem.elementaristics.networking.PacketHandler;
+import de.aelpecyem.elementaristics.networking.cap.SpawnBoundParticles;
 import de.aelpecyem.elementaristics.networking.cap.CapabilitySync;
-import de.aelpecyem.elementaristics.networking.player.PacketPressSpace;
 import de.aelpecyem.elementaristics.networking.player.PacketPressSpellKey;
 import de.aelpecyem.elementaristics.util.Keybinds;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.settings.GameSettings;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.ResourceLocation;
@@ -21,11 +18,7 @@ import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.InputEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-import scala.collection.parallel.ParIterableLike;
 
 public class CapabilityHandler {
 
@@ -47,7 +40,9 @@ public class CapabilityHandler {
         if (player.hasCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null)) {
             IPlayerCapabilities caps = player.getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null);
             IPlayerCapabilities oldCaps = event.getOriginal().getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null);
-
+            if (event.getOriginal().getEntityData().hasKey("sharing_uuid")) {
+                player.getEntityData().setUniqueId("sharing_uuid", event.getOriginal().getEntityData().getUniqueId("sharing_uuid"));
+            }
             caps.setSoulId(oldCaps.getSoulId());
             caps.setKnowsSoul(oldCaps.knowsSoul());
             caps.setMaxMagan(oldCaps.getMaxMagan());

@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ESE",
+    "#P#",
+    "E#E"
+  ],
+  "key": {
+    "#": {
+      "item": "elementaristics:essence",
+      "data": 9
+    },
+    "P": {
+      "item": "minecraft:paper"
+    },
+    "E": {
+      "item": "elementaristics:essence",
+      "data": 1
+    },
+    "S": {
+      "item": "elementaristics:essence",
+      "data": 16
+    }
+  },
+  "result": {
+    "item": "elementaristics:incantation_binding",
+    "count": 1
+  }
+}

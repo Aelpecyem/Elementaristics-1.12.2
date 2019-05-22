@@ -1,29 +1,34 @@
 package de.aelpecyem.elementaristics.misc.pantheon;
 
 import de.aelpecyem.elementaristics.blocks.tileentity.pantheon.TileEntityDeityShrine;
+import de.aelpecyem.elementaristics.init.Deities;
 import de.aelpecyem.elementaristics.misc.elements.Aspect;
 import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nullable;
 
 public abstract class Deity {
-    private int tickTimeBegin, tickTimeEnd;
+    private long tickTimeBegin;
     private ResourceLocation name;
     private Aspect aspect;
+    private int color;
 
-    public Deity(int tickTimeBegin, int tickTimeEnd, ResourceLocation name, @Nullable Aspect aspect) {
+    public Deity(long tickTimeBegin, ResourceLocation name, @Nullable Aspect aspect, int color) {
         this.tickTimeBegin = tickTimeBegin;
-        this.tickTimeEnd = tickTimeEnd;
         this.name = name;
+        this.aspect = aspect;
+        this.color = color;
+        Deities.deities.put(name, this);
     }
 
-    public int getTickTimeBegin() {
+    public int getColor() {
+        return color;
+    }
+
+    public long getTickTimeBegin() {
         return tickTimeBegin;
     }
 
-    public int getTickTimeEnd() {
-        return tickTimeEnd;
-    }
 
     public ResourceLocation getName() {
         return name;

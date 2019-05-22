@@ -17,11 +17,9 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.NonNullList;
+import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -153,6 +151,7 @@ public class BlockBasin extends BlockTileEntity<TileEntityInfusionBasin> {
                         tile.aspectIDs.remove(0);
                         tile.addAspects(heldItem);
                         heldItem.shrink(1);
+                        worldIn.playSound(null, pos, SoundEvents.ENTITY_GENERIC_SPLASH, SoundCategory.AMBIENT, 1, 1);
                         tile.markDirty();
                     }
                 }
@@ -163,6 +162,8 @@ public class BlockBasin extends BlockTileEntity<TileEntityInfusionBasin> {
                     if (tile.fillCount < 1) {
                         tile.fillCount = 4;
                         heldItem.shrink(1);
+                        worldIn.playSound(null, pos, SoundEvents.ITEM_BUCKET_FILL, SoundCategory.AMBIENT, 1, 1);
+                        tile.markDirty();
                     }
                 } else if (tile.inventory.getStackInSlot(0).isEmpty()) {
                     playerIn.setHeldItem(hand, itemHandler.insertItem(0, heldItem, false));

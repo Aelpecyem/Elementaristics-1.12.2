@@ -12,6 +12,11 @@
       "type": "elementaristics:forging_recipe",
       "recipe": "elementaristics:hammer_heat",
       "text": "$(o)Clonk$()"
+    },
+    {
+      "type": "elementaristics:forging_recipe",
+      "recipe": "elementaristics:hammer_head",
+      "text": "The $(item)Archaic Hammer Head$() can be found in houses of blacksmiths; however, it can also be crafted."
     }
   ]
 }

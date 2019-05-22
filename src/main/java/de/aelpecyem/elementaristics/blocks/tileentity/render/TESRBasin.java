@@ -70,7 +70,7 @@ public class TESRBasin extends TileEntitySpecialRenderer<TileEntityInfusionBasin
     }
 
     public Color getWaterColor(TileEntityInfusionBasin te) {
-        return MiscUtil.blend(MiscUtil.getColorForEssenceIds(te.aspectIDs), new Color(47, 130, 232, 205), Math.min(0.1 * te.aspectIDs.size(), 0.9), 1 - Math.min(0.1 * te.aspectIDs.size(), 0.9));
+        return MiscUtil.blend(MiscUtil.getColorForEssenceIds(te.aspectIDs), new Color(47, 130, 232, 205), Math.min(0.2 * te.aspectIDs.size(), 0.9), 1 - Math.min(0.2 * te.aspectIDs.size(), 0.9));
     }
 
 }

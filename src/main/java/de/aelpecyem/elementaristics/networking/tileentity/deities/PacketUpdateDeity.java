@@ -19,9 +19,10 @@ public class PacketUpdateDeity implements IMessage {
     private boolean unusedBool;
     private int unusedInt;
     private float unusedFloat;
+    private long altarPos;
 
 
-    public PacketUpdateDeity(BlockPos pos, String deityBound, boolean isStatue, String unusedString, boolean unusedBool, int unusedInt, float unusedFloat) {
+    public PacketUpdateDeity(BlockPos pos, String deityBound, boolean isStatue, String unusedString, boolean unusedBool, int unusedInt, float unusedFloat, long altarPos) {
         this.pos = pos;
         this.deityBound = deityBound;
         this.isStatue = isStatue;
@@ -29,11 +30,11 @@ public class PacketUpdateDeity implements IMessage {
         this.unusedBool = unusedBool;
         this.unusedInt = unusedInt;
         this.unusedFloat = unusedFloat;
-
+        this.altarPos = altarPos;
     }
 
     public PacketUpdateDeity(TileEntityDeityShrine te) {
-        this(te.getPos(), te.deityBound, te.isStatue, te.unusedString, te.unusedBool, te.unusedInt, te.unusedFloat);
+        this(te.getPos(), te.deityBound, te.isStatue, te.unusedString, te.unusedBool, te.unusedInt, te.unusedFloat, te.altarPos.toLong());
     }
 
     public PacketUpdateDeity() {
@@ -49,6 +50,8 @@ public class PacketUpdateDeity implements IMessage {
         buf.writeBoolean(unusedBool);
         buf.writeInt(unusedInt);
         buf.writeFloat(unusedFloat);
+
+        buf.writeLong(altarPos);
     }
 
     @Override
@@ -61,6 +64,8 @@ public class PacketUpdateDeity implements IMessage {
         unusedBool = buf.readBoolean();
         unusedInt = buf.readInt();
         unusedFloat = buf.readFloat();
+
+        altarPos = buf.readLong();
     }
 
     public static class Handler implements IMessageHandler<PacketUpdateDeity, IMessage> {
@@ -76,6 +81,7 @@ public class PacketUpdateDeity implements IMessage {
                     te.unusedBool = message.unusedBool;
                     te.unusedInt = message.unusedInt;
                     te.unusedFloat = message.unusedFloat;
+                    te.altarPos = BlockPos.fromLong(message.altarPos);
 
                 }
             });

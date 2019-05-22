@@ -84,66 +84,59 @@ public class ClientProxy extends CommonProxy {
 
     @Override
     public void generateGenericParticles(Entity entityIn, int color, float scale, int maxAge, float gravity, boolean collision, boolean fade) {
-        if (entityIn.world.isRemote) {
-            double motionX = entityIn.world.rand.nextGaussian() * 0.02D;
-            double motionY = entityIn.world.rand.nextGaussian() * 0.02D;
-            double motionZ = entityIn.world.rand.nextGaussian() * 0.02D;
-            Particle particleGeneric = new ParticleGeneric(
-                    entityIn.world,
-                    entityIn.posX + entityIn.world.rand.nextFloat() * entityIn.width
-                            * 2.0F - entityIn.width,
-                    entityIn.posY + 0.5D + entityIn.world.rand.nextFloat()
-                            * entityIn.height,
-                    entityIn.posZ + entityIn.world.rand.nextFloat() * entityIn.width
-                            * 2.0F - entityIn.width,
-                    motionX,
-                    motionY,
-                    motionZ,
-                    color, scale, maxAge, gravity, collision, fade, false, 0, 0, 0);
-            Minecraft.getMinecraft().effectRenderer.addEffect(particleGeneric);
-        }
+        double motionX = entityIn.world.rand.nextGaussian() * 0.02D;
+        double motionY = entityIn.world.rand.nextGaussian() * 0.02D;
+        double motionZ = entityIn.world.rand.nextGaussian() * 0.02D;
+        Particle particleGeneric = new ParticleGeneric(
+                entityIn.world,
+                entityIn.posX + entityIn.world.rand.nextFloat() * entityIn.width
+                        * 2.0F - entityIn.width,
+                entityIn.posY + 0.5D + entityIn.world.rand.nextFloat()
+                        * entityIn.height,
+                entityIn.posZ + entityIn.world.rand.nextFloat() * entityIn.width
+                        * 2.0F - entityIn.width,
+                motionX,
+                motionY,
+                motionZ,
+                color, scale, maxAge, gravity, collision, fade, false, 0, 0, 0);
+        Minecraft.getMinecraft().effectRenderer.addEffect(particleGeneric);
     }
 
     public void generateGenericParticles(World world, double x, double y, double z, int color, float scale, int maxAge, float gravity, boolean collision, boolean fade) {
-        if (world.isRemote) {
-            double motionX = world.rand.nextGaussian() * 0.02D;
-            double motionY = world.rand.nextGaussian() * 0.02D;
-            double motionZ = world.rand.nextGaussian() * 0.02D;
-            Particle particleGeneric = new ParticleGeneric(world,
-                    x, y, z,
-                    motionX,
-                    motionY,
-                    motionZ,
-                    color, scale, maxAge, gravity, collision, fade, false, 0, 0, 0);
-            Minecraft.getMinecraft().effectRenderer.addEffect(particleGeneric);
-        }
+        double motionX = world.rand.nextGaussian() * 0.02D;
+        double motionY = world.rand.nextGaussian() * 0.02D;
+        double motionZ = world.rand.nextGaussian() * 0.02D;
+        Particle particleGeneric = new ParticleGeneric(world,
+                x, y, z,
+                motionX,
+                motionY,
+                motionZ,
+                color, scale, maxAge, gravity, collision, fade, false, 0, 0, 0);
+        Minecraft.getMinecraft().effectRenderer.addEffect(particleGeneric);
     }
 
     public void generateGenericParticles(World world, double x, double y, double z, double velX, double velY, double velZ, int color, float scale, int maxAge, float gravity, boolean collision, boolean fade) {
-        if (world.isRemote) {
-            Particle particleGeneric = new ParticleGeneric(world,
-                    x, y, z,
-                    velX,
-                    velY,
-                    velZ,
-                    color, scale, maxAge, gravity, collision, fade, false, 0, 0, 0);
-            Minecraft.getMinecraft().effectRenderer.addEffect(particleGeneric);
-        }
+        Particle particleGeneric = new ParticleGeneric(world,
+                x, y, z,
+                velX,
+                velY,
+                velZ,
+                color, scale, maxAge, gravity, collision, fade, false, 0, 0, 0);
+        Minecraft.getMinecraft().effectRenderer.addEffect(particleGeneric);
     }
 
     public void generateGenericParticles(World world, BlockPos pos, int color, float scale, int maxAge, float gravity, boolean collision, boolean fade) {
-        if (world.isRemote) {
-            double motionX = world.rand.nextGaussian() * 0.02D;
-            double motionY = world.rand.nextGaussian() * 0.02D;
-            double motionZ = world.rand.nextGaussian() * 0.02D;
-            Particle particleGeneric = new ParticleGeneric(world,
-                    pos.getX(), pos.getY(), pos.getZ(),
-                    motionX,
-                    motionY,
-                    motionZ,
-                    color, scale, maxAge, gravity, collision, fade, false, 0, 0, 0);
+        double motionX = world.rand.nextGaussian() * 0.02D;
+        double motionY = world.rand.nextGaussian() * 0.02D;
+        double motionZ = world.rand.nextGaussian() * 0.02D;
+        Particle particleGeneric = new ParticleGeneric(world,
+                pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F,
+                motionX,
+                motionY,
+                motionZ,
+                color, scale, maxAge, gravity, collision, fade, false, 0, 0, 0);
 
-        }
+        Minecraft.getMinecraft().effectRenderer.addEffect(particleGeneric);
     }
 
 

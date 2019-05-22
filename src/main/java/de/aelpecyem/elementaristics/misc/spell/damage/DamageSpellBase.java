@@ -1,5 +1,6 @@
 package de.aelpecyem.elementaristics.misc.spell.damage;
 
+import de.aelpecyem.elementaristics.entity.EntitySpellProjectile;
 import de.aelpecyem.elementaristics.misc.spell.SpellBase;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.DamageSource;
@@ -24,7 +25,7 @@ public class DamageSpellBase extends SpellBase {
     }
 
     @Override
-    public void affect(RayTraceResult result, EntityLivingBase caster, World world) {
+    public void affect(RayTraceResult result, EntityLivingBase caster, World world, EntitySpellProjectile projectile) {
         EntityLivingBase target;
         if (result.entityHit instanceof EntityLivingBase) {
             target = (EntityLivingBase) result.entityHit;
@@ -33,6 +34,6 @@ public class DamageSpellBase extends SpellBase {
         } else {
             return;
         }
-        super.affect(result, caster, world);
+        super.affect(result, caster, world, projectile);
     }
 }
