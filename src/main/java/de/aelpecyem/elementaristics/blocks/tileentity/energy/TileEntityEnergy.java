@@ -84,7 +84,7 @@ public class TileEntityEnergy extends TileEntity implements ITickable, IHasBound
         if (getPositionBoundTo() != null || getPositionBoundTo() != pos) {
             if (world.getTileEntity(getPositionBoundTo()) != null) {
                 TileEntity te = world.getTileEntity(getPositionBoundTo());
-                if (te.hasCapability(CapabilityEnergy.ENERGY, null) && getPositionBoundTo().getDistance(pos.getX(), pos.getY(), pos.getZ()) < 16) {
+                if (te.hasCapability(CapabilityEnergy.ENERGY, null) && getPositionBoundTo().getDistance(pos.getX(), pos.getY(), pos.getZ()) < 18) {
                     IEnergyStorage linkedTo = te.getCapability(CapabilityEnergy.ENERGY, null);
                     if (receives) {
                         if (storage.getEnergyStored() + storage.getMaxReceive() <= storage.getMaxEnergyStored())

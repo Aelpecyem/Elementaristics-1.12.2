@@ -2,6 +2,9 @@ package de.aelpecyem.elementaristics.blocks.tileentity;
 
 import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.blocks.tileentity.blocks.BlockReactor;
+import de.aelpecyem.elementaristics.blocks.tileentity.blocks.pantheon.BlockDeityShrineBase;
+import de.aelpecyem.elementaristics.blocks.tileentity.energy.TileEntityEnergy;
+import de.aelpecyem.elementaristics.blocks.tileentity.pantheon.TileEntityDeityShrine;
 import de.aelpecyem.elementaristics.capability.player.IPlayerCapabilities;
 import de.aelpecyem.elementaristics.capability.player.PlayerCapProvider;
 import de.aelpecyem.elementaristics.capability.player.souls.Soul;
@@ -10,6 +13,7 @@ import de.aelpecyem.elementaristics.init.RiteInit;
 import de.aelpecyem.elementaristics.init.SoulInit;
 import de.aelpecyem.elementaristics.items.base.artifacts.rites.IHasRiteUse;
 import de.aelpecyem.elementaristics.misc.elements.Aspect;
+import de.aelpecyem.elementaristics.misc.pantheon.Deity;
 import de.aelpecyem.elementaristics.misc.rites.RiteBase;
 import de.aelpecyem.elementaristics.networking.PacketHandler;
 import de.aelpecyem.elementaristics.networking.tileentity.altar.PacketUpdateAltar;
@@ -17,6 +21,7 @@ import de.aelpecyem.elementaristics.networking.tileentity.inventory.PacketUpdate
 import de.aelpecyem.elementaristics.networking.tileentity.tick.PacketUpdateTickTime;
 import de.aelpecyem.elementaristics.particles.ParticleGeneric;
 import de.aelpecyem.elementaristics.util.MaganUtil;
+import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -27,16 +32,19 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.ItemStackHandler;
+import org.lwjgl.Sys;
 
 import javax.annotation.Nullable;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class TileEntityAltar extends TileEntity implements ITickable, IHasTickCount {
 
     public int tickCount;
     public String currentRite = "";
     Random random = new Random();
-    List<Aspect> aspectsExt = new ArrayList<>();
+    int addedPower = 0;
+    Map<Aspect, Integer> aspectsExt = new ConcurrentHashMap<>();
 
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
@@ -52,15 +60,20 @@ public class TileEntityAltar extends TileEntity implements ITickable, IHasTickCo
         super.readFromNBT(compound);
     }
 
-
+    //check IHasRiteUse for blocks, too
     @Override
     public void update() {
+        if (world.provider.getWorldTime() % 1000 == 0) {
+            aspectsExt.clear();
+            addedPower = 0;
+        }
         if (!world.isRemote) {
             PacketHandler.sendToAllAround(world, pos, 64, new PacketUpdateTickTime(this, tickCount));
             PacketHandler.sendToAllAround(world, pos, 64, new PacketUpdateAltar(TileEntityAltar.this));
         }
 
         if (!currentRite.equals("")) {
+            refreshAddedAspects();
             if (RiteInit.getRiteForResLoc(currentRite) != null) {
                 if (getCultistsInArea().size() < 5) {
                     RiteBase rite = RiteInit.getRiteForResLoc(currentRite);
@@ -111,6 +124,7 @@ public class TileEntityAltar extends TileEntity implements ITickable, IHasTickCo
         } else {
             tickCount = 0;
             aspectsExt.clear();
+            addedPower = 0;
         }
     }
 
@@ -127,7 +141,6 @@ public class TileEntityAltar extends TileEntity implements ITickable, IHasTickCo
                                 return false;
                             }
                         }
-                        System.out.println("Found cultist");
                         return true;
                     }
                 }
@@ -135,7 +148,6 @@ public class TileEntityAltar extends TileEntity implements ITickable, IHasTickCo
             }
         });
         if (!cultists.isEmpty()) {
-            System.out.println("Processing Cultist");
             EntityCultist cultist = null;
             for (EntityCultist entity : cultists) {
                 if (RiteInit.getRiteForResLoc(currentRite) != null && RiteInit.getRiteForResLoc(currentRite).getAspectsRequired().contains(entity.getAspect())) {
@@ -155,9 +167,9 @@ public class TileEntityAltar extends TileEntity implements ITickable, IHasTickCo
     }
 
     private void doFailingShow() {
-        Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(world, pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, world.rand.nextGaussian() * 0.125F, Math.abs(world.rand.nextGaussian()) * 0.125F, world.rand.nextGaussian() * 0.125F, 10092778, 3, 10, 0, true, false, 1F));
-        Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(world, pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, world.rand.nextGaussian() * 0.1F, Math.abs(world.rand.nextGaussian()) * 0.1F, world.rand.nextGaussian() * 0.1F, 10092724, 1, 10, 0, true, false, 1F));
-        Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(world, pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, world.rand.nextGaussian() * 0.075F, Math.abs(world.rand.nextGaussian()) * 0.075F, world.rand.nextGaussian() * 0.075F, 10092661, 1, 10, 0, true, false, 1F));
+        Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(world, pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, world.rand.nextGaussian() * 0.125F, Math.abs(world.rand.nextGaussian()) * 0.125F, world.rand.nextGaussian() * 0.125F, 10092778, 3, 10, 0, true, false, 1F, false));
+        Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(world, pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, world.rand.nextGaussian() * 0.1F, Math.abs(world.rand.nextGaussian()) * 0.1F, world.rand.nextGaussian() * 0.1F, 10092724, 1, 10, 0, true, false, 1F, false));
+        Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(world, pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, world.rand.nextGaussian() * 0.075F, Math.abs(world.rand.nextGaussian()) * 0.075F, world.rand.nextGaussian() * 0.075F, 10092661, 1, 10, 0, true, false, 1F, false));
     }
 
     public Set<Soul> getSoulsInArea() {
@@ -187,7 +199,7 @@ public class TileEntityAltar extends TileEntity implements ITickable, IHasTickCo
                                 cultist.posY + 0.5D + cultist.world.rand.nextFloat()
                                         * cultist.height,
                                 cultist.posZ + cultist.world.rand.nextFloat() * cultist.width
-                                        * 2.0F - cultist.width, 0, 0, 0, cultist.getAspect().getColor(), 1, 100, 0, true, true, true, pos.getX() + 0.5F, pos.getY() + 1, pos.getZ() + 0.5F));
+                                        * 2.0F - cultist.width, 0, 0, 0, cultist.getAspect().getColor(), 1, 100, 0, true, true, true, true, pos.getX() + 0.5F, pos.getY() + 1, pos.getZ() + 0.5F));
                     }
                     return true;
                 }
@@ -208,7 +220,7 @@ public class TileEntityAltar extends TileEntity implements ITickable, IHasTickCo
                                         player.posY + 0.5D + player.world.rand.nextFloat()
                                                 * player.height,
                                         player.posZ + player.world.rand.nextFloat() * player.width
-                                                * 2.0F - player.width, 0, 0, 0, SoulInit.getSoulFromId(caps.getSoulId()).getParticleColor(), 1, 100, 0, true, true, true, pos.getX() + 0.5F, pos.getY() + 1, pos.getZ() + 0.5F));
+                                                * 2.0F - player.width, 0, 0, 0, SoulInit.getSoulFromId(caps.getSoulId()).getParticleColor(), 1, 100, 0, true, true, true, true, pos.getX() + 0.5F, pos.getY() + 1, pos.getZ() + 0.5F));
                         }
                     }
                     return true;
@@ -219,6 +231,32 @@ public class TileEntityAltar extends TileEntity implements ITickable, IHasTickCo
         return false;
     }
 
+
+    @Override
+    public int getTickCount() {
+        return tickCount;
+    }
+
+    @Override
+    public void setTickCount(int tickCount) {
+        this.tickCount = tickCount;
+    }
+
+    //Participants
+    public List<EntityPlayer> getPlayersInArea() {
+        return world.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(
+                new BlockPos(pos.getX() - 10F, pos.getY() - 4F, pos.getZ() - 10F),
+                new BlockPos(pos.getX() + 10F, pos.getY() + 8F, pos.getZ() + 10F)));
+    }
+
+    public List<EntityCultist> getCultistsInArea() {
+        return world.getEntitiesWithinAABB(EntityCultist.class,
+                new AxisAlignedBB(pos.getX() - 10, pos.getY() - 4,
+                        pos.getZ() - 10, pos.getX() + 10, pos.getY() + 8, pos.getZ() + 10));
+
+    }
+
+    //Power
     public int getItemPowerInArea() {
         int power = 0;
         List<EntityPlayer> targets = getPlayersInArea();
@@ -247,34 +285,49 @@ public class TileEntityAltar extends TileEntity implements ITickable, IHasTickCo
         }
 
         List<EntityCultist> cultists = getCultistsInArea();
+        int cultistPower = 0;
         if (cultists.size() > 0) {
             Iterator iterator = cultists.iterator();
             while (iterator.hasNext()) {
                 EntityCultist cultist = (EntityCultist) iterator.next();
                 RiteBase rite = RiteInit.getRiteForResLoc(currentRite);
                 if (rite.getAspectsRequired().contains(cultist.getAspect())) {
-                    power += 4;
+                    cultistPower += 4;
+                }
+                if (cultistPower >= 16) {
+                    break;
                 }
             }
         }
-
-
+        power += cultistPower;
+        int blockPower = 0;
+        for (int i = 0; i < aspectsExt.keySet().size(); i++) {
+            blockPower += 4;
+            if (blockPower >= 20) {
+                break;
+            }
+        }
+        power += blockPower;
         return power;
     }
 
-    public List<EntityPlayer> getPlayersInArea() {
-        return world.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(
-                new BlockPos(pos.getX() - 10F, pos.getY() - 4F, pos.getZ() - 10F),
-                new BlockPos(pos.getX() + 10F, pos.getY() + 8F, pos.getZ() + 10F)));
+
+    //Aspects - External
+    public void addAspect(Aspect aspect) {
+        aspectsExt.put(aspect, 2);
     }
 
-    public List<EntityCultist> getCultistsInArea(){
-        return world.getEntitiesWithinAABB(EntityCultist.class,
-                new AxisAlignedBB(pos.getX() - 10, pos.getY() - 4,
-                        pos.getZ() - 10, pos.getX() + 10, pos.getY() + 8, pos.getZ() + 10));
-
+    public void refreshAddedAspects() {
+        //subtract by one; if it reaches 0, then remove it
+        for (Aspect aspect : aspectsExt.keySet()) {
+            aspectsExt.replace(aspect, aspectsExt.get(aspect), aspectsExt.get(aspect) - 1);
+            if (aspectsExt.get(aspect) <= 0) {
+                aspectsExt.remove(aspect);
+            }
+        }
     }
 
+    //Aspects - All
     public Set<Aspect> getAspectsInArea() {
         Set<Aspect> aspects = new HashSet<>();
         List<EntityPlayer> targets = getPlayersInArea();
@@ -300,10 +353,12 @@ public class TileEntityAltar extends TileEntity implements ITickable, IHasTickCo
                 aspects.add(cultist.getAspect());
             }
         }
-        aspects.addAll(aspectsExt);
+        aspects.addAll(aspectsExt.keySet());
+
         return aspects;
     }
 
+    /////Consumables
     public void consumeConsumables() {
         List<EntityPlayer> targets = getPlayersInArea();
         RiteBase rite = RiteInit.getRiteForResLoc(currentRite);
@@ -326,7 +381,7 @@ public class TileEntityAltar extends TileEntity implements ITickable, IHasTickCo
                 if (player.getHeldItemOffhand().getItem() instanceof IHasRiteUse) {
                     if (((IHasRiteUse) player.getHeldItemOffhand().getItem()).isConsumed()) {
                         boolean flag = false;
-                        for (Aspect aspect : ((IHasRiteUse) player.getHeldItemMainhand().getItem()).getAspects()) {
+                        for (Aspect aspect : ((IHasRiteUse) player.getHeldItemOffhand().getItem()).getAspects()) {
                             if (rite.getAspectsRequired().contains(aspect)) {
                                 flag = true;
                             }
@@ -337,19 +392,6 @@ public class TileEntityAltar extends TileEntity implements ITickable, IHasTickCo
                 }
             }
         }
-    }
-
-    public void addAspectsExternally(Aspect aspect) {
-        aspectsExt.add(aspect);
-    }
-    @Override
-    public int getTickCount() {
-        return tickCount;
-    }
-
-    @Override
-    public void setTickCount(int tickCount) {
-        this.tickCount = tickCount;
     }
 
 }

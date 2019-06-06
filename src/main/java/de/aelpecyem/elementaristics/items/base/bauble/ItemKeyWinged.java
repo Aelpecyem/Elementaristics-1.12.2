@@ -41,7 +41,7 @@ public class ItemKeyWinged extends ItemBase implements IBauble {
 
     @Override
     public void onWornTick(ItemStack itemstack, EntityLivingBase player) {
-        player.fallDistance *= 0.9F;
+        player.fallDistance *= 0.8F;
         if (itemstack.hasTagCompound() && itemstack.getTagCompound().hasKey(CHARGE_KEY)) {
             if (itemstack.getTagCompound().getFloat(CHARGE_KEY) < 10 && player.onGround) {
                 itemstack.getTagCompound().setFloat(CHARGE_KEY, 10);

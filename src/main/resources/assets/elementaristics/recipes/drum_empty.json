@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ECE",
+    "GLS",
+    "ESE"
+  ],
+  "key": {
+    "E": {
+      "item": "elementaristics:essence",
+      "data": 7
+    },
+    "S": {
+      "item": "elementaristics:stone_enriched"
+    },
+    "C": {
+      "item": "elementaristics:gem_arcane"
+    },
+    "G": {
+      "item": "minecraft:glass"
+    },
+    "L": {
+      "item": "minecraft:leather"
+    }
+  },
+  "result": {
+    "item": "elementaristics:tympanum_empty",
+    "count": 1
+  }
+}

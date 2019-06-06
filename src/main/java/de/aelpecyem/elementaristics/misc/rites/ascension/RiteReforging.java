@@ -83,7 +83,7 @@ public class RiteReforging extends RiteBase {
         }
         if (world.isRemote) {
             Elementaristics.proxy.generateGenericParticles(world, altarPos.getX() + world.rand.nextFloat(), altarPos.getY() + 1F, altarPos.getZ() + world.rand.nextFloat(), 0, 0.02 + world.rand.nextFloat() / 50, 0, Aspects.fire.getColor(), 3, 60, 0, false, false);
-            Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(world, altarPos.getX() + 0.5 + world.rand.nextGaussian(), altarPos.getY() + 3 + world.rand.nextGaussian(), altarPos.getZ() + 0.5 + world.rand.nextGaussian(), 0, 0, 0, Aspects.light.getColor(), 1, 200, 0, false, true, true, altarPos.getX() + 0.5F, altarPos.getY() + 2.5F, altarPos.getZ() + 0.5F));
+            Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(world, altarPos.getX() + 0.5 + world.rand.nextGaussian(), altarPos.getY() + 3 + world.rand.nextGaussian(), altarPos.getZ() + 0.5 + world.rand.nextGaussian(), 0, 0, 0, Aspects.light.getColor(), 1, 200, 0, false, true, true, true, altarPos.getX() + 0.5F, altarPos.getY() + 2.5F, altarPos.getZ() + 0.5F));
 
         }
 

@@ -101,8 +101,8 @@ public class EntityExplosionProjectile extends EntityThrowable {
     @Override
     public void onUpdate() {
         if (world.isRemote) {
-            Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(world, posX, posY, posZ, world.rand.nextGaussian() * 0.02D, world.rand.nextGaussian() * 0.02D, world.rand.nextGaussian() * 0.02D, Aspects.fire.getColor(), 4, 40, 0, true, true, 0.8F));
-            Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(world, posX, posY, posZ, world.rand.nextGaussian() * 0.02D, world.rand.nextGaussian() * 0.02D, world.rand.nextGaussian() * 0.02D, Aspects.chaos.getColor(), 4, 40, 0, true, true, 0.8F));
+            Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(world, posX, posY, posZ, world.rand.nextGaussian() * 0.02D, world.rand.nextGaussian() * 0.02D, world.rand.nextGaussian() * 0.02D, Aspects.fire.getColor(), 4, 40, 0, true, true, 0.8F, true));
+            Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(world, posX, posY, posZ, world.rand.nextGaussian() * 0.02D, world.rand.nextGaussian() * 0.02D, world.rand.nextGaussian() * 0.02D, Aspects.chaos.getColor(), 4, 40, 0, true, true, 0.8F, true));
         }
         super.onUpdate();
     }

@@ -2,9 +2,12 @@ package de.aelpecyem.elementaristics.networking.tileentity.pos;
 
 import de.aelpecyem.elementaristics.blocks.tileentity.IHasBoundPosition;
 import de.aelpecyem.elementaristics.blocks.tileentity.energy.TileEntityEnergy;
+import de.aelpecyem.elementaristics.blocks.tileentity.energy.TileEntityRedstoneTransmitter;
 import de.aelpecyem.elementaristics.capability.energy.EnergyCapability;
+import de.aelpecyem.elementaristics.networking.tileentity.energy.EnergySync;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.audio.PositionedSound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
@@ -15,17 +18,15 @@ public class PosSync implements IMessage {
     private BlockPos pos, posTo;
 
     public PosSync() {
-
     }
 
     public PosSync(TileEntity te) {
-        if (te instanceof IHasBoundPosition) {
-            this.pos = te.getPos();
-            if (posTo == null) {
-                posTo = pos;
-            }
-            posTo = ((IHasBoundPosition) te).getPositionBoundTo();
+        this.pos = te.getPos();
+        if (posTo == null) {
+            posTo = pos;
         }
+        posTo = ((IHasBoundPosition) te).getPositionBoundTo();
+
     }
 
     @Override
@@ -44,7 +45,6 @@ public class PosSync implements IMessage {
             posTo = pos;
         }
         posTo = BlockPos.fromLong(buf.readLong());
-
     }
 
     public static class Handler implements IMessageHandler<PosSync, IMessage> {
@@ -53,15 +53,14 @@ public class PosSync implements IMessage {
         public IMessage onMessage(PosSync message, MessageContext ctx) {
             Minecraft.getMinecraft().addScheduledTask(() -> {
                 TileEntity te = Minecraft.getMinecraft().world.getTileEntity(message.pos);
-                if (te != null && te instanceof TileEntityEnergy) {
+                if (te != null && te instanceof IHasBoundPosition) {
                     if (message.posTo == null)
-                        ((TileEntityEnergy) te).setPositionBoundTo(message.pos);
+                        ((IHasBoundPosition) te).setPositionBoundTo(message.pos);
                     else
-                        ((TileEntityEnergy) te).setPositionBoundTo(message.posTo);
+                        ((IHasBoundPosition) te).setPositionBoundTo(message.posTo);
                 }
             });
             return null;
         }
-
     }
 }

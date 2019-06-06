@@ -104,9 +104,9 @@ public class TileEntityConcentrator extends TileEntity implements ITickable, IHa
 
     private void doParticleShow() {
         if (inventory.getStackInSlot(1).getItem() instanceof ItemEssence)
-            Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(world, pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, world.rand.nextGaussian() * 0.02F, Math.abs(world.rand.nextGaussian()) * 0.06F, world.rand.nextGaussian() * 0.02F, Aspects.getElementById(inventory.getStackInSlot(1).getMetadata()).getColor(), 2, 10, 0, true, false, 0.5F));
+            Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(world, pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, world.rand.nextGaussian() * 0.02F, Math.abs(world.rand.nextGaussian()) * 0.06F, world.rand.nextGaussian() * 0.02F, Aspects.getElementById(inventory.getStackInSlot(1).getMetadata()).getColor(), 2, 10, 0, true, false, 0.5F, true));
         else if (inventory.getStackInSlot(1).getItem() instanceof ItemAspects)
-            Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(world, pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, world.rand.nextGaussian() * 0.02F, Math.abs(world.rand.nextGaussian()) * 0.06F, world.rand.nextGaussian() * 0.02F,((ItemAspects) inventory.getStackInSlot(1).getItem()).getAspects().get(0).getColor(), 2, 10, 0, true, false, 0.5F));
+            Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(world, pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, world.rand.nextGaussian() * 0.02F, Math.abs(world.rand.nextGaussian()) * 0.06F, world.rand.nextGaussian() * 0.02F, ((ItemAspects) inventory.getStackInSlot(1).getItem()).getAspects().get(0).getColor(), 2, 10, 0, true, false, 0.5F, true));
 
     }
 

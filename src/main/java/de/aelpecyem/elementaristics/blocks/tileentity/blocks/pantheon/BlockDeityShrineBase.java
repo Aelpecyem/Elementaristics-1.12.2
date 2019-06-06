@@ -5,6 +5,7 @@ import de.aelpecyem.elementaristics.blocks.tileentity.TileEntityPurifier;
 import de.aelpecyem.elementaristics.blocks.tileentity.pantheon.TileEntityDeityShrine;
 import de.aelpecyem.elementaristics.misc.pantheon.Deity;
 import de.aelpecyem.elementaristics.util.InventoryUtil;
+import de.aelpecyem.elementaristics.util.TimeUtil;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyDirection;
@@ -75,6 +76,15 @@ public class BlockDeityShrineBase extends BlockTileEntity<TileEntityDeityShrine>
             te.deityBound = deity.getName().toString();
             te.isStatue = isStatue;
         }
+    }
+
+    @Override
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+        if (isStatue && TimeUtil.getTimeUnfalsified(worldIn.getWorldTime()) >= deity.getTickTimeBegin() && TimeUtil.getTimeUnfalsified(worldIn.getWorldTime()) <= deity.getTickTimeBegin() + 1000) {
+            deity.activeStatueEffect(getTileEntity(worldIn, pos));
+            deity.activeStatueEffect(getTileEntity(worldIn, pos), playerIn, hand, facing, hitX, hitY, hitZ);
+        }
+        return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
     }
 
     @Override

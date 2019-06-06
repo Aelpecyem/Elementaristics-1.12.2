@@ -1,6 +1,7 @@
 package de.aelpecyem.elementaristics.misc;
 
 import de.aelpecyem.elementaristics.items.base.ItemEssence;
+import de.aelpecyem.elementaristics.items.base.ItemScale;
 import de.aelpecyem.elementaristics.items.base.thaumagral.ItemPartHandle;
 import de.aelpecyem.elementaristics.items.base.thaumagral.ItemThaumagral;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;
@@ -13,29 +14,8 @@ public class ItemColorHandler implements IItemColor {
         if (stack.getItem() instanceof ItemEssence) {
             return Aspects.getElementById(stack.getItemDamage()).getColor();
         }
-        if (stack.getItem() instanceof ItemThaumagral){
-            if (stack.hasTagCompound()) {
-                switch (tintIndex) {
-                    case 0: //blades
-                        return stack.getTagCompound().getInteger("blade");
-
-                    case 1: //runes
-                        return stack.getTagCompound().getInteger("engravings");
-
-                    case 2: //core
-                        return stack.getTagCompound().getInteger("core");
-
-                    case 3: //handle
-                        return stack.getTagCompound().getInteger("handle");
-                }
-            }
-        }
-        if (stack.getItem() instanceof ItemPartHandle){
-            if (tintIndex == 0) {
-                return ((IHasColor) stack.getItem()).getColor();
-            }else{
-                return 16777215;
-            }
+        if (stack.getItem() instanceof ItemScale) {
+            return Aspects.getElementById(stack.getItemDamage()).getColor();
         }
         return 0;
     }

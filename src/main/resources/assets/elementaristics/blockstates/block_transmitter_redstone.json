@@ -1,0 +1,33 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "cube_all",
+    "all": "elementaristics:blocks/block_transmitter_redstone"
+  },
+  "variants": {
+    "powered": {
+      "true": {
+        "textures": {
+          "all": "elementaristics:blocks/block_transmitter_redstone"
+        }
+      },
+      "false": {
+        "textures": {
+          "all": "elementaristics:blocks/block_transmitter_redstone_inactive"
+        }
+      }
+    },
+    "normal": {
+      "model": "cube_all",
+      "textures": {
+        "all": "elementaristics:blocks/block_transmitter_redstone_inactive"
+      }
+    },
+    "inventory": {
+      "model": "cube_all",
+      "textures": {
+        "all": "elementaristics:blocks/block_transmitter_redstone_inactive"
+      }
+    }
+  }
+}

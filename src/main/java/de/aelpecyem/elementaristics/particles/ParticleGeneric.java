@@ -13,6 +13,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
+import scala.reflect.internal.tpe.GlbLubs;
 
 //see https://github.com/Ellpeck/NaturesAura/blob/master/src/main/java/de/ellpeck/naturesaura/particles/ParticleMagic.java
 
@@ -24,8 +25,9 @@ public class ParticleGeneric extends Particle {
     private final boolean fade;
     private final boolean followPosition;
     private final float xTo, yTo, zTo;
+    private final boolean shrink;
 
-    public ParticleGeneric(World world, double posX, double posY, double posZ, double motionX, double motionY, double motionZ, int color, float scale, int maxAge, float gravity, boolean collision, boolean fade, float alpha) {
+    public ParticleGeneric(World world, double posX, double posY, double posZ, double motionX, double motionY, double motionZ, int color, float scale, int maxAge, float gravity, boolean collision, boolean fade, float alpha, boolean shrink) {
         super(world, posX, posY, posZ);
         this.desiredScale = scale;
         this.particleMaxAge = maxAge;
@@ -38,6 +40,7 @@ public class ParticleGeneric extends Particle {
         this.motionZ = motionZ;
 
         followPosition = false;
+        this.shrink = shrink;
         xTo = 0;
         yTo = 0;
         zTo = 0;
@@ -54,13 +57,14 @@ public class ParticleGeneric extends Particle {
         this.particleScale = this.desiredScale;
     }
 
-    public ParticleGeneric(World world, double posX, double posY, double posZ, double motionX, double motionY, double motionZ, int color, float scale, int maxAge, float gravity, boolean collision, boolean fade, boolean followPosition, float xTo, float yTo, float zTo) {
+    public ParticleGeneric(World world, double posX, double posY, double posZ, double motionX, double motionY, double motionZ, int color, float scale, int maxAge, float gravity, boolean collision, boolean fade, boolean shrink, boolean followPosition, float xTo, float yTo, float zTo) {
         super(world, posX, posY, posZ);
         this.desiredScale = scale;
         this.particleMaxAge = maxAge;
         this.canCollide = collision;
         this.particleGravity = gravity;
         this.fade = fade;
+        this.shrink = shrink;
 
         this.motionX = motionX;
         this.motionY = motionY;
@@ -75,19 +79,19 @@ public class ParticleGeneric extends Particle {
         float b = ((color & 255) / 255F) * (1F - this.rand.nextFloat() * 0.25F);
         this.setRBGColorF(r, g, b);
 
-        TextureMap map = Minecraft.getMinecraft().getTextureMapBlocks();
-
-        //  this.setParticleTexture(map.getAtlasSprite(TEXTURE.toString()));
 
         this.particleAlpha = 0.5F;
         this.particleScale = this.desiredScale;
     }
 
     @Override
+    public int getFXLayer() {
+        return 2;
+    }
+
+    @Override
     public void renderParticle(BufferBuilder buffer, Entity entityIn, float partialTicks, float rotationX, float rotationZ, float rotationYZ, float rotationXY, float rotationXZ) {
-
-        // buffer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX_COLOR);
-
+//        buffer.begin(7, DefaultVertexFormats.POSITION_TEX_COLOR);
         double x = this.prevPosX + (this.posX - this.prevPosX) * partialTicks - interpPosX;
         double y = this.prevPosY + (this.posY - this.prevPosY) * partialTicks - interpPosY;
         double z = this.prevPosZ + (this.posZ - this.prevPosZ) * partialTicks - interpPosZ;
@@ -96,7 +100,6 @@ public class ParticleGeneric extends Particle {
         int brightness = this.getBrightnessForRender(partialTicks);
         int sky = brightness >> 16 & 0xFFFF;
         int block = brightness & 0xFFFF;
-
         buffer.pos(x + (-rotationX * sc - rotationXY * sc), y + -rotationZ * sc, z + (-rotationYZ * sc - rotationXZ * sc))
                 .tex(0, 1).color(this.particleRed, this.particleGreen, this.particleBlue, this.particleAlpha)
                 .lightmap(sky, block).endVertex();
@@ -109,7 +112,7 @@ public class ParticleGeneric extends Particle {
         buffer.pos(x + (rotationX * sc - rotationXY * sc), y + (-rotationZ * sc), z + (rotationYZ * sc - rotationXZ * sc))
                 .tex(0, 0).color(this.particleRed, this.particleGreen, this.particleBlue, this.particleAlpha)
                 .lightmap(sky, block).endVertex();
-        //super.renderParticle(buffer, entityIn, partialTicks, rotationX, rotationZ, rotationYZ, rotationXY, rotationXZ);
+        super.renderParticle(buffer, entityIn, partialTicks, rotationX, rotationZ, rotationYZ, rotationXY, rotationXZ);
         Minecraft.getMinecraft().renderEngine.bindTexture(TEXTURE);
     }
 
@@ -132,11 +135,14 @@ public class ParticleGeneric extends Particle {
             this.motionY -= 0.04D * (double) this.particleGravity;
             this.move(this.motionX, this.motionY, this.motionZ);
 
+            float lifeRatio = (float) this.particleAge / (float) this.particleMaxAge;
             if (this.fade) {
-                float lifeRatio = (float) this.particleAge / (float) this.particleMaxAge;
                 this.particleAlpha = 0.5F - (lifeRatio * 0.5F);
+            }
+            if (this.shrink) {
                 this.particleScale = this.desiredScale - (this.desiredScale * lifeRatio);
             }
+
         }
     }
 

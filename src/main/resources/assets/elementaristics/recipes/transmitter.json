@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SRS",
+    "R#R",
+    "SRS"
+  ],
+  "key": {
+    "#": {
+      "item": "elementaristics:essence",
+      "data": 4
+    },
+    "S": {
+      "item": "elementaristics:stone_enriched"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    }
+  },
+  "result": {
+    "item": "elementaristics:block_transmitter_redstone",
+    "count": 2
+  }
+}

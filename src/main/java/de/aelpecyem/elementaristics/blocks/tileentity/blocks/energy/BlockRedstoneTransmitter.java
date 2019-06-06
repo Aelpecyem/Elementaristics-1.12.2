@@ -7,8 +7,9 @@ import de.aelpecyem.elementaristics.items.base.ItemEssence;
 import de.aelpecyem.elementaristics.items.base.artifacts.ItemChannelingTool;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;
 import de.aelpecyem.elementaristics.util.InventoryUtil;
-import net.minecraft.block.BlockHorizontal;
+import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -30,78 +31,96 @@ import net.minecraftforge.items.IItemHandler;
 
 import javax.annotation.Nullable;
 import java.util.List;
+import java.util.Random;
 
 
 public class BlockRedstoneTransmitter extends BlockTileEntity<TileEntityRedstoneTransmitter> {
-
-    public static final PropertyDirection FACING = BlockHorizontal.FACING;
-
+    public static final PropertyBool POWERED = PropertyBool.create("powered");
     public BlockRedstoneTransmitter() {
-        super(Material.ROCK, "generator_combustion");
-
+        super(Material.ROCK, "block_transmitter_redstone");
+        this.setDefaultState(this.blockState.getBaseState().withProperty(POWERED, false));
     }
 
     @Override
-    public BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, FACING);
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+        return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
+    }
+
+    @Override
+    public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
+        if (getTileEntity(worldIn, pos) != null) {
+            TileEntityRedstoneTransmitter te = getTileEntity(worldIn, pos);
+            if (te.isBoundToATile(te)) {
+                if (worldIn.getTileEntity(te.posBound) instanceof TileEntityRedstoneTransmitter) {
+                    TileEntityRedstoneTransmitter tileBound = (TileEntityRedstoneTransmitter) worldIn.getTileEntity(te.posBound);
+                    tileBound.posBoundFrom = tileBound.getPos();
+                }
+            }
+        }
+        super.breakBlock(worldIn, pos, state);
+    }
+
+    @Override
+    public int tickRate(World worldIn) {
+        return 2;
     }
 
     @Override
     public int getMetaFromState(IBlockState state) {
-        return state.getValue(FACING).getIndex();
+        return state.getValue(POWERED).booleanValue() ? 1 : 0;
     }
 
     @Override
     public IBlockState getStateFromMeta(int meta) {
-        if (meta < 2 || meta > 5) {
-            meta = 2;
-        }
-        return getDefaultState().withProperty(FACING, EnumFacing.getFront(meta));
+        return getDefaultState().withProperty(POWERED, meta == 1 ? true : false);
     }
 
     @Override
-    public int getWeakPower(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
-        if (blockAccess.getTileEntity(pos) != null && blockAccess.getTileEntity(pos) instanceof TileEntityRedstoneTransmitter) {
-            TileEntityRedstoneTransmitter te = (TileEntityRedstoneTransmitter) blockAccess.getTileEntity(pos);
-            if (te.activated) {
-                return 15;
-            } else {
-                return super.getWeakPower(blockState, blockAccess, pos, side);
+    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
+        if (getTileEntity(worldIn, pos) != null) {
+            boolean activated = getTileEntity(worldIn, pos).activated;
+            BlockPos posFrom = getTileEntity(worldIn, pos).posBoundFrom;
+            BlockPos posTo = getTileEntity(worldIn, pos).posBound;
+            worldIn.setBlockState(pos, getDefaultState().withProperty(POWERED, getTileEntity(worldIn, pos).activated), 2);
+            getTileEntity(worldIn, pos).activated = activated;
+            getTileEntity(worldIn, pos).posBoundFrom = posFrom;
+            getTileEntity(worldIn, pos).posBound = posTo;
+            if (fromPos.equals(pos)) {
+                worldIn.getBlockState(pos.add(0, 1, 0)).neighborChanged(worldIn, pos.add(0, 1, 0), worldIn.getBlockState(pos.add(0, 1, 0)).getBlock(), pos);
+                worldIn.getBlockState(pos.add(0, -1, 0)).neighborChanged(worldIn, pos.add(0, -1, 0), worldIn.getBlockState(pos.add(0, 1, 0)).getBlock(), pos);
+                worldIn.getBlockState(pos.add(1, 0, 0)).neighborChanged(worldIn, pos.add(1, 0, 0), worldIn.getBlockState(pos.add(0, 1, 0)).getBlock(), pos);
+                worldIn.getBlockState(pos.add(0, 0, 1)).neighborChanged(worldIn, pos.add(0, 0, 1), worldIn.getBlockState(pos.add(0, 1, 0)).getBlock(), pos);
+                worldIn.getBlockState(pos.add(-1, 0, 0)).neighborChanged(worldIn, pos.add(-1, 0, 0), worldIn.getBlockState(pos.add(0, 1, 0)).getBlock(), pos);
+                worldIn.getBlockState(pos.add(0, 0, -1)).neighborChanged(worldIn, pos.add(0, 0, -1), worldIn.getBlockState(pos.add(0, 1, 0)).getBlock(), pos);
+
             }
         }
-        return super.getWeakPower(blockState, blockAccess, pos, side);
+        super.neighborChanged(state, worldIn, pos, blockIn, fromPos);
     }
 
     @Override
-    public boolean canProvidePower(IBlockState state) {
+    public boolean canConnectRedstone(IBlockState state, IBlockAccess world, BlockPos pos, @Nullable EnumFacing side) {
         return true;
     }
 
     @Override
     public boolean shouldCheckWeakPower(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing side) {
+        return false;
+    }
+    @Override
+    public int getWeakPower(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
+        return getTileEntity(blockAccess, pos).shouldProvideWeakPower() ? 15 : 0; //maybe remove this
+    }
+
+    public boolean canProvidePower(IBlockState state) {
         return true;
     }
 
     @Override
-    public boolean hasComparatorInputOverride(IBlockState state) {
-        return true;
+    public BlockStateContainer createBlockState() {
+        return new BlockStateContainer(this, POWERED);
     }
 
-    @Override
-    public BlockRenderLayer getBlockLayer() {
-        return BlockRenderLayer.CUTOUT;
-    }
-
-
-    @Override
-    public boolean isFullCube(IBlockState state) {
-        return false;
-    }
-
-    @Override
-    public boolean isOpaqueCube(IBlockState state) {
-        return false;
-    }
 
 
     @Override

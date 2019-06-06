@@ -47,7 +47,7 @@ public class RequestPosSync implements IMessage {
             World world = FMLCommonHandler.instance().getMinecraftServerInstance().getWorld(message.dimension);
             TileEntity te = world.getTileEntity(message.pos);
             if (te != null && te instanceof IHasBoundPosition) {
-                return new PosSync(te);
+                return new PosSync((TileEntityRedstoneTransmitter) te);
             } else {
                 return null;
             }

@@ -21,7 +21,6 @@ public class ItemTinctureArcane extends ItemDrinkBase {
 
     @Override
     public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityLivingBase entityLiving) {
-        if (worldIn.isRemote)
             entityLiving.addPotionEffect(new PotionEffect(PotionInit.potionIntoxicated, 400, 0));
         return new ItemStack(Items.GLASS_BOTTLE);
     }

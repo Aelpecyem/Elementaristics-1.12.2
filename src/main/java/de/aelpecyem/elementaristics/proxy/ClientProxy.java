@@ -61,7 +61,7 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void registerColoring() {
         super.registerColoring();
-        Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new ItemColorHandler(), ModItems.essence);
+        Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new ItemColorHandler(), ModItems.essence, ModItems.scale);
     }
 
     @Override
@@ -98,7 +98,7 @@ public class ClientProxy extends CommonProxy {
                 motionX,
                 motionY,
                 motionZ,
-                color, scale, maxAge, gravity, collision, fade, false, 0, 0, 0);
+                color, scale, maxAge, gravity, collision, fade, fade, false, 0, 0, 0);
         Minecraft.getMinecraft().effectRenderer.addEffect(particleGeneric);
     }
 
@@ -111,7 +111,7 @@ public class ClientProxy extends CommonProxy {
                 motionX,
                 motionY,
                 motionZ,
-                color, scale, maxAge, gravity, collision, fade, false, 0, 0, 0);
+                color, scale, maxAge, gravity, collision, fade, fade, false, 0, 0, 0);
         Minecraft.getMinecraft().effectRenderer.addEffect(particleGeneric);
     }
 
@@ -121,7 +121,7 @@ public class ClientProxy extends CommonProxy {
                 velX,
                 velY,
                 velZ,
-                color, scale, maxAge, gravity, collision, fade, false, 0, 0, 0);
+                color, scale, maxAge, gravity, collision, fade, fade, false, 0, 0, 0);
         Minecraft.getMinecraft().effectRenderer.addEffect(particleGeneric);
     }
 
@@ -134,7 +134,7 @@ public class ClientProxy extends CommonProxy {
                 motionX,
                 motionY,
                 motionZ,
-                color, scale, maxAge, gravity, collision, fade, false, 0, 0, 0);
+                color, scale, maxAge, gravity, collision, fade, fade, false, 0, 0, 0);
 
         Minecraft.getMinecraft().effectRenderer.addEffect(particleGeneric);
     }

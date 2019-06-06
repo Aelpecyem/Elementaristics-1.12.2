@@ -14,6 +14,7 @@ import de.aelpecyem.elementaristics.networking.tileentity.basin.PacketUpdateBasi
 import de.aelpecyem.elementaristics.networking.tileentity.deities.PacketRequestUpdateDeity;
 import de.aelpecyem.elementaristics.networking.tileentity.deities.PacketUpdateDeity;
 import de.aelpecyem.elementaristics.networking.tileentity.energy.EnergySync;
+import de.aelpecyem.elementaristics.networking.tileentity.energy.PacketUpdateEmulator;
 import de.aelpecyem.elementaristics.networking.tileentity.energy.PacketUpdateTransmitter;
 import de.aelpecyem.elementaristics.networking.tileentity.energy.RequestEnergySync;
 import de.aelpecyem.elementaristics.networking.tileentity.inventory.PacketRequestUpdateInventory;
@@ -50,6 +51,7 @@ public class PacketHandler {
 
         network.registerMessage(new PacketUpdateDeity.Handler(), PacketUpdateDeity.class, next(), Side.CLIENT);
         network.registerMessage(new PacketUpdateTransmitter.Handler(), PacketUpdateTransmitter.class, next(), Side.CLIENT);
+        network.registerMessage(new PacketUpdateEmulator.Handler(), PacketUpdateEmulator.class, next(), Side.CLIENT);
         network.registerMessage(new PacketUpdateAltar.Handler(), PacketUpdateAltar.class, next(), Side.CLIENT);
         network.registerMessage(new PacketUpdateBasin.Handler(), PacketUpdateBasin.class, next(), Side.CLIENT);
 

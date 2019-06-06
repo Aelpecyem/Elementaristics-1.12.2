@@ -54,10 +54,10 @@ public class TESRBasin extends TileEntitySpecialRenderer<TileEntityInfusionBasin
 
             buffer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX_COLOR);
 
-            buffer.pos(1F / 16F, te.fillCount / 4F * 0.7 + 0.1, 15F / 16F).tex(1, 1).color(getWaterColor(te).getRed(), getWaterColor(te).getGreen(), getWaterColor(te).getBlue(), getWaterColor(te).getAlpha()).endVertex();
-            buffer.pos(15F / 16F, te.fillCount / 4F * 0.7 + 0.1, 15F / 16F).tex(2, 1).color(getWaterColor(te).getRed(), getWaterColor(te).getGreen(), getWaterColor(te).getBlue(), getWaterColor(te).getAlpha()).endVertex();
-            buffer.pos(15F / 16F, te.fillCount / 4F * 0.7 + 0.1, 1F / 16F).tex(2, 2).color(getWaterColor(te).getRed(), getWaterColor(te).getGreen(), getWaterColor(te).getBlue(), getWaterColor(te).getAlpha()).endVertex();
-            buffer.pos(1F / 16F, te.fillCount / 4F * 0.7 + 0.1, 1F / 16F).tex(1, 2).color(getWaterColor(te).getRed(), getWaterColor(te).getGreen(), getWaterColor(te).getBlue(), getWaterColor(te).getAlpha()).endVertex();
+            buffer.pos(1F / 16F, te.fillCount / 4F * 0.7 + 0.1, 15F / 16F).tex(1, 1).color(getWaterColor(te).getRed(), getWaterColor(te).getGreen(), getWaterColor(te).getBlue(), 255).endVertex();
+            buffer.pos(15F / 16F, te.fillCount / 4F * 0.7 + 0.1, 15F / 16F).tex(2, 1).color(getWaterColor(te).getRed(), getWaterColor(te).getGreen(), getWaterColor(te).getBlue(), 255).endVertex();
+            buffer.pos(15F / 16F, te.fillCount / 4F * 0.7 + 0.1, 1F / 16F).tex(2, 2).color(getWaterColor(te).getRed(), getWaterColor(te).getGreen(), getWaterColor(te).getBlue(), 255).endVertex();
+            buffer.pos(1F / 16F, te.fillCount / 4F * 0.7 + 0.1, 1F / 16F).tex(1, 2).color(getWaterColor(te).getRed(), getWaterColor(te).getGreen(), getWaterColor(te).getBlue(), 255).endVertex();
 
             Minecraft.getMinecraft().renderEngine.bindTexture(TEXTURE);
             tess.draw();

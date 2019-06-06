@@ -109,7 +109,7 @@ public class TileEntityGeneratorArcaneCombustion extends TileEntityEnergy implem
     }
 
     private void doParticles() {
-        Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(world, pos.getX() + 0.5 + (world.rand.nextGaussian() / 8F), pos.getY() + 0.3F, pos.getZ() + 0.5 + (world.rand.nextGaussian() / 8F), 0, 0.05F + world.rand.nextGaussian() / 1000F, 0F, Aspects.fire.getColor(), 3, 20 + world.rand.nextInt(4), 0, true, false, 0.95F));
+        Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(world, pos.getX() + 0.5 + (world.rand.nextGaussian() / 8F), pos.getY() + 0.3F, pos.getZ() + 0.5 + (world.rand.nextGaussian() / 8F), 0, 0.05F + world.rand.nextGaussian() / 1000F, 0F, Aspects.fire.getColor(), 3, 20 + world.rand.nextInt(4), 0, true, false, 0.95F, true));
     }
 
     @Override

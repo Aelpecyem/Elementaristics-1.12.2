@@ -16,6 +16,7 @@ import de.aelpecyem.elementaristics.items.base.thaumagral.*;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;
 import de.aelpecyem.elementaristics.util.IHasModel;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
@@ -68,12 +69,14 @@ public class ModItems {
     public static ItemAspects tool_channeling;
     public static ItemAspects splendor_eye;
     public static ItemAspects heart_human;
+    public static ItemAspects tympanum_empty;
 
     public static IncantationBase incantation_light;
     public static IncantationBase incantation_reforging;
 
     public static IncantationBase incantation_chaos;
     public static IncantationBase incantation_forging;
+    public static IncantationBase incantation_glorious;
 
     public static IncantationBase incantation_feast;
     public static IncantationBase incantation_recruiting;
@@ -120,6 +123,10 @@ public class ModItems {
     public static ItemDrinkBase water_clear;
     public static ItemDrinkBase phial_nectar;
 
+    //Ingredient -  might receive more use later
+    public static ItemBase item_lock;
+
+    public static ItemBase scale;
    /* public static ItemArmor hood_cultist = new RobesCultist("hood_cultist",1, EntityEquipmentSlot.HEAD);
     public static ItemArmor garb_cultist = new RobesCultist("garb_cultist",1, EntityEquipmentSlot.CHEST);
     public static ItemArmor legwear_cultist = new RobesCultist("legwear_cultist",2, EntityEquipmentSlot.LEGS);
@@ -174,6 +181,9 @@ public class ModItems {
         gunpowder_energized = new ItemGunpowderEnergized();
         water_clear = new ItemWaterClear();
         phial_nectar = new ItemNectar();
+
+        item_lock = new ItemBase("item_lock");
+        scale = new ItemScale();
     }
 
     private static void initRiteMaterials() {
@@ -206,6 +216,7 @@ public class ModItems {
 
         incantation_chaos = new IncantationBase("incantation_chaos", RiteInit.riteChaos, Aspects.chaos, 4);
         incantation_forging = new IncantationBase("incantation_forging", RiteInit.riteForging, Aspects.fire, 4);
+        incantation_glorious = new IncantationBase("incantation_glorious", RiteInit.riteGlorious, Aspects.light, 2);
 
         incantation_feast = new IncantationBase("incantation_feast", RiteInit.riteFeast, Aspects.life, 4);
         incantation_recruiting = new IncantationBase("incantation_recruiting", RiteInit.riteRecruiting, Aspects.soul, 2);
@@ -229,6 +240,7 @@ public class ModItems {
         tool_channeling = new ItemChannelingTool();
         splendor_eye = new ItemEyeSplendor();//ItemAspects("splendor_eye", 4, false, Aspects.light); //shows current "Hour" and used for interaction with deities
         heart_human = new ItemAspects("heart_human", 4, false, Aspects.body); //idk about that one--- crafted by killing a villager with a heart of in the one hand, and redmost wine in the other
+        tympanum_empty = new ItemInstrument("tympanum_emtpy", 4, Aspects.vacuum, SoundEvents.BLOCK_NOTE_BASEDRUM);
     }
 
     public static void register(IForgeRegistry<Item> registry) {

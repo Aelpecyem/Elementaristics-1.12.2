@@ -14,7 +14,6 @@ public class ItemWaterClear extends ItemDrinkBase {
 
     @Override
     public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityLivingBase entityLiving) {
-        if (worldIn.isRemote)
             entityLiving.addPotionEffect(new PotionEffect(PotionInit.potionPotential, 2000, 0));
         stack.shrink(1);
         return stack;

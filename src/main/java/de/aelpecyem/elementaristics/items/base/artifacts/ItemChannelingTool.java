@@ -19,9 +19,9 @@ import net.minecraft.world.World;
 import java.util.List;
 
 public class ItemChannelingTool extends ItemAspects {
-    protected final String X_KEY = "posX";
-    protected final String Y_KEY = "posY";
-    protected final String Z_KEY = "posZ";
+    public static final String X_KEY = "posX";
+    public static final String Y_KEY = "posY";
+    public static final String Z_KEY = "posZ";
 
     public ItemChannelingTool() {
         super("tool_channeling", 4, false, Aspects.electricity);

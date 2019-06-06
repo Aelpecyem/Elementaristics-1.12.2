@@ -33,7 +33,7 @@ public class Aspects {
     public static Aspect chaos;
     //advanced
     public static Aspect soul;
-
+    public static Aspect wood;
     private static ArrayList<Aspect> elements = new ArrayList<>();
 
     public static ArrayList<Aspect> getElements() {
@@ -66,6 +66,7 @@ public class Aspects {
         soul = new Aspect("soul", 7831949); //16
         mana = new Aspect("mana", 13972108); //17
 
+        wood = new Aspect("wood", 6571520);
     }
 
 

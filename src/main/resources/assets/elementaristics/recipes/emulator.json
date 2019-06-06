@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "S#S",
+    "RTR",
+    "   "
+  ],
+  "key": {
+    "#": {
+      "item": "elementaristics:essence",
+      "data": 6
+    },
+    "S": {
+      "item": "elementaristics:stone_enriched"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "T": {
+      "item": "elementaristics:block_transmitter_redstone"
+    }
+  },
+  "result": {
+    "item": "elementaristics:block_emulator_redstone",
+    "count": 1
+  }
+}

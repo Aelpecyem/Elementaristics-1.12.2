@@ -2,6 +2,7 @@ package de.aelpecyem.elementaristics.items.base.artifacts;
 
 
 import com.mojang.realmsclient.gui.ChatFormatting;
+import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.blocks.tileentity.TileEntityAltar;
 import de.aelpecyem.elementaristics.blocks.tileentity.pantheon.TileEntityDeityShrine;
 import de.aelpecyem.elementaristics.init.Deities;

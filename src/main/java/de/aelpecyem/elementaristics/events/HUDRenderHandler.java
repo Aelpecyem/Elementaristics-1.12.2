@@ -141,8 +141,10 @@ public class HUDRenderHandler {
         } else if (mc.player.world.getTileEntity(PlayerUtil.getBlockPosLookingAt(5)) != null &&
                 mc.player.world.getTileEntity(PlayerUtil.getBlockPosLookingAt(5)) instanceof IHasBoundPosition) {
             TileEntity tile = mc.player.world.getTileEntity(PlayerUtil.getBlockPosLookingAt(5));
-            if (((IHasBoundPosition) tile).getPositionBoundTo() != null)
-                mc.ingameGUI.drawString(mc.fontRenderer, I18n.format("hud.energy_to") + " X: " + ((IHasBoundPosition) tile).getPositionBoundTo().getX() + " Y: " + ((IHasBoundPosition) tile).getPositionBoundTo().getY() + " Z: " + ((IHasBoundPosition) tile).getPositionBoundTo().getZ(), 5, 40, Aspects.magan.getColor());
+            if (((IHasBoundPosition) tile).getPositionBoundTo() != null) {
+                if (!(((IHasBoundPosition) tile).getPositionBoundTo().getZ() == tile.getPos().getZ() && ((IHasBoundPosition) tile).getPositionBoundTo().getY() == tile.getPos().getY() && ((IHasBoundPosition) tile).getPositionBoundTo().getX() == tile.getPos().getX()))
+                    mc.ingameGUI.drawString(mc.fontRenderer, I18n.format("hud.pos_to") + " X: " + ((IHasBoundPosition) tile).getPositionBoundTo().getX() + " Y: " + ((IHasBoundPosition) tile).getPositionBoundTo().getY() + " Z: " + ((IHasBoundPosition) tile).getPositionBoundTo().getZ(), 5, 40, Aspects.magan.getColor());
+            }
         }
     }
 

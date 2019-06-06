@@ -192,7 +192,7 @@ public class EntitySilverThread extends EntityMob {
                         0,
                         0,
                         0,
-                        12249855, 4, 120, 0, true, true, 0.4F));
+                        12249855, 4, 120, 0, true, true, 0.4F, true));
         }
         super.onLivingUpdate();
     }

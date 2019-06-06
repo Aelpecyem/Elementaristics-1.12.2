@@ -4,6 +4,7 @@ import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;
 import de.aelpecyem.elementaristics.misc.rites.*;
 import de.aelpecyem.elementaristics.misc.rites.ascension.RiteReforging;
+import de.aelpecyem.elementaristics.misc.rites.crafting.RiteGlorious;
 import de.aelpecyem.elementaristics.misc.rites.crafting.RiteRecruiting;
 import de.aelpecyem.elementaristics.misc.rites.ascension.RiteKnowledge;
 import de.aelpecyem.elementaristics.misc.rites.crafting.RiteChaos;
@@ -23,6 +24,7 @@ public class RiteInit {
 
     public static RiteChaos riteChaos = new RiteChaos();
     public static RiteForging riteForging = new RiteForging();
+    public static RiteGlorious riteGlorious = new RiteGlorious();
 
     public static RiteFeast riteFeast = new RiteFeast();
     public static RiteDay riteDay = new RiteDay();
@@ -49,6 +51,7 @@ public class RiteInit {
 
         registerRite(riteChaos.name, RiteInit.riteChaos);
         registerRite(riteForging.name, RiteInit.riteForging);
+        registerRite(riteGlorious.name, RiteInit.riteGlorious);
 
         registerRite(riteFeast.name, RiteInit.riteFeast);
         registerRite(riteRecruiting.name, RiteInit.riteRecruiting);

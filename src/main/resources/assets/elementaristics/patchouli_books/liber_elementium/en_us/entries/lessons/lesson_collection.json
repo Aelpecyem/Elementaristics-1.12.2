@@ -89,10 +89,17 @@
       "item": "elementaristics:essence:15",
       "text": "Chaos essence is the chaotic aspect of aether, and is the destructive force keeping the universe from becoming the most ordered. It is like the fire that warms and consumes, although order is always the ash.",
       "link_recipe": true
-    },{
+    },
+    {
       "type": "spotlight",
       "item": "elementaristics:essence:7",
       "text": "Total. Emptiness. But. Yet. More."
+    },
+    {
+      "type": "spotlight",
+      "item": "elementaristics:essence:18",
+      "text": "With $(l:alchemy/entry_flesh_lamb)Flesh of the Lamb$() in a $(l:manipulation/entry_basin)Infusion Basin$() with the power of Life, Soul, Light, Mind and Chaos Essence, the essence of the chaotic Wood, the essence of fallen, dim, gods, and the Goat, is created.",
+      "link_recipe": true
     }
   ]
 }

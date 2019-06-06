@@ -3,14 +3,14 @@
     "modid": "elementaristics",
     "name": "Elementaristics",
     "description": "A mod about the elemental things",
-    "version": "0.0.7",
+    "version": "0.0.9",
     "mcversion": "1.12.2",
     "url": "",
     "updateUrl": "",
     "authorList": [
       "Aelpecyem"
     ],
-    "credits": "Credit to pretty much everyone from the Z-Net, special thanks to gunroot2525 and Morinor.",
+    "credits": "Credit to pretty much everyone from the Z-Net, special thanks to gunroot2525 and Morinor, and especially for cybercat5555 for fancy texture overhauls.",
     "logoFile": "",
     "screenshots": [],
     "dependencies": []

@@ -4,6 +4,7 @@ import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;
 import de.aelpecyem.elementaristics.recipe.*;
 import de.aelpecyem.elementaristics.recipe.base.*;
+import de.aelpecyem.elementaristics.util.TimeUtil;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -14,13 +15,41 @@ public class InitRecipes {
 
     public static void init() {
         initForge();
-        // initPedestal();
+        initGlory();
         initPurifier();
         initEntropizer();
         initTunneler();
         initConcentrator();
         initReactor();
         initBasin(); //todo add doc to all added stuff (Energized Gunpowder, Ascension stage reshaping) and ofc recipes
+    }
+
+    private static void initGlory() { //todo add additonal effects to the statues where it's noted; update doc for that, then, too
+        GloriousRecipes.addRecipe(new GloriousRecipe(new ResourceLocation(Elementaristics.MODID, "nothingness"), TimeUtil.getHourForTimeBegin(Deities.deityNothingness.getTickTimeBegin()), Ingredient.fromItem(ModItems.flesh_lamb), ModBlocks.symbol_nothingness));
+        GloriousRecipes.addRecipe(new GloriousRecipe(new ResourceLocation(Elementaristics.MODID, "azathoth"), TimeUtil.getHourForTimeBegin(Deities.deityAzathoth.getTickTimeBegin()), Ingredient.fromItem(ModItems.tympanum_empty), ModBlocks.symbol_azathoth));
+        GloriousRecipes.addRecipe(new GloriousRecipe(new ResourceLocation(Elementaristics.MODID, "fire"), TimeUtil.getHourForTimeBegin(Deities.deityDragonFire.getTickTimeBegin()), Ingredient.fromStacks(new ItemStack(ModItems.scale, 1, Aspects.fire.getId())), ModBlocks.symbol_dragon_fire));
+        GloriousRecipes.addRecipe(new GloriousRecipe(new ResourceLocation(Elementaristics.MODID, "aether"), TimeUtil.getHourForTimeBegin(Deities.deityDragonAether.getTickTimeBegin()), Ingredient.fromStacks(new ItemStack(ModItems.scale, 1, Aspects.aether.getId())), ModBlocks.symbol_dragon_aether));
+        GloriousRecipes.addRecipe(new GloriousRecipe(new ResourceLocation(Elementaristics.MODID, "air"), TimeUtil.getHourForTimeBegin(Deities.deityDragonAir.getTickTimeBegin()), Ingredient.fromStacks(new ItemStack(ModItems.scale, 1, Aspects.air.getId())), ModBlocks.symbol_dragon_air));
+        GloriousRecipes.addRecipe(new GloriousRecipe(new ResourceLocation(Elementaristics.MODID, "earth"), TimeUtil.getHourForTimeBegin(Deities.deityDragonEarth.getTickTimeBegin()), Ingredient.fromStacks(new ItemStack(ModItems.scale, 1, Aspects.earth.getId())), ModBlocks.symbol_dragon_earth));
+        GloriousRecipes.addRecipe(new GloriousRecipe(new ResourceLocation(Elementaristics.MODID, "water"), TimeUtil.getHourForTimeBegin(Deities.deityDragonWater.getTickTimeBegin()), Ingredient.fromStacks(new ItemStack(ModItems.scale, 1, Aspects.water.getId())), ModBlocks.symbol_dragon_water));
+        GloriousRecipes.addRecipe(new GloriousRecipe(new ResourceLocation(Elementaristics.MODID, "gate"), TimeUtil.getHourForTimeBegin(Deities.deityGateAndKey.getTickTimeBegin()), Ingredient.fromItem(ModItems.item_lock), ModBlocks.symbol_gate));
+        GloriousRecipes.addRecipe(new GloriousRecipe(new ResourceLocation(Elementaristics.MODID, "dreamer"), TimeUtil.getHourForTimeBegin(Deities.deityDreamer.getTickTimeBegin()), Ingredient.fromItem(ModItems.dagger_sacrificial), ModBlocks.symbol_dreamer));
+        GloriousRecipes.addRecipe(new GloriousRecipe(new ResourceLocation(Elementaristics.MODID, "angel"), TimeUtil.getHourForTimeBegin(Deities.deityAngel.getTickTimeBegin()), Ingredient.fromItem(ModItems.key_winged), ModBlocks.symbol_angel));
+        GloriousRecipes.addRecipe(new GloriousRecipe(new ResourceLocation(Elementaristics.MODID, "storm"), TimeUtil.getHourForTimeBegin(Deities.deityStorm.getTickTimeBegin()), Ingredient.fromItem(ModItems.tool_channeling), ModBlocks.symbol_storm));
+        GloriousRecipes.addRecipe(new GloriousRecipe(new ResourceLocation(Elementaristics.MODID, "fighter"), TimeUtil.getHourForTimeBegin(Deities.deityFighter.getTickTimeBegin()), Ingredient.fromItem(Items.DIAMOND_SWORD), ModBlocks.symbol_fighter));
+        GloriousRecipes.addRecipe(new GloriousRecipe(new ResourceLocation(Elementaristics.MODID, "sun"), TimeUtil.getHourForTimeBegin(Deities.deitySun.getTickTimeBegin()), Ingredient.fromItem(ModItems.splendor_eye), ModBlocks.symbol_sun));
+        GloriousRecipes.addRecipe(new GloriousRecipe(new ResourceLocation(Elementaristics.MODID, "harbinger"), TimeUtil.getHourForTimeBegin(Deities.deityHarbinger.getTickTimeBegin()), Ingredient.fromItem(Items.DIAMOND_BOOTS), ModBlocks.symbol_harbinger));
+        GloriousRecipes.addRecipe(new GloriousRecipe(new ResourceLocation(Elementaristics.MODID, "queen"), TimeUtil.getHourForTimeBegin(Deities.deityQueen.getTickTimeBegin()), Ingredient.fromItem(Items.RABBIT_FOOT), ModBlocks.symbol_queen));
+        GloriousRecipes.addRecipe(new GloriousRecipe(new ResourceLocation(Elementaristics.MODID, "goat"), TimeUtil.getHourForTimeBegin(Deities.deityGoat.getTickTimeBegin()), Ingredient.fromStacks(new ItemStack(ModItems.essence, 1, Aspects.wood.getId())), ModBlocks.symbol_goat));
+        // GloriousRecipes.addRecipe(new GloriousRecipe(new ResourceLocation(Elementaristics.MODID, "moth"), TimeUtil.getHourForTimeBegin(Deities.deityMoth.getTickTimeBegin()), Ingredient.fromItem(ModItems.ash), ModBlocks.symbol_moth));       todo: add these once fitting items are in
+        //  GloriousRecipes.addRecipe(new GloriousRecipe(new ResourceLocation(Elementaristics.MODID, "thread"), TimeUtil.getHourForTimeBegin(Deities.deityThread.getTickTimeBegin()), Ingredient.fromItem(ModItems.ash), ModBlocks.symbol_thread));
+        GloriousRecipes.addRecipe(new GloriousRecipe(new ResourceLocation(Elementaristics.MODID, "mirror"), TimeUtil.getHourForTimeBegin(Deities.deityMirror.getTickTimeBegin()), Ingredient.fromItem(ModItems.soul_mirror), ModBlocks.symbol_mirror));
+        //  GloriousRecipes.addRecipe(new GloriousRecipe(new ResourceLocation(Elementaristics.MODID, "dancer"), TimeUtil.getHourForTimeBegin(Deities.deityDancer.getTickTimeBegin()), Ingredient.fromItem(ModItems.ash), ModBlocks.symbol_dancer));
+        //   GloriousRecipes.addRecipe(new GloriousRecipe(new ResourceLocation(Elementaristics.MODID, "king"), TimeUtil.getHourForTimeBegin(Deities.deityKing.getTickTimeBegin()), Ingredient.fromItem(ModItems.ash), ModBlocks.symbol_king));
+        //  GloriousRecipes.addRecipe(new GloriousRecipe(new ResourceLocation(Elementaristics.MODID, "mother"), TimeUtil.getHourForTimeBegin(Deities.deityMother.getTickTimeBegin()), Ingredient.fromItem(ModItems.ash), ModBlocks.symbol_mother));
+        //   GloriousRecipes.addRecipe(new GloriousRecipe(new ResourceLocation(Elementaristics.MODID, "moon"), TimeUtil.getHourForTimeBegin(Deities.deityMoon.getTickTimeBegin()), Ingredient.fromItem(ModItems.ash), ModBlocks.symbol_moon));
+        //   GloriousRecipes.addRecipe(new GloriousRecipe(new ResourceLocation(Elementaristics.MODID, "witch"), TimeUtil.getHourForTimeBegin(Deities.deityWitch.getTickTimeBegin()), Ingredient.fromItem(ModItems.ash), ModBlocks.symbol_witch));
+
     }
 
     private static void initBasin() {
@@ -31,6 +60,7 @@ public class InitRecipes {
         InfusionRecipes.addRecipe(new InfusionRecipe(new ResourceLocation(Elementaristics.MODID, "body_water"), Ingredient.fromItem(ModItems.maganized_matter), new ItemStack(ModItems.body_water), Aspects.water, Aspects.body, Aspects.air));
 
         InfusionRecipes.addRecipe(new InfusionRecipe(new ResourceLocation(Elementaristics.MODID, "gunpowder_energized"), Ingredient.fromItem(Items.GUNPOWDER), new ItemStack(ModItems.gunpowder_energized, 3), Aspects.electricity));
+        InfusionRecipes.addRecipe(new InfusionRecipe(new ResourceLocation(Elementaristics.MODID, "essence_wood"), Ingredient.fromItems(ModItems.flesh_lamb), new ItemStack(ModItems.essence, 1, Aspects.wood.getId()), Aspects.life, Aspects.soul, Aspects.light, Aspects.mind, Aspects.chaos));
 
     }
     private static void initForge() {
@@ -54,6 +84,9 @@ public class InitRecipes {
         ForgeRecipes.addRecipe(new ForgeRecipe(new ResourceLocation(Elementaristics.MODID, "splendor_eye"), Ingredient.fromItems(Items.DIAMOND, Items.EMERALD), Ingredient.fromStacks(new ItemStack(ModItems.essence, 1, Aspects.soul.getId())), Ingredient.fromStacks(new ItemStack(Blocks.OBSIDIAN)), Ingredient.fromStacks(new ItemStack(ModBlocks.stone_enriched)), Ingredient.fromStacks(new ItemStack(ModItems.essence, 1, Aspects.light.getId())), new ItemStack(ModItems.splendor_eye)));
 
         ForgeRecipes.addRecipe(new ForgeRecipe(new ResourceLocation(Elementaristics.MODID, "incantation_reshaping"), Ingredient.fromItems(Items.PAPER), Ingredient.fromStacks(new ItemStack(ModItems.essence, 1, Aspects.fire.getId())), Ingredient.fromStacks(new ItemStack(ModItems.essence, 1, Aspects.light.getId())), Ingredient.fromStacks(new ItemStack(ModItems.essence, 1, Aspects.body.getId())), Ingredient.fromStacks(new ItemStack(ModItems.essence, 1, Aspects.earth.getId())), new ItemStack(ModItems.incantation_reforging)));
+
+        ForgeRecipes.addRecipe(new ForgeRecipe(new ResourceLocation(Elementaristics.MODID, "stone_runed"), Ingredient.fromStacks(new ItemStack(ModBlocks.stone_enriched)), Ingredient.fromStacks(new ItemStack(ModItems.essence, 1, Aspects.light.getId())), Ingredient.fromItems(Items.ENDER_EYE), Ingredient.fromStacks(new ItemStack(ModItems.essence, 1, Aspects.vacuum.getId())), Ingredient.fromStacks(new ItemStack(ModItems.essence, 1, Aspects.soul.getId())), new ItemStack(ModBlocks.stone_runed)));
+        ForgeRecipes.addRecipe(new ForgeRecipe(new ResourceLocation(Elementaristics.MODID, "lock"), Ingredient.fromStacks(new ItemStack(ModItems.ash)), Ingredient.fromStacks(new ItemStack(ModItems.essence, 1, Aspects.mind.getId())), Ingredient.fromItems(Items.ENDER_EYE), Ingredient.fromItem(Items.IRON_INGOT), Ingredient.fromStacks(new ItemStack(ModItems.essence, 1, Aspects.air.getId())), new ItemStack(ModItems.item_lock)));
 
     }
 
@@ -87,6 +120,8 @@ public class InitRecipes {
         EntropizerRecipes.addRecipe(new EntropizerRecipe(new ResourceLocation(Elementaristics.MODID, "matter_astral_body"), Ingredient.fromItem(ModItems.stardust), new ItemStack(ModItems.matter_astral_body)));
         EntropizerRecipes.addRecipe(new EntropizerRecipe(new ResourceLocation(Elementaristics.MODID, "dead_soul"), Ingredient.fromStacks(new ItemStack(ModItems.essence, 1, Aspects.soul.getId())), new ItemStack(ModItems.soul_dead)));
         EntropizerRecipes.addRecipe(new EntropizerRecipe(new ResourceLocation(Elementaristics.MODID, "stardust"), Ingredient.fromItem(Items.GLOWSTONE_DUST), new ItemStack(ModItems.stardust)));
+
+        EntropizerRecipes.addRecipe(new EntropizerRecipe(new ResourceLocation(Elementaristics.MODID, "rite_glory"), Ingredient.fromItem(ModItems.incantation_day), new ItemStack(ModItems.incantation_glorious)));
 
     }
 

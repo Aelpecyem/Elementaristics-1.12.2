@@ -1,0 +1,21 @@
+{
+  "name": "Using Deities",
+  "icon": "",
+  "category": "glory",
+  "advancement": "elementaristics:progress_glory",
+  "priority": true,
+  "pages": [
+    {
+      "type": "text",
+      "text": "As one progresses with the research on deities, a question might come up: \"What the actual hell do I even get from doing all this work? And how do I even use it?\"$(br)Good question, occultist!$(br)Generally, a deity is used by creating $(marked)Symbols$() or advanced $(marked)Statues$().$(br)These are powered with $(marked)Occult Energy$()."
+    },
+    {
+      "type": "text",
+      "text": "These symbols and statues use occult energy when their $(marked)hour$() begins, which can be viewed with the $(item)Splendorous Eye$().$(br)Deities can have different effects, which are usually stronger in statues than in symbols, and which are usually only active during the matching hour."
+    },
+    {
+      "type": "text",
+      "text": "When used with a Splendorous Eye, a deity (as in, a symbol or a statue) can be bound to the nearest altar. This will cause it to supply an aspect to it (when the hour is matching), given that it has any aspects bound to it."
+    }
+  ]
+}

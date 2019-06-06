@@ -162,6 +162,7 @@ item.essence_order.name=Order Essence
 item.essence_chaos.name=Chaos Essence
 item.essence_body.name=Body Essence
 item.essence_mind.name=Mind Essence
+item.essence_wood.name=Essence of the Wood
 
 tile.block_essence_air.name=Concentrated Air Essence
 tile.block_essence_earth.name=Concentrated Earth Essence
@@ -206,6 +207,7 @@ tile.block_moss_everchanging.name=Everchanging Moss
 tile.basin_infusion.name=Infusion Basin
 tile.generator_combustion.name=Arcane Combustion Generator
 tile.storage_energy.name=Occult Energy Core
+tile.block_transmitter_redstone.name=Redstone Transmitter
 
 tile.symbol_dragon_fire.name=Symbol of the Fire Dragon
 
@@ -500,7 +502,7 @@ elementaristics:gate_and_key=The Gate-and-Key
 elementaristics:deity_dreamer=The Dreamer
 elementaristics:deity_angel=The Angel
 elementaristics:deity_storm=The Storm
-elementaristics:deity_fighter=The Knight-in-Blue
+elementaristics:deity_fighter=The Knight
 elementaristics:deity_sun=The Sun-in-Splendor
 elementaristics:deity_harbinger=The Harbinger
 elementaristics:deity_queen=The Fasting Queen

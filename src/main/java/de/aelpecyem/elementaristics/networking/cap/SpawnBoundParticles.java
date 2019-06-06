@@ -71,13 +71,13 @@ public class SpawnBoundParticles implements IMessage {
                         message.y + 0.5D + world.rand.nextFloat()
                                 * message.entityHeight,
                         message.z + world.rand.nextFloat() * message.entitySize
-                                * 2.0F - message.entitySize, motionX, motionY, motionZ, Aspects.body.getColor(), 3, 100, 0, false, false, 0.8F));
+                                * 2.0F - message.entitySize, motionX, motionY, motionZ, Aspects.body.getColor(), 3, 100, 0, false, false, 0.8F, true));
                 Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(world, message.x + world.rand.nextFloat() * message.entitySize
                         * 2.0F - message.entitySize,
                         message.y + 0.5D + world.rand.nextFloat()
                                 * message.entityHeight,
                         message.z + world.rand.nextFloat() * message.entitySize
-                                * 2.0F - message.entitySize, motionX, motionY, motionZ, Aspects.earth.getColor(), 3, 100, 0, false, false, 0.8F));
+                                * 2.0F - message.entitySize, motionX, motionY, motionZ, Aspects.earth.getColor(), 3, 100, 0, false, false, 0.8F, true));
 
             });
             return null;

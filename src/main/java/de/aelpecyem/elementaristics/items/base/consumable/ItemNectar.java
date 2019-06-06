@@ -15,13 +15,11 @@ public class ItemNectar extends ItemDrinkBase {
 
     @Override
     public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityLivingBase entityLiving) {
-        if (worldIn.isRemote) {
             entityLiving.attackEntityFrom(Elementaristics.DAMAGE_PSYCHIC, 15);
             entityLiving.addPotionEffect(new PotionEffect(MobEffects.ABSORPTION, 2000, 3));
             entityLiving.addPotionEffect(new PotionEffect(MobEffects.HEALTH_BOOST, 2000, 4));
             entityLiving.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 2000, 0));
             entityLiving.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, 2000, 0));
-        }
         stack.shrink(1);
         return stack;
     }
