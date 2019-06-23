@@ -41,7 +41,7 @@ import java.util.Iterator;
 
 public class EventHandler {
     public static final String LAST_DMG_STRING = "lastDmg";
-
+    //todo update forge version, probs in a new project to also fix weird tex issues
     //for Poison stuff
     @SubscribeEvent
     public void onItemUsed(LivingEntityUseItemEvent.Finish event) {
