@@ -90,7 +90,7 @@ public final class Elementaristics {
         ModCaps.registerCapabilites();
         initElements();
         Deities.initDeities();
-        PoisonInit.init();
+     //   PoisonInit.init();
         ModBlocks.init();
         ModItems.init();
 

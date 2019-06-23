@@ -188,7 +188,7 @@ public class ModItems {
 
         item_lock = new ItemBase("item_lock");
         scale = new ItemScale();
-        poison_glassfinger = new ItemPoisonBase("poison_glassfinger", PoisonInit.poisonGlassfinger);
+       // poison_glassfinger = new ItemPoisonBase("poison_glassfinger", PoisonInit.poisonGlassfinger);
     }
 
     private static void initRiteMaterials() {

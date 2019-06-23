@@ -43,6 +43,7 @@ public class EventHandler {
     public static final String LAST_DMG_STRING = "lastDmg";
 
     //for Poison stuff
+    @SubscribeEvent
     public void onItemUsed(LivingEntityUseItemEvent.Finish event) {
         ItemStack stack = event.getItem();
         if (stack.hasTagCompound() && stack.getTagCompound().hasKey(ItemPoisonBase.POISON_TAG)) {

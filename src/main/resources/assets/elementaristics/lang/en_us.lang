@@ -143,6 +143,8 @@ item.water_clear.name=Clear Water
 item.heart_human.name=Human Heart
 item.splendor_eye.name=Splendorous Eye
 
+
+
 #Essences (Items and Blocks)
 item.essence_air.name=Air Essence
 item.essence_earth.name=Earth Essence
