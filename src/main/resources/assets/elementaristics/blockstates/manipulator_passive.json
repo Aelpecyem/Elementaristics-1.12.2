@@ -1,0 +1,33 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "cube_all",
+    "all": "elementaristics:blocks/manipulator_passive"
+  },
+  "variants": {
+    "powered": {
+      "true": {
+        "textures": {
+          "all": "elementaristics:blocks/manipulator_passive"
+        }
+      },
+      "false": {
+        "textures": {
+          "all": "elementaristics:blocks/manipulator_passive_inactive"
+        }
+      }
+    },
+    "normal": {
+      "model": "cube_all",
+      "textures": {
+        "all": "elementaristics:blocks/manipulator_passive_inactive"
+      }
+    },
+    "inventory": {
+      "model": "cube_all",
+      "textures": {
+        "all": "elementaristics:blocks/manipulator_passive_inactive"
+      }
+    }
+  }
+}

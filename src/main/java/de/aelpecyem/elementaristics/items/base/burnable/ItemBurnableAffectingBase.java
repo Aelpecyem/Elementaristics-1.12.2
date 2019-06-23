@@ -17,19 +17,25 @@ public class ItemBurnableAffectingBase extends ItemBase {
         super(name);
     }
 
-    public void affect(EntityItem itemIn, EntityPlayer player) {
-        player.world.playSound(itemIn.posX, itemIn.posY, itemIn.posZ, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.AMBIENT, 1, 1.1F, true);
+    public void affect(EntityItem itemIn) {
+
+    }
+
+    public void affectPlayer(EntityItem item, EntityPlayer player) {
+        player.world.playSound(item.posX, item.posY, item.posZ, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.AMBIENT, 1, 1.1F, true);
+
     }
 
     @Override
     public boolean onEntityItemUpdate(EntityItem entityItem) {
         if (entityItem.isBurning()) {
+            affect(entityItem);
             List<EntityPlayer> players = entityItem.getEntityWorld().getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(new BlockPos(entityItem.getPosition().getX() - 5, entityItem.getPosition().getY() - 2, entityItem.getPosition().getZ() - 5), new BlockPos(entityItem.getPosition().getX() + 5, entityItem.getPosition().getY() + 5, entityItem.getPosition().getZ() + 5)));
             if (players.size() > 0) {
                 Iterator var3 = players.iterator();
                 while (var3.hasNext()) {
                     EntityPlayer e = (EntityPlayer) var3.next();
-                        affect(entityItem, e);
+                    affectPlayer(entityItem, e);
                 }
             }
             entityItem.setDead();

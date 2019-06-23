@@ -27,14 +27,14 @@ public class DeitySupplyEffectBase extends Deity {
 
     @Override
     public void symbolEffect(TileEntityDeityShrine te) {
-        if (te.storage.extractIfPossible(5)) {
+        if (!te.altarPos.equals(te.getPos()) && te.storage.extractIfPossible(5)) {
             supplyEffect(te);
         }
     }
 
     @Override
     public void statueEffect(TileEntityDeityShrine te) {
-        if (te.storage.extractIfPossible(2)) {
+        if (!te.altarPos.equals(te.getPos()) && te.storage.extractIfPossible(2)) {
             supplyEffect(te);
         }
     }

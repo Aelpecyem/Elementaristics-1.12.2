@@ -11,6 +11,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public class BlockPowerableBase extends BlockBase {
@@ -20,6 +21,11 @@ public class BlockPowerableBase extends BlockBase {
     public BlockPowerableBase(Material material, String name) {
         super(material, name);
         this.setDefaultState(this.blockState.getBaseState().withProperty(POWERED, false));
+    }
+
+    @Override
+    public int getLightValue(IBlockState state, IBlockAccess world, BlockPos pos) {
+        return state.getValue(POWERED) ? 10 : 0;
     }
 
     @Override

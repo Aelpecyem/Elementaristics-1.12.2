@@ -27,7 +27,13 @@ public class ItemOpiumTincture extends ItemBurnableAffectingBase {
     }
 
     @Override
-    public void affect(EntityItem itemIn, EntityPlayer player) {
+    public void affectPlayer(EntityItem item, EntityPlayer player) {
+        player.addPotionEffect(new PotionEffect(PotionInit.potionTrance, 3500, 0, true, true));
+        super.affectPlayer(item, player);
+    }
+
+    @Override
+    public void affect(EntityItem itemIn) {
         for (int y = -1; y < 3; y++) {
             for (int x = -3; x < 3; x++) {
                 for (int z = -3; z < 3; z++) {
@@ -36,8 +42,7 @@ public class ItemOpiumTincture extends ItemBurnableAffectingBase {
                 }
             }
         }
-        player.addPotionEffect(new PotionEffect(PotionInit.potionTrance, 3500, 0, true, true));
-        super.affect(itemIn, player);
+        super.affect(itemIn);
     }
 
 }

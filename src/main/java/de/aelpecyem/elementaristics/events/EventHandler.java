@@ -5,6 +5,9 @@ import de.aelpecyem.elementaristics.blocks.base.BlockFlowerBase;
 import de.aelpecyem.elementaristics.capability.player.IPlayerCapabilities;
 import de.aelpecyem.elementaristics.capability.player.PlayerCapProvider;
 import de.aelpecyem.elementaristics.config.Config;
+import de.aelpecyem.elementaristics.items.base.burnable.ItemPoisonBase;
+import de.aelpecyem.elementaristics.misc.poisons.PoisonEffectBase;
+import de.aelpecyem.elementaristics.misc.poisons.PoisonInit;
 import de.aelpecyem.elementaristics.misc.potions.PotionInit;
 import de.aelpecyem.elementaristics.misc.potions.effects.emotion.PotionEmotion;
 import net.minecraft.client.Minecraft;
@@ -14,6 +17,7 @@ import net.minecraft.command.CommandException;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.server.MinecraftServer;
@@ -22,6 +26,8 @@ import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ITeleporter;
+import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.SleepingTimeCheckEvent;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.common.eventhandler.Event;
@@ -34,6 +40,27 @@ import vazkii.patchouli.api.PatchouliAPI;
 import java.util.Iterator;
 
 public class EventHandler {
+    public static final String LAST_DMG_STRING = "lastDmg";
+
+    //for Poison stuff
+    public void onItemUsed(LivingEntityUseItemEvent.Finish event) {
+        ItemStack stack = event.getItem();
+        if (stack.hasTagCompound() && stack.getTagCompound().hasKey(ItemPoisonBase.POISON_TAG)) {
+            PoisonEffectBase effect = PoisonInit.poisons.getOrDefault(stack.getTagCompound().getInteger(ItemPoisonBase.POISON_TAG), null);
+            if (effect != null) {
+                effect.performEffect(event.getEntityLiving().world, event.getEntityLiving());
+            }
+
+        }
+    }
+
+    @SubscribeEvent
+    public void damageTaken(LivingHurtEvent event) {
+        event.getEntityLiving().getEntityData().setFloat(LAST_DMG_STRING, event.getAmount());
+    }
+
+
+
     @SubscribeEvent
     public void onPlayerTick(TickEvent.PlayerTickEvent event) {
         if (event.phase == TickEvent.Phase.END) {

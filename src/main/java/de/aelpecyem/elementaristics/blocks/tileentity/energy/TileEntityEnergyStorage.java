@@ -17,6 +17,11 @@ public class TileEntityEnergyStorage extends TileEntityEnergy implements ITickab
     }
 
     @Override
+    public int getTransfer(int i) {
+        return 30;
+    }
+
+    @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
         return super.writeToNBT(compound);
     }

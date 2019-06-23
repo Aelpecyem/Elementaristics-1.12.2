@@ -132,6 +132,13 @@ public class TileEntityDeityShrine extends TileEntityEnergy implements ITickable
                     }
                     doParticles(deityActive);
                 }
+                if (isPassiveEffectManipulatorBelow()) {
+                    if (isStatue) {
+                        deityActive.statueEffect(this);
+                    } else {
+                        deityActive.symbolEffect(this);
+                    }
+                }
             }
         }
     }
@@ -147,6 +154,13 @@ public class TileEntityDeityShrine extends TileEntityEnergy implements ITickable
 
     public boolean isSupplyingManipulatorBelow() {
         if (world.getBlockState(pos.down()).getBlock() == ModBlocks.manipulator_supplying && world.isBlockPowered(pos.down())) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isPassiveEffectManipulatorBelow() {
+        if (world.getBlockState(pos.down()).getBlock() == ModBlocks.manipulator_passive && world.isBlockPowered(pos.down())) {
             return true;
         }
         return false;

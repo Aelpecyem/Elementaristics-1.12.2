@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "EAE",
+    "SCS",
+    "   "
+  ],
+  "key": {
+    "C": {
+      "item": "elementaristics:gem_arcane"
+    },
+    "S": {
+      "item": "elementaristics:stone_enriched"
+    },
+    "E": {
+      "item": "elementaristics:essence",
+      "data": 1
+    },
+    "A": {
+      "item": "elementaristics:essence",
+      "data": 16
+    }
+  },
+  "result": {
+    "item": "elementaristics:manipulator_passive",
+    "count": 1
+  }
+}

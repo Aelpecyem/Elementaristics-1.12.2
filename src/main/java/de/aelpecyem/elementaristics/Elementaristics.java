@@ -11,6 +11,7 @@ import de.aelpecyem.elementaristics.init.*;
 import de.aelpecyem.elementaristics.misc.ItemColorHandler;
 import de.aelpecyem.elementaristics.misc.commands.CommandElementaristics;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;
+import de.aelpecyem.elementaristics.misc.poisons.PoisonInit;
 import de.aelpecyem.elementaristics.misc.potions.PotionInit;
 import de.aelpecyem.elementaristics.networking.PacketHandler;
 import de.aelpecyem.elementaristics.proxy.CommonProxy;
@@ -89,6 +90,7 @@ public final class Elementaristics {
         ModCaps.registerCapabilites();
         initElements();
         Deities.initDeities();
+        PoisonInit.init();
         ModBlocks.init();
         ModItems.init();
 

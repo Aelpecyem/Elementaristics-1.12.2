@@ -26,6 +26,10 @@ public class BlockRedstoneEmulator extends BlockTileEntity<TileEntityRedstoneEmu
         this.setDefaultState(this.blockState.getBaseState().withProperty(POWERED, false));
     }
 
+    @Override
+    public int getLightValue(IBlockState state, IBlockAccess world, BlockPos pos) {
+        return state.getValue(POWERED) ? 10 : 0;
+    }
 
     @Override
     public int getMetaFromState(IBlockState state) {

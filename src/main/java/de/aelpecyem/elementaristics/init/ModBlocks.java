@@ -82,6 +82,7 @@ public class ModBlocks {
     public static BlockDeityShrineBase symbol_witch;
 
     public static BlockBase manipulator_supplying;
+    public static BlockBase manipulator_passive;
     public static BlockRedstoneTransmitter block_transmitter_redstone;
     public static BlockRedstoneEmulator block_emulator_redstone;
     //PLANTS
@@ -155,6 +156,7 @@ public class ModBlocks {
         symbol_witch = new BlockDeityWitch(false);
 
         manipulator_supplying = new BlockPowerableBase(Material.ROCK, "manipulator_supplying");
+        manipulator_passive = new BlockPowerableBase(Material.ROCK, "manipulator_passive");
         block_transmitter_redstone = new BlockRedstoneTransmitter();
         block_emulator_redstone = new BlockRedstoneEmulator();
 

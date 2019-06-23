@@ -7,6 +7,7 @@ import de.aelpecyem.elementaristics.misc.pantheon.DeityBase;
 import de.aelpecyem.elementaristics.misc.pantheon.DeitySupplyEffectBase;
 import de.aelpecyem.elementaristics.misc.pantheon.advanced.DeityAzathoth;
 import de.aelpecyem.elementaristics.misc.pantheon.advanced.DeityDragon;
+import de.aelpecyem.elementaristics.misc.pantheon.advanced.DeityGate;
 import de.aelpecyem.elementaristics.util.TimeUtil;
 import net.minecraft.util.ResourceLocation;
 
@@ -51,11 +52,7 @@ public class Deities {
         deityDragonWater = new DeityDragon(5, Aspects.water, SoulInit.soulWater, 1049560);
         deityDragonAir = new DeityDragon(6, Aspects.air, SoulInit.soulAir, 1300735);
 
-       /* deityDragonEarth = new DeitySupplyEffectBase(TimeUtil.getTickTimeStartForHour(4), new ResourceLocation(Elementaristics.MODID, "dragon_earth"), Aspects.earth, 15375);
-        deityDragonWater = new DeitySupplyEffectBase(TimeUtil.getTickTimeStartForHour(5), new ResourceLocation(Elementaristics.MODID, "dragon_water"), Aspects.water, 1049560);
-        deityDragonAir = new DeitySupplyEffectBase(TimeUtil.getTickTimeStartForHour(6), new ResourceLocation(Elementaristics.MODID, "dragon_air"), Aspects.air, 1300735);
-      */
-        deityGateAndKey = new DeitySupplyEffectBase(TimeUtil.getTickTimeStartForHour(7), new ResourceLocation(Elementaristics.MODID, "gate_and_key"), Aspects.mind, 1131335);
+        deityGateAndKey = new DeityGate();
         deityDreamer = new DeitySupplyEffectBase(TimeUtil.getTickTimeStartForHour(8), new ResourceLocation(Elementaristics.MODID, "deity_dreamer"), Aspects.ice, 8497580);
         deityAngel = new DeityBase(TimeUtil.getTickTimeStartForHour(9), new ResourceLocation(Elementaristics.MODID, "deity_angel"), 4757545);
         deityStorm = new DeitySupplyEffectBase(TimeUtil.getTickTimeStartForHour(10), new ResourceLocation(Elementaristics.MODID, "deity_storm"), Aspects.electricity, 1729436);

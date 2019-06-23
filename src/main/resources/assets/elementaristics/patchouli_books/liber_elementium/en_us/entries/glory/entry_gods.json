@@ -15,7 +15,7 @@
     },
     {
       "type": "text",
-      "text": "When used with a Splendorous Eye, a deity (as in, a symbol or a statue) can be bound to the nearest altar. This will cause it to supply an aspect to it (when the hour is matching), given that it has any aspects bound to it."
+      "text": "When used with a Splendorous Eye, a deity (as in, a symbol or a statue) can be bound to the nearest altar. This will cause it to supply an aspect to it (when the hour is matching), given that it has any aspects bound to it. Symbols and Deities can also be bound to blocks like $(l:energy/entry_core)Occult Energy Cores$(), meaning that they can drain and be drained, depending on what the user desires (see according entry)."
     }
   ]
 }

@@ -41,6 +41,12 @@ public class BlockRedstoneTransmitter extends BlockTileEntity<TileEntityRedstone
         this.setDefaultState(this.blockState.getBaseState().withProperty(POWERED, false));
     }
 
+
+    @Override
+    public int getLightValue(IBlockState state, IBlockAccess world, BlockPos pos) {
+        return state.getValue(POWERED) ? 10 : 0;
+    }
+
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);

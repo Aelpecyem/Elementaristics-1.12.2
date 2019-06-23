@@ -8,10 +8,12 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 
+import java.util.Iterator;
 import java.util.List;
 
 public class ItemHerbBundle extends ItemBurnableAffectingBase {
@@ -27,7 +29,15 @@ public class ItemHerbBundle extends ItemBurnableAffectingBase {
     }
 
     @Override
-    public void affect(EntityItem itemIn, EntityPlayer player) {
+    public void affectPlayer(EntityItem item, EntityPlayer player) {
+        player.addPotionEffect(new PotionEffect(PotionInit.potionIntoxicated, 3500, 1, true, true));
+        if (player.world.isRemote)
+            player.sendStatusMessage(new TextComponentString(I18n.format("message.drugs")), false);
+        super.affectPlayer(item, player);
+    }
+
+    @Override
+    public void affect(EntityItem itemIn) {
         for (int y = -1; y < 5; y++) {
             for (int x = -5; x < 5; x++) {
                 for (int z = -5; z < 5; z++) {
@@ -41,11 +51,7 @@ public class ItemHerbBundle extends ItemBurnableAffectingBase {
                 }
             }
         }
-        player.addPotionEffect(new PotionEffect(PotionInit.potionIntoxicated, 3500, 1, true, true));
-        if (player.world.isRemote)
-            player.sendStatusMessage(new TextComponentString(I18n.format("message.drugs")), false);
-
-        super.affect(itemIn, player);
+        super.affect(itemIn);
     }
 
 }
