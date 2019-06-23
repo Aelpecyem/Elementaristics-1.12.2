@@ -8,7 +8,9 @@ import java.util.Set;
 public class PoisonInit {
     public static Map<Integer, PoisonEffectBase> poisons = new HashMap<>();
 
-    public static void init() {
+    public static PoisonEffectBase poisonGlassfinger;
 
+    public static void init() {
+        poisonGlassfinger = new PoisonGlassfinger();
     }
 }

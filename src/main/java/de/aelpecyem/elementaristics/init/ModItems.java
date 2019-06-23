@@ -11,9 +11,11 @@ import de.aelpecyem.elementaristics.items.base.bauble.ItemKeyWinged;
 import de.aelpecyem.elementaristics.items.base.bauble.ItemWaterBody;
 import de.aelpecyem.elementaristics.items.base.burnable.ItemHerbBundle;
 import de.aelpecyem.elementaristics.items.base.burnable.ItemOpiumTincture;
+import de.aelpecyem.elementaristics.items.base.burnable.ItemPoisonBase;
 import de.aelpecyem.elementaristics.items.base.consumable.*;
 import de.aelpecyem.elementaristics.items.base.thaumagral.*;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;
+import de.aelpecyem.elementaristics.misc.poisons.PoisonInit;
 import de.aelpecyem.elementaristics.util.IHasModel;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
@@ -135,6 +137,8 @@ public class ModItems {
 
     public static ItemEssence essence = new ItemEssence();
 
+    //poison
+    public static ItemPoisonBase poison_glassfinger;
 
     public static void init() {
         bundle_herbs = new ItemHerbBundle();
@@ -184,6 +188,7 @@ public class ModItems {
 
         item_lock = new ItemBase("item_lock");
         scale = new ItemScale();
+        poison_glassfinger = new ItemPoisonBase("poison_glassfinger", PoisonInit.poisonGlassfinger);
     }
 
     private static void initRiteMaterials() {
