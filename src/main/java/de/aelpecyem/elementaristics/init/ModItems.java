@@ -107,7 +107,7 @@ public class ModItems {
     public static ItemAspects vacuum_selfsustaining;
     public static ItemBase lightning_tangible;
     public static ItemAspects moss_everchaning;
-    public static ItemAspects gem_triangular;
+    public static ItemAspects gem_arcane;
     public static ItemAspects catalyst_ordering;
     public static ItemAspects catalyst_entropizing;
     public static ItemFoodBase flesh_lamb;
@@ -138,7 +138,9 @@ public class ModItems {
     public static ItemEssence essence = new ItemEssence();
 
     //poison
-    public static ItemPoisonBase poison_glassfinger;
+    public static ItemPoisonBase poison_glassblood;
+    public static ItemPoisonBase poison_wintersbreath;
+    public static ItemPoisonBase poison_sandthroat;
 
     public static void init() {
         bundle_herbs = new ItemHerbBundle();
@@ -188,7 +190,10 @@ public class ModItems {
 
         item_lock = new ItemBase("item_lock");
         scale = new ItemScale();
-       // poison_glassfinger = new ItemPoisonBase("poison_glassfinger", PoisonInit.poisonGlassfinger);
+
+        poison_glassblood = new ItemPoisonBase("poison_glassblood", PoisonInit.poisonGlassblood);
+        poison_wintersbreath = new ItemPoisonBase("poison_wintersbreath", PoisonInit.poisonWintersBreath);
+        poison_sandthroat = new ItemPoisonBase("poison_sandthroat", PoisonInit.poisonSandthroat);
     }
 
     private static void initRiteMaterials() {
@@ -204,7 +209,7 @@ public class ModItems {
         vacuum_selfsustaining = new ItemAspects("vacuum_selfsustaining", 6, true, Aspects.vacuum);
         lightning_tangible = new ItemLightningTangible();
         moss_everchaning = new ItemAspects("moss_everchanging", 6, true, Aspects.life);
-        gem_triangular = new ItemAspects("gem_arcane", 6, true, Aspects.crystal);
+        gem_arcane = new ItemAspects("gem_arcane", 6, true, Aspects.crystal);
         catalyst_ordering = new ItemAspects("catalyst_ordering", 6, true, Aspects.order);
         catalyst_entropizing = new ItemAspects("catalyst_entropizing", 6, true, Aspects.chaos); //1 aether essence 3 chaotic matter pieces
         flesh_lamb = new ItemFleshLamb();

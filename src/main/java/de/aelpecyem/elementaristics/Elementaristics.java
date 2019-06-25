@@ -50,7 +50,6 @@ import java.io.File;
 
 @Mod(modid = Elementaristics.MODID, name = Elementaristics.NAME, version = Elementaristics.VERSION, dependencies = "required-after:baubles")
 public final class Elementaristics {
-    //TODO spawn particles with packets
     //TODO ...ASCENSION!
     //TODO more rites
     //TODO ...more!
@@ -90,7 +89,7 @@ public final class Elementaristics {
         ModCaps.registerCapabilites();
         initElements();
         Deities.initDeities();
-     //   PoisonInit.init();
+        PoisonInit.init();
         ModBlocks.init();
         ModItems.init();
 
@@ -108,7 +107,7 @@ public final class Elementaristics {
         if (Loader.isModLoaded("thaumcraft")) {
             ThaumcraftCompat.init();
         }
-        GameRegistry.registerWorldGenerator(new WorldGenAnomaly(), 10);// todo gonna continue with this later on
+        GameRegistry.registerWorldGenerator(new WorldGenAnomaly(), 10);
         MinecraftForge.EVENT_BUS.register(new SpellInit());
         MinecraftForge.EVENT_BUS.register(new CapabilityHandler());
         MinecraftForge.EVENT_BUS.register(new EventHandler());

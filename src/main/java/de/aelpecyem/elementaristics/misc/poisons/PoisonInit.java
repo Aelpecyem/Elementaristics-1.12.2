@@ -1,16 +1,26 @@
 package de.aelpecyem.elementaristics.misc.poisons;
 
+import de.aelpecyem.elementaristics.items.base.burnable.ItemPoisonBase;
+import net.minecraft.entity.EntityLivingBase;
+
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 public class PoisonInit {
     public static Map<Integer, PoisonEffectBase> poisons = new HashMap<>();
 
-    public static PoisonEffectBase poisonGlassfinger;
+    public static PoisonEffectBase poisonGlassblood;
+    public static PoisonEffectBase poisonWintersBreath;
+    public static PoisonEffectBase poisonSandthroat;
 
     public static void init() {
-        poisonGlassfinger = new PoisonGlassfinger();
+        poisonGlassblood = new PoisonGlassblood();
+        poisonWintersBreath = new PoisonWintersBreath();
+        poisonSandthroat = new PoisonSandthroat();
+    }
+
+    public static void performDelayedEffect(EntityLivingBase entity, PoisonEffectBase poison, int ticksDelayed){
+        entity.getEntityData().setInteger(ItemPoisonBase.POISON_TAG, poison.getId());
+        entity.getEntityData().setInteger("poison_ticks_left", ticksDelayed);
     }
 }

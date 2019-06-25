@@ -161,7 +161,7 @@ public class EntitySpellProjectile extends EntityThrowable {
             //   EntityLivingBase caster = this.getCaster();
             if (spell != null) {
                 if ((result.typeOfHit != RayTraceResult.Type.ENTITY) || (result.entityHit != getThrower())) {
-                    //  performEffect(result, caster, this.world);
+                    //  drinkEffect(result, caster, this.world);
                     spell.affect(result, getThrower(), this.world, this);
                 }
                 if ((result.typeOfHit == RayTraceResult.Type.BLOCK && world.getBlockState(result.getBlockPos()).getMaterial().blocksMovement())) {// && ((spell.getType() == EnumSpellType.PROJECTILE_BLOCK) || (spell.getType() == EnumSpellType.PROJECTILE_ALL))) {
@@ -198,7 +198,7 @@ public class EntitySpellProjectile extends EntityThrowable {
     public void setDead() {
         super.setDead();
     }
-   /* public void performEffect(RayTraceResult result, EntityLivingBase caster, World world){
+   /* public void drinkEffect(RayTraceResult result, EntityLivingBase caster, World world){
         EntityLivingBase target;
         if (result.entityHit instanceof EntityLivingBase){
             target = (EntityLivingBase) result.entityHit;

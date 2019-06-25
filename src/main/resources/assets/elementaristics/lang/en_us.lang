@@ -143,6 +143,15 @@ item.water_clear.name=Clear Water
 item.heart_human.name=Human Heart
 item.splendor_eye.name=Splendorous Eye
 
+item.poison_glassblood.name=Glassblood Toxin
+tooltip.poison_glassblood.name=A strong poison that drains magic, too
+
+item.poison_wintersbreath.name=Winter's Breath
+tooltip.poison_wintersbreath.name=First comes the winter's breath, then comes the hunger
+
+item.poison_sandthroat.name=Sandthroat Poison
+tooltip.poison_sandthroat.name=ouch ouch soup hot owie
+
 
 
 #Essences (Items and Blocks)

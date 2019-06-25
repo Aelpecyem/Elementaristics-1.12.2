@@ -4,22 +4,18 @@ package de.aelpecyem.elementaristics.items.base.artifacts;
 import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.init.ModItems;
 import de.aelpecyem.elementaristics.init.ModMaterials;
-import de.aelpecyem.elementaristics.items.base.ItemEssence;
-import de.aelpecyem.elementaristics.items.base.ItemScale;
 import de.aelpecyem.elementaristics.items.base.artifacts.rites.IHasRiteUse;
 import de.aelpecyem.elementaristics.misc.elements.Aspect;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;
 import de.aelpecyem.elementaristics.util.IHasModel;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.*;
@@ -69,11 +65,10 @@ public class ItemHammerHeat extends ItemPickaxe implements IHasRiteUse, IHasMode
             EntityItem gem = null;
             EntityItem essence = null;
             for (EntityItem item : items) {
-                System.out.println("heeeeee");
                 if (item.getItem().getItem() == Items.PRISMARINE_SHARD) {
                     shard = item;
                 }
-                if (item.getItem().getItem() == ModItems.gem_triangular) {
+                if (item.getItem().getItem() == ModItems.gem_arcane) {
                     gem = item;
                 }
                 if (item.getItem().getItem() == ModItems.essence && item.getItem().getMetadata() < 5) {
@@ -87,7 +82,7 @@ public class ItemHammerHeat extends ItemPickaxe implements IHasRiteUse, IHasMode
                 gem.getItem().shrink(1);
                 essence.getItem().shrink(1);
                 worldIn.playSound(null, pos.add(0.5, 1, 0.5), SoundEvents.BLOCK_ANVIL_USE, SoundCategory.AMBIENT, 1, 1);
-                Elementaristics.proxy.generateGenericParticles(worldIn, pos.add(0.5, 1, 0.5), 15159040, 2, 160, 0, true, true);
+                Elementaristics.proxy.generateGenericParticles(worldIn, pos.add(hitX, hitY, hitZ), 15159040, 2, 160, 0, true, true);
                 player.getHeldItem(hand).damageItem(1, player);
                 return EnumActionResult.SUCCESS;
             }
@@ -95,7 +90,7 @@ public class ItemHammerHeat extends ItemPickaxe implements IHasRiteUse, IHasMode
         if (worldIn.getBlockState(pos.up()).getBlock() == Blocks.AIR) {
             worldIn.setBlockState(pos.up(), Blocks.FIRE.getDefaultState(), 1);
             worldIn.playSound(null, pos.add(0.5, 1, 0.5), SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.AMBIENT, 1, 1);
-            Elementaristics.proxy.generateGenericParticles(worldIn, pos.add(0.5, 1, 0.5), 15159040, 2, 160, 0, true, true);
+            Elementaristics.proxy.generateGenericParticles(worldIn,   pos.getX() + hitX, pos.getY() + hitY, pos.getZ() + hitZ, 15159040, 2, 160, 0, true, true);
             player.getHeldItem(hand).damageItem(1, player);
             return EnumActionResult.SUCCESS;
         }

@@ -10,31 +10,25 @@ import de.aelpecyem.elementaristics.misc.poisons.PoisonEffectBase;
 import de.aelpecyem.elementaristics.misc.poisons.PoisonInit;
 import de.aelpecyem.elementaristics.misc.potions.PotionInit;
 import de.aelpecyem.elementaristics.misc.potions.effects.emotion.PotionEmotion;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.command.AdvancementCommand;
-import net.minecraft.command.CommandException;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ITeleporter;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
+import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.SleepingTimeCheckEvent;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import vazkii.patchouli.api.PatchouliAPI;
 
 import java.util.Iterator;
@@ -49,7 +43,7 @@ public class EventHandler {
         if (stack.hasTagCompound() && stack.getTagCompound().hasKey(ItemPoisonBase.POISON_TAG)) {
             PoisonEffectBase effect = PoisonInit.poisons.getOrDefault(stack.getTagCompound().getInteger(ItemPoisonBase.POISON_TAG), null);
             if (effect != null) {
-                effect.performEffect(event.getEntityLiving().world, event.getEntityLiving());
+                effect.drinkEffect(event.getEntityLiving().world, event.getEntityLiving());
             }
 
         }
@@ -60,6 +54,20 @@ public class EventHandler {
         event.getEntityLiving().getEntityData().setFloat(LAST_DMG_STRING, event.getAmount());
     }
 
+    @SubscribeEvent
+    public void decreasePoisonCountdown(LivingEvent.LivingUpdateEvent event){
+        if (event.getEntityLiving().getEntityData().hasKey("poison_ticks_left")){
+            event.getEntityLiving().getEntityData().setInteger("poison_ticks_left", event.getEntityLiving().getEntityData().getInteger("poison_ticks_left") - 1);
+            if (event.getEntityLiving().getEntityData().getInteger("poison_ticks_left") <= 0){
+                event.getEntityLiving().getEntityData().removeTag("poison_ticks_left");
+                PoisonEffectBase effect = PoisonInit.poisons.getOrDefault(event.getEntityLiving().getEntityData().getInteger(ItemPoisonBase.POISON_TAG), null);
+                if (effect != null) {
+                    effect.performEffect(event.getEntityLiving().world, event.getEntityLiving());
+                }
+                event.getEntityLiving().getEntityData().removeTag(ItemPoisonBase.POISON_TAG);
+            }
+        }
+    }
 
 
     @SubscribeEvent
@@ -154,7 +162,6 @@ public class EventHandler {
         }
     }
 
-    //todo, fix bed stuff for server, fix thaumagrals for server ooooof
     public void performMoodAnalysis(EntityPlayer player) {
         if (player.getActivePotionEffects().contains(player.getActivePotionEffect(PotionInit.potionIntoxicated))) {
             World world = player.getEntityWorld();

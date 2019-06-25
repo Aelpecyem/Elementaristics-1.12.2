@@ -15,7 +15,11 @@ public class PoisonEffectBase {
         PoisonInit.poisons.put(id, this);
     }
 
-    public void performEffect(World world, EntityLivingBase player) {
+    public void drinkEffect(World world, EntityLivingBase player) {
+        performEffect(world, player);
+    }
+
+    public void performEffect(World world, EntityLivingBase player){
 
     }
 
