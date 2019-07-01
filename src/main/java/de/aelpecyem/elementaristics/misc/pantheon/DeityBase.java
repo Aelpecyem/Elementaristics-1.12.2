@@ -9,7 +9,6 @@ import net.minecraft.util.ResourceLocation;
 import javax.annotation.Nullable;
 
 public class DeityBase extends Deity {
-    //as of now, this does nothing
     public DeityBase(long tickTimeBegin, ResourceLocation name, int color) {
         super(tickTimeBegin, name, null, color);
     }
@@ -17,12 +16,12 @@ public class DeityBase extends Deity {
 
     @Override
     public void symbolEffect(TileEntityDeityShrine te) {
-
+       super.passiveParticles(te);
     }
 
     @Override
     public void statueEffect(TileEntityDeityShrine te) {
-
+        super.passiveParticles(te);
     }
 
 

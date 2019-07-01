@@ -237,6 +237,7 @@ advancement.elementaristics.basin=Flux free
 advancement.elementaristics.energy=Behold: technology!
 advancement.elementaristics.binding=More than just a frame of bones
 advancement.elementaristics.glory=There shall be glory!
+advancement.elementaristics.water_purest=Fresh!
 
 advancement.elementaristics.ascension_1=Far above, but just space
 advancement.elementaristics.ascension_2=THE MORE-!
@@ -262,6 +263,7 @@ advancement.elementaristics.basin.desc=Build an Infusion Basin to infuse items w
 advancement.elementaristics.energy.desc=Build a Channeling Tool
 advancement.elementaristics.binding.desc=Build a Heart of Stone
 advancement.elementaristics.glory.desc=Build a Splendorous Eye
+advancement.elementaristics.water_purest.desc=Craft Purest Water
 
 advancement.elementaristics.ascension_1.desc=Study the essence of space
 advancement.elementaristics.ascension_2.desc=Build an Altar to perform rites

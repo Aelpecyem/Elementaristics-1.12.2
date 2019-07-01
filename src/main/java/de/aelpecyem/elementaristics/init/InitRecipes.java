@@ -62,6 +62,8 @@ public class InitRecipes {
         InfusionRecipes.addRecipe(new InfusionRecipe(new ResourceLocation(Elementaristics.MODID, "gunpowder_energized"), Ingredient.fromItem(Items.GUNPOWDER), new ItemStack(ModItems.gunpowder_energized, 3), Aspects.electricity));
         InfusionRecipes.addRecipe(new InfusionRecipe(new ResourceLocation(Elementaristics.MODID, "essence_wood"), Ingredient.fromItems(ModItems.flesh_lamb), new ItemStack(ModItems.essence, 1, Aspects.wood.getId()), Aspects.life, Aspects.soul, Aspects.light, Aspects.mind, Aspects.chaos));
 
+        InfusionRecipes.addRecipe(new InfusionRecipe(new ResourceLocation(Elementaristics.MODID, "toxin_glassfinger"), Ingredient.fromItems(ModItems.sandthroat_concentrated), new ItemStack(ModItems.poison_glassblood, 1), Aspects.light, Aspects.ice));
+
     }
     private static void initForge() {
         ForgeRecipes.addRecipe(new ForgeRecipe(new ResourceLocation(Elementaristics.MODID, "thaumagral_iron"), Ingredient.fromStacks(new ItemStack(Items.IRON_SWORD)), Ingredient.fromStacks(new ItemStack(ModItems.essence, 1, Aspects.fire.getId())), Ingredient.fromStacks(new ItemStack(ModItems.essence, 1, Aspects.mana.getId())), Ingredient.fromStacks(new ItemStack(Items.IRON_INGOT)), Ingredient.fromStacks(new ItemStack(ModItems.gem_arcane)), new ItemStack(ModItems.thaumagral_iron)));
@@ -111,6 +113,9 @@ public class InitRecipes {
         PurifierRecipes.addRecipe(new PurifierRecipe(new ResourceLocation(Elementaristics.MODID, "water_purest"), Ingredient.fromStacks(new ItemStack(ModItems.essence, 1, Aspects.water.getId())), 2, new ItemStack(ModItems.water_purest), 600));
 
         PurifierRecipes.addRecipe(new PurifierRecipe(new ResourceLocation(Elementaristics.MODID, "flint"), Ingredient.fromStacks(new ItemStack(Blocks.GRAVEL)), 1, new ItemStack(Items.FLINT), 60));
+
+        PurifierRecipes.addRecipe(new PurifierRecipe(new ResourceLocation(Elementaristics.MODID, "poison_glassfinger_base"), Ingredient.fromStacks(new ItemStack(ModItems.poison_sandthroat)), 3, new ItemStack(ModItems.sandthroat_concentrated), 2400));
+
     }
 
     private static void initEntropizer() {

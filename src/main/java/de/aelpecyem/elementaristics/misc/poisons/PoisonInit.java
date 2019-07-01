@@ -21,6 +21,10 @@ public class PoisonInit {
 
     public static void performDelayedEffect(EntityLivingBase entity, PoisonEffectBase poison, int ticksDelayed){
         entity.getEntityData().setInteger(ItemPoisonBase.POISON_TAG, poison.getId());
-        entity.getEntityData().setInteger("poison_ticks_left", ticksDelayed);
+        if (entity.getEntityData().hasKey("poison_ticks_left") && entity.getEntityData().getInteger("poison_ticks_left") > 100) {
+            entity.getEntityData().setInteger("poison_ticks_left", ticksDelayed - 100);
+        }else if (!entity.getEntityData().hasKey("poison_ticks_left") || entity.getEntityData().getInteger("poison_ticks_left") < 0){
+            entity.getEntityData().setInteger("poison_ticks_left", entity.getEntityData().getInteger("poison_ticks_left") - 200);
+        }
     }
 }

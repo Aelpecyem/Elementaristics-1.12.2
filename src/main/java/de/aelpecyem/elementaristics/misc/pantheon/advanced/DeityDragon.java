@@ -37,27 +37,30 @@ public class DeityDragon extends DeitySupplyEffectBase {
     @Override
     public void symbolEffect(TileEntityDeityShrine te) {
         super.symbolEffect(te);
-        List<EntityPlayer> players = te.getWorld().getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(te.getPos().getX() - 16, te.getPos().getY() - 8, te.getPos().getZ() - 16, te.getPos().getX() + 16, te.getPos().getY() + 8, te.getPos().getZ() + 16), new Predicate<EntityPlayer>() {
-            @Override
-            public boolean apply(@Nullable EntityPlayer input) {
-                if (input.hasCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null)) {
-                    IPlayerCapabilities cap = input.getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null);
-                    if (cap.getSoul() == soul || cap.getSoul() == SoulInit.soulDragon) {
-                        return true;
-                    }
-                }
-                return false;
-            }
-        });
-        if (!players.isEmpty()) {
-            for (EntityPlayer player : players) {
-                IPlayerCapabilities cap = player.getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null);
-                if (cap.getTimeStunted() < 1) {
-                    cap.fillMagan(0.4F);
-                    player.addPotionEffect(new PotionEffect(MobEffects.SPEED, 200, 0, false, false));
-                    player.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 200, 0, false, false));
-                    player.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, 200, 0, false, false));
+        if (te.storage.extractIfPossible(5)) {
 
+            List<EntityPlayer> players = te.getWorld().getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(te.getPos().getX() - 16, te.getPos().getY() - 8, te.getPos().getZ() - 16, te.getPos().getX() + 16, te.getPos().getY() + 8, te.getPos().getZ() + 16), new Predicate<EntityPlayer>() {
+                @Override
+                public boolean apply(@Nullable EntityPlayer input) {
+                    if (input.hasCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null)) {
+                        IPlayerCapabilities cap = input.getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null);
+                        if (cap.getSoul() == soul || cap.getSoul() == SoulInit.soulDragon) {
+                            return true;
+                        }
+                    }
+                    return false;
+                }
+            });
+            if (!players.isEmpty()) {
+                for (EntityPlayer player : players) {
+                    IPlayerCapabilities cap = player.getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null);
+                    if (cap.getTimeStunted() < 1) {
+                        cap.fillMagan(0.4F);
+                        player.addPotionEffect(new PotionEffect(MobEffects.SPEED, 200, 0, false, false));
+                        player.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 200, 0, false, false));
+                        player.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, 200, 0, false, false));
+
+                    }
                 }
             }
         }

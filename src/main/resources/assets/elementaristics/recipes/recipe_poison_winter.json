@@ -1,0 +1,31 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "type": "minecraft:item_nbt",
+      "item": "minecraft:potion",
+      "nbt": {
+        "Potion": "minecraft:strong_poison"
+      }
+    },{
+      "type": "minecraft:item_nbt",
+      "item": "minecraft:potion",
+      "nbt": {
+        "Potion": "minecraft:harming"
+      }
+    },
+    {
+      "item": "elementaristics:essence",
+      "data": 11
+    },
+    {
+      "item": "minecraft:rotten_flesh"
+    },
+    {
+      "item": "elementaristics:water_purest"
+    }
+  ],
+  "result": {
+    "item": "elementaristics:poison_wintersbreath"
+  }
+}

@@ -21,7 +21,6 @@ public class DeitySupplyEffectBase extends Deity {
         if (te.getAltarBound() != null) {
             TileEntityAltar tile = te.getAltarBound();
             tile.addAspect(getAspect());
-            te.doParticles(this);
         }
     }
 
@@ -29,6 +28,7 @@ public class DeitySupplyEffectBase extends Deity {
     public void symbolEffect(TileEntityDeityShrine te) {
         if (!te.altarPos.equals(te.getPos()) && te.storage.extractIfPossible(5)) {
             supplyEffect(te);
+            passiveParticles(te);
         }
     }
 
@@ -36,6 +36,7 @@ public class DeitySupplyEffectBase extends Deity {
     public void statueEffect(TileEntityDeityShrine te) {
         if (!te.altarPos.equals(te.getPos()) && te.storage.extractIfPossible(2)) {
             supplyEffect(te);
+            passiveParticles(te);
         }
     }
 

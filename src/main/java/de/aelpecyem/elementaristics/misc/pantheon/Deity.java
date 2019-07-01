@@ -1,5 +1,6 @@
 package de.aelpecyem.elementaristics.misc.pantheon;
 
+import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.blocks.tileentity.pantheon.TileEntityDeityShrine;
 import de.aelpecyem.elementaristics.init.Deities;
 import de.aelpecyem.elementaristics.misc.elements.Aspect;
@@ -41,11 +42,24 @@ public abstract class Deity {
         return aspect;
     }
 
-    public abstract void symbolEffect(TileEntityDeityShrine te);
+    public void symbolEffect(TileEntityDeityShrine te){
+        passiveParticles(te);
+    }
 
-    public abstract void statueEffect(TileEntityDeityShrine te);
+    public void statueEffect(TileEntityDeityShrine te){
+        passiveParticles(te);
+    }
 
     public void normalize(TileEntityDeityShrine te) {
+    }
+
+    public void passiveParticles(TileEntityDeityShrine te){
+        if (te.getWorld().getWorldTime() % 10 == 0 && te.getWorld().isRemote) {
+            double motionX = te.getWorld().rand.nextGaussian() * 0.002D;
+            double motionY = te.getWorld().rand.nextGaussian() * 0.002D;
+            double motionZ = te.getWorld().rand.nextGaussian() * 0.002D;
+            Elementaristics.proxy.generateGenericParticles(te.getWorld(), te.getPos().getX() + te.getWorld().rand.nextFloat(), te.getPos().getY() + te.getWorld().rand.nextFloat(), te.getPos().getZ() + te.getWorld().rand.nextFloat(), motionX, motionY, motionZ, getColor(), 1, 120, 0, false, false);
+        }
     }
 
     public abstract void sacrificeEffect(TileEntityDeityShrine te);

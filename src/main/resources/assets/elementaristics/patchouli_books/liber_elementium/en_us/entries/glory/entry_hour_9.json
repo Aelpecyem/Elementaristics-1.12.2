@@ -12,7 +12,7 @@
     {
       "type": "spotlight",
       "item": "elementaristics:symbol_angel",
-      "text": "This symbol is created with the $(l:shaping/entry_key)Winged Key$() in the $(l:glory/entry_rite_glorious)Glorious Rite$().$(br)[not yet]",
+      "text": "This symbol is created with the $(l:shaping/entry_key)Winged Key$() in the $(l:glory/entry_rite_glorious)Glorious Rite$().$(br)When active, this statue will provide regeneration to every being nearby, and will increase Magan regeneration for players slightly.",
       "link_recipe": true
     }
   ]

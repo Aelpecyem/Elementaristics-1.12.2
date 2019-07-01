@@ -142,6 +142,8 @@ public class ModItems {
     public static ItemPoisonBase poison_wintersbreath;
     public static ItemPoisonBase poison_sandthroat;
 
+    public static ItemBase sandthroat_concentrated;
+
     public static void init() {
         bundle_herbs = new ItemHerbBundle();
         petal_opium = new ItemBase("petal_opium");
@@ -194,6 +196,8 @@ public class ModItems {
         poison_glassblood = new ItemPoisonBase("poison_glassblood", PoisonInit.poisonGlassblood);
         poison_wintersbreath = new ItemPoisonBase("poison_wintersbreath", PoisonInit.poisonWintersBreath);
         poison_sandthroat = new ItemPoisonBase("poison_sandthroat", PoisonInit.poisonSandthroat);
+
+        sandthroat_concentrated = new ItemBase("sandthroat_concentrated");
     }
 
     private static void initRiteMaterials() {

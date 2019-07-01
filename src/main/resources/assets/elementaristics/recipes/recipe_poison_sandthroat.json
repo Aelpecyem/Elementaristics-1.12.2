@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "type": "minecraft:item_nbt",
+      "item": "minecraft:potion",
+      "nbt": {
+        "Potion": "minecraft:poison"
+      }
+    },
+    {
+      "item": "minecraft:sand",
+      "data": 0
+    },
+    {
+      "item": "elementaristics:sparks_living"
+    },
+    {
+      "item": "elementaristics:water_purest"
+    }
+  ],
+  "result": {
+    "item": "elementaristics:poison_sandthroat"
+  }
+}

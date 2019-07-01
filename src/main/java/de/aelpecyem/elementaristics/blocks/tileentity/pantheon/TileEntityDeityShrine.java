@@ -111,12 +111,6 @@ public class TileEntityDeityShrine extends TileEntityEnergy implements ITickable
         Deity deityActive = Deities.deities.get(new ResourceLocation(deityBound));
         if (deityActive != null) {
             if (TimeUtil.getTimeUnfalsified(world.getWorldTime()) >= deityActive.getTickTimeBegin() && TimeUtil.getTimeUnfalsified(world.getWorldTime()) <= deityActive.getTickTimeBegin() + 1000) {
-                if (world.getWorldTime() % 10 == 0 && world.isRemote) {
-                    double motionX = world.rand.nextGaussian() * 0.002D;
-                    double motionY = world.rand.nextGaussian() * 0.002D;
-                    double motionZ = world.rand.nextGaussian() * 0.002D;
-                    Elementaristics.proxy.generateGenericParticles(getWorld(), getPos().getX() + getWorld().rand.nextFloat(), getPos().getY() + getWorld().rand.nextFloat(), getPos().getZ() + getWorld().rand.nextFloat(), motionX, motionY, motionZ, getDeityBound().getColor(), 1, 120, 0, false, false);
-                }
                 if (isStatue) {
                     deityActive.statueEffect(this);
                 } else {

@@ -4,11 +4,14 @@ import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;
 import de.aelpecyem.elementaristics.misc.pantheon.Deity;
 import de.aelpecyem.elementaristics.misc.pantheon.DeityBase;
+import de.aelpecyem.elementaristics.misc.pantheon.DeityPotionEffectBase;
 import de.aelpecyem.elementaristics.misc.pantheon.DeitySupplyEffectBase;
 import de.aelpecyem.elementaristics.misc.pantheon.advanced.DeityAzathoth;
 import de.aelpecyem.elementaristics.misc.pantheon.advanced.DeityDragon;
 import de.aelpecyem.elementaristics.misc.pantheon.advanced.DeityGate;
 import de.aelpecyem.elementaristics.util.TimeUtil;
+import net.minecraft.init.MobEffects;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
 
 import java.util.HashMap;
@@ -51,10 +54,9 @@ public class Deities {
         deityDragonEarth = new DeityDragon(4, Aspects.earth, SoulInit.soulEarth, 15375);
         deityDragonWater = new DeityDragon(5, Aspects.water, SoulInit.soulWater, 1049560);
         deityDragonAir = new DeityDragon(6, Aspects.air, SoulInit.soulAir, 1300735);
-
         deityGateAndKey = new DeityGate();
         deityDreamer = new DeitySupplyEffectBase(TimeUtil.getTickTimeStartForHour(8), new ResourceLocation(Elementaristics.MODID, "deity_dreamer"), Aspects.ice, 8497580);
-        deityAngel = new DeityBase(TimeUtil.getTickTimeStartForHour(9), new ResourceLocation(Elementaristics.MODID, "deity_angel"), 4757545);
+        deityAngel = new DeityPotionEffectBase(TimeUtil.getTickTimeStartForHour(9), new ResourceLocation(Elementaristics.MODID, "deity_angel"), 4757545, MobEffects.REGENERATION);
         deityStorm = new DeitySupplyEffectBase(TimeUtil.getTickTimeStartForHour(10), new ResourceLocation(Elementaristics.MODID, "deity_storm"), Aspects.electricity, 1729436);
         deityFighter = new DeityBase(TimeUtil.getTickTimeStartForHour(11), new ResourceLocation(Elementaristics.MODID, "deity_fighter"), 1845376);
         deitySun = new DeitySupplyEffectBase(TimeUtil.getTickTimeStartForHour(12), new ResourceLocation(Elementaristics.MODID, "deity_sun"), Aspects.light, 15194144);

@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "elementaristics:water_purest"
+    },
+    "title": {
+      "translate": "advancement.elementaristics.water_purest"
+    },
+    "description": {
+      "translate": "advancement.elementaristics.water_purest.desc"
+    }
+  },
+  "parent": "elementaristics:progress_purifier",
+  "criteria": {
+    "book": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "elementaristics:water_purest"
+          }
+        ]
+      }
+    }
+  }
+}

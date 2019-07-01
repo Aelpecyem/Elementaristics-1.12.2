@@ -10,7 +10,7 @@
     },
     {
       "type": "crafting",
-      "item": "elementaristics:recipe_water_clear",
+      "recipe": "elementaristics:recipe_water_clear",
       "text": "$(o)Remember: pure + pure does not equal pure"
     }
   ]

@@ -4,9 +4,11 @@ import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.networking.PacketHandler;
 import de.aelpecyem.elementaristics.networking.tileentity.inventory.PacketUpdateInventory;
 import de.aelpecyem.elementaristics.networking.tileentity.tick.PacketUpdateTickTime;
+import de.aelpecyem.elementaristics.particles.ParticleGeneric;
 import de.aelpecyem.elementaristics.recipe.PurifierRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntityBrewingStand;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ITickable;
@@ -71,6 +73,7 @@ public class TileEntityPurifier extends TileEntity implements ITickable, IHasTic
         if (!(PurifierRecipes.getRecipeForInput(inventory.getStackInSlot(0)) == null)) {
             if (inventory.getStackInSlot(0).getCount() == PurifierRecipes.getRecipeForInput(inventory.getStackInSlot(0)).itemCount) {
                 tickCount++;
+                if (world.isRemote)
                 doParticleShow();
             if (tickCount < 0) {
                 tickCount = 0;
@@ -90,11 +93,22 @@ public class TileEntityPurifier extends TileEntity implements ITickable, IHasTic
     }
 
     private void doParticleShow() {
-        Elementaristics.proxy.generateGenericParticles(world, getPos().getX() + 0.1, getPos().getY() + 0.75, getPos().getZ() + 0.9, 0.03, -0.005, -0.03, 14247, 2, 18, 0F, true, false);
-        Elementaristics.proxy.generateGenericParticles(world, getPos().getX() + 0.9, getPos().getY() + 0.75, getPos().getZ() + 0.1, -0.03, -0.005, 0.03, 14247, 2, 18, 0F, true, false);
-        Elementaristics.proxy.generateGenericParticles(world, getPos().getX() + 0.9, getPos().getY() + 0.75, getPos().getZ() + 0.9, -0.03, -0.005, -0.03, 14247, 2, 18, 0F, true, false);
-        Elementaristics.proxy.generateGenericParticles(world, getPos().getX() + 0.1, getPos().getY() + 0.75, getPos().getZ() + 0.1, 0.03, -0.005, 0.03, 14247, 2, 18, 0F, true, false);
+        if (tickCount % 5 == 0) {
+            ParticleGeneric p = new ParticleGeneric(world, pos.getX() + 1F + (world.rand.nextGaussian() / 15), pos.getY() + 0.62F + (world.rand.nextGaussian() / 15), pos.getZ() + 1F + (world.rand.nextGaussian() / 15), 0, 0, 0, 14247, 1 + ((float) world.rand.nextGaussian() / 3), 60, 0, true, false, true, true, pos.getX() + 0.5F, pos.getY() + 0.56F, pos.getZ() + 0.5F);
+            ParticleGeneric p2 = new ParticleGeneric(world, pos.getX() + (world.rand.nextGaussian() / 15), pos.getY() + 0.62F + (world.rand.nextGaussian() / 15), pos.getZ() + 1F + (world.rand.nextGaussian() / 15), 0, 0, 0, 14247, 1 + ((float) world.rand.nextGaussian() / 3), 60, 0, true, false, true, true, pos.getX() + 0.5F, pos.getY() + 0.56F, pos.getZ() + 0.5F);
+            ParticleGeneric p3 = new ParticleGeneric(world, pos.getX() + 1F + (world.rand.nextGaussian() / 15), pos.getY() + 0.62F + (world.rand.nextGaussian() / 15), pos.getZ() + (world.rand.nextGaussian() / 15), 0, 0, 0, 14247, 1 + ((float) world.rand.nextGaussian() / 3), 60, 0, true, false, true, true, pos.getX() + 0.5F, pos.getY() + 0.56F, pos.getZ() + 0.5F);
+            ParticleGeneric p4 = new ParticleGeneric(world, pos.getX() + (world.rand.nextGaussian() / 15), pos.getY() + 0.62F + (world.rand.nextGaussian() / 15), pos.getZ() + (world.rand.nextGaussian() / 15), 0, 0, 0, 14247, 1 + ((float) world.rand.nextGaussian() / 3), 60, 0, true, false, true, true, pos.getX() + 0.5F, pos.getY() + 0.56F, pos.getZ() + 0.5F);
 
+            p.setAlphaF(1);
+            p2.setAlphaF(1);
+            p3.setAlphaF(1);
+            p4.setAlphaF(1);
+
+            Elementaristics.proxy.generateGenericParticles(p);
+            Elementaristics.proxy.generateGenericParticles(p2);
+            Elementaristics.proxy.generateGenericParticles(p3);
+            Elementaristics.proxy.generateGenericParticles(p4);
+        }
     }
 
     @Override
