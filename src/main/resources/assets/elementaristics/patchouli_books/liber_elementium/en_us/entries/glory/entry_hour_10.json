@@ -11,6 +11,7 @@
     },
     {
       "type": "spotlight",
+      "title": "Symbol",
       "item": "elementaristics:symbol_storm",
       "text": "This symbol is created with the $(l:energy/entry_channeling)Channeling Tool$() in the $(l:glory/entry_rite_glorious)Glorious Rite$().$(br)The symbol can be linked to an altar, and will supply the $(marked)Electricity$() aspect.",
       "link_recipe": true

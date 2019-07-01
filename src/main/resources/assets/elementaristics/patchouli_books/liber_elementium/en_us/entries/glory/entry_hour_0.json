@@ -11,6 +11,7 @@
     },
     {
       "type": "spotlight",
+      "title": "Symbol",
       "item": "elementaristics:symbol_nothingness",
       "text": "This symbol is created with the $(l:alchemy/entry_flesh_lamb)Flesh of the Lamb$() in the $(l:glory/entry_rite_glorious)Glorious Rite$().",
       "link_recipe": true

@@ -34,6 +34,10 @@ public class Aspects {
     //advanced
     public static Aspect soul;
     public static Aspect wood;
+
+    //crafting only
+    public static Aspect night;
+
     private static ArrayList<Aspect> elements = new ArrayList<>();
 
     public static ArrayList<Aspect> getElements() {
@@ -67,6 +71,8 @@ public class Aspects {
         mana = new Aspect("mana", 13972108); //17
 
         wood = new Aspect("wood", 6571520);
+
+        night = new Aspect("night", 57);
     }
 
 

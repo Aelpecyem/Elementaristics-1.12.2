@@ -20,10 +20,17 @@ import java.util.List;
 
 public class DeityPotionEffectBase extends DeityBase {
     Potion effect;
+    boolean playersOnly;
 
     public DeityPotionEffectBase(long tickTimeBegin, ResourceLocation name, int color, Potion effect) {
         super(tickTimeBegin, name, color);
         this.effect = effect;
+        this.playersOnly = true;
+    }
+    public DeityPotionEffectBase(long tickTimeBegin, ResourceLocation name, int color, Potion effect, boolean playersOnly) {
+        super(tickTimeBegin, name, color);
+        this.effect = effect;
+        this.playersOnly = playersOnly;
     }
 
     @Override
@@ -33,6 +40,12 @@ public class DeityPotionEffectBase extends DeityBase {
         List<EntityLivingBase> targets = te.getWorld().getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(te.getPos().getX() - 24, te.getPos().getY() - 12, te.getPos().getZ() - 24, te.getPos().getX() + 24, te.getPos().getY() + 12, te.getPos().getZ() + 24), new Predicate<EntityLivingBase>() {
             @Override
             public boolean apply(@Nullable EntityLivingBase input) {
+                if(playersOnly && input instanceof EntityPlayer)
+                return true;
+                else{
+                    if (playersOnly)
+                    return false;
+                }
                 return true;
             }
         });

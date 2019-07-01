@@ -14,6 +14,8 @@ import de.aelpecyem.elementaristics.misc.pantheon.DeitySupplyEffectBase;
 import de.aelpecyem.elementaristics.util.TimeUtil;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.monster.EntityZombie;
+import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.potion.PotionEffect;
@@ -37,7 +39,7 @@ public class DeityGate extends DeitySupplyEffectBase {
         List<EntityLivingBase> victims = te.getWorld().getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(te.getPos().getX() - 16, te.getPos().getY() - 8, te.getPos().getZ() - 16, te.getPos().getX() + 16, te.getPos().getY() + 8, te.getPos().getZ() + 16));
         if (!victims.isEmpty()) {
             for (EntityLivingBase victim : victims) {
-                if (victim.hurtTime == 5) {
+                if (!victim.isEntityUndead() && victim.hurtTime == 5) {
                     if (victim.getEntityData().hasKey(EventHandler.LAST_DMG_STRING)) {
                         te.storage.receiveEnergy(Math.round(victim.getEntityData().getFloat(EventHandler.LAST_DMG_STRING) * 10), false);
                     }

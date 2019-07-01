@@ -85,6 +85,7 @@ item.hammer_heat.name=Hammer of Heat
 item.head_hammer.name=Archaic Hammer Head
 item.dagger_sacrificial.name=Sacrificial Dagger
 item.heart_stone.name=Heart of Stone
+item.tympanum_empty.name=Empty Tympanum
 
 item.incantation_chaos.name=Chaotic Incantation
 item.incantation_light.name=Incantation of Light
@@ -104,6 +105,7 @@ item.incantation_binding.name=Binding Incantation
 item.incantation_unbinding.name=Unbinding Incantation
 item.incantation_health_share.name=Sharing Incantation
 item.incantation_reforging.name=Incantation of Reforging
+item.incantation_glorious.name=Glorious Incantation
 
 item.water_purest.name=Purest Water
 item.sparks_living.name=Living Sparks
@@ -150,9 +152,14 @@ item.poison_wintersbreath.name=Winter's Breath
 tooltip.poison_wintersbreath.name=First comes the winter's breath, then comes the hunger
 
 item.poison_sandthroat.name=Sandthroat Poison
+item.sandthroat_concentrated.name=Concentrated Sandthroat Poison
 tooltip.poison_sandthroat.name=ouch ouch soup hot owie
 
-
+item.scale_air.name=Air Scale
+item.scale_earth.name=Earth Scale
+item.scale_fire.name=Fire Scale
+item.scale_water.name=Water Scale
+item.scale_aether.name=Aether Scale
 
 #Essences (Items and Blocks)
 item.essence_air.name=Air Essence
@@ -174,6 +181,7 @@ item.essence_chaos.name=Chaos Essence
 item.essence_body.name=Body Essence
 item.essence_mind.name=Mind Essence
 item.essence_wood.name=Essence of the Wood
+item.essence_night.name=Essence of the Night
 
 tile.block_essence_air.name=Concentrated Air Essence
 tile.block_essence_earth.name=Concentrated Earth Essence
@@ -218,10 +226,39 @@ tile.block_moss_everchanging.name=Everchanging Moss
 tile.basin_infusion.name=Infusion Basin
 tile.generator_combustion.name=Arcane Combustion Generator
 tile.storage_energy.name=Occult Energy Core
+
+tile.stone_runed.name=Runed Stone
+
 tile.block_transmitter_redstone.name=Redstone Transmitter
+tile.block_emulator_redstone.name=Redstone Emulator
 
+tile.manipulator_supplying.name=Supplying Manipulator
+tile.manipulator_passive.name=Passivity Manipulator
+
+tile.symbol_nothingness.name=Symbol from-and-to Nothingness
+tile.symbol_azathoth.name=Symbol of an Idiot
 tile.symbol_dragon_fire.name=Symbol of the Fire Dragon
-
+tile.symbol_dragon_aether.name=Symbol of the Aether Dragon
+tile.symbol_dragon_air.name=Symbol of the Air Dragon
+tile.symbol_dragon_earth.name=Symbol of the Earth Dragon
+tile.symbol_dragon_water.name=Symbol of the Water Dragon
+tile.symbol_gate.name=Symbol of the Gate-and-Key
+tile.symbol_dreamer.name=Symbol of the Dreamer
+tile.symbol_angel.name=Symbol of the Angel
+tile.symbol_storm.name=Symbol of the Storm
+tile.symbol_fighter.name=Symbol of the Knight
+tile.symbol_sun.name=Symbol of the Sun
+tile.symbol_harbinger.name=Symbol of the Harbinger
+tile.symbol_queen.name=Symbol of the Fasting Queen
+tile.symbol_goat.name=Symbol of the Goat in the Wood
+tile.symbol_moth.name=Symbol of the Moth
+tile.symbol_thread.name=Symbol of the Thread
+tile.symbol_mirror.name=Symbol of the Mirror
+tile.symbol_dancer.name=Symbol of the Dancer
+tile.symbol_king.name=Symbol of the Feasting King
+tile.symbol_mother.name=Symbol of the Mother
+tile.symbol_moon.name=Symbol of the Golden Moon
+tile.symbol_witch.name=Symbol of the Witch
 #Advancements
 advancement.elementaristics.root=Elementaristics
 advancement.elementaristics.root_research=Discovered Aspects
