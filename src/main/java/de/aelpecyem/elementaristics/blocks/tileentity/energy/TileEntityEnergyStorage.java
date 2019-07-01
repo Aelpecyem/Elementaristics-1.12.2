@@ -13,12 +13,12 @@ public class TileEntityEnergyStorage extends TileEntityEnergy implements ITickab
 
     @Override
     public int getMaxEnergy() {
-        return 10000;
+        return 50000;
     }
 
     @Override
     public int getTransfer(int i) {
-        return 30;
+        return 50;
     }
 
     @Override

@@ -105,6 +105,7 @@ public final class Elementaristics {
     public void init(FMLInitializationEvent event) {
         proxy.init(event);
         if (Loader.isModLoaded("thaumcraft")) {
+            MinecraftForge.EVENT_BUS.register(new ThaumcraftCompat());
             ThaumcraftCompat.init();
         }
         GameRegistry.registerWorldGenerator(new WorldGenAnomaly(), 10);

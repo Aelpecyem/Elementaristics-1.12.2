@@ -10,10 +10,13 @@ import jdk.nashorn.internal.runtime.regexp.joni.ScanEnvironment;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import thaumcraft.Registrar;
 import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
+import thaumcraft.api.aspects.AspectRegistryEvent;
 import thaumcraft.api.blocks.BlocksTC;
 import thaumcraft.api.capabilities.ThaumcraftCapabilities;
 import thaumcraft.api.casters.FocusEngine;
@@ -33,7 +36,6 @@ public class ThaumcraftCompat {
     static ResourceLocation elementaristicsGroup = new ResourceLocation("elementaristics");
 
     public static void init() {
-
         ResearchCategories.registerCategory("ELEMENTARISTICS", "UNLOCKALCHEMY",
                 new AspectList(),
                 new ResourceLocation("elementaristics", "textures/items/book_elementaristics.png"),
@@ -46,6 +48,15 @@ public class ThaumcraftCompat {
         addScannables();
 
     }
+
+    @SubscribeEvent
+    public void aspectRegistrationEvent(AspectRegistryEvent event) {
+        //todo continue with that
+        event.register.registerObjectTag(new ItemStack(ModItems.poison_glassblood), (new AspectList()).add(Aspect.ALCHEMY, 10).add(Aspect.DEATH, 12).add(Aspect.CRYSTAL, 4).add(Aspect.FLUX, 2));
+        event.register.registerObjectTag(new ItemStack(ModItems.poison_wintersbreath), (new AspectList()).add(Aspect.ALCHEMY, 10).add(Aspect.DEATH, 12).add(Aspect.COLD, 6));
+        event.register.registerObjectTag(new ItemStack(ModItems.sandthroat_concentrated), (new AspectList()).add(Aspect.ALCHEMY, 10).add(Aspect.DEATH, 6));
+    }
+
 
     public static void registerRecipes() {
 
