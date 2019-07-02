@@ -228,6 +228,7 @@ tile.generator_combustion.name=Arcane Combustion Generator
 tile.storage_energy.name=Occult Energy Core
 
 tile.stone_runed.name=Runed Stone
+tile.storage_energy_creative.name=The Truly Occult Energy Core Of Occult Truth
 
 tile.block_transmitter_redstone.name=Redstone Transmitter
 tile.block_emulator_redstone.name=Redstone Emulator
@@ -410,6 +411,8 @@ hud.energy_current=Current Energy:
 hud.energy_from=Draining Energy from:
 hud.energy_to=Transferring Energy to:
 hud.too_far=(too far!)
+hud.pos_to=Bound to
+hud.god=Deity:
 
 message.position_set=Bound Position:
 message.position_set_for=Set Bound Position to

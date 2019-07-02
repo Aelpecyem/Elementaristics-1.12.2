@@ -33,7 +33,9 @@ public abstract class Deity {
         return tickTimeBegin;
     }
 
+    public void setUpTile(TileEntityDeityShrine te){
 
+    }
     public ResourceLocation getName() {
         return name;
     }

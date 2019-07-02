@@ -1,0 +1,42 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "type": "minecraft:item_nbt",
+      "item": "minecraft:potion",
+      "nbt": {
+        "Potion": "minecraft:strong_harming"
+      }
+    },
+    {
+      "item": "elementaristics:essence",
+      "data": 18
+    },
+    {
+      "item": "elementaristics:ash"
+    },
+    {
+      "item": "elementaristics:vacuum_selfsustaining"
+    },
+    {
+      "item": "minecraft:skull",
+      "data": 1
+    },
+    {
+      "item": "elementaristics:essence",
+      "data": 15
+    },
+    {
+      "item": "elementaristics:essence",
+      "data": 4
+    },
+    {
+      "item": "elementaristics:essence",
+      "data": 12
+    }
+  ],
+  "result": {
+    "item": "elementaristics:essence",
+    "data": 19
+  }
+}

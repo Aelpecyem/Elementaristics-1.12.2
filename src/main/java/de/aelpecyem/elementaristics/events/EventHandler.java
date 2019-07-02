@@ -51,7 +51,7 @@ public class EventHandler {
 
     @SubscribeEvent
     public void damageTaken(LivingHurtEvent event) {
-        event.getEntityLiving().getEntityData().setFloat(LAST_DMG_STRING, event.getAmount());
+        event.getEntityLiving().getEntityData().setInteger(LAST_DMG_STRING, (int) Math.ceil(event.getAmount()));
     }
 
     @SubscribeEvent

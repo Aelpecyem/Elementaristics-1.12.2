@@ -77,6 +77,7 @@ public class BlockDeityShrineBase extends BlockTileEntity<TileEntityDeityShrine>
             TileEntityDeityShrine te = (TileEntityDeityShrine) world.getTileEntity(pos);
             te.deityBound = deity.getName().toString();
             te.isStatue = isStatue;
+            deity.setUpTile(te);
         }
     }
 

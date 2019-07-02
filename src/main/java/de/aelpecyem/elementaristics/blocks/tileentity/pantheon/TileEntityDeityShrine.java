@@ -1,13 +1,11 @@
 package de.aelpecyem.elementaristics.blocks.tileentity.pantheon;
 
-import com.sun.org.apache.regexp.internal.RE;
 import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.blocks.tileentity.TileEntityAltar;
 import de.aelpecyem.elementaristics.blocks.tileentity.blocks.pantheon.BlockDeityShrineBase;
 import de.aelpecyem.elementaristics.blocks.tileentity.energy.TileEntityEnergy;
 import de.aelpecyem.elementaristics.init.Deities;
 import de.aelpecyem.elementaristics.init.ModBlocks;
-import de.aelpecyem.elementaristics.misc.elements.Aspects;
 import de.aelpecyem.elementaristics.misc.pantheon.Deity;
 import de.aelpecyem.elementaristics.misc.pantheon.DeitySupplyEffectBase;
 import de.aelpecyem.elementaristics.networking.PacketHandler;
@@ -15,17 +13,20 @@ import de.aelpecyem.elementaristics.networking.tileentity.deities.PacketUpdateDe
 import de.aelpecyem.elementaristics.networking.tileentity.tick.PacketUpdateTickTime;
 import de.aelpecyem.elementaristics.particles.ParticleGeneric;
 import de.aelpecyem.elementaristics.util.TimeUtil;
-import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.MobSpawnerBaseLogic;
+import net.minecraft.tileentity.TileEntityMobSpawner;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.WeightedSpawnerEntity;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.energy.CapabilityEnergy;
-
-import java.sql.Time;
 
 public class TileEntityDeityShrine extends TileEntityEnergy implements ITickable {
     public int tickCount;
@@ -116,7 +117,8 @@ public class TileEntityDeityShrine extends TileEntityEnergy implements ITickable
                 } else {
                     deityActive.symbolEffect(this);
                 }
-                doParticles(deityActive);
+                if (world.getTileEntity(altarPos) != null && world.getTileEntity(altarPos) instanceof TileEntityAltar)
+                doAltarParticles(deityActive);
             } else {
                 if (isSupplyingManipulatorBelow()) {
                     if (deityActive instanceof DeitySupplyEffectBase) {
@@ -124,7 +126,8 @@ public class TileEntityDeityShrine extends TileEntityEnergy implements ITickable
                             ((DeitySupplyEffectBase) deityActive).supplyEffect(this);
                         }
                     }
-                    doParticles(deityActive);
+                    if (world.getTileEntity(altarPos) != null && world.getTileEntity(altarPos) instanceof TileEntityAltar)
+                    doAltarParticles(deityActive);
                 }
                 if (isPassiveEffectManipulatorBelow()) {
                     if (isStatue) {
@@ -160,10 +163,12 @@ public class TileEntityDeityShrine extends TileEntityEnergy implements ITickable
         return false;
     }
 
-    public void doParticles(Deity deity) {
+    public void doAltarParticles(Deity deity) {
         if (world.isRemote) {
             if (!posBound.equals(pos) && altarPos != null && altarPos != pos) {
-                int hours = 24;
+                if (world.rand.nextFloat() < 0.1F)
+                Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(world, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 0, 0, 0, deity.getColor(), 2 + world.rand.nextFloat(), 100, 0, false, false, true, true, altarPos.getX() + world.rand.nextFloat() / 2, altarPos.getX() + 0.2F +  world.rand.nextFloat() / 4, altarPos.getX() + world.rand.nextFloat() / 2));
+               /* int hours = 24;
 
                 double radius = 0.15F;
                 double x = altarPos.getX() - radius / 2;
@@ -176,7 +181,7 @@ public class TileEntityDeityShrine extends TileEntityEnergy implements ITickable
                     z += radius * Math.cos(angle);
                     if (i == TimeUtil.getHourForTimeBegin(deity.getTickTimeBegin()) - 0.5)
                         Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(world, x, y, z, 0, 0.01, 0, deity.getColor(), 0.45F + world.rand.nextFloat(), 30 + world.rand.nextInt(5), 0, false, false, 1, true));
-                }
+                }*/
             }
         }
     }

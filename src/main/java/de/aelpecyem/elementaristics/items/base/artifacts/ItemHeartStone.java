@@ -49,8 +49,8 @@ public class ItemHeartStone extends ItemAspects {
         // target.getEntityData().setUniqueId("sharing_uuid", attacker.getUniqueID());
         if (target instanceof EntityVillager && attacker instanceof EntityPlayer && attacker.getHeldItemOffhand().getItem() instanceof ItemWineRedmost) {
             target.attackEntityFrom(DamageSource.GENERIC, 100);
-            stack.shrink(1);
             ItemHandlerHelper.giveItemToPlayer((EntityPlayer) attacker, new ItemStack(ModItems.heart_human, 1), ((EntityPlayer) attacker).inventory.getSlotFor(stack));
+            stack.shrink(1);
             attacker.getHeldItemOffhand().shrink(1);
             target.world.playSound(null, attacker.getPosition(), SoundEvents.ENTITY_BLAZE_HURT, SoundCategory.AMBIENT, 1, 1);
             return true;

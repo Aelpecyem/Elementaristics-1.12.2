@@ -29,9 +29,14 @@ import java.util.List;
 public class DeityGate extends DeitySupplyEffectBase {
     public DeityGate() {
         super(TimeUtil.getTickTimeStartForHour(7), new ResourceLocation(Elementaristics.MODID, "gate_and_key"), Aspects.mind, 1131335);
-    }
-    //Todo
+    }//todo stuff
 
+    @Override
+    public void setUpTile(TileEntityDeityShrine te) {
+        te.storage.setMaxReceive(200);
+        te.storage.setMaxExtract(200);
+        super.setUpTile(te);
+    }
 
     @Override
     public void symbolEffect(TileEntityDeityShrine te) {
@@ -39,9 +44,9 @@ public class DeityGate extends DeitySupplyEffectBase {
         List<EntityLivingBase> victims = te.getWorld().getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(te.getPos().getX() - 16, te.getPos().getY() - 8, te.getPos().getZ() - 16, te.getPos().getX() + 16, te.getPos().getY() + 8, te.getPos().getZ() + 16));
         if (!victims.isEmpty()) {
             for (EntityLivingBase victim : victims) {
-                if (!victim.isEntityUndead() && victim.hurtTime == 5) {
+                if (!victim.isEntityUndead() && victim.hurtTime == 2) {
                     if (victim.getEntityData().hasKey(EventHandler.LAST_DMG_STRING)) {
-                        te.storage.receiveEnergy(Math.round(victim.getEntityData().getFloat(EventHandler.LAST_DMG_STRING) * 10), false);
+                        te.storage.receiveEnergy( victim.getEntityData().getInteger(EventHandler.LAST_DMG_STRING) * 10, false);
                     }
                 }
             }

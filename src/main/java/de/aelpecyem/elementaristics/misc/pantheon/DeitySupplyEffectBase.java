@@ -28,16 +28,16 @@ public class DeitySupplyEffectBase extends Deity {
     public void symbolEffect(TileEntityDeityShrine te) {
         if (!te.altarPos.equals(te.getPos()) && te.storage.extractIfPossible(5)) {
             supplyEffect(te);
-            passiveParticles(te);
         }
+        passiveParticles(te);
     }
 
     @Override
     public void statueEffect(TileEntityDeityShrine te) {
         if (!te.altarPos.equals(te.getPos()) && te.storage.extractIfPossible(2)) {
             supplyEffect(te);
-            passiveParticles(te);
         }
+        passiveParticles(te);
     }
 
 

@@ -42,6 +42,7 @@ public class ItemChannelingTool extends ItemAspects {
 
     @Override
     public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+        player.getFoodStats().addExhaustion(1);
         ItemStack stack = player.getHeldItem(hand);
         if (!stack.hasTagCompound()) {
             stack.setTagCompound(new NBTTagCompound());

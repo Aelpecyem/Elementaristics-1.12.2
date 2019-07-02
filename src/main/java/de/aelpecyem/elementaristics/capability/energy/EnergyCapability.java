@@ -69,4 +69,8 @@ public class EnergyCapability extends EnergyStorage {
         }
     }
 
+    @Override
+    public int receiveEnergy(int maxReceive, boolean simulate) {
+        return super.receiveEnergy(maxReceive, simulate);
+    }
 }

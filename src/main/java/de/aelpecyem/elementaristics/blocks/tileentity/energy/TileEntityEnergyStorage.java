@@ -18,7 +18,7 @@ public class TileEntityEnergyStorage extends TileEntityEnergy implements ITickab
 
     @Override
     public int getTransfer(int i) {
-        return 50;
+        return 10;
     }
 
     @Override

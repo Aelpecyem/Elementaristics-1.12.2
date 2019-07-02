@@ -70,7 +70,7 @@ public class ModItems {
     public static ItemAspects heart_stone;
     public static ItemAspects tool_channeling;
     public static ItemAspects splendor_eye;
-    public static ItemAspects heart_human;
+    public static ItemFoodBase heart_human;
     public static ItemAspects tympanum_empty;
 
     public static IncantationBase incantation_light;
@@ -252,8 +252,8 @@ public class ModItems {
         soul_mirror = new ItemSoulMirror();
         heart_stone = new ItemHeartStone();
         tool_channeling = new ItemChannelingTool();
-        splendor_eye = new ItemEyeSplendor();//ItemAspects("splendor_eye", 4, false, Aspects.light); //shows current "Hour" and used for interaction with deities
-        heart_human = new ItemAspects("heart_human", 4, false, Aspects.body); //idk about that one--- crafted by killing a villager with a heart of in the one hand, and redmost wine in the other
+        splendor_eye = new ItemEyeSplendor();
+        heart_human = new ItemHeartHuman();
         tympanum_empty = new ItemInstrument("tympanum_emtpy", 4, Aspects.vacuum, SoundEvents.BLOCK_NOTE_BASEDRUM);
     }
 
