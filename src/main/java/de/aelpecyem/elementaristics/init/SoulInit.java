@@ -93,8 +93,11 @@ public class SoulInit {
 
         soulUnstable.addSpellToList(SpellInit.spell_activate, 2);
         soulUnstable.addSpellToList(SpellInit.spell_blink, 2);
+
         soulAncient.addSpellToList(SpellInit.spell_activate, 2);
         soulAncient.addSpellToList(SpellInit.spell_blink, 2);
+        //soulAncient.addSpellToList(SpellInit.spell_pull, 1);
+      //  soulAncient.addSpellToList(SpellInit.spell_push, 1);
 
     }
 
@@ -124,6 +127,15 @@ public class SoulInit {
         return soulMagan;
     }
 
+    public static Soul getSoulFromIdWithNull(int id) {
+        for (Soul soul : souls) {
+            if (soul.getId() == id) {
+                return soul;
+            }
+        }
+        return null;
+    }
+
     public static void normalizeSoulCaps(EntityPlayer player) {
         if (player.hasCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null)) {
             SoulCaps.getCapForSoul(SoulInit.getSoulFromId(player.getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null).getSoulId())).normalize(player,
@@ -150,15 +162,39 @@ public class SoulInit {
                 notApproved = false;
             }
             if (soul.getRarity() == EnumSoulRarity.RARE) {
-                if (random.nextInt(3) == 0) {
+                if (random.nextInt(4) == 0) {
                     notApproved = false;
                 }
             }
             if (soul.getRarity() == EnumSoulRarity.EXTRAODINARY) {
-                if (random.nextInt(7) == 0) {
+                if (random.nextInt(10) == 0) {
                     notApproved = false;
                 }
 
+            }
+        }
+        return soul;
+
+    }
+
+    public static Soul generateSoulTypeForChunk(){
+        boolean notApproved = true;
+        Random random = new Random();
+        Soul soul = null;
+        while (notApproved) {
+            int num = random.nextInt(souls.size());
+
+            soul = getSoulFromId(num);
+            if (random.nextBoolean()){
+                return null; //make sure to always check null
+            }
+            if (soul.getRarity() == EnumSoulRarity.COMMON) {
+                notApproved = false;
+            }
+            if (soul.getRarity() == EnumSoulRarity.RARE) {
+                if (random.nextInt(4) == 0) {
+                    notApproved = false;
+                }
             }
         }
         return soul;

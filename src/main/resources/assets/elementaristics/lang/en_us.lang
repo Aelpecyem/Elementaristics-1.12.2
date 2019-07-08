@@ -499,6 +499,10 @@ message.deity_belong.name=This shrine belongs to
 message.deity_active.name=This deity is active for 1000 ticks after tick time
 
 display.spell_locked=Locked Spell
+
+message.sense_influence=The heart shivers with power as you spot a mighty
+message.sense_influence_end=influence!
+message.sense_influence_none=Deprived of a body, the heart throbs in your hand.
 #Souls
 soul.soul_magan.name=§6Magan Soul
 soul.soul_water.name=§1Water Soul

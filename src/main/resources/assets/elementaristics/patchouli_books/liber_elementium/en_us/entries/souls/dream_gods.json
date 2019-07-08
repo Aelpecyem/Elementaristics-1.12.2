@@ -11,7 +11,7 @@
     {
       "type": "crafting",
       "recipe": "elementaristics:dream_god_self",
-      "text": "I only know things so far: a god must be believed in. And maybe, just maybe, a god does not have $(o)one$() Soul. After all, doesn't a god controll all primal aspects of reality?"
+      "text": "$(o)Nam Gloria Mea!$()"
     }
   ]
 }

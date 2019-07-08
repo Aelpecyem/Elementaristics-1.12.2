@@ -11,7 +11,7 @@
     {
       "type": "crafting",
       "recipe": "elementaristics:incantation_reforging",
-      "text": "$(o)I am the vessel and this is my crucible. $(br)I am the god born in the machine$()"
+      "text": "$(o)A beautiful tale of man and machine, a deus ex machina$()"
     }
   ]
 }

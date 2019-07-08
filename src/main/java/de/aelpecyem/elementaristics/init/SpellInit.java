@@ -39,6 +39,8 @@ public class SpellInit {
     public static SpellBase spell_activate;
     public static SpellBase spell_counterspell;
 
+    public static SpellBase spell_pull;
+    public static SpellBase spell_push;
     public static SpellBase spell_explosion;
 
     public static void initSpells() {
@@ -63,6 +65,9 @@ public class SpellInit {
 
         spell_activate = new SpellActivate();
         spell_counterspell = new SpellCounterspell();
+
+        spell_pull = new SpellPull();
+        spell_push = new SpellPush();
 
         spell_explosion = new SpellExplosion();
     }

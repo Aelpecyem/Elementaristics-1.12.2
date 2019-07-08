@@ -1,5 +1,6 @@
 package de.aelpecyem.elementaristics.init;
 
+import de.aelpecyem.elementaristics.events.EventHandler;
 import de.aelpecyem.elementaristics.items.base.*;
 
 import de.aelpecyem.elementaristics.items.base.artifacts.*;
@@ -18,11 +19,9 @@ import de.aelpecyem.elementaristics.misc.elements.Aspects;
 import de.aelpecyem.elementaristics.misc.poisons.PoisonInit;
 import de.aelpecyem.elementaristics.util.IHasModel;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemPickaxe;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemSword;
+import net.minecraft.item.*;
 import net.minecraftforge.registries.IForgeRegistry;
 
 import java.util.ArrayList;
@@ -198,6 +197,7 @@ public class ModItems {
         poison_sandthroat = new ItemPoisonBase("poison_sandthroat", PoisonInit.poisonSandthroat);
 
         sandthroat_concentrated = new ItemBase("sandthroat_concentrated");
+
     }
 
     private static void initRiteMaterials() {

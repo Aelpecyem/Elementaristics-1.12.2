@@ -4,6 +4,8 @@ import de.aelpecyem.elementaristics.capability.player.IPlayerCapabilities;
 import de.aelpecyem.elementaristics.init.SoulInit;
 import de.aelpecyem.elementaristics.misc.spell.SpellBase;
 import net.minecraft.client.resources.I18n;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -96,11 +98,7 @@ public class Soul {
         this.name = name;
     }
 
-    /**
-     * Really, only call this Client-Side
-     *
-     * @return
-     */
+    @SideOnly(Side.CLIENT)
     public String getLocalizedName() {
         return I18n.format("soul." + name + ".name");
     }

@@ -1,6 +1,7 @@
 package de.aelpecyem.elementaristics.capability;
 
 import de.aelpecyem.elementaristics.Elementaristics;
+import de.aelpecyem.elementaristics.capability.chunk.ChunkCapProvider;
 import de.aelpecyem.elementaristics.capability.player.IPlayerCapabilities;
 import de.aelpecyem.elementaristics.capability.player.PlayerCapProvider;
 import de.aelpecyem.elementaristics.capability.player.souls.soulCaps.SoulCaps;
@@ -13,6 +14,7 @@ import de.aelpecyem.elementaristics.util.Keybinds;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
@@ -23,15 +25,17 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 public class CapabilityHandler {
 
     public static final ResourceLocation PLAYER_CAP = new ResourceLocation(Elementaristics.MODID, "player_caps");
+    public static final ResourceLocation CHUNK_CAP = new ResourceLocation(Elementaristics.MODID, "chunk_caps");
 
     @SubscribeEvent
     public void attachCapability(AttachCapabilitiesEvent event) {
         if (event.getObject() instanceof EntityPlayer) {
-            // EntityPlayer player = (EntityPlayer) event.getObject();
             event.addCapability(PLAYER_CAP, new PlayerCapProvider());
+        }else if (event.getObject() instanceof Chunk){
+            event.addCapability(CHUNK_CAP, new ChunkCapProvider());
         }
-
     }
+
 
 
     @SubscribeEvent
