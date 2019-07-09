@@ -127,7 +127,7 @@ public class TileEntityInfusionBasin extends TileEntity implements ITickable, IH
                 } else {
                     aspectIDs.remove(world.rand.nextInt(aspectIDs.size()));
                     if (!world.isRemote)
-                        world.spawnEntity(new EntityItem(world, pos.getX() + 0.5, pos.getY() + 1.2, pos.getZ() + 0.5, ModItems.maganized_matter.getDefaultInstance()));
+                        world.spawnEntity(new EntityItem(world, pos.getX() + 0.5, pos.getY() + 1.2, pos.getZ() + 0.5, new ItemStack(ModItems.maganized_matter)));
                     inventory.setStackInSlot(0, ItemStack.EMPTY);
                     tickCount = 0;
                     fillCount--;

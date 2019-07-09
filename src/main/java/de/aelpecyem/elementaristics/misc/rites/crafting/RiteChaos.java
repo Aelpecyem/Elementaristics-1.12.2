@@ -45,7 +45,7 @@ public class RiteChaos extends RiteBase {
                             ((EntityItem) entity).getItem().shrink(((EntityItem) entity).getItem().getCount());
                         }
                     } else {
-                        result = ModItems.chaotic_matter.getDefaultInstance();
+                        result = new ItemStack(ModItems.chaotic_matter);
                         if (((EntityItem) entity).getItem().getCount() >= 4){
                             ((EntityItem) entity).getItem().shrink(4);
                             result.setCount(4);

@@ -5,6 +5,7 @@ import de.aelpecyem.elementaristics.compat.thaumcraft.focus.FocusEffectRiftClose
 import de.aelpecyem.elementaristics.compat.thaumcraft.focus.FocusEffectStabilize;
 import de.aelpecyem.elementaristics.init.ModBlocks;
 import de.aelpecyem.elementaristics.init.ModItems;
+import de.aelpecyem.elementaristics.items.base.artifacts.rites.IHasRiteUse;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;
 import jdk.nashorn.internal.runtime.regexp.joni.ScanEnvironment;
 import net.minecraft.item.Item;
@@ -55,6 +56,74 @@ public class ThaumcraftCompat {
         event.register.registerObjectTag(new ItemStack(ModItems.poison_glassblood), (new AspectList()).add(Aspect.ALCHEMY, 10).add(Aspect.DEATH, 12).add(Aspect.CRYSTAL, 4).add(Aspect.FLUX, 2));
         event.register.registerObjectTag(new ItemStack(ModItems.poison_wintersbreath), (new AspectList()).add(Aspect.ALCHEMY, 10).add(Aspect.DEATH, 12).add(Aspect.COLD, 6));
         event.register.registerObjectTag(new ItemStack(ModItems.sandthroat_concentrated), (new AspectList()).add(Aspect.ALCHEMY, 10).add(Aspect.DEATH, 6));
+
+        for (Item item : ModItems.ITEMS){
+            if (item instanceof IHasRiteUse){
+                event.register.registerObjectTag(new ItemStack(item), (new AspectList()).add(((IHasRiteUse) item).isConsumed() ? Aspect.ALCHEMY : Aspect.TOOL, ((IHasRiteUse) item).getPower()));
+                for (de.aelpecyem.elementaristics.misc.elements.Aspect aspect : ((IHasRiteUse) item).getAspects()){
+                    if (aspect == Aspects.life){
+                        event.register.registerObjectTag(new ItemStack(item), (new AspectList()).add(Aspect.LIFE, ((IHasRiteUse) item).getPower()));
+                    }
+                    if (aspect == Aspects.soul){
+                        event.register.registerObjectTag(new ItemStack(item), (new AspectList()).add(Aspect.SOUL, ((IHasRiteUse) item).getPower()));
+                    }
+                    if (aspect == Aspects.fire){
+                        event.register.registerObjectTag(new ItemStack(item), (new AspectList()).add(Aspect.FIRE, ((IHasRiteUse) item).getPower()));
+                    }
+                    if (aspect == Aspects.earth){
+                        event.register.registerObjectTag(new ItemStack(item), (new AspectList()).add(Aspect.EARTH, ((IHasRiteUse) item).getPower()));
+                    }
+                    if (aspect == Aspects.water){
+                        event.register.registerObjectTag(new ItemStack(item), (new AspectList()).add(Aspect.WATER, ((IHasRiteUse) item).getPower()));
+                    }
+                    if (aspect == Aspects.air){
+                        event.register.registerObjectTag(new ItemStack(item), (new AspectList()).add(Aspect.AIR, ((IHasRiteUse) item).getPower()));
+                    }
+                    if (aspect == Aspects.aether){
+                        event.register.registerObjectTag(new ItemStack(item), (new AspectList()).add(Aspect.ORDER, ((IHasRiteUse) item).getPower()).add(Aspect.ENTROPY, ((IHasRiteUse) item).getPower()));
+                    }
+                    if (aspect == Aspects.light){
+                        event.register.registerObjectTag(new ItemStack(item), (new AspectList()).add(Aspect.LIGHT, ((IHasRiteUse) item).getPower()));
+                    }
+                    if (aspect == Aspects.body){
+                        event.register.registerObjectTag(new ItemStack(item), (new AspectList()).add(Aspect.LIFE, ((IHasRiteUse) item).getPower()));
+                    }
+                    if (aspect == Aspects.mind){
+                        event.register.registerObjectTag(new ItemStack(item), (new AspectList()).add(Aspect.MIND, ((IHasRiteUse) item).getPower()));
+                    }
+                    if (aspect == Aspects.chaos){
+                        event.register.registerObjectTag(new ItemStack(item), (new AspectList()).add(Aspect.ENTROPY, ((IHasRiteUse) item).getPower()));
+                    }
+                    if (aspect == Aspects.order){
+                        event.register.registerObjectTag(new ItemStack(item), (new AspectList()).add(Aspect.ORDER, ((IHasRiteUse) item).getPower()));
+                    }
+                    if (aspect == Aspects.electricity){
+                        event.register.registerObjectTag(new ItemStack(item), (new AspectList()).add(Aspect.ENERGY, ((IHasRiteUse) item).getPower()));
+                    }
+                    if (aspect == Aspects.mana){
+                        event.register.registerObjectTag(new ItemStack(item), (new AspectList()).add(Aspect.MAGIC, ((IHasRiteUse) item).getPower()));
+                    }
+                    if (aspect == Aspects.magan){
+                        event.register.registerObjectTag(new ItemStack(item), (new AspectList()).add(Aspect.AIR, 2).add(Aspect.EARTH, 2).add(Aspect.FIRE, 2).add(Aspect.WATER, 2).add(Aspect.MAGIC, 4));
+                    }
+                    if (aspect == Aspects.ice){
+                        event.register.registerObjectTag(new ItemStack(item), (new AspectList()).add(Aspect.COLD, ((IHasRiteUse) item).getPower()));
+                    }
+                    if (aspect == Aspects.crystal){
+                        event.register.registerObjectTag(new ItemStack(item), (new AspectList()).add(Aspect.CRYSTAL, ((IHasRiteUse) item).getPower()));
+                    }
+                    if (aspect == Aspects.vacuum){
+                        event.register.registerObjectTag(new ItemStack(item), (new AspectList()).add(Aspect.VOID, ((IHasRiteUse) item).getPower()));
+                    }
+                    if (aspect == Aspects.wood){
+                        event.register.registerObjectTag(new ItemStack(item), (new AspectList()).add(Aspect.ELDRITCH, ((IHasRiteUse) item).getPower()).add(Aspect.LIFE, 4));
+                    }
+                    if (aspect == Aspects.night){
+                        event.register.registerObjectTag(new ItemStack(item), (new AspectList()).add(Aspect.DARKNESS, ((IHasRiteUse) item).getPower()).add(Aspect.ELDRITCH, ((IHasRiteUse) item).getPower()).add(Aspect.VOID, ((IHasRiteUse) item).getPower()));
+                    }
+                }
+            }
+        }
     }
 
 
