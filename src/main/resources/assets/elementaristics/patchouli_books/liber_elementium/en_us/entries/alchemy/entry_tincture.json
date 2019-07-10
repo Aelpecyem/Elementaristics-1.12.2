@@ -11,7 +11,7 @@
     {
       "type": "crafting",
       "recipe": "elementaristics:tincture_arcane",
-      "text": "This tincture must be drunken by the occultist, and will then weakly intoxicate them for a short amount of time. $(br)Any potion can be used for this."
+      "text": "This tincture must be drunken by the occultist, and will then weakly intoxicate them for a short amount of time."
     }
   ]
 }

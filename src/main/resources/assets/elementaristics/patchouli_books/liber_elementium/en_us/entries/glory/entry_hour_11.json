@@ -7,13 +7,13 @@
   "pages": [
     {
       "type": "text",
-      "text": "$(o)\"The second human to rise, the second human to guard. The first human in blue, the first carrier of a sword. The Knight swings his blade and pleads to the Sun, the Knight will guard, the Knight will attack.$(br)He is holy, yes, but he is also human. He has shown compassion, even more than the Angel, and he will help us defend ourselves.\"$()"
+      "text": "$(o)\"The second human to rise, the second human to guard. The first human in blue, the first carrier of a sword. The Knight swings his blade and pleads to the Sun, the Knight will guard, the Knight will attack.$(br)He is holy, he is also human. He has shown compassion, even more than the Angel, and he will help us defend ourselves.\"$()"
     },
     {
       "type": "spotlight",
       "title": "Symbol",
       "item": "elementaristics:symbol_fighter",
-      "text": "This symbol is created with a $(item)Diamond Sword$() in the $(l:glory/entry_rite_glorious)Glorious Rite$().$(br)When active, this statue will provide strength to every player nearby, and will increase Magan regeneration slightly..",
+      "text": "This symbol is created with a $(item)Diamond Sword$() in the $(l:glory/entry_rite_glorious)Glorious Rite$().$(br)When active, this statue will provide strength to every player nearby, and will increase Magan regeneration slightly.",
       "link_recipe": true
     }
   ]

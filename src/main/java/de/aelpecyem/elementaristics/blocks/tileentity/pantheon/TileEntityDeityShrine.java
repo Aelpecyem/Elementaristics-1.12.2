@@ -39,6 +39,11 @@ public class TileEntityDeityShrine extends TileEntityEnergy implements ITickable
     public BlockPos altarPos = null;
 
     @Override
+    public int getTransfer(int i) {
+        return 30;
+    }
+
+    @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
         storage.writeToNBT(compound);
         compound.setInteger("tickCount", tickCount);
@@ -166,22 +171,8 @@ public class TileEntityDeityShrine extends TileEntityEnergy implements ITickable
     public void doAltarParticles(Deity deity) {
         if (world.isRemote) {
             if (!posBound.equals(pos) && altarPos != null && altarPos != pos) {
-                if (world.rand.nextFloat() < 0.1F)
-                Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(world, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 0, 0, 0, deity.getColor(), 2 + world.rand.nextFloat(), 100, 0, false, false, true, true, altarPos.getX() + world.rand.nextFloat() / 2, altarPos.getX() + 0.2F +  world.rand.nextFloat() / 4, altarPos.getX() + world.rand.nextFloat() / 2));
-               /* int hours = 24;
-
-                double radius = 0.15F;
-                double x = altarPos.getX() - radius / 2;
-                double y = altarPos.getY() + 0.9;
-                double z = altarPos.getZ() + 0.5F;
-
-                for (float i = 0.5F; i < TimeUtil.getHourForTimeBegin(deity.getTickTimeBegin()) + 0.5; i++) { //replace i with hour
-                    double angle = 2 * Math.PI * i / hours;
-                    x += radius * Math.sin(angle);
-                    z += radius * Math.cos(angle);
-                    if (i == TimeUtil.getHourForTimeBegin(deity.getTickTimeBegin()) - 0.5)
-                        Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(world, x, y, z, 0, 0.01, 0, deity.getColor(), 0.45F + world.rand.nextFloat(), 30 + world.rand.nextInt(5), 0, false, false, 1, true));
-                }*/
+                if (world.rand.nextFloat() < 0.01F)
+                Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(world, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 0, 0, 0, deity.getColor(), 2 + world.rand.nextFloat(), 100, 0, false, false, true, true, altarPos.getX() + 0.5F + (float) world.rand.nextGaussian() / 2, altarPos.getY() + 0.7F +  (float) world.rand.nextGaussian() / 5, altarPos.getZ() + 0.5F + (float) world.rand.nextGaussian() / 2));
             }
         }
     }

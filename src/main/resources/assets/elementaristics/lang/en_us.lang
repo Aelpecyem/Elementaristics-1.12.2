@@ -391,7 +391,7 @@ rite.elementaristics:rite_binding.name=Rite of the Shared Frame
 rite.elementaristics:rite_unbinding.name=Rite of the Falling Towers
 rite.elementaristics:rite_reforging.name=Reshaping Rite
 rite.elementaristics:rite_health_share.name=Rite of the Patchwork
-
+rite.elementaristics:rite_glorious.name=Glorious Rite
 
 #Misc
 entity.silver_thread.name=Silver Thread
@@ -413,6 +413,7 @@ hud.energy_to=Transferring Energy to:
 hud.too_far=(too far!)
 hud.pos_to=Bound to
 hud.god=Deity:
+hud.altar_to=Altar at
 
 message.position_set=Bound Position:
 message.position_set_for=Set Bound Position to

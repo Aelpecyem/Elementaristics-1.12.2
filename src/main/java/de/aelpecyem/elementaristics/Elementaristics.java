@@ -75,6 +75,7 @@ public final class Elementaristics {
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
+        //todo protoplasmatic slimes, and an advancement for protoplasm once the slimes have a use
         proxy.preInit(event);
         LOGGER.info(NAME + " is loading");
         File directory = event.getModConfigurationDirectory();

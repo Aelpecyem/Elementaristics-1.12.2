@@ -148,10 +148,10 @@ public class EventHandler {
             }
         }
 
-        if (event.getEntityPlayer().getActivePotionEffects().contains(event.getEntityPlayer().getActivePotionEffect(PotionInit.potionTrance)) && event.getEntityPlayer().isPlayerFullyAsleep()) {
+        if (event.getEntityPlayer().getActivePotionEffects().contains(event.getEntityPlayer().getActivePotionEffect(PotionInit.potionTrance)) && event.getEntityPlayer().isPlayerFullyAsleep() && !event.getEntityPlayer().getActivePotionEffects().contains(event.getEntityPlayer().getActivePotionEffect(PotionInit.ecstasy))) {
             if (event.getEntityPlayer().hasCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null)) {
-                IPlayerCapabilities cap = event.getEntityPlayer().getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null);
-                if (cap.getCultistCount() > 0) {
+            //    IPlayerCapabilities cap = event.getEntityPlayer().getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null);
+                //if (cap.getCultistCount() > 0) {
                     if (event.getEntityPlayer().dimension != Config.mindDimensionId) {
                         if (!event.getEntityPlayer().world.isRemote) {
                             event.getEntityPlayer().changeDimension(Config.mindDimensionId, new ITeleporter() {
@@ -162,10 +162,10 @@ public class EventHandler {
                             });
                         }
                     }
-                } else {
-                    event.getEntityPlayer().sendStatusMessage(new TextComponentString(ChatFormatting.RED + I18n.format("message.no_cultists_secured.name")), false);
+             //   } else {
+               //     event.getEntityPlayer().sendStatusMessage(new TextComponentString(ChatFormatting.RED + I18n.format("message.no_cultists_secured.name")), false);
 
-                }
+              //  }
             }
         }
     }

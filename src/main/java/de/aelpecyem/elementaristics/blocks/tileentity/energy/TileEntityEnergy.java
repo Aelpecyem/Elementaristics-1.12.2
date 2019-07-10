@@ -27,7 +27,7 @@ public class TileEntityEnergy extends TileEntity implements ITickable, IHasBound
      * @return
      */
     public int getTransfer(int i) {
-        return 10;
+        return 20;
     }
 
     public BlockPos posBound = null;

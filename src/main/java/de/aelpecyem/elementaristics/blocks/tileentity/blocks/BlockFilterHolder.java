@@ -106,7 +106,7 @@ public class BlockFilterHolder extends BlockTileEntity<TileEntityFilterHolder> {
                 if (tile.inventory.getStackInSlot(0).isEmpty()) {
                     playerIn.setHeldItem(hand, itemHandler.insertItem(0, heldItem, false));
                     tile.markDirty();
-
+                //fixme, test on server if items can be put it, test a lot of stuff server side in general
                 }
 
             }

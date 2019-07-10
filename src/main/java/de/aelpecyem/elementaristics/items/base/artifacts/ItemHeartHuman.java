@@ -13,6 +13,7 @@ import de.aelpecyem.elementaristics.misc.elements.Aspect;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;
 import de.aelpecyem.elementaristics.misc.potions.PotionInit;
 import de.aelpecyem.elementaristics.networking.PacketHandler;
+import de.aelpecyem.elementaristics.networking.cap.CapabilityChunkSync;
 import de.aelpecyem.elementaristics.networking.cap.SpawnBoundParticles;
 import de.aelpecyem.elementaristics.networking.player.PacketMessage;
 import de.aelpecyem.elementaristics.util.MaganUtil;
@@ -29,9 +30,12 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
+import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.items.ItemHandlerHelper;
+import org.lwjgl.Sys;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,6 +58,13 @@ public class ItemHeartHuman extends ItemFoodBase implements IHasRiteUse {
 
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
+        if (!worldIn.isRemote) {
+            Chunk chunk = worldIn.getChunkFromChunkCoords(playerIn.chunkCoordX, playerIn.chunkCoordZ);
+            if (chunk.hasCapability(ChunkCapProvider.ELEMENTARISTICS_CAP, null)) {
+                PacketHandler.sendTo(playerIn, new CapabilityChunkSync(chunk.x, chunk.z, chunk.getCapability(ChunkCapProvider.ELEMENTARISTICS_CAP, null).getInfluenceId()));
+            }
+        }
+
         if (MaganUtil.drainMaganFromPlayer(playerIn, 40, 60, true)) {
             if (worldIn.getChunkFromBlockCoords(playerIn.getPosition()).hasCapability(ChunkCapProvider.ELEMENTARISTICS_CAP, null)) {
                 if (worldIn.isRemote) {

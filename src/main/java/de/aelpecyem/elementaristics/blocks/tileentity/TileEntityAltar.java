@@ -1,10 +1,6 @@
 package de.aelpecyem.elementaristics.blocks.tileentity;
 
 import de.aelpecyem.elementaristics.Elementaristics;
-import de.aelpecyem.elementaristics.blocks.tileentity.blocks.BlockReactor;
-import de.aelpecyem.elementaristics.blocks.tileentity.blocks.pantheon.BlockDeityShrineBase;
-import de.aelpecyem.elementaristics.blocks.tileentity.energy.TileEntityEnergy;
-import de.aelpecyem.elementaristics.blocks.tileentity.pantheon.TileEntityDeityShrine;
 import de.aelpecyem.elementaristics.capability.player.IPlayerCapabilities;
 import de.aelpecyem.elementaristics.capability.player.PlayerCapProvider;
 import de.aelpecyem.elementaristics.capability.player.souls.Soul;
@@ -13,26 +9,18 @@ import de.aelpecyem.elementaristics.init.RiteInit;
 import de.aelpecyem.elementaristics.init.SoulInit;
 import de.aelpecyem.elementaristics.items.base.artifacts.rites.IHasRiteUse;
 import de.aelpecyem.elementaristics.misc.elements.Aspect;
-import de.aelpecyem.elementaristics.misc.pantheon.Deity;
 import de.aelpecyem.elementaristics.misc.rites.RiteBase;
 import de.aelpecyem.elementaristics.networking.PacketHandler;
 import de.aelpecyem.elementaristics.networking.tileentity.altar.PacketUpdateAltar;
-import de.aelpecyem.elementaristics.networking.tileentity.inventory.PacketUpdateInventory;
 import de.aelpecyem.elementaristics.networking.tileentity.tick.PacketUpdateTickTime;
 import de.aelpecyem.elementaristics.particles.ParticleGeneric;
 import de.aelpecyem.elementaristics.util.MaganUtil;
-import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-import net.minecraftforge.items.ItemStackHandler;
-import org.lwjgl.Sys;
 
 import javax.annotation.Nullable;
 import java.util.*;
@@ -45,6 +33,7 @@ public class TileEntityAltar extends TileEntity implements ITickable, IHasTickCo
     Random random = new Random();
     int addedPower = 0;
     Map<Aspect, Integer> aspectsExt = new ConcurrentHashMap<>();
+    Map<Soul, Integer> soulsExt = new ConcurrentHashMap<>();
 
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
@@ -73,7 +62,7 @@ public class TileEntityAltar extends TileEntity implements ITickable, IHasTickCo
         }
 
         if (!currentRite.equals("")) {
-            refreshAddedAspects();
+            refreshExternallyAdded();
             if (RiteInit.getRiteForResLoc(currentRite) != null) {
                 if (getCultistsInArea().size() < 5) {
                     RiteBase rite = RiteInit.getRiteForResLoc(currentRite);
@@ -90,6 +79,7 @@ public class TileEntityAltar extends TileEntity implements ITickable, IHasTickCo
                         currentRite = "";
                         tickCount = 0;
                         aspectsExt.clear();
+                        soulsExt.clear();
                     }
 
                     if (tickCount >= rite.getTicksRequired()) {
@@ -102,6 +92,7 @@ public class TileEntityAltar extends TileEntity implements ITickable, IHasTickCo
                                             currentRite = "";
                                             consumeConsumables();
                                             aspectsExt.clear();
+                                            soulsExt.clear();
                                         }
                                     }
                                 } else {
@@ -110,7 +101,7 @@ public class TileEntityAltar extends TileEntity implements ITickable, IHasTickCo
                                         rite.doMagic(world, pos, world.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 20, false), this);
                                         currentRite = "";
                                         aspectsExt.clear();
-
+                                        soulsExt.clear();
                                     }
                                 }
                             }
@@ -124,6 +115,7 @@ public class TileEntityAltar extends TileEntity implements ITickable, IHasTickCo
         } else {
             tickCount = 0;
             aspectsExt.clear();
+            soulsExt.clear();
             addedPower = 0;
         }
     }
@@ -183,6 +175,7 @@ public class TileEntityAltar extends TileEntity implements ITickable, IHasTickCo
                     souls.add(player.getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null).getSoul());
             }
         }
+        souls.addAll(soulsExt.keySet());
         return souls;
     }
 
@@ -316,8 +309,12 @@ public class TileEntityAltar extends TileEntity implements ITickable, IHasTickCo
     public void addAspect(Aspect aspect) {
         aspectsExt.put(aspect, 2);
     }
+    //Souls - External
+    public void addSoul(Soul soul) {
+        soulsExt.put(soul, 2);
+    }
 
-    public void refreshAddedAspects() {
+    public void refreshExternallyAdded() {
         //subtract by one; if it reaches 0, then remove it
         for (Aspect aspect : aspectsExt.keySet()) {
             aspectsExt.replace(aspect, aspectsExt.get(aspect), aspectsExt.get(aspect) - 1);
@@ -325,7 +322,14 @@ public class TileEntityAltar extends TileEntity implements ITickable, IHasTickCo
                 aspectsExt.remove(aspect);
             }
         }
+        for (Soul soul : soulsExt.keySet()) {
+            soulsExt.replace(soul, soulsExt.get(soul), soulsExt.get(soul) - 1);
+            if (soulsExt.get(soul) <= 0) {
+                soulsExt.remove(soul);
+            }
+        }
     }
+
 
     //Aspects - All
     public Set<Aspect> getAspectsInArea() {

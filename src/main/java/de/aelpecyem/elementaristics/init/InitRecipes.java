@@ -5,8 +5,11 @@ import de.aelpecyem.elementaristics.misc.elements.Aspects;
 import de.aelpecyem.elementaristics.recipe.*;
 import de.aelpecyem.elementaristics.recipe.base.*;
 import de.aelpecyem.elementaristics.util.TimeUtil;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.item.ItemEnchantedBook;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
@@ -41,14 +44,15 @@ public class InitRecipes {
         GloriousRecipes.addRecipe(new GloriousRecipe(new ResourceLocation(Elementaristics.MODID, "harbinger"), TimeUtil.getHourForTimeBegin(Deities.deityHarbinger.getTickTimeBegin()), Ingredient.fromItem(Items.DIAMOND_BOOTS), ModBlocks.symbol_harbinger));
         GloriousRecipes.addRecipe(new GloriousRecipe(new ResourceLocation(Elementaristics.MODID, "queen"), TimeUtil.getHourForTimeBegin(Deities.deityQueen.getTickTimeBegin()), Ingredient.fromItem(Items.RABBIT_FOOT), ModBlocks.symbol_queen));
         GloriousRecipes.addRecipe(new GloriousRecipe(new ResourceLocation(Elementaristics.MODID, "goat"), TimeUtil.getHourForTimeBegin(Deities.deityGoat.getTickTimeBegin()), Ingredient.fromStacks(new ItemStack(ModItems.essence, 1, Aspects.wood.getId())), ModBlocks.symbol_goat));
-        // GloriousRecipes.addRecipe(new GloriousRecipe(new ResourceLocation(Elementaristics.MODID, "moth"), TimeUtil.getHourForTimeBegin(Deities.deityMoth.getTickTimeBegin()), Ingredient.fromItem(ModItems.ash), ModBlocks.symbol_moth));       todo: add these once fitting items are in
-        //  GloriousRecipes.addRecipe(new GloriousRecipe(new ResourceLocation(Elementaristics.MODID, "thread"), TimeUtil.getHourForTimeBegin(Deities.deityThread.getTickTimeBegin()), Ingredient.fromItem(ModItems.ash), ModBlocks.symbol_thread));
+        GloriousRecipes.addRecipe(new GloriousRecipe(new ResourceLocation(Elementaristics.MODID, "moth"), TimeUtil.getHourForTimeBegin(Deities.deityMoth.getTickTimeBegin()), Ingredient.fromItem(ModItems.catalyst_entropizing), ModBlocks.symbol_moth));       //todo: add these once fitting items are in
+        GloriousRecipes.addRecipe(new GloriousRecipe(new ResourceLocation(Elementaristics.MODID, "thread"), TimeUtil.getHourForTimeBegin(Deities.deityThread.getTickTimeBegin()), Ingredient.fromItem(ModItems.protoplasm), ModBlocks.symbol_thread));
         GloriousRecipes.addRecipe(new GloriousRecipe(new ResourceLocation(Elementaristics.MODID, "mirror"), TimeUtil.getHourForTimeBegin(Deities.deityMirror.getTickTimeBegin()), Ingredient.fromItem(ModItems.soul_mirror), ModBlocks.symbol_mirror));
-        //  GloriousRecipes.addRecipe(new GloriousRecipe(new ResourceLocation(Elementaristics.MODID, "dancer"), TimeUtil.getHourForTimeBegin(Deities.deityDancer.getTickTimeBegin()), Ingredient.fromItem(ModItems.ash), ModBlocks.symbol_dancer));
+        // GloriousRecipes.addRecipe(new GloriousRecipe(new ResourceLocation(Elementaristics.MODID, "dancer"), TimeUtil.getHourForTimeBegin(Deities.deityDancer.getTickTimeBegin()), Ingredient.fromItem(ModItems.ash), ModBlocks.symbol_dancer));
         //   GloriousRecipes.addRecipe(new GloriousRecipe(new ResourceLocation(Elementaristics.MODID, "king"), TimeUtil.getHourForTimeBegin(Deities.deityKing.getTickTimeBegin()), Ingredient.fromItem(ModItems.ash), ModBlocks.symbol_king));
         //  GloriousRecipes.addRecipe(new GloriousRecipe(new ResourceLocation(Elementaristics.MODID, "mother"), TimeUtil.getHourForTimeBegin(Deities.deityMother.getTickTimeBegin()), Ingredient.fromItem(ModItems.ash), ModBlocks.symbol_mother));
         //   GloriousRecipes.addRecipe(new GloriousRecipe(new ResourceLocation(Elementaristics.MODID, "moon"), TimeUtil.getHourForTimeBegin(Deities.deityMoon.getTickTimeBegin()), Ingredient.fromItem(ModItems.ash), ModBlocks.symbol_moon));
-        //   GloriousRecipes.addRecipe(new GloriousRecipe(new ResourceLocation(Elementaristics.MODID, "witch"), TimeUtil.getHourForTimeBegin(Deities.deityWitch.getTickTimeBegin()), Ingredient.fromItem(ModItems.ash), ModBlocks.symbol_witch));
+        GloriousRecipes.addRecipe(new GloriousRecipe(new ResourceLocation(Elementaristics.MODID, "witch"), TimeUtil.getHourForTimeBegin(Deities.deityWitch.getTickTimeBegin()), Ingredient.fromItem(Items.ENCHANTED_BOOK), ModBlocks.symbol_witch));
+
 
     }
 

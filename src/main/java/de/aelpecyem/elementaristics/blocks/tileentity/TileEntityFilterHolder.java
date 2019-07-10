@@ -20,7 +20,6 @@ public class TileEntityFilterHolder extends TileEntity implements ITickable, IHa
             return 1;
         }
     };
-    Random random = new Random();
 
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {

@@ -1,0 +1,20 @@
+{
+  "name": "Hour 16",
+  "icon": "elementaristics:symbol_moth",
+  "category": "glory",
+  "advancement": "elementaristics:progress_glory",
+  "sortnum": 13,
+  "pages": [
+    {
+      "type": "text",
+      "text": "$(o)\"In the moonlight, $(t:congratulations, you got the referrence)the Moth$()$(o) flutters towards the moon so as to never reach it. $(br)But why even try in the first place? Because you must.\"$()"
+    },
+    {
+      "type": "spotlight",
+      "title": "Symbol",
+      "item": "elementaristics:symbol_moth",
+      "text": "This symbol is created with an $(l:alchemy/entry_entropizing_catalyst)Entropizing Catalyst$() in the $(l:glory/entry_rite_glorious)Glorious Rite$().$(br)The symbol can be linked to an altar, and will supply the $(marked)Chaos$() aspect.",
+      "link_recipe": true
+    }
+  ]
+}

@@ -7,18 +7,24 @@ import de.aelpecyem.elementaristics.capability.player.PlayerCapProvider;
 import de.aelpecyem.elementaristics.capability.player.souls.soulCaps.SoulCaps;
 import de.aelpecyem.elementaristics.init.SoulInit;
 import de.aelpecyem.elementaristics.networking.PacketHandler;
+import de.aelpecyem.elementaristics.networking.cap.CapabilityChunkSync;
 import de.aelpecyem.elementaristics.networking.cap.SpawnBoundParticles;
 import de.aelpecyem.elementaristics.networking.cap.CapabilitySync;
 import de.aelpecyem.elementaristics.networking.player.PacketPressSpellKey;
 import de.aelpecyem.elementaristics.util.Keybinds;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.chunk.Chunk;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.event.world.ChunkEvent;
+import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
@@ -35,8 +41,6 @@ public class CapabilityHandler {
             event.addCapability(CHUNK_CAP, new ChunkCapProvider());
         }
     }
-
-
 
     @SubscribeEvent
     public void onPlayerClone(PlayerEvent.Clone event) {
@@ -81,12 +85,12 @@ public class CapabilityHandler {
         }
     }
 
+
     @SubscribeEvent
     public void onPlayerUpdateEvent(LivingEvent.LivingUpdateEvent event) {
         if (event.getEntity() instanceof EntityPlayerMP) {
             final EntityPlayerMP player = (EntityPlayerMP) event.getEntity();
             final IPlayerCapabilities cap = player.getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null);
-
             PacketHandler.sendTo(player, new CapabilitySync(cap));
         }
 

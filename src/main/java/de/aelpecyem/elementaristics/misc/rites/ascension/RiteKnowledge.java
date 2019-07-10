@@ -33,9 +33,8 @@ public class RiteKnowledge extends RiteBase {
         if (player.hasCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null)) {
             IPlayerCapabilities caps = player.getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null);
             if (!caps.knowsSoul()) {
+                if (!world.isRemote)
                 PacketHandler.sendTo(player, new PacketMessage("message.know_" + SoulInit.getSoulFromId(caps.getSoulId()).getName()));
-                // if (world.isRemote)
-                //         player.sendStatusMessage(new TextComponentString(ChatFormatting.GOLD + I18n.format("message.know_" + SoulInit.getSoulFromId(caps.getSoulId()).getName())), false);
 
                 Elementaristics.proxy.generateGenericParticles(player, 16777073, 4, 100, 0, false, true);
                 caps.setKnowsSoul(true);

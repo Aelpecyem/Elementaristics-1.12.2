@@ -1,6 +1,7 @@
 package de.aelpecyem.elementaristics.networking;
 
 import de.aelpecyem.elementaristics.Elementaristics;
+import de.aelpecyem.elementaristics.networking.cap.CapabilityChunkSync;
 import de.aelpecyem.elementaristics.networking.cap.SpawnBoundParticles;
 import de.aelpecyem.elementaristics.networking.cap.CapabilitySync;
 import de.aelpecyem.elementaristics.networking.player.PacketBaubleKeyWinged;
@@ -34,7 +35,7 @@ import net.minecraftforge.fml.relauncher.Side;
 
 public class PacketHandler {
 
-    private static SimpleNetworkWrapper network;
+    public static SimpleNetworkWrapper network;
 
     private static int nextId = 0;
 
@@ -57,6 +58,7 @@ public class PacketHandler {
 
 
         network.registerMessage(new CapabilitySync.Handler(), CapabilitySync.class, next(), Side.CLIENT);
+        network.registerMessage(new CapabilityChunkSync.Handler(), CapabilityChunkSync.class, next(), Side.CLIENT);
 
         network.registerMessage(new SpawnBoundParticles.Handler(), SpawnBoundParticles.class, next(), Side.CLIENT);
         network.registerMessage(new PacketMessage.Handler(), PacketMessage.class, next(), Side.CLIENT);
@@ -91,6 +93,10 @@ public class PacketHandler {
 
     public static void sendToServer(IMessage message) {
         network.sendToServer(message);
+    }
+
+    public static void sendToDim(IMessage message, int dimensionId) {
+        network.sendToDimension(message, dimensionId);
     }
 }
 

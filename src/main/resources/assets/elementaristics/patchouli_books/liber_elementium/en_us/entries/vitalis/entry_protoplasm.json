@@ -1,0 +1,18 @@
+{
+  "name": "Protoplasm",
+  "icon": "elementaristics:protoplasm",
+  "category": "vis_vitalis",
+  "advancement": "elementaristics:progress_glory",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Protoplasm is the physical manifestation of the Thread, and is an incredibly malleable, organic substance, that can be shaped in quite a lot of ways. $(o)This could be useful later on...$()"
+    },
+    {
+      "type": "spotlight",
+      "item": "elementaristics:protoplasm",
+      "link_recipe": true,
+      "text": "Protoplasm is created by feeding a bestowed $(l:alchemy/entry_flesh_lamb)forgotten memory$() to a $(marked)tamed living being$() (by punching them violently with the food, though a player might eat it instead), destroying the creature's body in the process and rearranging it into a protoplasmic sample. This requires a lot of Magan to work."
+    }
+  ]
+}

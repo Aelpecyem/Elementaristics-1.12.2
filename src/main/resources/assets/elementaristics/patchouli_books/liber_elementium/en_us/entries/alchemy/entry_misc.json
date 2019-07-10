@@ -10,7 +10,7 @@
     {
       "type": "purifier_recipe",
       "recipe": "elementaristics:flint",
-      "text": "Like flint, as example"
+      "text": "Like flint, as example."
     }
   ],
   "advancement": "elementaristics:progress_purifier"

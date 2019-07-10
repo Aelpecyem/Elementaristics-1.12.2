@@ -10,7 +10,7 @@
     },
     {
       "type": "text",
-      "text": "In order to enter the Mind, one must first consume $(l:alchemy/entry_laudanum)Magic Laudanum$() and then sleep in a bed.$(br)Then, if the player is secured with at least one $(l:lessons/lesson_recruiting)Cultist$(), they will find theirselves in the Mind."
+      "text": "In order to enter the Mind, one must first consume $(l:alchemy/entry_laudanum)Magic Laudanum$() and then sleep in a bed.$(br)Then, they will find themselves in the Mind, though it is highly recommended to be secured with some kind of occult help for what may be done here."
     },
     {
       "type": "image",

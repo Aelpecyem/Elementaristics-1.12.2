@@ -93,7 +93,8 @@
     {
       "type": "spotlight",
       "item": "elementaristics:essence:7",
-      "text": "...$(br2)(Create this item with the $(l:manipulation/entry_chaos)Chaos Rite$())"
+      "text": "...$(br2)(Create this item with the $(l:manipulation/entry_chaos)Chaos Rite$())",
+      "link_recipe": true
     },
     {
       "type": "spotlight",
