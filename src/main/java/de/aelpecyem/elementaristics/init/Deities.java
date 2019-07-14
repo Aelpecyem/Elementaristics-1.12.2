@@ -65,7 +65,7 @@ public class Deities {
         deityThread = new DeitySupplyEffectBase(TimeUtil.getTickTimeStartForHour(17), new ResourceLocation(Elementaristics.MODID, "deity_thread"), Aspects.mana, 13442512);
         deityMirror = new DeitySupplyEffectBase(TimeUtil.getTickTimeStartForHour(18), new ResourceLocation(Elementaristics.MODID, "deity_mirror"), Aspects.crystal, 2143412);
         deityDancer = new DeityDancer();
-        deityKing = new DeitySupplyEffectBase(TimeUtil.getTickTimeStartForHour(20), new ResourceLocation(Elementaristics.MODID, "deity_king"), Aspects.body, 6296600);
+        deityKing = new DeityKing();
         deityMother = new DeitySupplyEffectBase(TimeUtil.getTickTimeStartForHour(21), new ResourceLocation(Elementaristics.MODID, "deity_mother"), Aspects.life, 15481145);
         deityMoon = new DeitySupplyEffectBase(TimeUtil.getTickTimeStartForHour(22), new ResourceLocation(Elementaristics.MODID, "deity_moon"), Aspects.order, 16508803);
         deityWitch = new DeityWitch();

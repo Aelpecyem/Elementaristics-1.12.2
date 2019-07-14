@@ -46,8 +46,8 @@ public class InitRecipes {
         GloriousRecipes.addRecipe(new GloriousRecipe(new ResourceLocation(Elementaristics.MODID, "goat"), TimeUtil.getHourForTimeBegin(Deities.deityGoat.getTickTimeBegin()), Ingredient.fromStacks(new ItemStack(ModItems.essence, 1, Aspects.wood.getId())), ModBlocks.symbol_goat));
         GloriousRecipes.addRecipe(new GloriousRecipe(new ResourceLocation(Elementaristics.MODID, "moth"), TimeUtil.getHourForTimeBegin(Deities.deityMoth.getTickTimeBegin()), Ingredient.fromItem(ModItems.catalyst_entropizing), ModBlocks.symbol_moth));       //todo: add these once fitting items are in
         GloriousRecipes.addRecipe(new GloriousRecipe(new ResourceLocation(Elementaristics.MODID, "thread"), TimeUtil.getHourForTimeBegin(Deities.deityThread.getTickTimeBegin()), Ingredient.fromItem(ModItems.protoplasm), ModBlocks.symbol_thread));
-        GloriousRecipes.addRecipe(new GloriousRecipe(new ResourceLocation(Elementaristics.MODID, "mirror"), TimeUtil.getHourForTimeBegin(Deities.deityMirror.getTickTimeBegin()), Ingredient.fromItem(ModItems.soul_mirror), ModBlocks.symbol_mirror));
-        // GloriousRecipes.addRecipe(new GloriousRecipe(new ResourceLocation(Elementaristics.MODID, "dancer"), TimeUtil.getHourForTimeBegin(Deities.deityDancer.getTickTimeBegin()), Ingredient.fromItem(ModItems.ash), ModBlocks.symbol_dancer));
+        GloriousRecipes.addRecipe(new GloriousRecipe(new ResourceLocation(Elementaristics.MODID, "mirror"), TimeUtil.getHourForTimeBegin(Deities.deityMirror.getTickTimeBegin()), Ingredient.fromItem(ModItems.reflection_sun), ModBlocks.symbol_mirror));
+        GloriousRecipes.addRecipe(new GloriousRecipe(new ResourceLocation(Elementaristics.MODID, "dancer"), TimeUtil.getHourForTimeBegin(Deities.deityDancer.getTickTimeBegin()), Ingredient.fromItem(ModItems.soul_mirror), ModBlocks.symbol_dancer));
         //   GloriousRecipes.addRecipe(new GloriousRecipe(new ResourceLocation(Elementaristics.MODID, "king"), TimeUtil.getHourForTimeBegin(Deities.deityKing.getTickTimeBegin()), Ingredient.fromItem(ModItems.ash), ModBlocks.symbol_king));
         //  GloriousRecipes.addRecipe(new GloriousRecipe(new ResourceLocation(Elementaristics.MODID, "mother"), TimeUtil.getHourForTimeBegin(Deities.deityMother.getTickTimeBegin()), Ingredient.fromItem(ModItems.ash), ModBlocks.symbol_mother));
         //   GloriousRecipes.addRecipe(new GloriousRecipe(new ResourceLocation(Elementaristics.MODID, "moon"), TimeUtil.getHourForTimeBegin(Deities.deityMoon.getTickTimeBegin()), Ingredient.fromItem(ModItems.ash), ModBlocks.symbol_moon));
@@ -117,6 +117,7 @@ public class InitRecipes {
         PurifierRecipes.addRecipe(new PurifierRecipe(new ResourceLocation(Elementaristics.MODID, "water_purest"), Ingredient.fromStacks(new ItemStack(ModItems.essence, 1, Aspects.water.getId())), 2, new ItemStack(ModItems.water_purest), 600));
 
         PurifierRecipes.addRecipe(new PurifierRecipe(new ResourceLocation(Elementaristics.MODID, "flint"), Ingredient.fromStacks(new ItemStack(Blocks.GRAVEL)), 1, new ItemStack(Items.FLINT), 60));
+        PurifierRecipes.addRecipe(new PurifierRecipe(new ResourceLocation(Elementaristics.MODID, "aether_essence_effective"), Ingredient.fromStacks(new ItemStack(ModItems.cluster_aether)), 1, new ItemStack(ModItems.essence, 2, Aspects.aether.getId()), 2400));
 
         PurifierRecipes.addRecipe(new PurifierRecipe(new ResourceLocation(Elementaristics.MODID, "poison_glassfinger_base"), Ingredient.fromStacks(new ItemStack(ModItems.poison_sandthroat)), 3, new ItemStack(ModItems.sandthroat_concentrated), 2400));
 
@@ -149,7 +150,7 @@ public class InitRecipes {
 
         TunnelerRecipes.addRecipe(new TunnelerRecipe(new ResourceLocation(Elementaristics.MODID, "motion_captured"), Ingredient.fromStacks(new ItemStack(Items.FEATHER)), new ItemStack(ModItems.essence, 1, Aspects.air.getId()), new ItemStack(ModItems.essence, 1, Aspects.air.getId()), new ItemStack(ModItems.essence, 1, Aspects.earth.getId()), new ItemStack(ModItems.motion_captured)));
 
-        TunnelerRecipes.addRecipe(new TunnelerRecipe(new ResourceLocation(Elementaristics.MODID, "incantation_weather"), Ingredient.fromStacks(new ItemStack(Items.PAPER)), new ItemStack(ModItems.sparks_brightest), new ItemStack(ModItems.lightning_tangible), new ItemStack(ModItems.essence, 1, Aspects.earth.getId()), new ItemStack(ModItems.motion_captured)));
+        TunnelerRecipes.addRecipe(new TunnelerRecipe(new ResourceLocation(Elementaristics.MODID, "incantation_weather"), Ingredient.fromStacks(new ItemStack(Items.PAPER)), new ItemStack(ModItems.sparks_brightest), new ItemStack(ModItems.lightning_tangible), new ItemStack(ModItems.essence, 1, Aspects.earth.getId()), new ItemStack(ModItems.incantation_weather)));
 
     }
 

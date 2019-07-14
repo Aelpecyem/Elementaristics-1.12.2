@@ -145,6 +145,8 @@ item.water_clear.name=Clear Water
 item.heart_human.name=Human Heart
 item.splendor_eye.name=Splendorous Eye
 
+item.reflection_sun.name=Reflection of the Sun
+
 item.poison_glassblood.name=Glassblood Toxin
 tooltip.poison_glassblood.name=A strong poison that drains magic, too
 

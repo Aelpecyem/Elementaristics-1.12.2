@@ -86,6 +86,12 @@
     },
     {
       "type": "spotlight",
+      "item": "elementaristics:essence:17",
+      "text": "Mana essence describes raw arcane power, and is contained to an extent within all kinds of soul. It can be obtained with the $(l:manipulation/entry_sacrifice)$(marked)Compression Rite$().",
+      "link_recipe": true
+    },
+    {
+      "type": "spotlight",
       "item": "elementaristics:essence:15",
       "text": "Chaos essence is the chaotic aspect of aether, and is the destructive force keeping the universe from becoming the most ordered. It is like the fire that warms and consumes, although order is always the ash. $(br2)(Create this item with the $(l:manipulation/entry_chaos)Chaos Rite$())",
       "link_recipe": true

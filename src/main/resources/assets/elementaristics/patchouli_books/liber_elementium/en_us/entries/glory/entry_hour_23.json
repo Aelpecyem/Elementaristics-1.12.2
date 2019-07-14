@@ -3,7 +3,7 @@
   "icon": "elementaristics:symbol_witch",
   "category": "glory",
   "advancement": "elementaristics:progress_glory",
-  "sortnum": 14,
+  "sortnum": 20,
   "pages": [
     {
       "type": "text",

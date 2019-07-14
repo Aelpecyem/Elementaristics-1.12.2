@@ -126,6 +126,7 @@ public class ModItems {
 
     //Ingredient -  might receive more use later
     public static ItemBase item_lock;
+    public static ItemBase reflection_sun;
 
     public static ItemBase scale;
    /* public static ItemArmor hood_cultist = new RobesCultist("hood_cultist",1, EntityEquipmentSlot.HEAD);
@@ -197,7 +198,7 @@ public class ModItems {
         poison_sandthroat = new ItemPoisonBase("poison_sandthroat", PoisonInit.poisonSandthroat);
 
         sandthroat_concentrated = new ItemBase("sandthroat_concentrated");
-
+        reflection_sun = new ItemAspects("reflection_sun", 4, true, Aspects.light);
     }
 
     private static void initRiteMaterials() {

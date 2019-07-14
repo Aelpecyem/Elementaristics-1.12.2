@@ -11,6 +11,11 @@
       "type": "purifier_recipe",
       "recipe": "elementaristics:flint",
       "text": "Like flint, as example."
+    },
+    {
+      "type": "purifier_recipe",
+      "recipe": "elementaristics:aether_essence_effective",
+      "text": "$(item)Aether Essence$() can be produced more efficiently using the Purifier."
     }
   ],
   "advancement": "elementaristics:progress_purifier"

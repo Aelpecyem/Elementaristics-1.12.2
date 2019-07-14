@@ -30,7 +30,7 @@
     {
       "type": "spotlight",
       "item": "elementaristics:stardust",
-      "text": "$(item)Stardust$() is stardust. It is the rotten blood of suns. $(br)It is us. It is a name, and it is space, partially, as what is without is just as within. $(br)But this is pretty much the opposite of $(item)Glowstone Dust$()... and the same."
+      "text": "$(item)Stardust$() is stardust. It is the rotten blood of suns. $(br)It is us. It is a name, and it is space, partially, as what is without is just as within. $(br)But this is pretty much the opposite of $(item)Glowstone Dust$()... and the same, of course, for occult paradox shenanigans."
     }
   ],
   "advancement": "elementaristics:progress_ascension_2"
