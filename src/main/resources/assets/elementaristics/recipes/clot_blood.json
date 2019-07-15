@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "elementaristics:essence",
+      "data": 9
+    },
+    {
+      "item": "elementaristics:heart_human"
+    },
+    {
+      "item": "elementaristics:wine_redmost"
+    },
+    {
+      "item": "elementaristics:essence",
+      "data": 9
+    }
+  ],
+  "result": {
+    "item": "elementaristics:clot_blood"
+  }
+}

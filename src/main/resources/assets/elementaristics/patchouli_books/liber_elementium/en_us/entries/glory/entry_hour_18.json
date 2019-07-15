@@ -13,7 +13,7 @@
       "type": "spotlight",
       "title": "Symbol",
       "item": "elementaristics:symbol_mirror",
-      "text": "This symbol is created with a $(item)Reflection of the Sun$() in the $(l:glory/entry_rite_glorious)Glorious Rite$().$(br)The symbol can be linked to an altar, and will supply the $(marked)Mana$() aspect.",
+      "text": "This symbol is created with a $(item)Reflection of the Sun$() in the $(l:glory/entry_rite_glorious)Glorious Rite$().$(br)The symbol can be linked to an altar, and will supply the $(marked)Crystal$() aspect.",
       "link_recipe": true
     },
     {
