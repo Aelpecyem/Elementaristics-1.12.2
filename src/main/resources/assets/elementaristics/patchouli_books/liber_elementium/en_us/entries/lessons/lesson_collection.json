@@ -93,13 +93,13 @@
     {
       "type": "spotlight",
       "item": "elementaristics:essence:15",
-      "text": "Chaos essence is the chaotic aspect of aether, and is the destructive force keeping the universe from becoming the most ordered. It is like the fire that warms and consumes, although order is always the ash. $(br2)(Create this item with the $(l:manipulation/entry_chaos)Chaos Rite$())",
+      "text": "Chaos essence is the chaotic aspect of $(marked)Aether$(), and is the destructive force keeping the universe from becoming the most ordered. It is like the fire that warms and consumes, although order is always the ash. $(br2)(Create this item with the $(l:manipulation/entry_chaos)Chaos Rite$() on Aether Essence)",
       "link_recipe": true
     },
     {
       "type": "spotlight",
       "item": "elementaristics:essence:7",
-      "text": "...$(br2)(Create this item with the $(l:manipulation/entry_chaos)Chaos Rite$())",
+      "text": "...$(br2)(Create this item with the $(l:manipulation/entry_chaos)Chaos Rite$() on Air Essence)",
       "link_recipe": true
     },
     {
