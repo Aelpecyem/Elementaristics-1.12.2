@@ -89,19 +89,19 @@ public class TileEntityAltar extends TileEntity implements ITickable, IHasTickCo
                                     if (getSoulsInArea().contains(rite.getSoulRequired())) {
                                         if (world.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 15, false) != null) {
                                             rite.doMagic(world, pos, world.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 20, false), this);
-                                            currentRite = "";
                                             consumeConsumables();
                                             aspectsExt.clear();
                                             soulsExt.clear();
+                                            currentRite = "";
                                         }
                                     }
                                 } else {
                                     if (world.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 15, false) != null) {
                                         consumeConsumables();
                                         rite.doMagic(world, pos, world.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 20, false), this);
-                                        currentRite = "";
                                         aspectsExt.clear();
                                         soulsExt.clear();
+                                        currentRite = "";
                                     }
                                 }
                             }
@@ -366,7 +366,7 @@ public class TileEntityAltar extends TileEntity implements ITickable, IHasTickCo
     public void consumeConsumables() {
         List<EntityPlayer> targets = getPlayersInArea();
         RiteBase rite = RiteInit.getRiteForResLoc(currentRite);
-        if (targets.size() > 0) {
+        if (targets.size() > 0){ //issue is that the rite returned is null, which is BAD
             Iterator iterator = targets.iterator();
             while (iterator.hasNext()) {
                 EntityPlayer player = (EntityPlayer) iterator.next();

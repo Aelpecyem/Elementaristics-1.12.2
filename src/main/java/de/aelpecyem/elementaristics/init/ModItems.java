@@ -230,7 +230,7 @@ public class ModItems {
     }
 
     private static void initRiteTools() {
-        incantation_light = new IncantationBase("incantation_light", RiteInit.riteKnowledge, Aspects.light, 4);
+        incantation_light = new IncantationBase("incantation_light", RiteInit.riteKnowledge, Aspects.light, 2);
         incantation_reforging = new IncantationBase("incantation_reforging", RiteInit.riteReforging, Aspects.fire, 1);
 
         incantation_chaos = new IncantationBase("incantation_chaos", RiteInit.riteChaos, Aspects.chaos, 4);
@@ -246,11 +246,11 @@ public class ModItems {
         incantation_unbinding = new IncantationBase("incantation_unbinding", RiteInit.riteUnbinding, Aspects.earth, 1);
         incantation_health_share = new IncantationBase("incantation_health_share", RiteInit.riteHealthShare, Aspects.earth, 1);
 
-        incantation_conflagration = new IncantationBase("incantation_conflagration", RiteInit.riteConflagration, Aspects.fire, 4);
-        incantation_wind = new IncantationBase("incantation_wind", RiteInit.riteShredding, Aspects.air, 4);
-        incantation_gaia = new IncantationBase("incantation_gaia", RiteInit.riteGaiasGaze, Aspects.earth, 4);
-        incantation_depths = new IncantationBase("incantation_depths", RiteInit.riteDrowningAstral, Aspects.water, 4);
-        incantation_compression = new IncantationBase("incantation_compression", RiteInit.riteCompression, Aspects.aether, 4);
+        incantation_conflagration = new IncantationBase("incantation_conflagration", RiteInit.riteConflagration, Aspects.fire, 2);
+        incantation_wind = new IncantationBase("incantation_wind", RiteInit.riteShredding, Aspects.air, 2);
+        incantation_gaia = new IncantationBase("incantation_gaia", RiteInit.riteGaiasGaze, Aspects.earth, 2);
+        incantation_depths = new IncantationBase("incantation_depths", RiteInit.riteDrowningAstral, Aspects.water, 2);
+        incantation_compression = new IncantationBase("incantation_compression", RiteInit.riteCompression, Aspects.aether, 2);
 
         hammer_heat = new ItemHammerHeat();
         dagger_sacrificial = new ItemDaggerSacrificial();

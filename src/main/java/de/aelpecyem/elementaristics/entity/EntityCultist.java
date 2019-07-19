@@ -10,6 +10,7 @@ import de.aelpecyem.elementaristics.misc.elements.Aspects;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;
+import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
@@ -31,6 +32,7 @@ public class EntityCultist extends EntityTameable {
     private static final DataParameter<Integer> ASPECT_ID = EntityDataManager.createKey(EntityCultist.class, DataSerializers.VARINT);
     private static final DataParameter<Float> MAGAN = EntityDataManager.createKey(EntityCultist.class, DataSerializers.FLOAT);
     private static final DataParameter<Integer> STUNT_TIME = EntityDataManager.createKey(EntityCultist.class, DataSerializers.VARINT);
+    private static final DataParameter<Integer> VARIANT_ID = EntityDataManager.createKey(EntityCultist.class, DataSerializers.VARINT); //only until there's fancy textures for each cultist
     public EntityCultist(World worldIn) {
         super(worldIn);
         setSize(0.6F, 1.8F);
@@ -43,6 +45,8 @@ public class EntityCultist extends EntityTameable {
         dataManager.register(ASPECT_ID, 0);
         dataManager.register(MAGAN, 80F);
         dataManager.register(STUNT_TIME, 0);
+        dataManager.register(VARIANT_ID, 0);
+        dataManager.set(VARIANT_ID, rand.nextInt(6));
     }
 
     public void setStuntTime(int stuntTime) {
@@ -69,6 +73,9 @@ public class EntityCultist extends EntityTameable {
         return Aspects.getElementById(dataManager.get(ASPECT_ID));
     }
 
+    public int getVariant() {
+        return dataManager.get(VARIANT_ID);
+    }
 
     @Override
     public void readFromNBT(NBTTagCompound compound) {

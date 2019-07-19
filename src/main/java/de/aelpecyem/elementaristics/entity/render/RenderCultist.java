@@ -10,9 +10,10 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nullable;
+import java.util.Random;
 
 public class RenderCultist extends RenderLiving<EntityCultist>{
-    public static final ResourceLocation TEXTURE = new ResourceLocation(Elementaristics.MODID, "textures/entity/cultist.png");
+    //public static final ResourceLocation TEXTURE = new ResourceLocation(Elementaristics.MODID, "textures/entity/cultist.png");
     public RenderCultist(RenderManager rendermanagerIn) {
         super(rendermanagerIn, new ModelCultist(), 0.5F);
     }
@@ -20,7 +21,7 @@ public class RenderCultist extends RenderLiving<EntityCultist>{
     @Nullable
     @Override
     protected ResourceLocation getEntityTexture(EntityCultist entity) {
-        return TEXTURE;
+        return new ResourceLocation(Elementaristics.MODID, "textures/entity/cultist/cultist_" + entity.getVariant()+ ".png");
     }
 
 }

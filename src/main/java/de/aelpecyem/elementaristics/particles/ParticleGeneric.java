@@ -90,6 +90,13 @@ public class ParticleGeneric extends Particle {
     }
 
     @Override
+    public boolean shouldDisableDepth() {
+        return true;
+    }
+
+
+
+    @Override
     public void renderParticle(BufferBuilder buffer, Entity entityIn, float partialTicks, float rotationX, float rotationZ, float rotationYZ, float rotationXY, float rotationXZ) {
 //        buffer.begin(7, DefaultVertexFormats.POSITION_TEX_COLOR);
         double x = this.prevPosX + (this.posX - this.prevPosX) * partialTicks - interpPosX;
