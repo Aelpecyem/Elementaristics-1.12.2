@@ -3,7 +3,7 @@
   "icon": "elementaristics:symbol_goat",
   "category": "glory",
   "advancement": "elementaristics:progress_glory",
-  "sortnum": 12,
+  "sortnum": 15,
   "pages": [
     {
       "type": "text",

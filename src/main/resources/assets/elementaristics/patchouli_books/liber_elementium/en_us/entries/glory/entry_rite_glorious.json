@@ -3,6 +3,7 @@
   "icon": "elementaristics:incantation_glorious",
   "advancement": "elementaristics:progress_forging",
   "category": "glory",
+  "sortnum": 1,
   "pages": [
     {
       "type": "text",

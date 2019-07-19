@@ -53,7 +53,7 @@ public class Aspects {
 
         magan = new Aspect("magan", 14117632);//5
 
-        electricity = new Aspect("electricity", 39935);//6
+        electricity = new Aspect("electricity", 11891928);//6
         vacuum = new Aspect("vacuum", 5263440);//7
         crystal = new Aspect("crystal", 39388);//8
         body = new Aspect("body", 11680055);//9
@@ -62,7 +62,7 @@ public class Aspects {
         ice = new Aspect("ice", 10610175);//11
 
         light = new Aspect("light", 16777157);//12
-        mind = new Aspect("mind",52677);//13
+        mind = new Aspect("mind",14292223);//13
 
         order = new Aspect("order", 16777215);//14
         chaos = new Aspect("chaos", 2431017);//15

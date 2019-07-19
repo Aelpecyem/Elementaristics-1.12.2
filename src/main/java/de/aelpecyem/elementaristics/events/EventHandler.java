@@ -86,22 +86,22 @@ public class EventHandler {
                     if (!event.player.inventory.hasItemStack(PatchouliAPI.instance.getBookStack("elementaristics:liber_elementium"))) {
                         if (event.player.getActivePotionEffect(PotionInit.potionIntoxicated).getDuration() == 3000) {
                             if (event.player.world.isRemote) {
-                                event.player.sendStatusMessage(new TextComponentString(I18n.format("message.vision.1")), true);
+                                event.player.sendStatusMessage(new TextComponentString(TextFormatting.GOLD + I18n.format("message.vision.1")), true);
                             }
                         }
                         if (event.player.getActivePotionEffect(PotionInit.potionIntoxicated).getDuration() == 2800) {
                             if (event.player.world.isRemote) {
-                                event.player.sendStatusMessage(new TextComponentString(I18n.format("message.vision.2")), true);
+                                event.player.sendStatusMessage(new TextComponentString(I18n.format(TextFormatting.GOLD + "message.vision.2")), true);
                             }
                         }
                         if (event.player.getActivePotionEffect(PotionInit.potionIntoxicated).getDuration() == 2600) {
                             if (event.player.world.isRemote) {
-                                event.player.sendStatusMessage(new TextComponentString(I18n.format("message.vision.3")), true);
+                                event.player.sendStatusMessage(new TextComponentString(TextFormatting.GOLD + I18n.format("message.vision.3")), true);
                             }
                         }
                         if (event.player.getActivePotionEffect(PotionInit.potionIntoxicated).getDuration() == 2400) {
                             if (event.player.world.isRemote) {
-                                event.player.sendStatusMessage(new TextComponentString(I18n.format("message.vision.4")), true);
+                                event.player.sendStatusMessage(new TextComponentString(I18n.format(TextFormatting.GOLD + "message.vision.4")), true);
                             }
                             event.player.inventory.addItemStackToInventory(PatchouliAPI.instance.getBookStack("elementaristics:liber_elementium"));
                         }

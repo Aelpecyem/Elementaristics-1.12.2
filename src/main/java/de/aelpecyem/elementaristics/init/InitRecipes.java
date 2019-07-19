@@ -49,8 +49,8 @@ public class InitRecipes {
         GloriousRecipes.addRecipe(new GloriousRecipe(new ResourceLocation(Elementaristics.MODID, "mirror"), Ingredient.fromItem(ModItems.reflection_sun), ModBlocks.symbol_mirror));
         GloriousRecipes.addRecipe(new GloriousRecipe(new ResourceLocation(Elementaristics.MODID, "dancer"), Ingredient.fromItem(ModItems.soul_mirror), ModBlocks.symbol_dancer));
         GloriousRecipes.addRecipe(new GloriousRecipe(new ResourceLocation(Elementaristics.MODID, "king"), Ingredient.fromItem(ModItems.clot_blood), ModBlocks.symbol_king));
-        //  GloriousRecipes.addRecipe(new GloriousRecipe(new ResourceLocation(Elementaristics.MODID, "mother"), TimeUtil.getHourForTimeBegin(Deities.deityMother.getTickTimeBegin()), Ingredient.fromItem(ModItems.ash), ModBlocks.symbol_mother));
-        //   GloriousRecipes.addRecipe(new GloriousRecipe(new ResourceLocation(Elementaristics.MODID, "moon"), TimeUtil.getHourForTimeBegin(Deities.deityMoon.getTickTimeBegin()), Ingredient.fromItem(ModItems.ash), ModBlocks.symbol_moon));
+        GloriousRecipes.addRecipe(new GloriousRecipe(new ResourceLocation(Elementaristics.MODID, "mother"), Ingredient.fromItem(ModItems.fragment_mother), ModBlocks.symbol_mother));
+        GloriousRecipes.addRecipe(new GloriousRecipe(new ResourceLocation(Elementaristics.MODID, "moon"), Ingredient.fromItem(ModItems.thaumagral_gold), ModBlocks.symbol_moon));
         GloriousRecipes.addRecipe(new GloriousRecipe(new ResourceLocation(Elementaristics.MODID, "witch"), Ingredient.fromItem(Items.ENCHANTED_BOOK), ModBlocks.symbol_witch));
 
 
@@ -91,7 +91,7 @@ public class InitRecipes {
 
         ForgeRecipes.addRecipe(new ForgeRecipe(new ResourceLocation(Elementaristics.MODID, "incantation_reshaping"), Ingredient.fromItems(Items.PAPER), Ingredient.fromStacks(new ItemStack(ModItems.essence, 1, Aspects.fire.getId())), Ingredient.fromStacks(new ItemStack(ModItems.essence, 1, Aspects.light.getId())), Ingredient.fromStacks(new ItemStack(ModItems.essence, 1, Aspects.body.getId())), Ingredient.fromStacks(new ItemStack(ModItems.essence, 1, Aspects.earth.getId())), new ItemStack(ModItems.incantation_reforging)));
 
-        ForgeRecipes.addRecipe(new ForgeRecipe(new ResourceLocation(Elementaristics.MODID, "stone_runed"), Ingredient.fromStacks(new ItemStack(ModBlocks.stone_enriched)), Ingredient.fromStacks(new ItemStack(ModItems.essence, 1, Aspects.light.getId())), Ingredient.fromItems(Items.ENDER_EYE), Ingredient.fromStacks(new ItemStack(ModItems.essence, 1, Aspects.vacuum.getId())), Ingredient.fromStacks(new ItemStack(ModItems.essence, 1, Aspects.soul.getId())), new ItemStack(ModBlocks.stone_runed)));
+        ForgeRecipes.addRecipe(new ForgeRecipe(new ResourceLocation(Elementaristics.MODID, "stone_runed"), Ingredient.fromStacks(new ItemStack(ModBlocks.stone_enriched)), Ingredient.fromStacks(new ItemStack(ModItems.essence, 1, Aspects.light.getId())), Ingredient.fromItems(Items.ENDER_EYE), Ingredient.fromStacks(new ItemStack(ModItems.essence, 1, Aspects.vacuum.getId())), Ingredient.fromStacks(new ItemStack(ModItems.sands_soul)), new ItemStack(ModBlocks.stone_runed)));
         ForgeRecipes.addRecipe(new ForgeRecipe(new ResourceLocation(Elementaristics.MODID, "lock"), Ingredient.fromStacks(new ItemStack(ModItems.ash)), Ingredient.fromStacks(new ItemStack(ModItems.essence, 1, Aspects.mind.getId())), Ingredient.fromItems(Items.ENDER_EYE), Ingredient.fromItem(Items.IRON_INGOT), Ingredient.fromStacks(new ItemStack(ModItems.essence, 1, Aspects.air.getId())), new ItemStack(ModItems.item_lock)));
 
     }

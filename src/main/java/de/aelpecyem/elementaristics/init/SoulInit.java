@@ -19,7 +19,7 @@ public class SoulInit {
     public static Soul soulEarth;
     public static Soul soulWater;
     public static Soul soulFire;
-    // public static Soul soulAether; hmhmh
+
     public static Soul soulMana;
     public static Soul soulUnstable;
     public static Soul soulImmutable;
@@ -41,7 +41,7 @@ public class SoulInit {
         soulEarth = new Soul("soul_earth",26368, EnumSoulRarity.COMMON);
         soulWater = new Soul("soul_water", 1279, EnumSoulRarity.COMMON);
         soulFire = new Soul("soul_fire", 15157504, EnumSoulRarity.COMMON);
-        // soulAether = new Soul("soul_aether", 10354943, EnumSoulRarity.COMMON);
+
 
         soulMana = new Soul("soul_mana", 15597809, EnumSoulRarity.RARE, 160, 0.4F, 1.5F);
         soulUnstable = new Soul("soul_unstable", 7208960, EnumSoulRarity.RARE, 130, 0.2F, 1.8F);

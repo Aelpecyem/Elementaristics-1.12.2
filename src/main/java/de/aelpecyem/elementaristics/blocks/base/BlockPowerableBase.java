@@ -44,6 +44,12 @@ public class BlockPowerableBase extends BlockBase {
     }
 
     @Override
+    public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
+        worldIn.setBlockState(pos, getDefaultState().withProperty(POWERED, worldIn.isBlockPowered(pos)), 2);
+        super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
+    }
+
+    @Override
     public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
         worldIn.setBlockState(pos, getDefaultState().withProperty(POWERED, worldIn.isBlockPowered(pos)), 2);
         super.neighborChanged(state, worldIn, pos, blockIn, fromPos);

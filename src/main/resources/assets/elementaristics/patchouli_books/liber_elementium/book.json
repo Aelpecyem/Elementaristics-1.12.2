@@ -8,8 +8,8 @@
   "advancements_tab": "elementaristics",
   "book_texture": "patchouli:textures/gui/book_blue.png",
   "filler_texture": "patchouli:textures/gui/page_filler.png",
-  "proress_bar_background": "bd8ace",
-  "proress_bar_color": "9b42f4",
+  "progress_bar_background": "bd8ace",
+  "progress_bar_color": "9b42f4",
   "model": "elementaristics:book_elementaristics",
   "subtitle": "info.elementaristics.book.subtitle",
   "macros": {

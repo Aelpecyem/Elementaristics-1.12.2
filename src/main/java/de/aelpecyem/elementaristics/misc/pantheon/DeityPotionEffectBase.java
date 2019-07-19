@@ -27,42 +27,44 @@ public class DeityPotionEffectBase extends DeityBase {
         this.effect = effect;
         this.playersOnly = true;
     }
+
     public DeityPotionEffectBase(long tickTimeBegin, ResourceLocation name, int color, Potion effect, boolean playersOnly) {
         super(tickTimeBegin, name, color);
         this.effect = effect;
         this.playersOnly = playersOnly;
     }
 
+    public void addEffect(EntityLivingBase target) {
+        target.addPotionEffect(new PotionEffect(effect, 400, 0, false, false));
+        if (target.hasCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null)) {
+            IPlayerCapabilities cap = target.getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null);
+            if (cap.getTimeStunted() < 1) {
+                cap.fillMagan(0.05F);
+            }
+        }
+    }
+
     @Override
     public void symbolEffect(TileEntityDeityShrine te) {
         if (te.storage.extractIfPossible(5)) {
-            PotionEffect p = new PotionEffect(effect, 400, 0, false, false);
-        List<EntityLivingBase> targets = te.getWorld().getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(te.getPos().getX() - 24, te.getPos().getY() - 12, te.getPos().getZ() - 24, te.getPos().getX() + 24, te.getPos().getY() + 12, te.getPos().getZ() + 24), new Predicate<EntityLivingBase>() {
-            @Override
-            public boolean apply(@Nullable EntityLivingBase input) {
-                if(playersOnly && input instanceof EntityPlayer)
-                return true;
-                else{
-                    if (playersOnly)
-                    return false;
+            List<EntityLivingBase> targets = te.getWorld().getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(te.getPos().getX() - 24, te.getPos().getY() - 12, te.getPos().getZ() - 24, te.getPos().getX() + 24, te.getPos().getY() + 12, te.getPos().getZ() + 24), new Predicate<EntityLivingBase>() {
+                @Override
+                public boolean apply(@Nullable EntityLivingBase input) {
+                    if (playersOnly && input instanceof EntityPlayer)
+                        return true;
+                    else {
+                        return !playersOnly;
+                    }
                 }
-                return true;
-            }
-        });
+            });
 
             if (!targets.isEmpty()) {
-                for (EntityLivingBase player : targets) {
-                    player.addPotionEffect(p);
-                    if (player.hasCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null)) {
-                        IPlayerCapabilities cap = player.getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null);
-                        if (cap.getTimeStunted() < 1) {
-                            cap.fillMagan(0.05F);
-                        }
-                    }
+                for (EntityLivingBase target : targets) {
+                    addEffect(target);
                 }
             }
             super.symbolEffect(te);
-        }
+        } //todo, same for statues but more efficient
     }
 
 

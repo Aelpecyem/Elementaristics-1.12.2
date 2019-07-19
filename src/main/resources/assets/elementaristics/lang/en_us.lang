@@ -146,6 +146,8 @@ item.heart_human.name=Human Heart
 item.splendor_eye.name=Splendorous Eye
 
 item.reflection_sun.name=Reflection of the Sun
+item.item_lock.name=Closed Lock
+item.fragment_mother.name=Fragment of the Mother
 
 item.poison_glassblood.name=Glassblood Toxin
 tooltip.poison_glassblood.name=A strong poison that drains magic, too
@@ -275,9 +277,10 @@ advancement.elementaristics.tunneler=Whoosh.
 advancement.elementaristics.reactor=Not of the giant kind
 advancement.elementaristics.basin=Flux free
 advancement.elementaristics.energy=Behold: technology!
-advancement.elementaristics.binding=More than just a frame of bones
+advancement.elementaristics.binding=Just a frame of bones?
 advancement.elementaristics.glory=There shall be glory!
 advancement.elementaristics.water_purest=Fresh!
+
 
 advancement.elementaristics.ascension_1=Far above, but just space
 advancement.elementaristics.ascension_2=THE MORE-!
@@ -286,6 +289,7 @@ advancement.elementaristics.ascension_3=The Mind
 advancement.elementaristics.ascension_4=Broken Boundaries
 advancement.elementaristics.ascension_5=Rethought Possibilities
 advancement.elementaristics.ascension_6=Reforged Boundaries
+
 advancement.elementaristics.ascension_7=Forged Possibilities
 advancement.elementaristics.ascension_8=Nothingness
 
@@ -312,6 +316,7 @@ advancement.elementaristics.ascension_3.desc=Enter The Mind
 advancement.elementaristics.ascension_4.desc=Kill the Silver Thread
 advancement.elementaristics.ascension_5.desc=Refine your mind
 advancement.elementaristics.ascension_6.desc=Reforge your body
+
 advancement.elementaristics.ascension_7.desc=Forge the Golden Thread
 advancement.elementaristics.ascension_8.desc=From and to Nothingness!
 
@@ -338,7 +343,7 @@ advancement.elementaristics.magan=Magan
 #Book
 item.elementaristics.book.name=Liber Elementium
 info.elementaristics.book.landing=The Elementaristics are the discipline from Nothingness, and they focus on how to dance beyond it.$(br)However, as no normal human has unlimited knowledge or an unceasing memory, this book covers the latter for them.
-info.elementaristics.book.subtitle=The gate's opening
+info.elementaristics.book.subtitle=By Ael
 
 book.purifierTime=Ticks needed:
 
@@ -420,50 +425,34 @@ hud.altar_to=Altar at
 message.position_set=Bound Position:
 message.position_set_for=Set Bound Position to
 
-message.ascension_1.standard=Walls have been broken. Walls that were limiting.
+message.ascension_1.standard=§6Walls have been broken. Walls that were limiting.
 hud.magan.amount=Current Magan:
 
 message.drugs=This is more potent than I thought... I might experience visions
 
-message.vision.1="What are you? Faust?"
-message.vision.2="Thankfully not"
-message.vision.3="Well what are you then? Mephistopheles?"
-message.vision.4="I could be"
+message.vision.1="Look to the Moon! You see it?"
+message.vision.2="What do you think is beyond it?"
+message.vision.3="A Witch? A Mother?"
+message.vision.4="A Wish?"
 
-message.know_soul_fire=The fire roars and so does my soul... and I shall burn forever.
-message.know_soul_water=The water flows, the water feels... and the water feels me.
-message.know_soul_air=The air swirls and I swirl with it...  and the harmony persists.
-message.know_soul_earth=The heart moves, the world moves... and I am the center.
-message.know_soul_aether=The space screams, the space whispers... we are all stardust but I am a star.
-message.know_soul_magan=The fabric was stitched and so was I... and I am a masterpiece.
+message.know_soul_fire=§6The fire roars and so does my soul... and I shall burn forever.
+message.know_soul_water=§6The water flows, the water feels... and the water feels me.
+message.know_soul_air=§6The air swirls and I swirl with it...  and the harmony persists.
+message.know_soul_earth=§6The heart moves, the world moves... and I am the center.
+message.know_soul_magan=§6The fabric was stitched and so was I... and I am a masterpiece.
 
-message.know_soul_balanced=I am me... not the true me, but less of a lie.
-message.know_soul_immutable=I persisted... and I will persist.
-message.know_soul_unstable=My walls hold my sanity in, but keep the knowledge out... and my walls crumble.
-message.know_soul_mana=The fabric was stitched... but I was the string.
+message.know_soul_balanced=§6I am me... not the true me, but less of a lie.
+message.know_soul_immutable=§6I persisted... and I will persist.
+message.know_soul_unstable=§6My walls hold my sanity in, but keep the knowledge out... and my walls crumble.
+message.know_soul_mana=§6The fabric was stitched... but I was the string.
 
-message.know_soul_ancient=The Great Dreamer sleeps... but I have awoken.
-message.know_soul_dragon=Dragons don't roar, they sing... and the world shall hear me.
+message.know_soul_ancient=§6The Great Dreamer sleeps... but I have awoken.
+message.know_soul_dragon=§6Dragons don't roar, they sing... and the world shall hear me.
 
 
 message.cultist.sit=The Cultist will stay here
 message.cultist.follow=The Cultist will closely follow you
 message.cultist.deny=This Cultist is not part of your cult
-
-message.soul.machine_activated.name=Machine Activated!
-message.soul.machine_deactivated.name=Machine Deactivated!
-message.soul.name=You have been identified with a
-message.soul_progress_1.name=Starting procedure on subject
-message.soul_progress_2.name=Localizing Soul
-message.soul_progress_3.name=Soul Found!
-message.soul_progress_4.name=Searching for Anima
-message.soul_progress_5.name=Anima Found!
-message.soul_progress_6.name=Scanning Anima
-message.soul_progress_7.name=Searching for Astral Body Core
-message.soul_progress_8.name=Found Astral Body Core!
-message.soul_progress_9.name=Taking Physical and Astral Body Probe
-message.soul_progress_10.name=Calculating Results
-message.soul_progress_done.name=Soul Identified!
 
 message.soul_creative.name=Your current soul is a
 message.soul_switch_creative.name=You switched to a
@@ -485,14 +474,15 @@ message.call_cultist_error.name=There must be more space for the cultists to app
 message.no_cultists_secured.name=Visiting the Mind without having any loyal Cultists sounds like a foolish idea
 message.interact_silver_thread.error_fight=There's already a Silver Thread in the area
 
-message.meditation_to_contentment.name=Ecstasy spreads, but will sooner wayne. But it always wants to leave something... contentment maybe.
+message.meditation_to_contentment.name=Ecstasy spreads, but will sooner wayne. But it always wants to leave something... contentment, ideally.
 message.meditation_to_dread.name=The earth revolves around the sun, and it never stops existing... but on times, we won't see it, and these times are times of dread.
 message.meditation_to_fear.name=As the sun is not seen, darkness arises. The darkness consumes, the darkness spreads fear.
 message.meditation_to_silence.name=And as the mind gets used to the fear, suddenly it stops. And as it stops, all sound stops.
 message.meditation_to_laughter.name=And suddenly we laugh.
 
 message.meditation_ascension.name=The mind has been reforged, and next is the body.
-message.ascension_body.name=The body has been reforged. The skin felt like clay, but it hardened.
+message.ascension_body.name=§6The body has been reforged. The skin felt like clay, but it hardened.
+
 message.deity_tick.name=Tick time:
 message.deity_hour.name=Hour:
 message.deity_active_current.name=It's the hour of
@@ -503,9 +493,52 @@ message.deity_active.name=This deity is active for 1000 ticks after tick time
 
 display.spell_locked=Locked Spell
 
-message.sense_influence=The heart shivers with power as you spot a mighty
-message.sense_influence_end=influence!
-message.sense_influence_none=Deprived of a body, the heart throbs in your hand.
+soul.soul_magan.name=§6Magan Soul
+soul.soul_water.name=§1Water Soul
+soul.soul_fire.name=§cFire Soul
+soul.soul_air.name=§bAir Soul
+soul.soul_earth.name=§2Earth Soul
+
+soul.soul_mana.name=§dMana Soul
+soul.soul_unstable.name=§4Unstable Soul
+soul.soul_immutable.name=§7Immutable Soul
+soul.soul_balanced.name=§fBalanced Soul
+
+soul.soul_dragon.name=§eDragon Soul
+soul.soul_ancient.name=§0Ancient Soul
+
+soul.soul_servant.name=§3Servant's Soul
+soul.soul_sentient.name=§9Sentient Soul
+soul.soul_machine.name=§8Mechanical Soul
+
+soul.soul_first.name=§fFirst Soul
+soul.soul_true.name=§fTrue Soul
+soul.soul_apostle.name=§4Apostle's Soul
+
+message.sense_influence_soul_magan=§6The heart unfolds in the weave to show a Magan Soul influence!
+message.sense_influence_soul_air=§bHere, the heart is the feather which it is weighted against. Here is an Air Soul influence.
+message.sense_influence_soul_earth=§2As the heart spots an Earth Soul influence, it feels like it is one of stone once again.
+message.sense_influence_soul_water=§1The blood of the heart jumps and flows as it spots a Water Soul influence.
+message.sense_influence_soul_fire=§cThe heart beats stronger than it did before as it spots a Fire Soul influence.
+
+message.sense_influence_soul_mana=§dThe heart is a skull and the heart is a string. This is a Mana Soul influence.
+message.sense_influence_soul_unstable=§4The heart falls apart but is then rethought in the influence of an Unstable Soul!
+message.sense_influence_soul_immutable=§7The heart stops beating, but it will not die either, as it is in a Immutable Soul influence.
+message.sense_influence_soul_balanced=§fThe heart is awash with vitality as it sports a Balanced Soul influence!
+
+message.sense_influence_soul_dragon=§eThe heart sings a song that should not be heard in this world.
+message.sense_influence_soul_ancient=§0The heart spots a force of the ancient, a force that should not be found in the world.
+
+message.sense_influence_soul_servant=§3This place is not a part of this world. This place serves something else.
+message.sense_influence_soul_sentient=§9This place feels.
+message.sense_influence_soul_machine=§8This is not a place, this is a machine.
+message.sense_influence_soul_first=§fThe Garden?
+message.sense_influence_soul_true=§fThe Thought?
+message.sense_influence_soul_apostle=§4The Legacy?
+
+
+message.sense_influence_none=§4Deprived of a body, the heart throbs in your hand.
+
 #Souls
 soul.soul_magan.name=§6Magan Soul
 soul.soul_water.name=§1Water Soul

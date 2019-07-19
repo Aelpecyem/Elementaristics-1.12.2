@@ -3,6 +3,7 @@
   "category": "glory",
   "icon": "elementaristics:textures/gui/icons/energy_dream.png",
   "advancement": "elementaristics:progress_ascension_4",
+  "sortnum": 0,
   "pages": [
     {
       "type": "text",

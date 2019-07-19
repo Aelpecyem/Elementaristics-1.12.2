@@ -3,7 +3,7 @@
   "icon": "elementaristics:symbol_thread",
   "category": "glory",
   "advancement": "elementaristics:progress_glory",
-  "sortnum": 14,
+  "sortnum": 17,
   "pages": [
     {
       "type": "text",

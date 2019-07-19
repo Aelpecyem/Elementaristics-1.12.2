@@ -3,6 +3,7 @@
   "icon": "elementaristics:stone_runed",
   "category": "glory",
   "advancement": "elementaristics:progress_glory",
+  "sortnum": 3,
   "pages": [
     {
       "type": "text",

@@ -1,7 +1,7 @@
 {
   "name": "The Splendorous Eye",
   "icon": "elementaristics:splendor_eye",
-  "category": "glory",
+  "category": "shaping",
   "advancement": "elementaristics:progress_forging",
   "pages": [
     {

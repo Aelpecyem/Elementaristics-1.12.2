@@ -124,10 +124,11 @@ public class ModItems {
     public static ItemDrinkBase water_clear;
     public static ItemDrinkBase phial_nectar;
 
-    //Ingredient -  might receive more use later
+    //Ingredient -  might receive more use later, also todo, base this off of item variants.
     public static ItemBase item_lock;
     public static ItemBase reflection_sun;
     public static ItemFoodBase clot_blood;
+    public static ItemBase fragment_mother;
 
     public static ItemBase scale;
    /* public static ItemArmor hood_cultist = new RobesCultist("hood_cultist",1, EntityEquipmentSlot.HEAD);
@@ -191,7 +192,7 @@ public class ModItems {
         water_clear = new ItemWaterClear();
         phial_nectar = new ItemNectar();
 
-        item_lock = new ItemBase("item_lock");
+        item_lock = new ItemLock();
         scale = new ItemScale();
 
         poison_glassblood = new ItemPoisonBase("poison_glassblood", PoisonInit.poisonGlassblood);
@@ -201,6 +202,7 @@ public class ModItems {
         sandthroat_concentrated = new ItemBase("sandthroat_concentrated");
         reflection_sun = new ItemAspects("reflection_sun", 4, true, Aspects.light);
         clot_blood = new ItemFoodBase("clot_blood", 4, 4, false);
+        fragment_mother = new ItemBase("fragment_mother");
     }
 
     private static void initRiteMaterials() {
@@ -215,7 +217,7 @@ public class ModItems {
         thoughts_battling = new ItemAspects("thoughts_battling", 6, true, "tooltip.thoughts_battling.name", Aspects.mind);
         vacuum_selfsustaining = new ItemAspects("vacuum_selfsustaining", 6, true, Aspects.vacuum);
         lightning_tangible = new ItemLightningTangible();
-        moss_everchaning = new ItemAspects("moss_everchanging", 6, true, Aspects.life);
+        moss_everchaning = new ItemMossEverchanging();
         gem_arcane = new ItemAspects("gem_arcane", 6, true, Aspects.crystal);
         catalyst_ordering = new ItemAspects("catalyst_ordering", 6, true, Aspects.order);
         catalyst_entropizing = new ItemAspects("catalyst_entropizing", 6, true, Aspects.chaos); //1 aether essence 3 chaotic matter pieces

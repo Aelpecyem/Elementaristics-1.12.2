@@ -86,13 +86,17 @@ public class ItemBaubleCharger extends ItemBase implements IBauble {
                 if (player.getPosition().getDistance(itemstack.getTagCompound().getInteger(X_KEY), itemstack.getTagCompound().getInteger(Y_KEY), itemstack.getTagCompound().getInteger(Z_KEY)) < 20) {
                     if (itemstack.getTagCompound().hasKey(CHARGE_KEY) && itemstack.getTagCompound().getInteger(CHARGE_KEY) < 10000)
                         itemstack.getTagCompound().setInteger(CHARGE_KEY, itemstack.getTagCompound().getInteger(CHARGE_KEY) + drainTileEntity(player.world, new BlockPos(itemstack.getTagCompound().getInteger(X_KEY), itemstack.getTagCompound().getInteger(Y_KEY), itemstack.getTagCompound().getInteger(Z_KEY))));
+                    else itemstack.getTagCompound().setInteger(CHARGE_KEY, 10000);
                 }
                 if (player.hasCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null)) {
                     IPlayerCapabilities cap = player.getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null);
                     if (cap.getTimeStunted() <= 0) {
-                        if (itemstack.getTagCompound().getInteger(CHARGE_KEY) >= 100 && cap.getMagan() < cap.getMaxMagan()) {
-                            itemstack.getTagCompound().setInteger(CHARGE_KEY, itemstack.getTagCompound().getInteger(CHARGE_KEY) - 10);
-                            cap.fillMagan(MaganUtil.convertOccultEnergyToMagan(10));
+                        if (itemstack.getTagCompound().getInteger(CHARGE_KEY) >= 50 && cap.getMagan() < cap.getMaxMagan()) {
+                            itemstack.getTagCompound().setInteger(CHARGE_KEY, itemstack.getTagCompound().getInteger(CHARGE_KEY) - 50);
+                            cap.fillMagan(MaganUtil.convertOccultEnergyToMagan(50));
+                        }else{
+                            cap.fillMagan(MaganUtil.convertOccultEnergyToMagan(itemstack.getTagCompound().getInteger(CHARGE_KEY)));
+                            itemstack.getTagCompound().setInteger(CHARGE_KEY, 0);
                         }
                     }
                 }

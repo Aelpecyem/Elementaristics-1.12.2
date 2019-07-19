@@ -30,7 +30,7 @@ public class DeityDancer extends DeitySupplyEffectBase {
     @Override
     public void supplyEffect(TileEntityDeityShrine te) {
         Chunk chunk = te.getWorld().getChunkFromBlockCoords(te.getPos());
-        if (chunk != null && chunk.hasCapability(ChunkCapProvider.ELEMENTARISTICS_CAP, null)){
+        if (chunk != null && chunk.hasCapability(ChunkCapProvider.ELEMENTARISTICS_CAP, null) && !te.getWorld().isRemote){
             te.unusedInt = chunk.getCapability(ChunkCapProvider.ELEMENTARISTICS_CAP, null).getInfluenceId();
         }
         if (te.getAltarBound() != null) {
@@ -47,6 +47,7 @@ public class DeityDancer extends DeitySupplyEffectBase {
             double motionX = te.getWorld().rand.nextGaussian() * 0.002D;
             double motionY = te.getWorld().rand.nextGaussian() * 0.002D;
             double motionZ = te.getWorld().rand.nextGaussian() * 0.002D;
+            System.out.println(te.unusedInt);
             Elementaristics.proxy.generateGenericParticles(te.getWorld(), te.getPos().getX() + te.getWorld().rand.nextFloat(), te.getPos().getY() + te.getWorld().rand.nextFloat(), te.getPos().getZ() + te.getWorld().rand.nextFloat(), motionX, motionY, motionZ, SoulInit.getSoulFromId(te.unusedInt).getParticleColor(), 1, 120, 0, false, false);
         }
         super.passiveParticles(te);

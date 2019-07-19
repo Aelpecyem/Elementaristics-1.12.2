@@ -3,11 +3,11 @@
   "icon": "elementaristics:symbol_dancer",
   "category": "glory",
   "advancement": "elementaristics:progress_glory",
-  "sortnum": 16,
+  "sortnum": 19,
   "pages": [
     {
       "type": "text",
-      "text": "$(o)\"In the Throne Room, the Dancer dances inside the Mirror who reflects the King. In the Throme Room, the Dancer steps inside the soul. Inside the soul, the Dancer acts on every whim, and every influence, and with the Dancer we feel, because her tale of emotion is the only tale of emotion we will ever listen to.\"$()"
+      "text": "$(o)\"In the Throne Room, the Dancer dances inside the Mirror who reflects the King. In the Throne Room, the Dancer steps inside the soul. Inside the soul, the Dancer acts on every whim, and every influence, and with the Dancer we feel, because her tale of emotion is the only tale of emotion we will ever listen to.\"$()"
     },
     {
       "type": "spotlight",

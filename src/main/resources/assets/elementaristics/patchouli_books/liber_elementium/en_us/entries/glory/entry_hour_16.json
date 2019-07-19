@@ -3,7 +3,7 @@
   "icon": "elementaristics:symbol_moth",
   "category": "glory",
   "advancement": "elementaristics:progress_glory",
-  "sortnum": 13,
+  "sortnum": 16,
   "pages": [
     {
       "type": "text",

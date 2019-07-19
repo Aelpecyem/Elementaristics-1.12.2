@@ -48,6 +48,12 @@ public class ItemHeartHuman extends ItemFoodBase implements IHasRiteUse {
 
     @Override
     public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+        tooltip.add(I18n.format("tooltip.aspect_tool.power") + " " + getPower());
+
+        tooltip.add(I18n.format("tooltip.aspect_tool.aspects"));
+        for (Aspect aspect : this.getAspects()) {
+            tooltip.add("-" + aspect.getLocalizedName());
+        }
         super.addInformation(stack, worldIn, tooltip, flagIn);
     }
 
@@ -63,15 +69,15 @@ public class ItemHeartHuman extends ItemFoodBase implements IHasRiteUse {
             if (chunk.hasCapability(ChunkCapProvider.ELEMENTARISTICS_CAP, null)) {
                 PacketHandler.sendTo(playerIn, new CapabilityChunkSync(chunk.x, chunk.z, chunk.getCapability(ChunkCapProvider.ELEMENTARISTICS_CAP, null).getInfluenceId()));
             }
-        }
 
+        }
         if (MaganUtil.drainMaganFromPlayer(playerIn, 40, 60, true)) {
             if (worldIn.getChunkFromBlockCoords(playerIn.getPosition()).hasCapability(ChunkCapProvider.ELEMENTARISTICS_CAP, null)) {
-                if (worldIn.isRemote) {
+                if (!worldIn.isRemote) {
                     if (worldIn.getChunkFromBlockCoords(playerIn.getPosition()).getCapability(ChunkCapProvider.ELEMENTARISTICS_CAP, null).getInfluence() != null) {
-                        playerIn.sendMessage(new TextComponentString(ChatFormatting.DARK_RED + I18n.format("message.sense_influence") + " " + worldIn.getChunkFromBlockCoords(playerIn.getPosition()).getCapability(ChunkCapProvider.ELEMENTARISTICS_CAP, null).getInfluence().getLocalizedName() + " " + ChatFormatting.DARK_RED + I18n.format("message.sense_influence_end")));
+                        PacketHandler.sendTo(playerIn, new PacketMessage("message.sense_influence_" + worldIn.getChunkFromBlockCoords(playerIn.getPosition()).getCapability(ChunkCapProvider.ELEMENTARISTICS_CAP, null).getInfluence().getName()));
                     } else {
-                        playerIn.sendMessage(new TextComponentString(ChatFormatting.DARK_RED + I18n.format("message.sense_influence_none")));
+                        PacketHandler.sendTo(playerIn, new PacketMessage("message.sense_influence_none"));
                     }
                 }
             }

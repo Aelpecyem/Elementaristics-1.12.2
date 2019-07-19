@@ -21,6 +21,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.BossInfo;
 import net.minecraft.world.BossInfoServer;
 import net.minecraft.world.World;
@@ -71,7 +72,7 @@ public class EntitySilverThread extends EntityMob {
             if (cap.knowsSoul()) {
                 if (cap.getPlayerAscensionStage() < 1) {
                     cap.setPlayerAscensionStage(1);
-                    PacketHandler.sendTo(player, new PacketMessage("message.ascension_1.standard"));
+                    PacketHandler.sendTo(player, new PacketMessage(TextFormatting.GOLD + "message.ascension_1.standard"));
                 }
             }
         }

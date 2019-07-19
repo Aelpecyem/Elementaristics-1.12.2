@@ -2,7 +2,7 @@
   "name": "Aquatic Body",
   "icon": "elementaristics:body_water",
   "category": "alchemy",
-  "advancement": "elementaristics:progress_ascension_basin",
+  "advancement": "elementaristics:progress_basin",
   "pages": [
     {
       "type": "text",

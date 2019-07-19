@@ -3,7 +3,7 @@
   "icon": "elementaristics:symbol_azathoth",
   "category": "glory",
   "advancement": "elementaristics:progress_glory",
-  "sortnum": 2,
+  "sortnum": 5,
   "pages": [
     {
       "type": "text",

@@ -2,7 +2,7 @@
   "name": "The Human Heart",
   "icon": "elementaristics:heart_human",
   "category": "vis_vitalis",
-  "advancement": "elementaristics:progress_binding",
+  "advancement": "elementaristics:progress_potential",
   "pages": [
     {
       "type": "text",
