@@ -10,7 +10,7 @@
     },
     {
       "type": "text",
-      "text": "In order to fulfill the rite, several criteria must be met:$(li)the one to be reshaped must hold a $(l:alchemy/entry_phial_nectar)Phial of Nectar$() and $(l:alchemy/entry_flesh_lamb)Flesh of the Lamb$()$(li)the one to be reshaped must have $(l:vitalis/entry_ascension_mind)rethought$() and $(li)all aspects needed for the rite must be present."
+      "text": "In order to fulfill the rite, several criteria must be met:$(li)the one to be reshaped must hold a $(l:alchemy/entry_phial_nectar)Phial of Nectar$() and $(l:alchemy/entry_flesh_lamb)Flesh of the Lamb$()$(li)the one to be reshaped must have $(l:vitalis/entry_ascension_mind)rethought$()$(li)the target must have $(marked)potential$() and $(li)all aspects needed for the rite must be present."
     },
     {
       "type": "text",

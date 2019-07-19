@@ -94,8 +94,14 @@ public class SoulInit {
         soulUnstable.addSpellToList(SpellInit.spell_activate, 2);
         soulUnstable.addSpellToList(SpellInit.spell_blink, 2);
 
+        soulMana.addSpellToList(SpellInit.spell_activate, 2);
+        soulMana.addSpellToList(SpellInit.spell_blink, 2);
+        soulMana.addSpellToList(SpellInit.spell_cleanse, 2);
+
         soulAncient.addSpellToList(SpellInit.spell_activate, 2);
         soulAncient.addSpellToList(SpellInit.spell_blink, 2);
+        soulAncient.addSpellToList(SpellInit.spell_cleanse, 2);
+        soulAncient.addSpellToList(SpellInit.spell_protection_crystal, 2);
         //soulAncient.addSpellToList(SpellInit.spell_pull, 1);
       //  soulAncient.addSpellToList(SpellInit.spell_push, 1);
 

@@ -181,7 +181,9 @@ public class EventHandler {
                 BlockPos pos = (BlockPos) iterator.next();
                 if (world.getBlockState(pos).getBlock() instanceof BlockFlowerBase) {
                     potion = world.rand.nextBoolean() ? ((BlockFlowerBase) world.getBlockState(pos).getBlock()).getEmotion() : null;
-                    System.out.println("Heyheyhey");
+                    if (potion != null){
+                        break;
+                    }
                 }
             }
             if (potion == null)
@@ -192,7 +194,7 @@ public class EventHandler {
         //to start meditation step
         if (player.getActivePotionEffects().contains(player.getActivePotionEffect(PotionInit.potionTrance)) && player.getActivePotionEffects().contains(player.getActivePotionEffect(PotionInit.ecstasy)) && player.getActivePotionEffect(PotionInit.ecstasy).getAmplifier() >= 2) {
             Potion potion = PotionInit.potionFocused;
-            player.addPotionEffect(new PotionEffect(potion, 24000, 0, true, true));
+            player.addPotionEffect(new PotionEffect(potion, 24000, 0, true, false));
             player.removePotionEffect(PotionInit.potionTrance);
             player.removePotionEffect(PotionInit.ecstasy);
             player.sendStatusMessage(new TextComponentString(TextFormatting.GOLD + I18n.format("message.meditation_to_contentment.name")), false);

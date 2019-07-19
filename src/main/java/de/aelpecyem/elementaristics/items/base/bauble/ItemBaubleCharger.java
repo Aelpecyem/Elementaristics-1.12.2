@@ -19,6 +19,8 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.energy.CapabilityEnergy;
+import net.minecraftforge.energy.IEnergyStorage;
 
 import java.util.List;
 
@@ -54,7 +56,7 @@ public class ItemBaubleCharger extends ItemBase implements IBauble {
             stack.setTagCompound(new NBTTagCompound());
         }
         if (player.isSneaking()) {
-            if (worldIn.getTileEntity(pos) != null && worldIn.getTileEntity(pos) instanceof TileEntityEnergy) {
+            if (worldIn.getTileEntity(pos) != null && worldIn.getTileEntity(pos).hasCapability(CapabilityEnergy.ENERGY, null)) {
                 stack.getTagCompound().setInteger(X_KEY, pos.getX());
                 stack.getTagCompound().setInteger(Y_KEY, pos.getY());
                 stack.getTagCompound().setInteger(Z_KEY, pos.getZ());
@@ -70,8 +72,9 @@ public class ItemBaubleCharger extends ItemBase implements IBauble {
 
 
     public int drainTileEntity(World world, BlockPos pos) {
-        if (world.getTileEntity(pos) instanceof TileEntityEnergy) {
-            return ((TileEntityEnergy) world.getTileEntity(pos)).storage.extractEnergy(((TileEntityEnergy) world.getTileEntity(pos)).getTransfer(1), false);
+        if (world.getTileEntity(pos).hasCapability(CapabilityEnergy.ENERGY, null)) {
+            IEnergyStorage storage = world.getTileEntity(pos).getCapability(CapabilityEnergy.ENERGY, null);
+            return storage.extractEnergy(50, false);
         }
         return 0;
     }
@@ -84,14 +87,16 @@ public class ItemBaubleCharger extends ItemBase implements IBauble {
                     itemstack.getTagCompound().setInteger(CHARGE_KEY, 0);
                 }
                 if (player.getPosition().getDistance(itemstack.getTagCompound().getInteger(X_KEY), itemstack.getTagCompound().getInteger(Y_KEY), itemstack.getTagCompound().getInteger(Z_KEY)) < 20) {
-                    if (itemstack.getTagCompound().hasKey(CHARGE_KEY) && itemstack.getTagCompound().getInteger(CHARGE_KEY) < 10000)
+                    if (itemstack.getTagCompound().hasKey(CHARGE_KEY) && itemstack.getTagCompound().getInteger(CHARGE_KEY) < 10000) {
                         itemstack.getTagCompound().setInteger(CHARGE_KEY, itemstack.getTagCompound().getInteger(CHARGE_KEY) + drainTileEntity(player.world, new BlockPos(itemstack.getTagCompound().getInteger(X_KEY), itemstack.getTagCompound().getInteger(Y_KEY), itemstack.getTagCompound().getInteger(Z_KEY))));
-                    else itemstack.getTagCompound().setInteger(CHARGE_KEY, 10000);
+                    } else {
+                        itemstack.getTagCompound().setInteger(CHARGE_KEY, 10000);
+                    }
                 }
                 if (player.hasCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null)) {
                     IPlayerCapabilities cap = player.getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null);
-                    if (cap.getTimeStunted() <= 0) {
-                        if (itemstack.getTagCompound().getInteger(CHARGE_KEY) >= 50 && cap.getMagan() < cap.getMaxMagan()) {
+                    if (cap.getTimeStunted() <= 0 && cap.getMagan() < cap.getMaxMagan()) {
+                        if (itemstack.getTagCompound().getInteger(CHARGE_KEY) >= 5) {
                             itemstack.getTagCompound().setInteger(CHARGE_KEY, itemstack.getTagCompound().getInteger(CHARGE_KEY) - 50);
                             cap.fillMagan(MaganUtil.convertOccultEnergyToMagan(50));
                         }else{

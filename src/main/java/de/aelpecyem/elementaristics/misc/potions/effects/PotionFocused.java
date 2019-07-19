@@ -3,6 +3,8 @@ package de.aelpecyem.elementaristics.misc.potions.effects;
 import de.aelpecyem.elementaristics.capability.player.IPlayerCapabilities;
 import de.aelpecyem.elementaristics.capability.player.PlayerCapProvider;
 import de.aelpecyem.elementaristics.misc.potions.PotionInit;
+import de.aelpecyem.elementaristics.networking.PacketHandler;
+import de.aelpecyem.elementaristics.networking.player.PacketMessage;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -64,9 +66,9 @@ public class PotionFocused extends PotionBase {
                             cap.setPlayerAscensionStage(2);
                             entityLivingBaseIn.addPotionEffect(new PotionEffect(this, 500, 5));
                         }
-                        if (((EntityPlayer) entityLivingBaseIn).world.isRemote)
-                        ((EntityPlayer) entityLivingBaseIn).sendStatusMessage(new TextComponentString(TextFormatting.GOLD + I18n.format("message.meditation_ascension.name")), false);
-                    }
+                        if (!((EntityPlayer) entityLivingBaseIn).world.isRemote)
+                            PacketHandler.sendTo((EntityPlayer) entityLivingBaseIn, new PacketMessage("message.meditation_ascension.name"));
+                       }
 
                 }
             }
