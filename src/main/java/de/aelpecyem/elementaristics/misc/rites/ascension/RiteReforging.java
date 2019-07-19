@@ -61,8 +61,6 @@ public class RiteReforging extends RiteBase {
                 }
 
             }
-            //player is launched far up, the reforging potion effects are removed, etc. some damage, too
-            //player must hold certain items (a fraction of ichor, and flesh of the lamb)
         }
 
     }

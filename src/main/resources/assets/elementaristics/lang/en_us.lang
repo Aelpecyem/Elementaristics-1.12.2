@@ -16,6 +16,8 @@ elementaristics.potion.fear=Fear
 elementaristics.potion.laughter=Laughter
 elementaristics.potion.silence=Silence
 
+elementaristics.potion.potential=Potential
+
 elementaristics.potion.gaseous=Gaseous Form
 elementaristics.potion.crystal_protection=Crystalline Shield
 elementaristics.potion.fireball_charge=Fireball Charge
@@ -56,24 +58,18 @@ elementaristics:spell_counterspell=Counterspell
 elementaristics:spell_activate=Far Reach
 
 
-
 #Items
-item.bubble_helium.name=Helium Filled Stone
-item.bubble_hydrogen.name=Hydrogen Filled Stone
+#-Ingredients
 item.elder_root.name=Elder Root
 item.quartz_vibrant.name=Vibrant Quartz
 item.matter_chaotic.name=Chaotic Matter
 item.matter_maganized.name=Maganized Matter
 item.module_matter_accelerating.name=Acceleration Module
-item.changer_soul.name=Soul Changer (Creative Only)
-item.mirror_soul.name=Mirror of the Soul
-item.ring_mana_regen.name=Ring of Mana Regeneration
 item.cluster_aether.name=Unrefined Aether Cluster
 item.cluster_air.name=Unrefined Air Cluster
 item.cluster_earth.name=Unrefined Earth Cluster
 item.cluster_fire.name=Unrefined Fire Cluster
 item.cluster_water.name=Unrefined Water Cluster
-item.essence.name=Air Essence
 item.tincture_opium.name=Magic Laudanum
 item.bundle_herbs.name=Bundle of Herbs
 item.petal_opium.name=Opium Petal
@@ -81,8 +77,15 @@ item.seeds_opium.name=Opium Seeds
 item.essence_blank.name=Blank Essence
 item.ash.name=Ash
 item.protoplasm.name=Protoplasmic Sample
-item.hammer_heat.name=Hammer of Heat
 item.head_hammer.name=Archaic Hammer Head
+
+
+item.mirror_soul.name=Mirror of the Soul
+
+item.essence.name=Air Essence
+
+item.hammer_heat.name=Hammer of Heat
+
 item.dagger_sacrificial.name=Sacrificial Dagger
 item.heart_stone.name=Heart of Stone
 item.tympanum_empty.name=Empty Tympanum
@@ -187,37 +190,25 @@ item.essence_mind.name=Mind Essence
 item.essence_wood.name=Essence of the Wood
 item.essence_night.name=Essence of the Night
 
-tile.block_essence_air.name=Concentrated Air Essence
-tile.block_essence_earth.name=Concentrated Earth Essence
-tile.block_essence_water.name=Concentrated Water Essence
-tile.block_essence_fire.name=Concentrated Fire Essence
-tile.block_essence_aether.name=Concentrated Aether Essence
-tile.block_essence_ice.name=Concentrated Ice Essence
-tile.block_essence_life.name=Concentrated Life Essence
-tile.block_essence_crystal.name=Concentrated Crystal Essence
-tile.block_essence_soul.name=Concentrated Soul Essence
-tile.block_essence_light.name=Concentrated Light Essence
-
 #Blocks
-tile.ore_helium.name=Helium Infused Stone
-tile.ore_hydrogen.name=Hydrogen Infused Stone
-tile.ore_prismarine.name=Prismarine Ore
 tile.stone_enriched.name=Enriched Stone
+tile.fabric_reason.name=Fabric of Reason
+tile.fabric_passion.name=Fabric of Passion
+tile.block_silver_thread.name=Silver Thread
+tile.stone_runed.name=Runed Stone
+
+#Blocks-Important Ones
 tile.pedestal.name=Pedestal
 tile.purifier.name=Purifier
-tile.pedestal_lightning.name=Lightning Pedestal
-tile.entropizer.name=Entropizer Basis
-tile.entropizer_top.name=Entropizer Top
-tile.soul_identifier.name=Soul Identifier
 tile.concentrator.name=Concentrator
 tile.tunneler.name=Tunneler
 tile.filter_holder.name=Filter Holder
 tile.reactor.name=Reactor
 tile.casing_essence.name=Essence Casing
 tile.altar.name=Altar
-tile.fabric_reason.name=Fabric of Reason
-tile.fabric_passion.name=Fabric of Passion
-tile.block_silver_thread.name=Silver Thread
+tile.basin_infusion.name=Infusion Basin
+
+#Blocks-Plants
 tile.flower_ecstasy.name=Aphrodium
 tile.flower_fear.name=Phobaryllis
 tile.flower_contentment.name=Laetatium
@@ -227,19 +218,18 @@ tile.flower_silence.name=Tacituryllis
 tile.mushroom_intoxicating.name=Shimmershroom
 tile.moss.name=Moss
 tile.block_moss_everchanging.name=Everchanging Moss
-tile.basin_infusion.name=Infusion Basin
+
+#Blocks-Energy
 tile.generator_combustion.name=Arcane Combustion Generator
 tile.storage_energy.name=Occult Energy Core
 
-tile.stone_runed.name=Runed Stone
-tile.storage_energy_creative.name=The Truly Occult Energy Core Of Occult Truth
-
+#Blocks-Redstone
 tile.block_transmitter_redstone.name=Redstone Transmitter
 tile.block_emulator_redstone.name=Redstone Emulator
-
 tile.manipulator_supplying.name=Supplying Manipulator
 tile.manipulator_passive.name=Passivity Manipulator
 
+#Blocks-Deity Symbols
 tile.symbol_nothingness.name=Symbol from-and-to Nothingness
 tile.symbol_azathoth.name=Symbol of an Idiot
 tile.symbol_dragon_fire.name=Symbol of the Fire Dragon
@@ -264,11 +254,16 @@ tile.symbol_king.name=Symbol of the Feasting King
 tile.symbol_mother.name=Symbol of the Mother
 tile.symbol_moon.name=Symbol of the Golden Moon
 tile.symbol_witch.name=Symbol of the Witch
+
+
+#Creative Only
+item.changer_soul.name=Soul Changer (Creative Only)
+tile.storage_energy_creative.name=The Truly Occult Energy Core Of Occult Truth (Creative Only)
+
+
 #Advancements
 advancement.elementaristics.root=Elementaristics
-advancement.elementaristics.root_research=Discovered Aspects
 
-advancement.elementaristics.pedestal=No mercy for atoms
 advancement.elementaristics.concentrator=Influencing, isn't it?
 advancement.elementaristics.purifier=SPLASHING
 advancement.elementaristics.chaos=Far below
@@ -281,7 +276,7 @@ advancement.elementaristics.binding=Just a frame of bones?
 advancement.elementaristics.glory=There shall be glory!
 advancement.elementaristics.water_purest=Fresh!
 
-
+#Advancements-Ascension
 advancement.elementaristics.ascension_1=Far above, but just space
 advancement.elementaristics.ascension_2=THE MORE-!
 advancement.elementaristics.ascension_identification=Know
@@ -289,12 +284,11 @@ advancement.elementaristics.ascension_3=The Mind
 advancement.elementaristics.ascension_4=Broken Boundaries
 advancement.elementaristics.ascension_5=Rethought Possibilities
 advancement.elementaristics.ascension_6=Reforged Boundaries
-
 advancement.elementaristics.ascension_7=Forged Possibilities
 advancement.elementaristics.ascension_8=Nothingness
 
+#Advancements-Descriptions
 advancement.elementaristics.root.desc=You opened your gate... after a not so appreciable intoxication.
-advancement.elementaristics.root_research.desc=The aspects of the multiverse, discovered by me
 
 advancement.elementaristics.pedestal.desc=Build a Lightning Pedestal to create essences using items
 advancement.elementaristics.concentrator.desc=Build a Concentrator to influence items with other items to create new items
@@ -309,6 +303,7 @@ advancement.elementaristics.binding.desc=Build a Heart of Stone
 advancement.elementaristics.glory.desc=Build a Splendorous Eye
 advancement.elementaristics.water_purest.desc=Craft Purest Water
 
+#Advancements-Ascension-Descriptions
 advancement.elementaristics.ascension_1.desc=Study the essence of space
 advancement.elementaristics.ascension_2.desc=Build an Altar to perform rites
 advancement.elementaristics.ascension_identification.desc=Create an Incantation of Light
@@ -316,46 +311,18 @@ advancement.elementaristics.ascension_3.desc=Enter The Mind
 advancement.elementaristics.ascension_4.desc=Kill the Silver Thread
 advancement.elementaristics.ascension_5.desc=Refine your mind
 advancement.elementaristics.ascension_6.desc=Reforge your body
-
 advancement.elementaristics.ascension_7.desc=Forge the Golden Thread
 advancement.elementaristics.ascension_8.desc=From and to Nothingness!
 
 
-advancement.elementaristics.fire=Fire
-advancement.elementaristics.air=Air
-advancement.elementaristics.earth=Earth
-advancement.elementaristics.water=Water
-advancement.elementaristics.aether=Aether
-advancement.elementaristics.crystal=Crystal
-advancement.elementaristics.life=Life
-advancement.elementaristics.soul=Soul
-advancement.elementaristics.ice=Ice
-advancement.elementaristics.light=Light
-advancement.elementaristics.chaos=Chaos
-advancement.elementaristics.order=Order
-advancement.elementaristics.electricity=Electricity!
-advancement.elementaristics.vacuum=Emptiness
-advancement.elementaristics.mind=Mind
-advancement.elementaristics.body=Body
-advancement.elementaristics.mana=Mana
-advancement.elementaristics.magan=Magan
-
 #Book
 item.elementaristics.book.name=Liber Elementium
 info.elementaristics.book.landing=The Elementaristics are the discipline from Nothingness, and they focus on how to dance beyond it.$(br)However, as no normal human has unlimited knowledge or an unceasing memory, this book covers the latter for them.
-info.elementaristics.book.subtitle=By Ael
+info.elementaristics.book.subtitle="Written in the water"
 
 book.purifierTime=Ticks needed:
 
 #Tooltip
-tooltip.incantation.rite=Rite:
-tooltip.incantation.magan=Magan needed:
-tooltip.incantation.power=Item Power needed:
-tooltip.incantation.soul=Soul needed:
-tooltip.incantation.aspects=Aspects needed:
-tooltip.aspect_tool.aspects=Aspects:
-tooltip.aspect_tool.power=Power:
-
 tooltip.root=I could have a rather interesting time when burning this...
 tooltip.thaumagral.durability=Durability Bonus:
 tooltip.thaumagral.damage=Damage Bonus:
@@ -379,6 +346,18 @@ tooltip.posZ=Bound Z-Coordinates:
 tooltip.spell_current=Current Spell:
 tooltip.no_current=No current Spell
 
+#Tooltips-Rites
+tooltip.aspect_tool.aspects=Aspects:
+tooltip.aspect_tool.power=Power:
+tooltip.incantation.rite=Rite:
+tooltip.incantation.magan=Magan needed:
+tooltip.incantation.power=Item Power needed:
+tooltip.incantation.soul=Soul needed:
+tooltip.incantation.aspects=Aspects needed:
+
+
+
+
 #Rites
 rite.elementaristics:rite_knowledge.name=Enlightenment's Sighing
 rite.elementaristics:rite_feast.name=The Feast on the Soul
@@ -400,14 +379,16 @@ rite.elementaristics:rite_reforging.name=Reshaping Rite
 rite.elementaristics:rite_health_share.name=Rite of the Patchwork
 rite.elementaristics:rite_glorious.name=Glorious Rite
 
-#Misc
+#Entities
 entity.silver_thread.name=Silver Thread
 entity.cultist.name=Cultist
 
+#Categories-Keybinds
 category.elementaristics=Elementaristics
 key.spell_down=Next Spell
 key.spell_up=Previous Spell
 
+#Hud Elements
 rite.item_power.name=Local Item Power:
 rite.progress.name=Progress:
 rite.progress_ready.name=Progress: §2ready
@@ -422,37 +403,26 @@ hud.pos_to=Bound to
 hud.god=Deity:
 hud.altar_to=Altar at
 
-message.position_set=Bound Position:
-message.position_set_for=Set Bound Position to
-
-message.ascension_1.standard=§6Walls have been broken. Walls that were limiting.
 hud.magan.amount=Current Magan:
 
-message.drugs=This is more potent than I thought... I might experience visions
+#Messages
+message.position_set=Bound Position:
+message.position_set_for=Set Bound Position to
 
 message.vision.1="Look to the Moon! You see it?"
 message.vision.2="What do you think is beyond it?"
 message.vision.3="A Witch? A Mother?"
 message.vision.4="A Wish?"
 
-message.know_soul_fire=§6The fire roars and so does my soul... and I shall burn forever.
-message.know_soul_water=§6The water flows, the water feels... and the water feels me.
-message.know_soul_air=§6The air swirls and I swirl with it...  and the harmony persists.
-message.know_soul_earth=§6The heart moves, the world moves... and I am the center.
-message.know_soul_magan=§6The fabric was stitched and so was I... and I am a masterpiece.
-
-message.know_soul_balanced=§6I am me... not the true me, but less of a lie.
-message.know_soul_immutable=§6I persisted... and I will persist.
-message.know_soul_unstable=§6My walls hold my sanity in, but keep the knowledge out... and my walls crumble.
-message.know_soul_mana=§6The fabric was stitched... but I was the string.
-
-message.know_soul_ancient=§6The Great Dreamer sleeps... but I have awoken.
-message.know_soul_dragon=§6Dragons don't roar, they sing... and the world shall hear me.
-
+message.drugs=This is more potent than I thought... I might experience visions
 
 message.cultist.sit=The Cultist will stay here
 message.cultist.follow=The Cultist will closely follow you
 message.cultist.deny=This Cultist is not part of your cult
+
+message.cultist_stats.name=Viewing stats for Cultist:
+message.cultist_aspect.name=Cultist's aspect:
+message.cultist_magan.name=Current Magan:
 
 message.soul_creative.name=Your current soul is a
 message.soul_switch_creative.name=You switched to a
@@ -465,23 +435,11 @@ message.regen_per_tick.name=Your magan regeneration rate per tick is
 message.ascension_stage.name=Your ascension stage:
 message.cultist_count.name=Your cultist count:
 
-message.cultist_stats.name=Viewing stats for Cultist:
-message.cultist_aspect.name=Cultist's aspect:
-message.cultist_magan.name=Current Magan:
-
 message.rite_fail_cultists.name=There's too many artificial souls here
 message.call_cultist_error.name=There must be more space for the cultists to appear
+
 message.no_cultists_secured.name=Visiting the Mind without having any loyal Cultists sounds like a foolish idea
 message.interact_silver_thread.error_fight=There's already a Silver Thread in the area
-
-message.meditation_to_contentment.name=Ecstasy spreads, but will sooner wayne. But it always wants to leave something... contentment, ideally.
-message.meditation_to_dread.name=The earth revolves around the sun, and it never stops existing... but on times, we won't see it, and these times are times of dread.
-message.meditation_to_fear.name=As the sun is not seen, darkness arises. The darkness consumes, the darkness spreads fear.
-message.meditation_to_silence.name=And as the mind gets used to the fear, suddenly it stops. And as it stops, all sound stops.
-message.meditation_to_laughter.name=And suddenly we laugh.
-
-message.meditation_ascension.name=§6The mind has been reforged, and next is the body.
-message.ascension_body.name=§6The body has been reforged. The skin felt like clay, but it hardened.
 
 message.deity_tick.name=Tick time:
 message.deity_hour.name=Hour:
@@ -492,28 +450,6 @@ message.deity_belong.name=This shrine belongs to
 message.deity_active.name=This deity is active for 1000 ticks after tick time
 
 display.spell_locked=Locked Spell
-
-soul.soul_magan.name=§6Magan Soul
-soul.soul_water.name=§1Water Soul
-soul.soul_fire.name=§cFire Soul
-soul.soul_air.name=§bAir Soul
-soul.soul_earth.name=§2Earth Soul
-
-soul.soul_mana.name=§dMana Soul
-soul.soul_unstable.name=§4Unstable Soul
-soul.soul_immutable.name=§7Immutable Soul
-soul.soul_balanced.name=§fBalanced Soul
-
-soul.soul_dragon.name=§eDragon Soul
-soul.soul_ancient.name=§0Ancient Soul
-
-soul.soul_servant.name=§3Servant's Soul
-soul.soul_sentient.name=§9Sentient Soul
-soul.soul_machine.name=§8Mechanical Soul
-
-soul.soul_first.name=§fFirst Soul
-soul.soul_true.name=§fTrue Soul
-soul.soul_apostle.name=§4Apostle's Soul
 
 message.sense_influence_soul_magan=§6The heart unfolds in the weave to show a Magan Soul influence!
 message.sense_influence_soul_air=§bHere, the heart is the feather which it is weighted against. Here is an Air Soul influence.
@@ -536,8 +472,33 @@ message.sense_influence_soul_first=§fThe Garden?
 message.sense_influence_soul_true=§fThe Thought?
 message.sense_influence_soul_apostle=§4The Legacy?
 
-
 message.sense_influence_none=§4Deprived of a body, the heart throbs in your hand.
+
+#Messages-Ascension
+message.ascension_1.standard=§6Walls have been broken. Walls that were limiting.
+message.meditation_ascension.name=§6The mind has been reforged, and next is the body.
+message.ascension_body.name=§6The body has been reforged. The skin felt like clay, but it hardened.
+
+message.meditation_to_contentment.name=Ecstasy spreads, but will sooner wayne. But it always wants to leave something... contentment, ideally.
+message.meditation_to_dread.name=The earth revolves around the sun, and it never stops existing... but on times, we won't see it, and these times are times of dread.
+message.meditation_to_fear.name=As the sun is not seen, darkness arises. The darkness consumes, the darkness spreads fear.
+message.meditation_to_silence.name=And as the mind gets used to the fear, suddenly it stops. And as it stops, all sound stops.
+message.meditation_to_laughter.name=And suddenly we laugh.
+
+#Messages of the Know
+message.know_soul_fire=§6The fire roars and so does my soul... and I shall burn forever.
+message.know_soul_water=§6The water flows, the water feels... and the water feels me.
+message.know_soul_air=§6The air swirls and I swirl with it...  and the harmony persists.
+message.know_soul_earth=§6The heart moves, the world moves... and I am the center.
+message.know_soul_magan=§6The fabric was stitched and so was I... and I am a masterpiece.
+message.know_soul_balanced=§6I am me... not the true me, but less of a lie.
+message.know_soul_immutable=§6I persisted... and I will persist.
+message.know_soul_unstable=§6My walls hold my sanity in, but keep the knowledge out... and my walls crumble.
+message.know_soul_mana=§6The fabric was stitched... but I was the string.
+message.know_soul_ancient=§6The Great Dreamer sleeps... but I have awoken.
+message.know_soul_dragon=§6Dragons don't roar, they sing... and the world shall hear me.
+
+
 
 #Souls
 soul.soul_magan.name=§6Magan Soul
@@ -545,7 +506,6 @@ soul.soul_water.name=§1Water Soul
 soul.soul_fire.name=§cFire Soul
 soul.soul_air.name=§bAir Soul
 soul.soul_earth.name=§2Earth Soul
-soul.soul_aether.name=§5Aether Soul
 
 soul.soul_mana.name=§dMana Soul
 soul.soul_unstable.name=§4Unstable Soul
@@ -582,6 +542,8 @@ aspect.electricity.name=§9Electricity
 aspect.chaos.name=§0Chaos
 aspect.order.name=§fOrder
 aspect.magan.name=§6Magan
+aspect.wood.name=§6The Wood
+aspect.night.name=§fThe Night
 
 #Deities
 elementaristics:deity_nothingness=The God from-and-to-Nothingness
