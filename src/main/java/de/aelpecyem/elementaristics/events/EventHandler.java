@@ -181,6 +181,7 @@ public class EventHandler {
                 BlockPos pos = (BlockPos) iterator.next();
                 if (world.getBlockState(pos).getBlock() instanceof BlockFlowerBase) {
                     potion = world.rand.nextBoolean() ? ((BlockFlowerBase) world.getBlockState(pos).getBlock()).getEmotion() : null;
+                    System.out.println("Heyheyhey");
                 }
             }
             if (potion == null)

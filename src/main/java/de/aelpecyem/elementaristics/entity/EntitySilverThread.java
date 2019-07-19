@@ -72,7 +72,7 @@ public class EntitySilverThread extends EntityMob {
             if (cap.knowsSoul()) {
                 if (cap.getPlayerAscensionStage() < 1) {
                     cap.setPlayerAscensionStage(1);
-                    PacketHandler.sendTo(player, new PacketMessage(TextFormatting.GOLD + "message.ascension_1.standard"));
+                    PacketHandler.sendTo(player, new PacketMessage("message.ascension_1.standard"));
                 }
             }
         }

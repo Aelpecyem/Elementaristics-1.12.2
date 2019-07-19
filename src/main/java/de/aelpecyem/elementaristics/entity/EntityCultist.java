@@ -33,6 +33,7 @@ public class EntityCultist extends EntityTameable {
     private static final DataParameter<Float> MAGAN = EntityDataManager.createKey(EntityCultist.class, DataSerializers.FLOAT);
     private static final DataParameter<Integer> STUNT_TIME = EntityDataManager.createKey(EntityCultist.class, DataSerializers.VARINT);
     private static final DataParameter<Integer> VARIANT_ID = EntityDataManager.createKey(EntityCultist.class, DataSerializers.VARINT); //only until there's fancy textures for each cultist
+  //  public static final String[] possibleNames = { "Ael", "Edward", "Amelie", "Sirona"};
     public EntityCultist(World worldIn) {
         super(worldIn);
         setSize(0.6F, 1.8F);
@@ -47,7 +48,7 @@ public class EntityCultist extends EntityTameable {
         dataManager.register(STUNT_TIME, 0);
         dataManager.register(VARIANT_ID, 0);
         dataManager.set(VARIANT_ID, rand.nextInt(6));
-        setCustomNameTag("AWAF");
+       // setCustomNameTag("AWAF"); choose from the possible names etc.
     }
 
     public void setStuntTime(int stuntTime) {

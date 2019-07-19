@@ -48,6 +48,10 @@
     {
       "type": "text",
       "text": "The Silver Thread on its own is not that strong, compared to other more powerful entities. However, it has the ability to only be damaged by two units, and that only by players. This makes the fight against it a fight of time, in which the player must try not to get hit. Shields and items that slow down enemies are recommended.$(br)As the Silver Thread will change location upon being hit, the fighting player must be cautious."
+    },
+    {
+      "type": "text",
+      "text": "In order to leave the Mind, one must activate the tangible Silver Thread again, after the Silver Thread entity has been slain."
     }
   ]
 }

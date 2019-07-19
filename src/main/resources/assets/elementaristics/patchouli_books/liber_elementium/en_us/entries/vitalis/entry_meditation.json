@@ -10,7 +10,7 @@
     },
     {
       "type": "text",
-      "text": "To perform meditation, one must simply sleep in a Bed, at any given time. This will normally cause a boost in health and Magan regeneration. $(br)However, meditation might also move deeper sentiments, given the right influences... This influence being $(marked)intoxication$(). $(br)These extremely amplified emotions have different effects."
+      "text": "To perform meditation, one must simply sleep in a Bed, at any given time. This will normally cause a boost in health and Magan regeneration. $(br)However, meditation might also move deeper sentiments, given the right influences... This influence being $(marked)intoxication$(), with the best way of achieving it being $(l:alchemy/entry_tincture)Arcane Tincture$(). $(br)These extremely amplified emotions have different effects."
     },
     {
       "type": "text",
@@ -23,6 +23,10 @@
     {
       "type": "text",
       "text": "$(l)Laughter$()$(br)While not being an emotion in the traditional sense, this sentiment is completely unstoppable, until it ceases on its own. It will immensely increase the regeneration of Magan.$(br2)$(l)Silence$()$(br)Not really being the opposite of laughter, but not really being anything in general, this emotion will prevent all Magan regeneration, but will increase strength and resistance."
+    },
+    {
+      "type": "text",
+      "text": "The probability of one of these being applied may be manipulated with certain means, like special $(marked)perfumes$(). However, one can only obtain emotions by meditation when intoxicated, and this counts always."
     }
   ]
 }
