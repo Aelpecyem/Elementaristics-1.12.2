@@ -47,6 +47,7 @@ public class EntityCultist extends EntityTameable {
         dataManager.register(STUNT_TIME, 0);
         dataManager.register(VARIANT_ID, 0);
         dataManager.set(VARIANT_ID, rand.nextInt(6));
+        setCustomNameTag("AWAF");
     }
 
     public void setStuntTime(int stuntTime) {

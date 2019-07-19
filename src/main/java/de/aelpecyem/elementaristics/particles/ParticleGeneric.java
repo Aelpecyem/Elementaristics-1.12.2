@@ -20,7 +20,7 @@ import scala.reflect.internal.tpe.GlbLubs;
 @SideOnly(Side.CLIENT)
 public class ParticleGeneric extends Particle {
     public static final ResourceLocation TEXTURE = new ResourceLocation(Elementaristics.MODID, "textures/misc/particle_base_1.png"); //switch to particle_base_1.png if it's considered fancier
-
+    //the rendering with the ParticleHandler class might not be needed in 1.14, but idk, we'll see
     private final float desiredScale;
     private final boolean fade;
     private final boolean followPosition;
@@ -89,12 +89,6 @@ public class ParticleGeneric extends Particle {
         return 2;
     }
 
-    @Override
-    public boolean shouldDisableDepth() {
-        return true;
-    }
-
-
 
     @Override
     public void renderParticle(BufferBuilder buffer, Entity entityIn, float partialTicks, float rotationX, float rotationZ, float rotationYZ, float rotationXY, float rotationXZ) {
@@ -152,7 +146,6 @@ public class ParticleGeneric extends Particle {
 
         }
     }
-
 
     @Override
     public int getBrightnessForRender(float f) {

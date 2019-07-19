@@ -10,7 +10,7 @@
     },
     {
       "type": "text",
-      "text": "In order to enter the Mind, one must first consume $(l:alchemy/entry_laudanum)Magic Laudanum$() and then sleep in a bed.$(br)Then, they will find themselves in the Mind, though it is highly recommended to be secured with some kind of occult help for what may be done here."
+      "text": "In order to enter the Mind, one must first consume $(l:alchemy/entry_laudanum)Magic Laudanum$() through the flame and then sleep in a bed.$(br)Then, they will find themselves in the Mind, though it is highly recommended to be secured with some kind of occult help for what may be done here."
     },
     {
       "type": "image",
@@ -23,7 +23,7 @@
     },
     {
       "type": "text",
-      "text": "The Player will find theirselves between two layers, from which one is made out of $(item)Fabric of Passion$() (above) while the other one is made out of $(item)Fabric of Reason$() (below), though more Fabric of Passion might be found underneath it. $(br)Additionally, another layer of Passion can be found over the current one."
+      "text": "The Player will find themselves between two layers, from which one is made out of $(item)Fabric of Passion$() (above) while the other one is made out of $(item)Fabric of Reason$() (below), though more Fabric of Passion might be found underneath it. $(br)Additionally, another layer of Passion can be found over the current one."
     },
     {
       "type": "image",
