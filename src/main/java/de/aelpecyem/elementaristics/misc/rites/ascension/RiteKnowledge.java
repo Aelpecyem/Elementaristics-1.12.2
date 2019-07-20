@@ -7,12 +7,14 @@ import de.aelpecyem.elementaristics.capability.player.IPlayerCapabilities;
 import de.aelpecyem.elementaristics.capability.player.PlayerCapProvider;
 import de.aelpecyem.elementaristics.capability.player.souls.soulCaps.SoulCaps;
 import de.aelpecyem.elementaristics.init.SoulInit;
+import de.aelpecyem.elementaristics.misc.advancements.CustomAdvancements;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;
 import de.aelpecyem.elementaristics.misc.rites.RiteBase;
 import de.aelpecyem.elementaristics.networking.PacketHandler;
 import de.aelpecyem.elementaristics.networking.player.PacketMessage;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
@@ -39,6 +41,9 @@ public class RiteKnowledge extends RiteBase {
                 Elementaristics.proxy.generateGenericParticles(player, 16777073, 4, 100, 0, false, true);
                 caps.setKnowsSoul(true);
                 SoulCaps.getCapForSoul(SoulInit.getSoulFromId(caps.getSoulId())).buffsOnSpawning(player, caps);
+                if (!world.isRemote){
+                    CustomAdvancements.Advancements.ASCEND.trigger((EntityPlayerMP) player);
+                }
                 world.playSound(null, pos, SoundEvents.BLOCK_ENCHANTMENT_TABLE_USE, SoundCategory.AMBIENT, 1, 0.7F);
             }
         }
