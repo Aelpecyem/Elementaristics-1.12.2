@@ -7,6 +7,7 @@ import de.aelpecyem.elementaristics.capability.player.PlayerCapProvider;
 import de.aelpecyem.elementaristics.init.ModItems;
 import de.aelpecyem.elementaristics.init.SoulInit;
 import de.aelpecyem.elementaristics.items.base.artifacts.rites.ItemAspects;
+import de.aelpecyem.elementaristics.misc.advancements.CustomAdvancements;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;
 import de.aelpecyem.elementaristics.misc.potions.PotionInit;
 import de.aelpecyem.elementaristics.particles.ParticleGeneric;
@@ -15,6 +16,7 @@ import de.aelpecyem.elementaristics.util.MaganUtil;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemStack;
@@ -72,11 +74,12 @@ ItemSoulMirror extends ItemAspects {
         if (playerIn.hasCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null)) {
             IPlayerCapabilities cap = playerIn.getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null);
             SoulInit.updateSoulInformation(playerIn, cap);
+            if (!worldIn.isRemote){
+                CustomAdvancements.Advancements.ASCEND.trigger((EntityPlayerMP) playerIn);
+            }
             if (worldIn.isRemote) {
                 if (playerIn.isSneaking()) {
-
                     playerIn.sendMessage(new TextComponentString(I18n.format("message.view_stats.name") + " " + playerIn.getName()));
-
 
                     if (cap.knowsSoul()) {
                         playerIn.sendMessage(new TextComponentString(ChatFormatting.GOLD + I18n.format("message.soul_creative.name") + " "

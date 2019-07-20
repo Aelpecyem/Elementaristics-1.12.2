@@ -13,11 +13,9 @@
   "parent": "elementaristics:progress_ascension_3",
   "criteria": {
     "book": {
-      "trigger": "minecraft:player_killed_entity",
+      "trigger": "elementaristics:ascend",
       "conditions": {
-        "entity": {
-          "type": "elementaristics:silver_thread"
-        }
+        "stage": 1
       }
     }
   }

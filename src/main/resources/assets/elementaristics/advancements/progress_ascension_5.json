@@ -13,16 +13,9 @@
   "parent": "elementaristics:progress_ascension_4",
   "criteria": {
     "book": {
-      "trigger": "minecraft:effects_changed",
+      "trigger": "elementaristics:ascend",
       "conditions": {
-        "effects": {
-          "elementaristics:focused": {
-            "amplifier": {
-              "min": 5,
-              "max": 5
-            }
-          }
-        }
+        "stage": 2
       }
     }
   }

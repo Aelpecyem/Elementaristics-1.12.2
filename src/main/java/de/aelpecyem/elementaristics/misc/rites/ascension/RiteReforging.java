@@ -13,6 +13,7 @@ import de.aelpecyem.elementaristics.items.base.artifacts.rites.IHasRiteUse;
 import de.aelpecyem.elementaristics.items.base.artifacts.rites.IncantationBase;
 import de.aelpecyem.elementaristics.items.base.artifacts.rites.materials.ItemFleshLamb;
 import de.aelpecyem.elementaristics.items.base.consumable.ItemNectar;
+import de.aelpecyem.elementaristics.misc.advancements.CustomAdvancements;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;
 import de.aelpecyem.elementaristics.misc.potions.PotionInit;
 import de.aelpecyem.elementaristics.misc.rites.RiteBase;
@@ -24,6 +25,7 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
@@ -57,6 +59,9 @@ public class RiteReforging extends RiteBase {
                             PacketHandler.sendTo(player, new PacketMove(0, 1, 0));
                         }
                         world.playSound(null, pos, SoundEvents.ITEM_FIRECHARGE_USE, SoundCategory.AMBIENT, 1.5F, 1.1F);
+                        if (!world.isRemote){
+                            CustomAdvancements.Advancements.ASCEND.trigger((EntityPlayerMP) player);
+                        }
                     }
                 }
 

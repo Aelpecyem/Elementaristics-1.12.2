@@ -9,6 +9,7 @@ import de.aelpecyem.elementaristics.events.LootTableEventHandler;
 import de.aelpecyem.elementaristics.gui.GuiHandler;
 import de.aelpecyem.elementaristics.init.*;
 import de.aelpecyem.elementaristics.misc.ItemColorHandler;
+import de.aelpecyem.elementaristics.misc.advancements.CustomAdvancements;
 import de.aelpecyem.elementaristics.misc.commands.CommandElementaristics;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;
 import de.aelpecyem.elementaristics.misc.poisons.PoisonInit;
@@ -100,6 +101,7 @@ public final class Elementaristics {
 
         GameRegistry.registerWorldGenerator(new WorldGen(), 3);
         initOreDict();
+        CustomAdvancements.init();
         //Keybinds.register();
     }
     @Mod.EventHandler

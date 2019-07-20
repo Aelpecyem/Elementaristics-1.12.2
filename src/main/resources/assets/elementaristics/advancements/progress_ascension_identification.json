@@ -13,13 +13,9 @@
   "parent": "elementaristics:progress_ascension_2",
   "criteria": {
     "book": {
-      "trigger": "minecraft:inventory_changed",
+      "trigger": "elementaristics:ascend",
       "conditions": {
-        "items": [
-          {
-            "item": "elementaristics:incantation_light"
-          }
-        ]
+        "know": true
       }
     }
   }

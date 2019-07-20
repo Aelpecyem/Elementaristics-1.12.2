@@ -6,10 +6,12 @@ import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.capability.player.IPlayerCapabilities;
 import de.aelpecyem.elementaristics.capability.player.PlayerCapProvider;
 import de.aelpecyem.elementaristics.init.SoulInit;
+import de.aelpecyem.elementaristics.misc.advancements.CustomAdvancements;
 import de.aelpecyem.elementaristics.networking.PacketHandler;
 import de.aelpecyem.elementaristics.networking.player.PacketMessage;
 import de.aelpecyem.elementaristics.particles.ParticleGeneric;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.command.AdvancementCommand;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.*;
@@ -67,7 +69,6 @@ public class EntitySilverThread extends EntityMob {
 
     @Override
     public void onDeath(DamageSource cause) {
-   //    EntityPlayer player = world.getClosestPlayer(posX, posY, posZ, 100, false);
         List<EntityPlayer> players = world.getEntitiesWithinAABB(EntityPlayer.class, this.getEntityBoundingBox().grow(50), new Predicate<EntityPlayer>() {
             @Override
             public boolean apply(@Nullable EntityPlayer input) {
@@ -77,6 +78,9 @@ public class EntitySilverThread extends EntityMob {
         for (EntityPlayer player : players){
             player.getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null).setPlayerAscensionStage(1);
             PacketHandler.sendTo(player, new PacketMessage("message.ascension_1.standard"));
+            if (!player.world.isRemote){
+                CustomAdvancements.Advancements.ASCEND.trigger((EntityPlayerMP) player);
+            }
         }
         super.onDeath(cause);
     }

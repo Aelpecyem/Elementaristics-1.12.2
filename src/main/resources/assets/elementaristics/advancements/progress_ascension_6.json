@@ -13,13 +13,9 @@
   "parent": "elementaristics:progress_ascension_5",
   "criteria": {
     "book": {
-      "trigger": "minecraft:inventory_changed",
+      "trigger": "elementaristics:ascend",
       "conditions": {
-        "items": [
-          {
-            "item": "elementaristics:incantation_reforging"
-          }
-        ]
+        "stage": 3
       }
     }
   }
