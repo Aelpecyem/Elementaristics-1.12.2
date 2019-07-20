@@ -1,5 +1,6 @@
 package de.aelpecyem.elementaristics.entity;
 
+import com.google.common.base.Predicate;
 import com.mojang.realmsclient.gui.ChatFormatting;
 import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.capability.player.IPlayerCapabilities;
@@ -27,6 +28,7 @@ import net.minecraft.world.BossInfoServer;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
+import java.util.List;
 
 public class EntitySilverThread extends EntityMob {
 
@@ -65,16 +67,16 @@ public class EntitySilverThread extends EntityMob {
 
     @Override
     public void onDeath(DamageSource cause) {
-        EntityPlayer player = world.getClosestPlayer(posX, posY, posZ, 100, false);
-        if (cause.getTrueSource() instanceof EntityPlayer) {
-             player = (EntityPlayer) cause.getTrueSource();
-            IPlayerCapabilities cap = player.getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null);
-            if (cap.knowsSoul()) {
-                if (cap.getPlayerAscensionStage() < 1) {
-                    cap.setPlayerAscensionStage(1);
-                    PacketHandler.sendTo(player, new PacketMessage("message.ascension_1.standard"));
-                }
+   //    EntityPlayer player = world.getClosestPlayer(posX, posY, posZ, 100, false);
+        List<EntityPlayer> players = world.getEntitiesWithinAABB(EntityPlayer.class, this.getRenderBoundingBox().grow(50), new Predicate<EntityPlayer>() {
+            @Override
+            public boolean apply(@Nullable EntityPlayer input) {
+                return input.hasCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null) && input.getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null).getPlayerAscensionStage() < 1 && input.getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null).knowsSoul();
             }
+        });
+        for (EntityPlayer player : players){
+            player.getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null).setPlayerAscensionStage(1);
+            PacketHandler.sendTo(player, new PacketMessage("message.ascension_1.standard"));
         }
         super.onDeath(cause);
     }
