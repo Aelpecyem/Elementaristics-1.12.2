@@ -27,7 +27,7 @@ public class ItemLock extends ItemBase {
         if (!entityItem.world.isDaytime())
         entityItem.setEntityInvulnerable(true);
         if (entityItem.isBurning()){
-            List<EntitySheep> sheep = entityItem.getEntityWorld().getEntitiesWithinAABB(EntitySheep.class, entityItem.getRenderBoundingBox().grow(8), new Predicate<EntitySheep>() {
+            List<EntitySheep> sheep = entityItem.getEntityWorld().getEntitiesWithinAABB(EntitySheep.class, entityItem.getEntityBoundingBox().grow(8), new Predicate<EntitySheep>() {
                 @Override
                 public boolean apply(@Nullable EntitySheep input) {
                     return input.getFleeceColor() == EnumDyeColor.RED;

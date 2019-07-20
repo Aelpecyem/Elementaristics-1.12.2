@@ -68,7 +68,7 @@ public class EntitySilverThread extends EntityMob {
     @Override
     public void onDeath(DamageSource cause) {
    //    EntityPlayer player = world.getClosestPlayer(posX, posY, posZ, 100, false);
-        List<EntityPlayer> players = world.getEntitiesWithinAABB(EntityPlayer.class, this.getRenderBoundingBox().grow(50), new Predicate<EntityPlayer>() {
+        List<EntityPlayer> players = world.getEntitiesWithinAABB(EntityPlayer.class, this.getEntityBoundingBox().grow(50), new Predicate<EntityPlayer>() {
             @Override
             public boolean apply(@Nullable EntityPlayer input) {
                 return input.hasCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null) && input.getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null).getPlayerAscensionStage() < 1 && input.getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null).knowsSoul();
