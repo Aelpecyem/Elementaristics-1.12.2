@@ -23,17 +23,6 @@ public class ItemBurnableAffectingBase extends ItemBase {
 
     public ItemBurnableAffectingBase(String name) {
         super(name);
-        //dispenser behaviour
-        BlockDispenser.DISPENSE_BEHAVIOR_REGISTRY.putObject(this, new IBehaviorDispenseItem() {
-            @Override
-            public ItemStack dispense(IBlockSource source, ItemStack stack) {
-                EnumFacing enumfacing = source.getBlockState().getValue(BlockDispenser.FACING);
-                Vec3d lookVect = new Vec3d(enumfacing.getDirectionVec());
-                affect(source.getWorld(), source.getBlockPos().getX() + (1.5 * lookVect.x) + 0.5, source.getBlockPos().getY() + 0.5d + lookVect.y, source.getBlockPos().getZ() + (1.5 * lookVect.z) + 0.5);
-                stack.shrink(1); //might not even add that lol
-                return stack;
-            }
-        });
     }
 
     public void affect(World world, double posX, double posY, double posZ) {
