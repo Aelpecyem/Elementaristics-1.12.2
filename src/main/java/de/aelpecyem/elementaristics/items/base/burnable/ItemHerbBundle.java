@@ -29,29 +29,28 @@ public class ItemHerbBundle extends ItemBurnableAffectingBase {
     }
 
     @Override
-    public void affectPlayer(EntityItem item, EntityPlayer player) {
+    public void affectPlayer(World world, double posX, double posY, double posZ, EntityPlayer player) {
         player.addPotionEffect(new PotionEffect(PotionInit.potionIntoxicated, 3500, 1, true, true));
         if (player.world.isRemote)
             player.sendStatusMessage(new TextComponentString(I18n.format("message.drugs")), false);
-        super.affectPlayer(item, player);
+        super.affectPlayer(world, posX, posY, posZ, player);
     }
 
     @Override
-    public void affect(EntityItem itemIn) {
+    public void affect(World world, double posX, double posY, double posZ) {
         for (int y = -1; y < 5; y++) {
             for (int x = -5; x < 5; x++) {
                 for (int z = -5; z < 5; z++) {
-                    BlockPos pos = new BlockPos(x + itemIn.getPosition().getX(), y + itemIn.getPosition().getY(), z + itemIn.getPosition().getZ());
-                    Elementaristics.proxy.generateGenericParticles(itemIn.getEntityWorld(), pos, 65280, 3F, 200, 0, true, true);
-                    Elementaristics.proxy.generateGenericParticles(itemIn.getEntityWorld(), pos, 255, 3F, 200, 0, true, true);
-                    Elementaristics.proxy.generateGenericParticles(itemIn.getEntityWorld(), pos, 16711680, 3F, 200, 0, true, true);
-                    Elementaristics.proxy.generateGenericParticles(itemIn.getEntityWorld(), pos, 16776960, 3F, 200, 0, true, true);
-                    Elementaristics.proxy.generateGenericParticles(itemIn.getEntityWorld(), pos, 11272428, 3F, 200, 0, true, true);
-                    Elementaristics.proxy.generateGenericParticles(itemIn.getEntityWorld(), pos, 16777215, 3F, 200, 0, true, true);
+                    BlockPos pos = new BlockPos(x + posX, y + posY, z + posZ);
+                    Elementaristics.proxy.generateGenericParticles(world, pos, 65280, 3F, 200, 0, true, true);
+                    Elementaristics.proxy.generateGenericParticles(world, pos, 255, 3F, 200, 0, true, true);
+                    Elementaristics.proxy.generateGenericParticles(world, pos, 16711680, 3F, 200, 0, true, true);
+                    Elementaristics.proxy.generateGenericParticles(world, pos, 16776960, 3F, 200, 0, true, true);
+                    Elementaristics.proxy.generateGenericParticles(world, pos, 11272428, 3F, 200, 0, true, true);
+                    Elementaristics.proxy.generateGenericParticles(world, pos, 16777215, 3F, 200, 0, true, true);
                 }
             }
         }
-        super.affect(itemIn);
+        super.affect(world, posX, posY, posZ);
     }
-
 }

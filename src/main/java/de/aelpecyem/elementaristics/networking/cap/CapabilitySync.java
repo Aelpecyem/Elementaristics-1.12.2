@@ -79,17 +79,19 @@ public class CapabilitySync implements IMessage{
         @Override
         public IMessage onMessage(CapabilitySync message, MessageContext ctx) {
             Minecraft.getMinecraft().addScheduledTask(() -> {
-                IPlayerCapabilities c = Minecraft.getMinecraft().player.getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null);
-                c.setSoulId(message.soulId);
-                c.stuntMagan(message.ticksLeftStunted);
-                c.setKnowsSoul(message.knowsSoul);
-                c.setMaxMagan(message.maxMagan);
-                c.setMagan(message.currentMagan);
-                c.setMaganRegenPerTick(message.maganRegenPerTick);
-                c.setPlayerAscensionStage(message.ascensionStage);
-                c.setCultistCount(message.cultistCount);
-                c.setAscensionRoute(message.ascensionRoute);
-                c.setSpellSlot(message.selectedSpell);
+                if (Minecraft.getMinecraft().player.hasCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null)) {
+                    IPlayerCapabilities c = Minecraft.getMinecraft().player.getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null);
+                    c.setSoulId(message.soulId);
+                    c.stuntMagan(message.ticksLeftStunted);
+                    c.setKnowsSoul(message.knowsSoul);
+                    c.setMaxMagan(message.maxMagan);
+                    c.setMagan(message.currentMagan);
+                    c.setMaganRegenPerTick(message.maganRegenPerTick);
+                    c.setPlayerAscensionStage(message.ascensionStage);
+                    c.setCultistCount(message.cultistCount);
+                    c.setAscensionRoute(message.ascensionRoute);
+                    c.setSpellSlot(message.selectedSpell);
+                }
             });
             return null;
         }

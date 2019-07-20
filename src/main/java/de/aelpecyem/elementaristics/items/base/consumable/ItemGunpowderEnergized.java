@@ -30,7 +30,6 @@ public class ItemGunpowderEnergized extends ItemAspects {
     public ItemGunpowderEnergized() {
         super("gunpowder_energized", 7, true, Aspects.fire, Aspects.electricity);
         BlockDispenser.DISPENSE_BEHAVIOR_REGISTRY.putObject(this, new IBehaviorDispenseItem() {
-
             @Override
             public ItemStack dispense(IBlockSource source, ItemStack stack) {
                 EnumFacing enumfacing = source.getBlockState().getValue(BlockDispenser.FACING);

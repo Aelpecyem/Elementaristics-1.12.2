@@ -27,22 +27,21 @@ public class ItemOpiumTincture extends ItemBurnableAffectingBase {
     }
 
     @Override
-    public void affectPlayer(EntityItem item, EntityPlayer player) {
+    public void affectPlayer(World world, double posX, double posY, double posZ, EntityPlayer player) {
         player.addPotionEffect(new PotionEffect(PotionInit.potionTrance, 3500, 0, true, true));
-        super.affectPlayer(item, player);
+        super.affectPlayer(world, posX, posY, posZ, player);
     }
 
     @Override
-    public void affect(EntityItem itemIn) {
+    public void affect(World world, double posX, double posY, double posZ) {
         for (int y = -1; y < 3; y++) {
             for (int x = -3; x < 3; x++) {
                 for (int z = -3; z < 3; z++) {
-                    BlockPos pos = new BlockPos(x + itemIn.getPosition().getX(), y + itemIn.getPosition().getY(), z + itemIn.getPosition().getZ());
-                    Elementaristics.proxy.generateGenericParticles(itemIn.getEntityWorld(), pos, 623319, 3F, 200, 0, true, true);
+                    BlockPos pos = new BlockPos(x + posX, y + posY, z + posZ);
+                    Elementaristics.proxy.generateGenericParticles(world, pos, 623319, 3F, 200, 0, true, true);
                 }
             }
         }
-        super.affect(itemIn);
+        super.affect(world, posX, posY, posZ);
     }
-
 }
