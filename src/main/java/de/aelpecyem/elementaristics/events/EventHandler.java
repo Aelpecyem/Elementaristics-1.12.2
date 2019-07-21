@@ -10,6 +10,7 @@ import de.aelpecyem.elementaristics.misc.poisons.PoisonEffectBase;
 import de.aelpecyem.elementaristics.misc.poisons.PoisonInit;
 import de.aelpecyem.elementaristics.misc.potions.PotionInit;
 import de.aelpecyem.elementaristics.misc.potions.effects.emotion.PotionEmotion;
+import de.aelpecyem.elementaristics.util.InventoryUtil;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
@@ -17,6 +18,8 @@ import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
@@ -39,6 +42,7 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.items.ItemHandlerHelper;
 import vazkii.patchouli.api.PatchouliAPI;
 
+import javax.swing.plaf.basic.BasicComboBoxUI;
 import java.util.Iterator;
 
 public class EventHandler {
@@ -84,7 +88,7 @@ public class EventHandler {
         if (event.phase == TickEvent.Phase.END) {
             if (event.player.getActivePotionEffects().contains(event.player.getActivePotionEffect(PotionInit.potionIntoxicated))) {
                 if (event.player.getActivePotionEffect(PotionInit.potionIntoxicated).getAmplifier() == 1) {
-                    if (!event.player.inventory.hasItemStack(PatchouliAPI.instance.getBookStack("elementaristics:liber_elementium"))) {
+                    if (InventoryUtil.containsItem(event.player.inventory, Items.BOOK) != null) {
                         if (event.player.getActivePotionEffect(PotionInit.potionIntoxicated).getDuration() == 3000) {
                             if (event.player.world.isRemote) {
                                 event.player.sendStatusMessage(new TextComponentString(TextFormatting.GOLD + I18n.format("message.vision.1")), true);
@@ -104,6 +108,8 @@ public class EventHandler {
                             if (event.player.world.isRemote) {
                                 event.player.sendStatusMessage(new TextComponentString(TextFormatting.GOLD + I18n.format("message.vision.4")), true);
                             }
+                            if (event.player.world.isRemote)
+                            event.player.inventory.getStackInSlot(event.player.inventory.getSlotFor(new ItemStack(Items.BOOK))).shrink(1);
                             ItemHandlerHelper.giveItemToPlayer(event.player, PatchouliAPI.instance.getBookStack("elementaristics:liber_elementium"), 24);
                         }
                     }

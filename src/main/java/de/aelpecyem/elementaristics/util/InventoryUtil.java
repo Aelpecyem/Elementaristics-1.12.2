@@ -1,9 +1,12 @@
 package de.aelpecyem.elementaristics.util;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumHand;
+import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.ItemStackHandler;
 
@@ -41,6 +44,17 @@ public class InventoryUtil {
                 break;
             }
         }
+    }
+
+    public static ItemStack containsItem(InventoryPlayer inventoryPlayer, Item item) {
+        ItemStack itemstack = null;
+        for (ItemStack s : inventoryPlayer.mainInventory) {
+            if (s != null && s.getItem() == item) {
+                itemstack = s;
+                break;
+            }
+        }
+        return itemstack;
     }
 
 
