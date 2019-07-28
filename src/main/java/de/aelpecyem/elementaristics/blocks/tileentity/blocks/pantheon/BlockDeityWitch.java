@@ -18,7 +18,7 @@ import net.minecraft.world.World;
 
 public class BlockDeityWitch extends BlockDeityShrineBase {
     public BlockDeityWitch(boolean isStatue) {
-        super("symbol_witch", Deities.deityWitch, isStatue);
+        super(isStatue ? "shrine_witch":"symbol_witch", Deities.deityWitch, isStatue);
     }
 
     @Override

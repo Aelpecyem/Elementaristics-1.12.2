@@ -74,12 +74,37 @@ public class ModBlocks {
     public static BlockDeityShrineBase symbol_goat;
     public static BlockDeityShrineBase symbol_moth;
     public static BlockDeityShrineBase symbol_thread;
-    public static BlockDeityShrineBase symbol_mirror; //
+    public static BlockDeityShrineBase symbol_mirror;
     public static BlockDeityShrineBase symbol_dancer;
     public static BlockDeityShrineBase symbol_king;
     public static BlockDeityShrineBase symbol_mother;
     public static BlockDeityShrineBase symbol_moon;
     public static BlockDeityShrineBase symbol_witch;
+
+    public static BlockDeityShrineBase shrine_nothingness;
+    public static BlockDeityShrineBase shrine_azathoth;
+    public static BlockDeityShrineBase shrine_dragon_aether;
+    public static BlockDeityShrineBase shrine_dragon_fire;
+    public static BlockDeityShrineBase shrine_dragon_earth;
+    public static BlockDeityShrineBase shrine_dragon_water;
+    public static BlockDeityShrineBase shrine_dragon_air;
+    public static BlockDeityShrineBase shrine_gate;
+    public static BlockDeityShrineBase shrine_dreamer;
+    public static BlockDeityShrineBase shrine_angel;
+    public static BlockDeityShrineBase shrine_storm;
+    public static BlockDeityShrineBase shrine_fighter;
+    public static BlockDeityShrineBase shrine_sun;
+    public static BlockDeityShrineBase shrine_harbinger;
+    public static BlockDeityShrineBase shrine_queen;
+    public static BlockDeityShrineBase shrine_goat;
+    public static BlockDeityShrineBase shrine_moth;
+    public static BlockDeityShrineBase shrine_thread;
+    public static BlockDeityShrineBase shrine_mirror;
+    public static BlockDeityShrineBase shrine_dancer;
+    public static BlockDeityShrineBase shrine_king;
+    public static BlockDeityShrineBase shrine_mother;
+    public static BlockDeityShrineBase shrine_moon;
+    public static BlockDeityShrineBase shrine_witch;
 
     public static BlockBase manipulator_supplying;
     public static BlockBase manipulator_passive;
@@ -129,7 +154,7 @@ public class ModBlocks {
         energy_storage_creative = new BlockCreativeStorage();
         //TC
         mushroom_intoxicating = new BlockMushroomIntoxicating();
-        //todo: add glorious rite, let it be in world or with the altar( idea: use linking tool to determine the block, surround it with redstone, toss the needed ingredient on top, then perform the rite and throw the linking tool, too)
+
         symbol_nothingness = new BlockDeityShrineBase("symbol_nothingness", Deities.deityNothingness, false);
         symbol_azathoth = new BlockDeityShrineBase("symbol_azathoth", Deities.deityAzathoth, false);
         symbol_dragon_fire = new BlockDeityShrineBase("symbol_dragon_fire", Deities.deityDragonFire, false);
@@ -154,6 +179,31 @@ public class ModBlocks {
         symbol_mother = new BlockDeityShrineBase("symbol_mother", Deities.deityMother, false);
         symbol_moon = new BlockDeityShrineBase("symbol_moon", Deities.deityMoon, false);
         symbol_witch = new BlockDeityWitch(false);
+
+        shrine_nothingness = new BlockDeityShrineBase("shrine_nothingness", Deities.deityNothingness, true);
+        shrine_azathoth = new BlockDeityShrineBase("shrine_azathoth", Deities.deityAzathoth, true);
+        shrine_dragon_fire = new BlockDeityShrineBase("shrine_dragon_fire", Deities.deityDragonFire, true);
+        shrine_dragon_aether = new BlockDeityShrineBase("shrine_dragon_aether", Deities.deityDragonAether, true);
+        shrine_dragon_air = new BlockDeityShrineBase("shrine_dragon_air", Deities.deityDragonAir, true);
+        shrine_dragon_earth = new BlockDeityShrineBase("shrine_dragon_earth", Deities.deityDragonEarth, true);
+        shrine_dragon_water = new BlockDeityShrineBase("shrine_dragon_water", Deities.deityDragonWater, true);
+        shrine_gate = new BlockDeityShrineBase("shrine_gate", Deities.deityGateAndKey, true);
+        shrine_dreamer = new BlockDeityShrineBase("shrine_dreamer", Deities.deityDreamer, true);
+        shrine_angel = new BlockDeityShrineBase("shrine_angel", Deities.deityAngel, true);
+        shrine_storm = new BlockDeityShrineBase("shrine_storm", Deities.deityStorm, true);
+        shrine_fighter = new BlockDeityShrineBase("shrine_fighter", Deities.deityFighter, true);
+        shrine_sun= new BlockDeityShrineBase("shrine_sun", Deities.deitySun, true);
+        shrine_harbinger = new BlockDeityShrineBase("shrine_harbinger", Deities.deityHarbinger, true);
+        shrine_queen = new BlockDeityShrineBase("shrine_queen", Deities.deityQueen, true);
+        shrine_goat = new BlockDeityShrineBase("shrine_goat", Deities.deityGoat, true);
+        shrine_moth = new BlockDeityShrineBase("shrine_moth", Deities.deityMoth, true);
+        shrine_thread = new BlockDeityShrineBase("shrine_thread", Deities.deityThread, true);
+        shrine_mirror = new BlockDeityShrineBase("shrine_mirror", Deities.deityMirror, true);
+        shrine_dancer = new BlockDeityShrineBase("shrine_dancer", Deities.deityDancer, true);
+        shrine_king = new BlockDeityShrineBase("shrine_king", Deities.deityKing, true);
+        shrine_mother = new BlockDeityShrineBase("shrine_mother", Deities.deityMother, true);
+        shrine_moon = new BlockDeityShrineBase("shrine_moon", Deities.deityMoon, true);
+        shrine_witch = new BlockDeityWitch(false);
 
         manipulator_supplying = new BlockPowerableBase(Material.ROCK, "manipulator_supplying");
         manipulator_passive = new BlockPowerableBase(Material.ROCK, "manipulator_passive");
