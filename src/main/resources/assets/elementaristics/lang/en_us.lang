@@ -480,11 +480,11 @@ message.ascension_1.standard=§6Walls have been broken. Walls that were limiting
 message.meditation_ascension.name=§6The mind has been reforged, and next is the body.
 message.ascension_body.name=§6The body has been reforged. The skin felt like clay, but it hardened.
 
-message.meditation_to_contentment.name=Ecstasy spreads, but will sooner wayne. But it always wants to leave something... contentment, ideally.
-message.meditation_to_dread.name=The earth revolves around the sun, and it never stops existing... but on times, we won't see it, and these times are times of dread.
-message.meditation_to_fear.name=As the sun is not seen, darkness arises. The darkness consumes, the darkness spreads fear.
-message.meditation_to_silence.name=And as the mind gets used to the fear, suddenly it stops. And as it stops, all sound stops.
-message.meditation_to_laughter.name=And suddenly we laugh.
+message.meditation_to_contentment.name=§6Ecstasy spreads, but will sooner wayne. But it always wants to leave something... contentment, ideally.
+message.meditation_to_dread.name=§6The earth revolves around the sun, and it never stops existing... but on times, we won't see it, and these times are times of dread.
+message.meditation_to_fear.name=§6As the sun is not seen, darkness arises. The darkness consumes, the darkness spreads fear.
+message.meditation_to_silence.name=§6And as the mind gets used to the fear, suddenly it stops. And as it stops, all sound stops.
+message.meditation_to_laughter.name=§6And suddenly we laugh.
 
 #Messages of the Know
 message.know_soul_fire=§6The fire roars and so does my soul... and I shall burn forever.

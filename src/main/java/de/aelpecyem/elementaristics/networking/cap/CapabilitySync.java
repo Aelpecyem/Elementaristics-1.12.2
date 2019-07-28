@@ -79,7 +79,7 @@ public class CapabilitySync implements IMessage{
         @Override
         public IMessage onMessage(CapabilitySync message, MessageContext ctx) {
             Minecraft.getMinecraft().addScheduledTask(() -> {
-                if (Minecraft.getMinecraft().player.hasCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null)) {
+                if (Minecraft.getMinecraft().player != null && Minecraft.getMinecraft().player.hasCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null)) {
                     IPlayerCapabilities c = Minecraft.getMinecraft().player.getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null);
                     c.setSoulId(message.soulId);
                     c.stuntMagan(message.ticksLeftStunted);

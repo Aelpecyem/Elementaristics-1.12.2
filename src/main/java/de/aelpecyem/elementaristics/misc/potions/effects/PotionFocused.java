@@ -11,6 +11,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 
 public class PotionFocused extends PotionBase {
     public PotionFocused() {
@@ -27,35 +28,33 @@ public class PotionFocused extends PotionBase {
     @Override
     public void performEffect(EntityLivingBase entityLivingBaseIn, int amplifier) {
         if (entityLivingBaseIn instanceof EntityPlayer) {
-            if (((EntityPlayer) entityLivingBaseIn).getSleepTimer() > 97) {
+            int sleepTimer = ObfuscationReflectionHelper.getPrivateValue(EntityPlayer.class, (EntityPlayer) entityLivingBaseIn, "field_71076_b", "sleepTimer");
+            if (sleepTimer > 97) {
                 if (amplifier == 0 && entityLivingBaseIn.getActivePotionEffects().contains(entityLivingBaseIn.getActivePotionEffect(PotionInit.contentment))) {
                     entityLivingBaseIn.removePotionEffect(this);
                     entityLivingBaseIn.removePotionEffect(PotionInit.contentment);
                     entityLivingBaseIn.addPotionEffect(new PotionEffect(this, 24000, 1, true, true));
-                    if (((EntityPlayer) entityLivingBaseIn).world.isRemote)
-                    ((EntityPlayer) entityLivingBaseIn).sendStatusMessage(new TextComponentString(TextFormatting.GOLD + I18n.format("message.meditation_to_dread.name")), false);
-
+                    if (!((EntityPlayer) entityLivingBaseIn).world.isRemote)
+                        PacketHandler.sendTo((EntityPlayer) entityLivingBaseIn, new PacketMessage("message.meditation_to_dread.name"));
 
                 } else if (amplifier == 1 && entityLivingBaseIn.getActivePotionEffects().contains(entityLivingBaseIn.getActivePotionEffect(PotionInit.dread))) {
                     entityLivingBaseIn.removePotionEffect(this);
                     entityLivingBaseIn.removePotionEffect(PotionInit.dread);
                     entityLivingBaseIn.addPotionEffect(new PotionEffect(this, 24000, 2, true, true));
-                    if (((EntityPlayer) entityLivingBaseIn).world.isRemote)
-                    ((EntityPlayer) entityLivingBaseIn).sendStatusMessage(new TextComponentString(TextFormatting.GOLD + I18n.format("message.meditation_to_fear.name")), false);
-
+                    if (!((EntityPlayer) entityLivingBaseIn).world.isRemote)
+                        PacketHandler.sendTo((EntityPlayer) entityLivingBaseIn, new PacketMessage("message.meditation_to_fear.name")); //todo, continue replacing the old ones with messages, add gold formatting to the messages
                 } else if (amplifier == 2 && entityLivingBaseIn.getActivePotionEffects().contains(entityLivingBaseIn.getActivePotionEffect(PotionInit.fear))) {
                     entityLivingBaseIn.removePotionEffect(this);
                     entityLivingBaseIn.removePotionEffect(PotionInit.fear);
                     entityLivingBaseIn.addPotionEffect(new PotionEffect(this, 24000, 3, true, true));
-                    if (((EntityPlayer) entityLivingBaseIn).world.isRemote)
-                    ((EntityPlayer) entityLivingBaseIn).sendStatusMessage(new TextComponentString(TextFormatting.GOLD + I18n.format("message.meditation_to_silence.name")), false);
-
+                    if (!((EntityPlayer) entityLivingBaseIn).world.isRemote)
+                        PacketHandler.sendTo((EntityPlayer) entityLivingBaseIn, new PacketMessage("message.meditation_to_silence.name")); //todo, continue replacing the old ones with messages, add gold formatting to the messages
                 } else if (amplifier == 3 && entityLivingBaseIn.getActivePotionEffects().contains(entityLivingBaseIn.getActivePotionEffect(PotionInit.silence))) {
                     entityLivingBaseIn.removePotionEffect(this);
                     entityLivingBaseIn.removePotionEffect(PotionInit.silence);
                     entityLivingBaseIn.addPotionEffect(new PotionEffect(this, 24000, 4, true, true));
-                    if (((EntityPlayer) entityLivingBaseIn).world.isRemote)
-                    ((EntityPlayer) entityLivingBaseIn).sendStatusMessage(new TextComponentString(TextFormatting.GOLD + I18n.format("message.meditation_to_laughter.name")), false);
+                    if (!((EntityPlayer) entityLivingBaseIn).world.isRemote)
+                        PacketHandler.sendTo((EntityPlayer) entityLivingBaseIn, new PacketMessage("message.meditation_to_laughter.name"));
 
                 } else if (amplifier == 4 && entityLivingBaseIn.getActivePotionEffects().contains(entityLivingBaseIn.getActivePotionEffect(PotionInit.laughter))) {
                     entityLivingBaseIn.removePotionEffect(this);

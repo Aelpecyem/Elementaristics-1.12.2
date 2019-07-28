@@ -12,7 +12,7 @@
     {
       "type": "spotlight",
       "title": "Symbol",
-      "item": "elementaristics:symbol_moth",
+      "item": "elementaristics:symbol_thread",
       "text": "This symbol is created with $(l:vitalis/entry_protoplasm)Protoplasm$() in the $(l:glory/entry_rite_glorious)Glorious Rite$().$(br)The symbol can be linked to an altar, and will supply the $(marked)Mana$() aspect.",
       "link_recipe": true
     }
