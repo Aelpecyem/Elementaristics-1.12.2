@@ -203,7 +203,7 @@ public class ModBlocks {
         shrine_king = new BlockDeityShrineBase("shrine_king", Deities.deityKing, true);
         shrine_mother = new BlockDeityShrineBase("shrine_mother", Deities.deityMother, true);
         shrine_moon = new BlockDeityShrineBase("shrine_moon", Deities.deityMoon, true);
-        shrine_witch = new BlockDeityWitch(false);
+        shrine_witch = new BlockDeityWitch(true);
 
         manipulator_supplying = new BlockPowerableBase(Material.ROCK, "manipulator_supplying");
         manipulator_passive = new BlockPowerableBase(Material.ROCK, "manipulator_passive");
