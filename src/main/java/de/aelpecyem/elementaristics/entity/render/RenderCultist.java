@@ -41,7 +41,7 @@ public class RenderCultist extends RenderLiving<EntityCultist>{
         if (availableTex.contains(entity.getAspect())){
             return "cultist_" + entity.getAspect().getName();
         }
-        return "cultist_alt";
+        return "cultist_1";
     }
 
 }
