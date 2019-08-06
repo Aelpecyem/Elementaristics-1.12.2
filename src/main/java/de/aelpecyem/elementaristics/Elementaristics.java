@@ -49,11 +49,13 @@ import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 
-@Mod(modid = Elementaristics.MODID, name = Elementaristics.NAME, version = Elementaristics.VERSION, dependencies = "required-after:baubles")
+@Mod(modid = Elementaristics.MODID, name = Elementaristics.NAME, version = Elementaristics.VERSION, useMetadata = true)
 public final class Elementaristics {
     //TODO ...ASCENSION!
     //TODO more rites
     //TODO ...more!
+
+    //todo thoughts on further ascension: each Soul (or at least the basic ones Aether for Magan) need to build their own core; godhood will require all 5 cores. Fabricating a core will sacrifice a cultist of the matching aspect. Place the core in the Mind, fight the guardian that appears, return to the Wake and be happy that you managed a good part of your ascension
 
     public static final String MODID = "elementaristics";
     public static final String NAME = "Elementaristics";

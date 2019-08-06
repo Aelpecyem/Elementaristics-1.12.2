@@ -11,6 +11,7 @@ import de.aelpecyem.elementaristics.misc.poisons.PoisonInit;
 import de.aelpecyem.elementaristics.misc.potions.PotionInit;
 import de.aelpecyem.elementaristics.misc.potions.effects.emotion.PotionEmotion;
 import de.aelpecyem.elementaristics.util.InventoryUtil;
+import de.aelpecyem.elementaristics.util.PlayerUtil;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
@@ -138,7 +139,9 @@ public class EventHandler {
                     }
                     event.setResult(Event.Result.ALLOW);
                 } else {
-                    performMoodAnalysis(event.getEntityPlayer());
+                    if (PlayerUtil.hasEmotionActive(event.getEntityPlayer())) {
+                        performMoodAnalysis(event.getEntityPlayer());
+                    }
 
                     PotionEffect[] effects = new PotionEffect[]{
                     };
@@ -169,7 +172,7 @@ public class EventHandler {
     }
 
     public void performMoodAnalysis(EntityPlayer player) {
-        if (player.getActivePotionEffects().contains(player.getActivePotionEffect(PotionInit.potionIntoxicated))) {
+        if (player.getActivePotionEffects().contains(player.getActivePotionEffect(PotionInit.potionIntoxicated)) ) {
             World world = player.getEntityWorld();
             Potion potion = null;
             Iterable<BlockPos> blockPos = BlockPos.getAllInBox(Math.round((float) player.posX) - 10, Math.round((float) player.posY) - 5, Math.round((float) player.posZ) - 10, Math.round((float) player.posX) + 10, Math.round((float) player.posY) + 8, Math.round((float) player.posZ) + 10);
@@ -188,6 +191,8 @@ public class EventHandler {
             player.addPotionEffect(new PotionEffect(potion, 16000, player.getActivePotionEffect(PotionInit.potionIntoxicated).getAmplifier(), true, false));
             player.removePotionEffect(PotionInit.potionIntoxicated);
         }
+
+
         //to start meditation step
         if (player.getActivePotionEffects().contains(player.getActivePotionEffect(PotionInit.potionTrance)) && player.getActivePotionEffects().contains(player.getActivePotionEffect(PotionInit.ecstasy)) && player.getActivePotionEffect(PotionInit.ecstasy).getAmplifier() >= 2) {
             Potion potion = PotionInit.potionFocused;
@@ -198,12 +203,4 @@ public class EventHandler {
 
         }
     }
-
-
-   /* @SubscribeEvent
-    public void canWakeUp(TickEvent.PlayerTickEvent event){
-       if (event.player.isPlayerSleeping()){
-       }
-    }*/
-
 }

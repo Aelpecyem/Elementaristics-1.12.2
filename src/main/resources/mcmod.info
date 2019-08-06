@@ -13,6 +13,6 @@
     "credits": "Credit to pretty much everyone from the Z-Net, special thanks to gunroot2525 and Morinor, and especially for cybercat5555 for fancy texture overhauls.",
     "logoFile": "",
     "screenshots": [],
-    "dependencies": []
+    "dependencies": ["patchouli", "baubles"]
   }
 ]
