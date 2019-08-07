@@ -385,6 +385,7 @@ rite.elementaristics:rite_glorious.name=Glorious Rite
 #Entities
 entity.silver_thread.name=Silver Thread
 entity.cultist.name=Cultist
+entity.protoplasm.name=Protoplasmatic Slime
 
 #Categories-Keybinds
 category.elementaristics=Elementaristics
