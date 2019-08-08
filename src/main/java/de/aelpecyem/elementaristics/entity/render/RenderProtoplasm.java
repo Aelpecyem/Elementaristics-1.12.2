@@ -16,7 +16,7 @@ import net.minecraft.util.ResourceLocation;
 import javax.annotation.Nullable;
 
 public class RenderProtoplasm extends RenderLiving<EntityProtoplasm> {
-    public static final ResourceLocation TEXTURE = new ResourceLocation(Elementaristics.MODID, "textures/entity/protoplasm.png");
+    public static final ResourceLocation TEXTURE = new ResourceLocation(Elementaristics.MODID, "textures/entity/protoplasm_a.png");
 
     public RenderProtoplasm(RenderManager rendermanagerIn) {
         //RenderSlime

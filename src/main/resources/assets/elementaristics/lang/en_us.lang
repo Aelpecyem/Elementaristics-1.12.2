@@ -385,7 +385,7 @@ rite.elementaristics:rite_glorious.name=Glorious Rite
 #Entities
 entity.silver_thread.name=Silver Thread
 entity.cultist.name=Cultist
-entity.protoplasm.name=Protoplasmatic Slime
+entity.protoplasm.name=Protoplasmic Slime
 
 #Categories-Keybinds
 category.elementaristics=Elementaristics
@@ -423,6 +423,10 @@ message.drugs=This is more potent than I thought... I might experience visions
 message.cultist.sit=The Cultist will stay here
 message.cultist.follow=The Cultist will closely follow you
 message.cultist.deny=This Cultist is not part of your cult
+
+message.protoplasm.sit=The Protoplasmic Slime will stay here
+message.protoplasm.follow=The Protoplasmic Slime will stick with you
+
 
 message.cultist_stats.name=Viewing stats for Cultist:
 message.cultist_aspect.name=Cultist's aspect:

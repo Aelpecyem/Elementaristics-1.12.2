@@ -1,6 +1,7 @@
 package de.aelpecyem.elementaristics.items.base.artifacts.rites.materials;
 
 import de.aelpecyem.elementaristics.Elementaristics;
+import de.aelpecyem.elementaristics.entity.EntityProtoplasm;
 import de.aelpecyem.elementaristics.init.ModItems;
 import de.aelpecyem.elementaristics.items.base.artifacts.rites.IHasRiteUse;
 import de.aelpecyem.elementaristics.items.base.consumable.ItemDrinkBase;
@@ -44,6 +45,21 @@ public class ItemFleshLamb extends ItemFoodBase implements IHasRiteUse {
     @Override
     public boolean doesSneakBypassUse(ItemStack stack, IBlockAccess world, BlockPos pos, EntityPlayer player) {
         return true;
+    }
+
+    @Override
+    public boolean itemInteractionForEntity(ItemStack stack, EntityPlayer playerIn, EntityLivingBase target, EnumHand hand) {
+        if (target instanceof EntityTameable && !(target instanceof EntityProtoplasm)){
+            if (((EntityTameable) target).isTamed() && target.isEntityAlive()){
+                for (int i = 0; i < 40; i++)
+                    Elementaristics.proxy.generateGenericParticles(target, 924705, 2 + (float) target.world.rand.nextGaussian(), 120 + target.world.rand.nextInt(40), 0.001F, false, false);
+                if (!playerIn.world.isRemote && MaganUtil.drainMaganFromPlayer(playerIn, 80, 2000, true))
+                    playerIn.world.spawnEntity(new EntityItem(playerIn.world, target.posX, target.posY, target.posZ, new ItemStack(ModItems.protoplasm)));
+                target.attackEntityFrom(DamageSource.MAGIC, 10000);
+                stack.shrink(1);
+            }
+        }
+        return super.itemInteractionForEntity(stack, playerIn, target, hand);
     }
 
     @Override

@@ -17,11 +17,15 @@ public class ModEntities {
         registerEntity("silver_thread", EntitySilverThread.class, SILVER_THREAD_ID, 200, 14474460, 10801103);
         registerEntity("cultist", EntityCultist.class, CULTIST_ID, 50, 1638451, 1638424);
         registerEntity("protoplasm", EntityProtoplasm.class, PROTOPLASM_ID, 50, 327728, 337968);
-        registerEntity("projectile_spell", EntitySpellProjectile.class, SPELL_ID, 50, 1, 1);
-        registerEntity("projectile_explosion", EntityExplosionProjectile.class, EXPLOSION_ID, 50, 1, 1);
+        registerEntity("projectile_spell", EntitySpellProjectile.class, SPELL_ID, 50);
+        registerEntity("projectile_explosion", EntityExplosionProjectile.class, EXPLOSION_ID, 50);
 
     }
     private static void registerEntity(String name, Class<? extends Entity> entity, int id, int range, int color1, int color2) {
-        EntityRegistry.registerModEntity(new ResourceLocation(Elementaristics.MODID, name), entity, name, id, Elementaristics.instance, range, 1, true, color1, color2);
+        EntityRegistry.registerModEntity(new ResourceLocation(Elementaristics.MODID, name), entity, name, id, Elementaristics.instance, range, 1, false, color1, color2);
+    }
+
+    private static void registerEntity(String name, Class<? extends Entity> entity, int id, int range) {
+        EntityRegistry.registerModEntity(new ResourceLocation(Elementaristics.MODID, name), entity, name, id, Elementaristics.instance, range, 1, true);
     }
 }

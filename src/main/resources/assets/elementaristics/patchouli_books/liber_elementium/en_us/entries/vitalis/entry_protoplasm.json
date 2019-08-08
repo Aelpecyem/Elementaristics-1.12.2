@@ -12,7 +12,20 @@
       "type": "spotlight",
       "item": "elementaristics:protoplasm",
       "link_recipe": true,
-      "text": "Protoplasm is created by feeding a bestowed $(l:alchemy/entry_flesh_lamb)forgotten memory$() to a $(marked)tamed living being$() (by punching them violently with the food, though a player might eat it instead), destroying the creature's body in the process and rearranging it into a protoplasmic sample. This requires a lot of Magan to work."
+      "text": "Protoplasm is created by feeding a bestowed $(l:alchemy/entry_flesh_lamb)forgotten memory$() to a $(marked)tamed living being$() or a player, destroying the creature's body in the process and rearranging it into a protoplasmic sample. This requires a lot of Magan to work."
+    },
+    {
+      "type": "image",
+      "images": [
+        "elementaristics:textures/images/slimecreation.png",
+        "elementaristics:textures/images/slimecreated.png"
+      ],
+      "border": true,
+      "text": "This sample may be thrown into water to create a Protoplasmic Slime."
+    },
+    {
+      "type": "text",
+      "text": "But behold! This slime is aggressive, and may only be tamed with a sufficient amount of $(l:vitalis/entry_moss_everchanging)Everchanging Moss$(). Once tamed, this slime can be dyed, may be commanded to sit or follow its owner, albeit slowly, and will also defend them if necessary. The Protoplasmic Slime may also gain in size under special circumstances."
     }
   ]
 }

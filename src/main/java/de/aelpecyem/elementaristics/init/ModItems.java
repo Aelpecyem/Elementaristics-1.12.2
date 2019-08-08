@@ -172,7 +172,7 @@ public class ModItems {
         soul_changer = new ItemSoulChanger();
 
         ash = new ItemBase("ash");
-        protoplasm = new ItemBase("protoplasm");
+        protoplasm = new ItemProtoplasm();//ItemBase("protoplasm");
         base_seed = new ItemBaseSeed(); //make it possible to craft many different plants/seeds with this
         //book_liber_elementium = new LiberElementiumItem();
 
