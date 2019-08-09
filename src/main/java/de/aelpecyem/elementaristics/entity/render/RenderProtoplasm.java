@@ -1,16 +1,11 @@
 package de.aelpecyem.elementaristics.entity.render;
 
 import de.aelpecyem.elementaristics.Elementaristics;
-import de.aelpecyem.elementaristics.entity.EntityCultist;
-import de.aelpecyem.elementaristics.entity.EntityProtoplasm;
-import de.aelpecyem.elementaristics.entity.model.ModelCultist;
+import de.aelpecyem.elementaristics.entity.protoplasm.EntityProtoplasm;
 import net.minecraft.client.model.ModelSlime;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.client.renderer.entity.RenderSlime;
-import net.minecraft.client.renderer.entity.layers.LayerSlimeGel;
-import net.minecraft.entity.monster.EntitySlime;
 import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nullable;

@@ -1,10 +1,14 @@
 package de.aelpecyem.elementaristics.util;
 
-import de.aelpecyem.elementaristics.entity.*;
+import de.aelpecyem.elementaristics.entity.EntityCultist;
+import de.aelpecyem.elementaristics.entity.EntityExplosionProjectile;
+import de.aelpecyem.elementaristics.entity.EntitySilverThread;
+import de.aelpecyem.elementaristics.entity.EntitySpellProjectile;
+import de.aelpecyem.elementaristics.entity.protoplasm.EntityProtoplasm;
 import de.aelpecyem.elementaristics.entity.render.RenderCultist;
+import de.aelpecyem.elementaristics.entity.render.RenderNone;
 import de.aelpecyem.elementaristics.entity.render.RenderProtoplasm;
 import de.aelpecyem.elementaristics.entity.render.RenderSilverThread;
-import de.aelpecyem.elementaristics.entity.render.RenderNone;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraftforge.fml.client.registry.IRenderFactory;

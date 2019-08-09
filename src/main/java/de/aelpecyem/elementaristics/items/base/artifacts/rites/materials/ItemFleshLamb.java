@@ -1,36 +1,26 @@
 package de.aelpecyem.elementaristics.items.base.artifacts.rites.materials;
 
 import de.aelpecyem.elementaristics.Elementaristics;
-import de.aelpecyem.elementaristics.entity.EntityProtoplasm;
+import de.aelpecyem.elementaristics.entity.protoplasm.EntityProtoplasm;
 import de.aelpecyem.elementaristics.init.ModItems;
 import de.aelpecyem.elementaristics.items.base.artifacts.rites.IHasRiteUse;
-import de.aelpecyem.elementaristics.items.base.consumable.ItemDrinkBase;
 import de.aelpecyem.elementaristics.items.base.consumable.ItemFoodBase;
 import de.aelpecyem.elementaristics.misc.elements.Aspect;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;
-import de.aelpecyem.elementaristics.misc.potions.PotionInit;
 import de.aelpecyem.elementaristics.util.MaganUtil;
-import de.aelpecyem.elementaristics.util.PlayerUtil;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.passive.EntityTameable;
-import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.ActionResult;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.MinecraftForge;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;

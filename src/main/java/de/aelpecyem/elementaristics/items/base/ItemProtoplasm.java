@@ -1,9 +1,7 @@
 package de.aelpecyem.elementaristics.items.base;
 
 import de.aelpecyem.elementaristics.Elementaristics;
-import de.aelpecyem.elementaristics.entity.EntityProtoplasm;
-import de.aelpecyem.elementaristics.misc.elements.Aspects;
-import net.minecraft.command.server.CommandSummon;
+import de.aelpecyem.elementaristics.entity.protoplasm.EntityProtoplasm;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;

@@ -2,7 +2,11 @@ package de.aelpecyem.elementaristics.init;
 
 import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.config.Config;
-import de.aelpecyem.elementaristics.entity.*;
+import de.aelpecyem.elementaristics.entity.EntityCultist;
+import de.aelpecyem.elementaristics.entity.EntityExplosionProjectile;
+import de.aelpecyem.elementaristics.entity.EntitySilverThread;
+import de.aelpecyem.elementaristics.entity.EntitySpellProjectile;
+import de.aelpecyem.elementaristics.entity.protoplasm.EntityProtoplasm;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.EntityRegistry;

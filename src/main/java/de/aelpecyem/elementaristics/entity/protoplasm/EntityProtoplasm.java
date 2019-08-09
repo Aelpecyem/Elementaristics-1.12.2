@@ -1,49 +1,33 @@
-package de.aelpecyem.elementaristics.entity;
+package de.aelpecyem.elementaristics.entity.protoplasm;
 
-import com.google.common.base.Optional;
-import com.google.common.base.Predicate;
 import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.init.ModItems;
-import de.aelpecyem.elementaristics.misc.elements.Aspects;
 import de.aelpecyem.elementaristics.networking.PacketHandler;
 import de.aelpecyem.elementaristics.networking.player.PacketMessage;
 import de.aelpecyem.elementaristics.util.MiscUtil;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.passive.*;
+import net.minecraft.entity.monster.IMob;
+import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.EnumDyeColor;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemDye;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.pathfinding.PathNodeType;
-import net.minecraft.util.*;
-import net.minecraft.util.datafix.DataFixer;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-import scala.Int;
-import thaumcraft.common.entities.monster.EntityThaumicSlime;
-import thaumcraft.common.entities.monster.boss.EntityThaumcraftBoss;
 
 import javax.annotation.Nullable;
 import java.awt.*;
-import java.util.UUID;
 
 public class EntityProtoplasm extends EntityTameable implements IMob{
     protected static final DataParameter<Integer> SIZE = EntityDataManager.<Integer>createKey(EntityProtoplasm.class, DataSerializers.VARINT);
@@ -57,18 +41,19 @@ public class EntityProtoplasm extends EntityTameable implements IMob{
     @Override
     protected void initEntityAI() {
         this.aiSit = new EntityAISit(this);
-        this.tasks.addTask(1, new EntityAISwimming(this));
-        this.tasks.addTask(2, this.aiSit);
+        this.tasks.addTask(1, new EntityProtoplasm.AIPerformTasks(this));
+        this.tasks.addTask(2, new EntityAISwimming(this));
+        this.tasks.addTask(3, this.aiSit);
         if (!isTamed()) {
                 this.targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
         }
-        this.tasks.addTask(3, new EntityAILeapAtTarget(this, 0.3F + 0.1F * getSize()));
-        this.tasks.addTask(4, new EntityAIAttackMelee(this, 1.0D, true));
-        this.tasks.addTask(5, new EntityAIFollowOwner(this, 1.0D, 10.0F, 2.0F));
-        this.tasks.addTask(6, new EntityAITempt(this, 1.0D, ModItems.moss_everchaning, false));
-        this.tasks.addTask(7, new EntityAIWanderAvoidWater(this, 1.0D));
-        this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 12.0F));
-        this.tasks.addTask(8, new EntityAILookIdle(this));
+        this.tasks.addTask(4, new EntityAILeapAtTarget(this, 0.3F + 0.1F * getSize()));
+        this.tasks.addTask(5, new EntityAIAttackMelee(this, 1.0D, true));
+        this.tasks.addTask(6, new EntityAIFollowOwner(this, 1.0D, 10.0F, 2.0F));
+        this.tasks.addTask(7, new EntityAITempt(this, 1.0D, ModItems.moss_everchaning, false));
+        this.tasks.addTask(8, new EntityAIWanderAvoidWater(this, 1.0D));
+        this.tasks.addTask(9, new EntityAIWatchClosest(this, EntityPlayer.class, 12.0F));
+        this.tasks.addTask(10, new EntityAILookIdle(this));
 
         this.targetTasks.addTask(2, new EntityAIOwnerHurtByTarget(this));
         this.targetTasks.addTask(3, new EntityAIOwnerHurtTarget(this));
@@ -225,7 +210,7 @@ public class EntityProtoplasm extends EntityTameable implements IMob{
     }
 
     public void onCollideWithPlayer(EntityPlayer entityIn) {
-        if (!isOwner(entityIn) && getAttackTarget() != null && getAttackTarget().isEntityEqual(entityIn)) {
+        if (!isOwner(entityIn) && getAttackTarget() != null && getAttackTarget().isEntityEqual(entityIn) && !isSitting()) {
             this.dealDamage(entityIn);
         }
     }
@@ -284,13 +269,6 @@ public class EntityProtoplasm extends EntityTameable implements IMob{
         return MiscUtil.convertIntToColor(dataManager.get(COLOR));
     }
 
-    @Override
-    protected void onInsideBlock(IBlockState p_191955_1_) {
-        if (p_191955_1_.getMaterial().blocksMovement()){
-            motionY = getJumpUpwardsMotion();
-        }
-    }
-
     /**
      * Merges 5% of the chosen color into the current one
      */
@@ -335,6 +313,59 @@ public class EntityProtoplasm extends EntityTameable implements IMob{
             {
                 this.move(MoverType.SELF, (double)(f - this.width), 0.1D, (double)(f - this.width));
             }
+        }
+    }
+
+    static class AIPerformTasks extends EntityAIBase {
+        private final EntityProtoplasm slime;
+        private int growTieredTimer;
+        private int waitingTimer;
+
+        public AIPerformTasks(EntityProtoplasm slimeIn)
+        {
+            this.slime = slimeIn;
+            this.setMutexBits(3);
+        }
+
+        /**
+         * Returns whether the EntityAIBase should begin execution.
+         */
+        public boolean shouldExecute() {
+            return slime.getOwner() != null && slime.getOwner() instanceof EntityPlayer && ((EntityPlayer)slime.getOwner()).bedLocation != null;
+        }
+
+        /**
+         * Execute a one shot task or start executing a continuous task
+         */
+        public void startExecuting() {
+            this.growTieredTimer = 500;
+            super.startExecuting();
+        }
+
+        /**
+         * Returns whether an in-progress EntityAIBase should continue executing
+         */
+        public boolean shouldContinueExecuting() {
+            EntityLivingBase entitylivingbase = slime.getOwner();
+
+            if (entitylivingbase == null) {
+                return false;
+            }
+            else if (!entitylivingbase.isEntityAlive()) {
+                return false;
+            }
+            else {
+                return --this.growTieredTimer > 0;
+            }
+        }
+
+        /**
+         * Keep ticking a continuous task that has already been started
+         */
+        public void updateTask() {
+            //move this to task instances, but they only use methods
+            BlockPos pos = ((EntityPlayer)slime.getOwner()).bedLocation;
+            slime.getNavigator().tryMoveToXYZ(pos.getX(), pos.getY(), pos.getZ(), 1.0D);
         }
     }
 

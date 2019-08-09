@@ -1,12 +1,10 @@
 package de.aelpecyem.elementaristics.entity.render;
 
-import de.aelpecyem.elementaristics.entity.EntityProtoplasm;
+import de.aelpecyem.elementaristics.entity.protoplasm.EntityProtoplasm;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelSlime;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.entity.RenderSlime;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
-import net.minecraft.entity.monster.EntitySlime;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
