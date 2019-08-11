@@ -3,6 +3,7 @@ package de.aelpecyem.elementaristics;
 import de.aelpecyem.elementaristics.capability.CapabilityHandler;
 import de.aelpecyem.elementaristics.capability.player.souls.soulCaps.SoulCaps;
 import de.aelpecyem.elementaristics.compat.thaumcraft.ThaumcraftCompat;
+import de.aelpecyem.elementaristics.entity.protoplasm.tasks.ProtoplasmTaskInit;
 import de.aelpecyem.elementaristics.events.EventHandler;
 import de.aelpecyem.elementaristics.events.LootTableEventHandler;
 import de.aelpecyem.elementaristics.gui.GuiHandler;
@@ -42,7 +43,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 
-@Mod(modid = Elementaristics.MODID, name = Elementaristics.NAME, useMetadata = true)
+@Mod(modid = Elementaristics.MODID, name = Elementaristics.NAME, version = Elementaristics.VERSION, useMetadata = true)
 public final class Elementaristics {
     //TODO ...ASCENSION!
     //TODO more rites
@@ -52,6 +53,7 @@ public final class Elementaristics {
 
     public static final String MODID = "elementaristics";
     public static final String NAME = "Elementaristics";
+    public static final String VERSION = "0.0.9.5.2";
 
     public static final Logger LOGGER = LogManager.getLogger(NAME);
     public static CreativeTabs tab = new ElementaristicsTab();
@@ -78,6 +80,7 @@ public final class Elementaristics {
         de.aelpecyem.elementaristics.config.Config.readConfig();
         MinecraftForge.EVENT_BUS.register(new PotionInit());
 
+        ProtoplasmTaskInit.init();
         SoulInit.init();
 
         PacketHandler.init();

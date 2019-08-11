@@ -26,6 +26,10 @@
     {
       "type": "text",
       "text": "But behold! This slime is aggressive, and may only be tamed with a sufficient amount of $(l:vitalis/entry_moss_everchanging)Everchanging Moss$(). Once tamed, this slime can be dyed, may be commanded to sit or follow its owner, albeit slowly, and will also defend them if necessary. The Protoplasmic Slime may also gain in size under special circumstances."
+    },
+    {
+      "type": "text",
+      "text": "Over time, one may also notice other special properties. As example, the slimes seem to harden when on colder surfaces like snow or ice."
     }
   ]
 }

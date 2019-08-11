@@ -321,7 +321,7 @@ advancement.elementaristics.ascension_8.desc=From and to Nothingness!
 #Book
 item.elementaristics.book.name=Liber Elementium
 info.elementaristics.book.landing=The Elementaristics are the discipline from Nothingness, and they focus on how to dance beyond it.$(br)However, as no normal human has unlimited knowledge or an unceasing memory, this book covers the latter for them.
-info.elementaristics.book.subtitle="Written in the water"
+info.elementaristics.book.subtitle=Janus remembers
 
 book.purifierTime=Ticks needed:
 
@@ -389,10 +389,19 @@ entity.protoplasm.name=Protoplasmic Slime
 
 #Categories-Keybinds
 category.elementaristics=Elementaristics
-key.spell_down=Next Spell
-key.spell_up=Previous Spell
+key.spell_down=Next
+key.spell_up=Previous
 
 #Hud Elements
+
+hud.current_tasks.name=Current Tasks:
+hud.goto=Go to
+
+hud.pos=Navigate To
+hud.wait=Wait
+
+hud.mode.name=Current Mode:
+
 rite.item_power.name=Local Item Power:
 rite.progress.name=Progress:
 rite.progress_ready.name=Progress: §2ready
@@ -413,6 +422,13 @@ hud.magan.amount=Current Magan:
 message.position_set=Bound Position:
 message.position_set_for=Set Bound Position to
 
+message.task_added=§2Successfully added task
+message.too_many_tasks=§cThere are too many tasks specified for another to be added
+message.reset_tasks=§2Cleared stored tasks
+message.slime_task_set=§2The Protoplasmic Slime will execute the given tasks
+message.slime_task_reset=§dThe Protoplasmic Slime will now not execute tasks
+message.task_timer_cant_add=§cNo timer specified
+
 message.vision.1="Look to the Moon! You see it?"
 message.vision.2="What do you think is beyond it?"
 message.vision.3="A Witch? A Mother?"
@@ -424,9 +440,10 @@ message.cultist.sit=The Cultist will stay here
 message.cultist.follow=The Cultist will closely follow you
 message.cultist.deny=This Cultist is not part of your cult
 
-message.protoplasm.sit=The Protoplasmic Slime will stay here
+message.protoplasm.sit=The Protoplasmic Slime will stick here
 message.protoplasm.follow=The Protoplasmic Slime will stick with you
-
+message.protoplasm.task=The Protoplasmic Slime will go after its tasks
+message.slime_task_copied=Copied tasks to the Thaumagral
 
 message.cultist_stats.name=Viewing stats for Cultist:
 message.cultist_aspect.name=Cultist's aspect:

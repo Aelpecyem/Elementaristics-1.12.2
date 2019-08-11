@@ -1,6 +1,5 @@
 package de.aelpecyem.elementaristics.events;
 
-import com.mojang.realmsclient.gui.ChatFormatting;
 import de.aelpecyem.elementaristics.blocks.base.BlockFlowerBase;
 import de.aelpecyem.elementaristics.capability.player.IPlayerCapabilities;
 import de.aelpecyem.elementaristics.capability.player.PlayerCapProvider;
@@ -14,17 +13,11 @@ import de.aelpecyem.elementaristics.util.InventoryUtil;
 import de.aelpecyem.elementaristics.util.PlayerUtil;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.monster.EntityMob;
-import net.minecraft.entity.monster.IMob;
-import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
@@ -33,8 +26,6 @@ import net.minecraftforge.common.util.ITeleporter;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
-import net.minecraftforge.event.entity.player.ItemTooltipEvent;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.SleepingTimeCheckEvent;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.common.eventhandler.Event;
@@ -43,7 +34,6 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.items.ItemHandlerHelper;
 import vazkii.patchouli.api.PatchouliAPI;
 
-import javax.swing.plaf.basic.BasicComboBoxUI;
 import java.util.Iterator;
 
 public class EventHandler {
@@ -139,7 +129,7 @@ public class EventHandler {
                     }
                     event.setResult(Event.Result.ALLOW);
                 } else {
-                    if (PlayerUtil.hasEmotionActive(event.getEntityPlayer())) {
+                    if (!PlayerUtil.hasEmotionActive(event.getEntityPlayer())) {
                         performMoodAnalysis(event.getEntityPlayer());
                     }
 

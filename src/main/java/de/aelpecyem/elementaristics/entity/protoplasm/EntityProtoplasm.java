@@ -1,10 +1,14 @@
 package de.aelpecyem.elementaristics.entity.protoplasm;
 
 import de.aelpecyem.elementaristics.Elementaristics;
+import de.aelpecyem.elementaristics.entity.protoplasm.tasks.ProtoplasmTaskInit;
+import de.aelpecyem.elementaristics.entity.protoplasm.tasks.execs.ProtoplasmTask;
 import de.aelpecyem.elementaristics.init.ModItems;
+import de.aelpecyem.elementaristics.items.base.artifacts.ItemEyeSplendor;
 import de.aelpecyem.elementaristics.networking.PacketHandler;
 import de.aelpecyem.elementaristics.networking.player.PacketMessage;
 import de.aelpecyem.elementaristics.util.MiscUtil;
+import net.minecraft.block.material.Material;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.IMob;
@@ -22,33 +26,42 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 import java.awt.*;
+import java.util.List;
 
 public class EntityProtoplasm extends EntityTameable implements IMob{
     protected static final DataParameter<Integer> SIZE = EntityDataManager.<Integer>createKey(EntityProtoplasm.class, DataSerializers.VARINT);
     protected static final DataParameter<Integer> COLOR = EntityDataManager.<Integer>createKey(EntityProtoplasm.class, DataSerializers.VARINT);
+
+    protected static final DataParameter<String> TASK = EntityDataManager.<String>createKey(EntityProtoplasm.class, DataSerializers.STRING);
+    protected static final DataParameter<Integer> TASK_STAGE = EntityDataManager.<Integer>createKey(EntityProtoplasm.class, DataSerializers.VARINT);
+    protected static final DataParameter<Boolean> TASK_ACTIVE = EntityDataManager.<Boolean>createKey(EntityProtoplasm.class, DataSerializers.BOOLEAN);
 
     public EntityProtoplasm(World worldIn) {
         super(worldIn);
         setSlimeSize(3, false);
     }
 
+
     @Override
     protected void initEntityAI() {
         this.aiSit = new EntityAISit(this);
-        this.tasks.addTask(1, new EntityProtoplasm.AIPerformTasks(this));
-        this.tasks.addTask(2, new EntityAISwimming(this));
-        this.tasks.addTask(3, this.aiSit);
+        //EntityWolf
+        this.tasks.addTask(1, new EntityAISwimming(this));
+        this.tasks.addTask(2, this.aiSit);
+
         if (!isTamed()) {
                 this.targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
         }
+        this.tasks.addTask(3, new EntityProtoplasm.AIPerformTasks(this));
+
         this.tasks.addTask(4, new EntityAILeapAtTarget(this, 0.3F + 0.1F * getSize()));
-        this.tasks.addTask(5, new EntityAIAttackMelee(this, 1.0D, true));
+        this.tasks.addTask(5, new EntityAIMoveTowardsTarget(this, 1D, 16));
+
         this.tasks.addTask(6, new EntityAIFollowOwner(this, 1.0D, 10.0F, 2.0F));
         this.tasks.addTask(7, new EntityAITempt(this, 1.0D, ModItems.moss_everchaning, false));
         this.tasks.addTask(8, new EntityAIWanderAvoidWater(this, 1.0D));
@@ -65,9 +78,19 @@ public class EntityProtoplasm extends EntityTameable implements IMob{
         super.entityInit();
         dataManager.register(SIZE, 3);
         dataManager.register(COLOR, 0);
+        dataManager.register(TASK, "");
+        dataManager.register(TASK_STAGE, 0);
+        dataManager.register(TASK_ACTIVE, false);
     }
 
-    //
+    @Override
+    public void setSitting(boolean sitting) {
+        super.setSitting(sitting);
+        if (aiSit != null) {
+            aiSit.setSitting(sitting);
+        }
+    }
+
     @Nullable
     @Override
     public EntityAgeable createChild(EntityAgeable ageable) {
@@ -89,16 +112,36 @@ public class EntityProtoplasm extends EntityTameable implements IMob{
 
     protected void updateAITasks() {
         this.dataManager.set(SIZE, getSize());
+        this.dataManager.set(TASK, getTaskString());
+        this.dataManager.set(TASK_STAGE, getTaskStage());
+        this.dataManager.set(TASK_ACTIVE, isTaskActive());
     }
+
+    @Nullable
+    @Override
+    public AxisAlignedBB getCollisionBoundingBox() {
+        if (world.getBlockState(getPosition().down()).getMaterial() == Material.ICE ||
+                world.getBlockState(getPosition().down()).getMaterial() == Material.PACKED_ICE ||
+                world.getBlockState(getPosition().down()).getMaterial() == Material.SNOW || world.getBlockState(getPosition().down()).getMaterial() == Material.CRAFTED_SNOW){
+            return getEntityBoundingBox();
+        }
+
+        return super.getCollisionBoundingBox();
+    }
+
 
     @Override
     public void onEntityUpdate() {
+        if (ticksExisted % 200 == 0){
+            heal(getSize());
+        }
         super.onEntityUpdate();
     }
 
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
+        this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(32.0D);
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(20.0D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.2D);
         this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(6.0D);
@@ -106,6 +149,12 @@ public class EntityProtoplasm extends EntityTameable implements IMob{
 
     @Override
     public boolean processInteract(EntityPlayer player, EnumHand hand) {
+        if (player.getHeldItem(hand).getItem() instanceof ItemEyeSplendor){
+            System.out.println("----------------------------");
+            System.out.println("Is Sitting? " + isSitting());
+            System.out.println("Task String: " + getTaskString());
+            System.out.println("Task Stage: " + getTaskStage());
+        }
         if (!isTamed()) {
             if (player.getHeldItem(hand).getItem() == ModItems.moss_everchaning) {
                 if (!player.capabilities.isCreativeMode) {
@@ -142,7 +191,7 @@ public class EntityProtoplasm extends EntityTameable implements IMob{
                     this.isJumping = false;
                     this.navigator.clearPath();
                     this.setAttackTarget(null);
-                    PacketHandler.sendTo(player, new PacketMessage("message.protoplasm." + (isSitting() ? "follow" : "sit"), true));
+                    PacketHandler.sendTo(player, new PacketMessage("message.protoplasm." + (isSitting() ? (getTaskString().equals("")? "follow" : "task"): "sit"), true));
                     return true;
                 }
             }
@@ -166,7 +215,10 @@ public class EntityProtoplasm extends EntityTameable implements IMob{
     @Override
     public void writeEntityToNBT(NBTTagCompound compound) {
         compound.setInteger("size", this.getSize() - 1);
-        compound.setInteger("color", this.getColor());
+        compound.setInteger("color", this.getColor());//todo write task stuff to nbt
+        compound.setInteger("task_stage", this.getTaskStage());
+        compound.setString("task_string", this.getTaskString());
+        compound.setBoolean("task_active", this.isTaskActive());
         super.writeEntityToNBT(compound);
     }
 
@@ -179,6 +231,9 @@ public class EntityProtoplasm extends EntityTameable implements IMob{
         }
         this.setSlimeSize(i + 1, false);
         this.setColor(compound.getInteger("color"));
+        this.setTaskStage(compound.getInteger("task_stage"));
+        this.setTaskString(compound.getString("task_string"));
+        this.setTaskActive(compound.getBoolean("task_active"));
         super.readEntityFromNBT(compound);
     }
 
@@ -196,8 +251,19 @@ public class EntityProtoplasm extends EntityTameable implements IMob{
         }
 
         if (COLOR.equals(key)) {
-            int i = this.getColor();
-            this.setColor(i);
+            this.setColor(getColor());
+        }
+
+        if (TASK.equals(key)) {
+            this.setTaskString(getTaskString());
+        }
+
+        if (TASK_STAGE.equals(key)) {
+            this.setTaskStage(getTaskStage());
+        }
+
+        if (TASK_ACTIVE.equals(key)) {
+            this.setTaskActive(isTaskActive());
         }
 
         super.notifyDataManagerChange(key);
@@ -223,6 +289,14 @@ public class EntityProtoplasm extends EntityTameable implements IMob{
         super.collideWithEntity(entityIn);
     }
 
+    @Override
+    public boolean hitByEntity(Entity entityIn) {
+        if (aiSit != null) {
+            aiSit.setSitting(false);
+        }
+        return super.hitByEntity(entityIn);
+    }
+
     protected void dealDamage(EntityLivingBase entityIn) {
         int i = this.getAttackStrength() * 2;
 
@@ -238,6 +312,7 @@ public class EntityProtoplasm extends EntityTameable implements IMob{
     public float getEyeHeight() {
         return 0.625F * this.height;
     }
+
 
     protected int getAttackStrength() {
         return this.getSize() * 2;
@@ -269,6 +344,29 @@ public class EntityProtoplasm extends EntityTameable implements IMob{
         return MiscUtil.convertIntToColor(dataManager.get(COLOR));
     }
 
+    public String getTaskString(){
+        return dataManager.get(TASK);
+    }
+
+    public void setTaskString(String taskString){
+        dataManager.set(TASK, taskString);
+    }
+
+    public int getTaskStage(){
+        return dataManager.get(TASK_STAGE);
+    }
+
+    public void setTaskStage(int stage){
+        dataManager.set(TASK_STAGE, stage);
+    }
+
+    public boolean isTaskActive(){
+        return dataManager.get(TASK_ACTIVE);
+    }
+
+    public void setTaskActive(boolean active){
+        dataManager.set(TASK_ACTIVE, active);
+    }
     /**
      * Merges 5% of the chosen color into the current one
      */
@@ -277,7 +375,7 @@ public class EntityProtoplasm extends EntityTameable implements IMob{
     }
 
     public void setSlimeSize(int size, boolean resetHealth) {
-        if (size > 0 && size <= 10) { //over size ten gets weird, in terms of hitboxes
+        if (size > 0 && size <= 10) {
             this.dataManager.set(SIZE, size);
             this.setSlimeSize(0.51000005F * (float) size, 0.51000005F * (float) size);
             this.setPosition(this.posX, this.posY, this.posZ);
@@ -290,7 +388,6 @@ public class EntityProtoplasm extends EntityTameable implements IMob{
 
             this.experienceValue = size;
         }
-       // updateAITasks();
     }
 
     protected void setSlimeSize(float widthIn, float heightIn) {
@@ -316,13 +413,13 @@ public class EntityProtoplasm extends EntityTameable implements IMob{
         }
     }
 
-    static class AIPerformTasks extends EntityAIBase {
-        private final EntityProtoplasm slime;
-        private int growTieredTimer;
-        private int waitingTimer;
-
-        public AIPerformTasks(EntityProtoplasm slimeIn)
-        {
+    //Todo, add doc to slime tasks where it explains how it all works
+    public static class AIPerformTasks extends EntityAIBase {
+        public final EntityProtoplasm slime;
+        public int timer;
+        public int tiredTimer; //this can be used by tasks, but is not used in here
+        List<ProtoplasmTask> taskList;
+        public AIPerformTasks(EntityProtoplasm slimeIn){
             this.slime = slimeIn;
             this.setMutexBits(3);
         }
@@ -331,41 +428,52 @@ public class EntityProtoplasm extends EntityTameable implements IMob{
          * Returns whether the EntityAIBase should begin execution.
          */
         public boolean shouldExecute() {
-            return slime.getOwner() != null && slime.getOwner() instanceof EntityPlayer && ((EntityPlayer)slime.getOwner()).bedLocation != null;
+            return slime.isTamed() &&  !slime.getTaskString().equals("") && (!slime.isSitting() || slime.isTaskActive());
         }
 
         /**
          * Execute a one shot task or start executing a continuous task
          */
         public void startExecuting() {
-            this.growTieredTimer = 500;
-            super.startExecuting();
+            if (slime != null) {
+                slime.setTaskActive(true);
+                taskList = ProtoplasmTaskInit.getTasksFromString(slime.getTaskString());
+                taskList.get(slime.getTaskStage()).execute(this);
+                super.startExecuting();
+            }
         }
 
         /**
          * Returns whether an in-progress EntityAIBase should continue executing
          */
         public boolean shouldContinueExecuting() {
-            EntityLivingBase entitylivingbase = slime.getOwner();
-
-            if (entitylivingbase == null) {
-                return false;
+            boolean flag = !slime.isSitting() && !slime.getTaskString().equals("");
+            if (!flag){
+                slime.setTaskActive(false);
             }
-            else if (!entitylivingbase.isEntityAlive()) {
-                return false;
-            }
-            else {
-                return --this.growTieredTimer > 0;
-            }
-        }
+            return flag;
+        } //continues task after relogging?
 
         /**
          * Keep ticking a continuous task that has already been started
          */
         public void updateTask() {
-            //move this to task instances, but they only use methods
-            BlockPos pos = ((EntityPlayer)slime.getOwner()).bedLocation;
-            slime.getNavigator().tryMoveToXYZ(pos.getX(), pos.getY(), pos.getZ(), 1.0D);
+            taskList = ProtoplasmTaskInit.getTasksFromString(slime.getTaskString());
+            if (!taskList.isEmpty() && taskList.get(slime.getTaskStage()) != null) {
+                taskList.get(slime.getTaskStage()).continueExecuting(this);
+                boolean continueExecuting = !taskList.get(slime.getTaskStage()).isFinished(this);
+                if (!continueExecuting) {
+                    if (slime.getTaskStage() < taskList.size() - 1) {
+                        slime.setTaskStage(slime.getTaskStage() + 1);
+                    } else {
+                        slime.setTaskStage(0);
+                    }
+                }
+            }else{
+                slime.setTaskString("");
+                slime.setTaskStage(0);
+                taskList.clear();
+            }
         }
     }
 

@@ -9,16 +9,14 @@ import de.aelpecyem.elementaristics.blocks.tileentity.energy.TileEntityEnergy;
 import de.aelpecyem.elementaristics.blocks.tileentity.pantheon.TileEntityDeityShrine;
 import de.aelpecyem.elementaristics.capability.player.IPlayerCapabilities;
 import de.aelpecyem.elementaristics.capability.player.PlayerCapProvider;
+import de.aelpecyem.elementaristics.entity.protoplasm.tasks.ProtoplasmTaskInit;
+import de.aelpecyem.elementaristics.entity.protoplasm.tasks.execs.ProtoplasmTask;
 import de.aelpecyem.elementaristics.init.RiteInit;
 import de.aelpecyem.elementaristics.init.SoulInit;
 import de.aelpecyem.elementaristics.items.base.thaumagral.ItemThaumagral;
 import de.aelpecyem.elementaristics.misc.elements.Aspect;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;
 import de.aelpecyem.elementaristics.misc.spell.SpellBase;
-import de.aelpecyem.elementaristics.misc.spell.damage.DamageSpellBase;
-import de.aelpecyem.elementaristics.networking.PacketHandler;
-import de.aelpecyem.elementaristics.networking.player.PacketPressSpellKey;
-import de.aelpecyem.elementaristics.util.Keybinds;
 import de.aelpecyem.elementaristics.util.MiscUtil;
 import de.aelpecyem.elementaristics.util.PlayerUtil;
 import net.minecraft.client.Minecraft;
@@ -33,9 +31,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
-import net.minecraftforge.event.world.NoteBlockEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.TickEvent;
 import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
@@ -58,9 +54,49 @@ public class HUDRenderHandler {
 
         }
         if (event.getType() == RenderGameOverlayEvent.ElementType.TEXT && !event.isCancelable()) {
+            renderSlimeTasks(event);
             renderRiteHud(event);
             renderEnergyHud(event);
             renderDeityHud(event);
+        }
+    }
+
+    public void renderSlimeTasks(RenderGameOverlayEvent.Post event){
+        Minecraft mc = Minecraft.getMinecraft();
+        EntityPlayer player = mc.player;
+        ItemStack heldItem = player.getHeldItem(EnumHand.MAIN_HAND);
+        if (heldItem.getItem() instanceof ItemThaumagral && ((ItemThaumagral)heldItem.getItem()).isTuned(heldItem)) {
+
+            particlesForSlimeTasks(player, heldItem, (ItemThaumagral) heldItem.getItem());
+
+            mc.ingameGUI.drawString(mc.fontRenderer, ChatFormatting.BOLD + I18n.format("hud.current_tasks.name") + ChatFormatting.RESET, 5, 20, 3045026);
+
+            List<ProtoplasmTask> taskList = ProtoplasmTaskInit.getTasksFromString(((ItemThaumagral) heldItem.getItem()).getTaskString(heldItem));
+            for (int i = 0; i < taskList.size(); i++) {
+                mc.ingameGUI.drawString(mc.fontRenderer,  taskList.get(i).getHudDescription(), 5, 30 + i * 10, 3045026);
+            }
+
+            mc.ingameGUI.drawString(mc.fontRenderer, ChatFormatting.BOLD + I18n.format("hud.mode.name") + ChatFormatting.RESET + " " + I18n.format("hud." + ((ItemThaumagral) heldItem.getItem()).getModeName(heldItem) +""), 5, 5, 7304866);
+            return;
+        }
+
+    }
+
+    public void particlesForSlimeTasks(EntityPlayer player, ItemStack heldItem, ItemThaumagral item){
+        List<ProtoplasmTask> tasks = ProtoplasmTaskInit.getTasksFromString(item.getTaskString(heldItem));
+        if (!tasks.isEmpty()){
+            for (int i = 0; i < tasks.size(); i++){
+                ProtoplasmTask task = tasks.get(i);
+                ProtoplasmTask prevTask = null;
+                ProtoplasmTask nextTask = null;
+                if (i < tasks.size() - 1){
+                    nextTask = tasks.get(i + 1);
+                }
+                if (i > 0){
+                    prevTask = tasks.get(i - 1);
+                }
+                task.getParticles(prevTask, nextTask, player.world, player, heldItem, item);
+            }
         }
     }
 
@@ -72,7 +108,7 @@ public class HUDRenderHandler {
             heldItem = player.getHeldItem(EnumHand.OFF_HAND);
 
         }
-        if (heldItem.getItem() instanceof ItemThaumagral) {
+        if (heldItem.getItem() instanceof ItemThaumagral && !((ItemThaumagral) heldItem.getItem()).isTuned(heldItem)) {
             if (player.hasCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null)) {
                 IPlayerCapabilities cap = player.getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null);
                 List<SpellBase> spells = cap.getSoul().getSpellList();
@@ -124,6 +160,7 @@ public class HUDRenderHandler {
                 for (int i = 0; i < aspectList.size(); i++) {
                     mc.ingameGUI.drawString(mc.fontRenderer, "-" + aspectList.get(i).getLocalizedName(), event.getResolution().getScaledWidth() - 100, 15 + i * 10, 16777215);
                 }
+                return;
             }
         }
     }
