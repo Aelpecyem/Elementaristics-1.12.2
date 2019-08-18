@@ -3,7 +3,6 @@ package de.aelpecyem.elementaristics.entity.protoplasm.tasks.execs;
 import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.entity.protoplasm.EntityProtoplasm;
 import de.aelpecyem.elementaristics.items.base.thaumagral.ItemThaumagral;
-import de.aelpecyem.elementaristics.misc.elements.Aspects;
 import de.aelpecyem.elementaristics.particles.ParticleGeneric;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
@@ -11,15 +10,18 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
+import java.util.List;
 
-public class ProtoplasmGoToTask extends ProtoplasmTask{
+public class ProtoplasmGoToTask extends ProtoplasmTask {
     BlockPos posTo;
+
     public ProtoplasmGoToTask() {
         super("pos");
     }
@@ -28,6 +30,7 @@ public class ProtoplasmGoToTask extends ProtoplasmTask{
         super("pos");
         this.posTo = posTo;
     }
+
     @Override
     public boolean execute(EntityProtoplasm.AIPerformTasks slimeAI) {
         if (slimeAI.slime.getNavigator() != null && posTo != null) {
@@ -47,7 +50,7 @@ public class ProtoplasmGoToTask extends ProtoplasmTask{
 
     @Override
     public boolean isFinished(EntityProtoplasm.AIPerformTasks slimeAI) { //change the box to be more centered
-        boolean finished = posTo.equals(slimeAI.slime.getPosition());//slimeAI.slime.world.getEntitiesWithinAABB(EntityProtoplasm.class, new AxisAlignedBB(xTo - 0.5, yTo - 0.5, zTo - 0.5, xTo + 0.5, yTo + 0.5, zTo + 0.5)).contains(slimeAI.slime);
+        boolean finished = slimeAI.slime.world.getEntitiesWithinAABB(EntityProtoplasm.class, new AxisAlignedBB(posTo.getX() + slimeAI.slime.width / 4, posTo.getY() + slimeAI.slime.height / 4, posTo.getZ() + slimeAI.slime.width / 4, posTo.getX() + 1 + slimeAI.slime.width / 4, posTo.getY() + 1 + slimeAI.slime.height / 4, posTo.getZ() + 1 + slimeAI.slime.width / 4)).contains(slimeAI.slime);//posTo.equals(slimeAI.slime.getPosition());//slimeAI.slime.world.getEntitiesWithinAABB(EntityProtoplasm.class, new AxisAlignedBB(xTo - 0.5, yTo - 0.5, zTo - 0.5, xTo + 0.5, yTo + 0.5, zTo + 0.5)).contains(slimeAI.slime);
         if (finished) {
             slimeAI.slime.getNavigator().clearPath();
         }
@@ -61,7 +64,7 @@ public class ProtoplasmGoToTask extends ProtoplasmTask{
 
     @Override
     public String writeAsString() {
-        return name + "," + posTo.toLong() +";";
+        return name + "," + posTo.toLong() + ";";
     }
 
 
@@ -74,20 +77,17 @@ public class ProtoplasmGoToTask extends ProtoplasmTask{
     @SideOnly(Side.CLIENT)
     @Override
     public String getHudDescription() {
-        return I18n.format("hud.goto") + " X: " + posTo.getX() + " Y: " +  posTo.getY() + " Z: " +  posTo.getZ();
+        return I18n.format("hud.goto") + " X: " + posTo.getX() + " Y: " + posTo.getY() + " Z: " + posTo.getZ();
+    }
+
+    public BlockPos getPosTo() {
+        return posTo;
     }
 
     @Override
-    public void getParticles(@Nullable ProtoplasmTask prevTask, @Nullable ProtoplasmTask nextTask, World world, EntityPlayer player, ItemStack heldItem, ItemThaumagral item) {
-        ParticleGeneric particles;
-        if (nextTask instanceof ProtoplasmGoToTask){
-            particles = new ParticleGeneric(world, posTo.getX() + 0.5 + (world.rand.nextGaussian() / 8), posTo.getY() + 0.5 + (world.rand.nextGaussian() / 8), posTo.getZ() + 0.5 + (world.rand.nextGaussian() / 8),
-                    0, 0, 0, Aspects.fire.getColor(), world.rand.nextFloat(), 100, 0, false, false, true, true,
-                    (float) ((ProtoplasmGoToTask) nextTask).posTo.getX() + 0.5F + ((float) world.rand.nextGaussian() / 8F), (float) ((ProtoplasmGoToTask) nextTask).posTo.getY() + 0.5F + ((float) world.rand.nextGaussian() / 8F), (float) ((ProtoplasmGoToTask) nextTask).posTo.getZ() + 0.5F + ((float) world.rand.nextGaussian() / 8F));
-            Elementaristics.proxy.generateGenericParticles(particles);
-        }
-        particles = new ParticleGeneric(world, posTo.getX() + 0.5 + (world.rand.nextGaussian() / 8), posTo.getY() + 0.5 + (world.rand.nextGaussian() / 8), posTo.getZ() + 0.5 + (world.rand.nextGaussian() / 8), 0, 0, 0, Aspects.fire.getColor(), world.rand.nextFloat(), 100, 0, false, false, true, false, 0, 0, 0);
-        Elementaristics.proxy.generateGenericParticles(particles);
-        super.getParticles(prevTask, nextTask, world, player, heldItem, item);
+    public void getParticles(int indexAt, List<ProtoplasmTask> taskList, @Nullable ProtoplasmTask prevTask, @Nullable ProtoplasmTask nextTask, World world, EntityPlayer player, ItemStack heldItem, ItemThaumagral item) {
+        Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(world, posTo.getX() + 0.5 + (world.rand.nextGaussian() / 8), posTo.getY() + 0.5 + (world.rand.nextGaussian() / 8), posTo.getZ() + 0.5 + (world.rand.nextGaussian() / 8), 0, 0, 0, nextTask instanceof ProtoplasmWaitTask ? 2555985 : 16740608, prevTask instanceof ProtoplasmWaitTask ? world.rand.nextFloat() + 0.5F : world.rand.nextFloat() + 0.1F, 100, 0, false, false, true, false, 0, 0, 0));
+        super.getParticles(indexAt, taskList, prevTask, nextTask, world, player, heldItem, item);
     }
+
 }

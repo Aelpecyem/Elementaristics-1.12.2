@@ -14,24 +14,36 @@ public class SoulInit {
 
 
     public static List<Soul> souls = new ArrayList<Soul>();
+    //Magic
     public static Soul soulMagan;
+    //Movement
     public static Soul soulAir;
+    //Defense
     public static Soul soulEarth;
+    //Healing
     public static Soul soulWater;
+    //Offense
     public static Soul soulFire;
 
+    //much more Mana and stuff, but no Emotion buffs
     public static Soul soulMana;
+    //more spells and more magan, but "instability" (?) also easy Silver Thread
     public static Soul soulUnstable;
+    //Magic defense but lower magan
     public static Soul soulImmutable;
+    //Clay
     public static Soul soulBalanced;
+
+    //all elemental spells, some dragon statue benefits
     public static Soul soulDragon;
+    //more protoplasm tasks, more spells, mana bonuses etc. + Father's Blessing for Azathoth
     public static Soul soulAncient;
 
-    public static Soul soulApostleGod;
+    public static Soul soulApostleGod; //higher stats with more followers
     public static Soul soulTrue;
     public static Soul soulFirst;
 
-    public static Soul soulMachnie;
+    public static Soul soulMachine;
     public static Soul soulSentient;
     public static Soul soulServant;
 

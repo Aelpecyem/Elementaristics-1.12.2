@@ -10,6 +10,7 @@ import de.aelpecyem.elementaristics.blocks.tileentity.pantheon.TileEntityDeitySh
 import de.aelpecyem.elementaristics.capability.player.IPlayerCapabilities;
 import de.aelpecyem.elementaristics.capability.player.PlayerCapProvider;
 import de.aelpecyem.elementaristics.entity.protoplasm.tasks.ProtoplasmTaskInit;
+import de.aelpecyem.elementaristics.entity.protoplasm.tasks.execs.ProtoplasmGoToTask;
 import de.aelpecyem.elementaristics.entity.protoplasm.tasks.execs.ProtoplasmTask;
 import de.aelpecyem.elementaristics.init.RiteInit;
 import de.aelpecyem.elementaristics.init.SoulInit;
@@ -17,6 +18,7 @@ import de.aelpecyem.elementaristics.items.base.thaumagral.ItemThaumagral;
 import de.aelpecyem.elementaristics.misc.elements.Aspect;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;
 import de.aelpecyem.elementaristics.misc.spell.SpellBase;
+import de.aelpecyem.elementaristics.particles.ParticleGeneric;
 import de.aelpecyem.elementaristics.util.MiscUtil;
 import de.aelpecyem.elementaristics.util.PlayerUtil;
 import net.minecraft.client.Minecraft;
@@ -37,6 +39,7 @@ import org.lwjgl.opengl.GL11;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class HUDRenderHandler {
     public static final ResourceLocation TEXTURE = new ResourceLocation("elementaristics:textures/gui/hud_elements.png");
@@ -67,8 +70,9 @@ public class HUDRenderHandler {
         ItemStack heldItem = player.getHeldItem(EnumHand.MAIN_HAND);
         if (heldItem.getItem() instanceof ItemThaumagral && ((ItemThaumagral)heldItem.getItem()).isTuned(heldItem)) {
 
-            particlesForSlimeTasks(player, heldItem, (ItemThaumagral) heldItem.getItem());
-
+            if (!mc.isGamePaused()) {
+                particlesForSlimeTasks(player, heldItem, (ItemThaumagral) heldItem.getItem());
+            }
             mc.ingameGUI.drawString(mc.fontRenderer, ChatFormatting.BOLD + I18n.format("hud.current_tasks.name") + ChatFormatting.RESET, 5, 20, 3045026);
 
             List<ProtoplasmTask> taskList = ProtoplasmTaskInit.getTasksFromString(((ItemThaumagral) heldItem.getItem()).getTaskString(heldItem));
@@ -91,13 +95,31 @@ public class HUDRenderHandler {
                 ProtoplasmTask nextTask = null;
                 if (i < tasks.size() - 1){
                     nextTask = tasks.get(i + 1);
+                } else if (tasks.size() > 1) {
+                    nextTask = tasks.get(0);
                 }
                 if (i > 0){
                     prevTask = tasks.get(i - 1);
+                } else if (tasks.size() > 1) {
+                    prevTask = tasks.get(tasks.size() - 1);
                 }
-                task.getParticles(prevTask, nextTask, player.world, player, heldItem, item);
+                task.getParticles(i, tasks, prevTask, nextTask, player.world, player, heldItem, item);
+
+                List<ProtoplasmTask> goToTasks = tasks.stream().filter(protoplasmTask -> protoplasmTask instanceof ProtoplasmGoToTask).collect(Collectors.toList());
+                if (goToTasks.size() > 1) {
+                    for (int j = 0; j < goToTasks.size(); j++) {
+                        ProtoplasmGoToTask disPos = (ProtoplasmGoToTask) goToTasks.get(j);
+                        ProtoplasmGoToTask nextPos = (ProtoplasmGoToTask) goToTasks.get(j < goToTasks.size() - 1 ? j + 1 : 0);
+                        ParticleGeneric particles = new ParticleGeneric(player.world, disPos.getPosTo().getX() + 0.5 + (player.world.rand.nextGaussian() / 8), disPos.getPosTo().getY() + 0.5 + (player.world.rand.nextGaussian() / 8), disPos.getPosTo().getZ() + 0.5 + (player.world.rand.nextGaussian() / 8),
+                                0, 0, 0, nextPos.getPosTo().getDistance(disPos.getPosTo().getX(), disPos.getPosTo().getY(), disPos.getPosTo().getZ()) > 32 ? 3093050 : 16740608, player.world.rand.nextFloat() + 0.1F, (int) (nextPos.getPosTo().getDistance(disPos.getPosTo().getX(), disPos.getPosTo().getY(), disPos.getPosTo().getZ()) * 30), 0, false, false, true, true,
+                                nextPos.getPosTo().getX() + 0.5F + ((float) player.world.rand.nextGaussian() / 8F), nextPos.getPosTo().getY() + 0.5F + ((float) player.world.rand.nextGaussian() / 8F), nextPos.getPosTo().getZ() + 0.5F + ((float) player.world.rand.nextGaussian() / 8F));
+                        Elementaristics.proxy.generateGenericParticles(particles);
+                    }
+                }
             }
         }
+
+
     }
 
     public void renderSpellSelected(RenderGameOverlayEvent.Post event) {

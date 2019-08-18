@@ -11,9 +11,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
-import thaumcraft.common.config.ModConfig;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.function.Supplier;
@@ -22,18 +20,16 @@ import java.util.function.Supplier;
 @SideOnly(Side.CLIENT)
 public final class ParticleHandler {
 
-    public static boolean depthEnabled = true;
-    public static int range = 32;
     private static final List<Particle> PARTICLES = new CopyOnWriteArrayList<>();
     private static final List<Particle> PARTICLES_NO_DEPTH = new CopyOnWriteArrayList<>();
+    public static boolean depthEnabled = true;
+    public static int range = 32;
 
     public static void spawnParticle(Supplier<Particle> particle) {
-       // if (Minecraft.getMinecraft().player.getDistanceSq(x, y, z) <= range * range) {
-            if (depthEnabled)
-                PARTICLES.add(particle.get());
-            else
-                PARTICLES_NO_DEPTH.add(particle.get());
-      //  }
+        if (depthEnabled)
+            PARTICLES.add(particle.get());
+        else
+            PARTICLES_NO_DEPTH.add(particle.get());
     }
 
     public static void updateParticles() {

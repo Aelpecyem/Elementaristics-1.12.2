@@ -1,8 +1,6 @@
 package de.aelpecyem.elementaristics.entity.protoplasm.tasks;
 
-import de.aelpecyem.elementaristics.entity.protoplasm.tasks.execs.ProtoplasmGoToTask;
-import de.aelpecyem.elementaristics.entity.protoplasm.tasks.execs.ProtoplasmTask;
-import de.aelpecyem.elementaristics.entity.protoplasm.tasks.execs.ProtoplasmWaitTask;
+import de.aelpecyem.elementaristics.entity.protoplasm.tasks.execs.*;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -15,6 +13,8 @@ public class ProtoplasmTaskInit {
     public static void init(){
         registerTask(new ProtoplasmGoToTask());
         registerTask(new ProtoplasmWaitTask());
+        registerTask(new ProtoplasmTakeItemTask());
+        registerTask(new ProtoplasmStoreItemTask()); //store any item with empty hand
     }
 
     public static ProtoplasmTask getTaskByName(String name){
@@ -23,7 +23,11 @@ public class ProtoplasmTaskInit {
     public static ProtoplasmTask getTask(String... taskParts){
         ProtoplasmTask task = taskMap.get(taskParts[0]);
         if (task != null) {
-            return task.applyAttributes(taskParts);
+            try {
+                return task.applyAttributes(taskParts);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                return null;
+            }
         }
         return null;
     }

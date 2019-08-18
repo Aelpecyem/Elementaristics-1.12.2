@@ -2,26 +2,21 @@ package de.aelpecyem.elementaristics.networking;
 
 import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.networking.cap.CapabilityChunkSync;
-import de.aelpecyem.elementaristics.networking.cap.SpawnBoundParticles;
 import de.aelpecyem.elementaristics.networking.cap.CapabilitySync;
+import de.aelpecyem.elementaristics.networking.cap.SpawnBoundParticles;
+import de.aelpecyem.elementaristics.networking.other.PacketDyeProtoplasm;
 import de.aelpecyem.elementaristics.networking.player.PacketBaubleKeyWinged;
 import de.aelpecyem.elementaristics.networking.player.PacketMessage;
 import de.aelpecyem.elementaristics.networking.player.PacketMove;
 import de.aelpecyem.elementaristics.networking.player.PacketPressSpellKey;
-import de.aelpecyem.elementaristics.networking.tileentity.altar.PacketRequestUpdateAltar;
 import de.aelpecyem.elementaristics.networking.tileentity.altar.PacketUpdateAltar;
-import de.aelpecyem.elementaristics.networking.tileentity.basin.PacketRequestUpdateBasin;
 import de.aelpecyem.elementaristics.networking.tileentity.basin.PacketUpdateBasin;
-import de.aelpecyem.elementaristics.networking.tileentity.deities.PacketRequestUpdateDeity;
 import de.aelpecyem.elementaristics.networking.tileentity.deities.PacketUpdateDeity;
 import de.aelpecyem.elementaristics.networking.tileentity.energy.EnergySync;
 import de.aelpecyem.elementaristics.networking.tileentity.energy.PacketUpdateEmulator;
 import de.aelpecyem.elementaristics.networking.tileentity.energy.PacketUpdateTransmitter;
-import de.aelpecyem.elementaristics.networking.tileentity.energy.RequestEnergySync;
-import de.aelpecyem.elementaristics.networking.tileentity.inventory.PacketRequestUpdateInventory;
 import de.aelpecyem.elementaristics.networking.tileentity.inventory.PacketUpdateInventory;
 import de.aelpecyem.elementaristics.networking.tileentity.pos.PosSync;
-import de.aelpecyem.elementaristics.networking.tileentity.tick.PacketRequestUpdateTickTime;
 import de.aelpecyem.elementaristics.networking.tileentity.tick.PacketUpdateTickTime;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -65,6 +60,7 @@ public class PacketHandler {
         network.registerMessage(new PacketMove.Handler(), PacketMove.class, next(), Side.CLIENT);
 
         network.registerMessage(new PacketPressSpellKey.Handler(), PacketPressSpellKey.class, next(), Side.SERVER);
+        network.registerMessage(new PacketDyeProtoplasm.Handler(), PacketDyeProtoplasm.class, next(), Side.SERVER);
 
         network.registerMessage(new PacketBaubleKeyWinged.Handler(), PacketBaubleKeyWinged.class, next(), Side.SERVER);
         network.registerMessage(new PacketBaubleKeyWinged.Handler(), PacketBaubleKeyWinged.class, next(), Side.CLIENT);

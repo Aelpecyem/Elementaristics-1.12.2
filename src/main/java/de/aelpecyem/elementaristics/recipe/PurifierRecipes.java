@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class PurifierRecipes {
-    public static Map<ResourceLocation, PurifierRecipe> PURIFIER_RECIPES = new HashMap<>();
+    public static final Map<ResourceLocation, PurifierRecipe> PURIFIER_RECIPES = new HashMap<>();
 
     public static void addRecipe(PurifierRecipe recipe) {
         PURIFIER_RECIPES.put(recipe.name, recipe);

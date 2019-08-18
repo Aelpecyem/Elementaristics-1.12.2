@@ -5,7 +5,6 @@ import de.aelpecyem.elementaristics.capability.player.souls.Soul;
 import de.aelpecyem.elementaristics.misc.potions.effects.emotion.PotionEmotion;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.potion.PotionEffect;
@@ -52,6 +51,13 @@ public class PlayerUtil {
             }
         }
         return false;
+    }
+
+    public static Soul getSoul(EntityPlayer player) {
+        if (player.hasCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null)) {
+            return player.getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null).getSoul();
+        }
+        return null;
     }
 
 }

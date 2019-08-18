@@ -389,16 +389,23 @@ entity.protoplasm.name=Protoplasmic Slime
 
 #Categories-Keybinds
 category.elementaristics=Elementaristics
-key.spell_down=Next
-key.spell_up=Previous
+key.elementaristics_down=Next
+key.elementaristics_up=Previous
+key.elementaristics_master=Slime Master Key
 
 #Hud Elements
 
 hud.current_tasks.name=Current Tasks:
 hud.goto=Go to
 
-hud.pos=Navigate To
+hud.fetch=Fetch
+hud.fetch.any=Grab a stack
+hud.store.any=Store a stack
+
+hud.pos=Navigate to
 hud.wait=Wait
+hud.take=Collect
+hud.store=Store
 
 hud.mode.name=Current Mode:
 
@@ -444,6 +451,8 @@ message.protoplasm.sit=The Protoplasmic Slime will stick here
 message.protoplasm.follow=The Protoplasmic Slime will stick with you
 message.protoplasm.task=The Protoplasmic Slime will go after its tasks
 message.slime_task_copied=Copied tasks to the Thaumagral
+
+message.protoplasm.task_need_inventory=Block must have an inventory
 
 message.cultist_stats.name=Viewing stats for Cultist:
 message.cultist_aspect.name=Cultist's aspect:

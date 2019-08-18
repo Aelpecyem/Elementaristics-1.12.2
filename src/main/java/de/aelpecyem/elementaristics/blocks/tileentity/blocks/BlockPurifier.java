@@ -105,16 +105,14 @@ public class BlockPurifier extends BlockTileEntity<TileEntityPurifier> {
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (!worldIn.isRemote) {
             TileEntityPurifier tile = getTileEntity(worldIn, pos);
-            IItemHandler itemHandler = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, facing);
 
             ItemStack heldItem = playerIn.getHeldItem(hand);
             if (heldItem.isEmpty()) {
                 InventoryUtil.drawItemFromInventory(tile, tile.inventory, playerIn);
 
             } else {
-                if (tile.inventory.getStackInSlot(0).isEmpty() || tile.inventory.getStackInSlot(0).getItem() == heldItem.getItem()) {
+                if (tile.inventory.getStackInSlot(0).isEmpty() || tile.inventory.getStackInSlot(0).isItemEqual(heldItem)) {
                     InventoryUtil.insertOneItemToInventory(tile, tile.inventory, 0, playerIn, hand);
-                    //playerIn.setHeldItem(hand, itemHandler.insertItem(0, heldItem, false));
                     tile.markDirty();
                 }
 

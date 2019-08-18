@@ -14,7 +14,6 @@ import net.minecraft.world.World;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 public class ItemWaterPurest extends ItemDrinkBase implements IHasRiteUse {
     public ItemWaterPurest() {
@@ -38,10 +37,6 @@ public class ItemWaterPurest extends ItemDrinkBase implements IHasRiteUse {
 
     @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-      /*  if (extraLore != null){
-            tooltip.add(I18n.format(extraLore));
-            tooltip.add(" ");
-        }*/
         tooltip.add(I18n.format("tooltip.aspect_tool.power") + " " + getPower());
 
         tooltip.add(I18n.format("tooltip.aspect_tool.aspects"));

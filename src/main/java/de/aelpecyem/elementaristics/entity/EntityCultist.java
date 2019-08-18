@@ -7,10 +7,12 @@ import de.aelpecyem.elementaristics.capability.player.PlayerCapProvider;
 import de.aelpecyem.elementaristics.items.base.artifacts.ItemSoulMirror;
 import de.aelpecyem.elementaristics.misc.elements.Aspect;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;
+import de.aelpecyem.elementaristics.networking.PacketHandler;
+import de.aelpecyem.elementaristics.networking.player.PacketMessage;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.entity.*;
+import net.minecraft.entity.EntityAgeable;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
-import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
@@ -32,8 +34,8 @@ public class EntityCultist extends EntityTameable {
     private static final DataParameter<Integer> ASPECT_ID = EntityDataManager.createKey(EntityCultist.class, DataSerializers.VARINT);
     private static final DataParameter<Float> MAGAN = EntityDataManager.createKey(EntityCultist.class, DataSerializers.FLOAT);
     private static final DataParameter<Integer> STUNT_TIME = EntityDataManager.createKey(EntityCultist.class, DataSerializers.VARINT);
-    private static final DataParameter<Integer> VARIANT_ID = EntityDataManager.createKey(EntityCultist.class, DataSerializers.VARINT); //only until there's fancy textures for each cultist
-  //  public static final String[] possibleNames = { "Ael", "Edward", "Amelie", "Sirona"};
+
+    private static final DataParameter<Boolean> WANDERING = EntityDataManager.createKey(EntityCultist.class, DataSerializers.BOOLEAN);
     public EntityCultist(World worldIn) {
         super(worldIn);
         setSize(0.6F, 1.8F);
@@ -46,9 +48,7 @@ public class EntityCultist extends EntityTameable {
         dataManager.register(ASPECT_ID, 0);
         dataManager.register(MAGAN, 80F);
         dataManager.register(STUNT_TIME, 0);
-        dataManager.register(VARIANT_ID, 0);
-        dataManager.set(VARIANT_ID, rand.nextInt(6));
-       // setCustomNameTag("AWAF"); choose from the possible names etc.
+        dataManager.register(WANDERING, false);
     }
 
     public void setStuntTime(int stuntTime) {
@@ -75,33 +75,22 @@ public class EntityCultist extends EntityTameable {
         return Aspects.getElementById(dataManager.get(ASPECT_ID));
     }
 
-    public int getVariant() {
-        return dataManager.get(VARIANT_ID);
+    public boolean isWandering() {
+        return dataManager.get(WANDERING);
     }
 
-    @Override
-    public void readFromNBT(NBTTagCompound compound) {
-        setAspect(Aspects.getElementById(compound.getInteger("aspectId")));
-        setMagan(compound.getFloat("magan"));
-        setStuntTime(compound.getInteger("stuntTime"));
-        super.readFromNBT(compound);
-
+    public void setWandering(boolean wandering) {
+        dataManager.set(WANDERING, wandering);
     }
 
-    @Override
-    public NBTTagCompound writeToNBT(NBTTagCompound compound) {
-        compound.setInteger("aspectId", getAspect().getId());
-        compound.setFloat("magan", getMagan());
-        compound.setInteger("stuntTime", getStuntTime());
-        return super.writeToNBT(compound);
-    }
-
+    //plans to add defense of sorts to cultists
     @Override
     public void readEntityFromNBT(NBTTagCompound compound) {
         super.readEntityFromNBT(compound);
         setAspect(Aspects.getElementById(compound.getInteger("aspectId")));
         setMagan(compound.getFloat("magan"));
         setStuntTime(compound.getInteger("stuntTime"));
+        setWandering(compound.getBoolean("wander"));
     }
 
     @Override
@@ -110,12 +99,14 @@ public class EntityCultist extends EntityTameable {
         compound.setInteger("aspectId", getAspect().getId());
         compound.setFloat("magan", getMagan());
         compound.setInteger("stuntTime", getStuntTime());
+        compound.setBoolean("wander", isWandering());
     }
 
 
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
+        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.3);
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(20);
         this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(6.0D);
     }
@@ -174,13 +165,15 @@ public class EntityCultist extends EntityTameable {
 
 
     @Override
-    protected void initEntityAI() {
+    protected void initEntityAI() { //todo, add some sort of wandering mode, though that may be reserved for later builds
         this.aiSit = new EntityAISit(this);
         this.tasks.addTask(1, new EntityAISwimming(this));
         this.tasks.addTask(2, this.aiSit);
-        this.tasks.addTask(3, new EntityAIFollowOwner(this, 0.5D, 4.0F, 2.0F));
+        //this.tasks.addTask(3, new EntityAIWanderAvoidWater(this, 0.8F, isWandering() ? 0.2F : -0.1F));
+        this.tasks.addTask(3, new EntityAIFollowOwner(this, 1D, 4.0F, 2.0F));
         this.tasks.addTask(4, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(5, new EntityAILookIdle(this));
+        System.out.println("aaaaaaa");
     }
 
     @Override
@@ -195,16 +188,15 @@ public class EntityCultist extends EntityTameable {
                     }
                     return true;
                 }
-                if (!isSitting()) {
-                    if (!world.isRemote)
-                        setSitting(true);
-                    if (world.isRemote)
-                        player.sendStatusMessage(new TextComponentString(I18n.format("message.cultist.sit")), true);
-                } else {
-                    if (!world.isRemote)
-                        setSitting(false);
-                    if (world.isRemote)
-                        player.sendStatusMessage(new TextComponentString(I18n.format("message.cultist.follow")), true);
+                if (!world.isRemote) {
+                    if (!world.isRemote) {
+                        this.setSitting(!this.isSitting());
+                        this.isJumping = false;
+                        this.navigator.clearPath();
+                        this.setAttackTarget(null);
+                        PacketHandler.sendTo(player, new PacketMessage("message.cultist." + (!isSitting() ? "follow" : "sit"), true));
+                        return true;
+                    }
                 }
             } else {
                 if (world.isRemote)
@@ -231,6 +223,20 @@ public class EntityCultist extends EntityTameable {
             setMagan(0);
             return false;
         }
+    }
+
+    @Override
+    public void setSitting(boolean sitting) {
+        super.setSitting(sitting);
+        if (aiSit != null) {
+            aiSit.setSitting(sitting);
+        }
+        updateAITasks();
+    }
+
+    @Override
+    public boolean isSitting() {
+        return super.isSitting();
     }
 
     @Nullable

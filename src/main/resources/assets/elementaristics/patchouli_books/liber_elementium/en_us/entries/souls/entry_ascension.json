@@ -36,7 +36,7 @@
       "type": "spotlight",
       "item": "elementaristics:incantation_reforging",
       "title": "Reforging",
-      "text": "The step of reforging centers around getting the body ready for the energies that it will have to hold. This step is finalized with the $(marked)Reshaping Rite$().",
+      "text": "The step of reforging centers around getting the body ready for the energies that it will have to hold. This step is finalized with the $(marked)$(l:shaping/entry_reshaping)Reshaping Rite$().",
       "advancement": "elementaristics:progress_ascension_5"
     }
   ]

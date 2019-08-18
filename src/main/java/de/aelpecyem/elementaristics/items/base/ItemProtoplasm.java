@@ -14,7 +14,6 @@ public class ItemProtoplasm extends ItemBase {
 
     public ItemProtoplasm() {
         super("protoplasm");
-        maxStackSize = 1;
     }
 
     //=======================================TESTING ZONE=======================================
@@ -37,13 +36,12 @@ public class ItemProtoplasm extends ItemBase {
                     entityItem.getItem().getTagCompound().setInteger(NBTKEY_WATER, entityItem.getItem().getTagCompound().getInteger(NBTKEY_WATER) + 1);
                     if (entityItem.getItem().getTagCompound().getInteger(NBTKEY_WATER) > 100) {
                         if (!entityItem.world.isRemote){
-                            System.out.println("aha!");
                             EntityProtoplasm protoplasm = new EntityProtoplasm(entityItem.world);
                             protoplasm.setLocationAndAngles(entityItem.posX, entityItem.posY, entityItem.posZ, entityItem.rotationYaw, entityItem.rotationPitch);
                             protoplasm.onInitialSpawn(entityItem.world.getDifficultyForLocation(entityItem.getPosition()), null);
                             entityItem.world.spawnEntity(protoplasm);
-
                             entityItem.getItem().shrink(1);
+                            entityItem.getItem().setTagCompound(new NBTTagCompound());
                         }
                     }
                 } else {

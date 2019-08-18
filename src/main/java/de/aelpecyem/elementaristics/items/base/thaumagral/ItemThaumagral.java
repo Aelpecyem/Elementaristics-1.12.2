@@ -32,6 +32,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -102,7 +104,7 @@ public class ItemThaumagral extends ItemSword implements IHasModel {
 
     public boolean appendTask(ItemStack stack, ProtoplasmTask task, EntityPlayer player){ //check this and send a message if it fails
         isReady(stack);
-        if (ProtoplasmTaskInit.getTasksFromString(getTaskString(stack)).size() < 10) {
+        if (ProtoplasmTaskInit.getTasksFromString(getTaskString(stack)).size() < 15 || PlayerUtil.getSoul(player) == SoulInit.soulAncient && ProtoplasmTaskInit.getTasksFromString(getTaskString(stack)).size() < 20) {
             stack.getTagCompound().setString(SAVEDTASK, stack.getTagCompound().getString(SAVEDTASK) + task.writeAsString());
             if (!player.world.isRemote){
                 PacketHandler.sendTo(player, new PacketMessage("message.task_added"));
@@ -125,9 +127,14 @@ public class ItemThaumagral extends ItemSword implements IHasModel {
         return false;
     }
 
-    public void cycleMode(ItemStack stack){
+    public void cycleMode(ItemStack stack, boolean down) {
         isReady(stack);
-        setMode(stack, getMode(stack) < ProtoplasmTaskInit.taskMap.size() - 1 ? getMode(stack) + 1 : 0);
+        setWIPTask(stack, "0");
+        if (!down) {
+            setMode(stack, getMode(stack) < ProtoplasmTaskInit.taskMap.size() - 1 ? getMode(stack) + 1 : 0);
+            return;
+        }
+        setMode(stack, getMode(stack) > 0 ? getMode(stack) - 1 : ProtoplasmTaskInit.taskMap.size() - 1);
     }
 
     public String getModeName(ItemStack stack){
@@ -144,7 +151,7 @@ public class ItemThaumagral extends ItemSword implements IHasModel {
                 stack.getTagCompound().setInteger(MODE, 0);
             }
             if (!stack.getTagCompound().hasKey(WIPTASK)){
-                stack.getTagCompound().setString(WIPTASK, "");
+                stack.getTagCompound().setString(WIPTASK, "0");
             }
             if (!stack.getTagCompound().hasKey(TUNED)){
                 stack.getTagCompound().setBoolean(TUNED, false);
@@ -161,25 +168,7 @@ public class ItemThaumagral extends ItemSword implements IHasModel {
         return false;
     }
 
-    @Override
-    public boolean onEntitySwing(EntityLivingBase entityLiving, ItemStack stack) {
-        if (isTuned(stack)) {
-            if (!entityLiving.isSneaking()) {
-                cycleMode(stack);
-                return true;
-            } else if (entityLiving instanceof EntityPlayer) {
-                setTaskString(stack, "");
-                setTuned(stack, false);
-                if (!entityLiving.world.isRemote) {
-                    PacketHandler.sendTo((EntityPlayer) entityLiving, new PacketMessage("message.reset_tasks"));
-                }
-                return true;
-            }
-        }
-
-        return super.onEntitySwing(entityLiving, stack);
-    }
-
+    @SideOnly(Side.CLIENT)
     @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
         if (isTuned(stack)) {
@@ -225,10 +214,12 @@ public class ItemThaumagral extends ItemSword implements IHasModel {
             if (((EntityProtoplasm) entity).getTaskString() != "" && !((EntityProtoplasm) entity).getTaskString().equals(getTaskString(stack))){
                 setTaskString(stack, ((EntityProtoplasm) entity).getTaskString());
                 if (player.world.isRemote){
-                   player.sendStatusMessage(new TextComponentString(ChatFormatting.LIGHT_PURPLE + I18n.format("message.slime_task_copied")), false);
+                    player.sendStatusMessage(new TextComponentString(ChatFormatting.LIGHT_PURPLE + I18n.format("message.slime_task_copied")), false);
                 }
             }
             return true;
+        } else {
+            setTuned(stack, false);
         }
         return super.onLeftClickEntity(stack, player, entity);
     }
@@ -238,11 +229,12 @@ public class ItemThaumagral extends ItemSword implements IHasModel {
         ItemStack stack = player.getHeldItem(hand);
         if (isTuned(stack)) {
             if (ProtoplasmTaskInit.getTaskByName(getModeName(stack)) != null) {
-                ProtoplasmTaskInit.getTaskByName(getModeName(stack)).setTask(stack, this, player, worldIn, pos, hand, facing, hitX, hitY, hitZ);
+                return ProtoplasmTaskInit.getTaskByName(getModeName(stack)).setTask(stack, this, player, worldIn, pos, hand, facing, hitX, hitY, hitZ);
             }
         }
-        return super.onItemUse(player, worldIn, pos, hand, facing, hitX, hitY, hitZ);
+        return EnumActionResult.FAIL;
     }
+
 
 
     @Override
@@ -250,7 +242,7 @@ public class ItemThaumagral extends ItemSword implements IHasModel {
         ItemStack stack = playerIn.getHeldItem(handIn);
         if (isTuned(stack)) {
             if (ProtoplasmTaskInit.getTaskByName(getModeName(stack)) != null) {
-                ProtoplasmTaskInit.getTaskByName(getModeName(stack)).setTask(stack, this, worldIn, playerIn, handIn);
+                return ProtoplasmTaskInit.getTaskByName(getModeName(stack)).setTask(stack, this, worldIn, playerIn, handIn);
             }
         }else {
             if (playerIn.hasCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null)) {

@@ -11,6 +11,11 @@ import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.ItemStackHandler;
 
 public class InventoryUtil {
+
+    public static boolean areStacksEqual(ItemStack stack1, ItemStack stack2) {
+        return stack1.isItemEqual(stack2) && stack1.getTagCompound() == stack2.getTagCompound();
+    }
+
     //snatched a bit of code from Botania c:
     public static void drawItemFromInventory(TileEntity te, ItemStackHandler inv, EntityPlayer player) {
         for (int i = inv.getSlots() - 1; i >= 0; i--) {
@@ -27,8 +32,15 @@ public class InventoryUtil {
 
     public static void insertOneItemToInventory(TileEntity te, ItemStackHandler inv, int slot, EntityPlayer player, EnumHand hand) {
         if (inv.getSlotLimit(slot) > inv.getStackInSlot(slot).getCount()) {
-            inv.setStackInSlot(slot, new ItemStack(player.getHeldItem(hand).getItem(), 1 + inv.getStackInSlot(slot).getCount(), player.getHeldItem(hand).getMetadata()));
-            player.getHeldItem(hand).shrink(1);
+            if (inv.getStackInSlot(slot).isEmpty()) {
+                ItemStack stack = player.getHeldItem(EnumHand.MAIN_HAND).copy();
+                stack.setCount(1);
+                inv.setStackInSlot(slot, stack);
+                player.getHeldItem(hand).shrink(1);
+            } else if (areStacksEqual(inv.getStackInSlot(slot), player.getHeldItem(hand))) {
+                inv.getStackInSlot(slot).grow(1);
+                player.getHeldItem(hand).shrink(1);
+            }
             player.world.updateComparatorOutputLevel(te.getPos(), null);
         }
     }
@@ -46,6 +58,15 @@ public class InventoryUtil {
         }
     }
 
+    public static int hasStack(IItemHandler inv, ItemStack stack) {
+        for (int i = 0; i < inv.getSlots(); i++) {
+            if (stack.isItemEqual(inv.getStackInSlot(i))) {//if (areStacksEqual(inv.getStackInSlot(i), stack)){
+                return i;
+            }
+        }
+        return -1;
+    }
+
     public static ItemStack containsItem(InventoryPlayer inventoryPlayer, Item item) {
         ItemStack itemstack = null;
         for (ItemStack s : inventoryPlayer.mainInventory) {
@@ -57,5 +78,40 @@ public class InventoryUtil {
         return itemstack;
     }
 
+    public static int hasSpace(IItemHandler handler) {
+        for (int i = 0; i < handler.getSlots(); i++) {
+            if (handler.getStackInSlot(i).isEmpty()) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public static int hasSpace(IItemHandler handler, ItemStack stack) {
+        for (int i = 0; i < handler.getSlots(); i++) {
+            if (areStacksEqual(handler.getStackInSlot(i), stack) && handler.getStackInSlot(i).getCount() + stack.getCount() <= stack.getMaxStackSize() && handler.getStackInSlot(i).getCount() + stack.getCount() <= handler.getSlotLimit(i)) {
+                return i;
+            }
+        }
+        for (int i = 0; i < handler.getSlots(); i++) {
+            //    System.out.println("checking for slot: " + handler.getStackInSlot(i).isEmpty());
+            if (handler.getStackInSlot(i).isEmpty()) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+
+    public static ItemStack containsItemWithMeta(InventoryPlayer inventoryPlayer, Item item, int meta) {
+        ItemStack itemstack = null;
+        for (ItemStack s : inventoryPlayer.mainInventory) {
+            if (s != null && s.getItem() == item && s.getMetadata() == meta) {
+                itemstack = s;
+                break;
+            }
+        }
+        return itemstack;
+    }
 
 }

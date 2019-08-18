@@ -8,9 +8,7 @@ import de.aelpecyem.elementaristics.particles.ParticleGeneric;
 import de.aelpecyem.elementaristics.recipe.PurifierRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityBrewingStand;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraftforge.common.capabilities.Capability;
@@ -21,7 +19,6 @@ import net.minecraftforge.items.ItemStackHandler;
 public class TileEntityPurifier extends TileEntity implements ITickable, IHasTickCount, IHasInventory {
 
 
-    public EnumParticleTypes particle = EnumParticleTypes.CRIT_MAGIC;
     public ItemStackHandler inventory = new ItemStackHandler(1) {
         @Override
         public int getSlotLimit(int slot) {
@@ -29,13 +26,11 @@ public class TileEntityPurifier extends TileEntity implements ITickable, IHasTic
         }
     };
     public int tickCount;
-    public long lastChangeTime;
 
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
         compound.setTag("inventory", inventory.serializeNBT());
         compound.setInteger("tickCount", tickCount);
-        compound.setLong("lastChangeTime", lastChangeTime);
         return super.writeToNBT(compound);
     }
 

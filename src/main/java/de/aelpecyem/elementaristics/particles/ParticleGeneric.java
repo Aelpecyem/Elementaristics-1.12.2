@@ -5,15 +5,11 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.texture.TextureMap;
-import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.lwjgl.opengl.GL11;
-import scala.reflect.internal.tpe.GlbLubs;
 
 //see https://github.com/Ellpeck/NaturesAura/blob/master/src/main/java/de/ellpeck/naturesaura/particles/ParticleMagic.java
 
@@ -24,7 +20,7 @@ public class ParticleGeneric extends Particle {
     private final float desiredScale;
     private final boolean fade;
     private final boolean followPosition;
-    private final float xTo, yTo, zTo;
+    private final double xTo, yTo, zTo;
     private final boolean shrink;
 
     public ParticleGeneric(World world, double posX, double posY, double posZ, double motionX, double motionY, double motionZ, int color, float scale, int maxAge, float gravity, boolean collision, boolean fade, float alpha, boolean shrink) {
@@ -57,7 +53,7 @@ public class ParticleGeneric extends Particle {
         this.particleScale = this.desiredScale;
     }
 
-    public ParticleGeneric(World world, double posX, double posY, double posZ, double motionX, double motionY, double motionZ, int color, float scale, int maxAge, float gravity, boolean collision, boolean fade, boolean shrink, boolean followPosition, float xTo, float yTo, float zTo) {
+    public ParticleGeneric(World world, double posX, double posY, double posZ, double motionX, double motionY, double motionZ, int color, float scale, int maxAge, float gravity, boolean collision, boolean fade, boolean shrink, boolean followPosition, double xTo, double yTo, double zTo) {
         super(world, posX, posY, posZ);
         this.desiredScale = scale;
         this.particleMaxAge = maxAge;
@@ -117,12 +113,30 @@ public class ParticleGeneric extends Particle {
         Minecraft.getMinecraft().renderEngine.bindTexture(TEXTURE);
     }
 
+
     @Override
     public void onUpdate() {
         if (followPosition) {
-            motionX = (xTo - posX) / 20;
-            motionY = (yTo - posY) / 20;
-            motionZ = (zTo - posZ) / 20;
+            double velX = motionX = (xTo - posX) / 20;
+            double velY = motionY = (yTo - posY) / 20;
+            double velZ = motionZ = (zTo - posZ) / 20;
+            double vel = Math.sqrt(Math.abs(velX) + Math.abs(velY) + Math.abs(velZ));
+            if (vel > 0.1) {
+                double percentageX = velX / vel;
+                double percentageY = velY / vel;
+                double percentageZ = velZ / vel;
+                motionX = 0.1 * percentageX;
+                motionY = 0.1 * percentageY;
+                motionZ = 0.1 * percentageZ;
+            } else {
+                motionX = velX; // / 20 instead of / Math.abs(...)
+                motionY = velY; //might have two options because this moves interesting
+                motionZ = velZ;
+            }
+           /* System.out.println(getTotalSpeed());
+            if (getTotalSpeed() > 0.1){
+
+            } //get portion of the total speed, then multiply with a set max so that this becomes the total speed*/
         }
 
         this.prevPosX = this.posX;
