@@ -1,19 +1,14 @@
 package de.aelpecyem.elementaristics.items.base.burnable;
 
-import de.aelpecyem.elementaristics.entity.EntityExplosionProjectile;
 import de.aelpecyem.elementaristics.items.base.ItemBase;
-import net.minecraft.block.BlockDispenser;
-import net.minecraft.dispenser.IBehaviorDispenseItem;
-import net.minecraft.dispenser.IBlockSource;
+import de.aelpecyem.elementaristics.networking.PacketHandler;
+import de.aelpecyem.elementaristics.networking.other.PacketBurnableAffect;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 import java.util.Iterator;
@@ -43,8 +38,9 @@ public class ItemBurnableAffectingBase extends ItemBase {
 
     @Override
     public boolean onEntityItemUpdate(EntityItem entityItem) {
-        if (entityItem.isBurning()) {
-            affect(entityItem.world, entityItem.posX, entityItem.posY, entityItem.posZ);
+        if (entityItem.isBurning() && !entityItem.world.isRemote) {
+            affect(entityItem.world, entityItem.posX, entityItem.posY, entityItem.posZ); //todo, send a packet that exectures affect() on the client side, too
+            PacketHandler.sendToAll(new PacketBurnableAffect(entityItem));
             entityItem.setDead();
         }
         return super.onEntityItemUpdate(entityItem);

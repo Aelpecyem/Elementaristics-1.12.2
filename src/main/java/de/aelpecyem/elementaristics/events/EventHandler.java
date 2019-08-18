@@ -77,7 +77,7 @@ public class EventHandler {
     @SubscribeEvent
     public void onPlayerTick(TickEvent.PlayerTickEvent event) {
         if (event.phase == TickEvent.Phase.END) {
-            if (event.player.getActivePotionEffects().contains(event.player.getActivePotionEffect(PotionInit.potionIntoxicated))) {
+            if (!event.player.world.isDaytime() && event.player.getActivePotionEffects().contains(event.player.getActivePotionEffect(PotionInit.potionIntoxicated))) {
                 if (event.player.getActivePotionEffect(PotionInit.potionIntoxicated).getAmplifier() == 1) {
                     if (InventoryUtil.containsItem(event.player.inventory, Items.BOOK) != null) {
                         if (event.player.getActivePotionEffect(PotionInit.potionIntoxicated).getDuration() == 3000) {
@@ -102,6 +102,7 @@ public class EventHandler {
                             if (event.player.world.isRemote)
                             event.player.inventory.getStackInSlot(event.player.inventory.getSlotFor(new ItemStack(Items.BOOK))).shrink(1);
                             ItemHandlerHelper.giveItemToPlayer(event.player, PatchouliAPI.instance.getBookStack("elementaristics:liber_elementium"), 24);
+                            event.player.removePotionEffect(PotionInit.potionIntoxicated);
                         }
                     }
                 }

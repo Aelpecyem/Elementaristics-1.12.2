@@ -2,7 +2,6 @@ package de.aelpecyem.elementaristics.blocks.tileentity.blocks;
 
 import de.aelpecyem.elementaristics.blocks.tileentity.BlockTileEntity;
 import de.aelpecyem.elementaristics.blocks.tileentity.TileEntityFilterHolder;
-import de.aelpecyem.elementaristics.items.base.ItemEssence;
 import de.aelpecyem.elementaristics.util.InventoryUtil;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.material.Material;
@@ -105,12 +104,10 @@ public class BlockFilterHolder extends BlockTileEntity<TileEntityFilterHolder> {
             } else {
                 if (tile.inventory.getStackInSlot(0).isEmpty()) {
                     playerIn.setHeldItem(hand, itemHandler.insertItem(0, heldItem, false));
-                    tile.markDirty();
-                //fixme, test on server if items can be put it, test a lot of stuff server side in general
                 }
 
             }
-
+            tile.markDirty();
         }
         return true;
     }

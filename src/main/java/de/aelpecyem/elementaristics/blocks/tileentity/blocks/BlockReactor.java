@@ -127,10 +127,8 @@ public class BlockReactor extends BlockTileEntity<TileEntityReactor> {
 
                 if (tile.inventory.getStackInSlot(0).isEmpty()) {
                     playerIn.setHeldItem(hand, itemHandler.insertItem(0, heldItem, false));
-                    tile.markDirty();
                 } else if (tile.inventory.getStackInSlot(1).isEmpty()) {
                     playerIn.setHeldItem(hand, itemHandler.insertItem(1, heldItem, false));
-                    tile.markDirty();
                 }
 
             }

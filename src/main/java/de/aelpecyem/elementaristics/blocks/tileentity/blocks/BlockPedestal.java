@@ -95,11 +95,10 @@ public class BlockPedestal extends BlockTileEntity<TileEntityPedestal> {
             } else {
                 if (tile.inventory.getStackInSlot(0).isEmpty()) {
                     playerIn.setHeldItem(hand, itemHandler.insertItem(0, heldItem, false));
-                    tile.markDirty();
-
                 }
 
             }
+            tile.markDirty();
 
         }
         return true;

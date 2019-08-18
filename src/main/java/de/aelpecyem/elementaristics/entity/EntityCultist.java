@@ -173,7 +173,6 @@ public class EntityCultist extends EntityTameable {
         this.tasks.addTask(3, new EntityAIFollowOwner(this, 1D, 4.0F, 2.0F));
         this.tasks.addTask(4, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(5, new EntityAILookIdle(this));
-        System.out.println("aaaaaaa");
     }
 
     @Override

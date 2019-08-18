@@ -30,7 +30,6 @@ public class FocusEffectStabilize extends FocusEffect {
                     if (world.getTileEntity(position) instanceof TileInfusionMatrix) {
                         TileInfusionMatrix matrix = (TileInfusionMatrix) world.getTileEntity(position);
                         matrix.stabilityReplenish += power;
-                        System.out.println("STABILIZING");
                         matrix.stability += power;
                     }
 

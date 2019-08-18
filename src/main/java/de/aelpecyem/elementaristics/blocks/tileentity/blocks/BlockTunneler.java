@@ -117,11 +117,9 @@ public class BlockTunneler extends BlockTileEntity<TileEntityTunneler> {
 
                 if (heldItem.isItemEqual(new ItemStack(ModItems.matter_accelerating_module))) {
                     playerIn.setHeldItem(hand, itemHandler.insertItem(1, heldItem, false));
-                    tile.markDirty();
 
                 } else if (tile.inventory.getStackInSlot(0).isEmpty()) {
                     playerIn.setHeldItem(hand, itemHandler.insertItem(0, heldItem, false));
-                    tile.markDirty();
                 }
 
             }

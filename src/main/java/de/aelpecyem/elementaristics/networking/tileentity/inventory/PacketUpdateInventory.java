@@ -77,8 +77,8 @@ public class PacketUpdateInventory implements IMessage {
         public IMessage onMessage(PacketUpdateInventory message, MessageContext ctx) {
             Minecraft.getMinecraft().addScheduledTask(() -> {
                 if (message.pos != null) {
-                    TileEntity te = Minecraft.getMinecraft().world.getTileEntity(message.pos);
-                    if (te != null && te instanceof IHasInventory) {
+                    if (Minecraft.getMinecraft().world.getTileEntity(message.pos) instanceof IHasInventory) {
+                        TileEntity te = Minecraft.getMinecraft().world.getTileEntity(message.pos);
                         for (int i = 0; i < message.slotCount; i++)
                             ((IHasInventory) te).getInventory().setStackInSlot(i, message.stacks.get(i));
                     }

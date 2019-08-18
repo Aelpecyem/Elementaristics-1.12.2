@@ -41,7 +41,6 @@ public class TileEntityPurifier extends TileEntity implements ITickable, IHasTic
         super.readFromNBT(compound);
     }
 
-
     @Override
     public AxisAlignedBB getRenderBoundingBox() {
         return new AxisAlignedBB(getPos(), getPos().add(1, 2, 1));

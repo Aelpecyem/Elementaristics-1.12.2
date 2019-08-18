@@ -1,10 +1,8 @@
 package de.aelpecyem.elementaristics.networking.tileentity.altar;
 
 import de.aelpecyem.elementaristics.blocks.tileentity.TileEntityAltar;
-import de.aelpecyem.elementaristics.blocks.tileentity.TileEntityPurifier;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
@@ -45,8 +43,8 @@ public class PacketUpdateAltar implements IMessage {
         @Override
         public IMessage onMessage(PacketUpdateAltar message, MessageContext ctx) {
             Minecraft.getMinecraft().addScheduledTask(() -> {
-                TileEntityAltar te = (TileEntityAltar) Minecraft.getMinecraft().world.getTileEntity(message.pos);
-                if (te != null) {
+                if (Minecraft.getMinecraft().world.getTileEntity(message.pos) instanceof TileEntityAltar) {
+                    TileEntityAltar te = (TileEntityAltar) Minecraft.getMinecraft().world.getTileEntity(message.pos);
                     te.currentRite = message.currentRite;
                 }
             });

@@ -3,13 +3,7 @@ package de.aelpecyem.elementaristics.blocks.tileentity.blocks;
 import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.blocks.tileentity.BlockTileEntity;
 import de.aelpecyem.elementaristics.blocks.tileentity.TileEntityAltar;
-import de.aelpecyem.elementaristics.blocks.tileentity.TileEntityPurifier;
-import de.aelpecyem.elementaristics.blocks.tileentity.TileEntityReactor;
-import de.aelpecyem.elementaristics.entity.EntityCultist;
 import de.aelpecyem.elementaristics.items.base.artifacts.rites.IncantationBase;
-import de.aelpecyem.elementaristics.items.base.thaumagral.ItemThaumagral;
-import de.aelpecyem.elementaristics.util.InventoryUtil;
-import de.aelpecyem.elementaristics.util.MaganUtil;
 import net.minecraft.block.BlockAir;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.material.Material;
@@ -18,10 +12,7 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemFlintAndSteel;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
@@ -32,10 +23,6 @@ import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.IItemHandler;
-
-import java.util.List;
 
 
 public class BlockAltar extends BlockTileEntity<TileEntityAltar> {
@@ -152,6 +139,7 @@ public class BlockAltar extends BlockTileEntity<TileEntityAltar> {
                 }
             }
         }
+        tile.markDirty();
         return false;
     }
 

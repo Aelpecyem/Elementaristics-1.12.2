@@ -271,7 +271,7 @@ advancement.elementaristics.concentrator=Influencing, isn't it?
 advancement.elementaristics.purifier=SPLASHING
 advancement.elementaristics.chaos=Far below
 advancement.elementaristics.forging=Without the clonk
-advancement.elementaristics.tunneler=Whoosh.
+advancement.elementaristics.tunneler=Whoosh!
 advancement.elementaristics.reactor=Not of the giant kind
 advancement.elementaristics.basin=Flux free
 advancement.elementaristics.energy=Behold: technology!
@@ -291,7 +291,7 @@ advancement.elementaristics.ascension_7=Forged Possibilities
 advancement.elementaristics.ascension_8=Nothingness
 
 #Advancements-Descriptions
-advancement.elementaristics.root.desc=Burn a Bundle of Herbs while carrying a Book
+advancement.elementaristics.root.desc=Burn a Bundle of Herbs at night, while carrying a Book
 
 advancement.elementaristics.pedestal.desc=Build a Lightning Pedestal to create essences using items
 advancement.elementaristics.concentrator.desc=Build a Concentrator to influence items with other items to create new items

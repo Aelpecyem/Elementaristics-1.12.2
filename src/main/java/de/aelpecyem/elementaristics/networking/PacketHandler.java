@@ -4,6 +4,7 @@ import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.networking.cap.CapabilityChunkSync;
 import de.aelpecyem.elementaristics.networking.cap.CapabilitySync;
 import de.aelpecyem.elementaristics.networking.cap.SpawnBoundParticles;
+import de.aelpecyem.elementaristics.networking.other.PacketBurnableAffect;
 import de.aelpecyem.elementaristics.networking.other.PacketDyeProtoplasm;
 import de.aelpecyem.elementaristics.networking.player.PacketBaubleKeyWinged;
 import de.aelpecyem.elementaristics.networking.player.PacketMessage;
@@ -64,6 +65,9 @@ public class PacketHandler {
 
         network.registerMessage(new PacketBaubleKeyWinged.Handler(), PacketBaubleKeyWinged.class, next(), Side.SERVER);
         network.registerMessage(new PacketBaubleKeyWinged.Handler(), PacketBaubleKeyWinged.class, next(), Side.CLIENT);
+
+        network.registerMessage(new PacketBurnableAffect.Handler(), PacketBurnableAffect.class, next(), Side.SERVER);
+        network.registerMessage(new PacketBurnableAffect.Handler(), PacketBurnableAffect.class, next(), Side.CLIENT);
 
     }
 

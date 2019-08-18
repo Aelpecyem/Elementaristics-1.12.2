@@ -120,7 +120,6 @@ public class BlockPurifier extends BlockTileEntity<TileEntityPurifier> {
 
             tile.markDirty();
         }
-
         return true;
     }
 

@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "As there are different types of Thaumagrals, there are different types of Thaumagrals.$(br)Each one has a bonus in either the casting efficiency (the magan cost for spells) or cooldown reduction."
+      "text": "As there are different types of materials, there are different types of Thaumagrals.$(br)Each one has a bonus in either the casting efficiency (the magan cost for spells) or cooldown reduction."
     },
     {
       "type": "elementaristics:forging_recipe",
