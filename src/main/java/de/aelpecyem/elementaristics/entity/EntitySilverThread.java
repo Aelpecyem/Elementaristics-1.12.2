@@ -1,7 +1,6 @@
 package de.aelpecyem.elementaristics.entity;
 
 import com.google.common.base.Predicate;
-import com.mojang.realmsclient.gui.ChatFormatting;
 import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.capability.player.IPlayerCapabilities;
 import de.aelpecyem.elementaristics.capability.player.PlayerCapProvider;
@@ -10,11 +9,14 @@ import de.aelpecyem.elementaristics.misc.advancements.CustomAdvancements;
 import de.aelpecyem.elementaristics.networking.PacketHandler;
 import de.aelpecyem.elementaristics.networking.player.PacketMessage;
 import de.aelpecyem.elementaristics.particles.ParticleGeneric;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.command.AdvancementCommand;
-import net.minecraft.entity.*;
+import de.aelpecyem.elementaristics.util.PlayerUtil;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
-import net.minecraft.entity.monster.*;
+import net.minecraft.entity.monster.EntityIronGolem;
+import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.entity.monster.EntityPigZombie;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -23,8 +25,6 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TextComponentString;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.BossInfo;
 import net.minecraft.world.BossInfoServer;
 import net.minecraft.world.World;
@@ -76,7 +76,7 @@ public class EntitySilverThread extends EntityMob {
             }
         });
         for (EntityPlayer player : players){
-            player.getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null).setPlayerAscensionStage(1);
+            PlayerUtil.ascend(1, player);
             PacketHandler.sendTo(player, new PacketMessage("message.ascension_1.standard"));
             if (!player.world.isRemote){
                 CustomAdvancements.Advancements.ASCEND.trigger((EntityPlayerMP) player);

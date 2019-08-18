@@ -1,11 +1,16 @@
 package de.aelpecyem.elementaristics.util;
 
+import de.aelpecyem.elementaristics.capability.player.IPlayerCapabilities;
 import de.aelpecyem.elementaristics.capability.player.PlayerCapProvider;
 import de.aelpecyem.elementaristics.capability.player.souls.Soul;
+import de.aelpecyem.elementaristics.init.SoulInit;
+import de.aelpecyem.elementaristics.misc.advancements.CustomAdvancements;
 import de.aelpecyem.elementaristics.misc.potions.effects.emotion.PotionEmotion;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.math.BlockPos;
@@ -58,6 +63,20 @@ public class PlayerUtil {
             return player.getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null).getSoul();
         }
         return null;
+    }
+
+    public static boolean ascend(int to, Entity player) {
+        if (player.hasCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null)) {
+            IPlayerCapabilities cap = player.getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null);
+            cap.setPlayerAscensionStage(to);
+            if (!player.world.isRemote) {
+                CustomAdvancements.Advancements.ASCEND.trigger((EntityPlayerMP) player);
+            }
+            if (player instanceof EntityPlayer)
+                SoulInit.updateSoulInformation((EntityPlayer) player, cap);
+            return true;
+        }
+        return false;
     }
 
 }
