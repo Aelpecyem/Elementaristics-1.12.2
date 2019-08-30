@@ -1,10 +1,8 @@
 package de.aelpecyem.elementaristics.misc.spell;
 
 import de.aelpecyem.elementaristics.Elementaristics;
-import de.aelpecyem.elementaristics.entity.EntitySpellProjectile;
+import de.aelpecyem.elementaristics.entity.projectile.EntitySpellProjectile;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;
-import de.aelpecyem.elementaristics.util.InventoryUtil;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -14,7 +12,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import net.minecraftforge.items.ItemHandlerHelper;
-import vazkii.patchouli.common.util.ItemStackUtil;
 
 import java.util.List;
 

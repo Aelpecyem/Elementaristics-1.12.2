@@ -1,9 +1,8 @@
 package de.aelpecyem.elementaristics.misc.spell.damage;
 
 import de.aelpecyem.elementaristics.Elementaristics;
-import de.aelpecyem.elementaristics.entity.EntitySpellProjectile;
+import de.aelpecyem.elementaristics.entity.projectile.EntitySpellProjectile;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;
-import de.aelpecyem.elementaristics.misc.spell.SpellBase;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;

@@ -1,6 +1,6 @@
 package de.aelpecyem.elementaristics.misc.spell;
 
-import de.aelpecyem.elementaristics.entity.EntitySpellProjectile;
+import de.aelpecyem.elementaristics.entity.projectile.EntitySpellProjectile;
 import de.aelpecyem.elementaristics.init.SpellInit;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;

@@ -4,7 +4,7 @@ import com.mojang.realmsclient.gui.ChatFormatting;
 import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.capability.player.IPlayerCapabilities;
 import de.aelpecyem.elementaristics.capability.player.PlayerCapProvider;
-import de.aelpecyem.elementaristics.entity.EntitySpellProjectile;
+import de.aelpecyem.elementaristics.entity.projectile.EntitySpellProjectile;
 import de.aelpecyem.elementaristics.entity.protoplasm.EntityProtoplasm;
 import de.aelpecyem.elementaristics.entity.protoplasm.tasks.ProtoplasmTaskInit;
 import de.aelpecyem.elementaristics.entity.protoplasm.tasks.execs.ProtoplasmTask;
@@ -257,17 +257,17 @@ public class ItemThaumagral extends ItemSword implements IHasModel {
                         if (spellBase.getType() == SpellBase.SpellType.EDEMA) {
                             for (int i = 0; i < 10; i++) {
                                 EntitySpellProjectile spellProjectile = new EntitySpellProjectile(worldIn, playerIn);
-                                spellProjectile.shoot(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, 0.5F * 3.0F, 17.0F, spellBase);
                                 spellProjectile.setSpell(spellBase);
                                 spellProjectile.setCaster(playerIn);
+                                spellProjectile.shoot(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.5F * 3.0F, 17.0F);
                                 if (!worldIn.isRemote)
                                     worldIn.spawnEntity(spellProjectile);
                             }
                         }
                         if (spellBase.getType() == SpellBase.SpellType.PROJECTILE) {
                             EntitySpellProjectile spellProjectile = new EntitySpellProjectile(worldIn, playerIn);
-                            spellProjectile.shoot(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, 0.5F * 3.0F, 1.0F);
                             spellProjectile.setSpell(spellBase);
+                            spellProjectile.shoot(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.5F * 3.0F, 1.0F);
                             if (!worldIn.isRemote)
                                 worldIn.spawnEntity(spellProjectile);
                         }
@@ -278,8 +278,8 @@ public class ItemThaumagral extends ItemSword implements IHasModel {
                         if (spellBase.getType() == SpellBase.SpellType.WAVE) {
                             for (int i = -50; i < 50; i += 5) {
                                 EntitySpellProjectile spellProjectile = new EntitySpellProjectile(worldIn, playerIn);
-                                spellProjectile.shoot(playerIn, playerIn.rotationPitch, playerIn.rotationYaw + i, 0.0F, 0.5F * 3.0F, 1, spellBase);
                                 spellProjectile.setSpell(spellBase);
+                                spellProjectile.shoot(playerIn, playerIn.rotationPitch, playerIn.rotationYaw + i, 0.5F * 3.0F, 1);
                                 if (!worldIn.isRemote)
                                     worldIn.spawnEntity(spellProjectile);
                             }

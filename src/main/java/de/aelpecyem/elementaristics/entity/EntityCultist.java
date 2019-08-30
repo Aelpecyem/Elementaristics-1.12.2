@@ -4,13 +4,17 @@ import com.google.common.base.Predicate;
 import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.capability.player.IPlayerCapabilities;
 import de.aelpecyem.elementaristics.capability.player.PlayerCapProvider;
+import de.aelpecyem.elementaristics.entity.projectile.EntitySpellProjectile;
+import de.aelpecyem.elementaristics.init.SpellInit;
 import de.aelpecyem.elementaristics.items.base.artifacts.ItemSoulMirror;
 import de.aelpecyem.elementaristics.misc.elements.Aspect;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;
 import de.aelpecyem.elementaristics.networking.PacketHandler;
 import de.aelpecyem.elementaristics.networking.player.PacketMessage;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.passive.EntityTameable;
@@ -34,8 +38,9 @@ public class EntityCultist extends EntityTameable {
     private static final DataParameter<Integer> ASPECT_ID = EntityDataManager.createKey(EntityCultist.class, DataSerializers.VARINT);
     private static final DataParameter<Float> MAGAN = EntityDataManager.createKey(EntityCultist.class, DataSerializers.FLOAT);
     private static final DataParameter<Integer> STUNT_TIME = EntityDataManager.createKey(EntityCultist.class, DataSerializers.VARINT);
+    //  private static final DataParameter<Boolean> WANDERING = EntityDataManager.createKey(EntityCultist.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Integer> CASTING = EntityDataManager.createKey(EntityCultist.class, DataSerializers.VARINT);
 
-    private static final DataParameter<Boolean> WANDERING = EntityDataManager.createKey(EntityCultist.class, DataSerializers.BOOLEAN);
     public EntityCultist(World worldIn) {
         super(worldIn);
         setSize(0.6F, 1.8F);
@@ -48,7 +53,8 @@ public class EntityCultist extends EntityTameable {
         dataManager.register(ASPECT_ID, 0);
         dataManager.register(MAGAN, 80F);
         dataManager.register(STUNT_TIME, 0);
-        dataManager.register(WANDERING, false);
+        dataManager.register(CASTING, 0);
+        // dataManager.register(WANDERING, false);
     }
 
     public void setStuntTime(int stuntTime) {
@@ -75,13 +81,31 @@ public class EntityCultist extends EntityTameable {
         return Aspects.getElementById(dataManager.get(ASPECT_ID));
     }
 
-    public boolean isWandering() {
-        return dataManager.get(WANDERING);
+
+    public int getCastingProgress() {
+        return dataManager.get(CASTING);
     }
 
-    public void setWandering(boolean wandering) {
-        dataManager.set(WANDERING, wandering);
+    public boolean isCasting() {
+        return getCastingProgress() > 0;
     }
+
+    public void setCastingProgress(int progress) {
+        dataManager.set(CASTING, progress);
+    }
+
+    public void continueCasting() {
+        setCastingProgress(getCastingProgress() + 1);
+    }
+
+
+    //public boolean isWandering() {
+    //    return dataManager.get(WANDERING);
+    //  }
+
+    //  public void setWandering(boolean wandering) {
+    //       dataManager.set(WANDERING, wandering);
+    //  }
 
     //plans to add defense of sorts to cultists
     @Override
@@ -90,7 +114,8 @@ public class EntityCultist extends EntityTameable {
         setAspect(Aspects.getElementById(compound.getInteger("aspectId")));
         setMagan(compound.getFloat("magan"));
         setStuntTime(compound.getInteger("stuntTime"));
-        setWandering(compound.getBoolean("wander"));
+        setCastingProgress(compound.getInteger("castingProgress"));
+        //    setWandering(compound.getBoolean("wander"));
     }
 
     @Override
@@ -99,7 +124,8 @@ public class EntityCultist extends EntityTameable {
         compound.setInteger("aspectId", getAspect().getId());
         compound.setFloat("magan", getMagan());
         compound.setInteger("stuntTime", getStuntTime());
-        compound.setBoolean("wander", isWandering());
+        compound.setInteger("castingProgress", getCastingProgress());
+        //  compound.setBoolean("wander", isWandering());
     }
 
 
@@ -127,8 +153,16 @@ public class EntityCultist extends EntityTameable {
         } else {
             setStuntTime(getStuntTime() - 1);
         }
-        Elementaristics.proxy.generateGenericParticles(this, getAspect().getColor(), 0.5F, 50, -0.01F, true, true);
+        if (getRNG().nextFloat() < 0.1)
+            Elementaristics.proxy.generateGenericParticles(this, getAspect().getColor(), 0.5F, 50, -0.01F, true, true);
+
         super.onLivingUpdate();
+    }
+
+    @Override
+    public boolean hitByEntity(Entity entityIn) {
+        setSitting(false);
+        return super.hitByEntity(entityIn);
     }
 
     @Override
@@ -168,11 +202,18 @@ public class EntityCultist extends EntityTameable {
     protected void initEntityAI() { //todo, add some sort of wandering mode, though that may be reserved for later builds
         this.aiSit = new EntityAISit(this);
         this.tasks.addTask(1, new EntityAISwimming(this));
+        this.tasks.addTask(5, new AICastSpell(this));
         this.tasks.addTask(2, this.aiSit);
         //this.tasks.addTask(3, new EntityAIWanderAvoidWater(this, 0.8F, isWandering() ? 0.2F : -0.1F));
         this.tasks.addTask(3, new EntityAIFollowOwner(this, 1D, 4.0F, 2.0F));
-        this.tasks.addTask(4, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
-        this.tasks.addTask(5, new EntityAILookIdle(this));
+        //EntitySkeleton
+
+        this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
+        this.tasks.addTask(7, new EntityAILookIdle(this));
+
+        this.targetTasks.addTask(1, new EntityAIOwnerHurtByTarget(this));
+        this.targetTasks.addTask(2, new EntityAIOwnerHurtTarget(this));
+        this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true, new Class[0]));
     }
 
     @Override
@@ -262,4 +303,74 @@ public class EntityCultist extends EntityTameable {
         return null;
     }
 
+    static class AICastSpell extends EntityAIBase {
+        private final EntityCultist cultist;
+        private boolean finished;
+
+        public AICastSpell(EntityCultist cultist) {
+            this.cultist = cultist;
+            this.setMutexBits(7);
+        }
+
+        /**
+         * Returns whether the EntityAIBase should begin execution.
+         */
+        public boolean shouldExecute() {
+            EntityLivingBase target = this.cultist.getAttackTarget();
+            if (target != null && target.isEntityAlive()) {
+                return target.getDistance(cultist) < 40; //true;
+            }
+            return false;
+        }
+
+        /**
+         * Execute a one shot task or start executing a continuous task
+         */
+        public void startExecuting() {
+            cultist.continueCasting();
+            finished = false;
+            super.startExecuting();
+        }
+
+        /**
+         * Returns whether an in-progress EntityAIBase should continue executing
+         */
+        public boolean shouldContinueExecuting() {
+            EntityLivingBase target = this.cultist.getAttackTarget();
+            if (target == null || target.isDead || finished) {
+                cultist.setCastingProgress(0);
+                return false;
+            }
+            return true;
+        }
+
+        @Override
+        public void resetTask() {
+            cultist.setCastingProgress(0);
+            finished = false;
+            super.resetTask();
+        }
+
+        /**
+         * Keep ticking a continuous task that has already been started
+         */
+        public void updateTask() {
+            System.out.println(cultist.getCastingProgress());
+            cultist.continueCasting();
+            EntityLivingBase target = this.cultist.getAttackTarget();
+            if (target != null && !target.isDead) {
+                cultist.getLookHelper().setLookPosition(target.posX, target.posY + target.getEyeHeight(), target.posZ, cultist.getHorizontalFaceSpeed(), cultist.getVerticalFaceSpeed());
+                if (cultist.getCastingProgress() >= 60) {
+                    EntitySpellProjectile projectile = new EntitySpellProjectile(cultist.world, cultist);
+                    projectile.setSpell(SpellInit.spell_attack_air);
+                    projectile.shoot(cultist, cultist.rotationPitch, cultist.rotationYawHead, 0.5F * 3.0F, 1);
+                    if (!cultist.world.isRemote) {
+                        cultist.world.spawnEntity(projectile);
+                    }
+                    finished = true;
+                }
+            }
+            super.updateTask();
+        }
+    }
 }

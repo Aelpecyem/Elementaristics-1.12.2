@@ -2,8 +2,6 @@ package de.aelpecyem.elementaristics.misc;
 
 import de.aelpecyem.elementaristics.items.base.ItemEssence;
 import de.aelpecyem.elementaristics.items.base.ItemScale;
-import de.aelpecyem.elementaristics.items.base.thaumagral.ItemPartHandle;
-import de.aelpecyem.elementaristics.items.base.thaumagral.ItemThaumagral;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.item.ItemStack;

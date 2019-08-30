@@ -1,9 +1,10 @@
 package de.aelpecyem.elementaristics.misc.spell.damage;
 
-import de.aelpecyem.elementaristics.entity.EntitySpellProjectile;
+import de.aelpecyem.elementaristics.entity.projectile.EntitySpellProjectile;
 import de.aelpecyem.elementaristics.misc.spell.SpellBase;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EntityDamageSourceIndirect;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
@@ -29,7 +30,8 @@ public class DamageSpellBase extends SpellBase {
         EntityLivingBase target;
         if (result.entityHit instanceof EntityLivingBase) {
             target = (EntityLivingBase) result.entityHit;
-            target.attackEntityFrom(damageType, damage);
+            //new EntityDamageSourceIndirect(damageType.getDamageType(), projectile, caster);
+            target.attackEntityFrom(new EntityDamageSourceIndirect(damageType.getDamageType(), projectile, caster), damage);
 
         } else {
             return;

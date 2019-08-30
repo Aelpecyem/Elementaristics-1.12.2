@@ -1,29 +1,19 @@
 package de.aelpecyem.elementaristics.items.base.consumable;
 
-import de.aelpecyem.elementaristics.Elementaristics;
-import de.aelpecyem.elementaristics.capability.player.IPlayerCapabilities;
-import de.aelpecyem.elementaristics.capability.player.PlayerCapProvider;
-import de.aelpecyem.elementaristics.entity.EntityExplosionProjectile;
-import de.aelpecyem.elementaristics.entity.EntitySpellProjectile;
-import de.aelpecyem.elementaristics.init.ModItems;
-import de.aelpecyem.elementaristics.init.SoulInit;
-import de.aelpecyem.elementaristics.init.SpellInit;
+import de.aelpecyem.elementaristics.entity.projectile.EntityExplosionProjectile;
 import de.aelpecyem.elementaristics.items.base.artifacts.rites.ItemAspects;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;
-import de.aelpecyem.elementaristics.misc.spell.SpellBase;
-import de.aelpecyem.elementaristics.util.IHasModel;
-import de.aelpecyem.elementaristics.util.MaganUtil;
-import de.aelpecyem.elementaristics.util.PlayerUtil;
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.dispenser.IBehaviorDispenseItem;
 import net.minecraft.dispenser.IBlockSource;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.*;
-import net.minecraft.util.*;
-import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import net.minecraftforge.common.MinecraftForge;
 
 public class ItemGunpowderEnergized extends ItemAspects {
 

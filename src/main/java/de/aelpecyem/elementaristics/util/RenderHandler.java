@@ -1,9 +1,9 @@
 package de.aelpecyem.elementaristics.util;
 
 import de.aelpecyem.elementaristics.entity.EntityCultist;
-import de.aelpecyem.elementaristics.entity.EntityExplosionProjectile;
 import de.aelpecyem.elementaristics.entity.EntitySilverThread;
-import de.aelpecyem.elementaristics.entity.EntitySpellProjectile;
+import de.aelpecyem.elementaristics.entity.projectile.EntityExplosionProjectile;
+import de.aelpecyem.elementaristics.entity.projectile.EntitySpellProjectile;
 import de.aelpecyem.elementaristics.entity.protoplasm.EntityProtoplasm;
 import de.aelpecyem.elementaristics.entity.render.RenderCultist;
 import de.aelpecyem.elementaristics.entity.render.RenderNone;

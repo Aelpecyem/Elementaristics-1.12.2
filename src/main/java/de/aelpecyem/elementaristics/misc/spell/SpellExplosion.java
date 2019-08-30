@@ -1,12 +1,9 @@
 package de.aelpecyem.elementaristics.misc.spell;
 
 import de.aelpecyem.elementaristics.Elementaristics;
-import de.aelpecyem.elementaristics.entity.EntitySpellProjectile;
+import de.aelpecyem.elementaristics.entity.projectile.EntitySpellProjectile;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.Explosion;
@@ -22,7 +19,6 @@ public class SpellExplosion extends SpellBase {
         Explosion explosion = new Explosion(world, projectile, projectile.posX, projectile.posY, projectile.posZ, 2, false, false);
         explosion.doExplosionA();
         explosion.doExplosionB(true);
-
         projectile.setDead();
         super.affect(result, caster, world, projectile);
     }

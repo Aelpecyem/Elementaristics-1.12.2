@@ -1,6 +1,5 @@
-package de.aelpecyem.elementaristics.entity;
+package de.aelpecyem.elementaristics.entity.projectile;
 
-import com.google.common.base.Predicate;
 import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.init.SpellInit;
 import de.aelpecyem.elementaristics.misc.spell.SpellBase;
@@ -19,7 +18,6 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 //yup, grabbed that code from https://github.com/zabi94/Covens-reborn/blob/master/src/main/java/com/covens/common/entity/EntitySpellCarrier.java
@@ -104,7 +102,6 @@ public class EntitySpellProjectile extends EntityThrowable {
 
     @Override
     public void onUpdate() {
-
         if (getSpell() != null && getSpell().getType() == SpellBase.SpellType.WAVE)
             this.setNoGravity(true);
         if (getSpell() != null) {
@@ -125,7 +122,6 @@ public class EntitySpellProjectile extends EntityThrowable {
             this.setDead();
         }
 
-        //have a particle color for spells
         if (world.isRemote && getSpell() != null) {
             Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(world, posX, posY, posZ, world.rand.nextGaussian() * 0.02D, world.rand.nextGaussian() * 0.02D, world.rand.nextGaussian() * 0.02D, getSpell().getColor(), 4, 40, 0, true, true, 0.8F, true));
             Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(world, posX, posY, posZ, world.rand.nextGaussian() * 0.02D, world.rand.nextGaussian() * 0.02D, world.rand.nextGaussian() * 0.02D, getSpell().getColor2(), 4, 40, 0, true, true, 0.8F, true));
@@ -175,12 +171,12 @@ public class EntitySpellProjectile extends EntityThrowable {
         }
     }
 
-    public void shoot(Entity shooter, float pitch, float yaw, float p_184547_4_, float velocity, float inaccuracy, SpellBase spell) {
+    public void shoot(Entity shooter, float pitch, float yaw, float velocity, float inaccuracy) {
         float f = -MathHelper.sin(yaw * 0.017453292F) * MathHelper.cos(pitch * 0.017453292F);
         float f1 = -MathHelper.sin(pitch * 0.017453292F);
         float f2 = MathHelper.cos(yaw * 0.017453292F) * MathHelper.cos(pitch * 0.017453292F);
 
-        if (spell.getType() == SpellBase.SpellType.EDEMA) {
+        if (getSpell() != null && getSpell().getType() == SpellBase.SpellType.EDEMA) {
             f /= 2;
             f1 /= 2;
             f2 /= 2;
