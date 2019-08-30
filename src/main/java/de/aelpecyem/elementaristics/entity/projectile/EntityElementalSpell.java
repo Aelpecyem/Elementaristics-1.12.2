@@ -1,8 +1,8 @@
 package de.aelpecyem.elementaristics.entity.projectile;
 
 import de.aelpecyem.elementaristics.Elementaristics;
-import de.aelpecyem.elementaristics.init.SpellInit;
-import de.aelpecyem.elementaristics.misc.spell.SpellBase;
+import de.aelpecyem.elementaristics.misc.elements.Aspect;
+import de.aelpecyem.elementaristics.misc.elements.Aspects;
 import de.aelpecyem.elementaristics.particles.ParticleGeneric;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -11,7 +11,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.EntityDamageSourceIndirect;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
@@ -21,19 +22,20 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 //yup, grabbed that code from https://github.com/zabi94/Covens-reborn/blob/master/src/main/java/com/covens/common/entity/EntitySpellCarrier.java
-public class EntitySpellProjectile extends EntityThrowable {
-    private static final DataParameter<String> SPELL = EntityDataManager.<String>createKey(EntitySpellProjectile.class, DataSerializers.STRING);
-    private static final DataParameter<String> CASTER = EntityDataManager.<String>createKey(EntitySpellProjectile.class, DataSerializers.STRING);
+public class EntityElementalSpell extends EntityThrowable {
+    private static final DataParameter<Integer> ASPECT = EntityDataManager.<Integer>createKey(EntityElementalSpell.class, DataSerializers.VARINT);
+    private static final DataParameter<String> CASTER = EntityDataManager.<String>createKey(EntityElementalSpell.class, DataSerializers.STRING);
+    private int damage;
 
-    public EntitySpellProjectile(World world) {
+    public EntityElementalSpell(World world) {
         super(world);
     }
 
-    public EntitySpellProjectile(World worldIn, double x, double y, double z) {
+    public EntityElementalSpell(World worldIn, double x, double y, double z) {
         super(worldIn, x, y, z);
     }
 
-    public EntitySpellProjectile(World world, EntityLivingBase thrower) {
+    public EntityElementalSpell(World world, EntityLivingBase thrower) {
         super(world, thrower);
     }
 
@@ -41,17 +43,29 @@ public class EntitySpellProjectile extends EntityThrowable {
     protected void entityInit() {
         this.setEntityInvulnerable(true);
         this.setSize(0.1f, 0.1f);
-        this.getDataManager().register(SPELL, "");
+        this.getDataManager().register(ASPECT, 0);
         this.getDataManager().register(CASTER, "");
+        damage = 5;
     }
 
-    public void setSpell(SpellBase spell) {
-        this.setSpell(spell.getName());
+    public void setDamage(int damage) {
+        this.damage = damage;
     }
 
-    private void setSpell(ResourceLocation spell) {
-        this.getDataManager().set(SPELL, spell.toString());
-        this.getDataManager().setDirty(SPELL);
+    public int getDamage() {
+        return damage;
+    }
+
+    public void setAspectId(int aspect) {
+        this.getDataManager().set(ASPECT, aspect);
+    }
+
+    public Aspect getAspect() {
+        return Aspects.getElementById(getDataManager().get(ASPECT));
+    }
+
+    public int getAspectId() {
+        return this.getDataManager().get(ASPECT);
     }
 
     private void setCaster(String uuid) {
@@ -70,26 +84,18 @@ public class EntitySpellProjectile extends EntityThrowable {
     @Override
     public void writeEntityToNBT(NBTTagCompound compound) {
         super.writeEntityToNBT(compound);
-        compound.setString("spell", this.getSpellName());
+        compound.setInteger("aspect", this.getAspectId());
         compound.setString("caster", this.getCasterUUID());
+        compound.setInteger("damage", damage);
     }
 
     @Override
     public void readEntityFromNBT(NBTTagCompound compound) {
         super.readEntityFromNBT(compound);
-        this.setSpell(new ResourceLocation(compound.getString("spell")));
+        this.setAspectId(compound.getInteger("aspect"));
         this.setCaster(compound.getString("caster"));
+        this.setDamage(compound.getInteger("damage"));
     }
-
-    private String getSpellName() {
-        return this.getDataManager().get(SPELL);
-    }
-
-    @Nullable
-    public SpellBase getSpell() {
-        return SpellInit.spells.get(new ResourceLocation(this.getSpellName()));
-    }
-
 
     private String getCasterUUID() {
         return this.getDataManager().get(CASTER);
@@ -101,29 +107,13 @@ public class EntitySpellProjectile extends EntityThrowable {
 
     @Override
     public void onUpdate() {
-        if (getSpell() != null && getSpell().getType() == SpellBase.SpellType.WAVE)
-            this.setNoGravity(true);
-        if (getSpell() != null) {
-            if (getSpell().getType() == SpellBase.SpellType.EDEMA) {
-                if (this.ticksExisted > 4) {
-                    this.setDead();
-                }
-            } else if (getSpell().getType() == SpellBase.SpellType.WAVE) {
-                if (this.ticksExisted > 20) {
-                    this.setDead();
-                }
-            } else {
-                if (this.ticksExisted > 600) {
-                    this.setDead();
-                }
-            }
-        } else if (this.ticksExisted > 600) {
+        if (this.ticksExisted > 600) {
             this.setDead();
         }
 
-        if (world.isRemote && getSpell() != null) {
-            Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(world, posX, posY, posZ, world.rand.nextGaussian() * 0.02D, world.rand.nextGaussian() * 0.02D, world.rand.nextGaussian() * 0.02D, getSpell().getColor(), 4, 40, 0, true, true, 0.8F, true));
-            Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(world, posX, posY, posZ, world.rand.nextGaussian() * 0.02D, world.rand.nextGaussian() * 0.02D, world.rand.nextGaussian() * 0.02D, getSpell().getColor2(), 4, 40, 0, true, true, 0.8F, true));
+        if (world.isRemote && getAspect() != null) {
+            Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(world, posX, posY, posZ, world.rand.nextGaussian() * 0.02D, world.rand.nextGaussian() * 0.02D, world.rand.nextGaussian() * 0.02D, getAspect().getColor(), 4, 40, 0, true, true, 0.8F, true));
+            Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(world, posX, posY, posZ, world.rand.nextGaussian() * 0.02D, world.rand.nextGaussian() * 0.02D, world.rand.nextGaussian() * 0.02D, getAspect().getColor(), 4, 40, 0, true, true, 0.8F, true));
         }
         super.onUpdate();
     }
@@ -150,19 +140,23 @@ public class EntitySpellProjectile extends EntityThrowable {
 
     @Override
     protected void onImpact(RayTraceResult result) {
-
         if (!this.world.isRemote) {
-            SpellBase spell = this.getSpell();
             //   EntityLivingBase caster = this.getCaster();
-            if (spell != null) {
+            if (getAspect() != null) {
                 if ((result.typeOfHit != RayTraceResult.Type.ENTITY) || (result.entityHit != getThrower())) {
-                    //  drinkEffect(result, caster, this.world);
-                    spell.affect(result, getThrower(), this.world, this);
+                    EntityLivingBase target;
+                    if (result.entityHit instanceof EntityLivingBase) {
+                        target = (EntityLivingBase) result.entityHit;
+                        target.attackEntityFrom(new EntityDamageSourceIndirect(DamageSource.MAGIC.getDamageType(), this, getCaster()), getDamage());
+
+                    } else {
+                        return;
+                    }
                 }
                 if ((result.typeOfHit == RayTraceResult.Type.BLOCK && world.getBlockState(result.getBlockPos()).getMaterial().blocksMovement())) {// && ((spell.getType() == EnumSpellType.PROJECTILE_BLOCK) || (spell.getType() == EnumSpellType.PROJECTILE_ALL))) {
                     this.setDead();
                 }
-                if ((result.typeOfHit == RayTraceResult.Type.ENTITY) && spell.getType() != SpellBase.SpellType.WAVE) {// && ((spell.getType() == EnumSpellType.PROJECTILE_ENTITY) || (spell.getType() == EnumSpellType.PROJECTILE_ALL)) && (result.entityHit != caster)) {
+                if ((result.typeOfHit == RayTraceResult.Type.ENTITY)) {
                     this.setDead();
                 }
 
@@ -174,12 +168,6 @@ public class EntitySpellProjectile extends EntityThrowable {
         float f = -MathHelper.sin(yaw * 0.017453292F) * MathHelper.cos(pitch * 0.017453292F);
         float f1 = -MathHelper.sin(pitch * 0.017453292F);
         float f2 = MathHelper.cos(yaw * 0.017453292F) * MathHelper.cos(pitch * 0.017453292F);
-
-        if (getSpell() != null && getSpell().getType() == SpellBase.SpellType.EDEMA) {
-            f /= 2;
-            f1 /= 2;
-            f2 /= 2;
-        }
         this.shoot((double) f, (double) f1, (double) f2, velocity, inaccuracy);
         this.motionX += shooter.motionX;
         this.motionZ += shooter.motionZ;
@@ -193,13 +181,4 @@ public class EntitySpellProjectile extends EntityThrowable {
     public void setDead() {
         super.setDead();
     }
-   /* public void drinkEffect(RayTraceResult result, EntityLivingBase caster, World world){
-        EntityLivingBase target;
-        if (result.entityHit instanceof EntityLivingBase){
-            target = (EntityLivingBase) result.entityHit;
-            target.attackEntityFrom(DamageSource.MAGIC, 100);
-        }else {
-            return;
-        }
-    }*/
 }

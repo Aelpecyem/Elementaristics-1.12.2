@@ -4,8 +4,7 @@ import com.google.common.base.Predicate;
 import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.capability.player.IPlayerCapabilities;
 import de.aelpecyem.elementaristics.capability.player.PlayerCapProvider;
-import de.aelpecyem.elementaristics.entity.projectile.EntitySpellProjectile;
-import de.aelpecyem.elementaristics.init.SpellInit;
+import de.aelpecyem.elementaristics.entity.projectile.EntityElementalSpell;
 import de.aelpecyem.elementaristics.items.base.artifacts.ItemSoulMirror;
 import de.aelpecyem.elementaristics.misc.elements.Aspect;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;
@@ -144,6 +143,9 @@ public class EntityCultist extends EntityTameable {
 
     @Override
     public void onLivingUpdate() {
+        if (getAttackTarget() != null) {
+            setSitting(false);
+        }
         if (getStuntTime() < 0) {
             if (getMagan() < 80) {
                 setMagan(getMagan() + 0.05F);
@@ -202,14 +204,13 @@ public class EntityCultist extends EntityTameable {
     protected void initEntityAI() { //todo, add some sort of wandering mode, though that may be reserved for later builds
         this.aiSit = new EntityAISit(this);
         this.tasks.addTask(1, new EntityAISwimming(this));
-        this.tasks.addTask(5, new AICastSpell(this));
-        this.tasks.addTask(2, this.aiSit);
-        //this.tasks.addTask(3, new EntityAIWanderAvoidWater(this, 0.8F, isWandering() ? 0.2F : -0.1F));
-        this.tasks.addTask(3, new EntityAIFollowOwner(this, 1D, 4.0F, 2.0F));
+        this.tasks.addTask(2, new AICastSpell(this));
+        this.tasks.addTask(3, this.aiSit);
+        this.tasks.addTask(4, new EntityAIFollowOwner(this, 1D, 4.0F, 2.0F));
         //EntitySkeleton
 
-        this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
-        this.tasks.addTask(7, new EntityAILookIdle(this));
+        this.tasks.addTask(5, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
+        this.tasks.addTask(6, new EntityAILookIdle(this));
 
         this.targetTasks.addTask(1, new EntityAIOwnerHurtByTarget(this));
         this.targetTasks.addTask(2, new EntityAIOwnerHurtTarget(this));
@@ -229,14 +230,12 @@ public class EntityCultist extends EntityTameable {
                     return true;
                 }
                 if (!world.isRemote) {
-                    if (!world.isRemote) {
                         this.setSitting(!this.isSitting());
                         this.isJumping = false;
                         this.navigator.clearPath();
                         this.setAttackTarget(null);
                         PacketHandler.sendTo(player, new PacketMessage("message.cultist." + (!isSitting() ? "follow" : "sit"), true));
                         return true;
-                    }
                 }
             } else {
                 if (world.isRemote)
@@ -337,7 +336,7 @@ public class EntityCultist extends EntityTameable {
          */
         public boolean shouldContinueExecuting() {
             EntityLivingBase target = this.cultist.getAttackTarget();
-            if (target == null || target.isDead || finished) {
+            if (target == null || target.getDistance(cultist) >= 40 || target.isDead || finished) {
                 cultist.setCastingProgress(0);
                 return false;
             }
@@ -355,20 +354,21 @@ public class EntityCultist extends EntityTameable {
          * Keep ticking a continuous task that has already been started
          */
         public void updateTask() {
-            System.out.println(cultist.getCastingProgress());
             cultist.continueCasting();
             EntityLivingBase target = this.cultist.getAttackTarget();
             if (target != null && !target.isDead) {
                 cultist.getLookHelper().setLookPosition(target.posX, target.posY + target.getEyeHeight(), target.posZ, cultist.getHorizontalFaceSpeed(), cultist.getVerticalFaceSpeed());
                 if (cultist.getCastingProgress() >= 60) {
-                    EntitySpellProjectile projectile = new EntitySpellProjectile(cultist.world, cultist);
-                    projectile.setSpell(SpellInit.spell_attack_air);
+                    EntityElementalSpell projectile = new EntityElementalSpell(cultist.world, cultist);
+                    projectile.setAspectId(cultist.getAspect().getId());
                     projectile.shoot(cultist, cultist.rotationPitch, cultist.rotationYawHead, 0.5F * 3.0F, 1);
                     if (!cultist.world.isRemote) {
                         cultist.world.spawnEntity(projectile);
                     }
                     finished = true;
                 }
+            } else {
+                cultist.setCastingProgress(0);
             }
             super.updateTask();
         }

@@ -21,6 +21,8 @@ public class Config {
     public static int cultistId = 77766;
     public static int protoplasmId = 2602;
     public static int spellId = 7251;
+    public static int explosionId = 4145;
+    public static int elementalProjectileId = 6156;
 
     public static void readConfig() {
         Configuration cfg = Elementaristics.config;
@@ -61,6 +63,8 @@ public class Config {
         silverThreadId = cfg.getInt("silverThreadId", CATEGORY_MISC, silverThreadId, -10000, 10000, "Determines the ID for the Silver Thread Entity");
         protoplasmId = cfg.getInt("protoplasmId", CATEGORY_MISC, protoplasmId, -10000, 10000, "Determines the ID for the Protoplasm Entity");
         spellId = cfg.getInt("spellId", CATEGORY_MISC, spellId, -10000, 10000, "Determines the ID for the Spell Projectile Entity");
+        explosionId = cfg.getInt("explosionProjectileId", CATEGORY_MISC, explosionId, -10000, 10000, "Determines the ID for the Protoplasm Entity");
+        elementalProjectileId = cfg.getInt("elementalProjectileId", CATEGORY_MISC, elementalProjectileId, -10000, 10000, "Determines the ID for the Spell Projectile Entity");
 
     }
 }

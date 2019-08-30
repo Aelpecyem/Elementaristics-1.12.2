@@ -30,7 +30,6 @@ public class DamageSpellBase extends SpellBase {
         EntityLivingBase target;
         if (result.entityHit instanceof EntityLivingBase) {
             target = (EntityLivingBase) result.entityHit;
-            //new EntityDamageSourceIndirect(damageType.getDamageType(), projectile, caster);
             target.attackEntityFrom(new EntityDamageSourceIndirect(damageType.getDamageType(), projectile, caster), damage);
 
         } else {

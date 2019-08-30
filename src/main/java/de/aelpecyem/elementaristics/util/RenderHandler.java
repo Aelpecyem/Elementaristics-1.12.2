@@ -2,6 +2,7 @@ package de.aelpecyem.elementaristics.util;
 
 import de.aelpecyem.elementaristics.entity.EntityCultist;
 import de.aelpecyem.elementaristics.entity.EntitySilverThread;
+import de.aelpecyem.elementaristics.entity.projectile.EntityElementalSpell;
 import de.aelpecyem.elementaristics.entity.projectile.EntityExplosionProjectile;
 import de.aelpecyem.elementaristics.entity.projectile.EntitySpellProjectile;
 import de.aelpecyem.elementaristics.entity.protoplasm.EntityProtoplasm;
@@ -47,6 +48,13 @@ public class RenderHandler {
         RenderingRegistry.registerEntityRenderingHandler(EntityExplosionProjectile.class, new IRenderFactory<EntityExplosionProjectile>() {
             @Override
             public Render<? super EntityExplosionProjectile> createRenderFor(RenderManager manager) {
+                return new RenderNone(manager);
+            }
+        });
+
+        RenderingRegistry.registerEntityRenderingHandler(EntityElementalSpell.class, new IRenderFactory<EntityElementalSpell>() {
+            @Override
+            public Render<? super EntityElementalSpell> createRenderFor(RenderManager manager) {
                 return new RenderNone(manager);
             }
         });
