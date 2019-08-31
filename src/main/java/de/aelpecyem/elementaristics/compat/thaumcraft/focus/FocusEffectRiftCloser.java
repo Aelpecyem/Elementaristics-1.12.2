@@ -1,6 +1,5 @@
 package de.aelpecyem.elementaristics.compat.thaumcraft.focus;
 
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
@@ -19,7 +18,6 @@ import thaumcraft.api.casters.Trajectory;
 import thaumcraft.client.fx.ParticleEngine;
 import thaumcraft.client.fx.particles.FXGeneric;
 import thaumcraft.common.entities.EntityFluxRift;
-import thaumcraft.common.items.casters.foci.FocusEffectRift;
 
 import java.util.Iterator;
 import java.util.List;
@@ -50,7 +48,6 @@ public class FocusEffectRiftCloser extends FocusEffect {
                                 e.setRiftSize(e.getRiftSize() - 10);
                                 affected = true;
                             }
-
                         }
                     }
                 }

@@ -16,7 +16,6 @@ import de.aelpecyem.elementaristics.util.IBlockHasModel;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.settings.GameSettings;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
@@ -50,6 +49,7 @@ public class ModBlocks {
     public static BlockBase fabric_passion;
     public static BlockSilverThread block_silver_thread;
 
+    public static BlockGoldenThread block_golden_thread;
     //ENERGY
     public static BlockGeneratorCombustion generator_combustion;
     public static BlockStorage energy_storage;
@@ -110,6 +110,7 @@ public class ModBlocks {
     public static BlockBase manipulator_passive;
     public static BlockRedstoneTransmitter block_transmitter_redstone;
     public static BlockRedstoneEmulator block_emulator_redstone;
+
     //PLANTS
     public static BlockBush flower_ecstasy;
     public static BlockBush flower_contentment;
@@ -122,6 +123,7 @@ public class ModBlocks {
     public static BlockMossBase mossEverchanging;
 
     public static BlockBush mushroom_intoxicating;
+
 
     public static void init() {
         crop_opium = new CropOpium();
@@ -138,6 +140,8 @@ public class ModBlocks {
         fabric_reason = new BlockBase(Material.ROCK, "fabric_reason");
         fabric_passion = new BlockBase(Material.ROCK, "fabric_passion");
         block_silver_thread = new BlockSilverThread();
+
+        block_golden_thread = new BlockGoldenThread();
 
         flower_ecstasy = new BlockFlowerBase("flower_ecstasy", PotionInit.ecstasy);
         flower_contentment = new BlockFlowerBase("flower_contentment", PotionInit.contentment);
@@ -218,8 +222,6 @@ public class ModBlocks {
 
         for (Block blockBase : BLOCKS) {
             registry.register(blockBase);
-
-
         }
 
         registry.registerAll(

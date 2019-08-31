@@ -6,7 +6,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeProviderSingle;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraft.world.gen.structure.template.PlacementSettings;
@@ -16,7 +15,7 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 import java.util.Random;
 
 public class WorldGenAnomaly implements IWorldGenerator {
-    private static final ResourceLocation ANOMALY = new ResourceLocation(Elementaristics.MODID, "mind_anomally");
+    private static final ResourceLocation ANOMALY = new ResourceLocation(Elementaristics.MODID, "mind_anomaly");
 
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
