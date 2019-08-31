@@ -14,6 +14,9 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.world.BlockEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -24,6 +27,20 @@ public class BlockGoldenThread extends BlockTileEntity<TileEntityGoldenThread> {
     public BlockGoldenThread() {
         super(Material.ROCK, "block_golden_thread");
         setLightOpacity(0);
+        setResistance(1000);
+        setLightLevel(5);
+        MinecraftForge.EVENT_BUS.register(this);
+    }
+
+    @SubscribeEvent
+    public void onBlockDestroyed(BlockEvent.BreakEvent event) {
+        if (event.getState().getBlock() instanceof BlockGoldenThread) {
+            if (event.getWorld().getTileEntity(event.getPos()) instanceof TileEntityGoldenThread) {
+                if (((TileEntityGoldenThread) event.getWorld().getTileEntity(event.getPos())).activationStage > 0) {
+                    event.setCanceled(true);
+                }
+            }
+        }
     }
 
     @Override

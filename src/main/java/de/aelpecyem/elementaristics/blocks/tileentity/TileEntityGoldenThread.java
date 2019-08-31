@@ -2,6 +2,7 @@ package de.aelpecyem.elementaristics.blocks.tileentity;
 
 import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.networking.PacketHandler;
+import de.aelpecyem.elementaristics.networking.tileentity.goldenthread.PacketUpdateGoldenThread;
 import de.aelpecyem.elementaristics.networking.tileentity.inventory.PacketUpdateInventory;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -12,6 +13,8 @@ import net.minecraft.util.Rotation;
 import net.minecraft.world.gen.structure.template.PlacementSettings;
 import net.minecraft.world.gen.structure.template.Template;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
@@ -23,11 +26,15 @@ public class TileEntityGoldenThread extends TileEntity implements ITickable, IHa
             return 1;
         }
     };
+    public static final int MAX_CHARGE = 50;
     public int charge; //have a charge, a set element etc.
     public int aspect; //-> set with the item block (which will probably be separate from the block)
     public int activationStage;
-    //the structure that will be generated, for now just that thing
-    private static final ResourceLocation ANOMALY = new ResourceLocation(Elementaristics.MODID, "mind_anomaly");
+
+    private float rotation, height;
+    public int animPhase;
+
+    private static final ResourceLocation STRUCTURE = new ResourceLocation(Elementaristics.MODID, "thread_golden");
 
     /*
     --------------THE IDEA-------------
@@ -72,28 +79,49 @@ public class TileEntityGoldenThread extends TileEntity implements ITickable, IHa
     public void update() {
         if (!world.isRemote) {
             PacketHandler.sendToAllAround(world, pos, 64, new PacketUpdateInventory(this, inventory));
-            //PacketHandler.sendToAllAround(world, pos, 64, new PacketUpdateTickTime(this, tickCount)); that sort of packet thing comes later
+            PacketHandler.sendToAllAround(world, pos, 64, new PacketUpdateGoldenThread(this));
         }
-        if (charge < 100) { // test value
-            //spawn elementals depending on the block's aspect... the charge count of the block will be increased by the elementals on their own
-        } else {
-            try {
-                generateGoldenThread();
-            } catch (NullPointerException e) {
-                Elementaristics.LOGGER.error("An error occurred while generating a structure");
+        if (activationStage < 1) {
+            if (charge < MAX_CHARGE) { // test value
+                //spawn elementals depending on the block's aspect... the charge count of the block will be increased by the elementals on their own
+            } else {
+                if (!world.isRemote)
+                    generateGoldenThread();
+                activationStage = 1;
+
+                //the tile entity will change, but will not be replaced
             }
-            //the tile entity will change, but will not be replaced
         }
     }
 
     public void generateGoldenThread() {
         final PlacementSettings settings = new PlacementSettings().setRotation(Rotation.NONE);
-        final Template template = world.getSaveHandler().getStructureTemplateManager().getTemplate(world.getMinecraftServer(), ANOMALY);
-        template.addBlocksToWorld(world, pos.add(-8, -8, -8), settings);
+        final Template template = world.getSaveHandler().getStructureTemplateManager().getTemplate(world.getMinecraftServer(), STRUCTURE);
+        template.addBlocksToWorld(world, pos.add(-6, -1, -6), settings);
     }
 
     @Override
     public ItemStackHandler getInventory() {
         return inventory;
+    }
+
+    @SideOnly(Side.CLIENT)
+    public float getRotation() {
+        return rotation;
+    }
+
+    @SideOnly(Side.CLIENT)
+    public void setRotation(float rotation) {
+        this.rotation = rotation;
+    }
+
+    @SideOnly(Side.CLIENT)
+    public float getHeight() {
+        return height;
+    }
+
+    @SideOnly(Side.CLIENT)
+    public void setHeight(float height) {
+        this.height = height;
     }
 }

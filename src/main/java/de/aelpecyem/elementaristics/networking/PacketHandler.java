@@ -18,6 +18,7 @@ import de.aelpecyem.elementaristics.networking.tileentity.deities.PacketUpdateDe
 import de.aelpecyem.elementaristics.networking.tileentity.energy.EnergySync;
 import de.aelpecyem.elementaristics.networking.tileentity.energy.PacketUpdateEmulator;
 import de.aelpecyem.elementaristics.networking.tileentity.energy.PacketUpdateTransmitter;
+import de.aelpecyem.elementaristics.networking.tileentity.goldenthread.PacketUpdateGoldenThread;
 import de.aelpecyem.elementaristics.networking.tileentity.inventory.PacketUpdateInventory;
 import de.aelpecyem.elementaristics.networking.tileentity.pos.PosSync;
 import de.aelpecyem.elementaristics.networking.tileentity.tick.PacketUpdateTickTime;
@@ -49,6 +50,7 @@ public class PacketHandler {
         network.registerMessage(new PosSync.Handler(), PosSync.class, next(), Side.CLIENT);
 
         network.registerMessage(new PacketUpdateDeity.Handler(), PacketUpdateDeity.class, next(), Side.CLIENT);
+        network.registerMessage(new PacketUpdateGoldenThread.Handler(), PacketUpdateGoldenThread.class, next(), Side.CLIENT);
         network.registerMessage(new PacketUpdateTransmitter.Handler(), PacketUpdateTransmitter.class, next(), Side.CLIENT);
         network.registerMessage(new PacketUpdateEmulator.Handler(), PacketUpdateEmulator.class, next(), Side.CLIENT);
         network.registerMessage(new PacketUpdateAltar.Handler(), PacketUpdateAltar.class, next(), Side.CLIENT);

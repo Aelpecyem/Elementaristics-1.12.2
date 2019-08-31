@@ -3,9 +3,6 @@ package de.aelpecyem.elementaristics.entity;
 import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.blocks.tileentity.TileEntityGoldenThread;
 import de.aelpecyem.elementaristics.blocks.tileentity.blocks.BlockGoldenThread;
-import de.aelpecyem.elementaristics.capability.player.IPlayerCapabilities;
-import de.aelpecyem.elementaristics.capability.player.PlayerCapProvider;
-import de.aelpecyem.elementaristics.init.SoulInit;
 import de.aelpecyem.elementaristics.particles.ParticleGeneric;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
@@ -31,21 +28,6 @@ public class EntityElemental extends EntityMob {
     @Override
     public float getBrightness() {
         return 1F;
-    }
-
-    @Override
-    protected void damageEntity(DamageSource damageSrc, float damageAmount) {
-        if (damageSrc.getTrueSource() != null && damageSrc.getTrueSource().hasCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null)) {
-            IPlayerCapabilities cap = damageSrc.getTrueSource().getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null);
-            if (cap.getSoulId() == SoulInit.soulUnstable.getId()) {
-                damageAmount = 10;
-
-            } else {
-                damageAmount = 2;
-            }
-            super.damageEntity(damageSrc, damageAmount); //should only be hurt by players
-        }
-
     }
 
     @Override
