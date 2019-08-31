@@ -1,32 +1,25 @@
 package de.aelpecyem.elementaristics.items.base.artifacts;
 
 
-import de.aelpecyem.elementaristics.Elementaristics;
-import de.aelpecyem.elementaristics.blocks.tileentity.IHasBoundPosition;
-import de.aelpecyem.elementaristics.init.ModBlocks;
 import de.aelpecyem.elementaristics.init.ModItems;
 import de.aelpecyem.elementaristics.items.base.artifacts.rites.ItemAspects;
 import de.aelpecyem.elementaristics.items.base.artifacts.rites.materials.ItemWineRedmost;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;
 import de.aelpecyem.elementaristics.misc.potions.PotionInit;
 import de.aelpecyem.elementaristics.networking.PacketHandler;
-import de.aelpecyem.elementaristics.networking.cap.SpawnBoundParticles;
-import de.aelpecyem.elementaristics.util.InventoryUtil;
+import de.aelpecyem.elementaristics.networking.entity.PacketSpawnBoundParticles;
 import de.aelpecyem.elementaristics.util.MiscUtil;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.*;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TextComponentString;
-import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
 import net.minecraftforge.items.ItemHandlerHelper;
 
@@ -62,7 +55,7 @@ public class ItemHeartStone extends ItemAspects {
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
         if (!worldIn.isRemote) {
             for (EntityLivingBase entityLivingBase : MiscUtil.getBoundEntities(playerIn)) {
-                PacketHandler.sendTo(playerIn, new SpawnBoundParticles((float) entityLivingBase.posX, (float) entityLivingBase.posY, (float) entityLivingBase.posZ, entityLivingBase.width, entityLivingBase.height));
+                PacketHandler.sendTo(playerIn, new PacketSpawnBoundParticles((float) entityLivingBase.posX, (float) entityLivingBase.posY, (float) entityLivingBase.posZ, entityLivingBase.width, entityLivingBase.height));
             }
         }
         return super.onItemRightClick(worldIn, playerIn, handIn);

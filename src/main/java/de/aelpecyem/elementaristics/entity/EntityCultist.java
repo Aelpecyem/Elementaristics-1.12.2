@@ -9,9 +9,9 @@ import de.aelpecyem.elementaristics.items.base.artifacts.ItemSoulMirror;
 import de.aelpecyem.elementaristics.misc.elements.Aspect;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;
 import de.aelpecyem.elementaristics.networking.PacketHandler;
+import de.aelpecyem.elementaristics.networking.entity.cultist.PacketSpawnCultistAttackParticles;
 import de.aelpecyem.elementaristics.networking.player.PacketMessage;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -113,7 +113,6 @@ public class EntityCultist extends EntityTameable {
         setAspect(Aspects.getElementById(compound.getInteger("aspectId")));
         setMagan(compound.getFloat("magan"));
         setStuntTime(compound.getInteger("stuntTime"));
-        setCastingProgress(compound.getInteger("castingProgress"));
         //    setWandering(compound.getBoolean("wander"));
     }
 
@@ -143,9 +142,6 @@ public class EntityCultist extends EntityTameable {
 
     @Override
     public void onLivingUpdate() {
-        if (getAttackTarget() != null) {
-            setSitting(false);
-        }
         if (getStuntTime() < 0) {
             if (getMagan() < 80) {
                 setMagan(getMagan() + 0.05F);
@@ -162,12 +158,6 @@ public class EntityCultist extends EntityTameable {
     }
 
     @Override
-    public boolean hitByEntity(Entity entityIn) {
-        setSitting(false);
-        return super.hitByEntity(entityIn);
-    }
-
-    @Override
     public void onDeath(DamageSource cause) {
         if (getOwner() != null && getOwner().hasCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null)) {
             IPlayerCapabilities cap = getOwner().getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null);
@@ -176,30 +166,6 @@ public class EntityCultist extends EntityTameable {
         super.onDeath(cause);
     }
 
-    public void lookAt(double px, double py, double pz) {
-        double directionX = posX - px;
-        double directionY = posY - py;
-        double directionZ = posZ - pz;
-
-        double length = Math.sqrt(directionX * directionX + directionY * directionY + directionZ * directionZ);
-
-        directionX /= length;
-        directionY /= length;
-        directionZ /= length;
-
-        double pitch = Math.asin(directionY);
-        double yaw = Math.atan2(directionZ, directionX);
-
-        //to degree
-        pitch = pitch * 180.0 / Math.PI;
-        yaw = yaw * 180.0 / Math.PI;
-
-        yaw += 90f;
-        rotationPitch = (float) pitch;
-        rotationYaw = (float) yaw;
-    }
-
-
     @Override
     protected void initEntityAI() { //todo, add some sort of wandering mode, though that may be reserved for later builds
         this.aiSit = new EntityAISit(this);
@@ -207,13 +173,11 @@ public class EntityCultist extends EntityTameable {
         this.tasks.addTask(2, new AICastSpell(this));
         this.tasks.addTask(3, this.aiSit);
         this.tasks.addTask(4, new EntityAIFollowOwner(this, 1D, 4.0F, 2.0F));
-        //EntitySkeleton
-
         this.tasks.addTask(5, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(6, new EntityAILookIdle(this));
 
-        this.targetTasks.addTask(1, new EntityAIOwnerHurtByTarget(this));
-        this.targetTasks.addTask(2, new EntityAIOwnerHurtTarget(this));
+        this.targetTasks.addTask(1, new EntityAIOwnerHurtByTarget(this)); //same as below
+        this.targetTasks.addTask(2, new EntityAIOwnerHurtTarget(this));//doesn't get called, check conditions
         this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true, new Class[0]));
     }
 
@@ -308,7 +272,7 @@ public class EntityCultist extends EntityTameable {
 
         public AICastSpell(EntityCultist cultist) {
             this.cultist = cultist;
-            this.setMutexBits(7);
+            this.setMutexBits(3);
         }
 
         /**
@@ -317,7 +281,7 @@ public class EntityCultist extends EntityTameable {
         public boolean shouldExecute() {
             EntityLivingBase target = this.cultist.getAttackTarget();
             if (target != null && target.isEntityAlive()) {
-                return target.getDistance(cultist) < 40; //true;
+                return target.getDistance(cultist) < 40;
             }
             return false;
         }
@@ -326,7 +290,7 @@ public class EntityCultist extends EntityTameable {
          * Execute a one shot task or start executing a continuous task
          */
         public void startExecuting() {
-            cultist.continueCasting();
+            cultist.setCastingProgress(1);
             finished = false;
             super.startExecuting();
         }
@@ -356,15 +320,17 @@ public class EntityCultist extends EntityTameable {
         public void updateTask() {
             cultist.continueCasting();
             EntityLivingBase target = this.cultist.getAttackTarget();
+            PacketHandler.sendToAllLoaded(cultist, new PacketSpawnCultistAttackParticles(cultist));
             if (target != null && !target.isDead) {
                 cultist.getLookHelper().setLookPosition(target.posX, target.posY + target.getEyeHeight(), target.posZ, cultist.getHorizontalFaceSpeed(), cultist.getVerticalFaceSpeed());
-                if (cultist.getCastingProgress() >= 60) {
+                if (cultist.getCastingProgress() >= 40) {
                     EntityElementalSpell projectile = new EntityElementalSpell(cultist.world, cultist);
                     projectile.setAspectId(cultist.getAspect().getId());
                     projectile.shoot(cultist, cultist.rotationPitch, cultist.rotationYawHead, 0.5F * 3.0F, 1);
                     if (!cultist.world.isRemote) {
                         cultist.world.spawnEntity(projectile);
                     }
+                    cultist.drainMagan(5);
                     finished = true;
                 }
             } else {

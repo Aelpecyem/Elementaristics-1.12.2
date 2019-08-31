@@ -40,7 +40,7 @@ public class RiteRecruiting extends RiteBase {
                             EntityCultist cultist = new EntityCultist(world);
                             cultist.setPosition(pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5);
                             cultist.setAspect(((IHasRiteUse) item.getItem().getItem()).getAspects().get(0));
-                            cultist.setOwnerId(player.getUniqueID());
+                            cultist.setTamedBy(player);
                             doParticleBurst(world, pos, ((IHasRiteUse) item.getItem().getItem()).getAspects().get(0).getColor());
                             item.getItem().shrink(1);
                             world.spawnEntity(cultist);

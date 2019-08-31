@@ -5,6 +5,7 @@ import de.aelpecyem.elementaristics.misc.elements.Aspect;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;
 import de.aelpecyem.elementaristics.particles.ParticleGeneric;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.nbt.NBTTagCompound;
@@ -45,7 +46,7 @@ public class EntityElementalSpell extends EntityThrowable {
         this.setSize(0.1f, 0.1f);
         this.getDataManager().register(ASPECT, 0);
         this.getDataManager().register(CASTER, "");
-        damage = 5;
+        damage = 7;
     }
 
     public void setDamage(int damage) {
@@ -112,8 +113,8 @@ public class EntityElementalSpell extends EntityThrowable {
         }
 
         if (world.isRemote && getAspect() != null) {
-            Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(world, posX, posY, posZ, world.rand.nextGaussian() * 0.02D, world.rand.nextGaussian() * 0.02D, world.rand.nextGaussian() * 0.02D, getAspect().getColor(), 4, 40, 0, true, true, 0.8F, true));
-            Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(world, posX, posY, posZ, world.rand.nextGaussian() * 0.02D, world.rand.nextGaussian() * 0.02D, world.rand.nextGaussian() * 0.02D, getAspect().getColor(), 4, 40, 0, true, true, 0.8F, true));
+            Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(world, posX, posY, posZ, world.rand.nextGaussian() * 0.02D, world.rand.nextGaussian() * 0.02D, world.rand.nextGaussian() * 0.02D, getAspect().getColor(), 4, 60, 0, true, true, 0.8F, true));
+            Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(world, posX, posY, posZ, world.rand.nextGaussian() * 0.02D, world.rand.nextGaussian() * 0.02D, world.rand.nextGaussian() * 0.02D, getAspect().getColor(), 4, 60, 0, true, true, 0.8F, true));
         }
         super.onUpdate();
     }
@@ -141,11 +142,12 @@ public class EntityElementalSpell extends EntityThrowable {
     @Override
     protected void onImpact(RayTraceResult result) {
         if (!this.world.isRemote) {
-            //   EntityLivingBase caster = this.getCaster();
             if (getAspect() != null) {
                 if ((result.typeOfHit != RayTraceResult.Type.ENTITY) || (result.entityHit != getThrower())) {
                     EntityLivingBase target;
                     if (result.entityHit instanceof EntityLivingBase) {
+                        if (getCaster() instanceof EntityLiving && (((EntityLiving) getCaster()).getAttackTarget() == null || !result.entityHit.isEntityEqual(((EntityLiving) getCaster()).getAttackTarget())))
+                            return;
                         target = (EntityLivingBase) result.entityHit;
                         target.attackEntityFrom(new EntityDamageSourceIndirect(DamageSource.MAGIC.getDamageType(), this, getCaster()), getDamage());
 

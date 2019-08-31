@@ -3,9 +3,10 @@ package de.aelpecyem.elementaristics.networking;
 import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.networking.cap.CapabilityChunkSync;
 import de.aelpecyem.elementaristics.networking.cap.CapabilitySync;
-import de.aelpecyem.elementaristics.networking.cap.SpawnBoundParticles;
+import de.aelpecyem.elementaristics.networking.entity.PacketSpawnBoundParticles;
+import de.aelpecyem.elementaristics.networking.entity.cultist.PacketSpawnCultistAttackParticles;
+import de.aelpecyem.elementaristics.networking.entity.protoplasm.PacketDyeProtoplasm;
 import de.aelpecyem.elementaristics.networking.other.PacketBurnableAffect;
-import de.aelpecyem.elementaristics.networking.other.PacketDyeProtoplasm;
 import de.aelpecyem.elementaristics.networking.player.PacketBaubleKeyWinged;
 import de.aelpecyem.elementaristics.networking.player.PacketMessage;
 import de.aelpecyem.elementaristics.networking.player.PacketMove;
@@ -56,12 +57,14 @@ public class PacketHandler {
         network.registerMessage(new CapabilitySync.Handler(), CapabilitySync.class, next(), Side.CLIENT);
         network.registerMessage(new CapabilityChunkSync.Handler(), CapabilityChunkSync.class, next(), Side.CLIENT);
 
-        network.registerMessage(new SpawnBoundParticles.Handler(), SpawnBoundParticles.class, next(), Side.CLIENT);
+        network.registerMessage(new PacketSpawnBoundParticles.Handler(), PacketSpawnBoundParticles.class, next(), Side.CLIENT);
         network.registerMessage(new PacketMessage.Handler(), PacketMessage.class, next(), Side.CLIENT);
         network.registerMessage(new PacketMove.Handler(), PacketMove.class, next(), Side.CLIENT);
 
         network.registerMessage(new PacketPressSpellKey.Handler(), PacketPressSpellKey.class, next(), Side.SERVER);
         network.registerMessage(new PacketDyeProtoplasm.Handler(), PacketDyeProtoplasm.class, next(), Side.SERVER);
+
+        network.registerMessage(new PacketSpawnCultistAttackParticles.Handler(), PacketSpawnCultistAttackParticles.class, next(), Side.CLIENT);
 
         network.registerMessage(new PacketBaubleKeyWinged.Handler(), PacketBaubleKeyWinged.class, next(), Side.SERVER);
         network.registerMessage(new PacketBaubleKeyWinged.Handler(), PacketBaubleKeyWinged.class, next(), Side.CLIENT);

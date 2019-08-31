@@ -7,7 +7,7 @@ import de.aelpecyem.elementaristics.entity.protoplasm.tasks.execs.ProtoplasmTask
 import de.aelpecyem.elementaristics.init.ModItems;
 import de.aelpecyem.elementaristics.items.base.thaumagral.ItemThaumagral;
 import de.aelpecyem.elementaristics.networking.PacketHandler;
-import de.aelpecyem.elementaristics.networking.other.PacketDyeProtoplasm;
+import de.aelpecyem.elementaristics.networking.entity.protoplasm.PacketDyeProtoplasm;
 import de.aelpecyem.elementaristics.networking.player.PacketMessage;
 import de.aelpecyem.elementaristics.networking.tileentity.inventory.PacketUpdateInventory;
 import de.aelpecyem.elementaristics.util.MiscUtil;

@@ -1,4 +1,4 @@
-package de.aelpecyem.elementaristics.networking.other;
+package de.aelpecyem.elementaristics.networking.entity.protoplasm;
 
 import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.entity.protoplasm.EntityProtoplasm;

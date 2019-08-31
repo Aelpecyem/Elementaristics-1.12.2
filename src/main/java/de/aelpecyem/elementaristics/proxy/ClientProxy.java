@@ -14,30 +14,19 @@ import de.aelpecyem.elementaristics.util.Keybinds;
 import de.aelpecyem.elementaristics.util.RenderHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.Particle;
-import net.minecraft.client.renderer.Vector3d;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.util.IThreadListener;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec2f;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.client.model.ModelLoaderRegistry;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
-import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-import org.lwjgl.input.Keyboard;
-
-import java.util.Vector;
-import java.util.function.IntFunction;
 
 public class ClientProxy extends CommonProxy {
 
@@ -102,8 +91,7 @@ public class ClientProxy extends CommonProxy {
                 motionY,
                 motionZ,
                 color, scale, maxAge, gravity, collision, fade, fade, false, 0, 0, 0);
-        ParticleHandler.spawnParticle(() -> particleGeneric); //do that for every method here
-      //  Minecraft.getMinecraft().effectRenderer.addEffect(particleGeneric);
+        ParticleHandler.spawnParticle(() -> particleGeneric);
     }
 
     public void generateGenericParticles(World world, double x, double y, double z, int color, float scale, int maxAge, float gravity, boolean collision, boolean fade) {
@@ -117,7 +105,6 @@ public class ClientProxy extends CommonProxy {
                 motionZ,
                 color, scale, maxAge, gravity, collision, fade, fade, false, 0, 0, 0);
         ParticleHandler.spawnParticle(() -> particleGeneric);
-   //     Minecraft.getMinecraft().effectRenderer.addEffect(particleGeneric);
     }
 
     public void generateGenericParticles(World world, double x, double y, double z, double velX, double velY, double velZ, int color, float scale, int maxAge, float gravity, boolean collision, boolean fade) {
@@ -128,7 +115,6 @@ public class ClientProxy extends CommonProxy {
                 velZ,
                 color, scale, maxAge, gravity, collision, fade, fade, false, 0, 0, 0);
         ParticleHandler.spawnParticle(() -> particleGeneric);
-      //  Minecraft.getMinecraft().effectRenderer.addEffect(particleGeneric);
     }
 
     public void generateGenericParticles(World world, BlockPos pos, int color, float scale, int maxAge, float gravity, boolean collision, boolean fade) {
@@ -142,14 +128,12 @@ public class ClientProxy extends CommonProxy {
                 motionZ,
                 color, scale, maxAge, gravity, collision, fade, fade, false, 0, 0, 0);
         ParticleHandler.spawnParticle(() -> particleGeneric);
-       // Minecraft.getMinecraft().effectRenderer.addEffect(particleGeneric);
     }
 
 
     @Override
     public void generateGenericParticles(ParticleGeneric particleGeneric) {
         ParticleHandler.spawnParticle(() -> particleGeneric);
-      //  Minecraft.getMinecraft().effectRenderer.addEffect(particleGeneric);
     }
 
     @Override

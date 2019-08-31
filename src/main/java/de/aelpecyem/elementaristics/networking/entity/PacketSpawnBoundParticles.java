@@ -1,32 +1,21 @@
-package de.aelpecyem.elementaristics.networking.cap;
+package de.aelpecyem.elementaristics.networking.entity;
 
-import com.google.common.base.Predicate;
 import de.aelpecyem.elementaristics.Elementaristics;
-import de.aelpecyem.elementaristics.capability.player.IPlayerCapabilities;
-import de.aelpecyem.elementaristics.capability.player.PlayerCapProvider;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;
 import de.aelpecyem.elementaristics.particles.ParticleGeneric;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
-import net.minecraftforge.fml.relauncher.Side;
 
-import javax.annotation.Nullable;
-import java.util.List;
-import java.util.UUID;
-
-public class SpawnBoundParticles implements IMessage {
+public class PacketSpawnBoundParticles implements IMessage {
     float x, y, z;
     float entitySize;
     float entityHeight;
 
-    public SpawnBoundParticles(float x, float y, float z, float entitySize, float entityHeight) {
+    public PacketSpawnBoundParticles(float x, float y, float z, float entitySize, float entityHeight) {
         this.x = x;
         this.y = y;
         this.z = z;
@@ -34,7 +23,7 @@ public class SpawnBoundParticles implements IMessage {
         this.entityHeight = entityHeight;
     }
 
-    public SpawnBoundParticles() {
+    public PacketSpawnBoundParticles() {
 
     }
 
@@ -56,10 +45,10 @@ public class SpawnBoundParticles implements IMessage {
         entityHeight = buf.readFloat();
     }
 
-    public static class Handler implements IMessageHandler<SpawnBoundParticles, IMessage> {
+    public static class Handler implements IMessageHandler<PacketSpawnBoundParticles, IMessage> {
 
         @Override
-        public IMessage onMessage(SpawnBoundParticles message, MessageContext ctx) {
+        public IMessage onMessage(PacketSpawnBoundParticles message, MessageContext ctx) {
             Minecraft.getMinecraft().addScheduledTask(() -> {
                 World world = Minecraft.getMinecraft().player.world;
                 double motionX = world.rand.nextGaussian() * 0.01D;

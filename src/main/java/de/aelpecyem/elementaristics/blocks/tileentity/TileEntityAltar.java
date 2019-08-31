@@ -152,7 +152,7 @@ public class TileEntityAltar extends TileEntity implements ITickable, IHasTickCo
             }
 
             cultist.attemptTeleport(pos.getX() + 0.5 + (3 * (spot < 3 ? -1 : 1)), pos.getY(), pos.getZ() + 0.5 + (3 * (spot % 2 == 0 ? -1 : 1)));
-            cultist.lookAt(pos.getX(), pos.getY(), pos.getZ());
+            cultist.getLookHelper().setLookPosition(pos.getX(), pos.getY(), pos.getZ(), cultist.getHorizontalFaceSpeed(), cultist.getVerticalFaceSpeed());
             //cultist.getLookHelper().setLookPositionWithEntity(cultist, 45 + 90 * (spot - 1), 90);
         }
 
