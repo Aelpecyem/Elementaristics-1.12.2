@@ -1,0 +1,11 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "up": "elementaristics:blocks/block_golden_thread/block_golden_thread_t",
+    "down": "elementaristics:blocks/block_golden_thread/block_golden_thread_b",
+    "north": "elementaristics:blocks/block_golden_thread/block_golden_thread_n",
+    "south": "elementaristics:blocks/block_golden_thread/block_golden_thread_s",
+    "west": "elementaristics:blocks/block_golden_thread/block_golden_thread_w",
+    "east": "elementaristics:blocks/block_golden_thread/block_golden_thread_e"
+  }
+}

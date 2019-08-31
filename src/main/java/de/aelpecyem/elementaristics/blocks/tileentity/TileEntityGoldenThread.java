@@ -124,4 +124,36 @@ public class TileEntityGoldenThread extends TileEntity implements ITickable, IHa
     public void setHeight(float height) {
         this.height = height;
     }
+
+    public int getCharge() {
+        return charge;
+    }
+
+    public void setCharge(int charge) {
+        this.charge = charge;
+    }
+
+    public int getAspect() {
+        return aspect;
+    }
+
+    public void setAspect(int aspect) {
+        this.aspect = aspect;
+    }
+
+    public int getActivationStage() {
+        return activationStage;
+    }
+
+    public void setActivationStage(int activationStage) {
+        this.activationStage = activationStage;
+    }
+
+    public int getAnimPhase() {
+        return animPhase;
+    }
+
+    public void setAnimPhase(int animPhase) {
+        this.animPhase = animPhase;
+    }
 }

@@ -2,11 +2,14 @@ package de.aelpecyem.elementaristics.blocks.tileentity.blocks;
 
 import de.aelpecyem.elementaristics.blocks.tileentity.BlockTileEntity;
 import de.aelpecyem.elementaristics.blocks.tileentity.TileEntityGoldenThread;
+import de.aelpecyem.elementaristics.init.ModItems;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
@@ -21,6 +24,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
+
+import java.util.Random;
 
 
 public class BlockGoldenThread extends BlockTileEntity<TileEntityGoldenThread> {
@@ -80,7 +85,6 @@ public class BlockGoldenThread extends BlockTileEntity<TileEntityGoldenThread> {
     }
 
     //might give that a higher bounding box
-
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         TileEntityGoldenThread te = getTileEntity(worldIn, pos);
@@ -90,15 +94,17 @@ public class BlockGoldenThread extends BlockTileEntity<TileEntityGoldenThread> {
         return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
     }
 
-   /* @Override
+    @Override
     public ItemStack getItem(World world, BlockPos pos, IBlockState state) {
-        return new ItemStack(item);
+        ItemStack stack = new ItemStack(ModItems.item_golden_thread);
+
+        return new ItemStack(ModItems.item_golden_thread);
     }
 
     @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        return super.getItemDropped(state, rand, fortune);
-    }*/
+        return Items.AIR;
+    }
 
     @Override
     public boolean canPlaceBlockAt(World world, BlockPos pos) {

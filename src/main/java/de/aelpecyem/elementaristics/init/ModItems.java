@@ -1,8 +1,6 @@
 package de.aelpecyem.elementaristics.init;
 
-import de.aelpecyem.elementaristics.events.EventHandler;
 import de.aelpecyem.elementaristics.items.base.*;
-
 import de.aelpecyem.elementaristics.items.base.artifacts.*;
 import de.aelpecyem.elementaristics.items.base.artifacts.rites.IncantationBase;
 import de.aelpecyem.elementaristics.items.base.artifacts.rites.ItemAspects;
@@ -14,14 +12,16 @@ import de.aelpecyem.elementaristics.items.base.burnable.ItemHerbBundle;
 import de.aelpecyem.elementaristics.items.base.burnable.ItemOpiumTincture;
 import de.aelpecyem.elementaristics.items.base.burnable.ItemPoisonBase;
 import de.aelpecyem.elementaristics.items.base.consumable.*;
-import de.aelpecyem.elementaristics.items.base.thaumagral.*;
+import de.aelpecyem.elementaristics.items.base.thaumagral.ItemThaumagral;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;
 import de.aelpecyem.elementaristics.misc.poisons.PoisonInit;
 import de.aelpecyem.elementaristics.util.IHasModel;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.item.*;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemPickaxe;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemSword;
 import net.minecraftforge.registries.IForgeRegistry;
 
 import java.util.ArrayList;
@@ -131,6 +131,8 @@ public class ModItems {
     public static ItemBase fragment_mother;
 
     public static ItemBase scale;
+
+    public static ItemBase item_golden_thread;
    /* public static ItemArmor hood_cultist = new RobesCultist("hood_cultist",1, EntityEquipmentSlot.HEAD);
     public static ItemArmor garb_cultist = new RobesCultist("garb_cultist",1, EntityEquipmentSlot.CHEST);
     public static ItemArmor legwear_cultist = new RobesCultist("legwear_cultist",2, EntityEquipmentSlot.LEGS);
@@ -203,6 +205,8 @@ public class ModItems {
         reflection_sun = new ItemAspects("reflection_sun", 4, true, Aspects.light);
         clot_blood = new ItemFoodBase("clot_blood", 4, 4, false);
         fragment_mother = new ItemBase("fragment_mother");
+
+        item_golden_thread = new ItemGoldenThread();
     }
 
     private static void initRiteMaterials() {
