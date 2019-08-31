@@ -2,7 +2,9 @@ package de.aelpecyem.elementaristics.misc.potions.effects;
 
 import de.aelpecyem.elementaristics.capability.player.IPlayerCapabilities;
 import de.aelpecyem.elementaristics.capability.player.PlayerCapProvider;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.SoundCategory;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
@@ -20,14 +22,13 @@ public class PotionCrystalProtection extends PotionBase {
 
     @SubscribeEvent
     public void hitEntity(LivingHurtEvent event) {
-        //play some sound effect idk
         if (event.getEntityLiving().getActivePotionEffects().contains(event.getEntityLiving().getActivePotionEffect(this))) {
             if (event.getAmount() > 1) {
                 int amplifier = event.getEntityLiving().getActivePotionEffect(this).getAmplifier();
                 int duration = event.getEntityLiving().getActivePotionEffect(this).getDuration();
                 event.getEntityLiving().attackEntityFrom(event.getSource(), 1);
                 event.getEntityLiving().removePotionEffect(this);
-                //    if (duration > 1000) {
+                event.getEntityLiving().world.playSound(event.getEntityLiving().posX, event.getEntityLiving().posY, event.getEntityLiving().posZ, SoundEvents.BLOCK_GLASS_BREAK, SoundCategory.NEUTRAL, 0.9F, 1.5F, false);
                 if (!event.getEntityLiving().hasCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null))
                     event.getEntityLiving().addPotionEffect(new PotionEffect(this, duration - 1000, amplifier));
                 else {
@@ -37,7 +38,6 @@ public class PotionCrystalProtection extends PotionBase {
                         event.getEntityLiving().addPotionEffect(new PotionEffect(this, duration - 1000, amplifier, false, false));
                     }
                 }
-                //  }
                 event.setCanceled(true);
             }
 

@@ -53,7 +53,7 @@ public class MaganUtil {
 
     public static boolean drainMaganFromCultist(EntityCultist cultist, float amount, int stuntTime, boolean particles) {
         if (cultist != null) {
-            cultist.setStuntTime(stuntTime);
+            cultist.setStuntTimeHigher(stuntTime);
             if (cultist.getMagan() >= amount) {
                 if (particles) {
                     Elementaristics.proxy.generateGenericParticles(cultist, cultist.getAspect().getColor(), 2F, 50, -0.01F, true, true);

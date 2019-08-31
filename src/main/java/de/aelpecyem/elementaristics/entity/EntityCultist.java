@@ -8,8 +8,10 @@ import de.aelpecyem.elementaristics.entity.projectile.EntityElementalSpell;
 import de.aelpecyem.elementaristics.items.base.artifacts.ItemSoulMirror;
 import de.aelpecyem.elementaristics.misc.elements.Aspect;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;
+import de.aelpecyem.elementaristics.misc.potions.PotionInit;
 import de.aelpecyem.elementaristics.networking.PacketHandler;
 import de.aelpecyem.elementaristics.networking.entity.cultist.PacketSpawnCultistAttackParticles;
+import de.aelpecyem.elementaristics.networking.entity.cultist.PacketSpawnCultistSpellParticles;
 import de.aelpecyem.elementaristics.networking.player.PacketMessage;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.EntityAgeable;
@@ -23,6 +25,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundEvent;
@@ -58,6 +61,17 @@ public class EntityCultist extends EntityTameable {
 
     public void setStuntTime(int stuntTime) {
         dataManager.set(STUNT_TIME, stuntTime);
+    }
+
+    /**
+     * Sets the time the Magan regen is stunted, but only if the value is higher than the current one
+     *
+     * @param stuntTime
+     */
+    public void setStuntTimeHigher(int stuntTime) {
+        if (getStuntTime() < stuntTime) {
+            dataManager.set(STUNT_TIME, stuntTime);
+        }
     }
 
     public int getStuntTime() {
@@ -170,7 +184,9 @@ public class EntityCultist extends EntityTameable {
     protected void initEntityAI() { //todo, add some sort of wandering mode, though that may be reserved for later builds
         this.aiSit = new EntityAISit(this);
         this.tasks.addTask(1, new EntityAISwimming(this));
-        this.tasks.addTask(2, new AICastSpell(this));
+        this.tasks.addTask(2, new AICastAttackSpell(this));
+        this.tasks.addTask(2, new AICastShieldSpell(this));
+        this.tasks.addTask(2, new AICastShieldSpell(this));
         this.tasks.addTask(3, this.aiSit);
         this.tasks.addTask(4, new EntityAIFollowOwner(this, 1D, 4.0F, 2.0F));
         this.tasks.addTask(5, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
@@ -266,45 +282,36 @@ public class EntityCultist extends EntityTameable {
         return null;
     }
 
-    static class AICastSpell extends EntityAIBase {
+    static class AICastAttackSpell extends EntityAIBase {
         private final EntityCultist cultist;
         private boolean finished;
 
-        public AICastSpell(EntityCultist cultist) {
+        public AICastAttackSpell(EntityCultist cultist) {
             this.cultist = cultist;
             this.setMutexBits(3);
         }
 
-        /**
-         * Returns whether the EntityAIBase should begin execution.
-         */
         public boolean shouldExecute() {
             EntityLivingBase target = this.cultist.getAttackTarget();
             if (target != null && target.isEntityAlive()) {
-                return target.getDistance(cultist) < 40;
+                return target.getDistance(cultist) < 40 && cultist.getMagan() >= 5;
             }
             return false;
         }
 
-        /**
-         * Execute a one shot task or start executing a continuous task
-         */
         public void startExecuting() {
             cultist.setCastingProgress(1);
             finished = false;
             super.startExecuting();
         }
 
-        /**
-         * Returns whether an in-progress EntityAIBase should continue executing
-         */
         public boolean shouldContinueExecuting() {
             EntityLivingBase target = this.cultist.getAttackTarget();
             if (target == null || target.getDistance(cultist) >= 40 || target.isDead || finished) {
                 cultist.setCastingProgress(0);
                 return false;
             }
-            return true;
+            return cultist.getMagan() >= 5;
         }
 
         @Override
@@ -314,9 +321,6 @@ public class EntityCultist extends EntityTameable {
             super.resetTask();
         }
 
-        /**
-         * Keep ticking a continuous task that has already been started
-         */
         public void updateTask() {
             cultist.continueCasting();
             EntityLivingBase target = this.cultist.getAttackTarget();
@@ -331,10 +335,110 @@ public class EntityCultist extends EntityTameable {
                         cultist.world.spawnEntity(projectile);
                     }
                     cultist.drainMagan(5);
+                    cultist.setStuntTimeHigher(20);
                     finished = true;
                 }
             } else {
                 cultist.setCastingProgress(0);
+            }
+            super.updateTask();
+        }
+    }
+
+    static class AICastHealingSpell extends EntityAIBase {
+        private final EntityCultist cultist;
+        private boolean finished;
+
+        public AICastHealingSpell(EntityCultist cultist) {
+            this.cultist = cultist;
+            this.setMutexBits(3);
+        }
+
+        public boolean shouldExecute() {
+            return cultist.getHealth() < cultist.getMaxHealth() && cultist.getMagan() >= 15;
+        }
+
+        public void startExecuting() {
+            cultist.setCastingProgress(1);
+            finished = false;
+            super.startExecuting();
+        }
+
+        public boolean shouldContinueExecuting() {
+            if (finished) {
+                cultist.setCastingProgress(0);
+                return false;
+            }
+            return shouldExecute();
+        }
+
+        @Override
+        public void resetTask() {
+            cultist.setCastingProgress(0);
+            finished = false;
+            super.resetTask();
+        }
+
+        public void updateTask() {
+            cultist.continueCasting();
+            if (cultist.getRNG().nextFloat() < 0.4F) {
+                PacketHandler.sendToAllLoaded(cultist, new PacketSpawnCultistSpellParticles(cultist, 16721255));
+            }
+            if (cultist.getCastingProgress() >= 120) {
+                cultist.heal(4);
+                cultist.drainMagan(15);
+                cultist.setStuntTimeHigher(60);
+                finished = true;
+            }
+            super.updateTask();
+        }
+    }
+
+    static class AICastShieldSpell extends EntityAIBase {
+        private final EntityCultist cultist;
+        private boolean finished;
+
+        public AICastShieldSpell(EntityCultist cultist) {
+            this.cultist = cultist;
+            this.setMutexBits(3);
+        }
+
+        public boolean shouldExecute() {
+            return !cultist.getActivePotionEffects().contains(cultist.getActivePotionEffect(PotionInit.potionCrystalProtection)) && cultist.getAttackTarget() != null && cultist.getMagan() >= 25;
+        }
+
+        public void startExecuting() {
+            cultist.setCastingProgress(1);
+            finished = false;
+            super.startExecuting();
+        }
+
+        public boolean shouldContinueExecuting() {
+            if (finished) {
+                cultist.setCastingProgress(0);
+                return false;
+            }
+            return shouldExecute();
+        }
+
+        @Override
+        public void resetTask() {
+            cultist.setCastingProgress(0);
+            finished = false;
+            super.resetTask();
+        }
+
+        public void updateTask() {
+            cultist.continueCasting();
+            if (cultist.getRNG().nextFloat() < 0.4F) {
+                PacketHandler.sendToAllLoaded(cultist, new PacketSpawnCultistSpellParticles(cultist, Aspects.crystal.getColor()));
+            }
+            if (cultist.getCastingProgress() >= 180) {
+                cultist.addPotionEffect(new PotionEffect(PotionInit.potionCrystalProtection, 6000, 1, false, false));
+                cultist.heal(5);
+                cultist.drainMagan(25);
+                cultist.setStuntTimeHigher(120);
+                finished = true;
             }
             super.updateTask();
         }

@@ -40,7 +40,7 @@ public class PacketSpawnCultistAttackParticles implements IMessage {
                 double x = cultist.posX - MathHelper.sin(cultist.rotationYawHead * 0.017453292F) * MathHelper.cos(cultist.rotationPitch * 0.017453292F);
                 double y = cultist.posY + cultist.getEyeHeight() + -MathHelper.sin(cultist.rotationPitch * 0.017453292F);
                 double z = cultist.posZ + MathHelper.cos(cultist.rotationYawHead * 0.017453292F) * MathHelper.cos(cultist.rotationPitch * 0.017453292F);
-                Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(cultist.world, x + cultist.getRNG().nextGaussian() / 2, y + cultist.getRNG().nextGaussian() / 2, z + cultist.getRNG().nextGaussian() / 2, 0, 0, 0, cultist.getAspect().getColor(), 3 + cultist.getRNG().nextFloat() / 2, 30 + cultist.getRNG().nextInt(40), 0F, false, false, false, true, x, y, z));
+                Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(cultist.world, x + cultist.getRNG().nextGaussian() / 4, y + cultist.getRNG().nextGaussian() / 4, z + cultist.getRNG().nextGaussian() / 4, 0, 0, 0, cultist.getAspect().getColor(), 1.5F + cultist.getRNG().nextFloat() / 3, 30 + cultist.getRNG().nextInt(40), 0F, false, false, true, true, x, y, z));
             });
             return null;
         }
