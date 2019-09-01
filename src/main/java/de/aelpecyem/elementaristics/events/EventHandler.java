@@ -153,7 +153,9 @@ public class EventHandler {
             player.addPotionEffect(new PotionEffect(potion, 24000, 0, true, false));
             player.removePotionEffect(PotionInit.potionTrance);
             player.removePotionEffect(PotionInit.ecstasy);
-            player.sendStatusMessage(new TextComponentString(TextFormatting.GOLD + I18n.format("message.meditation_to_contentment.name")), false);
+            if (!player.world.isRemote) {
+                PacketHandler.sendTo(player, new PacketMessage("message.meditation_to_contentment.name"));
+            }
             return;
         }
 

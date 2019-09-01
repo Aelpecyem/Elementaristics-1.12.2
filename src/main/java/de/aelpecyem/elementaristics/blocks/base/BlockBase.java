@@ -3,11 +3,9 @@ package de.aelpecyem.elementaristics.blocks.base;
 import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.init.ModBlocks;
 import de.aelpecyem.elementaristics.util.IBlockHasModel;
-import de.aelpecyem.elementaristics.util.IHasModel;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 
@@ -37,6 +35,19 @@ public class BlockBase extends Block implements IBlockHasModel {
         setUnlocalizedName(name);
         setRegistryName(name);
         this.setCreativeTab(Elementaristics.tab);
+        ModBlocks.BLOCKS.add(this);
+    }
+
+    public BlockBase(Material material, String name, boolean creativeTab) {
+        super(material);
+        setHardness(6);
+        setResistance(6);
+        this.name = name;
+
+        setUnlocalizedName(name);
+        setRegistryName(name);
+        if (creativeTab)
+            this.setCreativeTab(Elementaristics.tab);
         ModBlocks.BLOCKS.add(this);
     }
 

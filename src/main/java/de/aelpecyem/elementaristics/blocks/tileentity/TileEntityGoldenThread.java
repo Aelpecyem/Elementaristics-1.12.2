@@ -1,9 +1,12 @@
 package de.aelpecyem.elementaristics.blocks.tileentity;
 
 import de.aelpecyem.elementaristics.Elementaristics;
+import de.aelpecyem.elementaristics.init.ModBlocks;
+import de.aelpecyem.elementaristics.items.base.ItemGoldenThread;
 import de.aelpecyem.elementaristics.networking.PacketHandler;
 import de.aelpecyem.elementaristics.networking.tileentity.goldenthread.PacketUpdateGoldenThread;
 import de.aelpecyem.elementaristics.networking.tileentity.inventory.PacketUpdateInventory;
+import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
@@ -82,6 +85,13 @@ public class TileEntityGoldenThread extends TileEntity implements ITickable, IHa
             PacketHandler.sendToAllAround(world, pos, 64, new PacketUpdateGoldenThread(this));
         }
         if (activationStage < 1) {
+            if (world.rand.nextInt(40) == 1) {
+                if (!world.isRemote && !ItemGoldenThread.hasSpace(world, pos, null)) {
+                    ModBlocks.block_golden_thread.breakBlock(world, pos, world.getBlockState(pos));
+                    world.setBlockState(pos, Blocks.AIR.getDefaultState());
+                    return;
+                }
+            }
             if (charge < MAX_CHARGE) { // test value
                 //spawn elementals depending on the block's aspect... the charge count of the block will be increased by the elementals on their own
             } else {

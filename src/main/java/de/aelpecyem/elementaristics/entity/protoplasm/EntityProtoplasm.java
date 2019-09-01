@@ -100,6 +100,15 @@ public class EntityProtoplasm extends EntityTameable implements IMob, IHasInvent
 
     @Nullable
     @Override
+    public EntityLivingBase getAttackTarget() {
+        if (isTamed() && super.getAttackTarget() instanceof EntityPlayer) {
+            return null;
+        }
+        return super.getAttackTarget();
+    }
+
+    @Nullable
+    @Override
     public EntityAgeable createChild(EntityAgeable ageable) {
         return null;
     }
@@ -169,6 +178,7 @@ public class EntityProtoplasm extends EntityTameable implements IMob, IHasInvent
                         this.aiSit.setSitting(true);
                         this.setHealth(getMaxHealth());
                         this.playTameEffect(true);
+                        setAttackTarget(null);
                         this.world.setEntityState(this, (byte)7);
                         return true;
                     }

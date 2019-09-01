@@ -11,7 +11,6 @@ import net.minecraft.util.ResourceLocation;
 import javax.annotation.Nullable;
 
 public class RenderCultist extends RenderLiving<EntityCultist>{
-    //public static final ResourceLocation TEXTURE = new ResourceLocation(Elementaristics.MODID, "textures/entity/cultist.png");
     public RenderCultist(RenderManager rendermanagerIn) {
         super(rendermanagerIn, new ModelCultist(), 0.5F);
     }

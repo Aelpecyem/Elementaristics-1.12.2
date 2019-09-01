@@ -11,6 +11,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -30,7 +31,7 @@ import java.util.Random;
 
 public class BlockGoldenThread extends BlockTileEntity<TileEntityGoldenThread> {
     public BlockGoldenThread() {
-        super(Material.ROCK, "block_golden_thread");
+        super(Material.ROCK, "block_golden_thread", false);
         setLightOpacity(0);
         setResistance(1000);
         setLightLevel(5);
@@ -64,12 +65,14 @@ public class BlockGoldenThread extends BlockTileEntity<TileEntityGoldenThread> {
 
     @Override
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-        TileEntityGoldenThread tile = getTileEntity(worldIn, pos);
-        IItemHandler itemHandler = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.NORTH);
-        ItemStack stack = itemHandler.getStackInSlot(0);
-        if (!stack.isEmpty()) {
-            EntityItem item = new EntityItem(worldIn, pos.getX(), pos.getY(), pos.getZ(), stack);
-            worldIn.spawnEntity(item);
+        TileEntity tile = getTileEntity(worldIn, pos);
+        if (tile instanceof TileEntityGoldenThread) {
+            IItemHandler itemHandler = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.NORTH);
+            ItemStack stack = itemHandler.getStackInSlot(0);
+            if (!stack.isEmpty()) {
+                EntityItem item = new EntityItem(worldIn, pos.getX(), pos.getY(), pos.getZ(), stack);
+                worldIn.spawnEntity(item);
+            }
         }
         super.breakBlock(worldIn, pos, state);
     }

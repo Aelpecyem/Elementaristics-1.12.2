@@ -8,6 +8,7 @@ import de.aelpecyem.elementaristics.networking.entity.cultist.PacketSpawnCultist
 import de.aelpecyem.elementaristics.networking.entity.cultist.PacketSpawnCultistSpellParticles;
 import de.aelpecyem.elementaristics.networking.entity.protoplasm.PacketDyeProtoplasm;
 import de.aelpecyem.elementaristics.networking.other.PacketBurnableAffect;
+import de.aelpecyem.elementaristics.networking.other.PacketMarkBlock;
 import de.aelpecyem.elementaristics.networking.player.PacketBaubleKeyWinged;
 import de.aelpecyem.elementaristics.networking.player.PacketMessage;
 import de.aelpecyem.elementaristics.networking.player.PacketMove;
@@ -61,6 +62,7 @@ public class PacketHandler {
         network.registerMessage(new CapabilityChunkSync.Handler(), CapabilityChunkSync.class, next(), Side.CLIENT);
 
         network.registerMessage(new PacketSpawnBoundParticles.Handler(), PacketSpawnBoundParticles.class, next(), Side.CLIENT);
+        network.registerMessage(new PacketMarkBlock.Handler(), PacketMarkBlock.class, next(), Side.CLIENT);
         network.registerMessage(new PacketMessage.Handler(), PacketMessage.class, next(), Side.CLIENT);
         network.registerMessage(new PacketMove.Handler(), PacketMove.class, next(), Side.CLIENT);
 

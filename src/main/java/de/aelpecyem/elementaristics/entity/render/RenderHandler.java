@@ -1,15 +1,13 @@
-package de.aelpecyem.elementaristics.util;
+package de.aelpecyem.elementaristics.entity.render;
 
 import de.aelpecyem.elementaristics.entity.EntityCultist;
 import de.aelpecyem.elementaristics.entity.EntitySilverThread;
+import de.aelpecyem.elementaristics.entity.elementals.EntityAetherElemental;
 import de.aelpecyem.elementaristics.entity.projectile.EntityElementalSpell;
 import de.aelpecyem.elementaristics.entity.projectile.EntityExplosionProjectile;
 import de.aelpecyem.elementaristics.entity.projectile.EntitySpellProjectile;
 import de.aelpecyem.elementaristics.entity.protoplasm.EntityProtoplasm;
-import de.aelpecyem.elementaristics.entity.render.RenderCultist;
-import de.aelpecyem.elementaristics.entity.render.RenderNone;
-import de.aelpecyem.elementaristics.entity.render.RenderProtoplasm;
-import de.aelpecyem.elementaristics.entity.render.RenderSilverThread;
+import de.aelpecyem.elementaristics.entity.render.elemental.RenderElementalAether;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
@@ -35,6 +33,13 @@ public class RenderHandler {
             @Override
             public Render<? super EntityProtoplasm> createRenderFor(RenderManager manager) {
                 return new RenderProtoplasm(manager);
+            }
+        });
+
+        RenderingRegistry.registerEntityRenderingHandler(EntityAetherElemental.class, new IRenderFactory<EntityAetherElemental>() {
+            @Override
+            public Render<? super EntityAetherElemental> createRenderFor(RenderManager manager) {
+                return new RenderElementalAether(manager);
             }
         });
 

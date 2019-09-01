@@ -22,7 +22,6 @@ public class RenderProtoplasm extends RenderLiving<EntityProtoplasm> {
     public static final ResourceLocation TEXTURE = new ResourceLocation(Elementaristics.MODID, "textures/entity/protoplasm.png");
 
     public RenderProtoplasm(RenderManager rendermanagerIn) {
-        //RenderSlime
         super(rendermanagerIn, new ModelSlime(16), 0.25F);
         this.addLayer(new LayerProtoplasmGel(this));
     }

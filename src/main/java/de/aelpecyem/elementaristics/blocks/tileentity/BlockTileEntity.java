@@ -14,6 +14,10 @@ public abstract class BlockTileEntity<TE extends TileEntity> extends BlockBase {
         super(material, name);
     }
 
+    public BlockTileEntity(Material material, String name, boolean creativeTab) {
+        super(material, name, creativeTab);
+    }
+
 
     public abstract Class<TE> getTileEntityClass();
 

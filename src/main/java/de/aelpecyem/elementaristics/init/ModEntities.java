@@ -1,9 +1,9 @@
 package de.aelpecyem.elementaristics.init;
 
 import de.aelpecyem.elementaristics.Elementaristics;
-import de.aelpecyem.elementaristics.config.Config;
 import de.aelpecyem.elementaristics.entity.EntityCultist;
 import de.aelpecyem.elementaristics.entity.EntitySilverThread;
+import de.aelpecyem.elementaristics.entity.elementals.EntityAetherElemental;
 import de.aelpecyem.elementaristics.entity.projectile.EntityElementalSpell;
 import de.aelpecyem.elementaristics.entity.projectile.EntityExplosionProjectile;
 import de.aelpecyem.elementaristics.entity.projectile.EntitySpellProjectile;
@@ -13,26 +13,23 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 
 public class ModEntities {
-    public static final int SILVER_THREAD_ID = Config.silverThreadId;
-    public static final int CULTIST_ID = Config.cultistId;
-    public static final int PROTOPLASM_ID = Config.protoplasmId;
-    public static final int SPELL_ID = Config.spellId;
-    public static final int EXPLOSION_ID = Config.explosionId;
-    public static final int ELEMENTAL_SPELL_ID = Config.elementalProjectileId;
+    public static int entityId = 0;
     public static void init(){
-        registerEntity("silver_thread", EntitySilverThread.class, SILVER_THREAD_ID, 200, 14474460, 10801103);
-        registerEntity("cultist", EntityCultist.class, CULTIST_ID, 50, 1638451, 1638424);
-        registerEntity("protoplasm", EntityProtoplasm.class, PROTOPLASM_ID, 50, 327728, 337968);
-        registerEntity("projectile_spell", EntitySpellProjectile.class, SPELL_ID, 50);
-        registerEntity("projectile_explosion", EntityExplosionProjectile.class, EXPLOSION_ID, 50);
-        registerEntity("projectile_elemental", EntityElementalSpell.class, ELEMENTAL_SPELL_ID, 50);
+        registerEntity("silver_thread", EntitySilverThread.class, 200, 14474460, 10801103);
+        registerEntity("cultist", EntityCultist.class, 50, 1638451, 1638424);
+        registerEntity("protoplasm", EntityProtoplasm.class, 50, 327728, 337968);
+        registerEntity("elemental_aether", EntityAetherElemental.class, 50, 1415, 267888); //change the abstract part and add config stuff etc.
+        registerEntity("projectile_spell", EntitySpellProjectile.class, 50);
+        registerEntity("projectile_explosion", EntityExplosionProjectile.class, 50);
+        registerEntity("projectile_elemental", EntityElementalSpell.class, 50);
 
     }
-    private static void registerEntity(String name, Class<? extends Entity> entity, int id, int range, int color1, int color2) {
-        EntityRegistry.registerModEntity(new ResourceLocation(Elementaristics.MODID, name), entity, name, id, Elementaristics.instance, range, 1, false, color1, color2);
+
+    private static void registerEntity(String name, Class<? extends Entity> entity, int range, int color1, int color2) {
+        EntityRegistry.registerModEntity(new ResourceLocation(Elementaristics.MODID, name), entity, name, entityId++, Elementaristics.instance, range, 1, false, color1, color2);
     }
 
-    private static void registerEntity(String name, Class<? extends Entity> entity, int id, int range) {
-        EntityRegistry.registerModEntity(new ResourceLocation(Elementaristics.MODID, name), entity, name, id, Elementaristics.instance, range, 1, true);
+    private static void registerEntity(String name, Class<? extends Entity> entity, int range) {
+        EntityRegistry.registerModEntity(new ResourceLocation(Elementaristics.MODID, name), entity, name, entityId++, Elementaristics.instance, range, 1, true);
     }
 }

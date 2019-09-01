@@ -4,9 +4,13 @@ import de.aelpecyem.elementaristics.blocks.tileentity.TileEntityGoldenThread;
 import de.aelpecyem.elementaristics.init.ModBlocks;
 import de.aelpecyem.elementaristics.misc.elements.Aspect;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;
+import de.aelpecyem.elementaristics.networking.PacketHandler;
+import de.aelpecyem.elementaristics.networking.other.PacketMarkBlock;
+import de.aelpecyem.elementaristics.networking.player.PacketMessage;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -34,8 +38,7 @@ public class ItemGoldenThread extends ItemBase {
     public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing face, float hitX, float hitY, float hitZ) {
         BlockPos pos0 = world.getBlockState(pos).getBlock().isReplaceable(world, pos) ? pos : pos.offset(face);
         ItemStack stack = player.getHeldItem(hand);
-        if (hasSpace(pos0) && player.canPlayerEdit(pos0, face, stack) && world.mayPlace(world.getBlockState(pos0).getBlock(), pos0, false, face, player) && ModBlocks.block_golden_thread.canPlaceBlockAt(world, pos0)) {
-            System.out.println("yes");
+        if (hasSpace(world, pos0, player) && player.canPlayerEdit(pos0, face, stack) && world.mayPlace(world.getBlockState(pos0).getBlock(), pos0, false, face, player) && ModBlocks.block_golden_thread.canPlaceBlockAt(world, pos0)) {
             world.setBlockState(pos0, ModBlocks.block_golden_thread.getStateForPlacement(world, pos, face, hitX, hitY, hitZ, 0, player, hand));
             TileEntity tile = world.getTileEntity(pos0);
             if (tile instanceof TileEntityGoldenThread) {
@@ -49,8 +52,24 @@ public class ItemGoldenThread extends ItemBase {
         return super.onItemUse(player, world, pos, hand, face, hitX, hitY, hitZ);
     }
 
-    public boolean hasSpace(BlockPos pos) {
-        return true; //will check if a huge area is free
+    public static boolean hasSpace(World world, BlockPos pos, @Nullable EntityPlayer player) {
+        boolean flag = true;
+        for (int x = -7; x < 7; x++) {
+            for (int y = 0; y < 6; y++) {
+                for (int z = -7; z < 7; z++) {
+                    if (!(pos == pos.add(x, y, z)) && !(world.getBlockState(pos.add(x, y, z)).getMaterial().isReplaceable() || world.getBlockState(pos.add(x, y, z)).getBlock() == Blocks.AIR)) {
+                        if (!world.isRemote) {
+                            if (player != null) {
+                                PacketHandler.sendTo(player, new PacketMarkBlock(pos.add(x, y, z)));
+                                PacketHandler.sendTo(player, new PacketMessage("message.golden_thread_space.not_enough", true));
+                            }
+                        }
+                        flag = false;
+                    }
+                }
+            }
+        }
+        return flag; //will check if a huge area is free
     }
 
     @Override
@@ -77,7 +96,7 @@ public class ItemGoldenThread extends ItemBase {
             stack.setTagCompound(new NBTTagCompound());
         }
         if (!stack.getTagCompound().hasKey(NBTKEY_ASPECT)) {
-            stack.getTagCompound().setInteger(NBTKEY_ASPECT, 15);
+            stack.getTagCompound().setInteger(NBTKEY_ASPECT, Aspects.air.getId());
         }
         return true;
     }

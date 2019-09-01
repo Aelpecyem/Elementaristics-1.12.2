@@ -11,18 +11,11 @@ public class Config {
     private static final String CATEGORY_DIM = "dimensions";
     private static final String CATEGORY_MISC = "misc";
     //values- hud
-    public static boolean useNumbersInsteadOfBar = false;
+    public static boolean useNumbersInsteadOfBar = true;
     //values- compat
     public static boolean useTcCompat = true;
     //values- dimensions
     public static int mindDimensionId = 1103;
-    //values- misc
-    public static int silverThreadId = 1103;
-    public static int cultistId = 77766;
-    public static int protoplasmId = 2602;
-    public static int spellId = 7251;
-    public static int explosionId = 4145;
-    public static int elementalProjectileId = 6156;
 
     public static void readConfig() {
         Configuration cfg = Elementaristics.config;
@@ -59,12 +52,5 @@ public class Config {
 
     private static void initMiscConfig(Configuration cfg) {
         cfg.addCustomCategoryComment(CATEGORY_MISC, "Misc Configuration");
-        cultistId = cfg.getInt("cultistId", CATEGORY_MISC, cultistId, -10000, 10000, "Determines the ID for the Cultist Entity");
-        silverThreadId = cfg.getInt("silverThreadId", CATEGORY_MISC, silverThreadId, -10000, 10000, "Determines the ID for the Silver Thread Entity");
-        protoplasmId = cfg.getInt("protoplasmId", CATEGORY_MISC, protoplasmId, -10000, 10000, "Determines the ID for the Protoplasm Entity");
-        spellId = cfg.getInt("spellId", CATEGORY_MISC, spellId, -10000, 10000, "Determines the ID for the Spell Projectile Entity");
-        explosionId = cfg.getInt("explosionProjectileId", CATEGORY_MISC, explosionId, -10000, 10000, "Determines the ID for the Protoplasm Entity");
-        elementalProjectileId = cfg.getInt("elementalProjectileId", CATEGORY_MISC, elementalProjectileId, -10000, 10000, "Determines the ID for the Spell Projectile Entity");
-
     }
 }

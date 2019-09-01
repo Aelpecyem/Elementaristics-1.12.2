@@ -62,10 +62,9 @@ public class TESRGoldenThread extends TileEntitySpecialRenderer<TileEntityGolden
 
         if (te.animPhase == 0) {
             float motionDown = Math.max(Math.abs(te.getHeight()) / 100F, 0.005F);
-            te.setHeight(te.getHeight() + motionDown); //faster the further from the bounds
+            te.setHeight(te.getHeight() + motionDown);
         } else {
             float motionUp = Math.max(Math.abs((float) 1 + te.getHeight()) / 100F, 0.005F);
-            System.out.println(motionUp);
             te.setHeight(te.getHeight() - motionUp);
         }
 

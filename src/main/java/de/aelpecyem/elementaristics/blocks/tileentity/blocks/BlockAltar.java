@@ -1,9 +1,10 @@
 package de.aelpecyem.elementaristics.blocks.tileentity.blocks;
 
-import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.blocks.tileentity.BlockTileEntity;
 import de.aelpecyem.elementaristics.blocks.tileentity.TileEntityAltar;
 import de.aelpecyem.elementaristics.items.base.artifacts.rites.IncantationBase;
+import de.aelpecyem.elementaristics.networking.PacketHandler;
+import de.aelpecyem.elementaristics.networking.other.PacketMarkBlock;
 import net.minecraft.block.BlockAir;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.material.Material;
@@ -103,7 +104,10 @@ public class BlockAltar extends BlockTileEntity<TileEntityAltar> {
                     for (int y = pos.getY(); y < pos.getY() + 3; y++) {
                         for (int z = pos.getZ() - 4; z < pos.getZ() + 4; z++) {
                             if (!(worldIn.getBlockState(new BlockPos(x, y, z)).getBlock() instanceof BlockAir || (x == pos.getX() && z == pos.getZ() && y == pos.getY() || !worldIn.getBlockState(new BlockPos(x, y, z)).getMaterial().blocksMovement()))) {
-                                Elementaristics.proxy.generateGenericParticles(worldIn, x + 0.5, y + 0.5, z + 0.5, 8073887, 6, 80, 0, false, false);
+                                if (!worldIn.isRemote) {
+                                    PacketHandler.sendTo(playerIn, new PacketMarkBlock(new BlockPos(x, y, z)));
+                                }
+                                //  Elementaristics.proxy.generateGenericParticles(worldIn, x + 0.5, y + 0.5, z + 0.5, 8073887, 6, 80, 0, false, false);
                                 approved = false;
                             }
                         }

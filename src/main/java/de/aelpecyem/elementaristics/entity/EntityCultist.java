@@ -156,6 +156,9 @@ public class EntityCultist extends EntityTameable {
 
     @Override
     public void onLivingUpdate() {
+        if (isCasting() && getAttackTarget() != null) {
+            getLookHelper().setLookPosition(getAttackTarget().posX, getAttackTarget().posY + getAttackTarget().getEyeHeight(), getAttackTarget().posZ, getHorizontalFaceSpeed(), getVerticalFaceSpeed());
+        }
         if (getStuntTime() < 0) {
             if (getMagan() < 80) {
                 setMagan(getMagan() + 0.05F);

@@ -134,8 +134,10 @@ public final class Elementaristics {
         OreDictionary.registerOre("listAllMeat", Items.PORKCHOP);
         OreDictionary.registerOre("listAllMeat", Items.BEEF);
         OreDictionary.registerOre("listAllMeat", Items.MUTTON);
+        OreDictionary.registerOre("listAllMeat", Items.FISH);
 
         OreDictionary.registerOre("listAllPlant", Blocks.VINE);
+        OreDictionary.registerOre("listAllPlant", Blocks.GRASS);
         OreDictionary.registerOre("listAllPlant", Blocks.RED_FLOWER);
         OreDictionary.registerOre("listAllPlant", Blocks.YELLOW_FLOWER);
         OreDictionary.registerOre("listAllPlant", Blocks.TALLGRASS);
