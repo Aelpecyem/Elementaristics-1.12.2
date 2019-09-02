@@ -2,8 +2,10 @@ package de.aelpecyem.elementaristics.misc.pantheon;
 
 import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.blocks.tileentity.pantheon.TileEntityDeityShrine;
+import de.aelpecyem.elementaristics.blocks.tileentity.render.BlockModel;
 import de.aelpecyem.elementaristics.init.Deities;
 import de.aelpecyem.elementaristics.misc.elements.Aspect;
+import net.minecraft.client.model.ModelBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -16,13 +18,35 @@ public abstract class Deity {
     private ResourceLocation name;
     private Aspect aspect;
     private int color;
+    private ModelBase model;
+    private ResourceLocation tex;
 
     public Deity(long tickTimeBegin, ResourceLocation name, @Nullable Aspect aspect, int color) {
         this.tickTimeBegin = tickTimeBegin;
         this.name = name;
         this.aspect = aspect;
         this.color = color;
+        this.model = new BlockModel();
+        this.tex = new ResourceLocation(Elementaristics.MODID, "textures/blocks/stone_enriched.png");
         Deities.deities.put(name, this);
+    }
+
+    public Deity(long tickTimeBegin, ResourceLocation name, @Nullable Aspect aspect, int color, ModelBase model, ResourceLocation tex) {
+        this.tickTimeBegin = tickTimeBegin;
+        this.name = name;
+        this.aspect = aspect;
+        this.color = color;
+        this.model = model;
+        this.tex = tex;
+        Deities.deities.put(name, this);
+    }
+
+    public ModelBase getModel() {
+        return model;
+    }
+
+    public ResourceLocation getTexture() {
+        return tex;
     }
 
     public int getColor() {

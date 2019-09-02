@@ -14,6 +14,8 @@ import javax.annotation.Nullable;
 public class RenderElementalAether extends RenderLiving<EntityAetherElemental> {
     public RenderElementalAether(RenderManager rendermanagerIn) {
         super(rendermanagerIn, new ModelAetherElemental(), 0);
+        if (Minecraft.getMinecraft().player != null)
+            System.out.println(Minecraft.getMinecraft().player.getSkinType());
     }
 
     @Nullable
@@ -22,7 +24,6 @@ public class RenderElementalAether extends RenderLiving<EntityAetherElemental> {
         Minecraft mc = Minecraft.getMinecraft();
         if (!(mc.getRenderViewEntity() instanceof AbstractClientPlayer))
             return DefaultPlayerSkin.getDefaultSkinLegacy();
-
         return ((AbstractClientPlayer) mc.getRenderViewEntity()).getLocationSkin();
     }
 

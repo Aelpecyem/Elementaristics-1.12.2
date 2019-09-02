@@ -1,0 +1,32 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "textures": {
+      "all": "elementaristics:blocks/nothing",
+      "particle": "elementaristics:blocks/stone_enriched"
+    }
+  },
+  "variants": {
+    "facing=north": {
+      "model": "cube_all"
+    },
+    "facing=south": {
+      "model": "cube_all"
+    },
+    "facing=west": {
+      "model": "cube_all"
+    },
+    "facing=east": {
+      "model": "cube_all"
+    },
+    "normal": {
+      "model": "cube_all"
+    },
+    "inventory": {
+      "model": "elementaristics:item",
+      "textures": {
+        "layer0": "elementaristics:items/shrine_mirror"
+      }
+    }
+  }
+}

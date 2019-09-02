@@ -170,7 +170,7 @@ public class ModBlocks {
         symbol_dreamer = new BlockDeityShrineBase("symbol_dreamer", Deities.deityDreamer, false);
         symbol_angel = new BlockDeityShrineBase("symbol_angel", Deities.deityAngel, false);
         symbol_storm = new BlockDeityShrineBase("symbol_storm", Deities.deityStorm, false);
-        symbol_fighter = new BlockDeityShrineBase("symbol_fighter", Deities.deityFighter, false);
+        symbol_fighter = new BlockDeityShrineBase("symbol_knight", Deities.deityKnight, false);
         symbol_sun = new BlockDeityShrineBase("symbol_sun", Deities.deitySun, false);
         symbol_harbinger = new BlockDeityShrineBase("symbol_harbinger", Deities.deityHarbinger, false);
         symbol_queen = new BlockDeityShrineBase("symbol_queen", Deities.deityQueen, false);
@@ -195,7 +195,7 @@ public class ModBlocks {
         shrine_dreamer = new BlockDeityShrineBase("shrine_dreamer", Deities.deityDreamer, true);
         shrine_angel = new BlockDeityShrineBase("shrine_angel", Deities.deityAngel, true);
         shrine_storm = new BlockDeityShrineBase("shrine_storm", Deities.deityStorm, true);
-        shrine_fighter = new BlockDeityShrineBase("shrine_fighter", Deities.deityFighter, true);
+        shrine_fighter = new BlockDeityShrineBase("shrine_knight", Deities.deityKnight, true);
         shrine_sun= new BlockDeityShrineBase("shrine_sun", Deities.deitySun, true);
         shrine_harbinger = new BlockDeityShrineBase("shrine_harbinger", Deities.deityHarbinger, true);
         shrine_queen = new BlockDeityShrineBase("shrine_queen", Deities.deityQueen, true);

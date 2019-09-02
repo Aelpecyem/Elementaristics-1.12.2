@@ -1,9 +1,7 @@
 package de.aelpecyem.elementaristics.misc.elements;
 
-import de.aelpecyem.elementaristics.init.SoulInit;
-import net.minecraft.init.Items;
-
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Aspects {
 
@@ -83,6 +81,14 @@ public class Aspects {
             }
         }
         return null;
+    }
+
+    public static Aspect getRandomAspect() {
+        return elements.get(new Random().nextInt(elements.size()));
+    }
+
+    public static Aspect getRandomPrimal() {
+        return elements.get(new Random().nextInt(5));
     }
 
     public static Aspect getElementById(int id) {

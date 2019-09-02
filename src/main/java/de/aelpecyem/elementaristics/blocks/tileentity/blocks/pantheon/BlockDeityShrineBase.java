@@ -1,12 +1,9 @@
 package de.aelpecyem.elementaristics.blocks.tileentity.blocks.pantheon;
 
 import de.aelpecyem.elementaristics.blocks.tileentity.BlockTileEntity;
-import de.aelpecyem.elementaristics.blocks.tileentity.TileEntityPurifier;
-import de.aelpecyem.elementaristics.blocks.tileentity.energy.TileEntityEnergyStorage;
 import de.aelpecyem.elementaristics.blocks.tileentity.pantheon.TileEntityDeityShrine;
 import de.aelpecyem.elementaristics.items.base.artifacts.ItemChannelingTool;
 import de.aelpecyem.elementaristics.misc.pantheon.Deity;
-import de.aelpecyem.elementaristics.util.InventoryUtil;
 import de.aelpecyem.elementaristics.util.TimeUtil;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.material.Material;
@@ -14,18 +11,14 @@ import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.IItemHandler;
 
 public class BlockDeityShrineBase extends BlockTileEntity<TileEntityDeityShrine> {
     public static final PropertyDirection FACING = BlockHorizontal.FACING;
@@ -105,14 +98,23 @@ public class BlockDeityShrineBase extends BlockTileEntity<TileEntityDeityShrine>
 
     @Override
     public boolean isFullCube(IBlockState state) {
-        return false;
+        return !isStatue;
     }
 
     @Override
     public boolean isOpaqueCube(IBlockState state) {
-        return false;
+        return isStatue;
     }
 
+    @Override
+    public boolean isFullBlock(IBlockState state) {
+        return !isStatue;
+    }
+
+    @Override
+    public boolean doesSideBlockRendering(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing face) {
+        return !isStatue;
+    }
 
     @Override
     public Class<TileEntityDeityShrine> getTileEntityClass() {

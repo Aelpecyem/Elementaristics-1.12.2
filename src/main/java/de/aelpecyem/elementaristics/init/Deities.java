@@ -9,7 +9,6 @@ import de.aelpecyem.elementaristics.misc.pantheon.DeitySupplyEffectBase;
 import de.aelpecyem.elementaristics.misc.pantheon.advanced.*;
 import de.aelpecyem.elementaristics.util.TimeUtil;
 import net.minecraft.init.MobEffects;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
 
 import java.util.HashMap;
@@ -28,7 +27,7 @@ public class Deities {
     public static Deity deityDreamer;
     public static Deity deityAngel;
     public static Deity deityStorm;
-    public static Deity deityFighter;
+    public static Deity deityKnight;
     public static Deity deitySun;
     public static Deity deityHarbinger;
     public static Deity deityQueen;
@@ -56,7 +55,7 @@ public class Deities {
         deityDreamer = new DeitySupplyEffectBase(TimeUtil.getTickTimeStartForHour(8), new ResourceLocation(Elementaristics.MODID, "deity_dreamer"), Aspects.ice, 8497580);
         deityAngel = new DeityPotionEffectBase(TimeUtil.getTickTimeStartForHour(9), new ResourceLocation(Elementaristics.MODID, "deity_angel"), 4757545, MobEffects.REGENERATION);
         deityStorm = new DeitySupplyEffectBase(TimeUtil.getTickTimeStartForHour(10), new ResourceLocation(Elementaristics.MODID, "deity_storm"), Aspects.electricity, 1729436);
-        deityFighter = new DeityPotionEffectBase(TimeUtil.getTickTimeStartForHour(11), new ResourceLocation(Elementaristics.MODID, "deity_fighter"), 1845376, MobEffects.STRENGTH);
+        deityKnight = new DeityPotionEffectBase(TimeUtil.getTickTimeStartForHour(11), new ResourceLocation(Elementaristics.MODID, "deity_knight"), 1845376, MobEffects.STRENGTH);
         deitySun = new DeitySupplyEffectBase(TimeUtil.getTickTimeStartForHour(12), new ResourceLocation(Elementaristics.MODID, "deity_sun"), Aspects.light, 15194144);
         deityHarbinger = new DeityHarbinger();
         deityQueen = new DeityQueen();

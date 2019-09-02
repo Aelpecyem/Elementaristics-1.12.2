@@ -2,6 +2,7 @@ package de.aelpecyem.elementaristics.proxy;
 
 import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.blocks.tileentity.*;
+import de.aelpecyem.elementaristics.blocks.tileentity.pantheon.TileEntityDeityShrine;
 import de.aelpecyem.elementaristics.blocks.tileentity.render.*;
 import de.aelpecyem.elementaristics.entity.render.RenderHandler;
 import de.aelpecyem.elementaristics.events.ClientEventHandler;
@@ -29,7 +30,6 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 public class ClientProxy extends CommonProxy {
-
     @Override
     public void preInit(FMLPreInitializationEvent event) {
         super.preInit(event);
@@ -67,6 +67,8 @@ public class ClientProxy extends CommonProxy {
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityInfusionBasin.class, new TESRBasin());
 
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityGoldenThread.class, new TESRGoldenThread());
+
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDeityShrine.class, new TESRShrine());
     }
 
 

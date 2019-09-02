@@ -17,6 +17,9 @@ import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
@@ -30,13 +33,19 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 public class EntitySilverThread extends EntityMob {
-
+    private static final DataParameter<Integer> COOLDOWN = EntityDataManager.createKey(EntityCultist.class, DataSerializers.VARINT); //Let's do the time warp again!
     private final BossInfoServer bossInfo = (BossInfoServer) (new BossInfoServer(this.getDisplayName(), BossInfo.Color.BLUE, BossInfo.Overlay.PROGRESS)).setDarkenSky(true);
 
     public EntitySilverThread(World worldIn) {
         super(worldIn);
         setSize(0.6F, 1.8F);
 
+    }
+
+    @Override
+    protected void entityInit() {
+        dataManager.register(COOLDOWN, 0);
+        super.entityInit();
     }
 
     @Override
@@ -111,7 +120,12 @@ public class EntitySilverThread extends EntityMob {
     }
     @Override
     public boolean attackEntityAsMob(Entity entityIn) {
-        return super.attackEntityAsMob(entityIn);
+        if (dataManager.get(COOLDOWN) <= 0) {
+            dataManager.set(COOLDOWN, 40);
+            return super.attackEntityAsMob(entityIn);
+        } else {
+            return false;
+        }
     }
 
     @Override
@@ -163,7 +177,6 @@ public class EntitySilverThread extends EntityMob {
 
     @Override
     protected void initEntityAI() {
-
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(2, new EntityAIAttackMelee(this, 1.0D, false));
         this.tasks.addTask(5, new EntityAIMoveTowardsRestriction(this, 1.0D));
@@ -181,6 +194,9 @@ public class EntitySilverThread extends EntityMob {
 
     @Override
     public void onLivingUpdate() {
+        if (dataManager.get(COOLDOWN) > 0) {
+            dataManager.set(COOLDOWN, dataManager.get(COOLDOWN) - 1);
+        }
         for (int i = 0; i < 2; i++) {
             if (world.isRemote)
                 Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(

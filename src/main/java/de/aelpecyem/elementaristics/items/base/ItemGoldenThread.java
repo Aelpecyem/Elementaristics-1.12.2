@@ -14,7 +14,10 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.*;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -26,12 +29,6 @@ public class ItemGoldenThread extends ItemBase {
 
     public ItemGoldenThread() {
         super("item_golden_thread");
-    }
-
-    @Override
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
-        setAspect(playerIn.getHeldItem(handIn), Aspects.fire);
-        return super.onItemRightClick(worldIn, playerIn, handIn);
     }
 
     @Override
@@ -96,7 +93,7 @@ public class ItemGoldenThread extends ItemBase {
             stack.setTagCompound(new NBTTagCompound());
         }
         if (!stack.getTagCompound().hasKey(NBTKEY_ASPECT)) {
-            stack.getTagCompound().setInteger(NBTKEY_ASPECT, Aspects.air.getId());
+            stack.getTagCompound().setInteger(NBTKEY_ASPECT, Aspects.getRandomPrimal().getId());
         }
         return true;
     }

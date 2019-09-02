@@ -8,10 +8,12 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityThrowable;
+import net.minecraft.init.MobEffects;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSourceIndirect;
 import net.minecraft.util.math.MathHelper;
@@ -163,6 +165,23 @@ public class EntityElementalSpell extends EntityThrowable {
                 }
 
             }
+        }
+    }
+
+    private void specialEffect(EntityLivingBase target) {
+        if (getAspect() == Aspects.fire) {
+            target.setFire(4);
+            target.attackEntityFrom(new EntityDamageSourceIndirect(DamageSource.IN_FIRE.getDamageType(), this, getCaster()), 1);
+        } else if (getAspect() == Aspects.light) {
+            target.addPotionEffect(new PotionEffect(MobEffects.BLINDNESS, 240));
+        } else if (getAspect() == Aspects.earth) {
+            target.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 480, 1));
+        } else if (getAspect() == Aspects.water) {
+            target.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, 480, 1));
+        } else if (getAspect() == Aspects.air) {
+            target.knockBack(target, 1, getLookVec().x, getLookVec().z);
+        } else if (getAspect() == Aspects.aether) {
+            target.addPotionEffect(new PotionEffect(MobEffects.LEVITATION, 60, 0, false, false));
         }
     }
 

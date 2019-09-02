@@ -23,14 +23,13 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 import java.util.Iterator;
-import java.util.List;
 
 public class AbstractElemental extends EntityMob {
-    private static final DataParameter<Integer> ASPECT_ID = EntityDataManager.createKey(EntityCultist.class, DataSerializers.VARINT);
+    protected static final DataParameter<Integer> ASPECT_ID = EntityDataManager.createKey(EntityCultist.class, DataSerializers.VARINT);
 
     public AbstractElemental(World worldIn) {
         super(worldIn);
-        setSize(0.6F, 1.8F);
+        setSize(0.6F, 1.675F);
 
     }
 
@@ -52,8 +51,9 @@ public class AbstractElemental extends EntityMob {
 
     @Override
     protected void entityInit() {
-        dataManager.register(ASPECT_ID, 0);
         super.entityInit();
+        dataManager.register(ASPECT_ID, Aspects.aether.getId());
+
     }
 
     @Override
@@ -92,33 +92,22 @@ public class AbstractElemental extends EntityMob {
 
     @Override
     public void onDeath(DamageSource cause) {
-        List<BlockPos> blocks = (List<BlockPos>) BlockPos.getAllInBox(getPosition().add(16, 16, 16), getPosition().add(-16, -16, -16));
-        System.out.println(blocks);
-        if (blocks.size() > 0) {
-            Iterator iterator = blocks.iterator();
-            while (iterator.hasNext()) {
-                BlockPos posTo = (BlockPos) iterator.next();
-                if (world.getBlockState(posTo).getBlock() instanceof BlockGoldenThread) {
-                    TileEntity te = world.getTileEntity(posTo);
-                    if (te instanceof TileEntityGoldenThread && ((TileEntityGoldenThread) te).aspect == getAspect().getId()) {
-                        ((TileEntityGoldenThread) te).charge++;
-                        if (world.isRemote) {
-                            for (int i = 0; i < 10 + getRNG().nextInt(5); i++)
-                                Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(world, posX + width / 2 + getRNG().nextGaussian() / 2, posY + width / 2 + getRNG().nextGaussian() / 2, posZ + width / 2 + getRNG().nextGaussian() / 2, 0, 0, 0, getAspect().getColor(), 0.8F + getRNG().nextFloat(), 100, 0, false, false, true, true, posTo.getX() + 0.5, posTo.getY() + 0.5, posTo.getZ() + 0.5));
-                        }
+        Iterable<BlockPos> blocks = BlockPos.getAllInBox(getPosition().add(16, 16, 16), getPosition().add(-16, -16, -16));
+        Iterator iterator = blocks.iterator();
+        while (iterator.hasNext()) {
+            BlockPos posTo = (BlockPos) iterator.next();
+            if (world.getBlockState(posTo).getBlock() instanceof BlockGoldenThread) {
+                TileEntity te = world.getTileEntity(posTo);
+                if (te instanceof TileEntityGoldenThread && ((TileEntityGoldenThread) te).aspect == getAspect().getId()) {
+                    ((TileEntityGoldenThread) te).charge++;
+                    if (world.isRemote) {
+                        for (int i = 0; i < 15 + getRNG().nextInt(5); i++)
+                            Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(world, posX + width / 2 + getRNG().nextGaussian() / 2, posY + width / 2 + getRNG().nextGaussian() / 2, posZ + width / 2 + getRNG().nextGaussian() / 2, 0, 0, 0, getAspect().getColor(), 1.8F + getRNG().nextFloat(), 200, 0, false, false, true, true, posTo.getX() + 0.5, posTo.getY() + 0.5, posTo.getZ() + 0.5));
                     }
                 }
             }
         }
         super.onDeath(cause);
-    }
-
-    @Override
-    public void onLivingUpdate() {
-        if (getRNG().nextFloat() < 0.4F && world.isRemote) {
-            Elementaristics.proxy.generateGenericParticles(this, getAspect().getColor(), 0.7F, 50, -0.01F, true, true);
-        }
-        super.onLivingUpdate();
     }
 
     @Nullable

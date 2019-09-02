@@ -2,19 +2,20 @@ package de.aelpecyem.elementaristics.init;
 
 import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;
-import de.aelpecyem.elementaristics.misc.rites.*;
-import de.aelpecyem.elementaristics.misc.rites.ascension.RiteReforging;
-import de.aelpecyem.elementaristics.misc.rites.crafting.RiteGlorious;
-import de.aelpecyem.elementaristics.misc.rites.crafting.RiteRecruiting;
+import de.aelpecyem.elementaristics.misc.rites.RiteBase;
 import de.aelpecyem.elementaristics.misc.rites.ascension.RiteKnowledge;
+import de.aelpecyem.elementaristics.misc.rites.ascension.RiteReforging;
 import de.aelpecyem.elementaristics.misc.rites.crafting.RiteChaos;
 import de.aelpecyem.elementaristics.misc.rites.crafting.RiteForging;
+import de.aelpecyem.elementaristics.misc.rites.crafting.RiteGlorious;
+import de.aelpecyem.elementaristics.misc.rites.crafting.RiteRecruiting;
 import de.aelpecyem.elementaristics.misc.rites.killing.RiteSacrifice;
 import de.aelpecyem.elementaristics.misc.rites.misc.*;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class RiteInit {
     private static Map<ResourceLocation, RiteBase> RITES = new HashMap<>();
@@ -34,6 +35,7 @@ public class RiteInit {
     public static RiteBinding riteBinding = new RiteBinding();
     public static RiteUnbinding riteUnbinding = new RiteUnbinding();
     public static RiteHealthShare riteHealthShare = new RiteHealthShare();
+    public static RiteEmptiness riteEmptiness = new RiteEmptiness();
 
     public static RiteSacrifice riteConflagration = new RiteSacrifice("conflagration_soul", Aspects.fire, SoulInit.soulFire, DamageSource.ON_FIRE);
     public static RiteSacrifice riteShredding = new RiteSacrifice("rage_wind", Aspects.air, SoulInit.soulAir, Elementaristics.DAMAGE_AIR);
@@ -61,6 +63,7 @@ public class RiteInit {
         registerRite(riteBinding.name, RiteInit.riteBinding);
         registerRite(riteUnbinding.name, RiteInit.riteUnbinding);
         registerRite(riteHealthShare.name, RiteInit.riteHealthShare);
+        registerRite(riteEmptiness.name, RiteInit.riteEmptiness);
 
         registerRite(riteConflagration.name, riteConflagration);
         registerRite(riteShredding.name, riteShredding);

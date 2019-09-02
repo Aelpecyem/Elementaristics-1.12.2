@@ -249,7 +249,7 @@ tile.symbol_gate.name=Symbol of the Gate-and-Key
 tile.symbol_dreamer.name=Symbol of the Dreamer
 tile.symbol_angel.name=Symbol of the Angel
 tile.symbol_storm.name=Symbol of the Storm
-tile.symbol_fighter.name=Symbol of the Knight
+tile.symbol_knight.name=Symbol of the Knight
 tile.symbol_sun.name=Symbol of the Sun
 tile.symbol_harbinger.name=Symbol of the Harbinger
 tile.symbol_queen.name=Symbol of the Fasting Queen
@@ -326,7 +326,7 @@ advancement.elementaristics.ascension_8.desc=From and to Nothingness!
 #Book
 item.elementaristics.book.name=Liber Elementium
 info.elementaristics.book.landing=The Elementaristics are the discipline from Nothingness, and they focus on how to dance beyond it.$(br)However, as no normal human has unlimited knowledge or an unceasing memory, this book covers the latter for them.
-info.elementaristics.book.subtitle=Janus remembers
+info.elementaristics.book.subtitle=Angels know blood
 
 book.purifierTime=Ticks needed:
 
@@ -343,6 +343,8 @@ tooltip.sparks_living.name=Can be used as fuel
 tooltip.thoughts_battling.name=Is it you or is it me, would you know or would you see?
 tooltip.wine_redmost.name=Will you ever know what you have done after drinking this?
 tooltip.flesh_lamb.name=Wolves shall devour the Lamb
+
+tooltip.golden_thread.aspect=Bound Aspect:
 
 tooltip.charge=Current Power:
 tooltip.magan=Current Magan:
@@ -386,6 +388,7 @@ rite.elementaristics:rite_unbinding.name=Rite of the Falling Towers
 rite.elementaristics:rite_reforging.name=Reshaping Rite
 rite.elementaristics:rite_health_share.name=Rite of the Patchwork
 rite.elementaristics:rite_glorious.name=Glorious Rite
+rite.elementaristics:rite_emptiness.name=Rite of the Hollow Soul
 
 #Entities
 entity.silver_thread.name=Silver Thread
@@ -578,11 +581,11 @@ aspect.mana.name=§dMana
 aspect.vacuum.name=§8Emptiness
 aspect.mind.name=§3Mind
 aspect.electricity.name=§9Electricity
-aspect.chaos.name=§0Chaos
+aspect.chaos.name=§8Chaos
 aspect.order.name=§fOrder
 aspect.magan.name=§6Magan
 aspect.wood.name=§6The Wood
-aspect.night.name=§fThe Night
+aspect.night.name=§8The Night
 
 #Deities
 elementaristics:deity_nothingness=The God from-and-to-Nothingness
@@ -596,7 +599,7 @@ elementaristics:gate_and_key=The Gate-and-Key
 elementaristics:deity_dreamer=The Dreamer
 elementaristics:deity_angel=The Angel
 elementaristics:deity_storm=The Storm
-elementaristics:deity_fighter=The Knight
+elementaristics:deity_knight=The Knight
 elementaristics:deity_sun=The Sun-in-Splendor
 elementaristics:deity_harbinger=The Harbinger
 elementaristics:deity_queen=The Fasting Queen
