@@ -1,20 +1,20 @@
 package de.aelpecyem.elementaristics.misc.pantheon;
 
-import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.blocks.tileentity.TileEntityAltar;
 import de.aelpecyem.elementaristics.blocks.tileentity.pantheon.TileEntityDeityShrine;
-import de.aelpecyem.elementaristics.items.base.artifacts.rites.IHasRiteUse;
 import de.aelpecyem.elementaristics.misc.elements.Aspect;
-import net.minecraft.tileentity.TileEntity;
+import net.minecraft.client.model.ModelBase;
 import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.List;
 
 public class DeitySupplyEffectBase extends Deity {
     public DeitySupplyEffectBase(long tickTimeBegin, ResourceLocation name, @Nullable Aspect aspect, int color) {
         super(tickTimeBegin, name, aspect, color);
+    }
+
+    public DeitySupplyEffectBase(long tickTimeBegin, ResourceLocation name, @Nullable Aspect aspect, int color, ModelBase model, ResourceLocation texture) {
+        super(tickTimeBegin, name, aspect, color, model, texture);
     }
 
     public void supplyEffect(TileEntityDeityShrine te) {

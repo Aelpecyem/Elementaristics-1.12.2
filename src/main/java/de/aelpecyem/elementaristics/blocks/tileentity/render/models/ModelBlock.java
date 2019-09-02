@@ -1,4 +1,4 @@
-package de.aelpecyem.elementaristics.blocks.tileentity.render;
+package de.aelpecyem.elementaristics.blocks.tileentity.render.models;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
@@ -8,10 +8,10 @@ import net.minecraft.entity.Entity;
  * NewProject - Undefined
  * Created using Tabula 7.0.0
  */
-public class BlockModel extends ModelBase {
+public class ModelBlock extends ModelBase {
     public ModelRenderer shape1;
 
-    public BlockModel() {
+    public ModelBlock() {
         this.textureWidth = 64;
         this.textureHeight = 32;
         this.shape1 = new ModelRenderer(this, 0, 0);

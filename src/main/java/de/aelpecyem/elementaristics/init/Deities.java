@@ -1,6 +1,7 @@
 package de.aelpecyem.elementaristics.init;
 
 import de.aelpecyem.elementaristics.Elementaristics;
+import de.aelpecyem.elementaristics.blocks.tileentity.render.models.ModelDragonFire;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;
 import de.aelpecyem.elementaristics.misc.pantheon.Deity;
 import de.aelpecyem.elementaristics.misc.pantheon.DeityBase;
@@ -47,7 +48,7 @@ public class Deities {
         deityNothingness = new DeityBase(TimeUtil.getTickTimeStartForHour(0), new ResourceLocation(Elementaristics.MODID, "deity_nothingness"), 13553358); //pretty white color- might make it dark instead
         deityAzathoth = new DeityAzathoth();
         deityDragonAether = new DeityDragon(2, Aspects.aether, SoulInit.soulAncient, 4986465);
-        deityDragonFire = new DeityDragon(3, Aspects.fire, SoulInit.soulFire, 16139267);
+        deityDragonFire = new DeityDragon(3, Aspects.fire, SoulInit.soulFire, 16139267, new ModelDragonFire(), new ResourceLocation(Elementaristics.MODID, "textures/blocks/shrines/dragon_fire.png"));
         deityDragonEarth = new DeityDragon(4, Aspects.earth, SoulInit.soulEarth, 15375);
         deityDragonWater = new DeityDragon(5, Aspects.water, SoulInit.soulWater, 1049560);
         deityDragonAir = new DeityDragon(6, Aspects.air, SoulInit.soulAir, 1300735);

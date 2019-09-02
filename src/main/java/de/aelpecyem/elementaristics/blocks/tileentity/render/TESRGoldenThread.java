@@ -2,6 +2,7 @@ package de.aelpecyem.elementaristics.blocks.tileentity.render;
 
 import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.blocks.tileentity.TileEntityGoldenThread;
+import de.aelpecyem.elementaristics.blocks.tileentity.render.models.ModelBlock;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;
 import de.aelpecyem.elementaristics.util.MiscUtil;
 import net.minecraft.client.renderer.GlStateManager;
@@ -13,7 +14,7 @@ import java.awt.*;
 public class TESRGoldenThread extends TileEntitySpecialRenderer<TileEntityGoldenThread> {
     @Override
     public void render(TileEntityGoldenThread te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
-        BlockModel model = new BlockModel();
+        ModelBlock model = new ModelBlock();
         GlStateManager.pushMatrix();
         if (te.activationStage == 0) {
             Color color = MiscUtil.reverseColor(new Color(Aspects.getElementById(te.aspect).getColor()));//14928384));, gold

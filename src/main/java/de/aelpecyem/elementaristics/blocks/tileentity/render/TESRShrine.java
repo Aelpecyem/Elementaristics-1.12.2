@@ -11,7 +11,7 @@ import net.minecraft.util.ResourceLocation;
 public class TESRShrine extends TileEntitySpecialRenderer<TileEntityDeityShrine> {
     @Override
     public void render(TileEntityDeityShrine te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
-        if (te.getDeityBound() != null) {
+        if (te.isStatue && te.getDeityBound() != null) {
             ModelBase model = te.getDeityBound().getModel();
             ResourceLocation loc = te.getDeityBound().getTexture();
             if (loc == null || model == null) return;

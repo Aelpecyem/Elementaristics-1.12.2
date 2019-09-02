@@ -2,22 +2,18 @@ package de.aelpecyem.elementaristics.misc.pantheon.advanced;
 
 import com.google.common.base.Predicate;
 import de.aelpecyem.elementaristics.Elementaristics;
-import de.aelpecyem.elementaristics.blocks.tileentity.TileEntityAltar;
 import de.aelpecyem.elementaristics.blocks.tileentity.pantheon.TileEntityDeityShrine;
 import de.aelpecyem.elementaristics.capability.player.IPlayerCapabilities;
 import de.aelpecyem.elementaristics.capability.player.PlayerCapProvider;
 import de.aelpecyem.elementaristics.capability.player.souls.Soul;
 import de.aelpecyem.elementaristics.init.SoulInit;
 import de.aelpecyem.elementaristics.misc.elements.Aspect;
-import de.aelpecyem.elementaristics.misc.elements.Aspects;
 import de.aelpecyem.elementaristics.misc.pantheon.DeitySupplyEffectBase;
 import de.aelpecyem.elementaristics.util.TimeUtil;
-import javafx.print.PageLayout;
+import net.minecraft.client.model.ModelBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 
@@ -31,7 +27,11 @@ public class DeityDragon extends DeitySupplyEffectBase {
         super(TimeUtil.getTickTimeStartForHour(hour), new ResourceLocation(Elementaristics.MODID, "dragon_" + aspect.getName()), aspect, color);
         this.soul = soul;
     }
-    //Todo
+
+    public DeityDragon(int hour, Aspect aspect, Soul soul, int color, ModelBase model, ResourceLocation texture) {
+        super(TimeUtil.getTickTimeStartForHour(hour), new ResourceLocation(Elementaristics.MODID, "dragon_" + aspect.getName()), aspect, color, model, texture);
+        this.soul = soul;
+    }
 
 
     @Override

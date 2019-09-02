@@ -2,7 +2,7 @@ package de.aelpecyem.elementaristics.misc.pantheon;
 
 import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.blocks.tileentity.pantheon.TileEntityDeityShrine;
-import de.aelpecyem.elementaristics.blocks.tileentity.render.BlockModel;
+import de.aelpecyem.elementaristics.blocks.tileentity.render.models.ModelBlock;
 import de.aelpecyem.elementaristics.init.Deities;
 import de.aelpecyem.elementaristics.misc.elements.Aspect;
 import net.minecraft.client.model.ModelBase;
@@ -26,7 +26,7 @@ public abstract class Deity {
         this.name = name;
         this.aspect = aspect;
         this.color = color;
-        this.model = new BlockModel();
+        this.model = new ModelBlock();
         this.tex = new ResourceLocation(Elementaristics.MODID, "textures/blocks/stone_enriched.png");
         Deities.deities.put(name, this);
     }
