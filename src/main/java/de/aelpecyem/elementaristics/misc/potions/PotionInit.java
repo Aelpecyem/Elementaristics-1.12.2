@@ -34,6 +34,7 @@ public class PotionInit {
 
     public static PotionBase potionPotential = new PotionBase("potential", false, 8747125, 15);
     public static PotionBase potionFatherBlessing = new PotionFatherBlessing();
+
     @SubscribeEvent
     public static void registerPotions(RegistryEvent.Register<Potion> event) {
         event.getRegistry().register(potionIntoxicated);

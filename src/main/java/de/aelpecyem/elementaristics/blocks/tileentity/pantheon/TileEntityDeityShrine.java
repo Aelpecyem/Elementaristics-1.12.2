@@ -7,24 +7,17 @@ import de.aelpecyem.elementaristics.blocks.tileentity.energy.TileEntityEnergy;
 import de.aelpecyem.elementaristics.init.Deities;
 import de.aelpecyem.elementaristics.init.ModBlocks;
 import de.aelpecyem.elementaristics.misc.pantheon.Deity;
-import de.aelpecyem.elementaristics.misc.pantheon.DeitySupplyEffectBase;
 import de.aelpecyem.elementaristics.networking.PacketHandler;
 import de.aelpecyem.elementaristics.networking.tileentity.deities.PacketUpdateDeity;
 import de.aelpecyem.elementaristics.networking.tileentity.tick.PacketUpdateTickTime;
 import de.aelpecyem.elementaristics.particles.ParticleGeneric;
 import de.aelpecyem.elementaristics.util.TimeUtil;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.MobSpawnerBaseLogic;
-import net.minecraft.tileentity.TileEntityMobSpawner;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.WeightedSpawnerEntity;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.energy.CapabilityEnergy;
 
@@ -126,13 +119,13 @@ public class TileEntityDeityShrine extends TileEntityEnergy implements ITickable
                 doAltarParticles(deityActive);
             } else {
                 if (isSupplyingManipulatorBelow()) {
-                    if (deityActive instanceof DeitySupplyEffectBase) {
+                    /*if (deityActive instanceof DeitySupplyEffectBase) {
                         if (storage.extractIfPossible(10)) {
-                            ((DeitySupplyEffectBase) deityActive).supplyEffect(this);
+                            ((DeitySupplyEffectBase) deityActive).supplyEffect(this, isStatue);
                         }
-                    }
+                    }*/
                     if (world.getTileEntity(altarPos) != null && world.getTileEntity(altarPos) instanceof TileEntityAltar)
-                    doAltarParticles(deityActive);
+                        doAltarParticles(deityActive);
                 }
                 if (isPassiveEffectManipulatorBelow()) {
                     if (isStatue) {

@@ -1,5 +1,6 @@
 package de.aelpecyem.elementaristics.init;
 
+import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.blocks.base.*;
 import de.aelpecyem.elementaristics.blocks.base.crops.BlockCropBase;
 import de.aelpecyem.elementaristics.blocks.base.crops.BlockMossBase;
@@ -16,12 +17,15 @@ import de.aelpecyem.elementaristics.util.IBlockHasModel;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
+import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.IntFunction;
 
 public class ModBlocks {
 
@@ -252,8 +256,22 @@ public class ModBlocks {
     public static void registerModels() {
         for (Block blockBase : BLOCKS) {
             if (blockBase instanceof IBlockHasModel) {
-                ((IBlockHasModel) blockBase).registerItemModel(Item.getItemFromBlock(blockBase));
+                ((IBlockHasModel) blockBase).registerItemModel(blockBase);
             }
+        }
+    }
+
+    public static void registerCustomItemblock(Block b, String path) {
+        registerCustomItemblock(b, 1, i -> path);
+    }
+
+    public static void registerCustomItemblock(Block b, int maxExclusive, IntFunction<String> metaToPath) {
+        Item item = Item.getItemFromBlock(b);
+        for (int i = 0; i < maxExclusive; i++) {
+            ModelLoader.setCustomModelResourceLocation(
+                    item, i,
+                    new ModelResourceLocation(Elementaristics.MODID + ":itemblock/" + metaToPath.apply(i), "inventory")
+            );
         }
     }
 

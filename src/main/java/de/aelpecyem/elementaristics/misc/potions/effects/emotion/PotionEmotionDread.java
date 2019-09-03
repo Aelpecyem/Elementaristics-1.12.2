@@ -10,6 +10,10 @@ public class PotionEmotionDread extends PotionEmotion {
         super("dread", 2038323, 4);
     }
 
+    @Override
+    public boolean isEmotionNegative() {
+        return true;
+    }
 
     public void effect(EntityLivingBase living, IPlayerCapabilities cap, int amplifier) {
         if (cap.getTimeStunted() < 1) {

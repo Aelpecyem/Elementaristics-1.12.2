@@ -1,7 +1,10 @@
 package de.aelpecyem.elementaristics.init;
 
 import de.aelpecyem.elementaristics.Elementaristics;
+import de.aelpecyem.elementaristics.blocks.tileentity.render.models.ModelDragonAir;
+import de.aelpecyem.elementaristics.blocks.tileentity.render.models.ModelDragonEarth;
 import de.aelpecyem.elementaristics.blocks.tileentity.render.models.ModelDragonFire;
+import de.aelpecyem.elementaristics.blocks.tileentity.render.models.ModelDragonWater;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;
 import de.aelpecyem.elementaristics.misc.pantheon.Deity;
 import de.aelpecyem.elementaristics.misc.pantheon.DeityBase;
@@ -49,9 +52,9 @@ public class Deities {
         deityAzathoth = new DeityAzathoth();
         deityDragonAether = new DeityDragon(2, Aspects.aether, SoulInit.soulAncient, 4986465);
         deityDragonFire = new DeityDragon(3, Aspects.fire, SoulInit.soulFire, 16139267, new ModelDragonFire(), new ResourceLocation(Elementaristics.MODID, "textures/blocks/shrines/dragon_fire.png"));
-        deityDragonEarth = new DeityDragon(4, Aspects.earth, SoulInit.soulEarth, 15375);
-        deityDragonWater = new DeityDragon(5, Aspects.water, SoulInit.soulWater, 1049560);
-        deityDragonAir = new DeityDragon(6, Aspects.air, SoulInit.soulAir, 1300735);
+        deityDragonEarth = new DeityDragon(4, Aspects.earth, SoulInit.soulEarth, 15375, new ModelDragonEarth(), new ResourceLocation(Elementaristics.MODID, "textures/blocks/shrines/dragon_earth.png"));
+        deityDragonWater = new DeityDragon(5, Aspects.water, SoulInit.soulWater, 1049560, new ModelDragonWater(), new ResourceLocation(Elementaristics.MODID, "textures/blocks/shrines/dragon_water.png"));
+        deityDragonAir = new DeityDragon(6, Aspects.air, SoulInit.soulAir, 1300735, new ModelDragonAir(), new ResourceLocation(Elementaristics.MODID, "textures/blocks/shrines/dragon_air.png"));
         deityGateAndKey = new DeityGate();
         deityDreamer = new DeitySupplyEffectBase(TimeUtil.getTickTimeStartForHour(8), new ResourceLocation(Elementaristics.MODID, "deity_dreamer"), Aspects.ice, 8497580);
         deityAngel = new DeityPotionEffectBase(TimeUtil.getTickTimeStartForHour(9), new ResourceLocation(Elementaristics.MODID, "deity_angel"), 4757545, MobEffects.REGENERATION);

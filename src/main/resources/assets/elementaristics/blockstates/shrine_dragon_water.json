@@ -23,10 +23,7 @@
       "model": "cube_all"
     },
     "inventory": {
-      "model": "elementaristics:item",
-      "textures": {
-        "layer0": "elementaristics:items/shrine_dragon_water"
-      }
+      "model": "elementaristics:shrine"
     }
   }
 }

@@ -51,9 +51,8 @@ public class BlockBase extends Block implements IBlockHasModel {
         ModBlocks.BLOCKS.add(this);
     }
 
-
-    public void registerItemModel(Item itemBlock) {
-        Elementaristics.proxy.registerItemRenderer(itemBlock, 0, name);
+    public void registerItemModel(Block itemBlock) {
+        Elementaristics.proxy.registerItemRenderer(Item.getItemFromBlock(itemBlock), 0, name);
     }
 
     public Item createItemBlock() {

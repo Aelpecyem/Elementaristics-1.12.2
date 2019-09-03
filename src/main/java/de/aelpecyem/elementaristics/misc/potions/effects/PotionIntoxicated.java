@@ -39,8 +39,8 @@ public class PotionIntoxicated extends PotionBase {
             if (cap.getTimeStunted() < 1) {
                 cap.fillMagan(0.2F);
             }
-        }
 
+        }
         super.performEffect(entityLivingBaseIn, amplifier);
     }
 

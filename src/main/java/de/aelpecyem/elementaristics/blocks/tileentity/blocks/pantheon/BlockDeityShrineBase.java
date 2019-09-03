@@ -5,17 +5,21 @@ import de.aelpecyem.elementaristics.blocks.tileentity.pantheon.TileEntityDeitySh
 import de.aelpecyem.elementaristics.items.base.artifacts.ItemChannelingTool;
 import de.aelpecyem.elementaristics.misc.pantheon.Deity;
 import de.aelpecyem.elementaristics.util.TimeUtil;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyDirection;
+import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -95,6 +99,21 @@ public class BlockDeityShrineBase extends BlockTileEntity<TileEntityDeityShrine>
         return BlockRenderLayer.CUTOUT;
     }
 
+    @Override
+    public EnumBlockRenderType getRenderType(IBlockState state) {
+        if (isStatue) {
+            return EnumBlockRenderType.ENTITYBLOCK_ANIMATED; ///INVISIBLE
+        }
+        return super.getRenderType(state);
+    }
+
+    @Override
+    public AxisAlignedBB getSelectedBoundingBox(IBlockState state, World worldIn, BlockPos pos) {
+        if (isStatue) {
+            return new AxisAlignedBB(0, 0, 0, 0, 0, 0);
+        }
+        return super.getSelectedBoundingBox(state, worldIn, pos);
+    }
 
     @Override
     public boolean isFullCube(IBlockState state) {
@@ -124,5 +143,16 @@ public class BlockDeityShrineBase extends BlockTileEntity<TileEntityDeityShrine>
     @Override
     public TileEntityDeityShrine createTileEntity(World world, IBlockState state) {
         return new TileEntityDeityShrine();
+    }
+
+    @Override
+    public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
+        return isStatue ? BlockFaceShape.UNDEFINED : super.getBlockFaceShape(worldIn, state, pos, face);
+    }
+
+    @Override
+    public void registerItemModel(Block itemBlock) {
+        //  TileEntityChest
+        super.registerItemModel(itemBlock);
     }
 }

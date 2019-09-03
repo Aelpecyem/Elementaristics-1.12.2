@@ -7,6 +7,7 @@ import de.aelpecyem.elementaristics.blocks.tileentity.render.*;
 import de.aelpecyem.elementaristics.entity.render.RenderHandler;
 import de.aelpecyem.elementaristics.events.ClientEventHandler;
 import de.aelpecyem.elementaristics.events.HUDRenderHandler;
+import de.aelpecyem.elementaristics.events.ShaderHandler;
 import de.aelpecyem.elementaristics.init.ModItems;
 import de.aelpecyem.elementaristics.misc.ItemColorHandler;
 import de.aelpecyem.elementaristics.particles.ParticleGeneric;
@@ -16,6 +17,7 @@ import de.aelpecyem.elementaristics.util.Keybinds;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.tileentity.TileEntityItemStackRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -47,6 +49,7 @@ public class ClientProxy extends CommonProxy {
         MinecraftForge.EVENT_BUS.register(new HUDRenderHandler());
         MinecraftForge.EVENT_BUS.register(new ClientTickHandler());
         MinecraftForge.EVENT_BUS.register(new ClientEventHandler());
+        MinecraftForge.EVENT_BUS.register(new ShaderHandler());
 
     }
 
@@ -69,6 +72,8 @@ public class ClientProxy extends CommonProxy {
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityGoldenThread.class, new TESRGoldenThread());
 
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDeityShrine.class, new TESRShrine());
+
+        TileEntityItemStackRenderer.instance = new TESRShrine.ForwardingTEISR();
     }
 
 

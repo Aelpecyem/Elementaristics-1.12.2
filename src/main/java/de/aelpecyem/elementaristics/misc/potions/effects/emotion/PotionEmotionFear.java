@@ -11,6 +11,11 @@ public class PotionEmotionFear extends PotionEmotion {
     }
 
     @Override
+    public boolean isEmotionNegative() {
+        return true;
+    }
+
+    @Override
     public void effect(EntityLivingBase living, IPlayerCapabilities cap, int amplifier) {
         living.addPotionEffect(new PotionEffect(Potion.getPotionById(8), 40, amplifier + 1, false, false));
         living.addPotionEffect(new PotionEffect(Potion.getPotionById(1), 40, amplifier, false, false));

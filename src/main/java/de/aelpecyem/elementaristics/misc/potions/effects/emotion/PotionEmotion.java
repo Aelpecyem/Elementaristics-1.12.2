@@ -25,6 +25,10 @@ public class PotionEmotion extends PotionBase {
 
     }
 
+    public boolean isEmotionNegative() {
+        return false;
+    }
+
     @Override
     public void performEffect(EntityLivingBase entityLivingBaseIn, int amplifier) {
         if (entityLivingBaseIn.hasCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null)) {

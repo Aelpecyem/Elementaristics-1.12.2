@@ -17,7 +17,7 @@ public class DeitySupplyEffectBase extends Deity {
         super(tickTimeBegin, name, aspect, color, model, texture);
     }
 
-    public void supplyEffect(TileEntityDeityShrine te) {
+    public void supplyEffect(TileEntityDeityShrine te, boolean isStatue) {
         if (te.getAltarBound() != null) {
             TileEntityAltar tile = te.getAltarBound();
             tile.addAspect(getAspect());
@@ -27,7 +27,7 @@ public class DeitySupplyEffectBase extends Deity {
     @Override
     public void symbolEffect(TileEntityDeityShrine te) {
         if (!te.isPassiveEffectManipulatorBelow() && !te.altarPos.equals(te.getPos()) && te.storage.extractIfPossible(5)) {
-            supplyEffect(te);
+            supplyEffect(te, false);
         }
         passiveParticles(te);
     }
@@ -35,7 +35,7 @@ public class DeitySupplyEffectBase extends Deity {
     @Override
     public void statueEffect(TileEntityDeityShrine te) {
         if (!te.isPassiveEffectManipulatorBelow() && !te.altarPos.equals(te.getPos()) && te.storage.extractIfPossible(2)) {
-            supplyEffect(te);
+            supplyEffect(te, true);
         }
         passiveParticles(te);
     }

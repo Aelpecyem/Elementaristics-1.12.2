@@ -58,6 +58,22 @@ public class PlayerUtil {
         return false;
     }
 
+    public static boolean hasPositiveEmotion(EntityPlayer player) {
+        for (PotionEffect effect : player.getActivePotionEffects()) {
+            if (effect.getPotion() instanceof PotionEmotion) {
+                return !((PotionEmotion) effect.getPotion()).isEmotionNegative();
+            }
+        }
+        return false;
+    }
+
+    public static boolean hasNegativeEmotion(EntityPlayer player) {
+        if (hasEmotionActive(player)) {
+            return !hasPositiveEmotion(player);
+        }
+        return false;
+    }
+
     public static Soul getSoul(EntityPlayer player) {
         if (player.hasCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null)) {
             return player.getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null).getSoul();
