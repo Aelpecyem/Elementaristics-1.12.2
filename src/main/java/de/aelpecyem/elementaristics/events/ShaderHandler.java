@@ -7,15 +7,24 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.shader.ShaderGroup;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import thaumcraft.client.lib.events.RenderEventHandler;
+import org.lwjgl.opengl.GL11;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Iterator;
 
 public class ShaderHandler {
+    public static HashMap<Integer, ShaderGroup> shaderGroups = new HashMap<>();
+    public static boolean resetShaders = false;
+
+    private static int oldDisplayWidth = 0;
+    private static int oldDisplayHeight = 0;
+
     public static final int SHADER_DRUGS = 0;
     public static final int SHADER_TRANCE = 1;
     public static final int SHADER_FOCUSED = 2;
@@ -26,6 +35,7 @@ public class ShaderHandler {
     @SubscribeEvent
     public void doRender(TickEvent.PlayerTickEvent event) {
         Minecraft mc = Minecraft.getMinecraft();
+
         if (event.side == Side.CLIENT) {
             if (event.phase == TickEvent.Phase.START) {
                 handleShaders(event, mc);
@@ -42,10 +52,10 @@ public class ShaderHandler {
 
     public static void handleShader(boolean condition, int shaderId) {
         if (condition) {
-            if (!RenderEventHandler.shaderGroups.containsKey(shaderId)) {
+            if (!shaderGroups.containsKey(shaderId)) {
                 setShader(shader_resources[shaderId], shaderId);
             }
-        } else if (RenderEventHandler.shaderGroups.containsKey(shaderId)) {
+        } else if (shaderGroups.containsKey(shaderId)) {
             deactivateShader(shaderId);
         }
     }
@@ -54,20 +64,20 @@ public class ShaderHandler {
         try {
             ShaderGroup target = new ShaderGroup(Minecraft.getMinecraft().getTextureManager(), Minecraft.getMinecraft().getResourceManager(), Minecraft.getMinecraft().getFramebuffer(), shader_resources[shaderId]);
             if (OpenGlHelper.areShadersSupported()) {
-                if (RenderEventHandler.shaderGroups.containsKey(shaderId)) {
-                    ((ShaderGroup) RenderEventHandler.shaderGroups.get(shaderId)).deleteShaderGroup();//..func_148021_a();
-                    RenderEventHandler.shaderGroups.remove(shaderId);
+                if (shaderGroups.containsKey(shaderId)) {
+                    ((ShaderGroup) shaderGroups.get(shaderId)).deleteShaderGroup();//..func_148021_a();
+                    shaderGroups.remove(shaderId);
                 }
 
                 try {
                     if (target == null) {
                         deactivateShader(shaderId);
                     } else {
-                        RenderEventHandler.resetShaders = true;
-                        RenderEventHandler.shaderGroups.put(shaderId, target);
+                        resetShaders = true;
+                        shaderGroups.put(shaderId, target);
                     }
                 } catch (Exception var4) {
-                    RenderEventHandler.shaderGroups.remove(shaderId);
+                    shaderGroups.remove(shaderId);
                 }
             }
         } catch (JsonSyntaxException exception) {
@@ -80,10 +90,53 @@ public class ShaderHandler {
     }
 
     public static void deactivateShader(int shaderId) {
-        if (RenderEventHandler.shaderGroups.containsKey(shaderId)) {
-            ((ShaderGroup) RenderEventHandler.shaderGroups.get(shaderId)).deleteShaderGroup();//.func_148021_a();
+        if (shaderGroups.containsKey(shaderId)) {
+            (shaderGroups.get(shaderId)).deleteShaderGroup();
         }
 
-        RenderEventHandler.shaderGroups.remove(shaderId);
+        shaderGroups.remove(shaderId);
     }
+
+    @SubscribeEvent
+    public void renderShaders(RenderGameOverlayEvent.Pre event) {
+        if (event.getType() == RenderGameOverlayEvent.ElementType.ALL) {
+            Minecraft mc = Minecraft.getMinecraft();
+            if (OpenGlHelper.areShadersSupported() && shaderGroups.size() > 0) {
+                updateShaderFrameBuffers(mc);
+                GL11.glMatrixMode(5890);
+                GL11.glLoadIdentity();
+
+                for (Iterator var2 = shaderGroups.values().iterator(); var2.hasNext(); GL11.glPopMatrix()) {
+                    ShaderGroup sg = (ShaderGroup) var2.next();
+                    GL11.glPushMatrix();
+
+                    try {
+                        sg.render(event.getPartialTicks());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                mc.getFramebuffer().bindFramebuffer(true);
+            }
+        }
+
+    }
+
+    public static void updateShaderFrameBuffers(Minecraft mc) {
+        if (resetShaders || mc.displayWidth != oldDisplayWidth || oldDisplayHeight != mc.displayHeight) {
+            Iterator var1 = shaderGroups.values().iterator();
+
+            while (var1.hasNext()) {
+                ShaderGroup sg = (ShaderGroup) var1.next();
+                sg.createBindFramebuffers(mc.displayWidth, mc.displayHeight);
+            }
+
+            oldDisplayWidth = mc.displayWidth;
+            oldDisplayHeight = mc.displayHeight;
+            resetShaders = false;
+        }
+
+    }
+
 }

@@ -6,6 +6,7 @@ import de.aelpecyem.elementaristics.items.base.artifacts.rites.IncantationBase;
 import de.aelpecyem.elementaristics.items.base.artifacts.rites.ItemAspects;
 import de.aelpecyem.elementaristics.items.base.artifacts.rites.materials.*;
 import de.aelpecyem.elementaristics.items.base.bauble.ItemBaubleCharger;
+import de.aelpecyem.elementaristics.items.base.bauble.ItemCultBadge;
 import de.aelpecyem.elementaristics.items.base.bauble.ItemKeyWinged;
 import de.aelpecyem.elementaristics.items.base.bauble.ItemWaterBody;
 import de.aelpecyem.elementaristics.items.base.burnable.ItemHerbBundle;
@@ -134,6 +135,8 @@ public class ModItems {
     public static ItemBase scale;
 
     public static ItemBase item_golden_thread;
+
+    public static ItemBase badge_cult;
    /* public static ItemArmor hood_cultist = new RobesCultist("hood_cultist",1, EntityEquipmentSlot.HEAD);
     public static ItemArmor garb_cultist = new RobesCultist("garb_cultist",1, EntityEquipmentSlot.CHEST);
     public static ItemArmor legwear_cultist = new RobesCultist("legwear_cultist",2, EntityEquipmentSlot.LEGS);
@@ -208,6 +211,8 @@ public class ModItems {
         fragment_mother = new ItemBase("fragment_mother");
 
         item_golden_thread = new ItemGoldenThread();
+
+        badge_cult = new ItemCultBadge();
     }
 
     private static void initRiteMaterials() {

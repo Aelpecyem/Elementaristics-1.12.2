@@ -46,17 +46,17 @@ public class ClientProxy extends CommonProxy {
         super.init(event);
         registerColoring();
         registerKeyBinds();
+        MinecraftForge.EVENT_BUS.register(new ShaderHandler());
         MinecraftForge.EVENT_BUS.register(new HUDRenderHandler());
         MinecraftForge.EVENT_BUS.register(new ClientTickHandler());
         MinecraftForge.EVENT_BUS.register(new ClientEventHandler());
-        MinecraftForge.EVENT_BUS.register(new ShaderHandler());
 
     }
 
     @Override
     public void registerColoring() {
         super.registerColoring();
-        Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new ItemColorHandler(), ModItems.essence, ModItems.scale);
+        Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new ItemColorHandler(), ModItems.essence, ModItems.scale, ModItems.badge_cult);
     }
 
     @Override

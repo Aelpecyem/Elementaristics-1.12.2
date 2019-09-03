@@ -13,11 +13,11 @@
   "parent": "elementaristics:progress_glory",
   "criteria": {
     "book": {
-      "trigger": "elementaristics:dummy",
+      "trigger": "minecraft:tame_animal",
       "conditions": {
         "items": [
           {
-            "name": "tameslime"
+            "entity": "elementaristics:protoplasm"
           }
         ]
       }

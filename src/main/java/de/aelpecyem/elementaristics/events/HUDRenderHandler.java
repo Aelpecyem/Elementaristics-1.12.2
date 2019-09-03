@@ -53,6 +53,32 @@ public class HUDRenderHandler {
 
         }
         if (event.getType() == RenderGameOverlayEvent.ElementType.ALL && !event.isCancelable()) {
+            /*System.out.println("rendering shaders: 1");
+            if (event.getType() == RenderGameOverlayEvent.ElementType.ALL) {
+                System.out.println("rendering shaders: 2");
+                Minecraft mc = Minecraft.getMinecraft();
+                if (OpenGlHelper.areShadersSupported() && ShaderHandler.shaderGroups.size() > 0) {
+                    ShaderHandler.updateShaderFrameBuffers(mc);
+                    GL11.glMatrixMode(5890);
+                    GL11.glLoadIdentity();
+                    System.out.println("rendering shaders: 3");
+
+                    for(Iterator var2 = ShaderHandler.shaderGroups.values().iterator(); var2.hasNext(); GL11.glPopMatrix()) {
+                        ShaderGroup sg = (ShaderGroup)var2.next();
+                        GL11.glPushMatrix();
+
+                        try {
+                            System.out.println("yay");
+                            sg.render(event.getPartialTicks());
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    mc.getFramebuffer().bindFramebuffer(true);
+                }
+            }*/
+
             renderSpellSelected(event);
 
         }

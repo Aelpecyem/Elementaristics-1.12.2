@@ -92,12 +92,12 @@ public class FocusEffectRiftCloser extends FocusEffect {
     @SideOnly(Side.CLIENT)
     public void renderParticleFX(World world, double posX, double posY, double posZ, double motionX, double motionY, double motionZ) {
         FXGeneric fb = new FXGeneric(world, posX, posY, posZ, motionX, motionY, motionZ);
-        fb.func_187114_a(16 + world.rand.nextInt(16));
+        fb.setAlphaF(16 + world.rand.nextInt(16));//.func_187114_a(16 + world.rand.nextInt(16));
         fb.setParticles(384 + world.rand.nextInt(16), 1, 1);
         fb.setSlowDown(0.75D);
         fb.setAlphaF(new float[]{1.0F, 0.0F});
         fb.setScale(new float[]{(float) (0.699999988079071D + world.rand.nextGaussian() * 0.30000001192092896D)});
-        fb.func_70538_b(0.1F, 0.05F, 0.1F);
+        fb.setRBGColorF(0.1F, 0.05F, 0.1F);//.func_70538_b(0.1F, 0.05F, 0.1F);
         fb.setRandomMovementScale(0.01F, 0.01F, 0.01F);
         ParticleEngine.addEffectWithDelay(world, fb, 0);
     }
