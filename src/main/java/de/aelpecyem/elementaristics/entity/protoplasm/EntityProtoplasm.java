@@ -6,6 +6,7 @@ import de.aelpecyem.elementaristics.entity.protoplasm.tasks.ProtoplasmTaskInit;
 import de.aelpecyem.elementaristics.entity.protoplasm.tasks.execs.ProtoplasmTask;
 import de.aelpecyem.elementaristics.init.ModItems;
 import de.aelpecyem.elementaristics.items.base.thaumagral.ItemThaumagral;
+import de.aelpecyem.elementaristics.misc.advancements.CustomAdvancements;
 import de.aelpecyem.elementaristics.networking.PacketHandler;
 import de.aelpecyem.elementaristics.networking.entity.protoplasm.PacketDyeProtoplasm;
 import de.aelpecyem.elementaristics.networking.player.PacketMessage;
@@ -18,6 +19,7 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemDye;
@@ -179,6 +181,7 @@ public class EntityProtoplasm extends EntityTameable implements IMob, IHasInvent
                         this.setHealth(getMaxHealth());
                         this.playTameEffect(true);
                         setAttackTarget(null);
+                        CustomAdvancements.Advancements.DUMMY.trigger((EntityPlayerMP) player, "tameslime");
                         this.world.setEntityState(this, (byte)7);
                         return true;
                     }

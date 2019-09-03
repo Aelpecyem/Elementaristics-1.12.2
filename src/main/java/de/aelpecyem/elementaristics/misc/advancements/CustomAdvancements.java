@@ -16,10 +16,17 @@ public class CustomAdvancements {
          * Code usages: when the Mirror of the Soul is used, the Silver Thread is slain, ascension rites being performed...
          */
         public static AscensionTrigger ASCEND;
+
+        /**
+         * Only fired via code, doesn't take any criteria except a string for identification
+         */
+        public static DummyTrigger DUMMY;
     }
 
     public static void init(){
         CustomAdvancements.Advancements.ASCEND = (AscensionTrigger) registerAdvancementTrigger(new AscensionTrigger());
+        CustomAdvancements.Advancements.DUMMY = (DummyTrigger) registerAdvancementTrigger(new DummyTrigger());
+
     }
 
     public static <T extends ICriterionInstance> ICriterionTrigger<T> registerAdvancementTrigger(ICriterionTrigger<T> trigger) {

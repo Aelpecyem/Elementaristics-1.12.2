@@ -10,7 +10,7 @@
       "translate": "advancement.elementaristics.concentrator.desc"
     }
   },
-  "parent": "elementaristics:root",
+  "parent": "elementaristics:progress_book",
   "criteria": {
     "book": {
       "trigger": "minecraft:inventory_changed",

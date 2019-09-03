@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "elementaristics:protoplasm"
+    },
+    "title": {
+      "translate": "advancement.elementaristics.slime"
+    },
+    "description": {
+      "translate": "advancement.elementaristics.slime.desc"
+    }
+  },
+  "parent": "elementaristics:progress_glory",
+  "criteria": {
+    "book": {
+      "trigger": "elementaristics:dummy",
+      "conditions": {
+        "items": [
+          {
+            "name": "tameslime"
+          }
+        ]
+      }
+    }
+  }
+}

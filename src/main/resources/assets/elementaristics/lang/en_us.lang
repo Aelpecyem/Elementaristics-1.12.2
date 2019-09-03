@@ -271,6 +271,7 @@ tile.storage_energy_creative.name=The Truly Occult Energy Core Of Occult Truth (
 
 #Advancements
 advancement.elementaristics.root=Elementaristics
+advancement.elementaristics.book=Cthulhu's Dream Journal
 
 advancement.elementaristics.concentrator=Influencing, isn't it?
 advancement.elementaristics.purifier=SPLASHING
@@ -283,6 +284,7 @@ advancement.elementaristics.energy=Behold: technology!
 advancement.elementaristics.binding=Just a frame of bones?
 advancement.elementaristics.glory=There shall be glory!
 advancement.elementaristics.water_purest=Fresh!
+advancement.elementaristics.slime=Shogglings for the people
 
 #Advancements-Ascension
 advancement.elementaristics.ascension_1=Far above, but just space
@@ -296,7 +298,7 @@ advancement.elementaristics.ascension_7=Forged Possibilities
 advancement.elementaristics.ascension_8=Nothingness
 
 #Advancements-Descriptions
-advancement.elementaristics.root.desc=Burn a Bundle of Herbs at night, while carrying a Book
+advancement.elementaristics.book.desc=Burn a Bundle of Herbs at night, while carrying a Book
 
 advancement.elementaristics.pedestal.desc=Build a Lightning Pedestal to create essences using items
 advancement.elementaristics.concentrator.desc=Build a Concentrator to influence items with other items to create new items
@@ -311,6 +313,7 @@ advancement.elementaristics.binding.desc=Build a Heart of Stone
 advancement.elementaristics.glory.desc=Build a Splendorous Eye
 advancement.elementaristics.water_purest.desc=Craft Purest Water
 
+advancement.elementaristics.slime.desc=Tame a Protoplasmic Slime
 #Advancements-Ascension-Descriptions
 advancement.elementaristics.ascension_1.desc=Study the essence of space
 advancement.elementaristics.ascension_2.desc=Build an Altar to perform rites

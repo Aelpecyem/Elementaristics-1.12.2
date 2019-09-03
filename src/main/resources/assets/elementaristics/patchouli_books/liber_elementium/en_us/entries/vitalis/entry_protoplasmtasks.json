@@ -2,7 +2,7 @@
   "name": "The Slime and Its Master",
   "icon": "elementaristics:textures/gui/icons/slimehand.png",
   "category": "vis_vitalis",
-  "advancement": "elementaristics:progress_glory",
+  "advancement": "elementaristics:progress_slime",
   "pages": [
     {
       "type": "text",

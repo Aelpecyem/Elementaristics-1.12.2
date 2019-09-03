@@ -4,8 +4,10 @@ import de.aelpecyem.elementaristics.capability.CapabilityHandler;
 import de.aelpecyem.elementaristics.capability.player.souls.soulCaps.SoulCaps;
 import de.aelpecyem.elementaristics.compat.thaumcraft.ThaumcraftCompat;
 import de.aelpecyem.elementaristics.entity.protoplasm.tasks.ProtoplasmTaskInit;
-import de.aelpecyem.elementaristics.events.EventHandler;
+import de.aelpecyem.elementaristics.events.EmotionHandler;
+import de.aelpecyem.elementaristics.events.LivingEventHandler;
 import de.aelpecyem.elementaristics.events.LootTableEventHandler;
+import de.aelpecyem.elementaristics.events.PotionEventHandler;
 import de.aelpecyem.elementaristics.gui.GuiHandler;
 import de.aelpecyem.elementaristics.init.*;
 import de.aelpecyem.elementaristics.misc.advancements.CustomAdvancements;
@@ -111,8 +113,11 @@ public final class Elementaristics {
         GameRegistry.registerWorldGenerator(new WorldGenAnomaly(), 10);
         MinecraftForge.EVENT_BUS.register(new SpellInit());
         MinecraftForge.EVENT_BUS.register(new CapabilityHandler());
-        MinecraftForge.EVENT_BUS.register(new EventHandler());
+        MinecraftForge.EVENT_BUS.register(new LivingEventHandler());
         MinecraftForge.EVENT_BUS.register(new LootTableEventHandler());
+        MinecraftForge.EVENT_BUS.register(new PotionEventHandler());
+        MinecraftForge.EVENT_BUS.register(new EmotionHandler());
+
 
         InitRecipes.init();
         RiteInit.init();

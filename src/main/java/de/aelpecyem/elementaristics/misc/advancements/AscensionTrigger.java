@@ -1,15 +1,10 @@
 package de.aelpecyem.elementaristics.misc.advancements;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
-
 import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.capability.player.PlayerCapProvider;
 import net.minecraft.advancements.ICriterionTrigger;
@@ -18,6 +13,10 @@ import net.minecraft.advancements.critereon.AbstractCriterionInstance;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.JsonUtils;
 import net.minecraft.util.ResourceLocation;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class AscensionTrigger implements ICriterionTrigger<AscensionTrigger.Instance> {
     private static final ResourceLocation ID = new ResourceLocation(Elementaristics.MODID, "ascend");
@@ -30,14 +29,14 @@ public class AscensionTrigger implements ICriterionTrigger<AscensionTrigger.Inst
 
     @Override
     public void addListener(PlayerAdvancements playerAdvancementsIn, ICriterionTrigger.Listener<AscensionTrigger.Instance> listener) {
-        AscensionTrigger.Listeners consumeitemtrigger$listeners = this.listeners.get(playerAdvancementsIn);
+        AscensionTrigger.Listeners trigger = this.listeners.get(playerAdvancementsIn);
 
-        if (consumeitemtrigger$listeners == null) {
-            consumeitemtrigger$listeners = new AscensionTrigger.Listeners(playerAdvancementsIn);
-            this.listeners.put(playerAdvancementsIn, consumeitemtrigger$listeners);
+        if (trigger == null) {
+            trigger = new AscensionTrigger.Listeners(playerAdvancementsIn);
+            this.listeners.put(playerAdvancementsIn, trigger);
         }
 
-        consumeitemtrigger$listeners.add(listener);
+        trigger.add(listener);
     }
 
     @Override

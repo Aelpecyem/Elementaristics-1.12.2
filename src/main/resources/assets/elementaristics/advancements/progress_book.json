@@ -1,0 +1,30 @@
+{
+  "display": {
+    "icon": {
+      "item": "patchouli:guide_book",
+      "nbt": "{\"patchouli:book\":\"elementaristics:liber_elementium\"}"
+    },
+    "title": {
+      "translate": "advancement.elementaristics.book"
+    },
+    "description": {
+      "translate": "advancement.elementaristics.book.desc"
+    },
+    "announce_to_chat": true,
+    "frame": "goal"
+  },
+  "parent": "elementaristics:root",
+  "criteria": {
+    "book": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "patchouli:guide_book",
+            "nbt": "{\"patchouli:book\":\"elementaristics:liber_elementium\"}"
+          }
+        ]
+      }
+    }
+  }
+}

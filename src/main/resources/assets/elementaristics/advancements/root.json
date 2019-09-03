@@ -7,23 +7,16 @@
     "title": {
       "translate": "advancement.elementaristics.root"
     },
-    "description": {
-      "translate": "advancement.elementaristics.root.desc"
-    },
+    "description": "",
     "background": "minecraft:textures/gui/advancements/backgrounds/stone.png",
     "show_toast": false,
-    "announce_to_chat": true
+    "announce_to_chat": false
   },
   "criteria": {
     "book": {
-      "trigger": "minecraft:inventory_changed",
+      "trigger": "elementaristics:dummy",
       "conditions": {
-        "items": [
-          {
-            "item": "patchouli:guide_book",
-            "nbt": "{\"patchouli:book\":\"elementaristics:liber_elementium\"}"
-          }
-        ]
+        "name": "login"
       }
     }
   }

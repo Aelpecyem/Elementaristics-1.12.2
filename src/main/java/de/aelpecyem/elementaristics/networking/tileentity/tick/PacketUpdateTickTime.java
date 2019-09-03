@@ -43,7 +43,7 @@ public class PacketUpdateTickTime implements IMessage {
         @Override
         public IMessage onMessage(PacketUpdateTickTime message, MessageContext ctx) {
             Minecraft.getMinecraft().addScheduledTask(() -> {
-                if (Minecraft.getMinecraft().world.getTileEntity(message.pos) instanceof IHasTickCount) {
+                if (Minecraft.getMinecraft().world != null && Minecraft.getMinecraft().world.getTileEntity(message.pos) instanceof IHasTickCount) {
                     TileEntity te = Minecraft.getMinecraft().world.getTileEntity(message.pos);
                     ((IHasTickCount) te).setTickCount(message.tickTime);
                 }
