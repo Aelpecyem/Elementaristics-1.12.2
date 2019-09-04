@@ -1,10 +1,7 @@
 package de.aelpecyem.elementaristics.capability.player;
 
 import de.aelpecyem.elementaristics.capability.player.souls.Soul;
-import de.aelpecyem.elementaristics.entity.EntityCultist;
 import de.aelpecyem.elementaristics.misc.spell.SpellBase;
-
-import java.util.List;
 
 public interface IPlayerCapabilities {
 
@@ -58,4 +55,16 @@ public interface IPlayerCapabilities {
     void cycleSlot(boolean down);
 
     SpellBase getCurrentSpell();
+
+    float getVisionProgression();
+
+    boolean isVisionActive();
+
+    void setVisionProgression(float progression);
+
+    void setVision(String vision);
+
+    String getVision();
+
+    void updateVision();
 }

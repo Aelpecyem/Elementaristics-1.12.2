@@ -45,7 +45,7 @@ public class CommonProxy {
     public void generateGenericParticles(World world, BlockPos pos, int color, float scale, int maxAge, float gravity, boolean collision, boolean fade) {
     }
 
-    public void generateParticleRay(World world, float xFrom, float yFrom, float zFrom, float xTo, float yTo, float zTo, int color, float scale, int maxAge, float gravity, boolean collision, boolean fade) {
+    public void giveVision(EntityPlayer player, String vision) {
 
     }
 

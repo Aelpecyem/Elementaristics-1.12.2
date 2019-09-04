@@ -8,17 +8,24 @@ public class PlayerCapabilities implements IPlayerCapabilities {
 
     private int soulId = -1;
     private int ticksLeftStunted = 0;
-    private boolean knowsSoul = false;
     private float maxMagan = 100;
     private float currentMagan = maxMagan;
     private float maganRegenPerTick;
-    private int ascensionStage;
+
     private int cultistCount;
+
+    private int ascensionStage;
     private int ascensionRoute;
+    private boolean knowsSoul = false;
+
     private int spellSlot;
+
+    private float visionProgression;
+    private String visionActive;
 
     public PlayerCapabilities() {
         soulId = SoulInit.generateSoulType().getId();
+        visionActive = "";
     }
 
     @Override
@@ -175,5 +182,38 @@ public class PlayerCapabilities implements IPlayerCapabilities {
         }
     }
 
+    @Override
+    public float getVisionProgression() {
+        return visionProgression;
+    }
 
+    @Override
+    public boolean isVisionActive() {
+        return visionActive != null && !visionActive.isEmpty();
+    }
+
+    @Override
+    public void setVisionProgression(float progression) {
+        this.visionProgression = progression;
+    }
+
+    @Override
+    public void setVision(String vision) {
+        this.visionActive = vision;
+    }
+
+    @Override
+    public String getVision() {
+        return visionActive != null ? visionActive : "";
+    }
+
+    @Override
+    public void updateVision() { //might not need to be synced, as it's ONLY used Client-Side
+        if (isVisionActive() && getVisionProgression() < 1) {
+            setVisionProgression(getVisionProgression() + 0.001F);
+        } else {
+            setVisionProgression(0);
+            setVision("");
+        }
+    }
 }

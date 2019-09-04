@@ -53,6 +53,7 @@ public class PotionEventHandler {
                     if (InventoryUtil.containsItem(event.player.inventory, Items.BOOK) != null) {
                         if (event.player.getActivePotionEffect(PotionInit.potionIntoxicated).getDuration() == 3000) {
                             if (!event.player.world.isRemote) {
+
                                 PacketHandler.sendTo(event.player, new PacketMessage("message.vision.1", true));
                             }
                         }

@@ -3,6 +3,7 @@ package de.aelpecyem.elementaristics.events;
 import com.google.gson.JsonSyntaxException;
 import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.misc.potions.PotionInit;
+import de.aelpecyem.elementaristics.util.PlayerUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.shader.ShaderGroup;
@@ -28,8 +29,10 @@ public class ShaderHandler {
     public static final int SHADER_DRUGS = 0;
     public static final int SHADER_TRANCE = 1;
     public static final int SHADER_FOCUSED = 2;
+    public static final int SHADER_NEGATIVE = 3;
+    public static final int SHADER_POSITIVE = 4;
 
-    public static ResourceLocation[] shader_resources = new ResourceLocation[]{new ResourceLocation("shaders/post/intoxicated.json"), new ResourceLocation("shaders/post/trance.json"), new ResourceLocation("shaders/post/fxaa.json")};
+    public static ResourceLocation[] shader_resources = new ResourceLocation[]{new ResourceLocation("shaders/post/intoxicated.json"), new ResourceLocation("shaders/post/trance.json"), new ResourceLocation("shaders/post/deconverge.json"), new ResourceLocation("shaders/post/greyer.json"), new ResourceLocation("shaders/post/brighter.json")};
 
     @SideOnly(Side.CLIENT)
     @SubscribeEvent
@@ -48,6 +51,8 @@ public class ShaderHandler {
         handleShader(event.player.isPotionActive(PotionInit.potionIntoxicated) && event.player.getActivePotionEffect(PotionInit.potionIntoxicated).getAmplifier() >= 1, SHADER_TRANCE);
         handleShader(event.player.isPotionActive(PotionInit.potionTrance), SHADER_TRANCE);
         handleShader(event.player.isPotionActive(PotionInit.potionFocused), SHADER_FOCUSED);
+        handleShader(PlayerUtil.hasPositiveEmotion(event.player), SHADER_POSITIVE);
+        handleShader(PlayerUtil.hasNegativeEmotion(event.player), SHADER_NEGATIVE);
     }
 
     public static void handleShader(boolean condition, int shaderId) {

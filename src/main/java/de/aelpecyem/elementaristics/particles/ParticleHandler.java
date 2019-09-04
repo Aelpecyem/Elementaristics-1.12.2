@@ -1,5 +1,6 @@
 package de.aelpecyem.elementaristics.particles;
 
+import de.aelpecyem.elementaristics.Elementaristics;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.renderer.ActiveRenderInfo;
@@ -8,6 +9,7 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
@@ -19,17 +21,19 @@ import java.util.function.Supplier;
 //snatched directly from https://github.com/Ellpeck/NaturesAura/blob/master/src/main/java/de/ellpeck/naturesaura/particles/ParticleHandler.java
 @SideOnly(Side.CLIENT)
 public final class ParticleHandler {
+    public static final ResourceLocation PARTICLE_TEXTURES = new ResourceLocation(Elementaristics.MODID, "textures/misc/particles.png"); //switch to particle_base_1.png if it's considered fancier
 
     private static final List<Particle> PARTICLES = new CopyOnWriteArrayList<>();
-    private static final List<Particle> PARTICLES_NO_DEPTH = new CopyOnWriteArrayList<>();
+    private static final List<Particle> PARTICLES_NO_DEPTH = new CopyOnWriteArrayList<>(); //use a larger texture with indexes!
     public static boolean depthEnabled = true;
     public static int range = 32;
 
     public static void spawnParticle(Supplier<Particle> particle) {
-        if (depthEnabled)
+        if (depthEnabled) {
             PARTICLES.add(particle.get());
-        else
+        } else {
             PARTICLES_NO_DEPTH.add(particle.get());
+        }
     }
 
     public static void updateParticles() {
@@ -75,20 +79,20 @@ public final class ParticleHandler {
 
             GlStateManager.depthMask(false);
 
-            mc.getTextureManager().bindTexture(ParticleGeneric.TEXTURE);
-            Tessellator tessy = Tessellator.getInstance();
-            BufferBuilder buffer = tessy.getBuffer();
-
+            mc.getTextureManager().bindTexture(PARTICLE_TEXTURES);
+            Tessellator t = Tessellator.getInstance();
+            BufferBuilder buffer = t.getBuffer();
             buffer.begin(GL11.GL_QUADS, DefaultVertexFormats.PARTICLE_POSITION_TEX_COLOR_LMAP);
-            for (Particle particle : PARTICLES)
+            for (Particle particle : PARTICLES) {
                 particle.renderParticle(buffer, player, partialTicks, x, xz, z, yz, xy);
-            tessy.draw();
+            }
+            t.draw();
 
             GlStateManager.disableDepth();
             buffer.begin(GL11.GL_QUADS, DefaultVertexFormats.PARTICLE_POSITION_TEX_COLOR_LMAP);
             for (Particle particle : PARTICLES_NO_DEPTH)
                 particle.renderParticle(buffer, player, partialTicks, x, xz, z, yz, xy);
-            tessy.draw();
+            t.draw();
             GlStateManager.enableDepth();
 
             GlStateManager.enableCull();

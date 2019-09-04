@@ -71,10 +71,6 @@ public class EntityExplosionProjectile extends EntityThrowable {
         return this.getDataManager().get(THROWER);
     }
 
-    public void setThrower(EntityLivingBase thrower) {
-        this.thrower = thrower;
-    }
-
     @Nullable
     public EntityLivingBase getCaster() {
         String uuid = this.getCasterUUID();
@@ -115,12 +111,6 @@ public class EntityExplosionProjectile extends EntityThrowable {
             affect();
             this.setDead();
         }
-          /*  if(result.typeOfHit != RayTraceResult.Type.BLOCK || !world.getBlockState(result.getBlockPos()).getMaterial().blocksMovement()) {
-                Explosion explosion = new Explosion(world, this, this.posX, this.posY, this.posZ, 3, false, false);
-                explosion.doExplosionA();
-                explosion.doExplosionB(true);
-                this.setDead();
-            }*/
     }
 
     public void affect() {

@@ -21,6 +21,9 @@ public class PlayerCapStorage implements Capability.IStorage<IPlayerCapabilities
         compound.setInteger("cultistCount", instance.getCultistCount());
         compound.setInteger("spellSelected", instance.getAscensionRoute());
         compound.setInteger("spellSlot", instance.getSpellSlot());
+
+        compound.setFloat("visionProgress", instance.getVisionProgression());
+        compound.setString("vision", instance.getVision());
         return compound;
     }
 
@@ -38,6 +41,9 @@ public class PlayerCapStorage implements Capability.IStorage<IPlayerCapabilities
         instance.setCultistCount(compound.getInteger("cultistCount"));
         instance.setAscensionRoute(compound.getInteger("spellSelected"));
         instance.setSpellSlot(compound.getInteger("spellSlot"));
+
+        instance.setVisionProgression(compound.getFloat("visionProgress"));
+        instance.setVision(compound.getString("vision"));
 
     }
 }

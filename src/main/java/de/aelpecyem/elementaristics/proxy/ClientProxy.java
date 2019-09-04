@@ -4,6 +4,8 @@ import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.blocks.tileentity.*;
 import de.aelpecyem.elementaristics.blocks.tileentity.pantheon.TileEntityDeityShrine;
 import de.aelpecyem.elementaristics.blocks.tileentity.render.*;
+import de.aelpecyem.elementaristics.capability.player.IPlayerCapabilities;
+import de.aelpecyem.elementaristics.capability.player.PlayerCapProvider;
 import de.aelpecyem.elementaristics.entity.render.RenderHandler;
 import de.aelpecyem.elementaristics.events.ClientEventHandler;
 import de.aelpecyem.elementaristics.events.HUDRenderHandler;
@@ -51,6 +53,8 @@ public class ClientProxy extends CommonProxy {
         MinecraftForge.EVENT_BUS.register(new ClientTickHandler());
         MinecraftForge.EVENT_BUS.register(new ClientEventHandler());
 
+        TileEntityItemStackRenderer.instance = new TESRShrine.ForwardingTEISR(TileEntityItemStackRenderer.instance);
+
     }
 
     @Override
@@ -73,7 +77,7 @@ public class ClientProxy extends CommonProxy {
 
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDeityShrine.class, new TESRShrine());
 
-        TileEntityItemStackRenderer.instance = new TESRShrine.ForwardingTEISR();
+        //TileEntityItemStackRenderer.instance = new TESRShrine.ForwardingTEISR(TileEntityItemStackRenderer.instance);
     }
 
 
@@ -82,6 +86,18 @@ public class ClientProxy extends CommonProxy {
         ModelLoader.setCustomModelResourceLocation(item, meta, new ModelResourceLocation(Elementaristics.MODID + ":" + id, "inventory"));
     }
 
+    /**
+     * Grants the player a vision
+     *
+     * @param player
+     * @param vision The resource location of the vision; in this implementation, elementaristics:textures/misc/visions will always be accessed.
+     */
+    public void giveVision(EntityPlayer player, String vision) {
+        if (player.hasCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null)) {
+            IPlayerCapabilities cap = player.getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null);
+            cap.setVision("elementaristics:textures/misc/visions/" + vision + ".png");
+        }
+    }
 
     @Override
     public void generateGenericParticles(Entity entityIn, int color, float scale, int maxAge, float gravity, boolean collision, boolean fade) {

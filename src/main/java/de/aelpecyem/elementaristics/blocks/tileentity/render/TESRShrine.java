@@ -19,7 +19,6 @@ public class TESRShrine extends TileEntitySpecialRenderer<TileEntityDeityShrine>
     @Override
     public void render(@Nullable TileEntityDeityShrine te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
         if (te != null) {
-            //Forwarding
             if (te.isStatue && te.getDeityBound() != null) { //get deity from block!
                 ModelBase model = te.getDeityBound().getModel();
                 ResourceLocation loc = te.getDeityBound().getTexture();
@@ -40,6 +39,11 @@ public class TESRShrine extends TileEntitySpecialRenderer<TileEntityDeityShrine>
 
     public static class ForwardingTEISR extends TileEntityItemStackRenderer {
         private TileEntityDeityShrine shrineRender = new TileEntityDeityShrine();
+        private final TileEntityItemStackRenderer compose;
+
+        public ForwardingTEISR(TileEntityItemStackRenderer compose) {
+            this.compose = compose;
+        }
 
         @Override
         public void renderByItem(ItemStack itemStack) {
@@ -50,7 +54,7 @@ public class TESRShrine extends TileEntitySpecialRenderer<TileEntityDeityShrine>
                 shrineRender.unusedString = "item";
                 TileEntityRendererDispatcher.instance.render(this.shrineRender, 0.0D, 0.0D, 0.0D, 0.0F, 0, 0);
             } else {
-                super.renderByItem(itemStack);
+                compose.renderByItem(itemStack);
             }
         }
     }

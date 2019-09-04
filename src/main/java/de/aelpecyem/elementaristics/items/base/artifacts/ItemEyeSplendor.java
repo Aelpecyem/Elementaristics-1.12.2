@@ -8,18 +8,13 @@ import de.aelpecyem.elementaristics.blocks.tileentity.pantheon.TileEntityDeitySh
 import de.aelpecyem.elementaristics.init.Deities;
 import de.aelpecyem.elementaristics.items.base.artifacts.rites.ItemAspects;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;
-import de.aelpecyem.elementaristics.misc.pantheon.Deity;
-import de.aelpecyem.elementaristics.util.PlayerUtil;
 import de.aelpecyem.elementaristics.util.TimeUtil;
-import net.minecraft.block.Block;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.math.Vec3i;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 
@@ -39,6 +34,11 @@ public class ItemEyeSplendor extends ItemAspects {
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
         if (worldIn.isRemote) {
+            if (playerIn.isSneaking()) {
+                Elementaristics.proxy.giveVision(playerIn, "testvision");
+            } else {
+                Elementaristics.proxy.giveVision(playerIn, "vision2");
+            }
             if (playerIn.rayTrace(10, 0).getBlockPos() != null) {
                 if (worldIn.getTileEntity(playerIn.rayTrace(10, 0).getBlockPos()) instanceof TileEntityDeityShrine) {
                     return super.onItemRightClick(worldIn, playerIn, handIn);

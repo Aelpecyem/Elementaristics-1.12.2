@@ -17,14 +17,14 @@
         {
           "name": "BlurDir",
           "values": [
-            2.0,
-            2.0
+            0.4,
+            0.0
           ]
         },
         {
           "name": "Radius",
           "values": [
-            10.0
+            5.0
           ]
         }
       ]

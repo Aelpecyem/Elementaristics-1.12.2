@@ -53,6 +53,7 @@ public class CapabilityHandler {
             caps.setCultistCount(oldCaps.getCultistCount());
             caps.setAscensionRoute(oldCaps.getAscensionRoute());
             caps.setSpellSlot(oldCaps.getSpellSlot());
+            //visions are not updated
         }
     }
 
@@ -116,6 +117,9 @@ public class CapabilityHandler {
             }
             if (event.player.capabilities.isCreativeMode) {
                 cap.setMagan(cap.getMaxMagan());
+            }
+            if (event.player.world.isRemote) {
+                cap.updateVision();
             }
             //...
             SoulCaps.getCapForSoul(SoulInit.getSoulFromId(cap.getSoulId())).onTickEvent(event, event.player, cap);

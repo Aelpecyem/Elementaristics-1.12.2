@@ -11,7 +11,7 @@
     },
     {
       "type": "text",
-      "text": "If one looks at any block connected to OE in any way, they'll quickly notice blue letters in the top left of their screen, indicating the current amount of energy (in relation to the block's energy capacity).$(br2)Every one of these blocks can transfer their energy to or drain the energy from a block within $(marked)16 Blocks$().$(br)The transfer rate of a block is usually around 10 OE per tick ($(marked)10 OE/t$())."
+      "text": "If one looks at any block connected to OE in any way while holding a $(linked:energy/entry_energy)Channeling Tool$(), they'll quickly notice blue letters in the top left of their screen, indicating the current amount of energy (in relation to the block's energy capacity).$(br2)Every one of these blocks can transfer their energy to or drain the energy from a block within $(marked)16 Blocks$().$(br)The transfer rate of a block is usually around $(t:Do note that this amount may greatly vary)20 OE per tick ($(marked)20 OE/t$())."
     },
     {
       "type": "text",

@@ -14,6 +14,8 @@ import de.aelpecyem.elementaristics.entity.protoplasm.tasks.execs.ProtoplasmGoTo
 import de.aelpecyem.elementaristics.entity.protoplasm.tasks.execs.ProtoplasmTask;
 import de.aelpecyem.elementaristics.init.RiteInit;
 import de.aelpecyem.elementaristics.init.SoulInit;
+import de.aelpecyem.elementaristics.items.base.artifacts.ItemChannelingTool;
+import de.aelpecyem.elementaristics.items.base.artifacts.ItemEyeSplendor;
 import de.aelpecyem.elementaristics.items.base.thaumagral.ItemThaumagral;
 import de.aelpecyem.elementaristics.misc.elements.Aspect;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;
@@ -23,8 +25,8 @@ import de.aelpecyem.elementaristics.util.MiscUtil;
 import de.aelpecyem.elementaristics.util.PlayerUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
@@ -53,40 +55,31 @@ public class HUDRenderHandler {
 
         }
         if (event.getType() == RenderGameOverlayEvent.ElementType.ALL && !event.isCancelable()) {
-            /*System.out.println("rendering shaders: 1");
-            if (event.getType() == RenderGameOverlayEvent.ElementType.ALL) {
-                System.out.println("rendering shaders: 2");
-                Minecraft mc = Minecraft.getMinecraft();
-                if (OpenGlHelper.areShadersSupported() && ShaderHandler.shaderGroups.size() > 0) {
-                    ShaderHandler.updateShaderFrameBuffers(mc);
-                    GL11.glMatrixMode(5890);
-                    GL11.glLoadIdentity();
-                    System.out.println("rendering shaders: 3");
-
-                    for(Iterator var2 = ShaderHandler.shaderGroups.values().iterator(); var2.hasNext(); GL11.glPopMatrix()) {
-                        ShaderGroup sg = (ShaderGroup)var2.next();
-                        GL11.glPushMatrix();
-
-                        try {
-                            System.out.println("yay");
-                            sg.render(event.getPartialTicks());
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-
-                    mc.getFramebuffer().bindFramebuffer(true);
-                }
-            }*/
-
             renderSpellSelected(event);
 
         }
         if (event.getType() == RenderGameOverlayEvent.ElementType.TEXT && !event.isCancelable()) {
+            renderVision(event);
             renderSlimeTasks(event);
             renderRiteHud(event);
             renderEnergyHud(event);
             renderDeityHud(event);
+        }
+    }
+
+    public void renderVision(RenderGameOverlayEvent.Post event) {
+        Minecraft mc = Minecraft.getMinecraft();
+        if (mc.player.hasCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null)) {
+            IPlayerCapabilities cap = mc.player.getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null);
+            if (cap.isVisionActive()) {
+                ResourceLocation tex = new ResourceLocation(cap.getVision());
+                int posX = event.getResolution().getScaledWidth() / 2 - 256 / 2; // + 10;
+                int poxY = event.getResolution().getScaledHeight() / 2 - 256 / 2;
+                System.out.println(cap.getVisionProgression());
+                float alpha = cap.getVisionProgression(); //will be at max when half of the vision is complete, see later
+                drawColoredTexturedModalRect(posX, poxY, 0, 0, 256, 256, Color.WHITE, alpha, tex); //width 427, height 240 for full screen
+                return;
+            }
         }
     }
 
@@ -215,34 +208,38 @@ public class HUDRenderHandler {
 
     public void renderEnergyHud(RenderGameOverlayEvent.Post event) {
         Minecraft mc = Minecraft.getMinecraft();
-        if (mc.player.world.getTileEntity(PlayerUtil.getBlockPosLookingAt(5)) != null &&
-                mc.player.world.getTileEntity(PlayerUtil.getBlockPosLookingAt(5)) instanceof TileEntityEnergy) {
-            TileEntityEnergy tile = (TileEntityEnergy) mc.player.world.getTileEntity(PlayerUtil.getBlockPosLookingAt(5));
-            //render whether it drains or gets drained etc.
-            mc.ingameGUI.drawString(mc.fontRenderer, I18n.format("hud.energy_current") + " " + tile.storage.getEnergyStored() + " / " + tile.storage.getMaxEnergyStored(), 5, 5, Aspects.electricity.getColor());
-            if (tile.posBound != null)
-                if (!(tile.posBound.getZ() == tile.getPos().getZ() && tile.posBound.getY() == tile.getPos().getY() && tile.posBound.getX() == tile.getPos().getX()))
-                    mc.ingameGUI.drawString(mc.fontRenderer, (tile.receives ? I18n.format("hud.energy_from") : I18n.format("hud.energy_to")) + " X: " + tile.getPositionBoundTo().getX() + " Y: " + tile.getPositionBoundTo().getY() + " Z: " + tile.getPositionBoundTo().getZ() + " " + (tile.posBound.getDistance(tile.getPos().getX(), tile.getPos().getY(), tile.getPos().getZ()) < 16 ? " " : I18n.format("hud.too_far")), 5, 40, tile.posBound.getDistance(tile.getPos().getX(), tile.getPos().getY(), tile.getPos().getZ()) < 16 ? Aspects.electricity.getColor() : 13107200);
-        } else if (mc.player.world.getTileEntity(PlayerUtil.getBlockPosLookingAt(5)) != null &&
-                mc.player.world.getTileEntity(PlayerUtil.getBlockPosLookingAt(5)) instanceof IHasBoundPosition) {
-            TileEntity tile = mc.player.world.getTileEntity(PlayerUtil.getBlockPosLookingAt(5));
-            if (((IHasBoundPosition) tile).getPositionBoundTo() != null) {
-                if (!(((IHasBoundPosition) tile).getPositionBoundTo().getZ() == tile.getPos().getZ() && ((IHasBoundPosition) tile).getPositionBoundTo().getY() == tile.getPos().getY() && ((IHasBoundPosition) tile).getPositionBoundTo().getX() == tile.getPos().getX()))
-                    mc.ingameGUI.drawString(mc.fontRenderer, I18n.format("hud.pos_to") + " X: " + ((IHasBoundPosition) tile).getPositionBoundTo().getX() + " Y: " + ((IHasBoundPosition) tile).getPositionBoundTo().getY() + " Z: " + ((IHasBoundPosition) tile).getPositionBoundTo().getZ(), 5, 40, Aspects.magan.getColor());
+        if (mc.player.getHeldItemMainhand().getItem() instanceof ItemChannelingTool || mc.player.getHeldItemOffhand().getItem() instanceof ItemChannelingTool) {
+            if (mc.player.world.getTileEntity(PlayerUtil.getBlockPosLookingAt(5)) != null &&
+                    mc.player.world.getTileEntity(PlayerUtil.getBlockPosLookingAt(5)) instanceof TileEntityEnergy) {
+                TileEntityEnergy tile = (TileEntityEnergy) mc.player.world.getTileEntity(PlayerUtil.getBlockPosLookingAt(5));
+                //render whether it drains or gets drained etc.
+                mc.ingameGUI.drawString(mc.fontRenderer, I18n.format("hud.energy_current") + " " + tile.storage.getEnergyStored() + " / " + tile.storage.getMaxEnergyStored(), 5, 5, Aspects.electricity.getColor());
+                if (tile.posBound != null)
+                    if (!(tile.posBound.getZ() == tile.getPos().getZ() && tile.posBound.getY() == tile.getPos().getY() && tile.posBound.getX() == tile.getPos().getX()))
+                        mc.ingameGUI.drawString(mc.fontRenderer, (tile.receives ? I18n.format("hud.energy_from") : I18n.format("hud.energy_to")) + " X: " + tile.getPositionBoundTo().getX() + " Y: " + tile.getPositionBoundTo().getY() + " Z: " + tile.getPositionBoundTo().getZ() + " " + (tile.posBound.getDistance(tile.getPos().getX(), tile.getPos().getY(), tile.getPos().getZ()) < 16 ? " " : I18n.format("hud.too_far")), 5, 40, tile.posBound.getDistance(tile.getPos().getX(), tile.getPos().getY(), tile.getPos().getZ()) < 16 ? Aspects.electricity.getColor() : 13107200);
+            } else if (mc.player.world.getTileEntity(PlayerUtil.getBlockPosLookingAt(5)) != null &&
+                    mc.player.world.getTileEntity(PlayerUtil.getBlockPosLookingAt(5)) instanceof IHasBoundPosition) {
+                TileEntity tile = mc.player.world.getTileEntity(PlayerUtil.getBlockPosLookingAt(5));
+                if (((IHasBoundPosition) tile).getPositionBoundTo() != null) {
+                    if (!(((IHasBoundPosition) tile).getPositionBoundTo().getZ() == tile.getPos().getZ() && ((IHasBoundPosition) tile).getPositionBoundTo().getY() == tile.getPos().getY() && ((IHasBoundPosition) tile).getPositionBoundTo().getX() == tile.getPos().getX()))
+                        mc.ingameGUI.drawString(mc.fontRenderer, I18n.format("hud.pos_to") + " X: " + ((IHasBoundPosition) tile).getPositionBoundTo().getX() + " Y: " + ((IHasBoundPosition) tile).getPositionBoundTo().getY() + " Z: " + ((IHasBoundPosition) tile).getPositionBoundTo().getZ(), 5, 40, Aspects.magan.getColor());
+                }
             }
         }
     }
 
     public void renderDeityHud(RenderGameOverlayEvent.Post event) {
         Minecraft mc = Minecraft.getMinecraft();
-        if (mc.player.world.getTileEntity(PlayerUtil.getBlockPosLookingAt(5)) != null &&
-                mc.player.world.getTileEntity(PlayerUtil.getBlockPosLookingAt(5)) instanceof TileEntityDeityShrine) {
-            TileEntityDeityShrine tile = (TileEntityDeityShrine) mc.player.world.getTileEntity(PlayerUtil.getBlockPosLookingAt(5));
-            if (tile.deityBound != null || !tile.deityBound.equals(""))
-                mc.ingameGUI.drawString(mc.fontRenderer, I18n.format("hud.god") + " " + I18n.format(tile.deityBound), 5, 50, Aspects.light.getColor());
-            if (tile.altarPos != null)
-                if (!(tile.altarPos.getZ() == tile.getPos().getZ() && tile.altarPos.getY() == tile.getPos().getY() && tile.altarPos.getX() == tile.getPos().getX()))
-                    mc.ingameGUI.drawString(mc.fontRenderer, I18n.format("hud.altar_to") + " X: " + tile.altarPos.getX() + " Y: " + tile.altarPos.getY() + " Z: " + tile.altarPos.getZ(), 5, 60, Aspects.light.getColor());
+        if (mc.player.getHeldItemMainhand().getItem() instanceof ItemEyeSplendor || mc.player.getHeldItemOffhand().getItem() instanceof ItemEyeSplendor) {
+            if (mc.player.world.getTileEntity(PlayerUtil.getBlockPosLookingAt(5)) != null &&
+                    mc.player.world.getTileEntity(PlayerUtil.getBlockPosLookingAt(5)) instanceof TileEntityDeityShrine) {
+                TileEntityDeityShrine tile = (TileEntityDeityShrine) mc.player.world.getTileEntity(PlayerUtil.getBlockPosLookingAt(5));
+                if (tile.deityBound != null || !tile.deityBound.equals(""))
+                    mc.ingameGUI.drawString(mc.fontRenderer, I18n.format("hud.god") + " " + I18n.format(tile.deityBound), 5, 50, Aspects.light.getColor());
+                if (tile.altarPos != null)
+                    if (!(tile.altarPos.getZ() == tile.getPos().getZ() && tile.altarPos.getY() == tile.getPos().getY() && tile.altarPos.getX() == tile.getPos().getX()))
+                        mc.ingameGUI.drawString(mc.fontRenderer, I18n.format("hud.altar_to") + " X: " + tile.altarPos.getX() + " Y: " + tile.altarPos.getY() + " Z: " + tile.altarPos.getZ(), 5, 60, Aspects.light.getColor());
+            }
         }
     }
     public void renderMaganBar(RenderGameOverlayEvent.Post event) {
@@ -266,20 +263,26 @@ public class HUDRenderHandler {
     }
 
     public void drawColoredTexturedModalRect(int x, int y, int textureX, int textureY, int width, int height, Color color, float alpha, ResourceLocation resTex) {
+        // GlStateManager.color((float)color.getRed() / 255F, (float)color.getGreen() / 255F, (float)color.getBlue() / 255F, alpha / 255F);
+        GlStateManager.enableNormalize();
+        GlStateManager.enableBlend();
+        GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
+
+
         float zLevel = -90.0F;
-        float f = 0.00390625F;
-        float f1 = 0.00390625F;
         Tessellator tessellator = Tessellator.getInstance();
         BufferBuilder bufferbuilder = tessellator.getBuffer();
         bufferbuilder.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX_COLOR);
         //   bufferbuilder.begin(7, DefaultVertexFormats.POSITION_TEX);
-        bufferbuilder.pos((double) (x + 0), (double) (y + height), (double) zLevel).tex((double) ((float) (textureX + 0) * 0.00390625F), (double) ((float) (textureY + height) * 0.00390625F)).color(color.getRed() / 255F, color.getGreen() / 255F, color.getBlue() / 255F, alpha).endVertex();
+        bufferbuilder.pos((double) x, (double) (y + height), (double) zLevel).tex((double) ((float) (textureX + 0) * 0.00390625F), (double) ((float) (textureY + height) * 0.00390625F)).color(color.getRed() / 255F, color.getGreen() / 255F, color.getBlue() / 255F, alpha).endVertex();
         bufferbuilder.pos((double) (x + width), (double) (y + height), (double) zLevel).tex((double) ((float) (textureX + width) * 0.00390625F), (double) ((float) (textureY + height) * 0.00390625F)).color(color.getRed() / 255F, color.getGreen() / 255F, color.getBlue() / 255F, alpha).endVertex();
-        bufferbuilder.pos((double) (x + width), (double) (y + 0), (double) zLevel).tex((double) ((float) (textureX + width) * 0.00390625F), (double) ((float) (textureY + 0) * 0.00390625F)).color(color.getRed() / 255F, color.getGreen() / 255F, color.getBlue() / 255F, alpha).endVertex();
-        bufferbuilder.pos((double) (x + 0), (double) (y + 0), (double) zLevel).tex((double) ((float) (textureX + 0) * 0.00390625F), (double) ((float) (textureY + 0) * 0.00390625F)).color(color.getRed() / 255F, color.getGreen() / 255F, color.getBlue() / 255F, alpha).endVertex();
+        bufferbuilder.pos((double) (x + width), (double) y, (double) zLevel).tex((double) ((float) (textureX + width) * 0.00390625F), (double) ((float) (textureY + 0) * 0.00390625F)).color(color.getRed() / 255F, color.getGreen() / 255F, color.getBlue() / 255F, alpha).endVertex();
+        bufferbuilder.pos((double) x, (double) y, (double) zLevel).tex((double) ((float) (textureX + 0) * 0.00390625F), (double) ((float) (textureY + 0) * 0.00390625F)).color(color.getRed() / 255F, color.getGreen() / 255F, color.getBlue() / 255F, alpha).endVertex();
         Minecraft.getMinecraft().getTextureManager().bindTexture(resTex);
         tessellator.draw();
-        Minecraft.getMinecraft().getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
+        GlStateManager.disableBlend();
+        GlStateManager.disableNormalize();
+        //Minecraft.getMinecraft().getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
     }
 
 

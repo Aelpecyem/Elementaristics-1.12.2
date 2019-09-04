@@ -2,6 +2,7 @@ package de.aelpecyem.elementaristics.blocks.tileentity.blocks.pantheon;
 
 import de.aelpecyem.elementaristics.blocks.tileentity.BlockTileEntity;
 import de.aelpecyem.elementaristics.blocks.tileentity.pantheon.TileEntityDeityShrine;
+import de.aelpecyem.elementaristics.blocks.tileentity.render.TESRShrine;
 import de.aelpecyem.elementaristics.items.base.artifacts.ItemChannelingTool;
 import de.aelpecyem.elementaristics.misc.pantheon.Deity;
 import de.aelpecyem.elementaristics.util.TimeUtil;
@@ -12,8 +13,10 @@ import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.tileentity.TileEntityItemStackRenderer;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumBlockRenderType;
@@ -102,7 +105,7 @@ public class BlockDeityShrineBase extends BlockTileEntity<TileEntityDeityShrine>
     @Override
     public EnumBlockRenderType getRenderType(IBlockState state) {
         if (isStatue) {
-            return EnumBlockRenderType.ENTITYBLOCK_ANIMATED; ///INVISIBLE
+            return EnumBlockRenderType.INVISIBLE;
         }
         return super.getRenderType(state);
     }
@@ -151,8 +154,15 @@ public class BlockDeityShrineBase extends BlockTileEntity<TileEntityDeityShrine>
     }
 
     @Override
+    public Item createItemBlock() {
+        Item item = super.createItemBlock();
+        item.setTileEntityItemStackRenderer(new TESRShrine.ForwardingTEISR(TileEntityItemStackRenderer.instance));
+        return item;
+    }
+
+    @Override
     public void registerItemModel(Block itemBlock) {
-        //  TileEntityChest
+        //ModBlocks.registerCustomItemblock(this, "shrine");
         super.registerItemModel(itemBlock);
     }
 }

@@ -1,12 +1,8 @@
 package de.aelpecyem.elementaristics.particles;
 
-import de.aelpecyem.elementaristics.Elementaristics;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.renderer.BufferBuilder;
-import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -15,7 +11,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class ParticleGeneric extends Particle {
-    public static final ResourceLocation TEXTURE = new ResourceLocation(Elementaristics.MODID, "textures/misc/particle_base_1.png"); //switch to particle_base_1.png if it's considered fancier
     //the rendering with the ParticleHandler class might not be needed in 1.14, but idk, we'll see
     private final float desiredScale;
     private final boolean fade;
@@ -46,11 +41,9 @@ public class ParticleGeneric extends Particle {
         float b = ((color & 255) / 255F) * (1F - this.rand.nextFloat() * 0.25F);
         this.setRBGColorF(r, g, b);
 
-        TextureMap map = Minecraft.getMinecraft().getTextureMapBlocks();
-        //this.setParticleTexture(map.getAtlasSprite(TEXTURE.toString()));
-
         this.particleAlpha = alpha;
         this.particleScale = this.desiredScale;
+        setParticleTextureIndex(0);
     }
 
     public ParticleGeneric(World world, double posX, double posY, double posZ, double motionX, double motionY, double motionZ, int color, float scale, int maxAge, float gravity, boolean collision, boolean fade, boolean shrink, boolean followPosition, double xTo, double yTo, double zTo) {
@@ -78,17 +71,12 @@ public class ParticleGeneric extends Particle {
 
         this.particleAlpha = 0.5F;
         this.particleScale = this.desiredScale;
-    }
-
-    @Override
-    public int getFXLayer() {
-        return 2;
+        setParticleTextureIndex(0);
     }
 
 
     @Override
     public void renderParticle(BufferBuilder buffer, Entity entityIn, float partialTicks, float rotationX, float rotationZ, float rotationYZ, float rotationXY, float rotationXZ) {
-//        buffer.begin(7, DefaultVertexFormats.POSITION_TEX_COLOR);
         double x = this.prevPosX + (this.posX - this.prevPosX) * partialTicks - interpPosX;
         double y = this.prevPosY + (this.posY - this.prevPosY) * partialTicks - interpPosY;
         double z = this.prevPosZ + (this.posZ - this.prevPosZ) * partialTicks - interpPosZ;
@@ -97,20 +85,25 @@ public class ParticleGeneric extends Particle {
         int brightness = this.getBrightnessForRender(partialTicks);
         int sky = brightness >> 16 & 0xFFFF;
         int block = brightness & 0xFFFF;
+
+        float f = (float) this.particleTextureIndexX / 16.0F;
+        float f1 = f + 0.0624375F * 2;
+        float f2 = (float) this.particleTextureIndexY / 16.0F;
+        float f3 = f2 + 0.0624375F * 2;
+        // float f4 = 0.1F * this.particleScale;
+
         buffer.pos(x + (-rotationX * sc - rotationXY * sc), y + -rotationZ * sc, z + (-rotationYZ * sc - rotationXZ * sc))
-                .tex(0, 1).color(this.particleRed, this.particleGreen, this.particleBlue, this.particleAlpha)
+                .tex(f1, f3).color(this.particleRed, this.particleGreen, this.particleBlue, this.particleAlpha)
                 .lightmap(sky, block).endVertex();
         buffer.pos(x + (-rotationX * sc + rotationXY * sc), y + (rotationZ * sc), z + (-rotationYZ * sc + rotationXZ * sc))
-                .tex(1, 1).color(this.particleRed, this.particleGreen, this.particleBlue, this.particleAlpha)
+                .tex(f1, f2).color(this.particleRed, this.particleGreen, this.particleBlue, this.particleAlpha)
                 .lightmap(sky, block).endVertex();
         buffer.pos(x + (rotationX * sc + rotationXY * sc), y + (rotationZ * sc), z + (rotationYZ * sc + rotationXZ * sc))
-                .tex(1, 0).color(this.particleRed, this.particleGreen, this.particleBlue, this.particleAlpha)
+                .tex(f, f2).color(this.particleRed, this.particleGreen, this.particleBlue, this.particleAlpha)
                 .lightmap(sky, block).endVertex();
         buffer.pos(x + (rotationX * sc - rotationXY * sc), y + (-rotationZ * sc), z + (rotationYZ * sc - rotationXZ * sc))
-                .tex(0, 0).color(this.particleRed, this.particleGreen, this.particleBlue, this.particleAlpha)
+                .tex(f, f3).color(this.particleRed, this.particleGreen, this.particleBlue, this.particleAlpha)
                 .lightmap(sky, block).endVertex();
-        super.renderParticle(buffer, entityIn, partialTicks, rotationX, rotationZ, rotationYZ, rotationXY, rotationXZ);
-        Minecraft.getMinecraft().renderEngine.bindTexture(TEXTURE);
     }
 
 
@@ -129,14 +122,10 @@ public class ParticleGeneric extends Particle {
                 motionY = 0.1 * percentageY;
                 motionZ = 0.1 * percentageZ;
             } else {
-                motionX = velX; // / 20 instead of / Math.abs(...)
-                motionY = velY; //might have two options because this moves interesting
+                motionX = velX;
+                motionY = velY;
                 motionZ = velZ;
             }
-           /* System.out.println(getTotalSpeed());
-            if (getTotalSpeed() > 0.1){
-
-            } //get portion of the total speed, then multiply with a set max so that this becomes the total speed*/
         }
 
         this.prevPosX = this.posX;
@@ -144,7 +133,7 @@ public class ParticleGeneric extends Particle {
         this.prevPosZ = this.posZ;
 
         this.particleAge++;
-        if (particleAlpha < 0.1 || this.particleAge >= this.particleMaxAge) {
+        if (this.particleAge >= this.particleMaxAge) {
             this.setExpired();
         } else {
             this.motionY -= 0.04D * (double) this.particleGravity;
@@ -152,7 +141,7 @@ public class ParticleGeneric extends Particle {
 
             float lifeRatio = (float) this.particleAge / (float) this.particleMaxAge;
             if (this.fade) {
-                this.particleAlpha = 0.5F - (lifeRatio * 0.5F);
+                this.particleAlpha = particleAlpha - (lifeRatio * particleAlpha);
             }
             if (this.shrink) {
                 this.particleScale = this.desiredScale - (this.desiredScale * lifeRatio);
@@ -165,4 +154,5 @@ public class ParticleGeneric extends Particle {
     public int getBrightnessForRender(float f) {
         return 15 << 20 | 15 << 4;
     }
+
 }
