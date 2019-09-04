@@ -52,20 +52,22 @@ public class HUDRenderHandler {
     public void onRenderHud(RenderGameOverlayEvent.Post event) {
         if (event.getType() == RenderGameOverlayEvent.ElementType.EXPERIENCE && !event.isCancelable()) {
             renderMaganBar(event);
-
         }
         if (event.getType() == RenderGameOverlayEvent.ElementType.ALL && !event.isCancelable()) {
             renderSpellSelected(event);
-
         }
         if (event.getType() == RenderGameOverlayEvent.ElementType.TEXT && !event.isCancelable()) {
-            renderVision(event);
             renderSlimeTasks(event);
             renderRiteHud(event);
             renderEnergyHud(event);
             renderDeityHud(event);
         }
+
+        if (event.getType() == RenderGameOverlayEvent.ElementType.VIGNETTE && !event.isCancelable()) {
+            renderVision(event);
+        }
     }
+
 
     public void renderVision(RenderGameOverlayEvent.Post event) {
         Minecraft mc = Minecraft.getMinecraft();
@@ -73,21 +75,19 @@ public class HUDRenderHandler {
             IPlayerCapabilities cap = mc.player.getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null);
             if (cap.isVisionActive()) {
                 ResourceLocation tex = new ResourceLocation(cap.getVision());
-                int posX = event.getResolution().getScaledWidth() / 2 - 256 / 2; // + 10;
+                int posX = event.getResolution().getScaledWidth() / 2 - 256 / 2;
                 int poxY = event.getResolution().getScaledHeight() / 2 - 256 / 2;
-                System.out.println(cap.getVisionProgression());
-                float alpha = cap.getVisionProgression(); //will be at max when half of the vision is complete, see later
+                float alpha = (0.5F - Math.abs(0.5F - cap.getVisionProgression())) * 1.8F;//cap.getVisionProgression() > 0.5 ? Math.min((0.5F - cap.getVisionProgression()) * 2, 0.9F): Math.min(cap.getVisionProgression() * 2, 0.9F); //will be at max when half of the vision is complete, see later
                 drawColoredTexturedModalRect(posX, poxY, 0, 0, 256, 256, Color.WHITE, alpha, tex); //width 427, height 240 for full screen
-                return;
             }
         }
     }
 
-    public void renderSlimeTasks(RenderGameOverlayEvent.Post event){
+    public void renderSlimeTasks(RenderGameOverlayEvent.Post event) {
         Minecraft mc = Minecraft.getMinecraft();
         EntityPlayer player = mc.player;
         ItemStack heldItem = player.getHeldItem(EnumHand.MAIN_HAND);
-        if (heldItem.getItem() instanceof ItemThaumagral && ((ItemThaumagral)heldItem.getItem()).isTuned(heldItem)) {
+        if (heldItem.getItem() instanceof ItemThaumagral && ((ItemThaumagral) heldItem.getItem()).isTuned(heldItem)) {
 
             if (!mc.isGamePaused()) {
                 particlesForSlimeTasks(player, heldItem, (ItemThaumagral) heldItem.getItem());
@@ -96,28 +96,28 @@ public class HUDRenderHandler {
 
             List<ProtoplasmTask> taskList = ProtoplasmTaskInit.getTasksFromString(((ItemThaumagral) heldItem.getItem()).getTaskString(heldItem));
             for (int i = 0; i < taskList.size(); i++) {
-                mc.ingameGUI.drawString(mc.fontRenderer,  taskList.get(i).getHudDescription(), 5, 30 + i * 10, 3045026);
+                mc.ingameGUI.drawString(mc.fontRenderer, taskList.get(i).getHudDescription(), 5, 30 + i * 10, 3045026);
             }
 
-            mc.ingameGUI.drawString(mc.fontRenderer, ChatFormatting.BOLD + I18n.format("hud.mode.name") + ChatFormatting.RESET + " " + I18n.format("hud." + ((ItemThaumagral) heldItem.getItem()).getModeName(heldItem) +""), 5, 5, 7304866);
+            mc.ingameGUI.drawString(mc.fontRenderer, ChatFormatting.BOLD + I18n.format("hud.mode.name") + ChatFormatting.RESET + " " + I18n.format("hud." + ((ItemThaumagral) heldItem.getItem()).getModeName(heldItem) + ""), 5, 5, 7304866);
             return;
         }
 
     }
 
-    public void particlesForSlimeTasks(EntityPlayer player, ItemStack heldItem, ItemThaumagral item){
+    public void particlesForSlimeTasks(EntityPlayer player, ItemStack heldItem, ItemThaumagral item) {
         List<ProtoplasmTask> tasks = ProtoplasmTaskInit.getTasksFromString(item.getTaskString(heldItem));
-        if (!tasks.isEmpty()){
-            for (int i = 0; i < tasks.size(); i++){
+        if (!tasks.isEmpty()) {
+            for (int i = 0; i < tasks.size(); i++) {
                 ProtoplasmTask task = tasks.get(i);
                 ProtoplasmTask prevTask = null;
                 ProtoplasmTask nextTask = null;
-                if (i < tasks.size() - 1){
+                if (i < tasks.size() - 1) {
                     nextTask = tasks.get(i + 1);
                 } else if (tasks.size() > 1) {
                     nextTask = tasks.get(0);
                 }
-                if (i > 0){
+                if (i > 0) {
                     prevTask = tasks.get(i - 1);
                 } else if (tasks.size() > 1) {
                     prevTask = tasks.get(tasks.size() - 1);
@@ -242,6 +242,7 @@ public class HUDRenderHandler {
             }
         }
     }
+
     public void renderMaganBar(RenderGameOverlayEvent.Post event) {
         Minecraft mc = Minecraft.getMinecraft();
         if (!mc.player.capabilities.isCreativeMode && !mc.player.isSpectator()) {
@@ -263,7 +264,6 @@ public class HUDRenderHandler {
     }
 
     public void drawColoredTexturedModalRect(int x, int y, int textureX, int textureY, int width, int height, Color color, float alpha, ResourceLocation resTex) {
-        // GlStateManager.color((float)color.getRed() / 255F, (float)color.getGreen() / 255F, (float)color.getBlue() / 255F, alpha / 255F);
         GlStateManager.enableNormalize();
         GlStateManager.enableBlend();
         GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);

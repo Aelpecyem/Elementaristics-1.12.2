@@ -447,10 +447,10 @@ message.slime_task_set=§2The Protoplasmic Slime will execute the given tasks
 message.slime_task_reset=§dThe Protoplasmic Slime will now not execute tasks
 message.task_timer_cant_add=§cNo timer specified
 
-message.vision.1=§6"Death is down"
-message.vision.2=§6"Look to the Moon, you see it?"
-message.vision.3=§6"You know what it reflects?"
-message.vision.4=§6"This is where you want to go"
+message.vision.1=§6"Before time, there was only Nothingness"
+message.vision.2=§6"When time was born, one burned"
+message.vision.3=§6"Anguish remained"
+message.vision.4=§6"Do you know that tale?"
 
 message.drugs=This is more potent than I thought... I might experience visions
 

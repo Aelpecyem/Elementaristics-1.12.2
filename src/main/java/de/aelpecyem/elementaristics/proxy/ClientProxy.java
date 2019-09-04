@@ -95,7 +95,10 @@ public class ClientProxy extends CommonProxy {
     public void giveVision(EntityPlayer player, String vision) {
         if (player.hasCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null)) {
             IPlayerCapabilities cap = player.getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null);
-            cap.setVision("elementaristics:textures/misc/visions/" + vision + ".png");
+            if (!cap.getVision().equalsIgnoreCase("elementaristics:textures/misc/visions/" + vision + ".png")) {
+                cap.setVisionProgression(0);
+                cap.setVision("elementaristics:textures/misc/visions/" + vision + ".png");
+            }
         }
     }
 

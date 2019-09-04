@@ -199,6 +199,9 @@ public class PlayerCapabilities implements IPlayerCapabilities {
 
     @Override
     public void setVision(String vision) {
+        if (vision != visionActive) {
+            setVisionProgression(0);
+        }
         this.visionActive = vision;
     }
 
@@ -210,7 +213,7 @@ public class PlayerCapabilities implements IPlayerCapabilities {
     @Override
     public void updateVision() { //might not need to be synced, as it's ONLY used Client-Side
         if (isVisionActive() && getVisionProgression() < 1) {
-            setVisionProgression(getVisionProgression() + 0.001F);
+            setVisionProgression(getVisionProgression() + 0.003F);
         } else {
             setVisionProgression(0);
             setVision("");
