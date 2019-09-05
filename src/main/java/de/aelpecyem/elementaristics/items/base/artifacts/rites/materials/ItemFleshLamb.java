@@ -87,7 +87,7 @@ public class ItemFleshLamb extends ItemFoodBase implements IHasRiteUse {
             if (!stackIn.hasTagCompound()) {
                 stackIn.setTagCompound(new NBTTagCompound());
             }
-            stack.getTagCompound().setString(ItemProtoplasm.NBTKEY_NAME, ((EntityPlayer) entityLiving).getDisplayNameString());
+            stackIn.getTagCompound().setString(ItemProtoplasm.NBTKEY_NAME, ((EntityPlayer) entityLiving).getDisplayNameString());
             worldIn.spawnEntity(new EntityItem(worldIn, entityLiving.posX, entityLiving.posY, entityLiving.posZ, stackIn));
         }
         entityLiving.attackEntityFrom(DamageSource.MAGIC, 10000);
