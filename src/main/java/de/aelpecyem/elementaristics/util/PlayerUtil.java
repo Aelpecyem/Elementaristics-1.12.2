@@ -1,21 +1,16 @@
 package de.aelpecyem.elementaristics.util;
 
-import de.aelpecyem.elementaristics.capability.player.IPlayerCapabilities;
-import de.aelpecyem.elementaristics.capability.player.PlayerCapProvider;
-import de.aelpecyem.elementaristics.capability.player.souls.Soul;
-import de.aelpecyem.elementaristics.init.SoulInit;
-import de.aelpecyem.elementaristics.misc.advancements.CustomAdvancements;
-import de.aelpecyem.elementaristics.misc.potions.effects.emotion.PotionEmotion;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
+import net.minecraftforge.common.UsernameCache;
+
+import java.util.UUID;
 
 public class PlayerUtil {
     public static Block getBlockLookingAt(EntityPlayer player, double distance) {
@@ -34,7 +29,12 @@ public class PlayerUtil {
         return BlockPos.ORIGIN;
     }
 
-
+    public static Entity getEntityLookingAt() {
+        if (Minecraft.getMinecraft().objectMouseOver != null) {
+            return Minecraft.getMinecraft().objectMouseOver.entityHit;
+        }
+        return null;
+    }
     public static RayTraceResult rayTrace(EntityPlayer player, double blockReachDistance, float partialTicks) {
         Vec3d vec3d = player.getPositionEyes(partialTicks);
         Vec3d vec3d1 = player.getLook(partialTicks);
@@ -42,57 +42,14 @@ public class PlayerUtil {
         return player.world.rayTraceBlocks(vec3d, vec3d2, false, false, true);
     }
 
-    public static boolean hasSoul(EntityPlayer player, Soul soul){
-        if (player.hasCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null)){
-            return player.getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null).getSoulId() == soul.getId();
-        }
-        return false;
+    public static String getUsernameFromUUID(UUID uuid) {
+        return UsernameCache.getLastKnownUsername(uuid);
     }
 
-    public static boolean hasEmotionActive(EntityPlayer player){
-        for (PotionEffect effect : player.getActivePotionEffects()){
-            if (effect.getPotion() instanceof PotionEmotion){
-                return true;
-            }
+    public static String getUsernameFromUUID(String uuid) {
+        if (!uuid.isEmpty()) {
+            return UsernameCache.getLastKnownUsername(UUID.fromString(uuid));
         }
-        return false;
+        return "";
     }
-
-    public static boolean hasPositiveEmotion(EntityPlayer player) {
-        for (PotionEffect effect : player.getActivePotionEffects()) {
-            if (effect.getPotion() instanceof PotionEmotion) {
-                return !((PotionEmotion) effect.getPotion()).isEmotionNegative();
-            }
-        }
-        return false;
-    }
-
-    public static boolean hasNegativeEmotion(EntityPlayer player) {
-        if (hasEmotionActive(player)) {
-            return !hasPositiveEmotion(player);
-        }
-        return false;
-    }
-
-    public static Soul getSoul(EntityPlayer player) {
-        if (player.hasCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null)) {
-            return player.getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null).getSoul();
-        }
-        return null;
-    }
-
-    public static boolean ascend(int to, Entity player) {
-        if (player.hasCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null)) {
-            IPlayerCapabilities cap = player.getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null);
-            cap.setPlayerAscensionStage(to);
-            if (!player.world.isRemote) {
-                CustomAdvancements.Advancements.ASCEND.trigger((EntityPlayerMP) player);
-            }
-            if (player instanceof EntityPlayer)
-                SoulInit.updateSoulInformation((EntityPlayer) player, cap);
-            return true;
-        }
-        return false;
-    }
-
 }

@@ -1,5 +1,5 @@
 #Temporary Numbers; these are for testing
-temp.1=0.28
+temp.1=0.15
 temp.2=0.85
 temp.3=75
 
@@ -447,8 +447,8 @@ message.slime_task_set=§2The Protoplasmic Slime will execute the given tasks
 message.slime_task_reset=§dThe Protoplasmic Slime will now not execute tasks
 message.task_timer_cant_add=§cNo timer specified
 
-message.vision.1=§6"Before time, there was only Nothingness"
-message.vision.2=§6"When time was born, one burned"
+message.vision.1=§6"Before magic, there were seven children in Nothingness"
+message.vision.2=§6"When magic was born, one lost his skin"
 message.vision.3=§6"Anguish remained"
 message.vision.4=§6"Do you know that tale?"
 

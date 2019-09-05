@@ -5,6 +5,7 @@ import de.aelpecyem.elementaristics.misc.poisons.PoisonEffectBase;
 import de.aelpecyem.elementaristics.misc.poisons.PoisonInit;
 import de.aelpecyem.elementaristics.misc.potions.PotionInit;
 import de.aelpecyem.elementaristics.networking.PacketHandler;
+import de.aelpecyem.elementaristics.networking.player.PacketGiveVision;
 import de.aelpecyem.elementaristics.networking.player.PacketMessage;
 import de.aelpecyem.elementaristics.util.InventoryUtil;
 import net.minecraft.init.Items;
@@ -53,17 +54,19 @@ public class PotionEventHandler {
                     if (InventoryUtil.containsItem(event.player.inventory, Items.BOOK) != null) {
                         if (event.player.getActivePotionEffect(PotionInit.potionIntoxicated).getDuration() == 3000) {
                             if (!event.player.world.isRemote) {
-
+                                PacketHandler.sendTo(event.player, new PacketGiveVision("visionSevenThoughts"));
                                 PacketHandler.sendTo(event.player, new PacketMessage("message.vision.1", true));
                             }
                         }
                         if (event.player.getActivePotionEffect(PotionInit.potionIntoxicated).getDuration() == 2800) {
                             if (!event.player.world.isRemote) {
+                                PacketHandler.sendTo(event.player, new PacketGiveVision("visionThreadBirth"));
                                 PacketHandler.sendTo(event.player, new PacketMessage("message.vision.2", true));
                             }
                         }
                         if (event.player.getActivePotionEffect(PotionInit.potionIntoxicated).getDuration() == 2600) {
                             if (!event.player.world.isRemote) {
+                                PacketHandler.sendTo(event.player, new PacketGiveVision("visionAnguish"));
                                 PacketHandler.sendTo(event.player, new PacketMessage("message.vision.3", true));
                             }
                         }

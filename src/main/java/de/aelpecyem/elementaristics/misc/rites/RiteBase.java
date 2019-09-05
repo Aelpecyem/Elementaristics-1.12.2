@@ -21,7 +21,13 @@ public abstract class RiteBase {
     private Soul soulRequired;
     private boolean isSoulSpecific;
 
-    private Set<Aspect> aspectsRequired = new HashSet<>();
+    private Set<Aspect> aspectsRequired = new HashSet<>(); //todo, rework that a bit, with the impending changes to altars
+
+    /*TODO, THE REWORK
+     * A few things will change with the rework:
+     *   1: Rites will have a rite invoker specified, and will have a list of participants
+     *   2: Rites may only be cast on an Altar if the caster is in a cult with the person to have set the Altar
+     * */
 
     public RiteBase(ResourceLocation name, float ticksRequired, float maganDrainedPerTick, int itemPowerRequired, Aspect... aspectsRequired){
         this.name = name;

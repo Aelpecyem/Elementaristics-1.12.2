@@ -1,15 +1,18 @@
 package de.aelpecyem.elementaristics.items.base.artifacts.rites;
 
+import de.aelpecyem.elementaristics.entity.nexus.EntityDimensionalNexus;
 import de.aelpecyem.elementaristics.misc.elements.Aspect;
 import de.aelpecyem.elementaristics.misc.rites.RiteBase;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
-import java.util.*;
+import java.util.List;
 
 public class IncantationBase extends ItemAspects implements IHasRiteUse {
     RiteBase rite;
@@ -20,6 +23,19 @@ public class IncantationBase extends ItemAspects implements IHasRiteUse {
 
     }
 
+    @Override
+    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
+        List<EntityDimensionalNexus> nexuses = worldIn.getEntitiesWithinAABB(EntityDimensionalNexus.class, playerIn.getEntityBoundingBox().expand(5, 2, 5));
+        if (!nexuses.isEmpty()) {
+            System.out.println("owo");
+            for (EntityDimensionalNexus nexus : nexuses) {
+                if (nexus.isValidUser(playerIn)) {
+                    nexus.setRiteString(rite.name.toString());
+                }
+            }
+        }
+        return super.onItemRightClick(worldIn, playerIn, handIn);
+    }
 
     @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {

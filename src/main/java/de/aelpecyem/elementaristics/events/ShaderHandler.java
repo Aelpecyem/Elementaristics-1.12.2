@@ -3,7 +3,7 @@ package de.aelpecyem.elementaristics.events;
 import com.google.gson.JsonSyntaxException;
 import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.misc.potions.PotionInit;
-import de.aelpecyem.elementaristics.util.PlayerUtil;
+import de.aelpecyem.elementaristics.util.CapabilityUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.shader.ShaderGroup;
@@ -51,8 +51,8 @@ public class ShaderHandler {
         handleShader(event.player.isPotionActive(PotionInit.potionIntoxicated) && event.player.getActivePotionEffect(PotionInit.potionIntoxicated).getAmplifier() >= 1, SHADER_TRANCE);
         handleShader(event.player.isPotionActive(PotionInit.potionTrance), SHADER_TRANCE);
         handleShader(event.player.isPotionActive(PotionInit.potionFocused), SHADER_FOCUSED);
-        handleShader(PlayerUtil.hasPositiveEmotion(event.player), SHADER_POSITIVE);
-        handleShader(PlayerUtil.hasNegativeEmotion(event.player), SHADER_NEGATIVE);
+        handleShader(CapabilityUtil.hasPositiveEmotion(event.player), SHADER_POSITIVE);
+        handleShader(CapabilityUtil.hasNegativeEmotion(event.player), SHADER_NEGATIVE);
     }
 
     public static void handleShader(boolean condition, int shaderId) {

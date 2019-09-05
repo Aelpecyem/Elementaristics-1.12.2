@@ -9,7 +9,7 @@ import de.aelpecyem.elementaristics.misc.advancements.CustomAdvancements;
 import de.aelpecyem.elementaristics.networking.PacketHandler;
 import de.aelpecyem.elementaristics.networking.player.PacketMessage;
 import de.aelpecyem.elementaristics.particles.ParticleGeneric;
-import de.aelpecyem.elementaristics.util.PlayerUtil;
+import de.aelpecyem.elementaristics.util.CapabilityUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -82,7 +82,7 @@ public class EntitySilverThread extends EntityMob {
             }
         });
         for (EntityPlayer player : players){
-            PlayerUtil.ascend(1, player);
+            CapabilityUtil.ascend(1, player);
             PacketHandler.sendTo(player, new PacketMessage("message.ascension_1.standard"));
             if (!player.world.isRemote){
                 CustomAdvancements.Advancements.ASCEND.trigger((EntityPlayerMP) player);

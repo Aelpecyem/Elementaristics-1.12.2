@@ -5,7 +5,7 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
 /**
- * shrine_06_dragonwater - cybecat5555
+ * ModelDragonWater - cybecat5555
  * Created using Tabula 7.0.1
  */
 public class ModelDragonWater extends ModelBase {

@@ -3,6 +3,7 @@ package de.aelpecyem.elementaristics.entity.render;
 import de.aelpecyem.elementaristics.entity.EntityCultist;
 import de.aelpecyem.elementaristics.entity.EntitySilverThread;
 import de.aelpecyem.elementaristics.entity.elementals.EntityAetherElemental;
+import de.aelpecyem.elementaristics.entity.nexus.EntityDimensionalNexus;
 import de.aelpecyem.elementaristics.entity.projectile.EntityElementalSpell;
 import de.aelpecyem.elementaristics.entity.projectile.EntityExplosionProjectile;
 import de.aelpecyem.elementaristics.entity.projectile.EntitySpellProjectile;
@@ -15,6 +16,13 @@ import net.minecraftforge.fml.client.registry.RenderingRegistry;
 
 public class RenderHandler {
     public static void registerEntityRenderers(){
+        RenderingRegistry.registerEntityRenderingHandler(EntityDimensionalNexus.class, new IRenderFactory<EntityDimensionalNexus>() {
+            @Override
+            public Render<? super EntityDimensionalNexus> createRenderFor(RenderManager manager) {
+                return new RenderNone(manager);
+            }
+        });
+
         RenderingRegistry.registerEntityRenderingHandler(EntitySilverThread.class, new IRenderFactory<EntitySilverThread>() {
             @Override
             public Render<? super EntitySilverThread> createRenderFor(RenderManager manager) {

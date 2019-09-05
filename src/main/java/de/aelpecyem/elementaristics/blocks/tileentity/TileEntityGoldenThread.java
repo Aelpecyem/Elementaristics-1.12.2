@@ -6,6 +6,8 @@ import de.aelpecyem.elementaristics.items.base.ItemGoldenThread;
 import de.aelpecyem.elementaristics.networking.PacketHandler;
 import de.aelpecyem.elementaristics.networking.tileentity.goldenthread.PacketUpdateGoldenThread;
 import de.aelpecyem.elementaristics.networking.tileentity.inventory.PacketUpdateInventory;
+import net.minecraft.block.Block;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -20,6 +22,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
+
+import java.util.List;
 
 
 public class TileEntityGoldenThread extends TileEntity implements ITickable, IHasInventory {
@@ -95,9 +99,19 @@ public class TileEntityGoldenThread extends TileEntity implements ITickable, IHa
             if (charge < MAX_CHARGE) { // test value
                 //spawn elementals depending on the block's aspect... the charge count of the block will be increased by the elementals on their own
             } else {
-                if (!world.isRemote)
-                    generateGoldenThread();
-                activationStage = 1;
+                List<EntityPlayer> players = world.getEntitiesWithinAABB(EntityPlayer.class, Block.FULL_BLOCK_AABB.grow(10).offset(pos));
+                for (EntityPlayer player : players) {
+                    System.out.println("mawjhwahwawf");
+                    player.knockBack(player, 6, pos.getX() - player.posX, pos.getZ() - player.posZ);
+                }
+                charge++;
+                if (charge > MAX_CHARGE + 60) {
+                    if (!world.isRemote)
+                        generateGoldenThread();
+                    activationStage = 1;
+                }
+
+
 
                 //the tile entity will change, but will not be replaced
             }

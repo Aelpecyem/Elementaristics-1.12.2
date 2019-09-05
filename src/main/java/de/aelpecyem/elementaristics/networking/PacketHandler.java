@@ -9,10 +9,7 @@ import de.aelpecyem.elementaristics.networking.entity.cultist.PacketSpawnCultist
 import de.aelpecyem.elementaristics.networking.entity.protoplasm.PacketDyeProtoplasm;
 import de.aelpecyem.elementaristics.networking.other.PacketBurnableAffect;
 import de.aelpecyem.elementaristics.networking.other.PacketMarkBlock;
-import de.aelpecyem.elementaristics.networking.player.PacketBaubleKeyWinged;
-import de.aelpecyem.elementaristics.networking.player.PacketMessage;
-import de.aelpecyem.elementaristics.networking.player.PacketMove;
-import de.aelpecyem.elementaristics.networking.player.PacketPressSpellKey;
+import de.aelpecyem.elementaristics.networking.player.*;
 import de.aelpecyem.elementaristics.networking.tileentity.altar.PacketUpdateAltar;
 import de.aelpecyem.elementaristics.networking.tileentity.basin.PacketUpdateBasin;
 import de.aelpecyem.elementaristics.networking.tileentity.deities.PacketUpdateDeity;
@@ -64,6 +61,7 @@ public class PacketHandler {
         network.registerMessage(new PacketSpawnBoundParticles.Handler(), PacketSpawnBoundParticles.class, next(), Side.CLIENT);
         network.registerMessage(new PacketMarkBlock.Handler(), PacketMarkBlock.class, next(), Side.CLIENT);
         network.registerMessage(new PacketMessage.Handler(), PacketMessage.class, next(), Side.CLIENT);
+        network.registerMessage(new PacketGiveVision.Handler(), PacketGiveVision.class, next(), Side.CLIENT);
         network.registerMessage(new PacketMove.Handler(), PacketMove.class, next(), Side.CLIENT);
 
         network.registerMessage(new PacketPressSpellKey.Handler(), PacketPressSpellKey.class, next(), Side.SERVER);

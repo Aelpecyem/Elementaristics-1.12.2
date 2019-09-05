@@ -6,16 +6,18 @@ import org.apache.logging.log4j.Level;
 
 public class Config {
 
-    private static final String CATEGORY_HUD = "hud";
-    private static final String CATEGORY_COMPAT = "souls";
-    private static final String CATEGORY_DIM = "dimensions";
-    private static final String CATEGORY_MISC = "misc";
+    public static final String CATEGORY_COMPAT = "compat";
+    public static final String CATEGORY_DIM = "dimensions";
+    public static final String CATEGORY_MISC = "misc";
+    public static final String CATEGORY_HUD = "client";
     //values- hud
-    public static boolean useNumbersInsteadOfBar = true;
+    public static boolean showBar = true;
     //values- compat
     public static boolean useTcCompat = true;
     //values- dimensions
     public static int mindDimensionId = 1103;
+    //values- misc
+    public static int nexusUpdateInterval = 20;
 
     public static void readConfig() {
         Configuration cfg = Elementaristics.config;
@@ -35,9 +37,9 @@ public class Config {
     }
 
     private static void initHudConfig(Configuration cfg) {
-        cfg.addCustomCategoryComment(CATEGORY_HUD, "Configuration on HUD elements of Elementaristics");
+        cfg.addCustomCategoryComment(CATEGORY_HUD, "Configuration on client elements of Elementaristics");
 
-        useNumbersInsteadOfBar = cfg.getBoolean("useNumbersInsteadOfBar", CATEGORY_HUD, false, "Determines whether a bar or numbers should be shown for the Magan Hud");
+        showBar = cfg.getBoolean("showBar", CATEGORY_HUD, true, "Determines whether a bar of the Magan HUD should be shown");
     }
 
     private static void initCompatConfig(Configuration cfg) {
@@ -52,5 +54,6 @@ public class Config {
 
     private static void initMiscConfig(Configuration cfg) {
         cfg.addCustomCategoryComment(CATEGORY_MISC, "Misc Configuration");
+        nexusUpdateInterval = cfg.getInt("nexusUpdateInterval", CATEGORY_MISC, nexusUpdateInterval, 1, 200, "Determines the amount of ticks to pass to update the Dimensional Nexus' local aspects and item power.");
     }
 }

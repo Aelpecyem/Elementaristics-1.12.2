@@ -8,7 +8,7 @@ import de.aelpecyem.elementaristics.misc.potions.PotionInit;
 import de.aelpecyem.elementaristics.misc.potions.effects.emotion.PotionEmotion;
 import de.aelpecyem.elementaristics.networking.PacketHandler;
 import de.aelpecyem.elementaristics.networking.player.PacketMessage;
-import de.aelpecyem.elementaristics.util.PlayerUtil;
+import de.aelpecyem.elementaristics.util.CapabilityUtil;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -49,7 +49,7 @@ public class EmotionHandler {
                     }
                     event.setResult(Event.Result.ALLOW);
                 } else {
-                    if (!PlayerUtil.hasEmotionActive(player)) {
+                    if (!CapabilityUtil.hasEmotionActive(player)) {
                         performMoodAnalysis(player);
                     }
 

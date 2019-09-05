@@ -111,7 +111,12 @@ public class InitRecipes {
         PurifierRecipes.addRecipe(new PurifierRecipe(new ResourceLocation(Elementaristics.MODID, "water_purest"), Ingredient.fromStacks(new ItemStack(ModItems.essence, 1, Aspects.water.getId())), 2, new ItemStack(ModItems.water_purest), 600));
 
         PurifierRecipes.addRecipe(new PurifierRecipe(new ResourceLocation(Elementaristics.MODID, "flint"), Ingredient.fromStacks(new ItemStack(Blocks.GRAVEL)), 1, new ItemStack(Items.FLINT), 60));
+
         PurifierRecipes.addRecipe(new PurifierRecipe(new ResourceLocation(Elementaristics.MODID, "aether_essence_effective"), Ingredient.fromStacks(new ItemStack(ModItems.cluster_aether)), 1, new ItemStack(ModItems.essence, 2, Aspects.aether.getId()), 2400));
+        PurifierRecipes.addRecipe(new PurifierRecipe(new ResourceLocation(Elementaristics.MODID, "air_essence_effective"), Ingredient.fromStacks(new ItemStack(ModItems.cluster_air)), 1, new ItemStack(ModItems.essence, 2, Aspects.air.getId()), 2400));
+        PurifierRecipes.addRecipe(new PurifierRecipe(new ResourceLocation(Elementaristics.MODID, "earth_essence_effective"), Ingredient.fromStacks(new ItemStack(ModItems.cluster_earth)), 1, new ItemStack(ModItems.essence, 2, Aspects.earth.getId()), 2400));
+        PurifierRecipes.addRecipe(new PurifierRecipe(new ResourceLocation(Elementaristics.MODID, "water_essence_effective"), Ingredient.fromStacks(new ItemStack(ModItems.cluster_water)), 1, new ItemStack(ModItems.essence, 2, Aspects.water.getId()), 2400));
+        PurifierRecipes.addRecipe(new PurifierRecipe(new ResourceLocation(Elementaristics.MODID, "fire_essence_effective"), Ingredient.fromStacks(new ItemStack(ModItems.cluster_fire)), 1, new ItemStack(ModItems.essence, 2, Aspects.fire.getId()), 2400));
 
         PurifierRecipes.addRecipe(new PurifierRecipe(new ResourceLocation(Elementaristics.MODID, "poison_glassfinger_base"), Ingredient.fromStacks(new ItemStack(ModItems.poison_sandthroat)), 3, new ItemStack(ModItems.sandthroat_concentrated), 2400));
 

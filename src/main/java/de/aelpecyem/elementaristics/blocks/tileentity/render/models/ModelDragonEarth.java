@@ -5,7 +5,7 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
 /**
- * shrine_05_dragonearth - cybercat5555
+ * ModelDragonEarth - cybercat5555
  * Created using Tabula 7.0.1
  */
 public class ModelDragonEarth extends ModelBase {

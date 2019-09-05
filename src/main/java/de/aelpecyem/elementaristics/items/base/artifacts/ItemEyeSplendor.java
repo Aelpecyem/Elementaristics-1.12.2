@@ -2,7 +2,6 @@ package de.aelpecyem.elementaristics.items.base.artifacts;
 
 
 import com.mojang.realmsclient.gui.ChatFormatting;
-import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.blocks.tileentity.TileEntityAltar;
 import de.aelpecyem.elementaristics.blocks.tileentity.pantheon.TileEntityDeityShrine;
 import de.aelpecyem.elementaristics.init.Deities;
@@ -34,11 +33,6 @@ public class ItemEyeSplendor extends ItemAspects {
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
         if (worldIn.isRemote) {
-            if (playerIn.isSneaking()) {
-                Elementaristics.proxy.giveVision(playerIn, "testvision");
-            } else {
-                Elementaristics.proxy.giveVision(playerIn, "vision2");
-            }
             if (playerIn.rayTrace(10, 0).getBlockPos() != null) {
                 if (worldIn.getTileEntity(playerIn.rayTrace(10, 0).getBlockPos()) instanceof TileEntityDeityShrine) {
                     return super.onItemRightClick(worldIn, playerIn, handIn);

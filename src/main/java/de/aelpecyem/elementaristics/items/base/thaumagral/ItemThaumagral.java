@@ -13,6 +13,7 @@ import de.aelpecyem.elementaristics.init.SoulInit;
 import de.aelpecyem.elementaristics.misc.spell.SpellBase;
 import de.aelpecyem.elementaristics.networking.PacketHandler;
 import de.aelpecyem.elementaristics.networking.player.PacketMessage;
+import de.aelpecyem.elementaristics.util.CapabilityUtil;
 import de.aelpecyem.elementaristics.util.IHasModel;
 import de.aelpecyem.elementaristics.util.MaganUtil;
 import de.aelpecyem.elementaristics.util.PlayerUtil;
@@ -104,7 +105,7 @@ public class ItemThaumagral extends ItemSword implements IHasModel {
 
     public boolean appendTask(ItemStack stack, ProtoplasmTask task, EntityPlayer player){ //check this and send a message if it fails
         isReady(stack);
-        if (ProtoplasmTaskInit.getTasksFromString(getTaskString(stack)).size() < 15 || PlayerUtil.getSoul(player) == SoulInit.soulAncient && ProtoplasmTaskInit.getTasksFromString(getTaskString(stack)).size() < 20) {
+        if (ProtoplasmTaskInit.getTasksFromString(getTaskString(stack)).size() < 15 || CapabilityUtil.getSoul(player) == SoulInit.soulAncient && ProtoplasmTaskInit.getTasksFromString(getTaskString(stack)).size() < 20) {
             stack.getTagCompound().setString(SAVEDTASK, stack.getTagCompound().getString(SAVEDTASK) + task.writeAsString());
             if (!player.world.isRemote){
                 PacketHandler.sendTo(player, new PacketMessage("message.task_added"));

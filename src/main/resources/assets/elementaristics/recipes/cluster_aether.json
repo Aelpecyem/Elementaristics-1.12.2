@@ -2,7 +2,8 @@
   "type": "forge:ore_shapeless",
   "ingredients": [
     {
-      "item": "minecraft:glowstone_dust"
+      "type": "forge:ore_dict",
+      "ore": "listAetherItems"
     },
     {
       "item": "minecraft:redstone"
@@ -16,6 +17,6 @@
   ],
   "result": {
     "item": "elementaristics:cluster_aether",
-    "count": 2
+    "count": 3
   }
 }

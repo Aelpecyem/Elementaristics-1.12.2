@@ -5,7 +5,7 @@ import de.aelpecyem.elementaristics.capability.player.PlayerCapProvider;
 import de.aelpecyem.elementaristics.misc.potions.PotionInit;
 import de.aelpecyem.elementaristics.networking.PacketHandler;
 import de.aelpecyem.elementaristics.networking.player.PacketMessage;
-import de.aelpecyem.elementaristics.util.PlayerUtil;
+import de.aelpecyem.elementaristics.util.CapabilityUtil;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.PotionEffect;
@@ -60,7 +60,7 @@ public class PotionFocused extends PotionBase {
                     if (entityLivingBaseIn.hasCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null)) {
                         IPlayerCapabilities cap = entityLivingBaseIn.getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null);
                         if (cap.getPlayerAscensionStage() < 2) {
-                            PlayerUtil.ascend(2, entityLivingBaseIn);
+                            CapabilityUtil.ascend(2, entityLivingBaseIn);
                             cap.setPlayerAscensionStage(2);
                             entityLivingBaseIn.addPotionEffect(new PotionEffect(this, 500, 5));
                         }

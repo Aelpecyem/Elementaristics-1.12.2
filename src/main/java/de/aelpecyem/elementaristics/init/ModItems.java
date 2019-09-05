@@ -136,7 +136,8 @@ public class ModItems {
 
     public static ItemBase item_golden_thread;
 
-    public static ItemBase badge_cult;
+    public static ItemCultBadge badge_cult;
+    public static ItemBase nexus_dimensional;
    /* public static ItemArmor hood_cultist = new RobesCultist("hood_cultist",1, EntityEquipmentSlot.HEAD);
     public static ItemArmor garb_cultist = new RobesCultist("garb_cultist",1, EntityEquipmentSlot.CHEST);
     public static ItemArmor legwear_cultist = new RobesCultist("legwear_cultist",2, EntityEquipmentSlot.LEGS);
@@ -213,6 +214,7 @@ public class ModItems {
         item_golden_thread = new ItemGoldenThread();
 
         badge_cult = new ItemCultBadge();
+        nexus_dimensional = new ItemDimensionalNexus();
     }
 
     private static void initRiteMaterials() {

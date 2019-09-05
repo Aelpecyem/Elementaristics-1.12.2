@@ -45,7 +45,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 
-@Mod(modid = Elementaristics.MODID, name = Elementaristics.NAME, version = Elementaristics.VERSION, useMetadata = true)
+@Mod(modid = Elementaristics.MODID, name = Elementaristics.NAME, version = Elementaristics.VERSION, useMetadata = true, guiFactory = Elementaristics.GUI_FACTORY)
 public final class Elementaristics {
     //TODO ...ASCENSION!
     //TODO more rites
@@ -56,7 +56,7 @@ public final class Elementaristics {
     public static final String MODID = "elementaristics";
     public static final String NAME = "Elementaristics";
     public static final String VERSION = "0.0.9.6.1";
-
+    public static final String GUI_FACTORY = "de.aelpecyem.elementaristics.config.ElementaristicsConfigFactory";
     public static final Logger LOGGER = LogManager.getLogger(NAME);
     public static CreativeTabs tab = new ElementaristicsTab();
     @SidedProxy(serverSide = "de.aelpecyem.elementaristics.proxy.CommonProxy", clientSide = "de.aelpecyem.elementaristics.proxy.ClientProxy")
@@ -136,6 +136,10 @@ public final class Elementaristics {
 
     private void initOreDict() {
         // OreDictionary.registerOre("dye", Items.DYE);
+        OreDictionary.registerOre("listAetherItems", Items.ENDER_PEARL);
+        OreDictionary.registerOre("listAetherItems", Items.DIAMOND);
+        OreDictionary.registerOre("listAetherItems", Items.ENDER_EYE);
+
         OreDictionary.registerOre("listAllMeat", Items.PORKCHOP);
         OreDictionary.registerOre("listAllMeat", Items.BEEF);
         OreDictionary.registerOre("listAllMeat", Items.MUTTON);

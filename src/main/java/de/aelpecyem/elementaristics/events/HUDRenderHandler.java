@@ -9,6 +9,8 @@ import de.aelpecyem.elementaristics.blocks.tileentity.energy.TileEntityEnergy;
 import de.aelpecyem.elementaristics.blocks.tileentity.pantheon.TileEntityDeityShrine;
 import de.aelpecyem.elementaristics.capability.player.IPlayerCapabilities;
 import de.aelpecyem.elementaristics.capability.player.PlayerCapProvider;
+import de.aelpecyem.elementaristics.config.Config;
+import de.aelpecyem.elementaristics.entity.nexus.EntityDimensionalNexus;
 import de.aelpecyem.elementaristics.entity.protoplasm.tasks.ProtoplasmTaskInit;
 import de.aelpecyem.elementaristics.entity.protoplasm.tasks.execs.ProtoplasmGoToTask;
 import de.aelpecyem.elementaristics.entity.protoplasm.tasks.execs.ProtoplasmTask;
@@ -77,8 +79,8 @@ public class HUDRenderHandler {
                 ResourceLocation tex = new ResourceLocation(cap.getVision());
                 int posX = event.getResolution().getScaledWidth() / 2 - 256 / 2;
                 int poxY = event.getResolution().getScaledHeight() / 2 - 256 / 2;
-                float alpha = (0.5F - Math.abs(0.5F - cap.getVisionProgression())) * 1.8F;//cap.getVisionProgression() > 0.5 ? Math.min((0.5F - cap.getVisionProgression()) * 2, 0.9F): Math.min(cap.getVisionProgression() * 2, 0.9F); //will be at max when half of the vision is complete, see later
-                drawColoredTexturedModalRect(posX, poxY, 0, 0, 256, 256, Color.WHITE, alpha, tex); //width 427, height 240 for full screen
+                float alpha = (0.5F - Math.abs(0.5F - cap.getVisionProgression())) * 1.8F;
+                drawColoredTexturedModalRect(posX, poxY, 0, 0, 256, 256, Color.WHITE, alpha, tex);
             }
         }
     }
@@ -203,7 +205,38 @@ public class HUDRenderHandler {
                 }
                 return;
             }
-        }
+        } else //delete the upper part once done
+
+            if (PlayerUtil.getEntityLookingAt() instanceof EntityDimensionalNexus) {
+                System.out.println("yay");
+                EntityDimensionalNexus nexus = (EntityDimensionalNexus) PlayerUtil.getEntityLookingAt();
+                if (nexus.getRite() != null) {
+                    mc.ingameGUI.drawString(mc.fontRenderer, I18n.format("rite." + nexus.getRiteString() + ".name"), 5, 5, 16777215);
+                    mc.ingameGUI.drawString(mc.fontRenderer, I18n.format("rite.item_power.name") + " " + nexus.getItemPowerInArea(false) + " /  " + nexus.getRite().getItemPowerRequired(), 5, 15, 16777215);
+                    if (!((float) nexus.getRiteTicks() / nexus.getRite().getTicksRequired() > 1)) {
+                        progressPercentage = Math.round((float) nexus.getRiteTicks() / nexus.getRite().getTicksRequired() * 100);
+                        String progress = String.valueOf(progressPercentage);
+                        mc.ingameGUI.drawString(mc.fontRenderer, I18n.format("rite.progress.name") + " " + progress + " %", 5, 25, 16777215);
+                    } else {
+                        mc.ingameGUI.drawString(mc.fontRenderer, I18n.format("rite.progress_ready.name"), 5, 25, 16777215);
+                    }
+                    if (!nexus.getAspectsInArea(false).isEmpty()) {
+                        mc.ingameGUI.drawString(mc.fontRenderer, I18n.format("rite.aspects.name"), 5, 35, 16777215);
+                        List<Aspect> aspectList = new ArrayList<>();
+                        aspectList.addAll(nexus.getAspectsInArea(false));
+                        for (int i = 0; i < aspectList.size(); i++) {
+                            mc.ingameGUI.drawString(mc.fontRenderer, "-" + aspectList.get(i).getLocalizedName(), 5, 45 + i * 10, 16777215);
+                        }
+                    }
+                    mc.ingameGUI.drawString(mc.fontRenderer, I18n.format("rite.aspects_needed.name"), event.getResolution().getScaledWidth() - 100, 5, 16777215);
+                    List<Aspect> aspectList = new ArrayList<>();
+                    aspectList.addAll(nexus.getRite().getAspectsRequired());
+                    for (int i = 0; i < aspectList.size(); i++) {
+                        mc.ingameGUI.drawString(mc.fontRenderer, "-" + aspectList.get(i).getLocalizedName(), event.getResolution().getScaledWidth() - 100, 15 + i * 10, 16777215);
+                    }
+                    return;
+                }
+            }
     }
 
     public void renderEnergyHud(RenderGameOverlayEvent.Post event) {
@@ -245,7 +278,7 @@ public class HUDRenderHandler {
 
     public void renderMaganBar(RenderGameOverlayEvent.Post event) {
         Minecraft mc = Minecraft.getMinecraft();
-        if (!mc.player.capabilities.isCreativeMode && !mc.player.isSpectator()) {
+        if (Config.showBar && !mc.player.capabilities.isCreativeMode && !mc.player.isSpectator()) {
             if (mc.player.hasCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null)) {
                 IPlayerCapabilities caps = mc.player.getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null);
                 if (caps.knowsSoul()) {
@@ -268,12 +301,10 @@ public class HUDRenderHandler {
         GlStateManager.enableBlend();
         GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
 
-
         float zLevel = -90.0F;
         Tessellator tessellator = Tessellator.getInstance();
         BufferBuilder bufferbuilder = tessellator.getBuffer();
         bufferbuilder.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX_COLOR);
-        //   bufferbuilder.begin(7, DefaultVertexFormats.POSITION_TEX);
         bufferbuilder.pos((double) x, (double) (y + height), (double) zLevel).tex((double) ((float) (textureX + 0) * 0.00390625F), (double) ((float) (textureY + height) * 0.00390625F)).color(color.getRed() / 255F, color.getGreen() / 255F, color.getBlue() / 255F, alpha).endVertex();
         bufferbuilder.pos((double) (x + width), (double) (y + height), (double) zLevel).tex((double) ((float) (textureX + width) * 0.00390625F), (double) ((float) (textureY + height) * 0.00390625F)).color(color.getRed() / 255F, color.getGreen() / 255F, color.getBlue() / 255F, alpha).endVertex();
         bufferbuilder.pos((double) (x + width), (double) y, (double) zLevel).tex((double) ((float) (textureX + width) * 0.00390625F), (double) ((float) (textureY + 0) * 0.00390625F)).color(color.getRed() / 255F, color.getGreen() / 255F, color.getBlue() / 255F, alpha).endVertex();
