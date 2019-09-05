@@ -1,5 +1,7 @@
 package de.aelpecyem.elementaristics.entity.nexus;
 
+import de.aelpecyem.elementaristics.capability.player.PlayerCapProvider;
+import de.aelpecyem.elementaristics.capability.player.souls.Soul;
 import de.aelpecyem.elementaristics.config.Config;
 import de.aelpecyem.elementaristics.entity.EntityCultist;
 import de.aelpecyem.elementaristics.init.ModItems;
@@ -8,6 +10,7 @@ import de.aelpecyem.elementaristics.items.base.artifacts.rites.IHasRiteUse;
 import de.aelpecyem.elementaristics.misc.elements.Aspect;
 import de.aelpecyem.elementaristics.misc.rites.RiteBase;
 import de.aelpecyem.elementaristics.util.CultUtil;
+import de.aelpecyem.elementaristics.util.MaganUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -31,6 +34,7 @@ public class EntityDimensionalNexus extends Entity {
     protected static final DataParameter<String> OWNER_UUID = EntityDataManager.<String>createKey(EntityDimensionalNexus.class, DataSerializers.STRING);
     int itemPower = 0;
     Map<Aspect, Integer> aspectsExt = new ConcurrentHashMap<>(); //todo, handle external aspects
+    Map<Soul, Integer> souls = new ConcurrentHashMap<>();
     Set<Aspect> aspects = new HashSet<>();
     List<EntityPlayer> players = new ArrayList<>();
     List<EntityCultist> cultists = new ArrayList<>();
@@ -59,6 +63,7 @@ public class EntityDimensionalNexus extends Entity {
 
     @Override
     public boolean hitByEntity(Entity entityIn) {
+        //  LayerEnderDragonDeath
         if (entityIn instanceof EntityLivingBase && (isOwner((EntityLivingBase) entityIn) || (entityIn instanceof EntityPlayer && ((EntityPlayer) entityIn).isCreative()))) {
             if (entityIn.isSneaking()) {
                 if (!world.isRemote) {
@@ -81,14 +86,18 @@ public class EntityDimensionalNexus extends Entity {
 
     @Override
     public void onEntityUpdate() {
-        if (getRite() != null && ticksExisted % Config.nexusUpdateInterval == 0) {
-            getItemPowerInArea(true);
-            getAspectsInArea(true);
-            getPlayersInArea(true);
-            getCultistsInArea(true);
+        if (getRite() != null) {
+            if (ticksExisted % Config.nexusUpdateInterval == 0) {
+                getItemPowerInArea(true);
+                getAspectsInArea(true);
+                getPlayersInArea(true);
+                getCultistsInArea(true);
+            }
+
+            if (drainPower(getRite())) {
+                setRiteTicks(getRiteTicks() + 1);
+            }
         }
-        //particles
-        super.onEntityUpdate();
     }
 
 
@@ -112,6 +121,46 @@ public class EntityDimensionalNexus extends Entity {
 
     public void recruitCultists() {
         //todo fill that
+    }
+
+    public Set<Soul> getSoulsInArea() {
+        Set<Soul> soulsChecked = new HashSet<>();
+        List<EntityPlayer> targets = getPlayersInArea(false);
+        if (targets.size() > 0) {
+            Iterator iterator = targets.iterator();
+            while (iterator.hasNext()) {
+                EntityPlayer player = (EntityPlayer) iterator.next();
+                if (player.hasCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null))
+                    soulsChecked.add(player.getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null).getSoul());
+            }
+        }
+        soulsChecked.addAll(souls.keySet());
+        return soulsChecked;
+    }
+
+    public boolean drainPower(RiteBase rite) {
+        List<EntityCultist> cultists = getCultistsInArea(false).size() < 6 ? getCultistsInArea(false) : getCultistsInArea(false).subList(0, 6);
+        if (cultists.size() > 0) {
+            Iterator iterator = cultists.iterator();
+            while (iterator.hasNext()) {
+                EntityCultist cultist = (EntityCultist) iterator.next();
+                if (MaganUtil.drainMaganFromCultist(cultist, rite.getMaganDrainedPerTick(), 20, true)) {
+                    return true;
+                }
+            }
+        }
+        List<EntityPlayer> targets = getPlayersInArea(false);
+        if (targets.size() > 0) {
+            Iterator iterator = targets.iterator();
+            while (iterator.hasNext()) {
+                EntityPlayer player = (EntityPlayer) iterator.next();
+                if (MaganUtil.drainMaganFromPlayer(player, rite.getMaganDrainedPerTick(), 20, true)) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 
     public int getItemPowerInArea(boolean refresh) {
@@ -197,6 +246,7 @@ public class EntityDimensionalNexus extends Entity {
                 }
             }
             aspects.addAll(aspectsExt.keySet());
+            refreshAspectsExt();
         }
         return aspects;
     }
@@ -214,6 +264,35 @@ public class EntityDimensionalNexus extends Entity {
         }
         return cultists;
     }
+
+    //Aspects - External
+    public void addAspect(Aspect aspect) {
+        aspectsExt.put(aspect, 2);
+    }
+
+    //Souls - External
+    public void addSoul(Soul soul) {
+        souls.put(soul, 2);
+    }
+
+    public void refreshAspectsExt() {
+        for (Aspect aspect : aspectsExt.keySet()) {
+            aspectsExt.replace(aspect, aspectsExt.get(aspect), aspectsExt.get(aspect) - 1);
+            if (aspectsExt.get(aspect) <= 0) {
+                aspectsExt.remove(aspect);
+            }
+        }
+    }
+
+    public void refreshSoulsExt() {
+        for (Soul soul : souls.keySet()) {
+            souls.replace(soul, aspectsExt.get(soul), souls.get(soul) - 1);
+            if (souls.get(soul) <= 0) {
+                souls.remove(soul);
+            }
+        }
+    }
+
 
     public RiteBase getRite() {
         return RiteInit.getRiteForResLoc(getRiteString());

@@ -9,6 +9,8 @@ import de.aelpecyem.elementaristics.entity.projectile.EntityExplosionProjectile;
 import de.aelpecyem.elementaristics.entity.projectile.EntitySpellProjectile;
 import de.aelpecyem.elementaristics.entity.protoplasm.EntityProtoplasm;
 import de.aelpecyem.elementaristics.entity.render.elemental.RenderElementalAether;
+import de.aelpecyem.elementaristics.entity.render.nexus.RenderDimensionalNexus;
+import de.aelpecyem.elementaristics.entity.render.protoplasm.RenderProtoplasm;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
@@ -19,7 +21,7 @@ public class RenderHandler {
         RenderingRegistry.registerEntityRenderingHandler(EntityDimensionalNexus.class, new IRenderFactory<EntityDimensionalNexus>() {
             @Override
             public Render<? super EntityDimensionalNexus> createRenderFor(RenderManager manager) {
-                return new RenderNone(manager);
+                return new RenderDimensionalNexus(manager);
             }
         });
 

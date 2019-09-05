@@ -208,7 +208,6 @@ public class HUDRenderHandler {
         } else //delete the upper part once done
 
             if (PlayerUtil.getEntityLookingAt() instanceof EntityDimensionalNexus) {
-                System.out.println("yay");
                 EntityDimensionalNexus nexus = (EntityDimensionalNexus) PlayerUtil.getEntityLookingAt();
                 if (nexus.getRite() != null) {
                     mc.ingameGUI.drawString(mc.fontRenderer, I18n.format("rite." + nexus.getRiteString() + ".name"), 5, 5, 16777215);

@@ -49,7 +49,6 @@ public class TESRBasin extends TileEntitySpecialRenderer<TileEntityInfusionBasin
                     .addElement(DefaultVertexFormats.POSITION_3F)
                     .addElement(DefaultVertexFormats.TEX_2F)
                     .addElement(DefaultVertexFormats.TEX_2S)
-                    //.addElement(DefaultVertexFormats.NORMAL_3B)
                     .addElement(DefaultVertexFormats.COLOR_4UB));
 
             buffer.pos(1F / 16F, te.fillCount / 4F * 0.7 + 0.1, 15F / 16F).tex(1, 1).lightmap(240, 240).color(getWaterColor(te).getRed(), getWaterColor(te).getGreen(), getWaterColor(te).getBlue(), 255).endVertex();

@@ -1,4 +1,4 @@
-package de.aelpecyem.elementaristics.entity.render;
+package de.aelpecyem.elementaristics.entity.render.protoplasm;
 
 import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.entity.protoplasm.EntityProtoplasm;
@@ -51,7 +51,7 @@ public class RenderProtoplasm extends RenderLiving<EntityProtoplasm> {
             GlStateManager.disableRescaleNormal();
             GlStateManager.disableBlend();
         }
-        this.shadowSize = 0.25F * (float)entity.getSize();
+        this.shadowSize = 0.25F * (float) entity.getSize();
         super.doRender(entity, x, y, z, entityYaw, partialTicks);
     }
 
@@ -60,7 +60,7 @@ public class RenderProtoplasm extends RenderLiving<EntityProtoplasm> {
      */
     protected void preRenderCallback(EntityProtoplasm entitylivingbaseIn, float partialTickTime) {
         GlStateManager.scale(0.999F, 0.999F, 0.999F);
-        float f1 = (float)entitylivingbaseIn.getSize();
+        float f1 = (float) entitylivingbaseIn.getSize();
         float f3 = 1;
         GlStateManager.scale(f3 * f1, 1.0F / f3 * f1, f3 * f1);
     }
