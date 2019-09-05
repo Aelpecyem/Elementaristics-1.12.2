@@ -2,30 +2,34 @@ package de.aelpecyem.elementaristics.items.base;
 
 import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.entity.protoplasm.EntityProtoplasm;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumHand;
+import net.minecraft.world.World;
+
+import javax.annotation.Nullable;
+import java.util.List;
 
 public class ItemProtoplasm extends ItemBase {
-    private static final String NBTKEY_WATER = "watertime";
+    public static final String NBTKEY_WATER = "watertime";
+    public static final String NBTKEY_NAME = "nametag";
 
     public ItemProtoplasm() {
         super("protoplasm");
     }
 
-    //=======================================TESTING ZONE=======================================
-    // todo remove that once the stuff is in game
     @Override
-    public boolean itemInteractionForEntity(ItemStack stack, EntityPlayer playerIn, EntityLivingBase target, EnumHand hand) {
-        if (target instanceof EntityProtoplasm && playerIn.isCreative()){
-            ((EntityProtoplasm) target).setSlimeSize(((EntityProtoplasm) target).getSize() + (playerIn.isSneaking() ? -1 : 1), true);
+    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+        if (stack.hasTagCompound() && stack.getTagCompound().hasKey(NBTKEY_NAME)) {
+            String name = stack.getTagCompound().getString(NBTKEY_NAME);
+            if (!name.isEmpty()) {
+                tooltip.add("\"" + I18n.format("tooltip.protoplasm_sample.smell") + " " + name + "\"");
+            }
         }
-        return super.itemInteractionForEntity(stack, playerIn, target, hand);
+        super.addInformation(stack, worldIn, tooltip, flagIn);
     }
-    //=======================================TESTING ZONE OVER=======================================
 
     @Override
     public boolean onEntityItemUpdate(EntityItem entityItem) {
@@ -37,6 +41,12 @@ public class ItemProtoplasm extends ItemBase {
                     if (entityItem.getItem().getTagCompound().getInteger(NBTKEY_WATER) > 100) {
                         if (!entityItem.world.isRemote){
                             EntityProtoplasm protoplasm = new EntityProtoplasm(entityItem.world);
+                            if (entityItem.getItem().getTagCompound().hasKey(NBTKEY_NAME)) {
+                                String name = entityItem.getItem().getTagCompound().getString(NBTKEY_NAME);
+                                if (!name.isEmpty()) {
+                                    protoplasm.setCustomNameTag(name);
+                                }
+                            }
                             protoplasm.setLocationAndAngles(entityItem.posX, entityItem.posY, entityItem.posZ, entityItem.rotationYaw, entityItem.rotationPitch);
                             protoplasm.onInitialSpawn(entityItem.world.getDifficultyForLocation(entityItem.getPosition()), null);
                             entityItem.world.spawnEntity(protoplasm);

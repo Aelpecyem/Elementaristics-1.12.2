@@ -55,7 +55,6 @@ dependencies {
     deobfProvided "team.chisel:Chisel:MC1.12.2-0.2.1.35"
     deobfProvided "thaumcraft:Thaumcraft:1.12.2:6.1.BETA26"
     deobfProvided "vazkii.botania:Botania:r1.10-361.69"
-    deobfProvided "blusunrize:ImmersiveEngineering:0.12-+:deobf"
     //deobfProvided "al132.alchemistry:Alchemistry:1.0.34" add later with dependencies
 
     compile "baubles:Baubles:1.12:1.5.2"

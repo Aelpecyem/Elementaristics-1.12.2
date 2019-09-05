@@ -3,6 +3,7 @@ package de.aelpecyem.elementaristics.items.base.artifacts.rites.materials;
 import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.entity.protoplasm.EntityProtoplasm;
 import de.aelpecyem.elementaristics.init.ModItems;
+import de.aelpecyem.elementaristics.items.base.ItemProtoplasm;
 import de.aelpecyem.elementaristics.items.base.artifacts.rites.IHasRiteUse;
 import de.aelpecyem.elementaristics.items.base.consumable.ItemFoodBase;
 import de.aelpecyem.elementaristics.misc.elements.Aspect;
@@ -16,6 +17,7 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
@@ -43,8 +45,16 @@ public class ItemFleshLamb extends ItemFoodBase implements IHasRiteUse {
             if (((EntityTameable) target).isTamed() && target.isEntityAlive()){
                 for (int i = 0; i < 40; i++)
                     Elementaristics.proxy.generateGenericParticles(target, 924705, 2 + (float) target.world.rand.nextGaussian(), 120 + target.world.rand.nextInt(40), 0.001F, false, false);
-                if (!playerIn.world.isRemote && MaganUtil.drainMaganFromPlayer(playerIn, 80, 2000, true))
-                    playerIn.world.spawnEntity(new EntityItem(playerIn.world, target.posX, target.posY, target.posZ, new ItemStack(ModItems.protoplasm)));
+                if (!playerIn.world.isRemote && MaganUtil.drainMaganFromPlayer(playerIn, 80, 2000, true)) {
+                    ItemStack stackIn = new ItemStack(ModItems.protoplasm);
+                    if (target.hasCustomName()) {
+                        if (!stackIn.hasTagCompound()) {
+                            stackIn.setTagCompound(new NBTTagCompound());
+                        }
+                        stackIn.getTagCompound().setString(ItemProtoplasm.NBTKEY_NAME, target.getCustomNameTag());
+                    }
+                    playerIn.world.spawnEntity(new EntityItem(playerIn.world, target.posX, target.posY, target.posZ, stackIn));
+                }
                 target.attackEntityFrom(DamageSource.MAGIC, 10000);
                 stack.shrink(1);
             }
@@ -72,8 +82,14 @@ public class ItemFleshLamb extends ItemFoodBase implements IHasRiteUse {
         for (int i = 0; i < 40; i++)
             Elementaristics.proxy.generateGenericParticles(entityLiving, 924705, 2 + (float) worldIn.rand.nextGaussian(), 120 + worldIn.rand.nextInt(40), 0.001F, false, false);
 
-        if (entityLiving instanceof EntityPlayer && !worldIn.isRemote && MaganUtil.drainMaganFromPlayer((EntityPlayer) entityLiving, 80, 2000, true))
-            worldIn.spawnEntity(new EntityItem(worldIn, entityLiving.posX, entityLiving.posY, entityLiving.posZ, new ItemStack(ModItems.protoplasm)));
+        if (entityLiving instanceof EntityPlayer && !worldIn.isRemote && MaganUtil.drainMaganFromPlayer((EntityPlayer) entityLiving, 80, 2000, true)) {
+            ItemStack stackIn = new ItemStack(ModItems.protoplasm);
+            if (!stackIn.hasTagCompound()) {
+                stackIn.setTagCompound(new NBTTagCompound());
+            }
+            stack.getTagCompound().setString(ItemProtoplasm.NBTKEY_NAME, ((EntityPlayer) entityLiving).getDisplayNameString());
+            worldIn.spawnEntity(new EntityItem(worldIn, entityLiving.posX, entityLiving.posY, entityLiving.posZ, stackIn));
+        }
         entityLiving.attackEntityFrom(DamageSource.MAGIC, 10000);
         return super.onItemUseFinish(stack, worldIn, entityLiving);
     }
