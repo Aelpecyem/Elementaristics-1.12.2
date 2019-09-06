@@ -36,7 +36,7 @@ import net.minecraft.world.World;
 import javax.annotation.Nullable;
 
 public class EntityCultist extends EntityTameable {
-
+    //todo, embody rite help of cultists as AI
     private static final DataParameter<Integer> ASPECT_ID = EntityDataManager.createKey(EntityCultist.class, DataSerializers.VARINT);
     private static final DataParameter<Float> MAGAN = EntityDataManager.createKey(EntityCultist.class, DataSerializers.FLOAT);
     private static final DataParameter<Integer> STUNT_TIME = EntityDataManager.createKey(EntityCultist.class, DataSerializers.VARINT);

@@ -5,6 +5,7 @@ import de.aelpecyem.elementaristics.blocks.tileentity.TileEntityInfusionBasin;
 import de.aelpecyem.elementaristics.util.MiscUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
+import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
@@ -40,6 +41,7 @@ public class TESRBasin extends TileEntitySpecialRenderer<TileEntityInfusionBasin
             GL11.glPopMatrix();
         }
         if (te.fillCount > 0) {
+            RenderHelper.disableStandardItemLighting();
             Tessellator tess = Tessellator.getInstance();
             BufferBuilder buffer = tess.getBuffer();
 
@@ -51,10 +53,10 @@ public class TESRBasin extends TileEntitySpecialRenderer<TileEntityInfusionBasin
                     .addElement(DefaultVertexFormats.TEX_2S)
                     .addElement(DefaultVertexFormats.COLOR_4UB));
 
-            buffer.pos(1F / 16F, te.fillCount / 4F * 0.7 + 0.1, 15F / 16F).tex(1, 1).lightmap(240, 240).color(getWaterColor(te).getRed(), getWaterColor(te).getGreen(), getWaterColor(te).getBlue(), 255).endVertex();
-            buffer.pos(15F / 16F, te.fillCount / 4F * 0.7 + 0.1, 15F / 16F).tex(2, 1).lightmap(240, 240).color(getWaterColor(te).getRed(), getWaterColor(te).getGreen(), getWaterColor(te).getBlue(), 255).endVertex();
-            buffer.pos(15F / 16F, te.fillCount / 4F * 0.7 + 0.1, 1F / 16F).tex(2, 2).lightmap(240, 240).color(getWaterColor(te).getRed(), getWaterColor(te).getGreen(), getWaterColor(te).getBlue(), 255).endVertex();
-            buffer.pos(1F / 16F, te.fillCount / 4F * 0.7 + 0.1, 1F / 16F).tex(1, 2).lightmap(240, 240).color(getWaterColor(te).getRed(), getWaterColor(te).getGreen(), getWaterColor(te).getBlue(), 255).endVertex();
+            buffer.pos(1F / 16F, te.fillCount / 4F * 0.7 + 0.1, 15F / 16F).tex(1, 1).lightmap(240, 240).color(getWaterColor(te).getRed(), getWaterColor(te).getGreen(), getWaterColor(te).getBlue(), 240).endVertex();
+            buffer.pos(15F / 16F, te.fillCount / 4F * 0.7 + 0.1, 15F / 16F).tex(2, 1).lightmap(240, 240).color(getWaterColor(te).getRed(), getWaterColor(te).getGreen(), getWaterColor(te).getBlue(), 240).endVertex();
+            buffer.pos(15F / 16F, te.fillCount / 4F * 0.7 + 0.1, 1F / 16F).tex(2, 2).lightmap(240, 240).color(getWaterColor(te).getRed(), getWaterColor(te).getGreen(), getWaterColor(te).getBlue(), 240).endVertex();
+            buffer.pos(1F / 16F, te.fillCount / 4F * 0.7 + 0.1, 1F / 16F).tex(1, 2).lightmap(240, 240).color(getWaterColor(te).getRed(), getWaterColor(te).getGreen(), getWaterColor(te).getBlue(), 240).endVertex();
 
             Minecraft.getMinecraft().renderEngine.bindTexture(TEXTURE);
             tess.draw();
@@ -62,6 +64,7 @@ public class TESRBasin extends TileEntitySpecialRenderer<TileEntityInfusionBasin
 
             buffer.setTranslation(0, 0, 0);
 
+            RenderHelper.enableStandardItemLighting();
             //  Minecraft.getMinecraft().getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
         }
     }

@@ -17,7 +17,7 @@ public class Config {
     //values- dimensions
     public static int mindDimensionId = 1103;
     //values- misc
-    public static int nexusUpdateInterval = 20;
+    public static int nexusUpdateInterval = 10;
 
     public static void readConfig() {
         Configuration cfg = Elementaristics.config;

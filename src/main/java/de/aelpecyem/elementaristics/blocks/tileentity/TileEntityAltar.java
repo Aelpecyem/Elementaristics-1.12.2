@@ -10,9 +10,6 @@ import de.aelpecyem.elementaristics.init.SoulInit;
 import de.aelpecyem.elementaristics.items.base.artifacts.rites.IHasRiteUse;
 import de.aelpecyem.elementaristics.misc.elements.Aspect;
 import de.aelpecyem.elementaristics.misc.rites.RiteBase;
-import de.aelpecyem.elementaristics.networking.PacketHandler;
-import de.aelpecyem.elementaristics.networking.tileentity.altar.PacketUpdateAltar;
-import de.aelpecyem.elementaristics.networking.tileentity.tick.PacketUpdateTickTime;
 import de.aelpecyem.elementaristics.particles.ParticleGeneric;
 import de.aelpecyem.elementaristics.util.MaganUtil;
 import net.minecraft.entity.player.EntityPlayer;
@@ -52,7 +49,7 @@ public class TileEntityAltar extends TileEntity implements ITickable, IHasTickCo
     //check IHasRiteUse for blocks, too
     @Override
     public void update() {
-        if (world.provider.getWorldTime() % 1000 == 0) {
+        /*if (world.provider.getWorldTime() % 1000 == 0) {
             aspectsExt.clear();
             addedPower = 0;
         }
@@ -117,7 +114,8 @@ public class TileEntityAltar extends TileEntity implements ITickable, IHasTickCo
             aspectsExt.clear();
             soulsExt.clear();
             addedPower = 0;
-        }
+        }*/
+        //todo don't forget to keep the block for a while, so that the nexus can easily be obtained for some
     }
 
     public void recruitCultists(int spot) {

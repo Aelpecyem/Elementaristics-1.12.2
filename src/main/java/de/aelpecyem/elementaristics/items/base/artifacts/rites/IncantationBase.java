@@ -25,12 +25,16 @@ public class IncantationBase extends ItemAspects implements IHasRiteUse {
 
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
-        List<EntityDimensionalNexus> nexuses = worldIn.getEntitiesWithinAABB(EntityDimensionalNexus.class, playerIn.getEntityBoundingBox().expand(5, 2, 5));
-        if (!nexuses.isEmpty()) {
-            System.out.println("owo");
+        List<EntityDimensionalNexus> nexuses = worldIn.getEntitiesWithinAABB(EntityDimensionalNexus.class, playerIn.getEntityBoundingBox().grow(6));
+        if (!worldIn.isRemote && !nexuses.isEmpty()) {
             for (EntityDimensionalNexus nexus : nexuses) {
                 if (nexus.isValidUser(playerIn)) {
-                    nexus.setRiteString(rite.name.toString());
+                    if (nexus.getRiteString().equals(rite.name.toString())) {
+                        nexus.setRiteString("");
+                    } else {
+                        nexus.setRiteString(rite.name.toString());
+                    }
+                    nexus.setRiteTicks(0);
                 }
             }
         }

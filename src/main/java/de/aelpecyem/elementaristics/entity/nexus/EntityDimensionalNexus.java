@@ -9,6 +9,8 @@ import de.aelpecyem.elementaristics.init.RiteInit;
 import de.aelpecyem.elementaristics.items.base.artifacts.rites.IHasRiteUse;
 import de.aelpecyem.elementaristics.misc.elements.Aspect;
 import de.aelpecyem.elementaristics.misc.rites.RiteBase;
+import de.aelpecyem.elementaristics.networking.PacketHandler;
+import de.aelpecyem.elementaristics.networking.entity.nexus.PacketSyncNexus;
 import de.aelpecyem.elementaristics.util.CultUtil;
 import de.aelpecyem.elementaristics.util.MaganUtil;
 import net.minecraft.entity.Entity;
@@ -86,16 +88,32 @@ public class EntityDimensionalNexus extends Entity {
 
     @Override
     public void onEntityUpdate() {
+        if (ticksExisted % Config.nexusUpdateInterval == 0) {
+            getItemPowerInArea(true);
+            getAspectsInArea(true);
+            getPlayersInArea(true);
+            getCultistsInArea(true);
+        }
+        if (!world.isRemote) {
+            PacketHandler.sendToAllAround(world, getPosition(), 64, new PacketSyncNexus(this));
+        }
         if (getRite() != null) {
-            if (ticksExisted % Config.nexusUpdateInterval == 0) {
-                getItemPowerInArea(true);
-                getAspectsInArea(true);
-                getPlayersInArea(true);
-                getCultistsInArea(true);
-            }
-
             if (drainPower(getRite())) {
                 setRiteTicks(getRiteTicks() + 1);
+                getRite().onRitual(this);
+            } else {
+                setRiteString("");
+                setRiteTicks(100);
+                return;
+            }
+            if (getRiteTicks() >= getRite().getTicksRequired()) {
+                getRite().doMagic(this);
+                setRiteString(""); //packet?
+                setRiteTicks(100);
+            }
+        } else {
+            if (getRiteTicks() > 0) {
+                setRiteTicks(getRiteTicks() - 1);
             }
         }
     }
@@ -104,7 +122,7 @@ public class EntityDimensionalNexus extends Entity {
     @Override
     public void writeEntityToNBT(NBTTagCompound compound) {
         compound.setInteger("riteTicks", this.getRiteTicks());
-        compound.setString("rite", this.getRiteString());//todo write task stuff to nbt
+        compound.setString("rite", this.getRiteString());
         compound.setString("ownerUUID", this.getOwnerUUID().toString());
     }
 
@@ -237,7 +255,7 @@ public class EntityDimensionalNexus extends Entity {
                 }
             }
 
-            List<EntityCultist> cultists = getCultistsInArea(false);
+            List<EntityCultist> cultists = getCultistsInArea(false).size() < 6 ? getCultistsInArea(false) : getCultistsInArea(false).subList(0, 6);
             if (cultists.size() > 0) {
                 Iterator iterator = cultists.iterator();
                 while (iterator.hasNext()) {
@@ -258,7 +276,7 @@ public class EntityDimensionalNexus extends Entity {
         return players;
     }
 
-    List<EntityCultist> getCultistsInArea(boolean refresh) {
+    public List<EntityCultist> getCultistsInArea(boolean refresh) {
         if (refresh) {
             cultists = world.getEntitiesWithinAABB(EntityCultist.class, getEntityBoundingBox().grow(10), (EntityCultist p) -> p.getOwner() instanceof EntityPlayer && isValidUser((EntityPlayer) p.getOwner()));
         }

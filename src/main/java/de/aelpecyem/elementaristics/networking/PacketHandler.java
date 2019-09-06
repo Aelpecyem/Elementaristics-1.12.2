@@ -3,9 +3,11 @@ package de.aelpecyem.elementaristics.networking;
 import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.networking.cap.CapabilityChunkSync;
 import de.aelpecyem.elementaristics.networking.cap.CapabilitySync;
+import de.aelpecyem.elementaristics.networking.entity.PacketMoveEntity;
 import de.aelpecyem.elementaristics.networking.entity.PacketSpawnBoundParticles;
 import de.aelpecyem.elementaristics.networking.entity.cultist.PacketSpawnCultistAttackParticles;
 import de.aelpecyem.elementaristics.networking.entity.cultist.PacketSpawnCultistSpellParticles;
+import de.aelpecyem.elementaristics.networking.entity.nexus.PacketSyncNexus;
 import de.aelpecyem.elementaristics.networking.entity.protoplasm.PacketDyeProtoplasm;
 import de.aelpecyem.elementaristics.networking.other.PacketBurnableAffect;
 import de.aelpecyem.elementaristics.networking.other.PacketMarkBlock;
@@ -47,6 +49,8 @@ public class PacketHandler {
         network.registerMessage(new EnergySync.Handler(), EnergySync.class, next(), Side.CLIENT);
         network.registerMessage(new PosSync.Handler(), PosSync.class, next(), Side.CLIENT);
 
+        network.registerMessage(new PacketSyncNexus.Handler(), PacketSyncNexus.class, next(), Side.CLIENT);
+
         network.registerMessage(new PacketUpdateDeity.Handler(), PacketUpdateDeity.class, next(), Side.CLIENT);
         network.registerMessage(new PacketUpdateGoldenThread.Handler(), PacketUpdateGoldenThread.class, next(), Side.CLIENT);
         network.registerMessage(new PacketUpdateTransmitter.Handler(), PacketUpdateTransmitter.class, next(), Side.CLIENT);
@@ -63,6 +67,9 @@ public class PacketHandler {
         network.registerMessage(new PacketMessage.Handler(), PacketMessage.class, next(), Side.CLIENT);
         network.registerMessage(new PacketGiveVision.Handler(), PacketGiveVision.class, next(), Side.CLIENT);
         network.registerMessage(new PacketMove.Handler(), PacketMove.class, next(), Side.CLIENT);
+
+        network.registerMessage(new PacketMoveEntity.Handler(), PacketMoveEntity.class, next(), Side.CLIENT);
+        network.registerMessage(new PacketMoveEntity.Handler(), PacketMoveEntity.class, next(), Side.SERVER);
 
         network.registerMessage(new PacketPressSpellKey.Handler(), PacketPressSpellKey.class, next(), Side.SERVER);
         network.registerMessage(new PacketDyeProtoplasm.Handler(), PacketDyeProtoplasm.class, next(), Side.SERVER);

@@ -76,8 +76,6 @@ public class ClientProxy extends CommonProxy {
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityGoldenThread.class, new TESRGoldenThread());
 
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDeityShrine.class, new TESRShrine());
-
-        //TileEntityItemStackRenderer.instance = new TESRShrine.ForwardingTEISR(TileEntityItemStackRenderer.instance);
     }
 
 

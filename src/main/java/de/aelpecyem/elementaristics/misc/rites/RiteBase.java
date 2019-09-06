@@ -1,12 +1,9 @@
 package de.aelpecyem.elementaristics.misc.rites;
 
-import de.aelpecyem.elementaristics.blocks.tileentity.TileEntityAltar;
 import de.aelpecyem.elementaristics.capability.player.souls.Soul;
+import de.aelpecyem.elementaristics.entity.nexus.EntityDimensionalNexus;
 import de.aelpecyem.elementaristics.misc.elements.Aspect;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -81,26 +78,13 @@ public abstract class RiteBase {
         return maganDrainedPerTick;
     }
 
-    public void doMagic(World world, BlockPos pos, EntityPlayer player, TileEntityAltar tile) {
+    public void doMagic(EntityDimensionalNexus nexus) {
     }
 
-    public void onRitual(World world, BlockPos altarPos, List<EntityPlayer> players, int tickCoun, TileEntityAltar tile) {
+    public void onRitual(EntityDimensionalNexus nexus) {
     }
-   /* public boolean process(EntityPlayer player, int itemPower, float maganUsed){
-        if (player.hasCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null)){
-            IPlayerCapabilities cap = player.getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null);
-            if (itemPower >= itemPowerRequired){
-                if (maganUsed >= ticksRequired){
-                    if (isSoulSpecific){
-                        if (cap.getSoulId() >= soulRequired.getId()){
-                            return true;
-                        }
-                    }else{
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
-    }*/
+
+    public int getColor() {
+        return 0;
+    }
 }
