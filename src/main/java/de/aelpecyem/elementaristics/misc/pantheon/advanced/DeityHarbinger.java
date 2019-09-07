@@ -17,7 +17,7 @@ public class DeityHarbinger extends DeityBase {
 
     public DeityHarbinger() {
         super(TimeUtil.getTickTimeStartForHour(13), new ResourceLocation(Elementaristics.MODID, "deity_harbinger"), 664599);
-    }//todo stuff
+    }
 
     @Override
     public void setUpTile(TileEntityDeityShrine te) {

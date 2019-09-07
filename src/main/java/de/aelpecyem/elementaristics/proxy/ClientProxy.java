@@ -158,7 +158,7 @@ public class ClientProxy extends CommonProxy {
 
 
     @Override
-    public void generateGenericParticles(ParticleGeneric particleGeneric) {
+    public void generateGenericParticles(Particle particleGeneric) {
         ParticleHandler.spawnParticle(() -> particleGeneric);
     }
 

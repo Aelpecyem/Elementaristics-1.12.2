@@ -1,6 +1,6 @@
 package de.aelpecyem.elementaristics.proxy;
 
-import de.aelpecyem.elementaristics.particles.ParticleGeneric;
+import net.minecraft.client.particle.Particle;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -38,7 +38,7 @@ public class CommonProxy {
     public void generateGenericParticles(World world, double x, double y, double z, double velX, double velY, double velZ, int color, float scale, int maxAge, float gravity, boolean collision, boolean fade) {
     }
 
-    public void generateGenericParticles(ParticleGeneric particleGeneric) {
+    public void generateGenericParticles(Particle particleGeneric) {
     }
 
 

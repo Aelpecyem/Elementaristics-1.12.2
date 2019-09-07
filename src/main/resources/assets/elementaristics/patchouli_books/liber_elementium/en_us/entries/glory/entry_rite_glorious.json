@@ -17,7 +17,7 @@
     },
     {
       "type": "text",
-      "text": "When the rite is performed, the Channeling Tool must be thrown near the altar. If the target is close enough, particles will appear.$(br)Considered that the rite is successful, it will end with the pedestal and the redstone disappearing, leaving a new block at the place of the runed stone."
+      "text": "When the rite is performed, the Channeling Tool must be thrown near the Nexus. If the target is close enough, particles will appear.$(br)Considered that the rite is successful, it will end with the pedestal and the redstone disappearing, leaving a new block at the place of the runed stone."
     },
     {
       "type": "multiblock",

@@ -21,7 +21,6 @@ public class RenderCultist extends RenderLiving<EntityCultist>{
         return getAvailableTextures(entity);
     }
 
-
     @Override
     public void bindTexture(ResourceLocation location) {
         if (renderManager.renderEngine.getTexture(location) instanceof DynamicTexture) {

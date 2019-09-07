@@ -3,7 +3,10 @@ package de.aelpecyem.elementaristics.misc.rites;
 import de.aelpecyem.elementaristics.capability.player.souls.Soul;
 import de.aelpecyem.elementaristics.entity.nexus.EntityDimensionalNexus;
 import de.aelpecyem.elementaristics.misc.elements.Aspect;
+import de.aelpecyem.elementaristics.misc.elements.Aspects;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundCategory;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -85,6 +88,14 @@ public abstract class RiteBase {
     }
 
     public int getColor() {
-        return 0;
+        return !getAspectsRequired().iterator().hasNext() ? Aspects.vacuum.getColor() : getAspectsRequired().iterator().next().getColor();
+    }
+
+    public boolean areSoulsValid(Set<Soul> souls) {
+        return !isSoulSpecific || souls.contains(getSoulRequired());
+    }
+
+    public void playSound(EntityDimensionalNexus nexus) {
+        nexus.world.playSound(null, nexus.posX, nexus.posY, nexus.posZ, SoundEvents.BLOCK_ENCHANTMENT_TABLE_USE, SoundCategory.AMBIENT, 1, 1F);
     }
 }

@@ -1,6 +1,5 @@
 package de.aelpecyem.elementaristics.misc.pantheon;
 
-import de.aelpecyem.elementaristics.blocks.tileentity.TileEntityAltar;
 import de.aelpecyem.elementaristics.blocks.tileentity.pantheon.TileEntityDeityShrine;
 import de.aelpecyem.elementaristics.misc.elements.Aspect;
 import net.minecraft.client.model.ModelBase;
@@ -18,15 +17,14 @@ public class DeitySupplyEffectBase extends Deity {
     }
 
     public void supplyEffect(TileEntityDeityShrine te, boolean isStatue) {
-        if (te.getAltarBound() != null) {
-            TileEntityAltar tile = te.getAltarBound();
-            tile.addAspect(getAspect());
+        if (te.getNexusBound() != null) {
+            te.getNexusBound().addAspect(getAspect());
         }
     }
 
     @Override
     public void symbolEffect(TileEntityDeityShrine te) {
-        if (!te.isPassiveEffectManipulatorBelow() && !te.altarPos.equals(te.getPos()) && te.storage.extractIfPossible(5)) {
+        if (!te.isPassiveEffectManipulatorBelow() && te.getNexusBound() != null && te.storage.extractIfPossible(5)) {
             supplyEffect(te, false);
         }
         passiveParticles(te);
@@ -34,7 +32,7 @@ public class DeitySupplyEffectBase extends Deity {
 
     @Override
     public void statueEffect(TileEntityDeityShrine te) {
-        if (!te.isPassiveEffectManipulatorBelow() && !te.altarPos.equals(te.getPos()) && te.storage.extractIfPossible(2)) {
+        if (!te.isPassiveEffectManipulatorBelow() && te.getNexusBound() != null && te.storage.extractIfPossible(2)) {
             supplyEffect(te, true);
         }
         passiveParticles(te);

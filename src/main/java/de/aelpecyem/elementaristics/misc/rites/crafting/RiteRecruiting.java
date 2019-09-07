@@ -64,23 +64,19 @@ public class RiteRecruiting extends RiteBase {
 
     @Override
     public void onRitual(EntityDimensionalNexus nexus) {
-        Elementaristics.proxy.generateGenericParticles(nexus.world, nexus.posX, nexus.posY, nexus.posZ, Aspects.soul.getColor(), 3, 60, 0, false, false);
+        Elementaristics.proxy.generateGenericParticles(nexus.world, nexus.posX, nexus.posY + 0.5F, nexus.posZ, Aspects.soul.getColor(), 3, 60, 0, false, false);
         List<EntityItem> items = nexus.world.getEntitiesWithinAABB(EntityItem.class, nexus.getEntityBoundingBox().grow(6));
         List<EntityVillager> villagers = nexus.world.getEntitiesWithinAABB(EntityVillager.class, nexus.getEntityBoundingBox().grow(6));
 
         if (!villagers.isEmpty()) {
-            villagers.get(0).motionX = (nexus.posX - villagers.get(0).posX) / 20;
-            villagers.get(0).motionY = (nexus.posY - villagers.get(0).posY) / 20;
-            villagers.get(0).motionZ = (nexus.posZ - villagers.get(0).posZ) / 20;
+            nexus.suckInEntity(villagers.get(0), villagers.get(0).height / 2);
             Elementaristics.proxy.generateGenericParticles(villagers.get(0), Aspects.soul.getColor(), 1, 10, 0, false, false);
 
         }
         for (EntityItem item : items) {
-            item.motionX = (nexus.posX - item.posX) / 20;
-            item.motionY = (nexus.posY - item.posY) / 20;
-            item.motionZ = (nexus.posZ - item.posZ) / 20;
+            nexus.suckInEntity(item, item.height / 2);
             Elementaristics.proxy.generateGenericParticles(item, Aspects.soul.getColor(), 1, 10, 0, false, false);
-            Elementaristics.proxy.generateGenericParticles(nexus.world, nexus.posX, nexus.posY, nexus.posZ, item.getItem().getItem() instanceof IHasRiteUse ? ((IHasRiteUse) item.getItem().getItem()).getAspects().get(0).getColor() : Aspects.soul.getColor(), 4, 200, 0, false, true);
+            Elementaristics.proxy.generateGenericParticles(nexus.world, nexus.posX, nexus.posY + 0.5F, nexus.posZ, item.getItem().getItem() instanceof IHasRiteUse ? ((IHasRiteUse) item.getItem().getItem()).getAspects().get(0).getColor() : Aspects.soul.getColor(), 4, 200, 0, false, true);
         }
     }
 
@@ -89,7 +85,7 @@ public class RiteRecruiting extends RiteBase {
             double motionX = nexus.world.rand.nextGaussian() * 0.1D;
             double motionY = nexus.world.rand.nextGaussian() * 0.1D;
             double motionZ = nexus.world.rand.nextGaussian() * 0.1D;
-            Elementaristics.proxy.generateGenericParticles(nexus.world, nexus.posX, nexus.posY, nexus.posZ, motionX, motionY, motionZ, color, 4, 100, 0, true, true);
+            Elementaristics.proxy.generateGenericParticles(nexus.world, nexus.posX + 0.5F, nexus.posY, nexus.posZ, motionX, motionY, motionZ, color, 4, 100, 0, true, true);
         }
     }
 }

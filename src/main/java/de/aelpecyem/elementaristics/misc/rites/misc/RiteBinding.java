@@ -43,8 +43,7 @@ public class RiteBinding extends RiteBase {
 
     @Override
     public void onRitual(EntityDimensionalNexus nexus) {
-        if (nexus.getRiteTicks() % 20 == 0)
-            Elementaristics.proxy.generateGenericParticles(nexus.world, nexus.posX, nexus.posY, nexus.posZ, Aspects.earth.getColor(), 1, 60, 0.1F, false, true);
+        Elementaristics.proxy.generateGenericParticles(nexus.world, nexus.posX, nexus.posY + 0.5F, nexus.posZ, Aspects.earth.getColor(), 3, 60, 0, false, false);
         EntityPlayer player = nexus.world.getClosestPlayerToEntity(nexus, 20);
 
         List<EntityItem> items = nexus.world.getEntitiesWithinAABB(EntityItem.class, nexus.getEntityBoundingBox().grow(2), input -> input.getItem().getItem() instanceof ItemHeartStone);
@@ -53,9 +52,7 @@ public class RiteBinding extends RiteBase {
         for (EntityItem item : items) {
             if (nexus.getRiteTicks() % 20 == 0 && player != null)
                 Elementaristics.proxy.generateGenericParticles(player, Aspects.mana.getColor(), 2, 100, 0, false, true);
-            item.motionX = (nexus.posX - item.posX) / 20;
-            item.motionY = (nexus.posY + 1.5 - item.posY) / 20;
-            item.motionZ = (nexus.posZ + 0.5 - item.posZ) / 20;
+            nexus.suckInEntity(item, item.height / 2);
         }
 
         for (EntityLivingBase living : targets) {

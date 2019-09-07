@@ -7,6 +7,7 @@ import de.aelpecyem.elementaristics.items.base.ItemBase;
 import de.aelpecyem.elementaristics.util.PlayerUtil;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -25,12 +26,6 @@ public class ItemCultBadge extends ItemBase implements IBauble {
     protected final String OWNER = "owner";
     protected final String MEMBERS = "members";
 
-    /*Todo: Cults
-        As of now, this does not have any effect;
-        however, it will work like this:
-        A cult badge will have an expandable list of members; each member on the badge provides their cult services also for the person with the badge.
-        The rite for the cult's expansion will take the Badges of both participants, and will add the owner of each to the other badge.
-     */
     public ItemCultBadge() {
         super("badge_cult");
         maxStackSize = 1;
@@ -47,6 +42,13 @@ public class ItemCultBadge extends ItemBase implements IBauble {
             }
         }
         super.addInformation(stack, worldIn, tooltip, flagIn);
+    }
+
+    @Override
+    public void onWornTick(ItemStack itemstack, EntityLivingBase player) {
+        if (getOwnerUUID(itemstack).isEmpty() && player instanceof EntityPlayer) {
+            setOwner((EntityPlayer) player, itemstack);
+        }
     }
 
     @Override

@@ -9,12 +9,12 @@
     },
     {
       "type": "text",
-      "text": "However, some cultists may not find willing souls, or a player's soul is just too intricate for $(o)certain$() rites. $(br)This is why the $(item)Rite of Recruitment$() exists. It will forcefully pull nearby villagers to the Altar and will remove their soul, replacing it with an arcane soul imitate. The villagers will remove all their individuality and will be fully devoted."
+      "text": "However, some cultists may not find willing souls, or a player's soul is just too intricate for $(o)certain$() rites. $(br)This is why the $(item)Rite of Recruitment$() exists. It will forcefully pull nearby villagers to the Nexus and will remove their soul, replacing it with an arcane soul imitate. The villagers will remove all their individuality and will be fully devoted."
     },
     {
       "type": "crafting",
       "recipe": "elementaristics:recipe_recruitment",
-      "text": "In order to fulfill the rite, a $(item)Rite Tool$() must be tossed near the Altar, which will cause it to be dragged to its center. $(br)In the end, the tool will be consumed."
+      "text": "In order to fulfill the rite, a $(item)Rite Tool$() must be tossed near the Nexus, which will cause it to be dragged to its center. $(br)In the end, the tool will be consumed."
     },
     {
       "type": "entity",
@@ -25,11 +25,7 @@
     },
     {
       "type": "text",
-      "text": "The Cultist's owner will be the closest player to the altar. Each Cultist will have an Aspect assigned, depending on the Rite Tool that was offered. A Cultist has a Magan pool of 80 Units, which will be drained during rites. $(br)Acting on the Altar while sneaking will summon as many cultists to help as possible in rites (4)."
-    },
-    {
-      "type": "text",
-      "text": "It should be noted that some space will be needed for that, and that a cultist won't appear if the spot is blocked.$(br)A Cultist's stats can be viewed with a $(item)Mirror of the Soul$()."
+      "text": "Cultists will also defend themselves when getting attacked.$(br)Each Cultist will have an Aspect assigned, depending on the Rite Tool that was offered. A Cultist has a Magan pool of 80 Units, which will be drained during rites. A Cultist's stats can be viewed with a $(item)Mirror of the Soul$(). Whenever the Cultist's owner is starting a rite near the Cultist, the Cultist will also position themselves near the Nexus."
     }
   ],
   "advancement": "elementaristics:progress_forging"

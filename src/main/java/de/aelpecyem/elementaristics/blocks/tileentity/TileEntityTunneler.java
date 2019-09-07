@@ -171,9 +171,9 @@ public class TileEntityTunneler extends TileEntity implements ITickable, IHasTic
     }
 
     private void doParticleShow() {
-        Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(world, pos.getX() + 0.5, pos.getY() - 0.1F, pos.getZ() + 0.5, 0, -Math.abs(world.rand.nextGaussian()) * 0.1F, 0, 48895, 3, 40, 0, true, false, 0.9F, false));
-        Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(world, pos.getX() + 0.5, pos.getY() - 0.1F, pos.getZ() + 0.5, 0, -Math.abs(world.rand.nextGaussian()) * 0.1F, 0, 48895, 3, 40, 0, true, false, 0.9F, false));
-        Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(world, pos.getX() + 0.5, pos.getY() - 0.1F, pos.getZ() + 0.5, 0, -Math.abs(world.rand.nextGaussian()) * 0.1F, 0, 48895, 3, 40, 0, true, false, 0.9F, false));
+        Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(world, pos.getX() + 0.5, pos.getY() - 0.1F, pos.getZ() + 0.5, 0, -0.1, 0, 48895, 3, 40, 0, true, false, 0.9F, false));
+        Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(world, pos.getX() + 0.5, pos.getY() - 0.1F, pos.getZ() + 0.5, 0, -0.1F, 0, 48895, 3, 40, 0, true, false, 0.9F, false));
+        Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(world, pos.getX() + 0.5, pos.getY() - 0.1F, pos.getZ() + 0.5, 0, -0.1F, 0, 48895, 3, 40, 0, true, false, 0.9F, false));
 
     }
 

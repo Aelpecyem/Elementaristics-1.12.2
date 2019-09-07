@@ -3,8 +3,6 @@ package de.aelpecyem.elementaristics.events;
 import com.mojang.realmsclient.gui.ChatFormatting;
 import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.blocks.tileentity.IHasBoundPosition;
-import de.aelpecyem.elementaristics.blocks.tileentity.TileEntityAltar;
-import de.aelpecyem.elementaristics.blocks.tileentity.blocks.BlockAltar;
 import de.aelpecyem.elementaristics.blocks.tileentity.energy.TileEntityEnergy;
 import de.aelpecyem.elementaristics.blocks.tileentity.pantheon.TileEntityDeityShrine;
 import de.aelpecyem.elementaristics.capability.player.IPlayerCapabilities;
@@ -14,7 +12,6 @@ import de.aelpecyem.elementaristics.entity.nexus.EntityDimensionalNexus;
 import de.aelpecyem.elementaristics.entity.protoplasm.tasks.ProtoplasmTaskInit;
 import de.aelpecyem.elementaristics.entity.protoplasm.tasks.execs.ProtoplasmGoToTask;
 import de.aelpecyem.elementaristics.entity.protoplasm.tasks.execs.ProtoplasmTask;
-import de.aelpecyem.elementaristics.init.RiteInit;
 import de.aelpecyem.elementaristics.init.SoulInit;
 import de.aelpecyem.elementaristics.items.base.artifacts.ItemChannelingTool;
 import de.aelpecyem.elementaristics.items.base.artifacts.ItemEyeSplendor;
@@ -176,66 +173,35 @@ public class HUDRenderHandler {
 
     public void renderRiteHud(RenderGameOverlayEvent.Post event) {
         Minecraft mc = Minecraft.getMinecraft();
-        if (PlayerUtil.getBlockLookingAt(mc.player, 5) instanceof BlockAltar) {
-            BlockAltar altar = (BlockAltar) PlayerUtil.getBlockLookingAt(mc.player, 5);
-            TileEntityAltar tile = altar.getTileEntity(mc.player.world, PlayerUtil.getBlockPosLookingAt(5));
-            if (RiteInit.getRiteForResLoc(tile.currentRite) != null) {
-                mc.ingameGUI.drawString(mc.fontRenderer, I18n.format("rite." + tile.currentRite + ".name"), 5, 5, 16777215);
-                mc.ingameGUI.drawString(mc.fontRenderer, I18n.format("rite.item_power.name") + " " + tile.getItemPowerInArea() + " /  " + RiteInit.getRiteForResLoc(tile.currentRite).getItemPowerRequired(), 5, 15, 16777215);
-                if (!((float) tile.tickCount / RiteInit.getRiteForResLoc(tile.currentRite).getTicksRequired() > 1)) {
-                    progressPercentage = Math.round((float) tile.tickCount / RiteInit.getRiteForResLoc(tile.currentRite).getTicksRequired() * 100);
+        if (PlayerUtil.getEntityLookingAt() instanceof EntityDimensionalNexus) {
+            EntityDimensionalNexus nexus = (EntityDimensionalNexus) PlayerUtil.getEntityLookingAt();
+            if (nexus.getRite() != null) {
+                mc.ingameGUI.drawString(mc.fontRenderer, I18n.format("rite." + nexus.getRiteString() + ".name"), 5, 5, 16777215);
+                mc.ingameGUI.drawString(mc.fontRenderer, I18n.format("rite.item_power.name") + " " + nexus.getItemPowerInArea(false) + " /  " + nexus.getRite().getItemPowerRequired(), 5, 15, 16777215);
+                if (!((float) nexus.getRiteTicks() / nexus.getRite().getTicksRequired() > 1)) {
+                    progressPercentage = Math.round((float) nexus.getRiteTicks() / nexus.getRite().getTicksRequired() * 100);
                     String progress = String.valueOf(progressPercentage);
                     mc.ingameGUI.drawString(mc.fontRenderer, I18n.format("rite.progress.name") + " " + progress + " %", 5, 25, 16777215);
                 } else {
                     mc.ingameGUI.drawString(mc.fontRenderer, I18n.format("rite.progress_ready.name"), 5, 25, 16777215);
                 }
-                if (!tile.getAspectsInArea().isEmpty()) {
+                if (!nexus.getAspectsInArea(false).isEmpty()) {
                     mc.ingameGUI.drawString(mc.fontRenderer, I18n.format("rite.aspects.name"), 5, 35, 16777215);
                     List<Aspect> aspectList = new ArrayList<>();
-                    aspectList.addAll(tile.getAspectsInArea());
+                    aspectList.addAll(nexus.getAspectsInArea(false));
                     for (int i = 0; i < aspectList.size(); i++) {
                         mc.ingameGUI.drawString(mc.fontRenderer, "-" + aspectList.get(i).getLocalizedName(), 5, 45 + i * 10, 16777215);
                     }
                 }
                 mc.ingameGUI.drawString(mc.fontRenderer, I18n.format("rite.aspects_needed.name"), event.getResolution().getScaledWidth() - 100, 5, 16777215);
                 List<Aspect> aspectList = new ArrayList<>();
-                aspectList.addAll(RiteInit.getRiteForResLoc(tile.currentRite).getAspectsRequired());
+                aspectList.addAll(nexus.getRite().getAspectsRequired());
                 for (int i = 0; i < aspectList.size(); i++) {
                     mc.ingameGUI.drawString(mc.fontRenderer, "-" + aspectList.get(i).getLocalizedName(), event.getResolution().getScaledWidth() - 100, 15 + i * 10, 16777215);
                 }
                 return;
             }
-        } else //delete the upper part once done
-
-            if (PlayerUtil.getEntityLookingAt() instanceof EntityDimensionalNexus) {
-                EntityDimensionalNexus nexus = (EntityDimensionalNexus) PlayerUtil.getEntityLookingAt();
-                if (nexus.getRite() != null) {
-                    mc.ingameGUI.drawString(mc.fontRenderer, I18n.format("rite." + nexus.getRiteString() + ".name"), 5, 5, 16777215);
-                    mc.ingameGUI.drawString(mc.fontRenderer, I18n.format("rite.item_power.name") + " " + nexus.getItemPowerInArea(false) + " /  " + nexus.getRite().getItemPowerRequired(), 5, 15, 16777215);
-                    if (!((float) nexus.getRiteTicks() / nexus.getRite().getTicksRequired() > 1)) {
-                        progressPercentage = Math.round((float) nexus.getRiteTicks() / nexus.getRite().getTicksRequired() * 100);
-                        String progress = String.valueOf(progressPercentage);
-                        mc.ingameGUI.drawString(mc.fontRenderer, I18n.format("rite.progress.name") + " " + progress + " %", 5, 25, 16777215);
-                    } else {
-                        mc.ingameGUI.drawString(mc.fontRenderer, I18n.format("rite.progress_ready.name"), 5, 25, 16777215);
-                    }
-                    if (!nexus.getAspectsInArea(false).isEmpty()) {
-                        mc.ingameGUI.drawString(mc.fontRenderer, I18n.format("rite.aspects.name"), 5, 35, 16777215);
-                        List<Aspect> aspectList = new ArrayList<>();
-                        aspectList.addAll(nexus.getAspectsInArea(false));
-                        for (int i = 0; i < aspectList.size(); i++) {
-                            mc.ingameGUI.drawString(mc.fontRenderer, "-" + aspectList.get(i).getLocalizedName(), 5, 45 + i * 10, 16777215);
-                        }
-                    }
-                    mc.ingameGUI.drawString(mc.fontRenderer, I18n.format("rite.aspects_needed.name"), event.getResolution().getScaledWidth() - 100, 5, 16777215);
-                    List<Aspect> aspectList = new ArrayList<>();
-                    aspectList.addAll(nexus.getRite().getAspectsRequired());
-                    for (int i = 0; i < aspectList.size(); i++) {
-                        mc.ingameGUI.drawString(mc.fontRenderer, "-" + aspectList.get(i).getLocalizedName(), event.getResolution().getScaledWidth() - 100, 15 + i * 10, 16777215);
-                    }
-                    return;
-                }
-            }
+        }
     }
 
     public void renderEnergyHud(RenderGameOverlayEvent.Post event) {
@@ -268,9 +234,8 @@ public class HUDRenderHandler {
                 TileEntityDeityShrine tile = (TileEntityDeityShrine) mc.player.world.getTileEntity(PlayerUtil.getBlockPosLookingAt(5));
                 if (tile.deityBound != null || !tile.deityBound.equals(""))
                     mc.ingameGUI.drawString(mc.fontRenderer, I18n.format("hud.god") + " " + I18n.format(tile.deityBound), 5, 50, Aspects.light.getColor());
-                if (tile.altarPos != null)
-                    if (!(tile.altarPos.getZ() == tile.getPos().getZ() && tile.altarPos.getY() == tile.getPos().getY() && tile.altarPos.getX() == tile.getPos().getX()))
-                        mc.ingameGUI.drawString(mc.fontRenderer, I18n.format("hud.altar_to") + " X: " + tile.altarPos.getX() + " Y: " + tile.altarPos.getY() + " Z: " + tile.altarPos.getZ(), 5, 60, Aspects.light.getColor());
+                if (tile.getNexusBound() != null)
+                    mc.ingameGUI.drawString(mc.fontRenderer, I18n.format("hud.nexus_to") + " X: " + tile.getNexusBound().getPosition().getX() + " Y: " + tile.getNexusBound().getPosition().getY() + " Z: " + tile.getNexusBound().getPosition().getZ(), 5, 60, Aspects.light.getColor());
             }
         }
     }

@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " E ",
+    "MPS",
+    " B "
+  ],
+  "key": {
+    "M": {
+      "item": "elementaristics:essence",
+      "data": 13
+    },
+    "B": {
+      "item": "elementaristics:essence",
+      "data": 9
+    },
+    "S": {
+      "item": "elementaristics:essence",
+      "data": 16
+    },
+    "P": {
+      "item": "minecraft:paper"
+    },
+    "E": {
+      "item": "minecraft:emerald"
+    }
+  },
+  "result": {
+    "item": "elementaristics:incantation_pact",
+    "count": 1
+  }
+}

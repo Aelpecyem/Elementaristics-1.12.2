@@ -1,13 +1,13 @@
 {
   "display": {
     "icon": {
-      "item": "elementaristics:nexus_dimensional"
+      "item": "elementaristics:badge_cult"
     },
     "title": {
-      "translate": "advancement.elementaristics.ascension_2"
+      "translate": "advancement.elementaristics.progress_cult"
     },
     "description": {
-      "translate": "advancement.elementaristics.ascension_2.desc"
+      "translate": "advancement.elementaristics.progress_cult.desc"
     }
   },
   "parent": "elementaristics:progress_ascension",
@@ -17,7 +17,7 @@
       "conditions": {
         "items": [
           {
-            "item": "elementaristics:nexus_dimensional"
+            "item": "elementaristics:badge_cult"
           }
         ]
       }

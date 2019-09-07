@@ -2,6 +2,7 @@
   "name": "What \"Magan\" is",
   "icon": "elementaristics:essence:5",
   "category": "arcane_lessons",
+  "advancement": "elementaristics:progress_ascension",
   "pages": [
     {
       "type": "text",

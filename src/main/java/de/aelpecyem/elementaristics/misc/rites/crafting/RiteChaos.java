@@ -49,20 +49,22 @@ public class RiteChaos extends RiteBase {
                     }
                 }
                 nexus.world.spawnEntity(new EntityItem(nexus.world, entity.posX, entity.posY, entity.posZ, result));
-                nexus.world.playSound(null, nexus.posX, nexus.posY, nexus.posZ, SoundEvents.ENTITY_LIGHTNING_THUNDER, SoundCategory.AMBIENT, 0.8F, 0.9F);
             }
         }
     }
 
     @Override
+    public void playSound(EntityDimensionalNexus nexus) {
+        nexus.world.playSound(null, nexus.posX, nexus.posY, nexus.posZ, SoundEvents.ENTITY_LIGHTNING_THUNDER, SoundCategory.AMBIENT, 0.8F, 0.9F);
+    }
+
+    @Override
     public void onRitual(EntityDimensionalNexus nexus) {
-        Elementaristics.proxy.generateGenericParticles(nexus.world, nexus.posX, nexus.posY, nexus.posZ, Aspects.chaos.getColor(), 3, 60, 0, false, false);
+        Elementaristics.proxy.generateGenericParticles(nexus.world, nexus.posX, nexus.posY + 0.5F, nexus.posZ, Aspects.chaos.getColor(), 3, 60, 0, false, false);
         List<Entity> entities = nexus.world.getEntitiesWithinAABB(EntityItem.class, nexus.getEntityBoundingBox().grow(4), null);
         for (Entity entity : entities) {
-            entity.motionX = (nexus.posX - entity.posX) / 20;
-            entity.motionY = (nexus.posY - entity.posY) / 20;
-            entity.motionZ = (nexus.posZ - entity.posZ) / 20;
-            Elementaristics.proxy.generateGenericParticles(entity, Aspects.chaos.getColor(), 1, 10, 0, false, false);
+            nexus.suckInEntity(entity, entity.height / 2);
+            Elementaristics.proxy.generateGenericParticles(entity, Aspects.chaos.getColor(), 1, 40, 0, false, false);
 
         }
     }

@@ -28,7 +28,9 @@ public class RiteHealthShare extends RiteBase {
     @Override
     public void onRitual(EntityDimensionalNexus nexus) {
         if (nexus.getRiteTicks() % 2 == 0) {
-            Elementaristics.proxy.generateGenericParticles(nexus.world, nexus.posX, nexus.posY, nexus.posZ, 12863556, 1, 60, 0, false, true);
+            Elementaristics.proxy.generateGenericParticles(nexus.world, nexus.posX, nexus.posY + 0.5F, nexus.posZ, nexus.world.rand.nextGaussian() * 0.02D,
+                    nexus.world.rand.nextFloat() * -0.03D,
+                    nexus.world.rand.nextGaussian() * 0.02D, 12863556, 1 + nexus.world.rand.nextFloat(), 100, 0, false, true);
             for (EntityPlayer player : nexus.getPlayersInArea(false)) {
                 Elementaristics.proxy.generateGenericParticles(player, Aspects.life.getColor(), 1, 100, 0.1F, true, true);
             }

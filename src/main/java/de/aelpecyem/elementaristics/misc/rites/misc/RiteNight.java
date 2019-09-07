@@ -29,14 +29,16 @@ public class RiteNight extends RiteBase {
                 break;
             }
         }
-        if (flag)
+        if (flag) {
             nexus.world.setWorldTime(18000);
+        }
     }
 
     @Override
     public void onRitual(EntityDimensionalNexus nexus) {
         if (nexus.getRiteTicks() % 2 == 0) {
-            Elementaristics.proxy.generateGenericParticles(nexus.world, nexus.posX + (nexus.world.rand.nextGaussian() / 2), nexus.posY, nexus.posZ + 0.5F + (nexus.world.rand.nextGaussian() / 2), 0, 0.1F, 0, Aspects.chaos.getColor(), 3, 180, 0, false, true);
+            Elementaristics.proxy.generateGenericParticles(nexus.world, nexus.posX, nexus.posY + 0.5F, nexus.posZ, Aspects.water.getColor(), 3, 100, -0.1F, false, false);
+            Elementaristics.proxy.generateGenericParticles(nexus.world, nexus.posX, nexus.posY + 0.5F, nexus.posZ, Aspects.ice.getColor(), 2, 80, -0.05F, false, false);
         }
     }
 }

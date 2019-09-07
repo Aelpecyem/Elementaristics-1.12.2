@@ -40,16 +40,14 @@ public class RenderDimensionalNexus extends Render<EntityDimensionalNexus> {
             int amount = 8;
             float length = 1F + animState * 0.03F; //20.0F
             Color color = new Color(4391011);
-            float f = Math.min((float) entity.getRiteTicks() / 100F, 1);
+            float f = Math.min((float) entity.getRiteTicks() / 60F, 1);
 
             if (entity.getRite() != null) {
-                System.out.println("blend tat shiz");
                 color = MiscUtil.blend(new Color(entity.getRite().getColor()), color, f, 1 - f);
             } else if (entity.getRiteString().equals("") && entity.getRiteTicks() > 0) {
-                System.out.println("rad");
                 color = MiscUtil.blend(Color.RED, color, f, 1 - f);
             }
-            Color shades = new Color(16724725);
+            Color shades = color.darker();
             GlStateManager.disableTexture2D();
             GlStateManager.shadeModel(7425);
             GlStateManager.enableBlend();
@@ -59,7 +57,7 @@ public class RenderDimensionalNexus extends Render<EntityDimensionalNexus> {
             GlStateManager.depthMask(false);
             GlStateManager.pushMatrix();
 
-            GlStateManager.translate((float) x, (float) y, (float) z);
+            GlStateManager.translate((float) x, (float) y + entity.height / 2, (float) z);
             for (int i = 0; i < amount; ++i) { //(float)i < (f + f * f) / 2.0F * 60.0F //might vary the amount
                 //float varyLength = 0.4F + animState * 0.002F;
                 float distance = random.nextFloat() * length + 0.5F;//random.nextFloat() * length + 5.0F + varyLength * 10.0F;

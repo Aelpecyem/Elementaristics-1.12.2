@@ -15,8 +15,10 @@ import de.aelpecyem.elementaristics.recipe.base.GloriousRecipe;
 import net.minecraft.block.BlockRedstoneWire;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 
 import java.util.List;
@@ -83,6 +85,8 @@ public class RiteGlorious extends RiteBase {
                             }
                         }
                         nexus.world.setBlockState(posSelected, recipe.output.getDefaultState());
+                        nexus.world.playSound(null, posSelected, SoundEvents.BLOCK_ENCHANTMENT_TABLE_USE, SoundCategory.AMBIENT, 1, 0.7F);
+
                     }
                 }
             }
@@ -115,9 +119,7 @@ public class RiteGlorious extends RiteBase {
                     }
                 }
             }
-            entity.motionX = (nexus.posX - entity.posX) / 20;
-            entity.motionY = (nexus.posY - entity.posY) / 20;
-            entity.motionZ = (nexus.posZ - entity.posZ) / 20;
+            nexus.suckInEntity(entity, entity.height / 2);
         }
 
         if (nexus.world.getBlockState(new BlockPos(coordsX, coordsY, coordsZ)).getBlock() == ModBlocks.stone_runed) {
@@ -139,10 +141,10 @@ public class RiteGlorious extends RiteBase {
                             if (nexus.world.isRemote) {
                                 if (GloriousRecipes.getRecipeForInput(((TileEntityPedestal) nexus.world.getTileEntity(posSelected.up())).inventory.getStackInSlot(0)).output instanceof BlockDeityShrineBase) {
                                     Deity deity = ((BlockDeityShrineBase) GloriousRecipes.getRecipeForInput(((TileEntityPedestal) nexus.world.getTileEntity(posSelected.up())).inventory.getStackInSlot(0)).output).deity;
-                                    Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(nexus.world, nexus.posX, nexus.posY, nexus.posZ, 0, 0, 0, deity.getColor(), 2, 300, 0,
-                                            false, true, true, true, posSelected.getX() + nexus.world.rand.nextFloat(), posSelected.getY() + nexus.world.rand.nextFloat(), posSelected.getZ() + nexus.world.rand.nextFloat()));
-                                    Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(nexus.world, posSelected.up().getX() + 0.5, posSelected.up().getY() + 0.9, posSelected.up().getZ() + 0.5, 0, 0, 0, Aspects.light.getColor(), 2, 300, 0,
-                                            false, true, true, true, nexus.posX, nexus.posY, nexus.posZ));
+                                    Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(nexus.world, nexus.posX, nexus.posY + 0.5F, nexus.posZ, 0, 0, 0, deity.getColor(), 2, 400, 0,
+                                            false, false, true, true, posSelected.getX() + nexus.world.rand.nextFloat(), posSelected.getY() + nexus.world.rand.nextFloat(), posSelected.getZ() + nexus.world.rand.nextFloat()));
+                                    Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(nexus.world, posSelected.up().getX() + +nexus.world.rand.nextFloat(), posSelected.up().getY() + nexus.world.rand.nextFloat(), posSelected.up().getZ() + nexus.world.rand.nextFloat(), 0, 0, 0, Aspects.light.getColor(), 2, 400, 0,
+                                            false, false, true, true, nexus.posX, nexus.posY + 0.5F, nexus.posZ));
                                 }
                             }
                         }
@@ -150,5 +152,10 @@ public class RiteGlorious extends RiteBase {
                 }
             }
         }
+    }
+
+    @Override
+    public int getColor() {
+        return Aspects.light.getColor();
     }
 }

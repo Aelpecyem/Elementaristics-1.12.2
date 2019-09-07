@@ -2,12 +2,13 @@ package de.aelpecyem.elementaristics.items.base.artifacts;
 
 
 import com.mojang.realmsclient.gui.ChatFormatting;
-import de.aelpecyem.elementaristics.blocks.tileentity.TileEntityAltar;
 import de.aelpecyem.elementaristics.blocks.tileentity.pantheon.TileEntityDeityShrine;
+import de.aelpecyem.elementaristics.entity.nexus.EntityDimensionalNexus;
 import de.aelpecyem.elementaristics.init.Deities;
 import de.aelpecyem.elementaristics.items.base.artifacts.rites.ItemAspects;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;
 import de.aelpecyem.elementaristics.util.TimeUtil;
+import net.minecraft.block.Block;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
@@ -60,15 +61,9 @@ public class ItemEyeSplendor extends ItemAspects {
                 player.sendStatusMessage(new TextComponentString(ChatFormatting.YELLOW + I18n.format("message.deity_belong.name") + " " + I18n.format(te.deityBound)), false);
                 player.sendStatusMessage(new TextComponentString(ChatFormatting.YELLOW + I18n.format("message.deity_active.name") + " " + Deities.deities.get(new ResourceLocation(te.deityBound)).getTickTimeBegin()), false);
             }
-            for (int x = -14; x < 14; x++) {
-                for (int y = -8; y < 6; y++) {
-                    for (int z = -14; z < 14; z++) {
-                        if (worldIn.getTileEntity(new BlockPos(pos.getX() + x, pos.getY() + y, pos.getZ() + z)) instanceof TileEntityAltar) {
-                            te.altarPos = new BlockPos(pos.getX() + x, pos.getY() + y, pos.getZ() + z);
-                            return super.onItemUse(player, worldIn, pos, hand, facing, hitX, hitY, hitZ);
-                        }
-                    }
-                }
+            List<EntityDimensionalNexus> nexuses = worldIn.getEntitiesWithinAABB(EntityDimensionalNexus.class, Block.FULL_BLOCK_AABB.grow(20).offset(pos));
+            if (!nexuses.isEmpty()) {
+                te.nexus = nexuses.get(0).getUniqueID().toString();
             }
         }
         return super.onItemUse(player, worldIn, pos, hand, facing, hitX, hitY, hitZ);

@@ -2,10 +2,11 @@
   "name": "Infusion Basin",
   "icon": "elementaristics:basin_infusion",
   "category": "matter_manipulation",
+  "advancement": "elementaristics:progress_ascension_2",
   "pages": [
     {
       "type": "text",
-      "text": "The $(item)Infusion Basin$() is definitely one of the more expensive processes, as it requires $(l:alchemy/entry_base_materials)$(item)Purest Water$() as essential component.$(br)The basin is, as implied, used by pouring Purest Water into it. $(br)Then, essences are added."
+      "text": "The use of the $(item)Infusion Basin$() is definitely one of the more expensive processes, as it requires $(l:alchemy/entry_base_materials)$(item)Purest Water$() as essential component.$(br)The basin is, as implied, used by pouring Purest Water into it. $(br)Then, essences are added."
     },
     {
       "type": "text",
@@ -14,7 +15,7 @@
     {
       "type": "crafting",
       "recipe": "elementaristics:basin",
-      "text": "$(o)I swear its no crucible$()"
+      "text": "$(o)I swear it's no crucible$()"
     }
   ]
 }

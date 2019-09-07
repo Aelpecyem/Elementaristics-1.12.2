@@ -14,7 +14,7 @@
     },
     {
       "type": "text",
-      "text": "The ritual is performed on the $(l:manipulation/entry_altar)$(item)Altar$() and requires a greater power of Chaos, manifested in $(l:alchemy/entry_entropizing_catalyst)$(item)Entropizing Catalysts$(). $(br)In order to achieve results, the items to be affected must be tossed near the altar before the rite ends."
+      "text": "The ritual is performed with the $(l:manipulation/entry_nexus)$(item)Dimensional Nexus$() and requires a greater power of Chaos, manifested in $(l:alchemy/entry_entropizing_catalyst)$(item)Entropizing Catalysts$(). $(br)In order to achieve results, the items to be affected must be tossed near the altar before the rite ends."
     }
   ],
   "advancement": "elementaristics:progress_ascension_2"

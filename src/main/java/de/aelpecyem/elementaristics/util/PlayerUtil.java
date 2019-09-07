@@ -5,11 +5,14 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.common.UsernameCache;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class PlayerUtil {
@@ -51,5 +54,12 @@ public class PlayerUtil {
             return UsernameCache.getLastKnownUsername(UUID.fromString(uuid));
         }
         return "";
+    }
+
+    public static List<ItemStack> getHeldItems(EntityPlayer player) {
+        List<ItemStack> stacks = new ArrayList<>();
+        stacks.add(player.getHeldItemMainhand());
+        stacks.add(player.getHeldItemOffhand());
+        return stacks;
     }
 }

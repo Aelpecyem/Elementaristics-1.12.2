@@ -30,7 +30,7 @@ public class RiteFeast extends RiteBase {
     @Override
     public void onRitual(EntityDimensionalNexus nexus) {
         if (nexus.getRiteTicks() % 2 == 0) {
-            Elementaristics.proxy.generateGenericParticles(nexus.world, nexus.posX, nexus.posY, nexus.posZ, 12863556, 3, 60, 0, false, false);
+            Elementaristics.proxy.generateGenericParticles(nexus.world, nexus.posX, nexus.posY + 0.5F, nexus.posZ, 12863556, 3, 60, 0, false, false);
             for (EntityPlayer player : nexus.getPlayersInArea(false)) {
                 Elementaristics.proxy.generateGenericParticles(player, 12863556, 1, 100, 0, false, true);
             }

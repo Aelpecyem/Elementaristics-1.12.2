@@ -15,7 +15,9 @@
     "book": {
       "trigger": "minecraft:tame_animal",
       "conditions": {
-        "entity": "elementaristics:protoplasm"
+        "entity": {
+          "type": "elementaristics:protoplasm"
+        }
       }
     }
   }

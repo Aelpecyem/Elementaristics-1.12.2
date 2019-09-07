@@ -36,6 +36,7 @@ public class RiteInit {
     public static RiteUnbinding riteUnbinding = new RiteUnbinding();
     public static RiteHealthShare riteHealthShare = new RiteHealthShare();
     public static RiteEmptiness riteEmptiness = new RiteEmptiness();
+    public static RitePact ritePact = new RitePact();
 
     public static RiteSacrifice riteConflagration = new RiteSacrifice("conflagration_soul", Aspects.fire, SoulInit.soulFire, DamageSource.ON_FIRE);
     public static RiteSacrifice riteShredding = new RiteSacrifice("rage_wind", Aspects.air, SoulInit.soulAir, Elementaristics.DAMAGE_AIR);
@@ -64,6 +65,7 @@ public class RiteInit {
         registerRite(riteUnbinding.name, RiteInit.riteUnbinding);
         registerRite(riteHealthShare.name, RiteInit.riteHealthShare);
         registerRite(riteEmptiness.name, RiteInit.riteEmptiness);
+        registerRite(ritePact.name, RiteInit.ritePact);
 
         registerRite(riteConflagration.name, riteConflagration);
         registerRite(riteShredding.name, riteShredding);

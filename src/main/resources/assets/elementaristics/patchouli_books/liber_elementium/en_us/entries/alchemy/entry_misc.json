@@ -15,7 +15,23 @@
     {
       "type": "purifier_recipe",
       "recipe": "elementaristics:aether_essence_effective",
-      "text": "$(item)Aether Essence$() can be produced more efficiently using the Purifier."
+      "text": "$(item)Essence Clusters$() can be produced more efficiently using the Purifier."
+    },
+    {
+      "type": "purifier_recipe",
+      "recipe": "elementaristics:air_essence_effective"
+    },
+    {
+      "type": "purifier_recipe",
+      "recipe": "elementaristics:earth_essence_effective"
+    },
+    {
+      "type": "purifier_recipe",
+      "recipe": "elementaristics:fire_essence_effective"
+    },
+    {
+      "type": "purifier_recipe",
+      "recipe": "elementaristics:water_essence_effective"
     }
   ],
   "advancement": "elementaristics:progress_purifier"

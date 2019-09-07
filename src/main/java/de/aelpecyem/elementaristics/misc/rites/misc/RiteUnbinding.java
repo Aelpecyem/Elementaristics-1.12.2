@@ -37,7 +37,7 @@ public class RiteUnbinding extends RiteBase {
 
     @Override
     public void onRitual(EntityDimensionalNexus nexus) {
-        Elementaristics.proxy.generateGenericParticles(nexus.world, nexus.posX, nexus.posY, nexus.posZ, Aspects.earth.getColor(), 3, 60, 0, false, false);
+        Elementaristics.proxy.generateGenericParticles(nexus.world, nexus.posX, nexus.posY + 0.5F, nexus.posZ, Aspects.earth.getColor(), 3, 60, 0, false, false);
         EntityPlayer player = nexus.world.getClosestPlayerToEntity(nexus, 20);
         if (player != null)
             Elementaristics.proxy.generateGenericParticles(player, Aspects.earth.getColor(), 3, 100, 0, false, true);

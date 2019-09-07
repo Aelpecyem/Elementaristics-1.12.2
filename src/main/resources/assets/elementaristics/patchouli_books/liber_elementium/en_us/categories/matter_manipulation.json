@@ -1,6 +1,6 @@
 {
   "name": "Matter Manipulation",
-  "description": "The manipulation of matter is one of the essential aspects in $(marked)Alchemy$(), which should be pretty important for my research on elements. This chapter shall be dedicated to this.",
+  "description": "Creation, transmutation, destruction; the essential aspects of Alchemy.",
   "icon": "elementaristics:textures/gui/icons/manipulation.png",
   "sortnum": 1
 }

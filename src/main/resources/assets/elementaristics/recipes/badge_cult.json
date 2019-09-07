@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ASA",
+    "MLB",
+    "S S"
+  ],
+  "key": {
+    "M": {
+      "item": "elementaristics:essence",
+      "data": 13
+    },
+    "B": {
+      "item": "elementaristics:essence",
+      "data": 9
+    },
+    "S": {
+      "item": "elementaristics:essence",
+      "data": 16
+    },
+    "A": {
+      "item": "elementaristics:essence",
+      "data": 4
+    },
+    "S": {
+      "item": "minecraft:string"
+    },
+    "L": {
+      "item": "minecraft:leather"
+    }
+  },
+  "result": {
+    "item": "elementaristics:badge_cult",
+    "count": 1
+  }
+}

@@ -5,7 +5,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "The $(item)Concentrator$() is a simple matter manipulating apparatus.$(br) It uses two reagents, from which one (in the center of the block) will be influenced by the other (rotating around the center).$(br)If the process is successful, the influenced item will be transformed.$(br)One might want to watch the process, as it will always go on if not unsuccessful."
+      "text": "The $(item)Concentrator$() is a simple matter manipulating apparatus.$(br) It uses two reagents, from which $(t:In the center of the block)one$() will be influenced by the $(t:Below the influenced item)other$().$(br)If the process is successful, the influenced item will be transformed.$(br)One might want to watch the process, as it will always go on if not unsuccessful."
     },
     {
       "type": "crafting",

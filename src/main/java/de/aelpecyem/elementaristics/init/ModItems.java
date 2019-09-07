@@ -89,6 +89,7 @@ public class ModItems {
     public static IncantationBase incantation_unbinding;
     public static IncantationBase incantation_health_share;
     public static IncantationBase incantation_emptiness;
+    public static IncantationBase incantation_pact;
 
     public static IncantationBase incantation_conflagration;
     public static IncantationBase incantation_wind;
@@ -258,6 +259,7 @@ public class ModItems {
         incantation_unbinding = new IncantationBase("incantation_unbinding", RiteInit.riteUnbinding, Aspects.earth, 1);
         incantation_health_share = new IncantationBase("incantation_health_share", RiteInit.riteHealthShare, Aspects.earth, 1);
         incantation_emptiness = new IncantationBase("incantation_emptiness", RiteInit.riteEmptiness, Aspects.vacuum, 2);
+        incantation_pact = new IncantationBase("incantation_pact", RiteInit.ritePact, Aspects.mind, 2);
 
         incantation_conflagration = new IncantationBase("incantation_conflagration", RiteInit.riteConflagration, Aspects.fire, 2);
         incantation_wind = new IncantationBase("incantation_wind", RiteInit.riteShredding, Aspects.air, 2);

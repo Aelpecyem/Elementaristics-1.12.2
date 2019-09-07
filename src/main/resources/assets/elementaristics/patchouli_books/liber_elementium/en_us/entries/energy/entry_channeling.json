@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "The $(item)Channeling Tool$() is the key to all of $(marked)Occult Energy$(), as it is able to determine the flow of Occult Energy in the area.$(br)If I want to know more about it, I should probably just create it and get more into Occult Energy."
+      "text": "The $(item)Channeling Tool$() is the key to all of $(marked)Occult Energy$(), as it is able to determine the flow of Occult Energy in the area.$(br2)If I want to know more about it, I should probably just create it and get more into Occult Energy."
     },
     {
       "type": "forging_recipe",

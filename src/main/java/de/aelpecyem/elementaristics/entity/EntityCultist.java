@@ -4,6 +4,7 @@ import com.google.common.base.Predicate;
 import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.capability.player.IPlayerCapabilities;
 import de.aelpecyem.elementaristics.capability.player.PlayerCapProvider;
+import de.aelpecyem.elementaristics.entity.nexus.EntityDimensionalNexus;
 import de.aelpecyem.elementaristics.entity.projectile.EntityElementalSpell;
 import de.aelpecyem.elementaristics.items.base.artifacts.ItemSoulMirror;
 import de.aelpecyem.elementaristics.misc.elements.Aspect;
@@ -13,7 +14,10 @@ import de.aelpecyem.elementaristics.networking.PacketHandler;
 import de.aelpecyem.elementaristics.networking.entity.cultist.PacketSpawnCultistAttackParticles;
 import de.aelpecyem.elementaristics.networking.entity.cultist.PacketSpawnCultistSpellParticles;
 import de.aelpecyem.elementaristics.networking.player.PacketMessage;
+import de.aelpecyem.elementaristics.util.CultUtil;
+import net.minecraft.block.Block;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -29,11 +33,13 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
+import java.util.List;
 
 public class EntityCultist extends EntityTameable {
     //todo, embody rite help of cultists as AI
@@ -42,6 +48,7 @@ public class EntityCultist extends EntityTameable {
     private static final DataParameter<Integer> STUNT_TIME = EntityDataManager.createKey(EntityCultist.class, DataSerializers.VARINT);
     //  private static final DataParameter<Boolean> WANDERING = EntityDataManager.createKey(EntityCultist.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Integer> CASTING = EntityDataManager.createKey(EntityCultist.class, DataSerializers.VARINT);
+    private static final DataParameter<Integer> NEXUS = EntityDataManager.createKey(EntityCultist.class, DataSerializers.VARINT);
 
     public EntityCultist(World worldIn) {
         super(worldIn);
@@ -56,6 +63,7 @@ public class EntityCultist extends EntityTameable {
         dataManager.register(MAGAN, 80F);
         dataManager.register(STUNT_TIME, 0);
         dataManager.register(CASTING, 0);
+        dataManager.register(NEXUS, 0);
         // dataManager.register(WANDERING, false);
     }
 
@@ -111,6 +119,29 @@ public class EntityCultist extends EntityTameable {
         setCastingProgress(getCastingProgress() + 1);
     }
 
+    public int getNexusId() {
+        return dataManager.get(NEXUS);
+    }
+
+    public void setNexusId(int id) {
+        dataManager.set(NEXUS, id);
+    }
+
+    public void setNexus(EntityDimensionalNexus nexus) {
+        if (nexus.getOwnerUUID().equals(getOwnerId())) {
+            dataManager.set(NEXUS, nexus.getEntityId());
+        }
+    }
+
+    public EntityDimensionalNexus getNexus() {
+        Entity nexus = world.getEntityByID(dataManager.get(NEXUS));
+        if (nexus instanceof EntityDimensionalNexus && ((EntityDimensionalNexus) nexus).getOwnerUUID().equals(getOwnerId())) {
+            return (EntityDimensionalNexus) nexus;
+        }
+        return null;
+    }
+
+
 
     //public boolean isWandering() {
     //    return dataManager.get(WANDERING);
@@ -127,6 +158,7 @@ public class EntityCultist extends EntityTameable {
         setAspect(Aspects.getElementById(compound.getInteger("aspectId")));
         setMagan(compound.getFloat("magan"));
         setStuntTime(compound.getInteger("stuntTime"));
+        setNexusId(compound.getInteger("nexus"));
         //    setWandering(compound.getBoolean("wander"));
     }
 
@@ -137,6 +169,7 @@ public class EntityCultist extends EntityTameable {
         compound.setFloat("magan", getMagan());
         compound.setInteger("stuntTime", getStuntTime());
         compound.setInteger("castingProgress", getCastingProgress());
+        compound.setInteger("nexus", getNexusId());
         //  compound.setBoolean("wander", isWandering());
     }
 
@@ -156,7 +189,9 @@ public class EntityCultist extends EntityTameable {
 
     @Override
     public void onLivingUpdate() {
-        if (isCasting() && getAttackTarget() != null) {
+        if (getNexus() != null && getNexus().getRiteTicks() > 0 && getNexus().getRite() != null) {
+            getLookHelper().setLookPosition(getNexus().posX, getNexus().posY, getNexus().posZ, getHorizontalFaceSpeed(), getVerticalFaceSpeed());
+        } else if (isCasting() && getAttackTarget() != null) {
             getLookHelper().setLookPosition(getAttackTarget().posX, getAttackTarget().posY + getAttackTarget().getEyeHeight(), getAttackTarget().posZ, getHorizontalFaceSpeed(), getVerticalFaceSpeed());
         }
         if (getStuntTime() < 0) {
@@ -189,11 +224,12 @@ public class EntityCultist extends EntityTameable {
         this.tasks.addTask(1, new EntityAISwimming(this));
         this.tasks.addTask(2, new AICastAttackSpell(this));
         this.tasks.addTask(2, new AICastShieldSpell(this));
-        this.tasks.addTask(2, new AICastShieldSpell(this));
-        this.tasks.addTask(3, this.aiSit);
-        this.tasks.addTask(4, new EntityAIFollowOwner(this, 1D, 4.0F, 2.0F));
-        this.tasks.addTask(5, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
-        this.tasks.addTask(6, new EntityAILookIdle(this));
+        this.tasks.addTask(2, new AICastHealingSpell(this));
+        this.tasks.addTask(3, new AIFocusRite(this));
+        this.tasks.addTask(4, this.aiSit);
+        this.tasks.addTask(5, new EntityAIFollowOwner(this, 1D, 4.0F, 2.0F));
+        this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
+        this.tasks.addTask(7, new EntityAILookIdle(this));
 
         this.targetTasks.addTask(1, new EntityAIOwnerHurtByTarget(this)); //same as below
         this.targetTasks.addTask(2, new EntityAIOwnerHurtTarget(this));//doesn't get called, check conditions
@@ -202,6 +238,9 @@ public class EntityCultist extends EntityTameable {
 
     @Override
     public boolean processInteract(EntityPlayer player, EnumHand hand) {
+        if (!isTamed() && player.isCreative() && hand == EnumHand.MAIN_HAND) {
+            setTamedBy(player);
+        }
         if (hand == EnumHand.MAIN_HAND && isOwner(player)) {
             if (isOwner(player)) {
                 if (player.getHeldItemMainhand().getItem() instanceof ItemSoulMirror) {
@@ -285,10 +324,98 @@ public class EntityCultist extends EntityTameable {
         return null;
     }
 
+    @Override
+    public boolean isOwner(EntityLivingBase entityIn) {
+        return super.isOwner(entityIn) || (entityIn instanceof EntityPlayer) && getOwner() instanceof EntityPlayer && CultUtil.isCultMember((EntityPlayer) entityIn, (EntityPlayer) getOwner());
+    }
+
+    static class AIFocusRite extends EntityAIBase {
+        private final EntityCultist cultist;
+
+        public AIFocusRite(EntityCultist cultist) {
+            this.cultist = cultist;
+            this.setMutexBits(3);
+        }
+
+        public boolean shouldExecute() {
+            if (cultist.getNexus() == null) {
+                List<EntityDimensionalNexus> nexuses = cultist.world.getEntitiesWithinAABB(EntityDimensionalNexus.class, cultist.getEntityBoundingBox().grow(20), e -> e.getOwnerUUID().equals(cultist.getOwnerId()) && e.getRite() != null && e.getRiteTicks() > 0);
+                if (!nexuses.isEmpty()) {
+                    cultist.setNexus(nexuses.get(0));
+                    return true;
+                }
+                return false;
+            }
+            return cultist.getNexus().getRite() != null && cultist.getNexus().getRiteTicks() > 0;
+        }
+
+        public void startExecuting() {
+            super.startExecuting();
+        }
+
+        public boolean shouldContinueExecuting() {
+            EntityDimensionalNexus nexus = this.cultist.getNexus();
+            if (nexus == null || nexus.getDistance(cultist) >= 20 || nexus.getRite() == null || nexus.getRiteTicks() <= 0) {
+                return false;
+            }
+            return true;
+        }
+
+        @Override
+        public void resetTask() {
+            super.resetTask();
+        }
+
+        public void updateTask() {
+            double xTo = cultist.posX, yTo = cultist.posY, zTo = cultist.posZ;
+            boolean flag = false;
+            for (int x = -5; x < 5 && !flag; x++) {
+                for (int z = -5; z < 5 && !flag; z++) {
+                    if (validSpot(x, z)) {
+                        for (int y = 10; y > -10; y--) {
+                            if (hasCultist(cultist, getPos(cultist, x, y, z))) {
+                                break;
+                            }
+                            if (cultist.world.getBlockState(getPos(cultist, x, y - 1, z)).getMaterial().isSolid() && !cultist.world.getBlockState(getPos(cultist, x, y, z)).getMaterial().isSolid() && !cultist.world.getBlockState(getPos(cultist, x, y + 1, z)).getMaterial().isSolid()) {
+                                BlockPos posTo = getPos(cultist, x, y, z);
+                                xTo = posTo.getX();
+                                yTo = posTo.getY();
+                                zTo = posTo.getZ();
+                                flag = true;
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+            cultist.getNavigator().tryMoveToXYZ(xTo, yTo, zTo, 1);
+            super.updateTask();
+        }
+
+        public boolean validSpot(int x, int z) {
+            return (x == 0 && z == -4) ||
+                    (x == 0 && z == 4) ||
+                    (x == 4 && z == 0) ||
+                    (x == -4 && z == 0) ||
+
+                    (x == 3 && z == 3) ||
+                    (x == -3 && z == -3) ||
+                    (x == 3 && z == -3) ||
+                    (x == -3 && z == 3);
+        }
+
+        public boolean hasCultist(EntityCultist cultist, BlockPos pos) {
+            return !cultist.world.getEntitiesWithinAABB(EntityCultist.class, Block.FULL_BLOCK_AABB.grow(1).offset(pos), e -> !e.isEntityEqual(cultist)).isEmpty();
+        }
+
+        public BlockPos getPos(EntityCultist cultist, float x, float y, float z) {
+            return new BlockPos(cultist.getNexus().posX + x, cultist.getNexus().posY + y, cultist.getNexus().posZ + z);
+        }
+    }
+
     static class AICastAttackSpell extends EntityAIBase {
         private final EntityCultist cultist;
         private boolean finished;
-
         public AICastAttackSpell(EntityCultist cultist) {
             this.cultist = cultist;
             this.setMutexBits(3);

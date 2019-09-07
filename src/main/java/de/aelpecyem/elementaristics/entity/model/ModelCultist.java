@@ -164,7 +164,7 @@ public class ModelCultist extends ModelBase {
             this.leg0.rotationPointY = 12.0F;
             this.leg1.rotationPointY = 12.0F;
             this.head.rotationPointY = 0.0F;
-            if (((EntityCultist) entityIn).isCasting()) {
+            if (((EntityCultist) entityIn).isCasting() || (((EntityCultist) entityIn).getNexus() != null && ((EntityCultist) entityIn).getNexus().getRite() != null && ((EntityCultist) entityIn).getNexus().getRiteTicks() > 0)) {
                 doSpellCastingMovement(ageInTicks);
             }
         }

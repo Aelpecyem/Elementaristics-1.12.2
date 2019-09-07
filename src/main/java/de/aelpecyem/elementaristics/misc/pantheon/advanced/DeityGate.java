@@ -15,7 +15,7 @@ import java.util.List;
 public class DeityGate extends DeitySupplyEffectBase {
     public DeityGate() {
         super(TimeUtil.getTickTimeStartForHour(7), new ResourceLocation(Elementaristics.MODID, "gate_and_key"), Aspects.mind, 1131335);
-    }//todo stuff
+    }
 
     @Override
     public void setUpTile(TileEntityDeityShrine te) {

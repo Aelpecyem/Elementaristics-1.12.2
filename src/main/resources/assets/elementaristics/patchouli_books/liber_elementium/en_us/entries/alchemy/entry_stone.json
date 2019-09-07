@@ -5,7 +5,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "$(item)Enriched Stone$() is a basic building material that is mainly used for pedestals and other devices (like Altars).$(br)It is not very arcane on its own, really."
+      "text": "$(item)Enriched Stone$() is a basic building material that is mainly used for pedestals and other devices.$(br)It is not very arcane on its own, really."
     },
     {
       "type": "crafting",

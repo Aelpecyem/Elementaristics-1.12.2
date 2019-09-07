@@ -7,6 +7,7 @@ import de.aelpecyem.elementaristics.capability.player.souls.Soul;
 import de.aelpecyem.elementaristics.entity.EntityCultist;
 import de.aelpecyem.elementaristics.entity.nexus.EntityDimensionalNexus;
 import de.aelpecyem.elementaristics.init.ModItems;
+import de.aelpecyem.elementaristics.init.SoulInit;
 import de.aelpecyem.elementaristics.misc.elements.Aspect;
 import de.aelpecyem.elementaristics.misc.rites.RiteBase;
 import net.minecraft.entity.Entity;
@@ -18,6 +19,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 
 import java.util.List;
+import java.util.Set;
 
 public class RiteSacrifice extends RiteBase{//Soul's Conflagration
     Aspect aspect;
@@ -37,6 +39,11 @@ public class RiteSacrifice extends RiteBase{//Soul's Conflagration
     }
 
     @Override
+    public boolean areSoulsValid(Set<Soul> souls) {
+        return super.areSoulsValid(souls) || souls.contains(SoulInit.soulMagan);
+    }
+
+    @Override
     public void doMagic(EntityDimensionalNexus nexus) {
         if (!nexus.world.isRemote) {
             int killCount = 0;
@@ -45,8 +52,8 @@ public class RiteSacrifice extends RiteBase{//Soul's Conflagration
                 if (player.hasCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null)) {
                     IPlayerCapabilities caps = player.getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null);
                     if (caps.getPlayerAscensionStage() > 6) {
-                        if (caps.getSoulId() == soul.getId()) {
-                            //do final ascension
+                        if (caps.getSoulId() == soul.getId() || caps.getSoulId() == SoulInit.soulMagan.getId()) {
+                            //do final ascension in god ascension
                             return;
                         }
                     }
@@ -67,11 +74,11 @@ public class RiteSacrifice extends RiteBase{//Soul's Conflagration
                 }
                 EntityLivingBase entity = entities.get(i);
                 entity.attackEntityFrom(dmgSource, 50);
-                if (nexus.world.rand.nextBoolean()) {
-                    nexus.world.spawnEntity(new EntityItem(nexus.world, nexus.posX, nexus.posY, nexus.posZ, stack));
+                if (nexus.world.rand.nextFloat() < 0.75F) {
+                    killCount++;
                 }
             }
-            nexus.world.spawnEntity(new EntityItem(nexus.world, nexus.posX, nexus.posY, nexus.posZ, new ItemStack(stack.getItem(), killCount, aspect.getId())));
+            nexus.world.spawnEntity(new EntityItem(nexus.world, nexus.posX, nexus.posY + 0.5F, nexus.posZ, new ItemStack(stack.getItem(), killCount, aspect.getId())));
         }
     }
 
@@ -83,6 +90,6 @@ public class RiteSacrifice extends RiteBase{//Soul's Conflagration
                 Elementaristics.proxy.generateGenericParticles(entity, aspect.getColor(), 2, 100, 0, false, true);
             }
         }
-        Elementaristics.proxy.generateGenericParticles(nexus.world, nexus.posX, nexus.posY, nexus.posZ, aspect.getColor(), 3, 60, 0, false, false);
+        Elementaristics.proxy.generateGenericParticles(nexus.world, nexus.posX, nexus.posY + 0.5F, nexus.posZ, aspect.getColor(), 3, 60, 0, false, false);
     }
 }

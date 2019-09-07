@@ -1,6 +1,5 @@
 package de.aelpecyem.elementaristics.networking.tileentity.deities;
 
-import de.aelpecyem.elementaristics.blocks.tileentity.TileEntityAltar;
 import de.aelpecyem.elementaristics.blocks.tileentity.pantheon.TileEntityDeityShrine;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
@@ -9,7 +8,6 @@ import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
-import scala.util.control.Exception;
 
 public class PacketUpdateDeity implements IMessage {
     private BlockPos pos;
@@ -19,10 +17,10 @@ public class PacketUpdateDeity implements IMessage {
     private boolean unusedBool;
     private int unusedInt;
     private float unusedFloat;
-    private long altarPos;
+    private String nexus;
 
 
-    public PacketUpdateDeity(BlockPos pos, String deityBound, boolean isStatue, String unusedString, boolean unusedBool, int unusedInt, float unusedFloat, long altarPos) {
+    public PacketUpdateDeity(BlockPos pos, String deityBound, boolean isStatue, String unusedString, boolean unusedBool, int unusedInt, float unusedFloat, String nexus) {
         this.pos = pos;
         this.deityBound = deityBound;
         this.isStatue = isStatue;
@@ -30,11 +28,11 @@ public class PacketUpdateDeity implements IMessage {
         this.unusedBool = unusedBool;
         this.unusedInt = unusedInt;
         this.unusedFloat = unusedFloat;
-        this.altarPos = altarPos;
+        this.nexus = nexus;
     }
 
     public PacketUpdateDeity(TileEntityDeityShrine te) {
-        this(te.getPos(), te.deityBound, te.isStatue, te.unusedString, te.unusedBool, te.unusedInt, te.unusedFloat, te.altarPos.toLong());
+        this(te.getPos(), te.deityBound, te.isStatue, te.unusedString, te.unusedBool, te.unusedInt, te.unusedFloat, te.nexus);
     }
 
     public PacketUpdateDeity() {
@@ -51,7 +49,7 @@ public class PacketUpdateDeity implements IMessage {
         buf.writeInt(unusedInt);
         buf.writeFloat(unusedFloat);
 
-        buf.writeLong(altarPos);
+        ByteBufUtils.writeUTF8String(buf, nexus);
     }
 
     @Override
@@ -65,7 +63,7 @@ public class PacketUpdateDeity implements IMessage {
         unusedInt = buf.readInt();
         unusedFloat = buf.readFloat();
 
-        altarPos = buf.readLong();
+        nexus = ByteBufUtils.readUTF8String(buf);
     }
 
     public static class Handler implements IMessageHandler<PacketUpdateDeity, IMessage> {
@@ -81,7 +79,7 @@ public class PacketUpdateDeity implements IMessage {
                     te.unusedBool = message.unusedBool;
                     te.unusedInt = message.unusedInt;
                     te.unusedFloat = message.unusedFloat;
-                    te.altarPos = BlockPos.fromLong(message.altarPos);
+                    te.nexus = message.nexus;
 
                 }
             });

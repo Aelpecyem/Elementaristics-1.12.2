@@ -21,6 +21,8 @@ elementaristics.potion.fear=Fear
 elementaristics.potion.laughter=Laughter
 elementaristics.potion.silence=Silence
 
+elementaristics.potion.health_share=Shared Health
+
 elementaristics.potion.potential=Potential
 
 elementaristics.potion.fatherblessing=A Father's Blessing
@@ -117,6 +119,12 @@ item.incantation_unbinding.name=Unbinding Incantation
 item.incantation_health_share.name=Sharing Incantation
 item.incantation_reforging.name=Incantation of Reforging
 item.incantation_glorious.name=Glorious Incantation
+item.incantation_emptiness.name=Hollow Incantation
+item.incantation_pact.name=Occult Contract
+
+item.nexus_dimensional.name=Dimensional Nexus
+item.badge_cult.name=Cult Badge
+item.item_golden_thread.name=Golden Thread
 
 item.water_purest.name=Purest Water
 item.sparks_living.name=Living Sparks
@@ -204,6 +212,7 @@ tile.fabric_reason.name=Fabric of Reason
 tile.fabric_passion.name=Fabric of Passion
 tile.block_silver_thread.name=Silver Thread
 tile.stone_runed.name=Runed Stone
+tile.block_golden_thread.name=Golden Thread
 
 #Blocks-Important Ones
 tile.pedestal.name=Pedestal
@@ -288,7 +297,7 @@ advancement.elementaristics.slime=Shogglings for the people
 
 #Advancements-Ascension
 advancement.elementaristics.ascension_1=Far above, but just space
-advancement.elementaristics.ascension_2=THE MORE-!
+advancement.elementaristics.ascension_2=Beyond the Inner Threshold
 advancement.elementaristics.ascension_identification=Know
 advancement.elementaristics.ascension_3=The Mind
 advancement.elementaristics.ascension_4=Broken Boundaries
@@ -316,7 +325,7 @@ advancement.elementaristics.water_purest.desc=Craft Purest Water
 advancement.elementaristics.slime.desc=Tame a Protoplasmic Slime
 #Advancements-Ascension-Descriptions
 advancement.elementaristics.ascension_1.desc=Study the essence of space
-advancement.elementaristics.ascension_2.desc=Build an Altar to perform rites
+advancement.elementaristics.ascension_2.desc=Connect the Wake with the Mind and Beyond
 advancement.elementaristics.ascension_identification.desc=Identify your Soul
 advancement.elementaristics.ascension_3.desc=Enter The Mind
 advancement.elementaristics.ascension_4.desc=Kill the Silver Thread
@@ -360,6 +369,9 @@ tooltip.posZ=Bound Z-Coordinates:
 tooltip.spell_current=Current Spell:
 tooltip.no_current=No current Spell
 
+tooltip.badge.owner=Owner:
+tooltip.badge.members=Acquaintances:
+
 #Tooltips-Rites
 tooltip.aspect_tool.aspects=Aspects:
 tooltip.aspect_tool.power=Power:
@@ -393,11 +405,15 @@ rite.elementaristics:rite_reforging.name=Reshaping Rite
 rite.elementaristics:rite_health_share.name=Rite of the Patchwork
 rite.elementaristics:rite_glorious.name=Glorious Rite
 rite.elementaristics:rite_emptiness.name=Rite of the Hollow Soul
+rite.elementaristics:rite_pact.name=Rite of the Pact
 
 #Entities
 entity.silver_thread.name=Silver Thread
 entity.cultist.name=Cultist
 entity.protoplasm.name=Protoplasmic Slime
+entity.nexus_dimensional.name=Dimensional Nexus
+
+
 
 #Categories-Keybinds
 category.elementaristics=Elementaristics
@@ -433,7 +449,7 @@ hud.energy_to=Transferring Energy to:
 hud.too_far=(too far!)
 hud.pos_to=Bound to
 hud.god=Deity:
-hud.altar_to=Altar at
+hud.nexus_to=Nexus at
 
 hud.magan.amount=Current Magan:
 
@@ -520,6 +536,8 @@ message.sense_influence_soul_apostle=§4The Legacy?
 
 message.sense_influence_none=§4Deprived of a body, the heart throbs in your hand.
 
+message.golden_thread_space.not_enough=The Golden Thread needs more space
+
 #Messages-Ascension
 message.ascension_1.standard=§6Walls have been broken. Walls that were limiting.
 message.meditation_ascension.name=§6The mind has been reforged, and next is the body.
@@ -604,7 +622,7 @@ elementaristics:deity_dreamer=The Dreamer
 elementaristics:deity_angel=The Angel
 elementaristics:deity_storm=The Storm
 elementaristics:deity_knight=The Knight
-elementaristics:deity_sun=The Sun-in-Splendor
+elementaristics:deity_sun=The Sun
 elementaristics:deity_harbinger=The Harbinger
 elementaristics:deity_queen=The Fasting Queen
 elementaristics:deity_goat=The Goat in the Wood

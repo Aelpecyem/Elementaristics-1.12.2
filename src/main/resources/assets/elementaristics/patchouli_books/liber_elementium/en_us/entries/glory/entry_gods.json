@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "As one progresses with the research on deities, a question might come up: \"What the actual hell do I even get from doing all this work? And how do I even use it?\"$(br)Good question, occultist!$(br)Generally, a deity is used by creating $(marked)Symbols$() or advanced $(marked)Statues$().$(br)These are powered with $(marked)Occult Energy$()."
+      "text": "As one progresses with the research on deities, a question might come up: \"What do I even get from doing all this work? And how do I even use it?\"$(br)Good question, occultist!$(br)Generally, a deity is used by creating $(marked)Symbols$() or advanced $(marked)Statues$().$(br)These are powered with $(marked)Occult Energy$()."
     },
     {
       "type": "text",
@@ -15,7 +15,7 @@
     },
     {
       "type": "text",
-      "text": "When used with a Splendorous Eye, a deity (as in, a symbol or a statue) will automatically  be bound to the nearest altar. This will cause it to supply an aspect to it (when the hour is matching), given that it has any aspects bound to it. Deities can also be bound to blocks like $(l:energy/entry_core)Occult Energy Cores$(), meaning that they can drain and be drained, depending on what the user desires (see according entry)."
+      "text": "When used with a Splendorous Eye, a deity (as in, a symbol or a statue) will automatically  be bound to the nearest Nexus. This will cause it to supply an aspect to it (when the hour is matching), given that it has any aspects bound to it. Deities can also be bound to blocks like $(l:energy/entry_core)Occult Energy Cores$(), meaning that they can drain and be drained, depending on what the user desires (see according entry)."
     },
     {
       "type": "text",
