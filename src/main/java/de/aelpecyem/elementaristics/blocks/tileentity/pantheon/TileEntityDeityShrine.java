@@ -92,7 +92,7 @@ public class TileEntityDeityShrine extends TileEntityEnergy implements ITickable
     @Override
     public void update() {
         super.update();
-
+        tickCount++;
         if (deityBound == "") {
             deityBound = ((BlockDeityShrineBase) world.getBlockState(pos).getBlock()).deity.getName().toString();
             isStatue = ((BlockDeityShrineBase) world.getBlockState(pos).getBlock()).isStatue;

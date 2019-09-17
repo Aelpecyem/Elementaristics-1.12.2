@@ -1,4 +1,4 @@
-package de.aelpecyem.elementaristics.blocks.tileentity.render.models;
+package de.aelpecyem.elementaristics.blocks.tileentity.render.models.pantheon;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;

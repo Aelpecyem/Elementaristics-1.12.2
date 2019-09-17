@@ -129,6 +129,9 @@ public class TileEntityInfusionBasin extends TileEntity implements ITickable, IH
         } else {
             tickCount = 0;
         }
+        if (fillCount <= 0) {
+            aspectIDs.clear();
+        }
 
 
     }

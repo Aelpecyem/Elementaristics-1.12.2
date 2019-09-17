@@ -1,7 +1,7 @@
 package de.aelpecyem.elementaristics.init;
 
 import de.aelpecyem.elementaristics.Elementaristics;
-import de.aelpecyem.elementaristics.blocks.tileentity.render.models.*;
+import de.aelpecyem.elementaristics.blocks.tileentity.render.models.pantheon.*;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;
 import de.aelpecyem.elementaristics.misc.pantheon.Deity;
 import de.aelpecyem.elementaristics.misc.pantheon.DeityBase;
