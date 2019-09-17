@@ -34,8 +34,10 @@ public class ItemSoulChanger extends ItemBase {
 
             if (!playerIn.isSneaking()) {
                 if (cap.getSoulId() > 0) {
+                    SoulCaps.getCapForSoul(SoulInit.getSoulFromId(cap.getSoulId())).normalize(playerIn, cap);
                     cap.setSoulId(cap.getSoulId() - 1);
                 } else if (cap.getSoulId() == 0) {
+                    SoulCaps.getCapForSoul(SoulInit.getSoulFromId(cap.getSoulId())).normalize(playerIn, cap);
                     cap.setSoulId(SoulInit.souls.size() - 1);
                 }
                 if(worldIn.isRemote) {

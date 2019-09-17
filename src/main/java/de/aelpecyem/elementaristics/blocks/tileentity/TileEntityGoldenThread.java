@@ -1,8 +1,11 @@
 package de.aelpecyem.elementaristics.blocks.tileentity;
 
 import de.aelpecyem.elementaristics.Elementaristics;
+import de.aelpecyem.elementaristics.entity.elementals.AbstractElemental;
+import de.aelpecyem.elementaristics.entity.elementals.EntityAetherElemental;
 import de.aelpecyem.elementaristics.init.ModBlocks;
 import de.aelpecyem.elementaristics.items.base.ItemGoldenThread;
+import de.aelpecyem.elementaristics.misc.elements.Aspects;
 import de.aelpecyem.elementaristics.networking.PacketHandler;
 import de.aelpecyem.elementaristics.networking.tileentity.goldenthread.PacketUpdateGoldenThread;
 import de.aelpecyem.elementaristics.networking.tileentity.inventory.PacketUpdateInventory;
@@ -15,6 +18,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Rotation;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.gen.structure.template.PlacementSettings;
 import net.minecraft.world.gen.structure.template.Template;
 import net.minecraftforge.common.capabilities.Capability;
@@ -23,6 +27,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -97,11 +102,15 @@ public class TileEntityGoldenThread extends TileEntity implements ITickable, IHa
                 }
             }
             if (charge < MAX_CHARGE) { // test value
+                if (world.getWorldTime() % 200 == 0) {
+                    if (world.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 20, false) != null && world.getEntitiesWithinAABB(AbstractElemental.class, new AxisAlignedBB(pos, pos.add(1, 1, 1)).grow(20)).size() < 1) {
+                        spawnElementals();
+                    }
+                }
                 //spawn elementals depending on the block's aspect... the charge count of the block will be increased by the elementals on their own
             } else {
                 List<EntityPlayer> players = world.getEntitiesWithinAABB(EntityPlayer.class, Block.FULL_BLOCK_AABB.grow(10).offset(pos));
                 for (EntityPlayer player : players) {
-                    System.out.println("mawjhwahwawf");
                     player.knockBack(player, 6, pos.getX() - player.posX, pos.getZ() - player.posZ);
                 }
                 charge++;
@@ -110,9 +119,6 @@ public class TileEntityGoldenThread extends TileEntity implements ITickable, IHa
                         generateGoldenThread();
                     activationStage = 1;
                 }
-
-
-
                 //the tile entity will change, but will not be replaced
             }
         }
@@ -124,6 +130,34 @@ public class TileEntityGoldenThread extends TileEntity implements ITickable, IHa
         template.addBlocksToWorld(world, pos.add(-6, -1, -6), settings);
     }
 
+
+    public void spawnElementals() {
+        int mobAmount = world.rand.nextInt(3) + 1;
+        List<AbstractElemental> elementals = new ArrayList<>();
+        for (int i = 0; i < mobAmount; i++) {
+            if (getAspect() == Aspects.air.getId()) {
+
+            } else if (getAspect() == Aspects.earth.getId()) {
+
+            } else if (getAspect() == Aspects.fire.getId()) {
+
+            } else if (getAspect() == Aspects.water.getId()) {
+
+            } else {
+                elementals.add(new EntityAetherElemental(world));
+            }
+        }
+
+        for (AbstractElemental entity : elementals) {
+            entity.setPosition(pos.getX() + 0.5F - entity.width / 2, pos.getY() + 0.5 - entity.height / 2, pos.getZ() + 0.5F - entity.width / 2);
+            entity.motionX = (world.rand.nextBoolean() ? -1 : 1) * (0.2 + Math.random() / 3);
+            entity.motionY = Math.random() / 2;
+            entity.motionZ = (world.rand.nextBoolean() ? -1 : 1) * (0.2 + Math.random() / 3);
+            if (!world.isRemote) {
+                world.spawnEntity(entity);
+            }
+        }
+    }
     @Override
     public ItemStackHandler getInventory() {
         return inventory;

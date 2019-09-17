@@ -8,7 +8,13 @@ itemGroup.elementaristics=Elementaristics
 itemGroup.elementaristics_essences=Elementaristic Essences
 
 #Config
-config.gameplaybuffs.comment=Set this to false if you wish not to play with the benefits of souls (Note that this excludes the mod's gameplay)
+elementaristics.config.category_client=Client
+elementaristics.config.nexus_update_interval=Nexus Update Interval
+elementaristics.config.mind_dimension_id=Mind Dimension ID
+
+elementaristics.config.particle_amount=Elementaristics' Particle Amount
+elementaristics.config.show_magan_bar=Show Magan Bar
+elementaristics.config.cultist_textures=Aspect-based Cultist Textures
 
 #Potion effect
 elementaristics.potion.intoxicated=Intoxicated
@@ -412,6 +418,7 @@ entity.silver_thread.name=Silver Thread
 entity.cultist.name=Cultist
 entity.protoplasm.name=Protoplasmic Slime
 entity.nexus_dimensional.name=Dimensional Nexus
+entity.elemental_aether.name=Aether Elemental
 
 
 

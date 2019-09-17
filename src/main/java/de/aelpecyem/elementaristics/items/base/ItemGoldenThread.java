@@ -71,7 +71,9 @@ public class ItemGoldenThread extends ItemBase {
 
     @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-        tooltip.add(I18n.format("tooltip.golden_thread.aspect") + " " + getAspect(stack).getLocalizedName());
+        if (stack.hasTagCompound() && stack.getTagCompound().hasKey(NBTKEY_ASPECT)) {
+            tooltip.add(I18n.format("tooltip.golden_thread.aspect") + " " + getAspect(stack).getLocalizedName());
+        }
         super.addInformation(stack, worldIn, tooltip, flagIn);
     }
 

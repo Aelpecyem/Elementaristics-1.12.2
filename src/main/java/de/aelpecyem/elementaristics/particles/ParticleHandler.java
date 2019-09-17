@@ -1,6 +1,7 @@
 package de.aelpecyem.elementaristics.particles;
 
 import de.aelpecyem.elementaristics.Elementaristics;
+import de.aelpecyem.elementaristics.config.Config;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.renderer.ActiveRenderInfo;
@@ -29,6 +30,23 @@ public final class ParticleHandler {
     public static int range = 32;
 
     public static void spawnParticle(Supplier<Particle> particle) {
+        Minecraft mc = Minecraft.getMinecraft();
+        Config.EnumParticles particleAmount = Config.client.particleAmount;
+        switch (particleAmount) {
+            case STANDARD:
+                break;
+            case REDUCED:
+                if (mc.world.rand.nextInt(3) != 0) {
+                    return;
+                }
+                break;
+            case MINIMAL:
+                if (mc.world.rand.nextInt(10) != 0) {
+                    return;
+                }
+                break;
+        }
+
         if (depthEnabled) {
             PARTICLES.add(particle.get());
         } else {

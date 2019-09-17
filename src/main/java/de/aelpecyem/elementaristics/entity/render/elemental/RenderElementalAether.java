@@ -13,7 +13,11 @@ import javax.annotation.Nullable;
 
 public class RenderElementalAether extends RenderLiving<EntityAetherElemental> {
     public RenderElementalAether(RenderManager rendermanagerIn) {
-        super(rendermanagerIn, new ModelAetherElemental(), 0);
+        super(rendermanagerIn, new ModelAetherElemental(false), 0);
+        if (Minecraft.getMinecraft().getRenderViewEntity() instanceof AbstractClientPlayer) {
+
+            this.mainModel = new ModelAetherElemental(!((AbstractClientPlayer) Minecraft.getMinecraft().getRenderViewEntity()).getSkinType().equals("default"));
+        }
         if (Minecraft.getMinecraft().player != null)
             System.out.println(Minecraft.getMinecraft().player.getSkinType());
     }

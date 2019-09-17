@@ -2,7 +2,10 @@ package de.aelpecyem.elementaristics.misc.commands;
 
 import de.aelpecyem.elementaristics.capability.player.IPlayerCapabilities;
 import de.aelpecyem.elementaristics.capability.player.PlayerCapProvider;
+import de.aelpecyem.elementaristics.capability.player.souls.soulCaps.SoulCaps;
 import de.aelpecyem.elementaristics.init.SoulInit;
+import de.aelpecyem.elementaristics.networking.PacketHandler;
+import de.aelpecyem.elementaristics.networking.player.PacketMessage;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
@@ -11,7 +14,6 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
-import thaumcraft.common.lib.CommandThaumcraft;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -116,7 +118,8 @@ public class CommandElementaristics extends CommandBase {
         if (player.hasCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null)) {
             IPlayerCapabilities cap = player.getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null);
             cap.setMagan(intValue);
-            sender.sendMessage(new TextComponentString(TextFormatting.GREEN + "Successfully changed the magan of "  + player.getDisplayNameString() + " to " + intValue));
+            PacketHandler.sendTo(player, new PacketMessage());
+            sender.sendMessage(new TextComponentString(TextFormatting.GREEN + "Successfully set the magan of " + player.getDisplayNameString() + " to " + intValue));
             SoulInit.updateSoulInformation(player, cap);
             return true;
         }
@@ -136,8 +139,10 @@ public class CommandElementaristics extends CommandBase {
     public boolean changeSoulId(int intValue, EntityPlayer player, ICommandSender sender){
         if (player.hasCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null)) {
             IPlayerCapabilities cap = player.getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null);
+            SoulCaps.getCapForSoul(SoulInit.getSoulFromId(cap.getSoulId())).normalize(player, cap);
             cap.setSoulId(intValue);
-            sender.sendMessage(new TextComponentString(TextFormatting.GREEN + "Successfully changed the soul of "  + player.getDisplayNameString() + " to " + SoulInit.getSoulFromId(intValue).getName()));
+            if (player.world.isRemote)
+                sender.sendMessage(new TextComponentString(TextFormatting.GREEN + "Successfully changed the soul of " + player.getDisplayNameString() + " to " + SoulInit.getSoulFromId(intValue).getName()));
             SoulInit.updateSoulInformation(player, cap);
             return true;
         }

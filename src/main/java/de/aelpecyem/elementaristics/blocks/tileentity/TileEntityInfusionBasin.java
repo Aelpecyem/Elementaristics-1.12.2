@@ -3,22 +3,17 @@ package de.aelpecyem.elementaristics.blocks.tileentity;
 import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.init.ModItems;
 import de.aelpecyem.elementaristics.items.base.ItemEssence;
-import de.aelpecyem.elementaristics.items.base.artifacts.rites.ItemAspects;
 import de.aelpecyem.elementaristics.misc.elements.Aspect;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;
 import de.aelpecyem.elementaristics.networking.PacketHandler;
 import de.aelpecyem.elementaristics.networking.tileentity.basin.PacketUpdateBasin;
 import de.aelpecyem.elementaristics.networking.tileentity.inventory.PacketUpdateInventory;
 import de.aelpecyem.elementaristics.networking.tileentity.tick.PacketUpdateTickTime;
-import de.aelpecyem.elementaristics.particles.ParticleGeneric;
-import de.aelpecyem.elementaristics.recipe.ConcentratorRecipes;
 import de.aelpecyem.elementaristics.recipe.InfusionRecipes;
-import de.aelpecyem.elementaristics.recipe.base.InfusionRecipe;
 import de.aelpecyem.elementaristics.util.MiscUtil;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTUtil;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
@@ -26,13 +21,12 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
-import org.apache.commons.lang3.ArrayUtils;
-import scala.Int;
 
-import javax.annotation.Nonnull;
 import java.awt.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class TileEntityInfusionBasin extends TileEntity implements ITickable, IHasTickCount, IHasInventory {
 
@@ -122,17 +116,18 @@ public class TileEntityInfusionBasin extends TileEntity implements ITickable, IH
                             world.spawnEntity(new EntityItem(world, pos.getX() + 0.5, pos.getY() + 1.2, pos.getZ() + 0.5, InfusionRecipes.getRecipeForInput(inventory.getStackInSlot(0)).output));
                         inventory.setStackInSlot(0, ItemStack.EMPTY);
                         tickCount = 0;
-                        fillCount--;
+                        return;
                     }
-                } else {
-                    aspectIDs.remove(world.rand.nextInt(aspectIDs.size()));
-                    if (!world.isRemote)
-                        world.spawnEntity(new EntityItem(world, pos.getX() + 0.5, pos.getY() + 1.2, pos.getZ() + 0.5, new ItemStack(ModItems.maganized_matter)));
-                    inventory.setStackInSlot(0, ItemStack.EMPTY);
-                    tickCount = 0;
-                    fillCount--;
                 }
+                aspectIDs.remove(world.rand.nextInt(aspectIDs.size()));
+                if (!world.isRemote)
+                    world.spawnEntity(new EntityItem(world, pos.getX() + 0.5, pos.getY() + 1.2, pos.getZ() + 0.5, new ItemStack(ModItems.maganized_matter)));
+                inventory.setStackInSlot(0, ItemStack.EMPTY);
+                tickCount = 0;
+                fillCount--;
             }
+        } else {
+            tickCount = 0;
         }
 
 

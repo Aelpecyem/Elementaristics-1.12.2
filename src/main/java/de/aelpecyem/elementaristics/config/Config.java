@@ -1,59 +1,58 @@
 package de.aelpecyem.elementaristics.config;
 
 import de.aelpecyem.elementaristics.Elementaristics;
-import net.minecraftforge.common.config.Configuration;
-import org.apache.logging.log4j.Level;
+import net.minecraftforge.common.config.ConfigManager;
+import net.minecraftforge.fml.client.event.ConfigChangedEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
+@net.minecraftforge.common.config.Config(modid = Elementaristics.MODID)
 public class Config {
-
-    public static final String CATEGORY_COMPAT = "compat";
-    public static final String CATEGORY_DIM = "dimensions";
-    public static final String CATEGORY_MISC = "misc";
-    public static final String CATEGORY_HUD = "client";
-    //values- hud
-    public static boolean showBar = true;
-    //values- compat
-    public static boolean useTcCompat = true;
-    //values- dimensions
+    @net.minecraftforge.common.config.Config.Comment("Determines the dimension ID of \"the Mind\".")
+    @net.minecraftforge.common.config.Config.LangKey(value = "elementaristics.config.mind_dimension_id")
     public static int mindDimensionId = 1103;
-    //values- misc
+
+    @net.minecraftforge.common.config.Config.Comment("Determines the amount of ticks to pass until the Dimensional Nexus updates its information concerning rites. Do note that all information is also updated before the rite ends.")
+    @net.minecraftforge.common.config.Config.LangKey(value = "elementaristics.config.nexus_update_interval")
     public static int nexusUpdateInterval = 10;
 
-    public static void readConfig() {
-        Configuration cfg = Elementaristics.config;
-        try {
-            cfg.load();
-            initDimConfig(cfg);
-            initHudConfig(cfg);
-            initCompatConfig(cfg);
-            initMiscConfig(cfg);
-        } catch (Exception e1) {
-            Elementaristics.LOGGER.log(Level.ERROR, "Problem loading config file!", e1);
-        } finally {
-            if (cfg.hasChanged()) {
-                cfg.save();
+    @net.minecraftforge.common.config.Config.LangKey(value = "elementaristics.config.category_client")
+    @net.minecraftforge.common.config.Config.Comment("Client-side settings of Elementaristics.")
+    public static final Client client = new Client();
+
+    public enum EnumParticles {
+        STANDARD,
+        REDUCED,
+        MINIMAL
+    }
+
+    public static class Client {
+        @net.minecraftforge.common.config.Config.LangKey(value = "elementaristics.config.show_magan_bar")
+        @net.minecraftforge.common.config.Config.Comment("Determines whether the Magan bar should be shown.")
+        public boolean showBar = true;
+
+        @net.minecraftforge.common.config.Config.LangKey(value = "elementaristics.config.cultist_textures")
+        @net.minecraftforge.common.config.Config.Comment("Set this to false to disable aspect-based Cultist textures. Instead, the standard texture for Cultists will be used.")
+        public boolean cultistTextures = true;
+
+        @net.minecraftforge.common.config.Config.LangKey(value = "elementaristics.config.particle_amount")
+        @net.minecraftforge.common.config.Config.Comment("This will set the amount of particles Elementaristics spawns. Personal recommendation: do not change this, as the majority of the mod's effects are based on particles.")
+        public EnumParticles particleAmount = EnumParticles.STANDARD;
+
+    }
+
+    @Mod.EventBusSubscriber(modid = Elementaristics.MODID)
+    private static class EventHandler {
+        /**
+         * Inject the new values and save to the config file when the config has been changed from the GUI.
+         *
+         * @param event The event
+         */
+        @SubscribeEvent
+        public static void onConfigChanged(final ConfigChangedEvent.OnConfigChangedEvent event) {
+            if (event.getModID().equals(Elementaristics.MODID)) {
+                ConfigManager.sync(Elementaristics.MODID, net.minecraftforge.common.config.Config.Type.INSTANCE);
             }
         }
-    }
-
-    private static void initHudConfig(Configuration cfg) {
-        cfg.addCustomCategoryComment(CATEGORY_HUD, "Configuration on client elements of Elementaristics");
-
-        showBar = cfg.getBoolean("showBar", CATEGORY_HUD, true, "Determines whether a bar of the Magan HUD should be shown");
-    }
-
-    private static void initCompatConfig(Configuration cfg) {
-        cfg.addCustomCategoryComment(CATEGORY_COMPAT, "Configuration on Elementaristics' cross-compat");
-        useTcCompat = cfg.getBoolean("useTcCompat", CATEGORY_COMPAT, useTcCompat, "Determines whether Elementaristics should add its own section in Thaumcraft or not");
-    }
-
-    private static void initDimConfig(Configuration cfg) {
-        cfg.addCustomCategoryComment(CATEGORY_DIM, "Configuration on Elementaristics' dimensions");
-        mindDimensionId = cfg.getInt("mindDimensionId", CATEGORY_DIM, mindDimensionId, -10000, 10000, "Determines the dimension id of 'The Mind'");
-    }
-
-    private static void initMiscConfig(Configuration cfg) {
-        cfg.addCustomCategoryComment(CATEGORY_MISC, "Misc Configuration");
-        nexusUpdateInterval = cfg.getInt("nexusUpdateInterval", CATEGORY_MISC, nexusUpdateInterval, 1, 200, "Determines the amount of ticks to pass to update the Dimensional Nexus' local aspects and item power.");
     }
 }

@@ -45,7 +45,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 
-@Mod(modid = Elementaristics.MODID, name = Elementaristics.NAME, version = Elementaristics.VERSION, useMetadata = true, guiFactory = Elementaristics.GUI_FACTORY)
+@Mod(modid = Elementaristics.MODID, name = Elementaristics.NAME, version = Elementaristics.VERSION, useMetadata = true)
 public final class Elementaristics {
     //TODO ...ASCENSION!
     //TODO more rites
@@ -55,8 +55,7 @@ public final class Elementaristics {
 
     public static final String MODID = "elementaristics";
     public static final String NAME = "Elementaristics";
-    public static final String VERSION = "0.0.9.6.1";
-    public static final String GUI_FACTORY = "de.aelpecyem.elementaristics.config.ElementaristicsConfigFactory";
+    public static final String VERSION = "0.0.9.7";
     public static final Logger LOGGER = LogManager.getLogger(NAME);
     public static CreativeTabs tab = new ElementaristicsTab();
     @SidedProxy(serverSide = "de.aelpecyem.elementaristics.proxy.CommonProxy", clientSide = "de.aelpecyem.elementaristics.proxy.ClientProxy")
@@ -74,12 +73,11 @@ public final class Elementaristics {
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        //todo protoplasmatic slimes, and an advancement for protoplasm once the slimes have a use
         proxy.preInit(event);
         LOGGER.info(NAME + " is loading");
         File directory = event.getModConfigurationDirectory();
         config = new Configuration(new File(directory.getPath(), "elementaristics.cfg"));
-        de.aelpecyem.elementaristics.config.Config.readConfig();
+
         MinecraftForge.EVENT_BUS.register(new PotionInit());
 
         ProtoplasmTaskInit.init();
@@ -183,11 +181,7 @@ public final class Elementaristics {
         public static void registerModels(ModelRegistryEvent event) {
             ModItems.registerModels();
             ModBlocks.registerModels();
-
-
         }
-
-
     }
 
 }

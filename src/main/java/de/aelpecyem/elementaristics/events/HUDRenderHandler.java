@@ -242,7 +242,7 @@ public class HUDRenderHandler {
 
     public void renderMaganBar(RenderGameOverlayEvent.Post event) {
         Minecraft mc = Minecraft.getMinecraft();
-        if (Config.showBar && !mc.player.capabilities.isCreativeMode && !mc.player.isSpectator()) {
+        if (Config.client.showBar && !mc.player.capabilities.isCreativeMode && !mc.player.isSpectator()) {
             if (mc.player.hasCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null)) {
                 IPlayerCapabilities caps = mc.player.getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null);
                 if (caps.knowsSoul()) {

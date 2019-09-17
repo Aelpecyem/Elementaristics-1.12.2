@@ -1,6 +1,7 @@
 package de.aelpecyem.elementaristics.entity.render;
 
 import de.aelpecyem.elementaristics.Elementaristics;
+import de.aelpecyem.elementaristics.config.Config;
 import de.aelpecyem.elementaristics.entity.EntityCultist;
 import de.aelpecyem.elementaristics.entity.model.ModelCultist;
 import net.minecraft.client.renderer.entity.RenderLiving;
@@ -18,7 +19,7 @@ public class RenderCultist extends RenderLiving<EntityCultist>{
     @Nullable
     @Override
     protected ResourceLocation getEntityTexture(EntityCultist entity) {
-        return getAvailableTextures(entity);
+        return Config.client.cultistTextures ? getAvailableTextures(entity) : new ResourceLocation(Elementaristics.MODID, "textures/entity/cultists/cultist_1.png");
     }
 
     @Override
@@ -30,8 +31,6 @@ public class RenderCultist extends RenderLiving<EntityCultist>{
     }
 
     public ResourceLocation getAvailableTextures(EntityCultist entity) {
-        // ResourceLocation res = new ResourceLocation(Elementaristics.MODID, "textures/entity/cultists/cultist_" + entity.getAspect().getName() + ".png");
         return new ResourceLocation(Elementaristics.MODID, "textures/entity/cultists/cultist_" + entity.getAspect().getName() + ".png");
-
     }
 }

@@ -13,8 +13,8 @@ import java.awt.*;
 public class ModelAetherElemental extends ModelPlayer {
 
 
-    public ModelAetherElemental() {
-        super(0, false);
+    public ModelAetherElemental(boolean smolArms) {
+        super(0, smolArms);
     }
 
     @Override

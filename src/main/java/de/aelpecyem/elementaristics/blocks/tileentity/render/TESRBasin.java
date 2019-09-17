@@ -4,13 +4,13 @@ import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.blocks.tileentity.TileEntityInfusionBasin;
 import de.aelpecyem.elementaristics.util.MiscUtil;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.BufferBuilder;
-import net.minecraft.client.renderer.RenderHelper;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.client.renderer.vertex.VertexFormat;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -19,7 +19,7 @@ import org.lwjgl.opengl.GL11;
 import java.awt.*;
 
 public class TESRBasin extends TileEntitySpecialRenderer<TileEntityInfusionBasin> {
-    public static final ResourceLocation TEXTURE = new ResourceLocation(Elementaristics.MODID, "textures/misc/fluid.png"); //may be dirty and hacky, but saves effort and one additional texture
+    public static final ResourceLocation TEXTURE = new ResourceLocation(Elementaristics.MODID, "blocks/fluid/gray_fluid");
 
     @Override
     public void render(TileEntityInfusionBasin te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
@@ -41,7 +41,7 @@ public class TESRBasin extends TileEntitySpecialRenderer<TileEntityInfusionBasin
             GL11.glPopMatrix();
         }
         if (te.fillCount > 0) {
-            RenderHelper.disableStandardItemLighting();
+            /*RenderHelper.disableStandardItemLighting();
             Tessellator tess = Tessellator.getInstance();
             BufferBuilder buffer = tess.getBuffer();
 
@@ -64,9 +64,36 @@ public class TESRBasin extends TileEntitySpecialRenderer<TileEntityInfusionBasin
 
             buffer.setTranslation(0, 0, 0);
 
-            RenderHelper.enableStandardItemLighting();
-            //  Minecraft.getMinecraft().getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
+            RenderHelper.enableStandardItemLighting();*/
+
+            renderWhat(te, x, y, z);
         }
+    }
+
+    public void renderWhat(TileEntityInfusionBasin te, double x, double y, double z) {
+        GlStateManager.pushMatrix();
+        GlStateManager.disableLighting();
+        GlStateManager.enableBlend();
+        GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
+        GlStateManager.translate(x + 0.125, y + te.fillCount / 4F * 0.7 + 0.1, z + 0.125);
+        GlStateManager.rotate(90, 1, 0, 0);
+        GlStateManager.scale(0.0460425, 0.0460425, 0.0460425);
+        //boolean water = stack.getFluid() == FluidRegistry.WATER;
+        //if (water)
+        Color color = getWaterColor(te);
+        GlStateManager.color(color.getRed() / 255f, color.getGreen() / 255f, color.getBlue() / 255f);
+        Minecraft.getMinecraft().renderEngine.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
+        TextureAtlasSprite sprite = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(TEXTURE.toString());
+        Tessellator tessellator = Tessellator.getInstance();
+        tessellator.getBuffer().begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX);
+        tessellator.getBuffer().pos(0, 16, 0).tex(sprite.getMinU(), sprite.getMaxV()).endVertex();
+        tessellator.getBuffer().pos(16, 16, 0).tex(sprite.getMaxU(), sprite.getMaxV()).endVertex();
+        tessellator.getBuffer().pos(16, 0, 0).tex(sprite.getMaxU(), sprite.getMinV()).endVertex();
+        tessellator.getBuffer().pos(0, 0, 0).tex(sprite.getMinU(), sprite.getMinV()).endVertex();
+        tessellator.draw();
+        GlStateManager.disableBlend();
+        GlStateManager.enableLighting();
+        GlStateManager.popMatrix();
     }
 
     public Color getWaterColor(TileEntityInfusionBasin te) {
