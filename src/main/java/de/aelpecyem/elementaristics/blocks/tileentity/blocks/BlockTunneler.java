@@ -1,7 +1,7 @@
 package de.aelpecyem.elementaristics.blocks.tileentity.blocks;
 
 import de.aelpecyem.elementaristics.blocks.tileentity.BlockTileEntity;
-import de.aelpecyem.elementaristics.blocks.tileentity.TileEntityTunneler;
+import de.aelpecyem.elementaristics.blocks.tileentity.tile.TileEntityTunneler;
 import de.aelpecyem.elementaristics.init.ModItems;
 import de.aelpecyem.elementaristics.util.InventoryUtil;
 import net.minecraft.block.BlockHorizontal;

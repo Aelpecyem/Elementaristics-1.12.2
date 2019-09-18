@@ -1,7 +1,7 @@
 package de.aelpecyem.elementaristics.blocks.tileentity.blocks;
 
 import de.aelpecyem.elementaristics.blocks.tileentity.BlockTileEntity;
-import de.aelpecyem.elementaristics.blocks.tileentity.TileEntityGoldenThread;
+import de.aelpecyem.elementaristics.blocks.tileentity.tile.TileEntityGoldenThread;
 import de.aelpecyem.elementaristics.init.ModItems;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;

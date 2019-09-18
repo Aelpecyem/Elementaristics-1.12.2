@@ -1,7 +1,7 @@
 package de.aelpecyem.elementaristics.misc.pantheon.advanced;
 
 import de.aelpecyem.elementaristics.Elementaristics;
-import de.aelpecyem.elementaristics.blocks.tileentity.pantheon.TileEntityDeityShrine;
+import de.aelpecyem.elementaristics.blocks.tileentity.tile.pantheon.TileEntityDeityShrine;
 import de.aelpecyem.elementaristics.capability.chunk.ChunkCapProvider;
 import de.aelpecyem.elementaristics.entity.nexus.EntityDimensionalNexus;
 import de.aelpecyem.elementaristics.init.SoulInit;

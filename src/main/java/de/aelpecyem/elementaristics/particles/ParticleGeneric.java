@@ -12,6 +12,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class ParticleGeneric extends Particle {
     //the rendering with the ParticleHandler class might not be needed in 1.14, but idk, we'll see
+    //also, for the 1.14 port, change the constructors and add option for also fading IN and not only out; this should be false for spells etc, but true for statues
     private final float desiredScale;
     private final boolean fade;
     private final boolean followPosition;

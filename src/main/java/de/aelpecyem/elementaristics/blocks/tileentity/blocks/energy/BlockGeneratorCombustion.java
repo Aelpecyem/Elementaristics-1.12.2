@@ -1,7 +1,7 @@
 package de.aelpecyem.elementaristics.blocks.tileentity.blocks.energy;
 
 import de.aelpecyem.elementaristics.blocks.tileentity.BlockTileEntity;
-import de.aelpecyem.elementaristics.blocks.tileentity.energy.TileEntityGeneratorArcaneCombustion;
+import de.aelpecyem.elementaristics.blocks.tileentity.tile.energy.TileEntityGeneratorArcaneCombustion;
 import de.aelpecyem.elementaristics.items.base.ItemEssence;
 import de.aelpecyem.elementaristics.items.base.artifacts.ItemChannelingTool;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;

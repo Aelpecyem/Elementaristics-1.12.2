@@ -1,7 +1,7 @@
 package de.aelpecyem.elementaristics.misc.pantheon.advanced;
 
 import de.aelpecyem.elementaristics.Elementaristics;
-import de.aelpecyem.elementaristics.blocks.tileentity.pantheon.TileEntityDeityShrine;
+import de.aelpecyem.elementaristics.blocks.tileentity.tile.pantheon.TileEntityDeityShrine;
 import de.aelpecyem.elementaristics.events.LivingEventHandler;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;
 import de.aelpecyem.elementaristics.misc.pantheon.DeitySupplyEffectBase;

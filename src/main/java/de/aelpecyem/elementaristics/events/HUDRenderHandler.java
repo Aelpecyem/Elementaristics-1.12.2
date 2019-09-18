@@ -3,8 +3,8 @@ package de.aelpecyem.elementaristics.events;
 import com.mojang.realmsclient.gui.ChatFormatting;
 import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.blocks.tileentity.IHasBoundPosition;
-import de.aelpecyem.elementaristics.blocks.tileentity.energy.TileEntityEnergy;
-import de.aelpecyem.elementaristics.blocks.tileentity.pantheon.TileEntityDeityShrine;
+import de.aelpecyem.elementaristics.blocks.tileentity.tile.energy.TileEntityEnergy;
+import de.aelpecyem.elementaristics.blocks.tileentity.tile.pantheon.TileEntityDeityShrine;
 import de.aelpecyem.elementaristics.capability.player.IPlayerCapabilities;
 import de.aelpecyem.elementaristics.capability.player.PlayerCapProvider;
 import de.aelpecyem.elementaristics.config.Config;
@@ -214,13 +214,13 @@ public class HUDRenderHandler {
                 mc.ingameGUI.drawString(mc.fontRenderer, I18n.format("hud.energy_current") + " " + tile.storage.getEnergyStored() + " / " + tile.storage.getMaxEnergyStored(), 5, 5, Aspects.electricity.getColor());
                 if (tile.posBound != null)
                     if (!(tile.posBound.getZ() == tile.getPos().getZ() && tile.posBound.getY() == tile.getPos().getY() && tile.posBound.getX() == tile.getPos().getX()))
-                        mc.ingameGUI.drawString(mc.fontRenderer, (tile.receives ? I18n.format("hud.energy_from") : I18n.format("hud.energy_to")) + " X: " + tile.getPositionBoundTo().getX() + " Y: " + tile.getPositionBoundTo().getY() + " Z: " + tile.getPositionBoundTo().getZ() + " " + (tile.posBound.getDistance(tile.getPos().getX(), tile.getPos().getY(), tile.getPos().getZ()) < 16 ? " " : I18n.format("hud.too_far")), 5, 40, tile.posBound.getDistance(tile.getPos().getX(), tile.getPos().getY(), tile.getPos().getZ()) < 16 ? Aspects.electricity.getColor() : 13107200);
+                        mc.ingameGUI.drawString(mc.fontRenderer, (tile.receives ? I18n.format("hud.energy_from") : I18n.format("hud.energy_to")) + " X: " + tile.getBoundPosition().getX() + " Y: " + tile.getBoundPosition().getY() + " Z: " + tile.getBoundPosition().getZ() + " " + (tile.posBound.getDistance(tile.getPos().getX(), tile.getPos().getY(), tile.getPos().getZ()) < 16 ? " " : I18n.format("hud.too_far")), 5, 40, tile.posBound.getDistance(tile.getPos().getX(), tile.getPos().getY(), tile.getPos().getZ()) < 16 ? Aspects.electricity.getColor() : 13107200);
             } else if (mc.player.world.getTileEntity(PlayerUtil.getBlockPosLookingAt(5)) != null &&
                     mc.player.world.getTileEntity(PlayerUtil.getBlockPosLookingAt(5)) instanceof IHasBoundPosition) {
                 TileEntity tile = mc.player.world.getTileEntity(PlayerUtil.getBlockPosLookingAt(5));
-                if (((IHasBoundPosition) tile).getPositionBoundTo() != null) {
-                    if (!(((IHasBoundPosition) tile).getPositionBoundTo().getZ() == tile.getPos().getZ() && ((IHasBoundPosition) tile).getPositionBoundTo().getY() == tile.getPos().getY() && ((IHasBoundPosition) tile).getPositionBoundTo().getX() == tile.getPos().getX()))
-                        mc.ingameGUI.drawString(mc.fontRenderer, I18n.format("hud.pos_to") + " X: " + ((IHasBoundPosition) tile).getPositionBoundTo().getX() + " Y: " + ((IHasBoundPosition) tile).getPositionBoundTo().getY() + " Z: " + ((IHasBoundPosition) tile).getPositionBoundTo().getZ(), 5, 40, Aspects.magan.getColor());
+                if (((IHasBoundPosition) tile).getBoundPosition() != null) {
+                    if (!(((IHasBoundPosition) tile).getBoundPosition().getZ() == tile.getPos().getZ() && ((IHasBoundPosition) tile).getBoundPosition().getY() == tile.getPos().getY() && ((IHasBoundPosition) tile).getBoundPosition().getX() == tile.getPos().getX()))
+                        mc.ingameGUI.drawString(mc.fontRenderer, I18n.format("hud.pos_to") + " X: " + ((IHasBoundPosition) tile).getBoundPosition().getX() + " Y: " + ((IHasBoundPosition) tile).getBoundPosition().getY() + " Z: " + ((IHasBoundPosition) tile).getBoundPosition().getZ(), 5, 40, Aspects.magan.getColor());
                 }
             }
         }

@@ -1,8 +1,7 @@
 package de.aelpecyem.elementaristics.blocks.tileentity.blocks.energy;
 
 import de.aelpecyem.elementaristics.blocks.tileentity.BlockTileEntity;
-import de.aelpecyem.elementaristics.blocks.tileentity.energy.TileEntityCreativeStorage;
-import de.aelpecyem.elementaristics.blocks.tileentity.energy.TileEntityEnergyStorage;
+import de.aelpecyem.elementaristics.blocks.tileentity.tile.energy.TileEntityCreativeStorage;
 import de.aelpecyem.elementaristics.items.base.artifacts.ItemChannelingTool;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.material.Material;

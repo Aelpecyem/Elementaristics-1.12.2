@@ -1,9 +1,7 @@
-package de.aelpecyem.elementaristics.blocks.tileentity;
+package de.aelpecyem.elementaristics.blocks.tileentity.tile;
 
 import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.networking.PacketHandler;
-import de.aelpecyem.elementaristics.networking.tileentity.inventory.PacketUpdateInventory;
-import de.aelpecyem.elementaristics.networking.tileentity.tick.PacketUpdateTickTime;
 import de.aelpecyem.elementaristics.particles.ParticleGeneric;
 import de.aelpecyem.elementaristics.recipe.PurifierRecipes;
 import net.minecraft.nbt.NBTTagCompound;
@@ -16,7 +14,7 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
 
-public class TileEntityPurifier extends TileEntity implements ITickable, IHasTickCount, IHasInventory {
+public class TileEntityPurifier extends TileEntity implements ITickable {
 
 
     public ItemStackHandler inventory = new ItemStackHandler(1) {
@@ -61,23 +59,22 @@ public class TileEntityPurifier extends TileEntity implements ITickable, IHasTic
     @Override
     public void update() {
         if (!world.isRemote) {
-            PacketHandler.sendToAllAround(world, pos, 64, new PacketUpdateInventory(this, inventory));
-            PacketHandler.sendToAllAround(world, pos, 64, new PacketUpdateTickTime(this, tickCount));
+            PacketHandler.syncTile(this);
         }
         if (!(PurifierRecipes.getRecipeForInput(inventory.getStackInSlot(0)) == null)) {
             if (inventory.getStackInSlot(0).getCount() == PurifierRecipes.getRecipeForInput(inventory.getStackInSlot(0)).itemCount) {
                 tickCount++;
                 if (world.isRemote)
-                doParticleShow();
-            if (tickCount < 0) {
-                tickCount = 0;
-            }
+                    doParticleShow();
+                if (tickCount < 0) {
+                    tickCount = 0;
+                }
 
-            if (tickCount >= PurifierRecipes.getRecipeForInput(inventory.getStackInSlot(0)).time) {
-                inventory.setStackInSlot(0, PurifierRecipes.getRecipeForInput(inventory.getStackInSlot(0)).output);
-                tickCount = 0;
-            }
-        } else{
+                if (tickCount >= PurifierRecipes.getRecipeForInput(inventory.getStackInSlot(0)).time) {
+                    inventory.setStackInSlot(0, PurifierRecipes.getRecipeForInput(inventory.getStackInSlot(0)).output);
+                    tickCount = 0;
+                }
+            } else {
                 tickCount = 0;
             }
         } else {
@@ -103,20 +100,5 @@ public class TileEntityPurifier extends TileEntity implements ITickable, IHasTic
             Elementaristics.proxy.generateGenericParticles(p3);
             Elementaristics.proxy.generateGenericParticles(p4);
         }
-    }
-
-    @Override
-    public int getTickCount() {
-        return tickCount;
-    }
-
-    @Override
-    public void setTickCount(int tickCount) {
-        this.tickCount = tickCount;
-    }
-
-    @Override
-    public ItemStackHandler getInventory() {
-        return inventory;
     }
 }

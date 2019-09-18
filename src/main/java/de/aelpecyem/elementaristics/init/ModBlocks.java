@@ -11,7 +11,7 @@ import de.aelpecyem.elementaristics.blocks.tileentity.blocks.*;
 import de.aelpecyem.elementaristics.blocks.tileentity.blocks.energy.*;
 import de.aelpecyem.elementaristics.blocks.tileentity.blocks.pantheon.BlockDeityShrineBase;
 import de.aelpecyem.elementaristics.blocks.tileentity.blocks.pantheon.BlockDeityWitch;
-import de.aelpecyem.elementaristics.blocks.tileentity.pantheon.TileEntityDeityShrine;
+import de.aelpecyem.elementaristics.blocks.tileentity.tile.pantheon.TileEntityDeityShrine;
 import de.aelpecyem.elementaristics.misc.potions.PotionInit;
 import de.aelpecyem.elementaristics.util.IBlockHasModel;
 import net.minecraft.block.Block;

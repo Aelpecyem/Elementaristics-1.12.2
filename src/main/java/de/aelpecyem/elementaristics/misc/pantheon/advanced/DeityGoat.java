@@ -1,8 +1,8 @@
 package de.aelpecyem.elementaristics.misc.pantheon.advanced;
 
 import de.aelpecyem.elementaristics.Elementaristics;
-import de.aelpecyem.elementaristics.blocks.tileentity.pantheon.TileEntityDeityShrine;
 import de.aelpecyem.elementaristics.blocks.tileentity.render.models.pantheon.ModelGoat;
+import de.aelpecyem.elementaristics.blocks.tileentity.tile.pantheon.TileEntityDeityShrine;
 import de.aelpecyem.elementaristics.misc.pantheon.DeityBase;
 import de.aelpecyem.elementaristics.util.TimeUtil;
 import net.minecraft.block.IGrowable;

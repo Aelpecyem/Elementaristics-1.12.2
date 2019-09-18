@@ -1,16 +1,15 @@
-package de.aelpecyem.elementaristics.blocks.tileentity.pantheon;
+package de.aelpecyem.elementaristics.blocks.tileentity.tile.pantheon;
 
 import de.aelpecyem.elementaristics.Elementaristics;
+import de.aelpecyem.elementaristics.blocks.tileentity.IHasBoundPosition;
 import de.aelpecyem.elementaristics.blocks.tileentity.blocks.pantheon.BlockDeityShrineBase;
-import de.aelpecyem.elementaristics.blocks.tileentity.energy.TileEntityEnergy;
+import de.aelpecyem.elementaristics.blocks.tileentity.tile.energy.TileEntityEnergy;
 import de.aelpecyem.elementaristics.entity.nexus.EntityDimensionalNexus;
 import de.aelpecyem.elementaristics.init.Deities;
 import de.aelpecyem.elementaristics.init.ModBlocks;
 import de.aelpecyem.elementaristics.misc.pantheon.Deity;
 import de.aelpecyem.elementaristics.misc.pantheon.DeitySupplyEffectBase;
 import de.aelpecyem.elementaristics.networking.PacketHandler;
-import de.aelpecyem.elementaristics.networking.tileentity.deities.PacketUpdateDeity;
-import de.aelpecyem.elementaristics.networking.tileentity.tick.PacketUpdateTickTime;
 import de.aelpecyem.elementaristics.particles.ParticleGeneric;
 import de.aelpecyem.elementaristics.util.TimeUtil;
 import net.minecraft.block.Block;
@@ -19,12 +18,13 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.energy.CapabilityEnergy;
 
 import java.util.List;
 
-public class TileEntityDeityShrine extends TileEntityEnergy implements ITickable {
+public class TileEntityDeityShrine extends TileEntityEnergy implements ITickable, IHasBoundPosition {
     public int tickCount;
     public String deityBound = "";
     public boolean isStatue;
@@ -99,8 +99,7 @@ public class TileEntityDeityShrine extends TileEntityEnergy implements ITickable
         }
 
         if (!world.isRemote) {
-            PacketHandler.sendToAllAround(world, pos, 64, new PacketUpdateTickTime(this, tickCount));
-            PacketHandler.sendToAllAround(world, pos, 64, new PacketUpdateDeity(this));
+            PacketHandler.syncTile(this);
         }
         Deity deityActive = Deities.deities.get(new ResourceLocation(deityBound));
         if (deityActive != null) {
@@ -172,6 +171,16 @@ public class TileEntityDeityShrine extends TileEntityEnergy implements ITickable
 
     public Deity getDeityBound() {
         return Deities.deities.getOrDefault(new ResourceLocation(deityBound), null);
+    }
+
+    @Override
+    public BlockPos getBoundPosition() {
+        return posBound;
+    }
+
+    @Override
+    public void setBoundPosition(BlockPos pos) {
+        this.posBound = pos;
     }
 }
 

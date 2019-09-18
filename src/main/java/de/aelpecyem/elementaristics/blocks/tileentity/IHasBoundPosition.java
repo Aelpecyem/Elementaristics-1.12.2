@@ -1,8 +1,9 @@
 package de.aelpecyem.elementaristics.blocks.tileentity;
+
 import net.minecraft.util.math.BlockPos;
 
 public interface IHasBoundPosition {
-    BlockPos getPositionBoundTo();
+    BlockPos getBoundPosition();
 
-    void setPositionBoundTo(BlockPos pos);
+    void setBoundPosition(BlockPos pos);
 }

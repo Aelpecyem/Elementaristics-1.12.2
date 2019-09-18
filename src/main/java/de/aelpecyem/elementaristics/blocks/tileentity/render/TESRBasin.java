@@ -1,7 +1,7 @@
 package de.aelpecyem.elementaristics.blocks.tileentity.render;
 
 import de.aelpecyem.elementaristics.Elementaristics;
-import de.aelpecyem.elementaristics.blocks.tileentity.TileEntityInfusionBasin;
+import de.aelpecyem.elementaristics.blocks.tileentity.tile.TileEntityInfusionBasin;
 import de.aelpecyem.elementaristics.util.MiscUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;

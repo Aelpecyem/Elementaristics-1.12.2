@@ -1,6 +1,6 @@
 package de.aelpecyem.elementaristics.items.base;
 
-import de.aelpecyem.elementaristics.blocks.tileentity.TileEntityGoldenThread;
+import de.aelpecyem.elementaristics.blocks.tileentity.tile.TileEntityGoldenThread;
 import de.aelpecyem.elementaristics.init.ModBlocks;
 import de.aelpecyem.elementaristics.misc.elements.Aspect;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;

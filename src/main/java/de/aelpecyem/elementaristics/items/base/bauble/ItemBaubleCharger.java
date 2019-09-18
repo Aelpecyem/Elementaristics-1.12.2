@@ -2,7 +2,6 @@ package de.aelpecyem.elementaristics.items.base.bauble;
 
 import baubles.api.BaubleType;
 import baubles.api.IBauble;
-import de.aelpecyem.elementaristics.blocks.tileentity.energy.TileEntityEnergy;
 import de.aelpecyem.elementaristics.capability.player.IPlayerCapabilities;
 import de.aelpecyem.elementaristics.capability.player.PlayerCapProvider;
 import de.aelpecyem.elementaristics.items.base.ItemBase;

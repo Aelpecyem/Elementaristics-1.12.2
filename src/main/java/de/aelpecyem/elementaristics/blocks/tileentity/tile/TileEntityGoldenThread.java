@@ -1,4 +1,4 @@
-package de.aelpecyem.elementaristics.blocks.tileentity;
+package de.aelpecyem.elementaristics.blocks.tileentity.tile;
 
 import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.entity.elementals.AbstractElemental;
@@ -7,8 +7,6 @@ import de.aelpecyem.elementaristics.init.ModBlocks;
 import de.aelpecyem.elementaristics.items.base.ItemGoldenThread;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;
 import de.aelpecyem.elementaristics.networking.PacketHandler;
-import de.aelpecyem.elementaristics.networking.tileentity.goldenthread.PacketUpdateGoldenThread;
-import de.aelpecyem.elementaristics.networking.tileentity.inventory.PacketUpdateInventory;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -31,7 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class TileEntityGoldenThread extends TileEntity implements ITickable, IHasInventory {
+public class TileEntityGoldenThread extends TileEntity implements ITickable {
     public ItemStackHandler inventory = new ItemStackHandler(1) {
         @Override
         public int getSlotLimit(int slot) {
@@ -90,8 +88,7 @@ public class TileEntityGoldenThread extends TileEntity implements ITickable, IHa
     @Override
     public void update() {
         if (!world.isRemote) {
-            PacketHandler.sendToAllAround(world, pos, 64, new PacketUpdateInventory(this, inventory));
-            PacketHandler.sendToAllAround(world, pos, 64, new PacketUpdateGoldenThread(this));
+            PacketHandler.syncTile(this);
         }
         if (activationStage < 1) {
             if (world.rand.nextInt(40) == 1) {
@@ -157,10 +154,6 @@ public class TileEntityGoldenThread extends TileEntity implements ITickable, IHa
                 world.spawnEntity(entity);
             }
         }
-    }
-    @Override
-    public ItemStackHandler getInventory() {
-        return inventory;
     }
 
     @SideOnly(Side.CLIENT)

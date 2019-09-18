@@ -5,6 +5,7 @@ import de.aelpecyem.elementaristics.networking.cap.CapabilityChunkSync;
 import de.aelpecyem.elementaristics.networking.cap.CapabilitySync;
 import de.aelpecyem.elementaristics.networking.entity.PacketMoveEntity;
 import de.aelpecyem.elementaristics.networking.entity.PacketSpawnBoundParticles;
+import de.aelpecyem.elementaristics.networking.entity.PacketUpdateProtoplasmInventory;
 import de.aelpecyem.elementaristics.networking.entity.cultist.PacketSpawnCultistAttackParticles;
 import de.aelpecyem.elementaristics.networking.entity.cultist.PacketSpawnCultistSpellParticles;
 import de.aelpecyem.elementaristics.networking.entity.nexus.PacketSyncNexus;
@@ -12,19 +13,11 @@ import de.aelpecyem.elementaristics.networking.entity.protoplasm.PacketDyeProtop
 import de.aelpecyem.elementaristics.networking.other.PacketBurnableAffect;
 import de.aelpecyem.elementaristics.networking.other.PacketMarkBlock;
 import de.aelpecyem.elementaristics.networking.player.*;
-import de.aelpecyem.elementaristics.networking.tileentity.altar.PacketUpdateAltar;
-import de.aelpecyem.elementaristics.networking.tileentity.basin.PacketUpdateBasin;
-import de.aelpecyem.elementaristics.networking.tileentity.deities.PacketUpdateDeity;
-import de.aelpecyem.elementaristics.networking.tileentity.energy.EnergySync;
-import de.aelpecyem.elementaristics.networking.tileentity.energy.PacketUpdateEmulator;
-import de.aelpecyem.elementaristics.networking.tileentity.energy.PacketUpdateTransmitter;
-import de.aelpecyem.elementaristics.networking.tileentity.goldenthread.PacketUpdateGoldenThread;
-import de.aelpecyem.elementaristics.networking.tileentity.inventory.PacketUpdateInventory;
-import de.aelpecyem.elementaristics.networking.tileentity.pos.PosSync;
-import de.aelpecyem.elementaristics.networking.tileentity.tick.PacketUpdateTickTime;
+import de.aelpecyem.elementaristics.networking.tileentity.PacketUpdateTileEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
@@ -44,19 +37,9 @@ public class PacketHandler {
     public static void init() {
         network = NetworkRegistry.INSTANCE.newSimpleChannel(Elementaristics.MODID);
 
-        network.registerMessage(new PacketUpdateInventory.Handler(), PacketUpdateInventory.class, next(), Side.CLIENT);
-        network.registerMessage(new PacketUpdateTickTime.Handler(), PacketUpdateTickTime.class, next(), Side.CLIENT);
-        network.registerMessage(new EnergySync.Handler(), EnergySync.class, next(), Side.CLIENT);
-        network.registerMessage(new PosSync.Handler(), PosSync.class, next(), Side.CLIENT);
-
         network.registerMessage(new PacketSyncNexus.Handler(), PacketSyncNexus.class, next(), Side.CLIENT);
 
-        network.registerMessage(new PacketUpdateDeity.Handler(), PacketUpdateDeity.class, next(), Side.CLIENT);
-        network.registerMessage(new PacketUpdateGoldenThread.Handler(), PacketUpdateGoldenThread.class, next(), Side.CLIENT);
-        network.registerMessage(new PacketUpdateTransmitter.Handler(), PacketUpdateTransmitter.class, next(), Side.CLIENT);
-        network.registerMessage(new PacketUpdateEmulator.Handler(), PacketUpdateEmulator.class, next(), Side.CLIENT);
-        network.registerMessage(new PacketUpdateAltar.Handler(), PacketUpdateAltar.class, next(), Side.CLIENT);
-        network.registerMessage(new PacketUpdateBasin.Handler(), PacketUpdateBasin.class, next(), Side.CLIENT);
+        network.registerMessage(new PacketUpdateTileEntity.Handler(), PacketUpdateTileEntity.class, next(), Side.CLIENT);
 
 
         network.registerMessage(new CapabilitySync.Handler(), CapabilitySync.class, next(), Side.CLIENT);
@@ -73,6 +56,7 @@ public class PacketHandler {
 
         network.registerMessage(new PacketPressSpellKey.Handler(), PacketPressSpellKey.class, next(), Side.SERVER);
         network.registerMessage(new PacketDyeProtoplasm.Handler(), PacketDyeProtoplasm.class, next(), Side.SERVER);
+        network.registerMessage(new PacketUpdateProtoplasmInventory.Handler(), PacketUpdateProtoplasmInventory.class, next(), Side.CLIENT);
 
         network.registerMessage(new PacketSpawnCultistAttackParticles.Handler(), PacketSpawnCultistAttackParticles.class, next(), Side.CLIENT);
         network.registerMessage(new PacketSpawnCultistSpellParticles.Handler(), PacketSpawnCultistSpellParticles.class, next(), Side.CLIENT);
@@ -111,6 +95,10 @@ public class PacketHandler {
 
     public static void sendToDim(IMessage message, int dimensionId) {
         network.sendToDimension(message, dimensionId);
+    }
+
+    public static void syncTile(TileEntity tile) {
+        sendToAllAround(tile.getWorld(), tile.getPos(), 64, new PacketUpdateTileEntity(tile));
     }
 }
 

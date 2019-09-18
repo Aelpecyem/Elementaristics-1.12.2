@@ -1,4 +1,4 @@
-package de.aelpecyem.elementaristics.blocks.tileentity;
+package de.aelpecyem.elementaristics.blocks.tileentity.tile;
 
 import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.capability.player.IPlayerCapabilities;
@@ -23,7 +23,7 @@ import javax.annotation.Nullable;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class TileEntityAltar extends TileEntity implements ITickable, IHasTickCount {
+public class TileEntityAltar extends TileEntity implements ITickable {
 
     public int tickCount;
     public String currentRite = "";
@@ -224,17 +224,6 @@ public class TileEntityAltar extends TileEntity implements ITickable, IHasTickCo
         return false;
     }
 
-
-    @Override
-    public int getTickCount() {
-        return tickCount;
-    }
-
-    @Override
-    public void setTickCount(int tickCount) {
-        this.tickCount = tickCount;
-    }
-
     //Participants
     public List<EntityPlayer> getPlayersInArea() {
         return world.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(
@@ -309,6 +298,7 @@ public class TileEntityAltar extends TileEntity implements ITickable, IHasTickCo
     public void addAspect(Aspect aspect) {
         aspectsExt.put(aspect, 2);
     }
+
     //Souls - External
     public void addSoul(Soul soul) {
         soulsExt.put(soul, 2);
@@ -366,7 +356,7 @@ public class TileEntityAltar extends TileEntity implements ITickable, IHasTickCo
     public void consumeConsumables() {
         List<EntityPlayer> targets = getPlayersInArea();
         RiteBase rite = RiteInit.getRiteForResLoc(currentRite);
-        if (targets.size() > 0){ //issue is that the rite returned is null, which is BAD
+        if (targets.size() > 0) { //issue is that the rite returned is null, which is BAD
             Iterator iterator = targets.iterator();
             while (iterator.hasNext()) {
                 EntityPlayer player = (EntityPlayer) iterator.next();

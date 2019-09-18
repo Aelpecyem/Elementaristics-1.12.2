@@ -1,13 +1,7 @@
-package de.aelpecyem.elementaristics.blocks.tileentity.energy;
+package de.aelpecyem.elementaristics.blocks.tileentity.tile.energy;
 
-import de.aelpecyem.elementaristics.capability.energy.EnergyCapability;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
-import net.minecraft.util.math.BlockPos;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.energy.CapabilityEnergy;
 
 public class TileEntityEnergyStorage extends TileEntityEnergy implements ITickable {
 

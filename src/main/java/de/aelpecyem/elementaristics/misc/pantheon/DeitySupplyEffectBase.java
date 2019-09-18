@@ -1,6 +1,6 @@
 package de.aelpecyem.elementaristics.misc.pantheon;
 
-import de.aelpecyem.elementaristics.blocks.tileentity.pantheon.TileEntityDeityShrine;
+import de.aelpecyem.elementaristics.blocks.tileentity.tile.pantheon.TileEntityDeityShrine;
 import de.aelpecyem.elementaristics.misc.elements.Aspect;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.util.ResourceLocation;

@@ -1,11 +1,8 @@
-package de.aelpecyem.elementaristics.blocks.tileentity.energy;
+package de.aelpecyem.elementaristics.blocks.tileentity.tile.energy;
 
 import de.aelpecyem.elementaristics.blocks.tileentity.IHasBoundPosition;
 import de.aelpecyem.elementaristics.capability.energy.EnergyCapability;
 import de.aelpecyem.elementaristics.networking.PacketHandler;
-import de.aelpecyem.elementaristics.networking.tileentity.energy.EnergySync;
-import de.aelpecyem.elementaristics.networking.tileentity.inventory.PacketUpdateInventory;
-import de.aelpecyem.elementaristics.networking.tileentity.tick.PacketUpdateTickTime;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
@@ -73,18 +70,17 @@ public class TileEntityEnergy extends TileEntity implements ITickable, IHasBound
 
     @Override
     public void update() {
-
         if (posBound == null) {
             posBound = pos;
         }
         if (!world.isRemote) {
-            PacketHandler.sendToAllAround(world, pos, 64, new EnergySync(this, storage));
+            PacketHandler.syncTile(this);
         }
 
-        if (getPositionBoundTo() != null || getPositionBoundTo() != pos) {
-            if (world.getTileEntity(getPositionBoundTo()) != null) {
-                TileEntity te = world.getTileEntity(getPositionBoundTo());
-                if (te.hasCapability(CapabilityEnergy.ENERGY, null) && getPositionBoundTo().getDistance(pos.getX(), pos.getY(), pos.getZ()) < 18) {
+        if (posBound != null || posBound != pos) {
+            if (world.getTileEntity(posBound) != null) {
+                TileEntity te = world.getTileEntity(posBound);
+                if (te.hasCapability(CapabilityEnergy.ENERGY, null) && posBound.getDistance(pos.getX(), pos.getY(), pos.getZ()) < 18) {
                     IEnergyStorage linkedTo = te.getCapability(CapabilityEnergy.ENERGY, null);
                     if (receives) {
                         storage.receiveEnergy(linkedTo.extractEnergy(storage.getMaxReceive(), false), false);
@@ -97,14 +93,13 @@ public class TileEntityEnergy extends TileEntity implements ITickable, IHasBound
 
     }
 
-
     @Override
-    public BlockPos getPositionBoundTo() {
+    public BlockPos getBoundPosition() {
         return posBound;
     }
 
     @Override
-    public void setPositionBoundTo(BlockPos pos) {
-        posBound = pos;
+    public void setBoundPosition(BlockPos pos) {
+        this.posBound = pos;
     }
 }

@@ -1,7 +1,7 @@
 package de.aelpecyem.elementaristics.blocks.tileentity.blocks;
 
 import de.aelpecyem.elementaristics.blocks.tileentity.BlockTileEntity;
-import de.aelpecyem.elementaristics.blocks.tileentity.TileEntityConcentrator;
+import de.aelpecyem.elementaristics.blocks.tileentity.tile.TileEntityConcentrator;
 import de.aelpecyem.elementaristics.items.base.ItemEssence;
 import de.aelpecyem.elementaristics.items.base.artifacts.rites.ItemAspects;
 import de.aelpecyem.elementaristics.util.InventoryUtil;

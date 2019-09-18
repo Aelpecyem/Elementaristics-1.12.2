@@ -1,6 +1,6 @@
 package de.aelpecyem.elementaristics.blocks.tileentity.render;
 
-import de.aelpecyem.elementaristics.blocks.tileentity.TileEntityTunneler;
+import de.aelpecyem.elementaristics.blocks.tileentity.tile.TileEntityTunneler;
 import de.aelpecyem.elementaristics.items.base.ItemEssence;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;

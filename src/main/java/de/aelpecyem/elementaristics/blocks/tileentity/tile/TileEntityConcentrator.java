@@ -1,4 +1,4 @@
-package de.aelpecyem.elementaristics.blocks.tileentity;
+package de.aelpecyem.elementaristics.blocks.tileentity.tile;
 
 import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.init.ModItems;
@@ -6,8 +6,6 @@ import de.aelpecyem.elementaristics.items.base.ItemEssence;
 import de.aelpecyem.elementaristics.items.base.artifacts.rites.ItemAspects;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;
 import de.aelpecyem.elementaristics.networking.PacketHandler;
-import de.aelpecyem.elementaristics.networking.tileentity.inventory.PacketUpdateInventory;
-import de.aelpecyem.elementaristics.networking.tileentity.tick.PacketUpdateTickTime;
 import de.aelpecyem.elementaristics.particles.ParticleGeneric;
 import de.aelpecyem.elementaristics.recipe.ConcentratorRecipes;
 import net.minecraft.entity.item.EntityItem;
@@ -22,7 +20,7 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
 
-public class TileEntityConcentrator extends TileEntity implements ITickable, IHasInventory, IHasTickCount {
+public class TileEntityConcentrator extends TileEntity implements ITickable {
 
     public ItemStackHandler inventory = new ItemStackHandler(2) {
 
@@ -33,6 +31,7 @@ public class TileEntityConcentrator extends TileEntity implements ITickable, IHa
                     EntityItem item = new EntityItem(world, pos.getX(), pos.getY() + 1.5, pos.getZ(), inventory.getStackInSlot(slot));
                     world.spawnEntity(item);
                     inventory.setStackInSlot(slot, ItemStack.EMPTY);
+                    markDirty();
                 }
             }
 
@@ -80,8 +79,7 @@ public class TileEntityConcentrator extends TileEntity implements ITickable, IHa
     @Override
     public void update() {
         if (!world.isRemote) {
-            PacketHandler.sendToAllAround(world, pos, 64, new PacketUpdateInventory(this, inventory));
-            PacketHandler.sendToAllAround(world, pos, 64, new PacketUpdateTickTime(this, tickCount));
+            PacketHandler.syncTile(this);
         }
         if (!inventory.getStackInSlot(0).isEmpty() && !inventory.getStackInSlot(1).isEmpty()) {
             tickCount++;
@@ -108,21 +106,5 @@ public class TileEntityConcentrator extends TileEntity implements ITickable, IHa
         else if (inventory.getStackInSlot(1).getItem() instanceof ItemAspects)
             Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(world, pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, world.rand.nextGaussian() * 0.02F, Math.abs(world.rand.nextGaussian()) * 0.06F, world.rand.nextGaussian() * 0.02F, ((ItemAspects) inventory.getStackInSlot(1).getItem()).getAspects().get(0).getColor(), 2, 10, 0, true, false, 0.5F, true));
 
-    }
-
-
-    @Override
-    public int getTickCount() {
-        return tickCount;
-    }
-
-    @Override
-    public void setTickCount(int tickCount) {
-        this.tickCount = tickCount;
-    }
-
-    @Override
-    public ItemStackHandler getInventory() {
-        return inventory;
     }
 }

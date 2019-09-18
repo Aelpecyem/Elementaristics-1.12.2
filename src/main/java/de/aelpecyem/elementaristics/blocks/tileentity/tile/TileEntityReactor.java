@@ -1,11 +1,9 @@
-package de.aelpecyem.elementaristics.blocks.tileentity;
+package de.aelpecyem.elementaristics.blocks.tileentity.tile;
 
 import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.blocks.tileentity.blocks.BlockReactor;
 import de.aelpecyem.elementaristics.init.ModItems;
 import de.aelpecyem.elementaristics.networking.PacketHandler;
-import de.aelpecyem.elementaristics.networking.tileentity.inventory.PacketUpdateInventory;
-import de.aelpecyem.elementaristics.networking.tileentity.tick.PacketUpdateTickTime;
 import de.aelpecyem.elementaristics.particles.ParticleGeneric;
 import de.aelpecyem.elementaristics.recipe.ReactorRecipes;
 import net.minecraft.entity.item.EntityItem;
@@ -21,7 +19,7 @@ import net.minecraftforge.items.ItemStackHandler;
 
 import java.util.Random;
 
-public class TileEntityReactor extends TileEntity implements ITickable, IHasTickCount, IHasInventory {
+public class TileEntityReactor extends TileEntity implements ITickable {
 
     public ItemStackHandler inventory = new ItemStackHandler(2) {
 
@@ -60,15 +58,14 @@ public class TileEntityReactor extends TileEntity implements ITickable, IHasTick
     }
 
     @Override
-    public <T> T getCapability(Capability<T> capability,  EnumFacing facing) {
+    public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
         return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY ? (T) inventory : super.getCapability(capability, facing);
     }
 
     @Override
     public void update() {
         if (!world.isRemote) {
-            PacketHandler.sendToAllAround(world, pos, 64, new PacketUpdateInventory(TileEntityReactor.this, inventory));
-            PacketHandler.sendToAllAround(world, pos, 64, new PacketUpdateTickTime(TileEntityReactor.this, tickCount));
+            PacketHandler.syncTile(this);
         }
         if (tickCount >= 1) {
             tickCount++;
@@ -118,21 +115,6 @@ public class TileEntityReactor extends TileEntity implements ITickable, IHasTick
 
     }
 
-
-    @Override
-    public ItemStackHandler getInventory() {
-        return inventory;
-    }
-
-    @Override
-    public int getTickCount() {
-        return tickCount;
-    }
-
-    @Override
-    public void setTickCount(int tickCount) {
-        this.tickCount = tickCount;
-    }
 }
 
 

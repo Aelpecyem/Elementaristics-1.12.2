@@ -1,8 +1,8 @@
 package de.aelpecyem.elementaristics.blocks.tileentity.render;
 
 import de.aelpecyem.elementaristics.Elementaristics;
-import de.aelpecyem.elementaristics.blocks.tileentity.TileEntityGoldenThread;
 import de.aelpecyem.elementaristics.blocks.tileentity.render.models.ModelBlock;
+import de.aelpecyem.elementaristics.blocks.tileentity.tile.TileEntityGoldenThread;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;
 import de.aelpecyem.elementaristics.util.MiscUtil;
 import net.minecraft.client.renderer.GlStateManager;

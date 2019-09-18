@@ -1,7 +1,7 @@
-package de.aelpecyem.elementaristics.blocks.tileentity;
+package de.aelpecyem.elementaristics.blocks.tileentity.tile;
 
 import de.aelpecyem.elementaristics.networking.PacketHandler;
-import de.aelpecyem.elementaristics.networking.tileentity.inventory.PacketUpdateInventory;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
@@ -12,14 +12,17 @@ import net.minecraftforge.items.ItemStackHandler;
 
 import java.util.Random;
 
-public class TileEntityFilterHolder extends TileEntity implements ITickable, IHasInventory {
+public class TileEntityPedestal extends TileEntity implements ITickable {
 
     public ItemStackHandler inventory = new ItemStackHandler(1) {
+
+
         @Override
         public int getSlotLimit(int slot) {
             return 1;
         }
     };
+    Random random = new Random();
 
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
@@ -45,17 +48,15 @@ public class TileEntityFilterHolder extends TileEntity implements ITickable, IHa
         return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY ? (T) inventory : super.getCapability(capability, facing);
     }
 
-
-    @Override
-    public void update() {
-        if (!world.isRemote) {
-            PacketHandler.sendToAllAround(world, pos, 64, new PacketUpdateInventory(this, inventory));
-        }
+    public ItemStack getItem() {
+        return inventory.getStackInSlot(0);
     }
 
 
     @Override
-    public ItemStackHandler getInventory() {
-        return inventory;
+    public void update() {
+        if (!world.isRemote) {
+            PacketHandler.syncTile(this);
+        }
     }
 }

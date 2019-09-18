@@ -1,11 +1,8 @@
-package de.aelpecyem.elementaristics.blocks.tileentity.energy;
+package de.aelpecyem.elementaristics.blocks.tileentity.tile.energy;
 
 import de.aelpecyem.elementaristics.blocks.tileentity.IHasBoundPosition;
 import de.aelpecyem.elementaristics.init.ModBlocks;
 import de.aelpecyem.elementaristics.networking.PacketHandler;
-import de.aelpecyem.elementaristics.networking.tileentity.energy.PacketUpdateEmulator;
-import de.aelpecyem.elementaristics.networking.tileentity.energy.PacketUpdateTransmitter;
-import de.aelpecyem.elementaristics.networking.tileentity.pos.PosSync;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
@@ -54,8 +51,7 @@ public class TileEntityRedstoneEmulator extends TileEntity implements ITickable,
         }
 
         if (!world.isRemote) {
-            PacketHandler.sendToAllAround(world, pos, 64, new PosSync(this));
-            PacketHandler.sendToAllAround(world, pos, 64, new PacketUpdateEmulator(this));
+            PacketHandler.syncTile(this);
         }
 
 
@@ -82,7 +78,7 @@ public class TileEntityRedstoneEmulator extends TileEntity implements ITickable,
 
 
     public boolean isBoundToATile(TileEntityRedstoneEmulator tile) {
-        if (tile.getPositionBoundTo() != null && !tile.getPositionBoundTo().equals(tile.pos)) {
+        if (posBound != null && !tile.posBound.equals(tile.pos)) {
             return true;
         }
         return false;
@@ -96,13 +92,12 @@ public class TileEntityRedstoneEmulator extends TileEntity implements ITickable,
     }
 
     @Override
-    public BlockPos getPositionBoundTo() {
-        return this.posBound;
+    public BlockPos getBoundPosition() {
+        return posBound;
     }
 
     @Override
-    public void setPositionBoundTo(BlockPos pos) {
+    public void setBoundPosition(BlockPos pos) {
         this.posBound = pos;
     }
-
 }

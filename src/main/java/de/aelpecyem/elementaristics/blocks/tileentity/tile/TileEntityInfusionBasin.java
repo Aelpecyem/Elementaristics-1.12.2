@@ -1,4 +1,4 @@
-package de.aelpecyem.elementaristics.blocks.tileentity;
+package de.aelpecyem.elementaristics.blocks.tileentity.tile;
 
 import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.init.ModItems;
@@ -6,14 +6,12 @@ import de.aelpecyem.elementaristics.items.base.ItemEssence;
 import de.aelpecyem.elementaristics.misc.elements.Aspect;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;
 import de.aelpecyem.elementaristics.networking.PacketHandler;
-import de.aelpecyem.elementaristics.networking.tileentity.basin.PacketUpdateBasin;
-import de.aelpecyem.elementaristics.networking.tileentity.inventory.PacketUpdateInventory;
-import de.aelpecyem.elementaristics.networking.tileentity.tick.PacketUpdateTickTime;
 import de.aelpecyem.elementaristics.recipe.InfusionRecipes;
 import de.aelpecyem.elementaristics.util.MiscUtil;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
@@ -22,13 +20,14 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
+import javax.annotation.Nullable;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class TileEntityInfusionBasin extends TileEntity implements ITickable, IHasTickCount, IHasInventory {
+public class TileEntityInfusionBasin extends TileEntity implements ITickable {
 
     public ItemStackHandler inventory = new ItemStackHandler(1) {
         @Override
@@ -94,14 +93,24 @@ public class TileEntityInfusionBasin extends TileEntity implements ITickable, IH
     }
 
 
+    @Nullable
+    public SPacketUpdateTileEntity getUpdatePacket() {
+        return new SPacketUpdateTileEntity(this.pos, -9, this.getUpdateTag());
+    }
+
     @Override
     public void update() {
         doPassiveParticleShow();
+        markDirty();
         if (!world.isRemote) {
-            PacketHandler.sendToAllAround(world, pos, 64, new PacketUpdateInventory(this, inventory));
+            PacketHandler.syncTile(this);
+            // IBlockState state = this.world.getBlockState(this.pos);
+            //this.world.notifyBlockUpdate(this.pos, state, state, 6);
+
+            /*PacketHandler.sendToAllAround(world, pos, 64, new PacketUpdateInventory(this, inventory));
             PacketHandler.sendToAllAround(world, pos, 64, new PacketUpdateTickTime(this, tickCount));
 
-            PacketHandler.sendToAllAround(world, pos, 64, new PacketUpdateBasin(TileEntityInfusionBasin.this));
+            PacketHandler.sendToAllAround(world, pos, 64, new PacketUpdateBasin(TileEntityInfusionBasin.this));*/
         }
         if (!inventory.getStackInSlot(0).isEmpty() && fillCount > 0 && aspectIDs.size() > 0) {
             tickCount++;
@@ -163,21 +172,4 @@ public class TileEntityInfusionBasin extends TileEntity implements ITickable, IH
         }
         return false;
     }
-
-    @Override
-    public int getTickCount() {
-        return tickCount;
-    }
-
-    @Override
-    public void setTickCount(int tickCount) {
-        this.tickCount = tickCount;
-    }
-
-    @Override
-    public ItemStackHandler getInventory() {
-        return inventory;
-    }
-
-
 }

@@ -1,6 +1,6 @@
 package de.aelpecyem.elementaristics.blocks.tileentity.render;
 
-import de.aelpecyem.elementaristics.blocks.tileentity.TileEntityConcentrator;
+import de.aelpecyem.elementaristics.blocks.tileentity.tile.TileEntityConcentrator;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;

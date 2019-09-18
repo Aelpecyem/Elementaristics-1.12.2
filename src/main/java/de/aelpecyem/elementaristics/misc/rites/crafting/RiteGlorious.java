@@ -1,8 +1,8 @@
 package de.aelpecyem.elementaristics.misc.rites.crafting;
 
 import de.aelpecyem.elementaristics.Elementaristics;
-import de.aelpecyem.elementaristics.blocks.tileentity.TileEntityPedestal;
 import de.aelpecyem.elementaristics.blocks.tileentity.blocks.pantheon.BlockDeityShrineBase;
+import de.aelpecyem.elementaristics.blocks.tileentity.tile.TileEntityPedestal;
 import de.aelpecyem.elementaristics.entity.nexus.EntityDimensionalNexus;
 import de.aelpecyem.elementaristics.init.ModBlocks;
 import de.aelpecyem.elementaristics.items.base.artifacts.ItemChannelingTool;

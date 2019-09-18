@@ -4,14 +4,14 @@ package de.aelpecyem.elementaristics.items.base.artifacts;
 import de.aelpecyem.elementaristics.blocks.tileentity.IHasBoundPosition;
 import de.aelpecyem.elementaristics.items.base.artifacts.rites.ItemAspects;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;
-import de.aelpecyem.elementaristics.util.MiscUtil;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.*;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
@@ -57,7 +57,7 @@ public class ItemChannelingTool extends ItemAspects {
         } else {
             if (worldIn.getTileEntity(pos) != null && worldIn.getTileEntity(pos) instanceof IHasBoundPosition) {
                 if (stack.getTagCompound().hasKey(X_KEY)) {
-                    ((IHasBoundPosition) worldIn.getTileEntity(pos)).setPositionBoundTo(new BlockPos(stack.getTagCompound().getInteger(X_KEY),
+                    ((IHasBoundPosition) worldIn.getTileEntity(pos)).setBoundPosition(new BlockPos(stack.getTagCompound().getInteger(X_KEY),
                             stack.getTagCompound().getInteger(Y_KEY), stack.getTagCompound().getInteger(Z_KEY)));
                     if (worldIn.isRemote)
                         player.sendStatusMessage(new TextComponentString(I18n.format("message.position_set_for") + " " + stack.getTagCompound().getInteger(X_KEY) + " " +

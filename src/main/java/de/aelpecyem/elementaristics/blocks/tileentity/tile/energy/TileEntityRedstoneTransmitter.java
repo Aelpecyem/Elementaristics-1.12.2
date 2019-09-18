@@ -1,24 +1,14 @@
-package de.aelpecyem.elementaristics.blocks.tileentity.energy;
+package de.aelpecyem.elementaristics.blocks.tileentity.tile.energy;
 
 import de.aelpecyem.elementaristics.blocks.tileentity.IHasBoundPosition;
-import de.aelpecyem.elementaristics.capability.energy.EnergyCapability;
 import de.aelpecyem.elementaristics.init.ModBlocks;
 import de.aelpecyem.elementaristics.networking.PacketHandler;
-import de.aelpecyem.elementaristics.networking.tileentity.energy.EnergySync;
-import de.aelpecyem.elementaristics.networking.tileentity.energy.PacketUpdateTransmitter;
-import de.aelpecyem.elementaristics.networking.tileentity.pos.PosSync;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockRedstoneDiode;
-import net.minecraft.block.BlockRedstoneLight;
-import net.minecraft.block.BlockRedstoneWire;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.energy.CapabilityEnergy;
-import net.minecraftforge.energy.IEnergyStorage;
 
 public class TileEntityRedstoneTransmitter extends TileEntity implements ITickable, IHasBoundPosition {
     public BlockPos posBound = null;
@@ -70,8 +60,7 @@ public class TileEntityRedstoneTransmitter extends TileEntity implements ITickab
         }
 
         if (!world.isRemote) {
-            PacketHandler.sendToAllAround(world, pos, 64, new PosSync(this));
-            PacketHandler.sendToAllAround(world, pos, 64, new PacketUpdateTransmitter(this));
+            PacketHandler.syncTile(this);
         }
 
         if ((this.world.isBlockPowered(pos) && isBoundToATile(this)) || ((this.world.getTileEntity(posBoundFrom) != null && !posBoundFrom.equals(pos) && this.world.getTileEntity(posBoundFrom) instanceof TileEntityRedstoneTransmitter && ((TileEntityRedstoneTransmitter) this.world.getTileEntity(posBoundFrom)).activated))) {
@@ -83,10 +72,10 @@ public class TileEntityRedstoneTransmitter extends TileEntity implements ITickab
 
         }
 
-        if ((getPositionBoundTo() != null || getPositionBoundTo() != pos) && posBound.getDistance(pos.getX(), pos.getY(), pos.getZ()) < 40) {
-            if (world.getTileEntity(getPositionBoundTo()) != null) {
-                if (world.getTileEntity(getPositionBoundTo()) instanceof TileEntityRedstoneTransmitter) {
-                    TileEntityRedstoneTransmitter tile = (TileEntityRedstoneTransmitter) world.getTileEntity(getPositionBoundTo());
+        if ((posBound != null || posBound != pos) && posBound.getDistance(pos.getX(), pos.getY(), pos.getZ()) < 40) {
+            if (world.getTileEntity(posBound) != null) {
+                if (world.getTileEntity(posBound) instanceof TileEntityRedstoneTransmitter) {
+                    TileEntityRedstoneTransmitter tile = (TileEntityRedstoneTransmitter) world.getTileEntity(posBound);
                     tile.posBoundFrom = pos;
                     tile.activated = requestActivation(activated);
                     world.getBlockState(posBound).neighborChanged(world, posBound, ModBlocks.block_transmitter_redstone, posBound);
@@ -98,7 +87,7 @@ public class TileEntityRedstoneTransmitter extends TileEntity implements ITickab
     }//always prioritize commands of other blocks of the same kin, not the redstone (as in, always check if it's boundFrom
 
     public boolean requestActivation(boolean activated) {
-        TileEntityRedstoneTransmitter tile = (TileEntityRedstoneTransmitter) world.getTileEntity(getPositionBoundTo());
+        TileEntityRedstoneTransmitter tile = (TileEntityRedstoneTransmitter) world.getTileEntity(posBound);
         if (isBoundToATile(tile)) {
             if (world.isBlockPowered(tile.pos)) {
                 return true;
@@ -110,7 +99,7 @@ public class TileEntityRedstoneTransmitter extends TileEntity implements ITickab
     }
 
     public boolean isBoundToATile(TileEntityRedstoneTransmitter tile) {
-        if (tile.getPositionBoundTo() != null && !tile.getPositionBoundTo().equals(tile.pos)) {
+        if (tile.posBound != null && !tile.posBound.equals(tile.pos)) {
             if (world.getTileEntity(tile.posBound) instanceof TileEntityRedstoneTransmitter) {
                 return true;
             }
@@ -135,13 +124,12 @@ public class TileEntityRedstoneTransmitter extends TileEntity implements ITickab
     }
 
     @Override
-    public BlockPos getPositionBoundTo() {
-        return this.posBound;
+    public BlockPos getBoundPosition() {
+        return posBound;
     }
 
     @Override
-    public void setPositionBoundTo(BlockPos pos) {
+    public void setBoundPosition(BlockPos pos) {
         this.posBound = pos;
     }
-
 }

@@ -1,10 +1,8 @@
-package de.aelpecyem.elementaristics.blocks.tileentity;
+package de.aelpecyem.elementaristics.blocks.tileentity.tile;
 
 import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.init.ModItems;
 import de.aelpecyem.elementaristics.networking.PacketHandler;
-import de.aelpecyem.elementaristics.networking.tileentity.inventory.PacketUpdateInventory;
-import de.aelpecyem.elementaristics.networking.tileentity.tick.PacketUpdateTickTime;
 import de.aelpecyem.elementaristics.particles.ParticleGeneric;
 import de.aelpecyem.elementaristics.recipe.TunnelerRecipes;
 import net.minecraft.entity.item.EntityItem;
@@ -23,7 +21,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class TileEntityTunneler extends TileEntity implements ITickable, IHasTickCount, IHasInventory {
+public class TileEntityTunneler extends TileEntity implements ITickable {
 
 
     public ItemStackHandler inventory = new ItemStackHandler(2) {
@@ -91,9 +89,7 @@ public class TileEntityTunneler extends TileEntity implements ITickable, IHasTic
     @Override
     public void update() {
         if (!world.isRemote) {
-            PacketHandler.sendToAllAround(world, pos, 64, new PacketUpdateInventory(TileEntityTunneler.this, inventory));
-            PacketHandler.sendToAllAround(world, pos, 64, new PacketUpdateTickTime(TileEntityTunneler.this, tickCount));
-
+            PacketHandler.syncTile(this);
         }
         if (world.isBlockPowered(pos)) {
             if (!inventory.getStackInSlot(0).isEmpty() && inventory.getStackInSlot(1).isItemEqual(new ItemStack(ModItems.matter_accelerating_module))) {
@@ -108,9 +104,9 @@ public class TileEntityTunneler extends TileEntity implements ITickable, IHasTic
                             for (int i = -1; i > -4; i--) {
                                 if (world.getTileEntity(new BlockPos(pos.getX(), pos.getY() + i, pos.getZ())) instanceof TileEntityFilterHolder) {
                                     TileEntityFilterHolder filter = (TileEntityFilterHolder) world.getTileEntity(new BlockPos(pos.getX(), pos.getY() + i, pos.getZ()));
-                                    for (Iterator<ItemStack> iterator = missingItems.iterator(); iterator.hasNext();) {
+                                    for (Iterator<ItemStack> iterator = missingItems.iterator(); iterator.hasNext(); ) {
                                         ItemStack stack = iterator.next();
-                                        if(stack.isItemEqual(filter.inventory.getStackInSlot(0))) {
+                                        if (stack.isItemEqual(filter.inventory.getStackInSlot(0))) {
                                             filter.inventory.setStackInSlot(0, ItemStack.EMPTY);
                                             iterator.remove();
                                         }
@@ -177,18 +173,4 @@ public class TileEntityTunneler extends TileEntity implements ITickable, IHasTic
 
     }
 
-    @Override
-    public int getTickCount() {
-        return tickCount;
-    }
-
-    @Override
-    public void setTickCount(int tickCount) {
-        this.tickCount = tickCount;
-    }
-
-    @Override
-    public ItemStackHandler getInventory() {
-        return inventory;
-    }
 }

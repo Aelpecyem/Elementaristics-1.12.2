@@ -1,8 +1,8 @@
 package de.aelpecyem.elementaristics.entity.elementals;
 
 import de.aelpecyem.elementaristics.Elementaristics;
-import de.aelpecyem.elementaristics.blocks.tileentity.TileEntityGoldenThread;
 import de.aelpecyem.elementaristics.blocks.tileentity.blocks.BlockGoldenThread;
+import de.aelpecyem.elementaristics.blocks.tileentity.tile.TileEntityGoldenThread;
 import de.aelpecyem.elementaristics.entity.EntityCultist;
 import de.aelpecyem.elementaristics.misc.elements.Aspect;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;

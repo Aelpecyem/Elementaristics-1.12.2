@@ -1,15 +1,14 @@
 package de.aelpecyem.elementaristics.entity.protoplasm;
 
 import de.aelpecyem.elementaristics.Elementaristics;
-import de.aelpecyem.elementaristics.blocks.tileentity.IHasInventory;
 import de.aelpecyem.elementaristics.entity.protoplasm.tasks.ProtoplasmTaskInit;
 import de.aelpecyem.elementaristics.entity.protoplasm.tasks.execs.ProtoplasmTask;
 import de.aelpecyem.elementaristics.init.ModItems;
 import de.aelpecyem.elementaristics.items.base.thaumagral.ItemThaumagral;
 import de.aelpecyem.elementaristics.networking.PacketHandler;
+import de.aelpecyem.elementaristics.networking.entity.PacketUpdateProtoplasmInventory;
 import de.aelpecyem.elementaristics.networking.entity.protoplasm.PacketDyeProtoplasm;
 import de.aelpecyem.elementaristics.networking.player.PacketMessage;
-import de.aelpecyem.elementaristics.networking.tileentity.inventory.PacketUpdateInventory;
 import de.aelpecyem.elementaristics.util.MiscUtil;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.*;
@@ -38,7 +37,7 @@ import javax.annotation.Nullable;
 import java.awt.*;
 import java.util.List;
 
-public class EntityProtoplasm extends EntityTameable implements IMob, IHasInventory {
+public class EntityProtoplasm extends EntityTameable implements IMob {
     protected static final DataParameter<Integer> SIZE = EntityDataManager.<Integer>createKey(EntityProtoplasm.class, DataSerializers.VARINT);
     protected static final DataParameter<Integer> COLOR = EntityDataManager.<Integer>createKey(EntityProtoplasm.class, DataSerializers.VARINT);
 
@@ -437,15 +436,11 @@ public class EntityProtoplasm extends EntityTameable implements IMob, IHasInvent
     @Override
     public void onUpdate() {
         if (!world.isRemote) {
-            PacketHandler.sendToAllAround(world, getPosition(), 64, new PacketUpdateInventory(this, getInventory()));
+            PacketHandler.sendToAllAround(world, getPosition(), 64, new PacketUpdateProtoplasmInventory(this));
         }
         super.onUpdate();
     }
 
-    @Override
-    public ItemStackHandler getInventory() {
-        return inventory;
-    }
 
     //Todo, add doc to slime tasks where it explains how it all works
     public static class AIPerformTasks extends EntityAIBase {

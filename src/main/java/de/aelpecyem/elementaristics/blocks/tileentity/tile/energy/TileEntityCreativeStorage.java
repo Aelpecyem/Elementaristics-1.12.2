@@ -1,4 +1,4 @@
-package de.aelpecyem.elementaristics.blocks.tileentity.energy;
+package de.aelpecyem.elementaristics.blocks.tileentity.tile.energy;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ITickable;

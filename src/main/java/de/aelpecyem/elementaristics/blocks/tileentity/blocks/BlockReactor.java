@@ -1,7 +1,7 @@
 package de.aelpecyem.elementaristics.blocks.tileentity.blocks;
 
 import de.aelpecyem.elementaristics.blocks.tileentity.BlockTileEntity;
-import de.aelpecyem.elementaristics.blocks.tileentity.TileEntityReactor;
+import de.aelpecyem.elementaristics.blocks.tileentity.tile.TileEntityReactor;
 import de.aelpecyem.elementaristics.util.InventoryUtil;
 import de.aelpecyem.elementaristics.util.MaganUtil;
 import net.minecraft.block.BlockHorizontal;

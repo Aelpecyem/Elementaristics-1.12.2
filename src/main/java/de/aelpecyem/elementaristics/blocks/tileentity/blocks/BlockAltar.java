@@ -1,7 +1,7 @@
 package de.aelpecyem.elementaristics.blocks.tileentity.blocks;
 
 import de.aelpecyem.elementaristics.blocks.tileentity.BlockTileEntity;
-import de.aelpecyem.elementaristics.blocks.tileentity.TileEntityAltar;
+import de.aelpecyem.elementaristics.blocks.tileentity.tile.TileEntityAltar;
 import de.aelpecyem.elementaristics.init.ModItems;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.material.Material;

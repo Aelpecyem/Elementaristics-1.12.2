@@ -2,29 +2,14 @@ package de.aelpecyem.elementaristics.items.base.bauble;
 
 import baubles.api.BaubleType;
 import baubles.api.IBauble;
-import de.aelpecyem.elementaristics.blocks.tileentity.energy.TileEntityEnergy;
-import de.aelpecyem.elementaristics.capability.player.IPlayerCapabilities;
 import de.aelpecyem.elementaristics.capability.player.PlayerCapProvider;
 import de.aelpecyem.elementaristics.init.SoulInit;
 import de.aelpecyem.elementaristics.items.base.ItemBase;
-import de.aelpecyem.elementaristics.util.MaganUtil;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.text.TextFormatting;
-import net.minecraft.world.World;
-
-import java.util.List;
 
 public class ItemWaterBody extends ItemBase implements IBauble {
     public ItemWaterBody() {
