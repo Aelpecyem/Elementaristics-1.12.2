@@ -7,7 +7,6 @@ import de.aelpecyem.elementaristics.misc.elements.Aspect;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;
 import de.aelpecyem.elementaristics.networking.PacketHandler;
 import de.aelpecyem.elementaristics.recipe.InfusionRecipes;
-import de.aelpecyem.elementaristics.util.MiscUtil;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -21,7 +20,6 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nullable;
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -100,17 +98,8 @@ public class TileEntityInfusionBasin extends TileEntity implements ITickable {
 
     @Override
     public void update() {
-        doPassiveParticleShow();
-        markDirty();
         if (!world.isRemote) {
             PacketHandler.syncTile(this);
-            // IBlockState state = this.world.getBlockState(this.pos);
-            //this.world.notifyBlockUpdate(this.pos, state, state, 6);
-
-            /*PacketHandler.sendToAllAround(world, pos, 64, new PacketUpdateInventory(this, inventory));
-            PacketHandler.sendToAllAround(world, pos, 64, new PacketUpdateTickTime(this, tickCount));
-
-            PacketHandler.sendToAllAround(world, pos, 64, new PacketUpdateBasin(TileEntityInfusionBasin.this));*/
         }
         if (!inventory.getStackInSlot(0).isEmpty() && fillCount > 0 && aspectIDs.size() > 0) {
             tickCount++;
@@ -156,12 +145,6 @@ public class TileEntityInfusionBasin extends TileEntity implements ITickable {
     private void doParticleShow() {
         if (world.rand.nextInt(10) == 5 && !aspectIDs.isEmpty() && fillCount > 0) {
             Elementaristics.proxy.generateGenericParticles(world, pos.getX() + 0.5 + (world.rand.nextGaussian() / 10), pos.getY() + 0.7 + (world.rand.nextGaussian() / 12), pos.getZ() + 0.5 + (world.rand.nextGaussian() / 10), Aspects.magan.getColor(), 3, 100, 0, true, true);
-        }
-    }
-
-    private void doPassiveParticleShow() {
-        if (world.rand.nextInt(10) == 5 && !aspectIDs.isEmpty() && fillCount > 0) {
-            Elementaristics.proxy.generateGenericParticles(world, pos.getX() + 0.5 + (world.rand.nextGaussian() / 10), pos.getY() + 0.7 + (world.rand.nextGaussian() / 12), pos.getZ() + 0.5 + (world.rand.nextGaussian() / 10), MiscUtil.coverColorToInt(MiscUtil.blend(MiscUtil.getColorForEssenceIds(aspectIDs), new Color(47, 130, 232, 205), Math.min(0.1 * aspectIDs.size(), 0.9), 1 - Math.min(0.1 * aspectIDs.size(), 0.9))), 3, 100, 0, true, true);
         }
     }
 

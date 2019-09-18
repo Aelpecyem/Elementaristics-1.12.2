@@ -41,36 +41,11 @@ public class TESRBasin extends TileEntitySpecialRenderer<TileEntityInfusionBasin
             GL11.glPopMatrix();
         }
         if (te.fillCount > 0) {
-            /*RenderHelper.disableStandardItemLighting();
-            Tessellator tess = Tessellator.getInstance();
-            BufferBuilder buffer = tess.getBuffer();
-
-            buffer.setTranslation(x, y, z);
-
-            buffer.begin(GL11.GL_QUADS, new VertexFormat()
-                    .addElement(DefaultVertexFormats.POSITION_3F)
-                    .addElement(DefaultVertexFormats.TEX_2F)
-                    .addElement(DefaultVertexFormats.TEX_2S)
-                    .addElement(DefaultVertexFormats.COLOR_4UB));
-
-            buffer.pos(1F / 16F, te.fillCount / 4F * 0.7 + 0.1, 15F / 16F).tex(1, 1).lightmap(240, 240).color(getWaterColor(te).getRed(), getWaterColor(te).getGreen(), getWaterColor(te).getBlue(), 240).endVertex();
-            buffer.pos(15F / 16F, te.fillCount / 4F * 0.7 + 0.1, 15F / 16F).tex(2, 1).lightmap(240, 240).color(getWaterColor(te).getRed(), getWaterColor(te).getGreen(), getWaterColor(te).getBlue(), 240).endVertex();
-            buffer.pos(15F / 16F, te.fillCount / 4F * 0.7 + 0.1, 1F / 16F).tex(2, 2).lightmap(240, 240).color(getWaterColor(te).getRed(), getWaterColor(te).getGreen(), getWaterColor(te).getBlue(), 240).endVertex();
-            buffer.pos(1F / 16F, te.fillCount / 4F * 0.7 + 0.1, 1F / 16F).tex(1, 2).lightmap(240, 240).color(getWaterColor(te).getRed(), getWaterColor(te).getGreen(), getWaterColor(te).getBlue(), 240).endVertex();
-
-            Minecraft.getMinecraft().renderEngine.bindTexture(TEXTURE);
-            tess.draw();
-
-
-            buffer.setTranslation(0, 0, 0);
-
-            RenderHelper.enableStandardItemLighting();*/
-
-            renderWhat(te, x, y, z);
+            renderWater(te, x, y, z);
         }
     }
 
-    public void renderWhat(TileEntityInfusionBasin te, double x, double y, double z) {
+    public void renderWater(TileEntityInfusionBasin te, double x, double y, double z) {
         GlStateManager.pushMatrix();
         GlStateManager.disableLighting();
         GlStateManager.enableBlend();
@@ -97,7 +72,7 @@ public class TESRBasin extends TileEntitySpecialRenderer<TileEntityInfusionBasin
     }
 
     public Color getWaterColor(TileEntityInfusionBasin te) {
-        return MiscUtil.blend(MiscUtil.getColorForEssenceIds(te.aspectIDs), new Color(47, 130, 232, 205), Math.min(0.2 * te.aspectIDs.size(), 0.9), 1 - Math.min(0.2 * te.aspectIDs.size(), 0.9));
+        return MiscUtil.blend(MiscUtil.getColorForEssenceIds(te.aspectIDs), new Color(47, 130, 232, 205), Math.min(0.2 * te.aspectIDs.size(), 0.9), 1 - Math.min(0.33 * te.aspectIDs.size(), 1));
     }
 
 }

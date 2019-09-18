@@ -1,10 +1,8 @@
 package de.aelpecyem.elementaristics.util;
 
 import com.google.common.base.Predicate;
-import de.aelpecyem.elementaristics.misc.elements.Aspect;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
 
 import javax.annotation.Nullable;
 import java.awt.*;
@@ -61,15 +59,18 @@ public class MiscUtil {
 
     public static Color getColorForEssenceIds(List<Integer> aspectIdList) {
         int r = 0, g = 0, b = 0;
+        int relevance = 0;
+        int mult = 100 + relevance * 30;
         for (int aspect : aspectIdList) {
-            r += convertIntToColor(Aspects.getElementById(aspect).getColor()).getRed() * 100;
-            g += convertIntToColor(Aspects.getElementById(aspect).getColor()).getGreen() * 100;
-            b += convertIntToColor(Aspects.getElementById(aspect).getColor()).getBlue() * 100;
+            r += convertIntToColor(Aspects.getElementById(aspect).getColor()).getRed() * mult;
+            g += convertIntToColor(Aspects.getElementById(aspect).getColor()).getGreen() * mult;
+            b += convertIntToColor(Aspects.getElementById(aspect).getColor()).getBlue() * mult;
+            relevance++;
         }
         if (aspectIdList.size() > 0) {
-            r /= aspectIdList.size() * 100;
-            g /= aspectIdList.size() * 100;
-            b /= aspectIdList.size() * 100;
+            r /= aspectIdList.size() * mult;
+            g /= aspectIdList.size() * mult;
+            b /= aspectIdList.size() * mult;
         } else {
             r = 255;
             g = 255;

@@ -115,6 +115,8 @@ public class ModBlocks {
     public static BlockRedstoneTransmitter block_transmitter_redstone;
     public static BlockRedstoneEmulator block_emulator_redstone;
 
+    public static BlockVessel block_vessel;
+
     //PLANTS
     public static BlockBush flower_ecstasy;
     public static BlockBush flower_contentment;
@@ -219,6 +221,8 @@ public class ModBlocks {
         block_emulator_redstone = new BlockRedstoneEmulator();
 
         stone_runed = new BlockBase(Material.ROCK, "stone_runed");
+
+        block_vessel = new BlockVessel();
     }
 
 

@@ -30,21 +30,34 @@ public class InventoryUtil {
         }
     }
 
-    public static void insertOneItemToInventory(TileEntity te, ItemStackHandler inv, int slot, EntityPlayer player, EnumHand hand) {
+    public static boolean insertOneItemToInventory(TileEntity te, ItemStackHandler inv, int slot, EntityPlayer player, EnumHand hand) {
+        boolean flag = false;
         if (inv.getSlotLimit(slot) > inv.getStackInSlot(slot).getCount()) {
             if (inv.getStackInSlot(slot).isEmpty()) {
                 ItemStack stack = player.getHeldItem(EnumHand.MAIN_HAND).copy();
                 stack.setCount(1);
                 inv.setStackInSlot(slot, stack);
                 player.getHeldItem(hand).shrink(1);
+                flag = true;
             } else if (areStacksEqual(inv.getStackInSlot(slot), player.getHeldItem(hand))) {
                 inv.getStackInSlot(slot).grow(1);
                 player.getHeldItem(hand).shrink(1);
+                flag = true;
             }
             player.world.updateComparatorOutputLevel(te.getPos(), null);
+            return flag;
         }
+        return false;
     }
 
+    public static boolean insertItems(TileEntity te, ItemStackHandler inv, EntityPlayer player, EnumHand hand) {
+        for (int i = 0; i < inv.getSlots(); i++) {
+            if (insertOneItemToInventory(te, inv, i, player, hand)) {
+                return true;
+            }
+        }
+        return false;
+    }
     public static void drawItemFromInventoryBackasswards(TileEntity te, ItemStackHandler inv, EntityPlayer player) {
         for (int i = 0; i < inv.getSlots(); i++) {
             ItemStack stackAt = inv.getStackInSlot(i);
