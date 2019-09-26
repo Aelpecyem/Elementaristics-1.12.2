@@ -2,12 +2,14 @@ package de.aelpecyem.elementaristics.blocks.tileentity.blocks;
 
 import de.aelpecyem.elementaristics.blocks.tileentity.BlockTileEntity;
 import de.aelpecyem.elementaristics.blocks.tileentity.tile.TileEntityVessel;
+import de.aelpecyem.elementaristics.items.base.artifacts.ItemChannelingTool;
 import de.aelpecyem.elementaristics.util.InventoryUtil;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -15,10 +17,14 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
+
+import java.util.List;
 
 
 public class BlockVessel extends BlockTileEntity<TileEntityVessel> {
@@ -66,6 +72,10 @@ public class BlockVessel extends BlockTileEntity<TileEntityVessel> {
         }
     }
 
+    @Override
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+        return new AxisAlignedBB(0, 0, 0, 1, 0.5, 1);
+    }
 
     @Override
     public BlockRenderLayer getBlockLayer() {
@@ -95,6 +105,10 @@ public class BlockVessel extends BlockTileEntity<TileEntityVessel> {
                 worldIn.spawnEntity(item);
             }
         }
+        if (tile.getCagedEntity() != null) {
+            worldIn.spawnEntity(tile.getCagedEntity());
+            tile.clearCage();
+        }
         super.breakBlock(worldIn, pos, state);
     }
 
@@ -102,22 +116,35 @@ public class BlockVessel extends BlockTileEntity<TileEntityVessel> {
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (!worldIn.isRemote) {
             TileEntityVessel tile = getTileEntity(worldIn, pos);
-            IItemHandler itemHandler = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, facing);
+            tile.setLastUser(playerIn);
             ItemStack heldItem = playerIn.getHeldItem(hand);
 
             if (heldItem.isEmpty()) {
-                InventoryUtil.drawItemFromInventoryBackasswards(tile, tile.inventory, playerIn);
-            } else {
-                InventoryUtil.insertItems(tile, tile.inventory, playerIn, hand);
-                if (tile.inventory.getStackInSlot(0).isEmpty()) {
-                    playerIn.setHeldItem(hand, itemHandler.insertItem(0, heldItem, false));
-                } else if (tile.inventory.getStackInSlot(1).isEmpty()) {
-                    playerIn.setHeldItem(hand, itemHandler.insertItem(1, heldItem, false));
+                if (!playerIn.isSneaking())
+                    InventoryUtil.drawItemFromInventoryBackasswards(tile, tile.inventory, playerIn);
+                else {
+                    EntityLiving entityIn = getEntityOnTop(worldIn, pos, state); //for a test
+                    if (entityIn != null && tile.getCagedEntity() == null) {
+                        tile.absorbEntity(entityIn);
+                    } else if (tile.getCagedEntity() != null) {
+                        worldIn.spawnEntity(tile.getCagedEntity());
+                        tile.clearCage();
+                    }
                 }
+            } else {
+                if (!(playerIn.getHeldItem(hand).getItem() instanceof ItemChannelingTool))
+                    InventoryUtil.insertItems(tile, tile.inventory, playerIn, hand);
             }
             tile.markDirty();
         }
         return true;
+    }
+
+    public EntityLiving getEntityOnTop(World world, BlockPos pos, IBlockState state) {
+        List<EntityLiving> onTopList = world.getEntitiesWithinAABB(EntityLiving.class, state.getCollisionBoundingBox(world, pos).offset(pos).grow(-0.1, 1, -0.1));
+        if (!onTopList.isEmpty())
+            return onTopList.get(0);
+        return null;
     }
 
     @Override

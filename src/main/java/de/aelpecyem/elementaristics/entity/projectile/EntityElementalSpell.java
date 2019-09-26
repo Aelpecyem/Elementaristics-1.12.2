@@ -24,7 +24,6 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.UUID;
 
-//yup, grabbed that code from https://github.com/zabi94/Covens-reborn/blob/master/src/main/java/com/covens/common/entity/EntitySpellCarrier.java
 public class EntityElementalSpell extends EntityThrowable {
     private static final DataParameter<Integer> ASPECT = EntityDataManager.<Integer>createKey(EntityElementalSpell.class, DataSerializers.VARINT);
     private static final DataParameter<String> CASTER = EntityDataManager.<String>createKey(EntityElementalSpell.class, DataSerializers.STRING);

@@ -1,19 +1,14 @@
 package de.aelpecyem.elementaristics.recipe;
 
 import de.aelpecyem.elementaristics.recipe.base.ForgeRecipe;
-import de.aelpecyem.elementaristics.recipe.base.PurifierRecipe;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.CopyOnWriteArrayList;
 
-public class ForgeRecipes {
+public class ForgeRecipes { //todo oh god all of that needs to get better in the rewrite
     public static Map<ResourceLocation, ForgeRecipe> FORGE_RECIPES = new HashMap<>();
 
     public static void addRecipe(ForgeRecipe recipe) {

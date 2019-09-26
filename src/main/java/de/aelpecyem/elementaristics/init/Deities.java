@@ -57,17 +57,17 @@ public class Deities {
         deityAngel = new DeityPotionEffectBase(TimeUtil.getTickTimeStartForHour(9), new ResourceLocation(Elementaristics.MODID, "deity_angel"), 4757545, MobEffects.REGENERATION);
         deityStorm = new DeitySupplyEffectBase(TimeUtil.getTickTimeStartForHour(10), new ResourceLocation(Elementaristics.MODID, "deity_storm"), Aspects.electricity, 1729436);
         deityKnight = new DeityPotionEffectBase(TimeUtil.getTickTimeStartForHour(11), new ResourceLocation(Elementaristics.MODID, "deity_knight"), 1845376, MobEffects.STRENGTH);
-        deitySun = new DeitySupplyEffectBase(TimeUtil.getTickTimeStartForHour(12), new ResourceLocation(Elementaristics.MODID, "deity_sun"), Aspects.light, 15194144);
+        deitySun = new DeitySupplyEffectBase(TimeUtil.getTickTimeStartForHour(12), new ResourceLocation(Elementaristics.MODID, "deity_sun"), Aspects.light, 15194144, new ModelSun(), new ResourceLocation(Elementaristics.MODID, "textures/blocks/shrines/sun.png"));
         deityHarbinger = new DeityHarbinger();
         deityQueen = new DeityQueen();
         deityGoat = new DeityGoat();
-        deityMoth = new DeitySupplyEffectBase(TimeUtil.getTickTimeStartForHour(16), new ResourceLocation(Elementaristics.MODID, "deity_moth"), Aspects.chaos, 1052431);
+        deityMoth = new DeitySupplyEffectBase(TimeUtil.getTickTimeStartForHour(16), new ResourceLocation(Elementaristics.MODID, "deity_moth"), Aspects.chaos, 1052431, new ModelMoth(), new ResourceLocation(Elementaristics.MODID, "textures/blocks/shrines/moth.png"));
         deityThread = new DeitySupplyEffectBase(TimeUtil.getTickTimeStartForHour(17), new ResourceLocation(Elementaristics.MODID, "deity_thread"), Aspects.mana, 13442512);
         deityMirror = new DeitySupplyEffectBase(TimeUtil.getTickTimeStartForHour(18), new ResourceLocation(Elementaristics.MODID, "deity_mirror"), Aspects.crystal, 2143412);
         deityDancer = new DeityDancer();
         deityKing = new DeityKing();
         deityMother = new DeityMother();//DeitySupplyEffectBase(TimeUtil.getTickTimeStartForHour(21), new ResourceLocation(Elementaristics.MODID, "deity_mother"), Aspects.life, 15481145);
-        deityMoon = new DeitySupplyEffectBase(TimeUtil.getTickTimeStartForHour(22), new ResourceLocation(Elementaristics.MODID, "deity_moon"), Aspects.order, 16508803);
+        deityMoon = new DeitySupplyEffectBase(TimeUtil.getTickTimeStartForHour(22), new ResourceLocation(Elementaristics.MODID, "deity_moon"), Aspects.order, 16508803, new ModelMoon(), new ResourceLocation(Elementaristics.MODID, "textures/blocks/shrines/moon.png"));
         deityWitch = new DeityWitch();
 
 

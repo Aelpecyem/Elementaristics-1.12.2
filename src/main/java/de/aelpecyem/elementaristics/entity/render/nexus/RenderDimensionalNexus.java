@@ -1,7 +1,7 @@
 package de.aelpecyem.elementaristics.entity.render.nexus;
 
 import de.aelpecyem.elementaristics.entity.nexus.EntityDimensionalNexus;
-import de.aelpecyem.elementaristics.util.MiscUtil;
+import de.aelpecyem.elementaristics.util.ColorUtil;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
@@ -10,6 +10,7 @@ import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.ResourceLocation;
+import org.lwjgl.opengl.GL11;
 
 import javax.annotation.Nullable;
 import java.awt.*;
@@ -34,7 +35,6 @@ public class RenderDimensionalNexus extends Render<EntityDimensionalNexus> {
             BufferBuilder bufferbuilder = tessellator.getBuffer();
             RenderHelper.disableStandardItemLighting();
             float animState = 50F - Math.abs(50F - ((float) entity.ticksExisted % 100F));//ranges from 0 - 50
-            //float f = ((float) entity.ticksExisted + partialTicks) / 200.0F;
             float transparency = 0.1F + animState / 1000F;// + animState*0.01F; //Float.valueOf(I18n.format("temp.1"));//1F;//0.0F;, currently 80
             float rotation = ((float) entity.ticksExisted + partialTicks) / 200.0F;
             int amount = 8;
@@ -43,24 +43,35 @@ public class RenderDimensionalNexus extends Render<EntityDimensionalNexus> {
             float f = Math.min((float) entity.getRiteTicks() / 60F, 1);
 
             if (entity.getRite() != null) {
-                color = MiscUtil.blend(new Color(entity.getRite().getColor()), color, f, 1 - f);
+                color = ColorUtil.blend(new Color(entity.getRite().getColor()), color, f, 1 - f);
             } else if (entity.getRiteString().equals("") && entity.getRiteTicks() > 0) {
-                color = MiscUtil.blend(Color.RED, color, f, 1 - f);
+                color = ColorUtil.blend(Color.RED, color, f, 1 - f);
             }
             Color shades = color.darker();
             GlStateManager.disableTexture2D();
             GlStateManager.shadeModel(7425);
             GlStateManager.enableBlend();
-            GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
+            boolean isDark = false;
+            if (entity.getRite() != null) {
+                Color riteColor = new Color(entity.getRite().getColor());
+                ColorUtil.isDark(riteColor.getRed() / 255F, riteColor.getGreen() / 255F, riteColor.getBlue() / 255F);
+            }
+            if (!isDark) {
+                GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
+            } else {
+                GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
+            }
             GlStateManager.disableAlpha();
             GlStateManager.enableCull();
             GlStateManager.depthMask(false);
             GlStateManager.pushMatrix();
 
+
+            GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+
             GlStateManager.translate((float) x, (float) y + entity.height / 2, (float) z);
-            for (int i = 0; i < amount; ++i) { //(float)i < (f + f * f) / 2.0F * 60.0F //might vary the amount
-                //float varyLength = 0.4F + animState * 0.002F;
-                float distance = random.nextFloat() * length + 0.5F;//random.nextFloat() * length + 5.0F + varyLength * 10.0F;
+            for (int i = 0; i < amount; ++i) {
+                float distance = random.nextFloat() * length + 0.5F;
                 if (entity.getRite() != null) {
                     distance += Math.min((float) entity.getRiteTicks() / 100F, 5);
                 }
@@ -71,8 +82,7 @@ public class RenderDimensionalNexus extends Render<EntityDimensionalNexus> {
                 GlStateManager.rotate(random.nextFloat() * 360.0F, 1.0F, 0.0F, 0.0F);
                 GlStateManager.rotate(random.nextFloat() * 360.0F, 0.0F, 1.0F, 0.0F);
                 GlStateManager.rotate(random.nextFloat() * 360.0F + rotation * i * 360F / 6F, 0.0F, 0.0F, 1.0F);
-                //
-                bufferbuilder.begin(6, DefaultVertexFormats.POSITION_COLOR);
+                bufferbuilder.begin(GL11.GL_TRIANGLE_FAN, DefaultVertexFormats.POSITION_COLOR);//PARTICLE_POSITION_TEX_COLOR_LMAP);
                 bufferbuilder.pos(0.0D, 0.0D, 0.0D).color(color.getRed(), color.getGreen(), color.getBlue(), (int) (255.0F * (1.0F - transparency))).endVertex();
                 bufferbuilder.pos(-0.866D * (double) width, (double) distance, (double) (-0.5F * width)).color(shades.getRed(), shades.getGreen(), shades.getBlue(), 0).endVertex();
                 bufferbuilder.pos(0.866D * (double) width, (double) distance, (double) (-0.5F * width)).color(shades.getRed(), shades.getGreen(), shades.getBlue(), 0).endVertex();

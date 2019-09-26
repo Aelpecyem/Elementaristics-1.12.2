@@ -27,14 +27,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.IntFunction;
 
-public class ModBlocks {
+public class
+ModBlocks {
 
     public static List<Block> BLOCKS = new ArrayList<>();
 
     //CROPS
     public static BlockCropBase crop_opium;
     //"DECOR"
+    public static BlockBase cobblestone_enriched;
     public static BlockBase stone_enriched;
+    public static BlockBase stonebrick_enriched;
+
     public static BlockPedestal pedestal;
     public static BlockBase stone_runed;
 
@@ -133,14 +137,15 @@ public class ModBlocks {
 
     public static void init() {
         crop_opium = new CropOpium();
+        stonebrick_enriched = new BlockBase(Material.ROCK, "stonebricks_enriched"); //todo add cobblestone variant (adapt the recipes to use the stonebrick variant) and add a normal stone variant (textures are already done :DDD)
         stone_enriched = new BlockBase(Material.ROCK, "stone_enriched");
+
         pedestal = new BlockPedestal();
         purifier = new BlockPurifier();
         concentrator = new BlockConcentrator();
         tunneler_top = new BlockTunneler();
         filter_holder = new BlockFilterHolder();
         reactor = new BlockReactor();
-        essence_casing = new BlockBase(Material.ROCK, "casing_essence");
         altar = new BlockAltar();
         basin = new BlockBasin();
         fabric_reason = new BlockBase(Material.ROCK, "fabric_reason");
@@ -167,11 +172,11 @@ public class ModBlocks {
 
         symbol_nothingness = new BlockDeityShrineBase("symbol_nothingness", Deities.deityNothingness, false);
         symbol_azathoth = new BlockDeityShrineBase("symbol_azathoth", Deities.deityAzathoth, false);
-        symbol_dragon_fire = new BlockDeityShrineBase("symbol_dragon_fire", Deities.deityDragonFire, false);
         symbol_dragon_aether = new BlockDeityShrineBase("symbol_dragon_aether", Deities.deityDragonAether, false);
-        symbol_dragon_air = new BlockDeityShrineBase("symbol_dragon_air", Deities.deityDragonAir, false);
+        symbol_dragon_fire = new BlockDeityShrineBase("symbol_dragon_fire", Deities.deityDragonFire, false);
         symbol_dragon_earth = new BlockDeityShrineBase("symbol_dragon_earth", Deities.deityDragonEarth, false);
         symbol_dragon_water = new BlockDeityShrineBase("symbol_dragon_water", Deities.deityDragonWater, false);
+        symbol_dragon_air = new BlockDeityShrineBase("symbol_dragon_air", Deities.deityDragonAir, false);
         symbol_gate = new BlockDeityShrineBase("symbol_gate", Deities.deityGateAndKey, false);
         symbol_dreamer = new BlockDeityShrineBase("symbol_dreamer", Deities.deityDreamer, false);
         symbol_angel = new BlockDeityShrineBase("symbol_angel", Deities.deityAngel, false);

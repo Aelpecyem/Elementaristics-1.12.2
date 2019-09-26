@@ -2,6 +2,7 @@ package de.aelpecyem.elementaristics.particles;
 
 import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.config.Config;
+import de.aelpecyem.elementaristics.util.ColorUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.renderer.ActiveRenderInfo;
@@ -22,11 +23,10 @@ import java.util.function.Supplier;
 //snatched directly from https://github.com/Ellpeck/NaturesAura/blob/master/src/main/java/de/ellpeck/naturesaura/particles/ParticleHandler.java
 @SideOnly(Side.CLIENT)
 public final class ParticleHandler {
-    public static final ResourceLocation PARTICLE_TEXTURES = new ResourceLocation(Elementaristics.MODID, "textures/misc/particles.png"); //switch to particle_base_1.png if it's considered fancier
+    public static final ResourceLocation PARTICLE_TEX = new ResourceLocation(Elementaristics.MODID, "textures/misc/particle_base_1.png");
 
     private static final List<Particle> PARTICLES = new CopyOnWriteArrayList<>();
-    private static final List<Particle> PARTICLES_NO_DEPTH = new CopyOnWriteArrayList<>(); //use a larger texture with indexes!
-    public static boolean depthEnabled = true;
+    private static final List<Particle> PARTICLES_DARK = new CopyOnWriteArrayList<>(); //use a larger texture with indexes!
     public static int range = 32;
 
     public static void spawnParticle(Supplier<Particle> particle) {
@@ -46,19 +46,18 @@ public final class ParticleHandler {
                 }
                 break;
         }
-
-        if (depthEnabled) {
+        boolean isDark = ColorUtil.isDark(particle.get().getRedColorF(), particle.get().getGreenColorF(), particle.get().getBlueColorF());
+        if (!isDark) {
             PARTICLES.add(particle.get());
         } else {
-            PARTICLES_NO_DEPTH.add(particle.get());
+            PARTICLES_DARK.add(particle.get());
         }
     }
 
     public static void updateParticles() {
         updateList(PARTICLES);
-        updateList(PARTICLES_NO_DEPTH);
+        updateList(PARTICLES_DARK);
 
-        depthEnabled = true;
         range = 32;
     }
 
@@ -75,6 +74,8 @@ public final class ParticleHandler {
         Minecraft mc = Minecraft.getMinecraft();
         EntityPlayer player = mc.player;
 
+        //GlStateManager.DestFactor destFactor = GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA; //_ALPHA; //CONSTANT_COLOR;  //usually ONE
+        //GlStateManager.SourceFactor sourceFactor = GlStateManager.SourceFactor.SRC_ALPHA; //usually SRC_ALPHA
         if (player != null) {
             float x = ActiveRenderInfo.getRotationX();
             float z = ActiveRenderInfo.getRotationZ();
@@ -93,11 +94,10 @@ public final class ParticleHandler {
             GlStateManager.enableBlend();
             GlStateManager.alphaFunc(516, 0.003921569F);
             GlStateManager.disableCull();
-            GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
-
             GlStateManager.depthMask(false);
+            mc.getTextureManager().bindTexture(PARTICLE_TEX);
 
-            mc.getTextureManager().bindTexture(PARTICLE_TEXTURES);
+            GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
             Tessellator t = Tessellator.getInstance();
             BufferBuilder buffer = t.getBuffer();
             buffer.begin(GL11.GL_QUADS, DefaultVertexFormats.PARTICLE_POSITION_TEX_COLOR_LMAP);
@@ -106,16 +106,18 @@ public final class ParticleHandler {
             }
             t.draw();
 
-            GlStateManager.disableDepth();
+
+            GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
             buffer.begin(GL11.GL_QUADS, DefaultVertexFormats.PARTICLE_POSITION_TEX_COLOR_LMAP);
-            for (Particle particle : PARTICLES_NO_DEPTH)
+            for (Particle particle : PARTICLES_DARK) {
                 particle.renderParticle(buffer, player, partialTicks, x, xz, z, yz, xy);
+            }
             t.draw();
-            GlStateManager.enableDepth();
+
 
             GlStateManager.enableCull();
             GlStateManager.depthMask(true);
-            GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
+            GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA); //ONE_MINUS_SRC_ALPHA
             GlStateManager.disableBlend();
             GlStateManager.alphaFunc(516, 0.1F);
 
@@ -124,13 +126,13 @@ public final class ParticleHandler {
     }
 
     public static int getParticleAmount(boolean depth) {
-        return depth ? PARTICLES.size() : PARTICLES_NO_DEPTH.size();
+        return depth ? PARTICLES.size() : PARTICLES_DARK.size();
     }
 
     public static void clearParticles() {
         if (!PARTICLES.isEmpty())
             PARTICLES.clear();
-        if (!PARTICLES_NO_DEPTH.isEmpty())
-            PARTICLES_NO_DEPTH.clear();
+        if (!PARTICLES_DARK.isEmpty())
+            PARTICLES_DARK.clear();
     }
 }

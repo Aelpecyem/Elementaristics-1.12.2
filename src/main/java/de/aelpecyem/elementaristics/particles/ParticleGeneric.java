@@ -87,10 +87,10 @@ public class ParticleGeneric extends Particle {
         int sky = brightness >> 16 & 0xFFFF;
         int block = brightness & 0xFFFF;
 
-        float f = (float) this.particleTextureIndexX / 16.0F;
-        float f1 = f + 0.0624375F * 2;
-        float f2 = (float) this.particleTextureIndexY / 16.0F;
-        float f3 = f2 + 0.0624375F * 2;
+        float f = 0;//(float) this.particleTextureIndexX / 16.0F;
+        float f1 = 1;//f + 0.0624375F * 2;
+        float f2 = 0; //(float) this.particleTextureIndexY / 16.0F;
+        float f3 = 1; //f2 + 0.0624375F * 2;
         // float f4 = 0.1F * this.particleScale;
 
         buffer.pos(x + (-rotationX * sc - rotationXY * sc), y + -rotationZ * sc, z + (-rotationYZ * sc - rotationXZ * sc))

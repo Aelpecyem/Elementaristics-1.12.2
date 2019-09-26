@@ -2,7 +2,7 @@ package de.aelpecyem.elementaristics.blocks.tileentity.render;
 
 import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.blocks.tileentity.tile.TileEntityInfusionBasin;
-import de.aelpecyem.elementaristics.util.MiscUtil;
+import de.aelpecyem.elementaristics.util.ColorUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
@@ -23,10 +23,9 @@ public class TESRBasin extends TileEntitySpecialRenderer<TileEntityInfusionBasin
 
     @Override
     public void render(TileEntityInfusionBasin te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
-        //Item influenced
         ItemStack stack = te.inventory.getStackInSlot(0);
         if (!stack.isEmpty()) {
-            EntityItem entityitem = null;
+            EntityItem entityitem;
             float ticks = (float) Minecraft.getMinecraft().getRenderViewEntity().ticksExisted + partialTicks;
             GL11.glPushMatrix();
             GL11.glTranslatef((float) x + 0.5F, (float) y, (float) z + 0.5F);
@@ -53,8 +52,6 @@ public class TESRBasin extends TileEntitySpecialRenderer<TileEntityInfusionBasin
         GlStateManager.translate(x + 0.125, y + te.fillCount / 4F * 0.7 + 0.1, z + 0.125);
         GlStateManager.rotate(90, 1, 0, 0);
         GlStateManager.scale(0.0460425, 0.0460425, 0.0460425);
-        //boolean water = stack.getFluid() == FluidRegistry.WATER;
-        //if (water)
         Color color = getWaterColor(te);
         GlStateManager.color(color.getRed() / 255f, color.getGreen() / 255f, color.getBlue() / 255f);
         Minecraft.getMinecraft().renderEngine.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
@@ -72,7 +69,7 @@ public class TESRBasin extends TileEntitySpecialRenderer<TileEntityInfusionBasin
     }
 
     public Color getWaterColor(TileEntityInfusionBasin te) {
-        return MiscUtil.blend(MiscUtil.getColorForEssenceIds(te.aspectIDs), new Color(47, 130, 232, 205), Math.min(0.2 * te.aspectIDs.size(), 0.9), 1 - Math.min(0.33 * te.aspectIDs.size(), 1));
+        return ColorUtil.blend(ColorUtil.getColorForEssenceIds(te.aspectIDs), new Color(47, 130, 232, 205), Math.min(0.25 * te.aspectIDs.size(), 1), 1 - Math.min(0.25 * te.aspectIDs.size(), 1));
     }
 
 }

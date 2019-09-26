@@ -14,7 +14,7 @@ public class TESRPedestal extends TileEntitySpecialRenderer<TileEntityPedestal> 
     public void render(TileEntityPedestal te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
         ItemStack stack = te.inventory.getStackInSlot(0);
         if (!stack.isEmpty()) {
-            EntityItem entityitem = null;
+            EntityItem entityitem;
             float ticks = (float) Minecraft.getMinecraft().getRenderViewEntity().ticksExisted + partialTicks;
             GL11.glPushMatrix();
             GL11.glTranslatef((float) x + 0.5F, (float) y + 0.75F, (float) z + 0.5F);

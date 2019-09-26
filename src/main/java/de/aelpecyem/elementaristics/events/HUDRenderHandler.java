@@ -20,7 +20,7 @@ import de.aelpecyem.elementaristics.misc.elements.Aspect;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;
 import de.aelpecyem.elementaristics.misc.spell.SpellBase;
 import de.aelpecyem.elementaristics.particles.ParticleGeneric;
-import de.aelpecyem.elementaristics.util.MiscUtil;
+import de.aelpecyem.elementaristics.util.ColorUtil;
 import de.aelpecyem.elementaristics.util.PlayerUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
@@ -158,7 +158,7 @@ public class HUDRenderHandler {
                     int posX = event.getResolution().getScaledWidth() / 2 - 88; // + 10;
                     int poxY = event.getResolution().getScaledHeight() - 19;
                     if (cap.getSoul().isSpellUsable(spellIn, cap))
-                        drawColoredTexturedModalRect(posX + (i * 20), poxY, 16 * spellIn.getIndexX(), 16 * spellIn.getIndexY(), 16, 16, i == cap.getSpellSlot() ? MiscUtil.convertIntToColor(spellIn.getColor()) : MiscUtil.blend(MiscUtil.convertIntToColor(spellIn.getColor()), Color.DARK_GRAY, 0.4, 0.6), i == cap.getSpellSlot() ? 0.8F : 0.4F, TEX);
+                        drawColoredTexturedModalRect(posX + (i * 20), poxY, 16 * spellIn.getIndexX(), 16 * spellIn.getIndexY(), 16, 16, i == cap.getSpellSlot() ? ColorUtil.convertIntToColor(spellIn.getColor()) : ColorUtil.blend(ColorUtil.convertIntToColor(spellIn.getColor()), Color.DARK_GRAY, 0.4, 0.6), i == cap.getSpellSlot() ? 0.8F : 0.4F, TEX);
 
                 }
                 if (cap.getCurrentSpell() != null) {
@@ -249,9 +249,9 @@ public class HUDRenderHandler {
                     int posX = event.getResolution().getScaledWidth() / 2 - 93; // + 10;
                     int poxY = event.getResolution().getScaledHeight() - 31;
                     float mult = caps.getMagan() / caps.getMaxMagan();
-                    Color color = MiscUtil.convertIntToColor(SoulInit.getSoulFromId(caps.getSoulId()).getParticleColor());
+                    Color color = ColorUtil.convertIntToColor(SoulInit.getSoulFromId(caps.getSoulId()).getParticleColor());
                     if (caps.getTimeStunted() > 0) {
-                        color = MiscUtil.blend(color, Color.gray, 1 - Math.min(0.1 * (float) caps.getTimeStunted() / 10F, 0.8), Math.min(0.1 * (float) caps.getTimeStunted() / 10F, 0.8));
+                        color = ColorUtil.blend(color, Color.gray, 1 - Math.min(0.1 * (float) caps.getTimeStunted() / 10F, 0.8), Math.min(0.1 * (float) caps.getTimeStunted() / 10F, 0.8));
                     }
                     //   mc.renderEngine.bindTexture(TEXTURE);
                     drawColoredTexturedModalRect(posX, poxY, 0, 0, Math.round(186 * mult), 9, color, 1, TEXTURE);

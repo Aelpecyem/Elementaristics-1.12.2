@@ -9,7 +9,7 @@ import de.aelpecyem.elementaristics.networking.PacketHandler;
 import de.aelpecyem.elementaristics.networking.entity.PacketUpdateProtoplasmInventory;
 import de.aelpecyem.elementaristics.networking.entity.protoplasm.PacketDyeProtoplasm;
 import de.aelpecyem.elementaristics.networking.player.PacketMessage;
-import de.aelpecyem.elementaristics.util.MiscUtil;
+import de.aelpecyem.elementaristics.util.ColorUtil;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;
@@ -348,7 +348,7 @@ public class EntityProtoplasm extends EntityTameable implements IMob {
     }
 
     public Color getColorAWT(){
-        return MiscUtil.convertIntToColor(dataManager.get(COLOR));
+        return ColorUtil.convertIntToColor(dataManager.get(COLOR));
     }
 
     public String getTaskString(){
@@ -378,7 +378,7 @@ public class EntityProtoplasm extends EntityTameable implements IMob {
      * Merges 5% of the chosen color into the current one
      */
     public void addColor(int color){
-        setColor(MiscUtil.blend(MiscUtil.convertIntToColor(getColor()), MiscUtil.convertIntToColor(color), 0.9, 0.1).getRGB());
+        setColor(ColorUtil.blend(ColorUtil.convertIntToColor(getColor()), ColorUtil.convertIntToColor(color), 0.9, 0.1).getRGB());
     }
 
     public void setSlimeSize(int size, boolean resetHealth) {

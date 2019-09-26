@@ -36,4 +36,9 @@ public class RiteFeast extends RiteBase {
             }
         }
     }
+
+    @Override
+    public int getColor() {
+        return 8327168;
+    }
 }

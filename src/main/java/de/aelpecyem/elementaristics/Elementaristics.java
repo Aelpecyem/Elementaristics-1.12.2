@@ -8,7 +8,6 @@ import de.aelpecyem.elementaristics.events.EmotionHandler;
 import de.aelpecyem.elementaristics.events.LivingEventHandler;
 import de.aelpecyem.elementaristics.events.LootTableEventHandler;
 import de.aelpecyem.elementaristics.events.PotionEventHandler;
-import de.aelpecyem.elementaristics.gui.GuiHandler;
 import de.aelpecyem.elementaristics.init.*;
 import de.aelpecyem.elementaristics.misc.advancements.CustomAdvancements;
 import de.aelpecyem.elementaristics.misc.commands.CommandElementaristics;
@@ -37,7 +36,6 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 import org.apache.logging.log4j.LogManager;
@@ -71,6 +69,7 @@ public final class Elementaristics {
     public static final DamageSource DAMAGE_AIR = new DamageSource("damage_air").setExplosion();
     public static final DamageSource DAMAGE_AETHER = new DamageSource("damage_aether");
 
+    //todo fancy graph with magan increase
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         proxy.preInit(event);
@@ -119,9 +118,8 @@ public final class Elementaristics {
 
         InitRecipes.init();
         RiteInit.init();
-        NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
 
-
+        initFurnaceRecipes();
     }
 
 
@@ -149,6 +147,9 @@ public final class Elementaristics {
         OreDictionary.registerOre("listAllPlant", Blocks.YELLOW_FLOWER);
         OreDictionary.registerOre("listAllPlant", Blocks.TALLGRASS);
         OreDictionary.registerOre("listAllPlant", Blocks.DOUBLE_PLANT);
+    }
+
+    private void initFurnaceRecipes() {
 
     }
 

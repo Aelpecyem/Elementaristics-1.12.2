@@ -99,8 +99,6 @@ public class BlockGoldenThread extends BlockTileEntity<TileEntityGoldenThread> {
 
     @Override
     public ItemStack getItem(World world, BlockPos pos, IBlockState state) {
-        ItemStack stack = new ItemStack(ModItems.item_golden_thread);
-
         return new ItemStack(ModItems.item_golden_thread);
     }
 

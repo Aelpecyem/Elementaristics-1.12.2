@@ -121,6 +121,7 @@ public class EntitySpellProjectile extends EntityThrowable {
             this.setDead();
         }
 
+
         if (world.isRemote && getSpell() != null) {
             Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(world, posX, posY, posZ, world.rand.nextGaussian() * 0.02D, world.rand.nextGaussian() * 0.02D, world.rand.nextGaussian() * 0.02D, getSpell().getColor(), 4, 40, 0, true, true, 0.8F, true));
             Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(world, posX, posY, posZ, world.rand.nextGaussian() * 0.02D, world.rand.nextGaussian() * 0.02D, world.rand.nextGaussian() * 0.02D, getSpell().getColor2(), 4, 40, 0, true, true, 0.8F, true));
@@ -150,7 +151,6 @@ public class EntitySpellProjectile extends EntityThrowable {
 
     @Override
     protected void onImpact(RayTraceResult result) {
-
         if (!this.world.isRemote) {
             SpellBase spell = this.getSpell();
             //   EntityLivingBase caster = this.getCaster();

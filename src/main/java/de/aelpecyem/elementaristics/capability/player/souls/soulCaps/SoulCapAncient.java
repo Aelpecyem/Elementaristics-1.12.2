@@ -4,10 +4,6 @@ import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.capability.player.IPlayerCapabilities;
 import de.aelpecyem.elementaristics.init.SoulInit;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.MobEffects;
-import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
@@ -31,7 +27,6 @@ public class SoulCapAncient extends SoulCap {
         if (cap.getPlayerAscensionStage() > 0) {
             if (player.world.rand.nextInt(1000) <= cap.getPlayerAscensionStage()) {
                 player.heal(5);
-
             }
         }
         super.onTickEvent(event, player, cap);

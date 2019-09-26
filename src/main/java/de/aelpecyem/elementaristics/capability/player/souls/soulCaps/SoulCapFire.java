@@ -9,9 +9,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
-import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 public class SoulCapFire extends SoulCap {
     private static final AttributeModifier DAMAGE_MOD_KNOW = new AttributeModifier("elementaristics_damage_know", 1, 0);
@@ -35,8 +33,9 @@ public class SoulCapFire extends SoulCap {
         }
         if (event.getEntityLiving().hasCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null)) {
             if (event.getEntityLiving().getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null).getSoulId() == SoulInit.soulFire.getId()) {
-                if ((event.getSource() == DamageSource.IN_FIRE || event.getSource() == DamageSource.ON_FIRE) && event.getAmount() > 3) {
-                    event.getEntityLiving().attackEntityFrom(event.getSource(), 3);
+                int reductionAmount = Math.max(2, 8 - event.getEntityLiving().getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null).getPlayerAscensionStage());
+                if ((event.getSource() == DamageSource.IN_FIRE || event.getSource() == DamageSource.ON_FIRE) && event.getAmount() > reductionAmount) {
+                    event.getEntityLiving().attackEntityFrom(event.getSource(), reductionAmount);
                     event.setCanceled(true);
                 }
             }

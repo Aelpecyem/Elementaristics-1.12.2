@@ -41,8 +41,6 @@ public final class ClientTickHandler {
 
             }
 
-            int ticksToOpen = 10;
-
             calcDelta();
         }
     }

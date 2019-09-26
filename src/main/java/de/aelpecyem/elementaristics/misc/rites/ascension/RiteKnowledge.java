@@ -51,7 +51,7 @@ public class RiteKnowledge extends RiteBase {
     public void onRitual(EntityDimensionalNexus nexus) {
         if (nexus.getRiteTicks() % 2 == 0) {
             Elementaristics.proxy.generateGenericParticles(nexus.world, nexus.posX, nexus.posY + 0.5F, nexus.posZ, 16777073, 3, 60, 0, false, false);
-            Elementaristics.proxy.generateGenericParticles(nexus.world, nexus.posX, nexus.posY + 0.5F, nexus.posZ, nexus.world.rand.nextGaussian() / 10, 0, nexus.world.rand.nextGaussian() / 10, 11513262, 3, 60, 0.01F, true, false);
+            Elementaristics.proxy.generateGenericParticles(nexus.world, nexus.posX, nexus.posY + 0.5F, nexus.posZ, nexus.world.rand.nextGaussian() / 30, 0, nexus.world.rand.nextGaussian() / 30, 11513262, 3, 60, 0.01F, true, false);
 
             for (EntityPlayer player : nexus.getPlayersInArea(false)) {
                 Elementaristics.proxy.generateGenericParticles(player, 16777073, 2, 100, 0, false, true);

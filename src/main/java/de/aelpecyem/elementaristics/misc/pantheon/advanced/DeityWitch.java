@@ -2,6 +2,7 @@ package de.aelpecyem.elementaristics.misc.pantheon.advanced;
 
 import com.google.common.base.Predicate;
 import de.aelpecyem.elementaristics.Elementaristics;
+import de.aelpecyem.elementaristics.blocks.tileentity.render.models.pantheon.ModelWitch;
 import de.aelpecyem.elementaristics.blocks.tileentity.tile.pantheon.TileEntityDeityShrine;
 import de.aelpecyem.elementaristics.capability.player.IPlayerCapabilities;
 import de.aelpecyem.elementaristics.capability.player.PlayerCapProvider;
@@ -17,7 +18,7 @@ import java.util.List;
 
 public class DeityWitch extends DeitySupplyEffectBase {
     public DeityWitch() {
-        super(TimeUtil.getTickTimeStartForHour(23), new ResourceLocation(Elementaristics.MODID, "deity_witch"), Aspects.magan, 15887104);
+        super(TimeUtil.getTickTimeStartForHour(23), new ResourceLocation(Elementaristics.MODID, "deity_witch"), Aspects.magan, 15887104, new ModelWitch(), new ResourceLocation(Elementaristics.MODID, "textures/blocks/shrines/witch.png"));
     }
 
 

@@ -1,18 +1,12 @@
 package de.aelpecyem.elementaristics.capability.player.souls.soulCaps;
 
 import de.aelpecyem.elementaristics.capability.player.IPlayerCapabilities;
-import de.aelpecyem.elementaristics.capability.player.PlayerCapProvider;
 import de.aelpecyem.elementaristics.init.SoulInit;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingEvent;
-import net.minecraftforge.event.entity.living.LivingFallEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
-
-import java.util.UUID;
 
 public class SoulCapAir extends SoulCap {
     private static final AttributeModifier HITSPEED_MOD_KNOW = new AttributeModifier("elementaristics_hit_speed_know", 0.03, 0);
@@ -51,6 +45,7 @@ public class SoulCapAir extends SoulCap {
         player.getEntityAttribute(SharedMonsterAttributes.ATTACK_SPEED).removeModifier(HITSPEED_MOD_STAGE1);
         player.getEntityAttribute(SharedMonsterAttributes.ATTACK_SPEED).removeModifier(HITSPEED_MOD_STAGE3);
         player.getEntityAttribute(SharedMonsterAttributes.ATTACK_SPEED).removeModifier(HITSPEED_MOD_STAGE5);
+
         player.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).removeModifier(SPEED_MOD_KNOW);
         player.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).removeModifier(SPEED_MOD_STAGE1);
         player.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).removeModifier(SPEED_MOD_STAGE3);

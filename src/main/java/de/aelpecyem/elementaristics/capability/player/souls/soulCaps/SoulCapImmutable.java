@@ -24,7 +24,6 @@ public class SoulCapImmutable extends SoulCap {
             if (event.getEntityLiving().hasCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null)) {
                 IPlayerCapabilities capHurt = event.getEntityLiving().getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null);
                 capHurt.drainMagan(5 * (1 + cap.getPlayerAscensionStage()));
-
             }
         }
         super.onHitting(event, attacker, cap);

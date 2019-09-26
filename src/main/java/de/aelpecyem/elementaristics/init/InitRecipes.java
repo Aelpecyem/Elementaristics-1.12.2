@@ -1,6 +1,7 @@
 package de.aelpecyem.elementaristics.init;
 
 import de.aelpecyem.elementaristics.Elementaristics;
+import de.aelpecyem.elementaristics.entity.EntityCultist;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;
 import de.aelpecyem.elementaristics.recipe.*;
 import de.aelpecyem.elementaristics.recipe.base.*;
@@ -20,9 +21,13 @@ public class InitRecipes {
         initTunneler();
         initConcentrator();
         initReactor();
-        initBasin(); //todo add doc to all added stuff (Energized Gunpowder, Ascension stage reshaping) and ofc recipes
+        initBasin(); //todo, oof (templates for all, maybe JEI compat if really needed, CraftTweaker compat once done, rewrite fancy and blablabla)
+        initVessel();
     }
 
+    private static void initVessel() {
+        VesselRecipes.addRecipe(new VesselRecipe(new ResourceLocation(Elementaristics.MODID, "golden_thread_air"), Aspects.air, EntityCultist.class, Ingredient.fromItem(ModItems.ash), Ingredient.fromItem(ModItems.ash), Ingredient.fromItem(ModItems.ash), Ingredient.fromItem(ModItems.ash), Ingredient.fromItem(ModItems.ash)));
+    }
     private static void initGlory() { //todo add additonal effects to the statues where it's noted; update doc for that, then, too
         GloriousRecipes.addRecipe(new GloriousRecipe(new ResourceLocation(Elementaristics.MODID, "nothingness"), Ingredient.fromItem(ModItems.flesh_lamb), ModBlocks.symbol_nothingness));
         GloriousRecipes.addRecipe(new GloriousRecipe(new ResourceLocation(Elementaristics.MODID, "azathoth"), Ingredient.fromItem(ModItems.tympanum_empty), ModBlocks.symbol_azathoth));

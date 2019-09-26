@@ -4,7 +4,7 @@ import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.blocks.tileentity.render.models.ModelBlock;
 import de.aelpecyem.elementaristics.blocks.tileentity.tile.TileEntityGoldenThread;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;
-import de.aelpecyem.elementaristics.util.MiscUtil;
+import de.aelpecyem.elementaristics.util.ColorUtil;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.util.ResourceLocation;
@@ -17,7 +17,7 @@ public class TESRGoldenThread extends TileEntitySpecialRenderer<TileEntityGolden
         ModelBlock model = new ModelBlock();
         GlStateManager.pushMatrix();
         if (te.activationStage == 0) {
-            Color color = MiscUtil.reverseColor(new Color(Aspects.getElementById(te.aspect).getColor()));//14928384));, gold
+            Color color = ColorUtil.reverseColor(new Color(Aspects.getElementById(te.aspect).getColor()));//14928384));, gold
             float colorFactor = (float) te.charge / (float) TileEntityGoldenThread.MAX_CHARGE;
             GlStateManager.color(1 - ((float) color.getRed() / 255F) * colorFactor, 1 - ((float) color.getGreen() / 255F) * colorFactor, 1 - ((float) color.getBlue() / 255F) * colorFactor, ((float) color.getAlpha() / 255F));
             GlStateManager.enableNormalize();
