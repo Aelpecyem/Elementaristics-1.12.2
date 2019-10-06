@@ -15,6 +15,6 @@ public class ItemColorHandler implements IItemColor {
         if (stack.getItem() instanceof ItemScale) {
             return Aspects.getElementById(stack.getItemDamage()).getColor();
         }
-        return 0;
+        return -1;
     }
 }

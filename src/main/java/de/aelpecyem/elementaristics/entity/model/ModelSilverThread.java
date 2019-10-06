@@ -4,6 +4,7 @@ import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 
 public class ModelSilverThread extends ModelBiped {
 
@@ -51,6 +52,12 @@ public class ModelSilverThread extends ModelBiped {
         GlStateManager.disableBlend();
         GlStateManager.disableNormalize();
         GlStateManager.popMatrix();
+    }
+
+    @Override
+    public void setLivingAnimations(EntityLivingBase entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTickTime) {
+        bipedHead.rotateAngleY = entitylivingbaseIn.ticksExisted;
+        super.setLivingAnimations(entitylivingbaseIn, limbSwing, limbSwingAmount, partialTickTime);
     }
 
     /**
