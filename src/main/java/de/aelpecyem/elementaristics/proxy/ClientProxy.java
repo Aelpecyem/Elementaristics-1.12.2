@@ -4,8 +4,6 @@ import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.blocks.tileentity.render.*;
 import de.aelpecyem.elementaristics.blocks.tileentity.tile.*;
 import de.aelpecyem.elementaristics.blocks.tileentity.tile.pantheon.TileEntityDeityShrine;
-import de.aelpecyem.elementaristics.capability.player.IPlayerCapabilities;
-import de.aelpecyem.elementaristics.capability.player.PlayerCapProvider;
 import de.aelpecyem.elementaristics.entity.render.RenderHandler;
 import de.aelpecyem.elementaristics.events.ClientEventHandler;
 import de.aelpecyem.elementaristics.events.HUDRenderHandler;
@@ -99,13 +97,13 @@ public class ClientProxy extends CommonProxy {
      * @param vision The resource location of the vision; in this implementation, elementaristics:textures/misc/visions will always be accessed.
      */
     public void giveVision(EntityPlayer player, String vision) {
-        if (player.hasCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null)) {
-            IPlayerCapabilities cap = player.getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null);
-            if (!cap.getVision().equalsIgnoreCase("elementaristics:textures/misc/visions/" + vision + ".png")) {
-                cap.setVisionProgression(0);
-                cap.setVision("elementaristics:textures/misc/visions/" + vision + ".png");
-            }
-        }
+        //if (player.hasCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null)) {
+        //    IPlayerCapabilities cap = player.getCapability(PlayerCapProvider.ELEMENTARISTICS_CAP, null);
+        //if (!cap.getVision().equalsIgnoreCase("elementaristics:textures/misc/visions/" + vision + ".png")) {
+        //    cap.setVisionProgression(0);
+        //      cap.setVision("elementaristics:textures/misc/visions/" + vision + ".png");
+        //   }
+        // }
     }
 
     @Override
