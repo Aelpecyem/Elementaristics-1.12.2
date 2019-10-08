@@ -12,7 +12,7 @@ public class TunnelerRecipes {
 
     public static TunnelerRecipe getRecipeForInput(ItemStack input) {
         for (TunnelerRecipe recipe : TUNNELER_RECIPES.values()) {
-            if (recipe.input.apply(input)) { //weird phantom error here.i hate it :(
+            if (recipe.input.apply(input)) {
                 return recipe;
             }
         }

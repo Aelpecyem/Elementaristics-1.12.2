@@ -3,14 +3,10 @@ package de.aelpecyem.elementaristics.init;
 import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.world.biomes.BiomeMind;
 import net.minecraft.world.biome.Biome;
-import net.minecraftforge.common.BiomeManager;
 import net.minecraftforge.common.BiomeDictionary;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.common.BiomeManager;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.registries.IForgeRegistry;
 
 @GameRegistry.ObjectHolder(Elementaristics.MODID)
 public class BiomeInit {
@@ -29,6 +25,4 @@ public class BiomeInit {
         }
         return biome;
     }
-
-
 }
