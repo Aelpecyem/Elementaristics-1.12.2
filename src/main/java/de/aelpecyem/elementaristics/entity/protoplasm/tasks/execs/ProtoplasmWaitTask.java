@@ -12,6 +12,8 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ProtoplasmWaitTask extends ProtoplasmTask{
     int time;
@@ -82,6 +84,7 @@ public class ProtoplasmWaitTask extends ProtoplasmTask{
     }
 
     @Override
+    @SideOnly(Side.CLIENT)
     public String getHudDescription() {
         return I18n.format("hud.wait") + " " + time/20 + "s";
     }

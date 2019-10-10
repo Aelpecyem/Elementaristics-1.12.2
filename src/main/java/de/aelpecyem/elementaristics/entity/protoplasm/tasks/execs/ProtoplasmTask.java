@@ -50,6 +50,7 @@ public abstract class ProtoplasmTask {
         return EnumActionResult.PASS;
     }
 
+    @SideOnly(Side.CLIENT)
     public void getParticles(int indexAt, List<ProtoplasmTask> taskList, @Nullable ProtoplasmTask prevTask, @Nullable ProtoplasmTask nextTask, World world, EntityPlayer player, ItemStack heldItem, ItemThaumagral item) {
 
     }

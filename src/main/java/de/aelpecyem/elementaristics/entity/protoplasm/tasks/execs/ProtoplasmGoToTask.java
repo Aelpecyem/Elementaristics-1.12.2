@@ -84,6 +84,7 @@ public class ProtoplasmGoToTask extends ProtoplasmTask {
         return posTo;
     }
 
+    @SideOnly(Side.CLIENT)
     @Override
     public void getParticles(int indexAt, List<ProtoplasmTask> taskList, @Nullable ProtoplasmTask prevTask, @Nullable ProtoplasmTask nextTask, World world, EntityPlayer player, ItemStack heldItem, ItemThaumagral item) {
         Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(world, posTo.getX() + 0.5 + (world.rand.nextGaussian() / 8), posTo.getY() + 0.5 + (world.rand.nextGaussian() / 8), posTo.getZ() + 0.5 + (world.rand.nextGaussian() / 8), 0, 0, 0, nextTask instanceof ProtoplasmWaitTask ? 2555985 : 16740608, prevTask instanceof ProtoplasmWaitTask ? world.rand.nextFloat() + 0.5F : world.rand.nextFloat() + 0.1F, 100, 0, false, false, true, false, 0, 0, 0));
