@@ -3,7 +3,6 @@ package de.aelpecyem.elementaristics.entity.projectile;
 import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.init.SpellInit;
 import de.aelpecyem.elementaristics.misc.spell.SpellBase;
-import de.aelpecyem.elementaristics.particles.ParticleGeneric;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityThrowable;
@@ -20,7 +19,6 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.UUID;
 
-//yup, grabbed that code from https://github.com/zabi94/Covens-reborn/blob/master/src/main/java/com/covens/common/entity/EntitySpellCarrier.java
 public class EntitySpellProjectile extends EntityThrowable {
     private static final DataParameter<String> SPELL = EntityDataManager.<String>createKey(EntitySpellProjectile.class, DataSerializers.STRING);
     private static final DataParameter<String> CASTER = EntityDataManager.<String>createKey(EntitySpellProjectile.class, DataSerializers.STRING);
@@ -123,8 +121,8 @@ public class EntitySpellProjectile extends EntityThrowable {
 
 
         if (world.isRemote && getSpell() != null) {
-            Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(world, posX, posY, posZ, world.rand.nextGaussian() * 0.02D, world.rand.nextGaussian() * 0.02D, world.rand.nextGaussian() * 0.02D, getSpell().getColor(), 4, 40, 0, true, true, 0.8F, true));
-            Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(world, posX, posY, posZ, world.rand.nextGaussian() * 0.02D, world.rand.nextGaussian() * 0.02D, world.rand.nextGaussian() * 0.02D, getSpell().getColor2(), 4, 40, 0, true, true, 0.8F, true));
+            Elementaristics.proxy.generateGenericParticles(world, posX, posY, posZ, world.rand.nextGaussian() * 0.02D, world.rand.nextGaussian() * 0.02D, world.rand.nextGaussian() * 0.02D, getSpell().getColor(), 4, 40, 0, true, true, 0.8F, true);
+            Elementaristics.proxy.generateGenericParticles(world, posX, posY, posZ, world.rand.nextGaussian() * 0.02D, world.rand.nextGaussian() * 0.02D, world.rand.nextGaussian() * 0.02D, getSpell().getColor2(), 4, 40, 0, true, true, 0.8F, true);
         }
         super.onUpdate();
     }

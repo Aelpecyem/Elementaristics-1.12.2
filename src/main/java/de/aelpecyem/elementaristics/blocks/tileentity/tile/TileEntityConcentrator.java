@@ -16,6 +16,8 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
@@ -100,6 +102,7 @@ public class TileEntityConcentrator extends TileEntity implements ITickable {
         }
     }
 
+    @SideOnly(Side.CLIENT)
     private void doParticleShow() {
         if (inventory.getStackInSlot(1).getItem() instanceof ItemEssence)
             Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(world, pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, world.rand.nextGaussian() * 0.02F, Math.abs(world.rand.nextGaussian()) * 0.06F, world.rand.nextGaussian() * 0.02F, Aspects.getElementById(inventory.getStackInSlot(1).getMetadata()).getColor(), 2, 10, 0, true, false, 0.5F, true));
