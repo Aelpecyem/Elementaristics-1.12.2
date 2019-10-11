@@ -10,6 +10,8 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
@@ -83,6 +85,7 @@ public class TileEntityPurifier extends TileEntity implements ITickable {
 
     }
 
+    @SideOnly(Side.CLIENT)
     private void doParticleShow() {
         if (tickCount % 5 == 0) {
             ParticleGeneric p = new ParticleGeneric(world, pos.getX() + 1F + (world.rand.nextGaussian() / 15), pos.getY() + 0.62F + (world.rand.nextGaussian() / 15), pos.getZ() + 1F + (world.rand.nextGaussian() / 15), 0, 0, 0, 14247, 1 + ((float) world.rand.nextGaussian() / 3), 60, 0, true, false, true, true, pos.getX() + 0.5F, pos.getY() + 0.56F, pos.getZ() + 0.5F);

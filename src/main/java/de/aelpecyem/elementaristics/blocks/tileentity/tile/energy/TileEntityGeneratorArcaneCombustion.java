@@ -13,6 +13,8 @@ import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.energy.CapabilityEnergy;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
@@ -94,6 +96,7 @@ public class TileEntityGeneratorArcaneCombustion extends TileEntityEnergy implem
         }
     }
 
+    @SideOnly(Side.CLIENT)
     private void doParticles() {
         Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(world, pos.getX() + 0.5 + (world.rand.nextGaussian() / 8F), pos.getY() + 0.3F, pos.getZ() + 0.5 + (world.rand.nextGaussian() / 8F), 0, 0.05F + world.rand.nextGaussian() / 1000F, 0F, Aspects.fire.getColor(), 3, 20 + world.rand.nextInt(4), 0, true, false, 0.95F, true));
     }

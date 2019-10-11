@@ -8,7 +8,6 @@ import de.aelpecyem.elementaristics.init.SoulInit;
 import de.aelpecyem.elementaristics.misc.advancements.CustomAdvancements;
 import de.aelpecyem.elementaristics.networking.PacketHandler;
 import de.aelpecyem.elementaristics.networking.player.PacketMessage;
-import de.aelpecyem.elementaristics.particles.ParticleGeneric;
 import de.aelpecyem.elementaristics.util.CapabilityUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -199,7 +198,7 @@ public class EntitySilverThread extends EntityMob {
         }
         for (int i = 0; i < 2; i++) {
             if (world.isRemote)
-                Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(
+                Elementaristics.proxy.generateGenericParticles(
                         world,
                         posX + world.rand.nextFloat() * width
                                 * 2.0F - width,
@@ -210,7 +209,7 @@ public class EntitySilverThread extends EntityMob {
                         0,
                         0,
                         0,
-                        12249855, 4, 120, 0, true, true, 0.4F, true));
+                        12249855, 4, 120, 0, true, true, 0.4F, true);
         }
         super.onLivingUpdate();
     }
