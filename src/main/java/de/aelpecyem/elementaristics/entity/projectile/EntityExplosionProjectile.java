@@ -2,7 +2,6 @@ package de.aelpecyem.elementaristics.entity.projectile;
 
 import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;
-import de.aelpecyem.elementaristics.particles.ParticleGeneric;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityThrowable;
@@ -93,8 +92,8 @@ public class EntityExplosionProjectile extends EntityThrowable {
     @Override
     public void onUpdate() {
         if (world.isRemote) {
-            Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(world, posX, posY, posZ, world.rand.nextGaussian() * 0.02D, world.rand.nextGaussian() * 0.02D, world.rand.nextGaussian() * 0.02D, Aspects.fire.getColor(), 4, 40, 0, true, true, 0.8F, true));
-            Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(world, posX, posY, posZ, world.rand.nextGaussian() * 0.02D, world.rand.nextGaussian() * 0.02D, world.rand.nextGaussian() * 0.02D, Aspects.chaos.getColor(), 4, 40, 0, true, true, 0.8F, true));
+            Elementaristics.proxy.generateGenericParticles(world, posX, posY, posZ, world.rand.nextGaussian() * 0.02D, world.rand.nextGaussian() * 0.02D, world.rand.nextGaussian() * 0.02D, Aspects.fire.getColor(), 4, 40, 0, true, true, 0.8F, true);
+            Elementaristics.proxy.generateGenericParticles(world, posX, posY, posZ, world.rand.nextGaussian() * 0.02D, world.rand.nextGaussian() * 0.02D, world.rand.nextGaussian() * 0.02D, Aspects.chaos.getColor(), 4, 40, 0, true, true, 0.8F, true);
         }
         super.onUpdate();
     }

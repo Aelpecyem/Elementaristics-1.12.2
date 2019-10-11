@@ -45,6 +45,14 @@ public class CommonProxy {
     public void generateGenericParticles(World world, BlockPos pos, int color, float scale, int maxAge, float gravity, boolean collision, boolean fade) {
     }
 
+    public void generateGenericParticles(World world, double posX, double posY, double posZ, double motionX, double motionY, double motionZ, int color, float scale, int maxAge, float gravity, boolean collision, boolean fade, float alpha, boolean shrink) {
+
+    }
+
+    public void generateGenericParticles(World world, double posX, double posY, double posZ, double motionX, double motionY, double motionZ, int color, float scale, int maxAge, float gravity, boolean collision, boolean fade, boolean shrink, double toX, double toY, double toZ) {
+
+    }
+
     public void giveVision(EntityPlayer player, String vision) {
 
     }
@@ -73,6 +81,7 @@ public class CommonProxy {
             throw new WrongSideException("Tried to get the IThreadListener from a client-side MessageContext on the dedicated server");
         }
     }
+
 
     class WrongSideException extends RuntimeException {
         public WrongSideException(final String message) {

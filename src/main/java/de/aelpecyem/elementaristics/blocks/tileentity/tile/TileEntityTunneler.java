@@ -3,7 +3,6 @@ package de.aelpecyem.elementaristics.blocks.tileentity.tile;
 import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.init.ModItems;
 import de.aelpecyem.elementaristics.networking.PacketHandler;
-import de.aelpecyem.elementaristics.particles.ParticleGeneric;
 import de.aelpecyem.elementaristics.recipe.TunnelerRecipes;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
@@ -167,9 +166,9 @@ public class TileEntityTunneler extends TileEntity implements ITickable {
     }
 
     private void doParticleShow() {
-        Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(world, pos.getX() + 0.5, pos.getY() - 0.1F, pos.getZ() + 0.5, 0, -0.1, 0, 48895, 3, 40, 0, true, false, 0.9F, false));
-        Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(world, pos.getX() + 0.5, pos.getY() - 0.1F, pos.getZ() + 0.5, 0, -0.1F, 0, 48895, 3, 40, 0, true, false, 0.9F, false));
-        Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(world, pos.getX() + 0.5, pos.getY() - 0.1F, pos.getZ() + 0.5, 0, -0.1F, 0, 48895, 3, 40, 0, true, false, 0.9F, false));
+        Elementaristics.proxy.generateGenericParticles(world, pos.getX() + 0.5, pos.getY() - 0.1F, pos.getZ() + 0.5, 0, -0.1, 0, 48895, 3, 40, 0, true, false, 0.9F, false);
+        Elementaristics.proxy.generateGenericParticles(world, pos.getX() + 0.5, pos.getY() - 0.1F, pos.getZ() + 0.5, 0, -0.1F, 0, 48895, 3, 40, 0, true, false, 0.9F, false);
+        Elementaristics.proxy.generateGenericParticles(world, pos.getX() + 0.5, pos.getY() - 0.1F, pos.getZ() + 0.5, 0, -0.1F, 0, 48895, 3, 40, 0, true, false, 0.9F, false);
 
     }
 

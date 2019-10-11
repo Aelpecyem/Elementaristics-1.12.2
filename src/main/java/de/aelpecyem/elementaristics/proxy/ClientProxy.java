@@ -169,6 +169,16 @@ public class ClientProxy extends CommonProxy {
     }
 
     @Override
+    public void generateGenericParticles(World world, double posX, double posY, double posZ, double motionX, double motionY, double motionZ, int color, float scale, int maxAge, float gravity, boolean collision, boolean fade, float alpha, boolean shrink) {
+        ParticleHandler.spawnParticle(() -> new ParticleGeneric(world, posX, posY, posZ, motionX, motionY, motionZ, color, scale, maxAge, gravity, collision, fade, alpha, shrink));
+    }
+
+    @Override
+    public void generateGenericParticles(World world, double posX, double posY, double posZ, double motionX, double motionY, double motionZ, int color, float scale, int maxAge, float gravity, boolean collision, boolean fade, boolean shrink, double toX, double toY, double toZ) {
+        ParticleHandler.spawnParticle(() -> new ParticleGeneric(world, posX, posY, posZ, motionX, motionY, motionZ, color, scale, maxAge, gravity, collision, fade, shrink, true, toX, toY, toZ));
+    }
+
+    @Override
     public void registerKeyBinds() {
         super.registerKeyBinds();
     }

@@ -3,7 +3,6 @@ package de.aelpecyem.elementaristics.networking.other;
 import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.client.Minecraft;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
@@ -35,7 +34,7 @@ public class PacketMarkBlock implements IMessage {
         @Override
         public IMessage onMessage(PacketMarkBlock message, MessageContext ctx) {
             Elementaristics.proxy.getThreadListener(ctx).addScheduledTask(() -> {
-                Elementaristics.proxy.generateGenericParticles(Minecraft.getMinecraft().world, message.pos, Aspects.mana.getColor(), 1.5F, 120, 0, false, false);
+                Elementaristics.proxy.generateGenericParticles(Elementaristics.proxy.getPlayer(ctx).world, message.pos, Aspects.mana.getColor(), 1.5F, 120, 0, false, false);
             });
 
             return null;

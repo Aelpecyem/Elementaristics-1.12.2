@@ -5,7 +5,6 @@ import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.init.ModItems;
 import de.aelpecyem.elementaristics.items.base.ItemBase;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;
-import de.aelpecyem.elementaristics.particles.ParticleGeneric;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.init.MobEffects;

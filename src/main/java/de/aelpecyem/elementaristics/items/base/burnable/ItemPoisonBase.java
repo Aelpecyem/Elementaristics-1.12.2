@@ -2,7 +2,6 @@ package de.aelpecyem.elementaristics.items.base.burnable;
 
 import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.misc.poisons.PoisonEffectBase;
-import de.aelpecyem.elementaristics.particles.ParticleGeneric;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.item.EntityItem;
@@ -83,7 +82,7 @@ public class ItemPoisonBase extends ItemBurnableAffectingBase {
 
         if (world.isRemote) {
             for (int i = 0; i < 20; i++)
-                Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(world, posX, posY, posZ, world.rand.nextGaussian() * 0.1F, Math.abs(world.rand.nextGaussian()) * 0.1F, world.rand.nextGaussian() * 0.1F, poison.getColor(), 3, 60, 0.1F, true, false, 0.99F, true));
+                Elementaristics.proxy.generateGenericParticles(world, posX, posY, posZ, world.rand.nextGaussian() * 0.1F, Math.abs(world.rand.nextGaussian()) * 0.1F, world.rand.nextGaussian() * 0.1F, poison.getColor(), 3, 60, 0.1F, true, false, 0.99F, true);
         }
         super.affect(world, posX, posY, posZ);
     }

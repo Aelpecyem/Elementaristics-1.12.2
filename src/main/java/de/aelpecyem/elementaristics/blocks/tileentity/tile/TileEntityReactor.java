@@ -14,6 +14,8 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
@@ -108,6 +110,7 @@ public class TileEntityReactor extends TileEntity implements ITickable {
         return this.world.getBlockState(this.pos).getValue(BlockReactor.FACING);
     }
 
+    @SideOnly(Side.CLIENT)
     private void doParticleShow() {
         Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(world, pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, world.rand.nextGaussian() * 0.1F, Math.abs(world.rand.nextGaussian()) * 0.1F, world.rand.nextGaussian() * 0.1F, 14958080, 3, 10, 0, false, false, 0.99F, true));
         Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(world, pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, world.rand.nextGaussian() * 0.08F, Math.abs(world.rand.nextGaussian()) * 0.08F, world.rand.nextGaussian() * 0.08F, 14777600, 1, 10, 0, false, false, 0.99F, true));

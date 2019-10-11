@@ -6,7 +6,6 @@ import de.aelpecyem.elementaristics.blocks.tileentity.tile.TileEntityGoldenThrea
 import de.aelpecyem.elementaristics.entity.EntityCultist;
 import de.aelpecyem.elementaristics.misc.elements.Aspect;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;
-import de.aelpecyem.elementaristics.particles.ParticleGeneric;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.EntityMob;
@@ -102,7 +101,7 @@ public class AbstractElemental extends EntityMob {
                     ((TileEntityGoldenThread) te).charge++;
                     if (world.isRemote) {
                         for (int i = 0; i < 15 + getRNG().nextInt(5); i++)
-                            Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(world, posX + width / 2 + getRNG().nextGaussian() / 2, posY + width / 2 + getRNG().nextGaussian() / 2, posZ + width / 2 + getRNG().nextGaussian() / 2, 0, 0, 0, getAspect().getColor(), 1.8F + getRNG().nextFloat(), 200, 0, false, false, true, true, posTo.getX() + 0.5, posTo.getY() + 0.5, posTo.getZ() + 0.5));
+                            Elementaristics.proxy.generateGenericParticles(world, posX + width / 2 + getRNG().nextGaussian() / 2, posY + width / 2 + getRNG().nextGaussian() / 2, posZ + width / 2 + getRNG().nextGaussian() / 2, 0, 0, 0, getAspect().getColor(), 1.8F + getRNG().nextFloat(), 200, 0, false, false, true, posTo.getX() + 0.5, posTo.getY() + 0.5, posTo.getZ() + 0.5);
                     }
                 }
             }

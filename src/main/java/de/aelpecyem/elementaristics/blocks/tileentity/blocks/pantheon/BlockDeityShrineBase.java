@@ -1,7 +1,6 @@
 package de.aelpecyem.elementaristics.blocks.tileentity.blocks.pantheon;
 
 import de.aelpecyem.elementaristics.blocks.tileentity.BlockTileEntity;
-import de.aelpecyem.elementaristics.blocks.tileentity.render.TESRShrine;
 import de.aelpecyem.elementaristics.blocks.tileentity.tile.pantheon.TileEntityDeityShrine;
 import de.aelpecyem.elementaristics.items.base.artifacts.ItemChannelingTool;
 import de.aelpecyem.elementaristics.misc.pantheon.Deity;
@@ -13,7 +12,6 @@ import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.tileentity.TileEntityItemStackRenderer;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -156,13 +154,12 @@ public class BlockDeityShrineBase extends BlockTileEntity<TileEntityDeityShrine>
     @Override
     public Item createItemBlock() {
         Item item = super.createItemBlock();
-        item.setTileEntityItemStackRenderer(new TESRShrine.ForwardingTEISR(TileEntityItemStackRenderer.instance));
+        // item.setTileEntityItemStackRenderer(new TESRShrine.ForwardingTEISR(TileEntityItemStackRenderer.instance));
         return item;
     }
 
     @Override
     public void registerItemModel(Block itemBlock) {
-        //ModBlocks.registerCustomItemblock(this, "shrine");
         super.registerItemModel(itemBlock);
     }
 }

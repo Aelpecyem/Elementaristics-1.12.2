@@ -2,7 +2,6 @@ package de.aelpecyem.elementaristics.networking.entity;
 
 import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;
-import de.aelpecyem.elementaristics.particles.ParticleGeneric;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.World;
@@ -54,19 +53,18 @@ public class PacketSpawnBoundParticles implements IMessage {
                 double motionX = world.rand.nextGaussian() * 0.01D;
                 double motionY = world.rand.nextGaussian() * 0.01D;
                 double motionZ = world.rand.nextGaussian() * 0.01D;
-
-                Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(world, message.x + world.rand.nextFloat() * message.entitySize
-                        * 2.0F - message.entitySize,
+                Elementaristics.proxy.generateGenericParticles(world, message.x + world.rand.nextFloat() * message.entitySize
+                                * 2.0F - message.entitySize,
                         message.y + 0.5D + world.rand.nextFloat()
                                 * message.entityHeight,
                         message.z + world.rand.nextFloat() * message.entitySize
-                                * 2.0F - message.entitySize, motionX, motionY, motionZ, Aspects.body.getColor(), 3, 100, 0, false, false, 0.8F, true));
-                Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(world, message.x + world.rand.nextFloat() * message.entitySize
-                        * 2.0F - message.entitySize,
+                                * 2.0F - message.entitySize, motionX, motionY, motionZ, Aspects.body.getColor(), 3, 100, 0, false, false, 0.8F, true);
+                Elementaristics.proxy.generateGenericParticles(world, message.x + world.rand.nextFloat() * message.entitySize
+                                * 2.0F - message.entitySize,
                         message.y + 0.5D + world.rand.nextFloat()
                                 * message.entityHeight,
                         message.z + world.rand.nextFloat() * message.entitySize
-                                * 2.0F - message.entitySize, motionX, motionY, motionZ, Aspects.earth.getColor(), 3, 100, 0, false, false, 0.8F, true));
+                                * 2.0F - message.entitySize, motionX, motionY, motionZ, Aspects.earth.getColor(), 3, 100, 0, false, false, 0.8F, true);
 
             });
             return null;

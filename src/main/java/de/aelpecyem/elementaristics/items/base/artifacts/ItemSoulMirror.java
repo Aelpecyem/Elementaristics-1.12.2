@@ -10,15 +10,11 @@ import de.aelpecyem.elementaristics.items.base.artifacts.rites.ItemAspects;
 import de.aelpecyem.elementaristics.misc.advancements.CustomAdvancements;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;
 import de.aelpecyem.elementaristics.misc.potions.PotionInit;
-import de.aelpecyem.elementaristics.particles.ParticleGeneric;
-import de.aelpecyem.elementaristics.util.InventoryUtil;
 import de.aelpecyem.elementaristics.util.MaganUtil;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.init.Blocks;
-import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ActionResult;
@@ -54,7 +50,7 @@ ItemSoulMirror extends ItemAspects {
                         stackThis.getTagCompound().setInteger(TIMER_TAG, stackThis.getTagCompound().getInteger(TIMER_TAG) + 1);
                         if (worldIn.isRemote){
                             for (int i = 0; i < 3; i++)
-                            Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(worldIn, playerIn.posX + (playerIn.width / 2) + worldIn.rand.nextGaussian() * 3, playerIn.posY + (playerIn.height / 2) + worldIn.rand.nextGaussian() * 3, playerIn.posZ + (playerIn.width / 2) + worldIn.rand.nextGaussian() * 3, 0, 0, 0, Aspects.light.getColor(), 1F + worldIn.rand.nextFloat(), 40, 0, false, true, true, true, (float) playerIn.posX + playerIn.width / 2, (float) playerIn.posY + playerIn.height / 2, (float) playerIn.posZ + playerIn.width / 2));
+                                Elementaristics.proxy.generateGenericParticles(worldIn, playerIn.posX + (playerIn.width / 2) + worldIn.rand.nextGaussian() * 3, playerIn.posY + (playerIn.height / 2) + worldIn.rand.nextGaussian() * 3, playerIn.posZ + (playerIn.width / 2) + worldIn.rand.nextGaussian() * 3, 0, 0, 0, Aspects.light.getColor(), 1F + worldIn.rand.nextFloat(), 40, 0, false, true, true, (float) playerIn.posX + playerIn.width / 2, (float) playerIn.posY + playerIn.height / 2, (float) playerIn.posZ + playerIn.width / 2);
                         }
                         if (stackThis.getTagCompound().getInteger(TIMER_TAG) > 40){
                             playerIn.getHeldItem(EnumHand.OFF_HAND).shrink(1);

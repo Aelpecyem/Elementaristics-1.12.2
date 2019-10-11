@@ -3,7 +3,6 @@ package de.aelpecyem.elementaristics.entity.projectile;
 import de.aelpecyem.elementaristics.Elementaristics;
 import de.aelpecyem.elementaristics.misc.elements.Aspect;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;
-import de.aelpecyem.elementaristics.particles.ParticleGeneric;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
@@ -114,8 +113,8 @@ public class EntityElementalSpell extends EntityThrowable {
         }
 
         if (world.isRemote && getAspect() != null) {
-            Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(world, posX, posY, posZ, world.rand.nextGaussian() * 0.02D, world.rand.nextGaussian() * 0.02D, world.rand.nextGaussian() * 0.02D, getAspect().getColor(), 4, 60, 0, true, true, 0.8F, true));
-            Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(world, posX, posY, posZ, world.rand.nextGaussian() * 0.02D, world.rand.nextGaussian() * 0.02D, world.rand.nextGaussian() * 0.02D, getAspect().getColor(), 4, 60, 0, true, true, 0.8F, true));
+            Elementaristics.proxy.generateGenericParticles(world, posX, posY, posZ, world.rand.nextGaussian() * 0.02D, world.rand.nextGaussian() * 0.02D, world.rand.nextGaussian() * 0.02D, getAspect().getColor(), 4, 60, 0, true, true, 0.8F, true);
+            Elementaristics.proxy.generateGenericParticles(world, posX, posY, posZ, world.rand.nextGaussian() * 0.02D, world.rand.nextGaussian() * 0.02D, world.rand.nextGaussian() * 0.02D, getAspect().getColor(), 4, 60, 0, true, true, 0.8F, true);
         }
         super.onUpdate();
     }

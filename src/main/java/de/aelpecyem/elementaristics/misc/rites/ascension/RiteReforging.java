@@ -13,7 +13,6 @@ import de.aelpecyem.elementaristics.misc.rites.RiteBase;
 import de.aelpecyem.elementaristics.networking.PacketHandler;
 import de.aelpecyem.elementaristics.networking.player.PacketMessage;
 import de.aelpecyem.elementaristics.networking.player.PacketMove;
-import de.aelpecyem.elementaristics.particles.ParticleGeneric;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.SoundEvents;
@@ -68,8 +67,8 @@ public class RiteReforging extends RiteBase {
             }
         }
         if (nexus.world.isRemote) {
-            Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(nexus.world, nexus.posX + nexus.world.rand.nextGaussian(), nexus.posY + 0.5F + nexus.world.rand.nextGaussian(), nexus.posZ + nexus.world.rand.nextGaussian(), 0, 0, 0, Aspects.light.getColor(), 1, 200, 0, false, true, true, true, nexus.posX, nexus.posY + 0.5, nexus.posZ));
-            Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(nexus.world, nexus.posX + nexus.world.rand.nextGaussian(), nexus.posY + 0.5F + nexus.world.rand.nextGaussian(), nexus.posZ + nexus.world.rand.nextGaussian(), 0, 0, 0, Aspects.fire.getColor(), 3, 80, 0, false, true, true, true, nexus.posX, nexus.posY + 0.5, nexus.posZ));
+            Elementaristics.proxy.generateGenericParticles(nexus.world, nexus.posX + nexus.world.rand.nextGaussian(), nexus.posY + 0.5F + nexus.world.rand.nextGaussian(), nexus.posZ + nexus.world.rand.nextGaussian(), 0, 0, 0, Aspects.light.getColor(), 1, 200, 0, false, true, true, nexus.posX, nexus.posY + 0.5, nexus.posZ);
+            Elementaristics.proxy.generateGenericParticles(nexus.world, nexus.posX + nexus.world.rand.nextGaussian(), nexus.posY + 0.5F + nexus.world.rand.nextGaussian(), nexus.posZ + nexus.world.rand.nextGaussian(), 0, 0, 0, Aspects.fire.getColor(), 3, 80, 0, false, true, true, nexus.posX, nexus.posY + 0.5, nexus.posZ);
 
         }
     }

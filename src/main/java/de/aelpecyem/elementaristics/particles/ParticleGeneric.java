@@ -4,12 +4,9 @@ import net.minecraft.client.particle.Particle;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.entity.Entity;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 //see https://github.com/Ellpeck/NaturesAura/blob/master/src/main/java/de/ellpeck/naturesaura/particles/ParticleMagic.java
 
-@SideOnly(Side.CLIENT)
 public class ParticleGeneric extends Particle {
     //the rendering with the ParticleHandler class might not be needed in 1.14, but idk, we'll see
     //also, for the 1.14 port, change the constructors and add option for also fading IN and not only out; this should be false for spells etc, but true for statues

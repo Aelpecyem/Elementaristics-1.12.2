@@ -9,7 +9,6 @@ import de.aelpecyem.elementaristics.items.base.artifacts.ItemChannelingTool;
 import de.aelpecyem.elementaristics.misc.elements.Aspects;
 import de.aelpecyem.elementaristics.misc.pantheon.Deity;
 import de.aelpecyem.elementaristics.misc.rites.RiteBase;
-import de.aelpecyem.elementaristics.particles.ParticleGeneric;
 import de.aelpecyem.elementaristics.recipe.GloriousRecipes;
 import de.aelpecyem.elementaristics.recipe.base.GloriousRecipe;
 import net.minecraft.block.BlockRedstoneWire;
@@ -76,9 +75,9 @@ public class RiteGlorious extends RiteBase {
                                 for (int y = 0; y < 8; y++) {
                                     for (int z = 0; z < 8; z++) {
                                         if (y < 2 || y > 5)
-                                            Elementaristics.proxy.generateGenericParticles(nexus.world, posSelected.getX() + (float) (x + 0.5F) / 8, posSelected.getY() + 1 + (float) (y + 0.5F) / 8, posSelected.getZ() + (float) (z + 0.5F) / 8, 0, 0, 0, 3881787, 2F, 200, 0, true, true);
+                                            Elementaristics.proxy.generateGenericParticles(nexus.world, posSelected.getX() + (float) (x + 0.5F) / 8, posSelected.getY() + 1 + (float) (y + 0.5F) / 8, posSelected.getZ() + (z + 0.5F) / 8, 0, 0, 0, 3881787, 2F, 200, 0, true, true);
                                         else if ((x > 1 && x < 6) && (z > 1 && z < 6))
-                                            Elementaristics.proxy.generateGenericParticles(nexus.world, posSelected.getX() + (float) (x + 0.5F) / 8, posSelected.getY() + 1 + (float) (y + 0.5F) / 8, posSelected.getZ() + (float) (z + 0.5F) / 8, 0, 0, 0, 3881787, 2F, 200, 0, true, true);
+                                            Elementaristics.proxy.generateGenericParticles(nexus.world, posSelected.getX() + (float) (x + 0.5F) / 8, posSelected.getY() + 1 + (float) (y + 0.5F) / 8, posSelected.getZ() + (z + 0.5F) / 8, 0, 0, 0, 3881787, 2F, 200, 0, true, true);
 
                                     }
                                 }
@@ -141,10 +140,10 @@ public class RiteGlorious extends RiteBase {
                             if (nexus.world.isRemote) {
                                 if (GloriousRecipes.getRecipeForInput(((TileEntityPedestal) nexus.world.getTileEntity(posSelected.up())).inventory.getStackInSlot(0)).output instanceof BlockDeityShrineBase) {
                                     Deity deity = ((BlockDeityShrineBase) GloriousRecipes.getRecipeForInput(((TileEntityPedestal) nexus.world.getTileEntity(posSelected.up())).inventory.getStackInSlot(0)).output).deity;
-                                    Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(nexus.world, nexus.posX, nexus.posY + 0.5F, nexus.posZ, 0, 0, 0, deity.getColor(), 2, 400, 0,
-                                            false, false, true, true, posSelected.getX() + nexus.world.rand.nextFloat(), posSelected.getY() + nexus.world.rand.nextFloat(), posSelected.getZ() + nexus.world.rand.nextFloat()));
-                                    Elementaristics.proxy.generateGenericParticles(new ParticleGeneric(nexus.world, posSelected.up().getX() + +nexus.world.rand.nextFloat(), posSelected.up().getY() + nexus.world.rand.nextFloat(), posSelected.up().getZ() + nexus.world.rand.nextFloat(), 0, 0, 0, Aspects.light.getColor(), 2, 400, 0,
-                                            false, false, true, true, nexus.posX, nexus.posY + 0.5F, nexus.posZ));
+                                    Elementaristics.proxy.generateGenericParticles(nexus.world, nexus.posX, nexus.posY + 0.5F, nexus.posZ, 0, 0, 0, deity.getColor(), 2, 400, 0,
+                                            false, false, true, posSelected.getX() + nexus.world.rand.nextFloat(), posSelected.getY() + nexus.world.rand.nextFloat(), posSelected.getZ() + nexus.world.rand.nextFloat());
+                                    Elementaristics.proxy.generateGenericParticles(nexus.world, posSelected.up().getX() + +nexus.world.rand.nextFloat(), posSelected.up().getY() + nexus.world.rand.nextFloat(), posSelected.up().getZ() + nexus.world.rand.nextFloat(), 0, 0, 0, Aspects.light.getColor(), 2, 400, 0,
+                                            false, false, true, nexus.posX, nexus.posY + 0.5F, nexus.posZ);
                                 }
                             }
                         }
