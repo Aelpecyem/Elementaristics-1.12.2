@@ -7,7 +7,6 @@ import de.aelpecyem.elementaristics.blocks.tileentity.tile.pantheon.TileEntityDe
 import de.aelpecyem.elementaristics.entity.render.RenderHandler;
 import de.aelpecyem.elementaristics.events.ClientEventHandler;
 import de.aelpecyem.elementaristics.events.HUDRenderHandler;
-import de.aelpecyem.elementaristics.events.ShaderHandler;
 import de.aelpecyem.elementaristics.init.ModItems;
 import de.aelpecyem.elementaristics.misc.ItemColorHandler;
 import de.aelpecyem.elementaristics.particles.ParticleGeneric;
@@ -52,7 +51,7 @@ public class ClientProxy extends CommonProxy {
         super.init(event);
         registerColoring();
         registerKeyBinds();
-        MinecraftForge.EVENT_BUS.register(new ShaderHandler());
+        //MinecraftForge.EVENT_BUS.register(new ShaderHandler());
         MinecraftForge.EVENT_BUS.register(new HUDRenderHandler());
         MinecraftForge.EVENT_BUS.register(new ClientTickHandler());
         MinecraftForge.EVENT_BUS.register(new ClientEventHandler());
