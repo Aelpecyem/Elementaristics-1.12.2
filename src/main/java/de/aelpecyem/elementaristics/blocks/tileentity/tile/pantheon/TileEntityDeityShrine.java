@@ -21,6 +21,8 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.energy.CapabilityEnergy;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
@@ -109,7 +111,7 @@ public class TileEntityDeityShrine extends TileEntityEnergy implements ITickable
                 } else {
                     deityActive.symbolEffect(this);
                 }
-                if (getNexusBound() != null) //world.getTileEntity(altarPos) != null && world.getTileEntity(altarPos) instanceof TileEntityAltar)
+                if (world.isRemote && getNexusBound() != null) //world.getTileEntity(altarPos) != null && world.getTileEntity(altarPos) instanceof TileEntityAltar)
                     doAltarParticles(deityActive);
             } else {
                 if (isSupplyingManipulatorBelow()) {
@@ -118,7 +120,7 @@ public class TileEntityDeityShrine extends TileEntityEnergy implements ITickable
                             ((DeitySupplyEffectBase) deityActive).supplyEffect(this, isStatue);
                         }
                     }
-                    if (getNexusBound() != null)//world.getTileEntity(altarPos) != null && world.getTileEntity(altarPos) instanceof TileEntityAltar)
+                    if (world.isRemote && getNexusBound() != null)//world.getTileEntity(altarPos) != null && world.getTileEntity(altarPos) instanceof TileEntityAltar)
                         doAltarParticles(deityActive);
                 }
                 if (isPassiveEffectManipulatorBelow()) {
@@ -131,20 +133,11 @@ public class TileEntityDeityShrine extends TileEntityEnergy implements ITickable
             }
         }
     }
-
     public EntityDimensionalNexus getNexusBound() {
+
         List<EntityDimensionalNexus> nexuses = world.getEntitiesWithinAABB(EntityDimensionalNexus.class, Block.FULL_BLOCK_AABB.grow(20).offset(pos), p -> p.getUniqueID().toString().equals(nexus));
         return nexuses.isEmpty() ? null : nexuses.get(0);
     }
-
-    /*public TileEntityAltar getAltarBound() {
-        if (altarPos != null && !altarPos.equals(pos)) {
-            if (world.getTileEntity(altarPos) != null && world.getTileEntity(altarPos) instanceof TileEntityAltar) {
-                return (TileEntityAltar) world.getTileEntity(altarPos);
-            }
-        }
-        return null;
-    }*/
 
     public boolean isSupplyingManipulatorBelow() {
         if (world.getBlockState(pos.down()).getBlock() == ModBlocks.manipulator_supplying && world.isBlockPowered(pos.down())) {
@@ -160,6 +153,7 @@ public class TileEntityDeityShrine extends TileEntityEnergy implements ITickable
         return false;
     }
 
+    @SideOnly(Side.CLIENT)
     public void doAltarParticles(Deity deity) {
         if (world.isRemote) {
             if (getNexusBound() != null) {
